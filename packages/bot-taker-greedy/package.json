@@ -42,6 +42,7 @@
     "ethers": "^5.4.7",
     "fast-safe-stringify": "^2.1.1",
     "finalhandler": "^1.1.2",
+    "newrelic": "^8.9.1",
     "random": "^3.0.6",
     "serve-static": "^1.15.0"
   },
@@ -56,6 +57,7 @@
     "@types/config": "^0.0.39",
     "@types/dotenv-flow": "^3.2.0",
     "@types/mocha": "^9.0.0",
+    "@types/newrelic": "^7.0.3",
     "@types/node": "^16.9.4",
     "@types/shelljs": "^0.8.9",
     "@typescript-eslint/eslint-plugin": "^4.31.0",

@@ -3,6 +3,7 @@
  * @module
  */
 
+import * as newrelic from "newrelic";
 import config from "./util/config";
 import { ErrorWithData } from "@mangrovedao/commonlib-js";
 import { logger } from "./util/logger";
