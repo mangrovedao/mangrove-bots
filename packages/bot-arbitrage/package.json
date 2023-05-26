@@ -15,7 +15,7 @@
     "prepack": "yarn build",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "build-this-package": " rm -f -r mangrove-arbitrage/node_modules && cp -R ../../node_modules mangrove-arbitrage/node_modules && yarn typechain && tsc && yarn run write-env-info-file",
-    "heroku-build-this-package": "yarn run build-this-package",
+    "heroku-build-this-package": "echo BUILD BROKEN ON HEROKU DUE TO SUBMODULES NOT BEING CHECKED OUT yarn run build-this-package",
     "build": "yarn install && yarn workspaces foreach -vpiR --topological-dev --from $npm_package_name run build-this-package",
     "clean-this-package": "rimraf build tsconfig.tsbuildinfo",
     "clean": "yarn workspaces foreach -vpiR --topological-dev --from $npm_package_name run clean-this-package",
