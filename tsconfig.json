@@ -30,9 +30,6 @@
       },
       {
         "path": "./packages/bot-arbitrage",
-      },
-      {
-        "path": "./packages/mangrove.js",
       }
     ]
   }

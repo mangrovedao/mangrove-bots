@@ -21,7 +21,7 @@
   "include": ["src/**/*.ts"],
   "references": [
     {
-      "path": "../mangrove.js"
+      "path": "../../node_modules/@mangrovedao/mangrove.js"
     }
   ]
 }

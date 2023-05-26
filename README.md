@@ -1,8 +1,10 @@
-[![CI](https://github.com/mangrovedao/mangrove-ts/actions/workflows/node.js.yml/badge.svg)](https://github.com/mangrovedao/mangrove-ts/actions/workflows/node.js.yml) [![Coverage Status](https://coveralls.io/repos/github/mangrovedao/mangrove-ts/badge.svg)](https://coveralls.io/github/mangrovedao/mangrove-ts)
+[![CI](https://github.com/mangrovedao/mangrove-bots/actions/workflows/node.js.yml/badge.svg)](https://github.com/mangrovedao/mangrove-bots/actions/workflows/node.js.yml) [![Coverage Status](https://coveralls.io/repos/github/mangrovedao/mangrove-bots/badge.svg)](https://coveralls.io/github/mangrovedao/mangrove-bots)
 
-This repo contains the SDK for developing TypeScript (and JavaScript) apps using the Mangrove, as well as a number of bots that use this SDK. 
+This repo contains the a number of bots that for the Mangrove ecosystem. 
 
 The core contracts for Mangrove with example Solidity offer logics live in the [mangrove-core](https://github.com/mangrovedao/mangrove-core) repo. 
+
+The SDK for Mangrove lives in the [mangrove-ts](https://github.com/mangrovedao/mangrove-ts) repo. 
 
 # Documentation
 
@@ -39,7 +41,7 @@ For Linux or macOS everything should work out of the box, if you are using Windo
 4. Clone the git repo with sub-modules
 
     ```shell
-    $ git clone --recurse-submodules https://github.com/mangrovedao/mangrove-ts.git
+    $ git clone --recurse-submodules https://github.com/mangrovedao/mangrove-bots.git
     # Or set the global git config once: git config --global submodule.recurse true
     ```
 
@@ -104,7 +106,7 @@ The repo root contains the following folders and files:
 ├── .github/         # GitHub related files, in particular CI configurations for GitHub Actions
 ├── .husky/          # Husky Git hooks, e.g. for auto formatting
 ├── .yarn/           # Yarn files
-├── packages/        # The actual Mangrove packages
+├── packages/        # The actual bot packages
 ├── .gitattributes   # Git attributes for the whole monorepo 
 ├── .gitignore       # Git ignore for the whole monorepo
 ├── .yarnrc.yml      # Yarn 2 configuration
