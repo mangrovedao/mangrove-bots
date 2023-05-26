@@ -1,4 +1,4 @@
-import { createLogger, CommonLogger, format } from "@mangrovedao/commonlib.js";
+import { createLogger, CommonLogger, format } from "@mangrovedao/bot-utils";
 import os from "os";
 import safeStringify from "fast-safe-stringify";
 import config from "./config";
@@ -37,6 +37,10 @@ const consoleLogFormat = format.printf(
 );
 
 const logLevel = config.get<string>("logLevel");
-export const logger: CommonLogger = createLogger(consoleLogFormat, logLevel);
+export const logger: CommonLogger = createLogger(
+  consoleLogFormat,
+  logLevel,
+  process.env["NO_COLOR"]
+);
 
 export default logger;

@@ -1,15 +1,21 @@
-import { CommonLogger, ErrorWithData } from "@mangrovedao/commonlib.js";
+import { CommonLogger } from "./logging/coreLogger";
+
 import Mangrove, { ethers } from "@mangrovedao/mangrove.js";
 import { IConfig } from "config";
 import http from "http";
 import { ToadScheduler } from "toad-scheduler";
-import * as log from "./util/logger";
-import { getDefaultProvider } from "@ethersproject/providers";
+import * as log from "./logging/logger";
+import {
+  StaticJsonRpcProvider,
+  WebSocketProvider,
+} from "@ethersproject/providers";
+import { getDefaultProvider } from "ethers";
 import { BaseProvider } from "@ethersproject/providers";
 import { Wallet } from "@ethersproject/wallet";
 import { NonceManager } from "@ethersproject/experimental";
 import finalhandler from "finalhandler";
 import serveStatic from "serve-static";
+import { ConfigUtils } from "./util/configUtils";
 
 export enum ExitCode {
   Normal = 0,
@@ -33,9 +39,11 @@ export type TokenConfig = {
 export class Setup {
   #config: IConfig;
   logger: CommonLogger;
+  configUtils: ConfigUtils;
   constructor(config: IConfig) {
     this.#config = config;
     this.logger = log.logger(config);
+    this.configUtils = new ConfigUtils(config);
   }
 
   public async exitIfMangroveIsKilled(
@@ -89,17 +97,37 @@ export class Setup {
       this.stopAndExit(ExitCode.UncaughtException, server, scheduler);
     });
 
-    if (!process.env["RPC_NODE_URL"]) {
-      throw new Error("No URL for a node has been provided in RPC_NODE_URL");
+    const providerHttpUrl = process.env["RPC_HTTP_URL"];
+    const providerWsUrl = process.env["RPC_WS_URL"];
+    if (!providerWsUrl) {
+      throw new Error("No URL for a node has been provided in RPC_WS_URL");
     }
-    if (!process.env["PRIVATE_KEY"]) {
+    if (!providerHttpUrl) {
+      throw new Error("No URL for a node has been provided in RPC_HTTP_URL");
+    }
+    const privateKey = process.env["PRIVATE_KEY"];
+    if (!privateKey) {
       throw new Error("No private key provided in PRIVATE_KEY");
     }
-    const provider = getDefaultProvider(process.env["RPC_NODE_URL"]);
-    const signer = new Wallet(process.env["PRIVATE_KEY"], provider);
-    const nonceManager = new NonceManager(signer);
-    const mgv = await Mangrove.connect({ signer: nonceManager });
 
+    // In case of a http provider we do not want to query chain id, so we use the Static provider; otherwise, we use the default WebSocketProvider.
+    const defaultProvider = getDefaultProvider(providerHttpUrl);
+    const provider =
+      defaultProvider instanceof WebSocketProvider
+        ? defaultProvider
+        : new StaticJsonRpcProvider(providerHttpUrl);
+    const signer = new Wallet(privateKey, provider);
+    const nonceManager = new NonceManager(signer);
+    const providerType = this.configUtils.getProviderType();
+    const mgv = await Mangrove.connect({
+      signer: nonceManager,
+      providerWsUrl: providerType == "http" ? undefined : providerWsUrl,
+    });
+    if (providerType == "http") {
+      this.logger.warn(
+        `Using HTTP provider, this is not recommended for production`
+      );
+    }
     this.logger.info("Connected to Mangrove", {
       contextInfo: "init",
       data: {

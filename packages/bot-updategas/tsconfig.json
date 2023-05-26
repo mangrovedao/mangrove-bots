@@ -20,10 +20,7 @@
   "include": ["src/**/*.ts"],
   "references": [
     {
-      "path": "../commonlib.js"
-    },
-    {
-      "path": "../mangrove.js"
+      "path": "../../node_modules/@mangrovedao/mangrove.js"
     }
   ]
 }

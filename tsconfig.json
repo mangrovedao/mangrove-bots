@@ -21,12 +21,15 @@
       },
       {
         "path": "./packages/bot-updategas",
+      },      
+      {
+        "path": "./packages/bot-utils",
       },
       {
-        "path": "./packages/commonlib.js",
+        "path": "./packages/bot-failing-offer",
       },
       {
-        "path": "./packages/mangrove.js",
+        "path": "./packages/bot-arbitrage",
       }
     ]
   }

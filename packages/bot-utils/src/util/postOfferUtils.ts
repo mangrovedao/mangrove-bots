@@ -1,9 +1,9 @@
-import { CommonLogger } from "@mangrovedao/commonlib.js";
+import { CommonLogger } from "../logging/coreLogger";
 import { ethers, LiquidityProvider, Market } from "@mangrovedao/mangrove.js";
 import Big from "big.js";
 import { IConfig } from "config";
 import { BigNumberish } from "ethers";
-import * as log from "./logger";
+import * as log from "../logging/logger";
 
 export type offerData = {
   market: Market;
@@ -13,10 +13,8 @@ export type offerData = {
 };
 
 export class PostOfferUtils {
-  #config: IConfig;
   logger: CommonLogger;
   constructor(config: IConfig) {
-    this.#config = config;
     this.logger = log.logger(config);
   }
   public async postFailing(offerData: offerData) {

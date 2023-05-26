@@ -1,7 +1,7 @@
 /**
  * Integration tests of MarketCleaner.ts.
  */
-import { afterEach, before, beforeEach, describe, it } from "mocha";
+import { afterEach, beforeEach, describe, it } from "mocha";
 import * as chai from "chai";
 const { expect } = chai;
 import chaiAsPromised from "chai-as-promised";
@@ -72,7 +72,6 @@ describe("MarketCleaner integration tests", () => {
 
   afterEach(async function () {
     mgvTestUtil.stopPollOfTransactionTracking();
-    market.disconnect();
     mgv.disconnect();
     mgvConfig.disconnect();
     mgvAdmin.disconnect();
@@ -84,8 +83,8 @@ describe("MarketCleaner integration tests", () => {
   mgvTestUtil.bidsAsks.forEach((ba) => {
     it(`should clean offer failing to trade 0 wants on the '${ba}' offer list`, async function () {
       // Arrange
-      await mgvTestUtil.postNewRevertingOffer(market, ba, maker);
-      await mgvTestUtil.waitForBooksForLastTx(market);
+      const tx = await mgvTestUtil.postNewRevertingOffer(market, ba, maker);
+      await mgvTestUtil.waitForBlock(market.mgv, tx.blockNumber);
 
       const marketCleaner = new MarketCleaner(market, cleanerProvider);
 
@@ -105,8 +104,8 @@ describe("MarketCleaner integration tests", () => {
 
     it(`should not clean offer succeeding to trade 0 wants on the '${ba}' offer list`, async function () {
       // Arrange
-      await mgvTestUtil.postNewSucceedingOffer(market, ba, maker);
-      await mgvTestUtil.waitForBooksForLastTx(market);
+      const tx = await mgvTestUtil.postNewSucceedingOffer(market, ba, maker);
+      await mgvTestUtil.waitForBlock(market.mgv, tx.blockNumber);
 
       const marketCleaner = new MarketCleaner(market, cleanerProvider);
 
