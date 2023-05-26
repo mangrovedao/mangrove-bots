@@ -93,10 +93,10 @@ $ yarn test
 
 
 ## Running scripts in a named package
-Regardless of the folder you're in, you can always run a script in a particular package by using the [`yarn workspace <packageName> <commandName>`](https://yarnpkg.com/cli/workspace/#gatsby-focus-wrapper) command. E.g. to run the tests for the `mangrove.js` package, run the following in *any folder*:
+Regardless of the folder you're in, you can always run a script in a particular package by using the [`yarn workspace <packageName> <commandName>`](https://yarnpkg.com/cli/workspace/#gatsby-focus-wrapper) command. E.g. to run the tests for the `bot-updategas` package, run the following in *any folder*:
 
 ```shell
-$ yarn workspace @mangrovedao/mangrove.js test
+$ yarn workspace @mangrovedao/bot-updategas test
 ```
 
 
@@ -168,7 +168,7 @@ Each package should have its own `package.json` file based on the following temp
                                                 // `prettier` will autoformat the files which we generally prefer.
   },
   "dependencies": {
-    "@mangrovedao/mangrove.js": "workspace:*"          // This is an example of a run-time dependency to another package in the monorepo
+    "@mangrovedao/bot-updategas": "workspace:*"          // This is an example of a run-time dependency to another package in the monorepo
   },
   "devDependencies": {
     "@mangrovedao/mangrove-core": "~1.0.0",
@@ -189,7 +189,7 @@ Each package should have its own `package.json` file based on the following temp
 When adding dependencies to another package in the monorepo, you can use `workspace:*` as the version range, e.g.:
 
 ```json
-"@mangrovedao/mangrove.js": "workspace:*"
+"@mangrovedao/bot-updategas": "workspace:*"
 ```
 
 Yarn will resolve this dependency amongst the packages in the monorepo and will use a symlink in `node_modules` for the package. You can add dependencies as either run-time dependencies, in `"dependencies"` or as a build-time dependency, in `"devDependencies"`.
