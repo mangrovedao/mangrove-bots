@@ -81,7 +81,7 @@
     "@types/chai-as-promised": "^7.1.5",
     "@types/mocha": "^9.1.1",
     "@types/node": "^18.0.0",
-    "@types/shelljs": "^0.8.11",
+    "@types/shelljs": "^0.8.12",
     "@types/yargs": "^17.0.12",
     "@typescript-eslint/eslint-plugin": "^5.50.0",
     "@typescript-eslint/parser": "^5.48.1",
