@@ -642,7 +642,6 @@ jobs:
         git-commit: ${{ steps.coveralls_vars.outputs.sha_for_head }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
         path-to-lcov: lcov.info
-        base-path	: .
         flag-name: solidity
 
     # NOTE: uncomment once you can manage forge test 
