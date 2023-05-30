@@ -573,7 +573,14 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      working-directory: packages/bot-arbitrage/mangrove-arbitrage
+      POLYGON_NODE_URL: ${{ secrets.POLYGON_NODE_URL }}
+      API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
+      MUMBAI_NODE_URL: ${{ secrets.MUMBAI_NODE_URL }}
+
     steps:
+      
 
     # == Git checkout ==
     - name: Checkout
@@ -614,17 +621,11 @@ jobs:
     # Run local Solidity tests
     - name: Mangrove Solidity Tests
       run: yarn run test
-      env:
-        POLYGON_NODE_URL: ${{ secrets.POLYGON_NODE_URL }}
-        MUMBAI_NODE_URL: ${{ secrets.MUMBAI_NODE_URL }}
 
     # For push runs we also create a coverage report
     - name: Create coverage report
       if: github.event_name != 'pull_request_target' 
       run: forge coverage --report lcov
-      env:
-        POLYGON_NODE_URL: ${{ secrets.POLYGON_NODE_URL }}
-        MUMBAI_NODE_URL: ${{ secrets.MUMBAI_NODE_URL }}
 
       # == Send coverage report to Coveralls == 
       # Coverallsapp by default uses GITHUB_SHA but that does not necessarily correspond
