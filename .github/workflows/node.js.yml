@@ -569,7 +569,7 @@ jobs:
 
  # ==== Job: Build and test bot-arbitrage ====
   bot-arbitrage:
-    needs: [security-guard, bot-utils, mangrove-arbitrage-solidity]
+    needs: [security-guard, bot-utils]
 
     runs-on: ubuntu-latest
 
@@ -752,7 +752,6 @@ jobs:
     - bot-template
     - bot-updategas
     - bot-arbitrage
-    - mangrove-arbitrage-solidity
 
     runs-on: ubuntu-latest
 
