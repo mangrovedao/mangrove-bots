@@ -1377,6 +1377,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mangrovedao/mangrove-core@npm:1.5.2":
+  version: 1.5.2
+  resolution: "@mangrovedao/mangrove-core@npm:1.5.2"
+  checksum: 617a95f5111c954517ad1303d4a3286c509ee2b93bf93d0e55bf3261f87a963b85f57946624797af455c5cfe6635d83439226b2f5ae20289e7d8d12272b5883b
+  languageName: node
+  linkType: hard
+
 "@mangrovedao/mangrove.js@npm:~1.2.6-6":
   version: 1.2.6-6
   resolution: "@mangrovedao/mangrove.js@npm:1.2.6-6"
@@ -5070,7 +5077,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mangrove-monorepo@workspace:."
   dependencies:
-    "@mangrovedao/mangrove-core": 1.5.1-1
+    "@mangrovedao/mangrove-core": 1.5.2
     husky: ^7.0.2
     pinst: ^3.0.0
   languageName: unknown
