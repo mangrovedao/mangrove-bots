@@ -1357,6 +1357,7 @@ __metadata:
     mocha-multi-reporters: ^1.5.1
     npm-run-all: ^4.1.5
     nyc: ^15.1.0
+    object-inspect: ^1.8.1
     prettier: 2.7.1
     prettier-eslint: ^15.0.1
     rimraf: ^5.0.1
@@ -5686,7 +5687,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"object-inspect@npm:^1.12.3, object-inspect@npm:^1.9.0":
+"object-inspect@npm:^1.12.3, object-inspect@npm:^1.8.1, object-inspect@npm:^1.9.0":
   version: 1.12.3
   resolution: "object-inspect@npm:1.12.3"
   checksum: dabfd824d97a5f407e6d5d24810d888859f6be394d8b733a77442b277e0808860555176719c5905e765e3743a7cada6b8b0a3b85e5331c530fd418cc8ae991db
