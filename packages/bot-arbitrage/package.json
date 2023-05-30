@@ -34,8 +34,7 @@
     "demo": "ts-node --transpileOnly scripts/demoScript.ts",
     "start": "node build/index.js",
     "startLocal": "node build/local.js",
-    "write-env-info-file": "node ./scripts/writeEnvInfoFile.js",
-    "submodule:init": "cd mangrove-arbitrage && yarn install --immutable && cd ../.."
+    "write-env-info-file": "node ./scripts/writeEnvInfoFile.js"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
