@@ -607,7 +607,7 @@ jobs:
 
     # == build ==
     - name: Solidity Compile
-      run: yarn run build
+      run: yarn run build-this-package
 
     - name: Save status of build
       # So we can fail-fast and drop the X Test Report steps, if build fails
