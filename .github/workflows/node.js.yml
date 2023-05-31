@@ -611,11 +611,12 @@ jobs:
     # == build ==
     - name: Solidity Compile
       run: yarn run build-this-package
+      working-directory: packages/mangrove-arbitrage
 
     - name: Save status of build
       # So we can fail-fast and drop the X Test Report steps, if build fails
       # A tiny bit hacky, but it's simple and works
-      run: echo "mangrove_built=true" >> $GITHUB_ENV
+      run: echo "mangrove_arbitrage_built=true" >> $GITHUB_ENV
 
     # Run local Solidity tests
     - name: Mangrove Solidity Tests
