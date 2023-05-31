@@ -645,7 +645,7 @@ jobs:
       with:
         git-commit: ${{ steps.coveralls_vars.outputs.sha_for_head }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: lcov.info
+        path-to-lcov: packages/mangrove-arbitrage/lcov.info
         base-path	: packages/mangrove-arbitrage
         flag-name: solidity
 
