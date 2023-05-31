@@ -1,5 +1,5 @@
 {
-  "name": "mangrove-arbitrage",
+  "name": "@mangrovedao/mangrove-arbitrage",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Mangrove DAO",
