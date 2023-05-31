@@ -567,9 +567,104 @@ jobs:
         
   # ==== End job: bot-failing-offer ====        
 
+  # ==== Job: Build and test Mangrove arbitrage contract ====
+  mangrove-arbitrage-contract:
+    needs: [security-guard]
+
+    runs-on: ubuntu-latest
+
+    env:
+      working-directory: packages/mangrove-arbitrage
+      
+    steps:
+
+    # == Git checkout ==
+    - name: Checkout
+      uses: actions/checkout@v3
+      # Workaround for https://github.com/npm/cli/issues/2610
+      with:
+        persist-credentials: false
+        ref: ${{ env.GIT_REF_TO_TEST }}
+        submodules: recursive
+
+    - name: Reconfigure git to use HTTP authentication
+      # Workaround for https://github.com/npm/cli/issues/2610    
+      run: >
+        git config --global url."https://github.com/".insteadOf
+        ssh://git@github.com/
+
+    # == yarn setup ==
+    - name: Yarn setup (caching yarn dependencies)
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'yarn'
+        
+    - run: yarn install --immutable
+
+    - name: Foundry Setup
+      uses: ./.github/actions/foundry-setup
+
+    # == build ==
+    - name: Solidity Compile
+      run: yarn run build
+
+    - name: Save status of build
+      # So we can fail-fast and drop the X Test Report steps, if build fails
+      # A tiny bit hacky, but it's simple and works
+      run: echo "mangrove_built=true" >> $GITHUB_ENV
+
+    # Run local Solidity tests
+    - name: Mangrove Solidity Tests
+      run: yarn run test
+      env:
+        POLYGON_NODE_URL: ${{ secrets.POLYGON_NODE_URL }}
+        MUMBAI_NODE_URL: ${{ secrets.MUMBAI_NODE_URL }}
+
+    # For push runs we also create a coverage report
+    - name: Create coverage report
+      if: github.event_name != 'pull_request_target' 
+      run: forge coverage --report lcov
+      env:
+        POLYGON_NODE_URL: ${{ secrets.POLYGON_NODE_URL }}
+        MUMBAI_NODE_URL: ${{ secrets.MUMBAI_NODE_URL }}
+
+     # == Send coverage report to Coveralls == 
+     # Coverallsapp by default uses GITHUB_SHA but that does not necessarily correspond
+     # to HEAD because a branch is checked out. We here find the actual SHA for HEAD.
+    - name: Set Coveralls vars
+      id: coveralls_vars
+      if: github.event_name != 'pull_request_target' 
+      run: echo "::set-output name=sha_for_head::$(git rev-parse HEAD)"
+
+    - name: Upload to Coveralls
+      uses: coverallsapp/github-action@master
+      if: github.event_name != 'pull_request_target' 
+      with:
+        git-commit: ${{ steps.coveralls_vars.outputs.sha_for_head }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: lcov.info
+        base-path	: .
+        flag-name: solidity
+
+    # NOTE: uncomment once you can manage forge test 
+    # outputs in gh actions
+    # - name: Mangrove Solidity Test Report
+    #   uses: dorny/test-reporter@v1
+    #   if: ${{ env.mangrove_built && (success() || failure()) }}
+    #   with:
+    #     name: Solidity Tests                  # Name of the check run which will be created
+    #     path: ${{env.working-directory}}/solidity-mocha-test-report.json # Path to test results
+    #     reporter: mocha-json                  # Format of test results
+
+    # == check precommit works ==
+    - run: yarn run precommit
+
+  # ==== End job build-and-test ====
+
  # ==== Job: Build and test bot-arbitrage ====
   bot-arbitrage:
-    needs: [security-guard, bot-utils]
+    needs: [security-guard, bot-utils, mangrove-arbitrage-contract]
 
     runs-on: ubuntu-latest
 
@@ -752,6 +847,7 @@ jobs:
     - bot-template
     - bot-updategas
     - bot-arbitrage
+    - mangrove-arbitrage-contract
 
     runs-on: ubuntu-latest
 
