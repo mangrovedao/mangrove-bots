@@ -1325,7 +1325,7 @@ __metadata:
     "@espendk/json-file-reporter": ^1.4.2
     "@ethersproject/experimental": ^5.7.0
     "@ethersproject/hardware-wallets": ^5.7.0
-    "@mangrovedao/mangrove.js": ~1.2.6-6
+    "@mangrovedao/mangrove.js": ~1.2.7
     "@types/big.js": ^6.1.6
     "@types/chai": ^4.3.4
     "@types/chai-as-promised": ^7.1.5
@@ -1377,23 +1377,35 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mangrovedao/mangrove.js@npm:~1.2.6-6":
-  version: 1.2.6-6
-  resolution: "@mangrovedao/mangrove.js@npm:1.2.6-6"
+"@mangrovedao/mangrove-core@npm:1.5.4":
+  version: 1.5.4
+  resolution: "@mangrovedao/mangrove-core@npm:1.5.4"
+  checksum: f3e44124d3cd05a96ecceffe777989adf5acc39a0f02e0b89ad7a33127361c85f5e00937cea609833d00b4ac9a86217b2ad3e23caa4ce75d01727d38ef593514
+  languageName: node
+  linkType: hard
+
+"@mangrovedao/mangrove.js@npm:~1.2.7":
+  version: 1.2.7
+  resolution: "@mangrovedao/mangrove.js@npm:1.2.7"
   dependencies:
     "@ethersproject/experimental": ^5.7.0
-    "@mangrovedao/mangrove-core": 1.5.1-1
+    "@mangrovedao/mangrove-core": 1.5.4
     "@mangrovedao/reliable-event-subscriber": 1.1.19
+    "@types/object-inspect": ^1.8.1
+    "@types/triple-beam": ^1.3.2
     async-mutex: ^0.4.0
     big.js: ^6.2.1
     ethers: ^5.7.2
     json-truncate: ^3.0.0
     just-clone: ^6.2.0
+    logform: ^2.5.1
+    loglevel: ^1.8.1
     node-cleanup: ^2.1.2
+    triple-beam: ^1.3.0
     yargs: ^17.3.0
   bin:
     mgv: ./dist/nodejs/cli/mgv.js
-  checksum: 4db197a66a44bf7970cfde40b83f88e59fb29e42ce6da8b97e9ba86a449a223428a1e3c2ba7bfa83d621355ba43c542a9f3fdf2f81c081af4e9f422b180d1c66
+  checksum: 45fc2763ee97cecebc4e42dc325704da82f8f401cd85ca5da3285c202d28786cbbd2f471f2dedff7552cfc60783a44a17891b808474fd200f1912f12674a7f38
   languageName: node
   linkType: hard
 
@@ -4967,7 +4979,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loglevel@npm:^1.4.1":
+"loglevel@npm:^1.4.1, loglevel@npm:^1.8.1":
   version: 1.8.1
   resolution: "loglevel@npm:1.8.1"
   checksum: a1a62db40291aaeaef2f612334c49e531bff71cc1d01a2acab689ab80d59e092f852ab164a5aedc1a752fdc46b7b162cb097d8a9eb2cf0b299511106c29af61d
