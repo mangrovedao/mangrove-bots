@@ -5070,7 +5070,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mangrove-monorepo@workspace:."
   dependencies:
-    "@mangrovedao/mangrove-core": 1.5.1-1
     husky: ^7.0.2
     pinst: ^3.0.0
   languageName: unknown
