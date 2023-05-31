@@ -661,6 +661,7 @@ jobs:
 
     # == check precommit works ==
     - run: yarn run precommit
+      working-directory: packages/mangrove-arbitrage
 
   # ==== End job build-and-test ====
 
