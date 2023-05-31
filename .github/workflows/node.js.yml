@@ -603,6 +603,7 @@ jobs:
         cache: 'yarn'
         
     - run: yarn install --immutable
+      working-directory: . # Yarn must run in root to ensure monorepo setup
 
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
