@@ -621,12 +621,14 @@ jobs:
     # Run local Solidity tests
     - name: Mangrove Solidity Tests
       run: yarn run test
+      working-directory: packages/mangrove-arbitrage
 
 
     # For push runs we also create a coverage report
     - name: Create coverage report
       if: github.event_name != 'pull_request_target' 
       run: forge coverage --report lcov
+      working-directory: packages/mangrove-arbitrage
 
 
      # == Send coverage report to Coveralls == 
