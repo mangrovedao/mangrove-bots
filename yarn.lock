@@ -1325,7 +1325,7 @@ __metadata:
     "@espendk/json-file-reporter": ^1.4.2
     "@ethersproject/experimental": ^5.7.0
     "@ethersproject/hardware-wallets": ^5.7.0
-    "@mangrovedao/mangrove.js": ~1.2.7
+    "@mangrovedao/mangrove.js": ~1.2.8
     "@types/big.js": ^6.1.6
     "@types/chai": ^4.3.4
     "@types/chai-as-promised": ^7.1.5
@@ -1384,9 +1384,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mangrovedao/mangrove.js@npm:~1.2.7":
-  version: 1.2.7
-  resolution: "@mangrovedao/mangrove.js@npm:1.2.7"
+"@mangrovedao/mangrove.js@npm:~1.2.8":
+  version: 1.2.8
+  resolution: "@mangrovedao/mangrove.js@npm:1.2.8"
   dependencies:
     "@ethersproject/experimental": ^5.7.0
     "@mangrovedao/mangrove-core": 1.5.4
@@ -1405,7 +1405,7 @@ __metadata:
     yargs: ^17.3.0
   bin:
     mgv: ./dist/nodejs/cli/mgv.js
-  checksum: 45fc2763ee97cecebc4e42dc325704da82f8f401cd85ca5da3285c202d28786cbbd2f471f2dedff7552cfc60783a44a17891b808474fd200f1912f12674a7f38
+  checksum: d837086595eca45084cc89af64b0bb08c13ee11aaac15bad7080a0c014f9c34cedd9274cde3a8bba89163e2c694a8e7ce2a380a01d86e79a4713c52b5c0e465c
   languageName: node
   linkType: hard
 
