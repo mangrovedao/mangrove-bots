@@ -38,6 +38,15 @@
         "sleepTimeMilliseconds": 30000,
         "offerCountCap": 5
       }
+    },
+    {
+      "baseToken": "WMATIC",
+      "baseTokenSymbolForPriceLookup": "MATIC",
+      "quoteToken": "USDT",
+      "takerConfig": {
+        "sleepTimeMilliseconds": 30000,
+        "offerCountCap": 5
+      }
     }
   ]
 }
