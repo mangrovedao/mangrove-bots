@@ -83,7 +83,9 @@ Here's an example configuration file with instances of all possible configuratio
   - `targetAllowance`: The allowance that Mangrove should be approved to transfer on behalf of the bot. On startup, this is checked and an approval tx sent if the current approval is too low.
 - `markets`: A list of per-market configurations. The bot will take offers from each of the markets listed here.
   - `baseToken`: The symbol of the base token.
+  - `baseTokenSymbolForPriceLookup?` Optional symbol to use instead of `baseToken` when looking up prices (eg MATIC instead of WMATIC). Useful if `baseToken` is not listed.
   - `quoteToken`: The symbol of the quote token.
+  - `quoteTokenSymbolForPriceLookup?` Optional symbol to use instead of `quoteToken` when looking up prices (eg MATIC instead of WMATIC). Useful if `quoteToken` is not listed.
   - `takerConfig`: Configuration of the taker on this market:
     - `sleepTimeMilliseconds`: The number of milliseconds the bot should sleep in between checking the market.
     - `offerCountCap`: The max number of offers the bot should attempt to take.
