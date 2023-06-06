@@ -17,7 +17,9 @@ import path from "path";
 const LOCAL_MNEMONIC =
   "test test test test test test test test test test test junk";
 const mnemonic = new eth.Mnemonic(LOCAL_MNEMONIC);
-const CORE_DIR = path.parse(require.resolve("../../../mangrove-arbitrage")).dir;
+const CORE_DIR = path.parse(
+  require.resolve("../../../../mangrove-arbitrage")
+).dir;
 
 export const mochaHooks = {
   server: { url: "", snapshot: async () => {} },

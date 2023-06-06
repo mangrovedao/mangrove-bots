@@ -48,6 +48,7 @@ async function startTakersForMarkets(
 
     const offerTaker = new OfferTaker(
       market,
+      marketConfig,
       address,
       marketConfig.takerConfig,
       scheduler

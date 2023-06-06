@@ -1,6 +1,6 @@
-[![CI](https://github.com/mangrovedao/mangrove-bots/actions/workflows/node.js.yml/badge.svg)](https://github.com/mangrovedao/mangrove-bots/actions/workflows/node.js.yml) [![Coverage Status](https://coveralls.io/repos/github/mangrovedao/mangrove-bots/badge.svg)](https://coveralls.io/github/mangrovedao/mangrove-bots)
+[![CI](https://github.com/mangrovedao/mangrove-bots/actions/workflows/node.js.yml/badge.svg)](https://github.com/mangrovedao/mangrove-bots/actions/workflows/node.js.yml)
 
-This repo contains the a number of bots that for the Mangrove ecosystem. 
+This repo contains a number of bots for the Mangrove ecosystem - each provided as a separate package. 
 
 The core contracts for Mangrove with example Solidity offer logics live in the [mangrove-core](https://github.com/mangrovedao/mangrove-core) repo. 
 
@@ -124,7 +124,7 @@ The Git hook scripts are in the `.husky/` folder.
 
 ## Husky and Heroku
 
-We currently deploy several off-chain packages to Heroku. To disable Husky from running on a Heroku deploy, we use [pinst](https://github.com/typicode/pinst) package and two heroku-specific `scripts` in the top-level `package.json`:
+We currently deploy several bot packages to Heroku. To disable Husky from running on a Heroku deploy, we use [pinst](https://github.com/typicode/pinst) package and two heroku-specific `scripts` in the top-level `package.json`:
 
 ```json
 {
