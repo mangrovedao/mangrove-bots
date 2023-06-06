@@ -1,6 +1,6 @@
 import { logger } from "./util/logger";
 import { Market } from "@mangrovedao/mangrove.js";
-import { TakerConfig } from "./MarketConfig";
+import { MarketConfig, TakerConfig } from "./MarketConfig";
 import { fetchJson } from "ethers/lib/utils";
 import { ToadScheduler, SimpleIntervalJob, AsyncTask } from "toad-scheduler";
 import Big from "big.js";
@@ -28,6 +28,7 @@ export class OfferTaker {
    */
   constructor(
     market: Market,
+    marketConfig: MarketConfig,
     takerAddress: string,
     takerConfig: TakerConfig,
     scheduler: ToadScheduler
@@ -36,8 +37,10 @@ export class OfferTaker {
     this.#takerAddress = takerAddress;
     this.#takerConfig = takerConfig;
     this.#cryptoCompareUrl = `https://min-api.cryptocompare.com/data/price?fsym=${
-      this.#market.base.name
-    }&tsyms=${this.#market.quote.name}`;
+      marketConfig.baseTokenSymbolForPriceLookup ?? this.#market.base.name
+    }&tsyms=${
+      marketConfig.quoteTokenSymbolForPriceLookup ?? this.#market.quote.name
+    }`;
     this.#scheduler = scheduler;
 
     logger.info("Initalized offer taker", {

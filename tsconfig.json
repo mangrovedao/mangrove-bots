@@ -17,9 +17,6 @@
         "path": "./packages/bot-taker-greedy",
       },
       {
-        "path": "./packages/bot-template",
-      },
-      {
         "path": "./packages/bot-updategas",
       },      
       {

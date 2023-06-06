@@ -989,6 +989,7 @@ __metadata:
     "@ethersproject/experimental": ^5.7.0
     "@ethersproject/hardware-wallets": ^5.7.0
     "@mangrovedao/bot-utils": "workspace:*"
+    "@mangrovedao/mangrove-arbitrage": "workspace:*"
     "@types/big.js": ^6.1.6
     "@types/chai": ^4.3.4
     "@types/chai-as-promised": ^7.1.5
@@ -1220,52 +1221,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mangrovedao/bot-template@workspace:packages/bot-template":
-  version: 0.0.0-use.local
-  resolution: "@mangrovedao/bot-template@workspace:packages/bot-template"
-  dependencies:
-    "@espendk/json-file-reporter": ^1.4.2
-    "@ethersproject/experimental": ^5.7.0
-    "@ethersproject/hardware-wallets": ^5.7.0
-    "@mangrovedao/bot-utils": "workspace:*"
-    "@types/big.js": ^6.1.6
-    "@types/chai": ^4.3.4
-    "@types/chai-as-promised": ^7.1.5
-    "@types/config": ^3.3.0
-    "@types/dotenv-flow": ^3.2.0
-    "@types/finalhandler": ^1.2.0
-    "@types/mocha": ^10.0.1
-    "@types/node": ^20.2.1
-    "@types/serve-static": ^1.15.0
-    "@types/shelljs": ^0.8.11
-    "@typescript-eslint/eslint-plugin": ^5.59.6
-    "@typescript-eslint/parser": ^5.48.1
-    big.js: ^6.2.1
-    chai: ^4.3.7
-    chai-as-promised: ^7.1.1
-    config: ^3.3.9
-    cross-env: ^7.0.3
-    dotenv-flow: ^3.2.0
-    eslint: ^8.31.0
-    eslint-config-prettier: ^8.8.0
-    ethers: ^5.7.2
-    fast-safe-stringify: ^2.1.1
-    finalhandler: ^1.2.0
-    lint-staged: ^13.2.0
-    mocha: ^10.2.0
-    mocha-multi-reporters: ^1.5.1
-    npm-run-all: ^4.1.5
-    nyc: ^15.1.0
-    prettier: 2.7.1
-    prettier-eslint: ^15.0.1
-    rimraf: ^5.0.1
-    serve-static: ^1.15.0
-    shelljs: ^0.8.5
-    ts-node: ^10.9.1
-    typescript: ^4.7.0
-  languageName: unknown
-  linkType: soft
-
 "@mangrovedao/bot-updategas@workspace:packages/bot-updategas":
   version: 0.0.0-use.local
   resolution: "@mangrovedao/bot-updategas@workspace:packages/bot-updategas"
@@ -1325,7 +1280,7 @@ __metadata:
     "@espendk/json-file-reporter": ^1.4.2
     "@ethersproject/experimental": ^5.7.0
     "@ethersproject/hardware-wallets": ^5.7.0
-    "@mangrovedao/mangrove.js": ~1.2.6-6
+    "@mangrovedao/mangrove.js": ~1.2.8
     "@types/big.js": ^6.1.6
     "@types/chai": ^4.3.4
     "@types/chai-as-promised": ^7.1.5
@@ -1357,6 +1312,7 @@ __metadata:
     mocha-multi-reporters: ^1.5.1
     npm-run-all: ^4.1.5
     nyc: ^15.1.0
+    object-inspect: ^1.8.1
     prettier: 2.7.1
     prettier-eslint: ^15.0.1
     rimraf: ^5.0.1
@@ -1369,30 +1325,50 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mangrovedao/mangrove-core@npm:1.5.1-1":
-  version: 1.5.1-1
-  resolution: "@mangrovedao/mangrove-core@npm:1.5.1-1"
-  checksum: 803c2714ee623a71950155fbec46fb5e80926acc46e30de7c77995e414f7811845c3dcfe8bd93b34e4888dcf87ae0af7a28e8b6801a848cb7f5774e479efd18b
+"@mangrovedao/mangrove-arbitrage@workspace:*, @mangrovedao/mangrove-arbitrage@workspace:packages/mangrove-arbitrage":
+  version: 0.0.0-use.local
+  resolution: "@mangrovedao/mangrove-arbitrage@workspace:packages/mangrove-arbitrage"
+  dependencies:
+    "@uniswap/swap-router-contracts": ^1.3.0
+    "@uniswap/v3-core": ^1.0.1
+    "@uniswap/v3-periphery": ^1.4.3
+    dotenv: ^16.0.3
+    lint-staged: ^13.2.2
+    prettier: ^2.8.7
+    shelljs: ^0.8.5
+    yargs: ^17.7.2
+  languageName: unknown
+  linkType: soft
+
+"@mangrovedao/mangrove-core@npm:1.5.4":
+  version: 1.5.4
+  resolution: "@mangrovedao/mangrove-core@npm:1.5.4"
+  checksum: f3e44124d3cd05a96ecceffe777989adf5acc39a0f02e0b89ad7a33127361c85f5e00937cea609833d00b4ac9a86217b2ad3e23caa4ce75d01727d38ef593514
   languageName: node
   linkType: hard
 
-"@mangrovedao/mangrove.js@npm:~1.2.6-6":
-  version: 1.2.6-6
-  resolution: "@mangrovedao/mangrove.js@npm:1.2.6-6"
+"@mangrovedao/mangrove.js@npm:~1.2.8":
+  version: 1.2.8
+  resolution: "@mangrovedao/mangrove.js@npm:1.2.8"
   dependencies:
     "@ethersproject/experimental": ^5.7.0
-    "@mangrovedao/mangrove-core": 1.5.1-1
+    "@mangrovedao/mangrove-core": 1.5.4
     "@mangrovedao/reliable-event-subscriber": 1.1.19
+    "@types/object-inspect": ^1.8.1
+    "@types/triple-beam": ^1.3.2
     async-mutex: ^0.4.0
     big.js: ^6.2.1
     ethers: ^5.7.2
     json-truncate: ^3.0.0
     just-clone: ^6.2.0
+    logform: ^2.5.1
+    loglevel: ^1.8.1
     node-cleanup: ^2.1.2
+    triple-beam: ^1.3.0
     yargs: ^17.3.0
   bin:
     mgv: ./dist/nodejs/cli/mgv.js
-  checksum: 4db197a66a44bf7970cfde40b83f88e59fb29e42ce6da8b97e9ba86a449a223428a1e3c2ba7bfa83d621355ba43c542a9f3fdf2f81c081af4e9f422b180d1c66
+  checksum: d837086595eca45084cc89af64b0bb08c13ee11aaac15bad7080a0c014f9c34cedd9274cde3a8bba89163e2c694a8e7ce2a380a01d86e79a4713c52b5c0e465c
   languageName: node
   linkType: hard
 
@@ -1832,6 +1808,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@uniswap/swap-router-contracts@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@uniswap/swap-router-contracts@npm:1.3.0"
+  dependencies:
+    "@openzeppelin/contracts": 3.4.2-solc-0.7
+    "@uniswap/v2-core": 1.0.1
+    "@uniswap/v3-core": 1.0.0
+    "@uniswap/v3-periphery": 1.4.1
+    dotenv: ^14.2.0
+    hardhat-watcher: ^2.1.1
+  checksum: 66f853a4f04742bdfb4eb3fd6035aa7e3238cafec99609fcfb87b640953a6575152687bd6d0d14fe35440b339b7e3cc70dde237fb70703b3f49684c630a2d648
+  languageName: node
+  linkType: hard
+
 "@uniswap/v2-core@npm:1.0.1":
   version: 1.0.1
   resolution: "@uniswap/v2-core@npm:1.0.1"
@@ -1850,6 +1840,20 @@ __metadata:
   version: 1.0.1
   resolution: "@uniswap/v3-core@npm:1.0.1"
   checksum: 4bfd8b218391a3d9efde44e0f984cfec3bc25889cd4d1386766828521006e71b210a3583ee32b52f3c81d384af9e8c39f471f2229e9af4d50da6801446ecb3e4
+  languageName: node
+  linkType: hard
+
+"@uniswap/v3-periphery@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@uniswap/v3-periphery@npm:1.4.1"
+  dependencies:
+    "@openzeppelin/contracts": 3.4.2-solc-0.7
+    "@uniswap/lib": ^4.0.1-alpha
+    "@uniswap/v2-core": 1.0.1
+    "@uniswap/v3-core": 1.0.0
+    base64-sol: 1.0.1
+    hardhat-watcher: ^2.1.1
+  checksum: a171332f1f1b89cde24d9962bdfc9742d9e6b102ea16815fa6997e0c812aa93a120752a6f497a5d5ab709f5c91ec7f18c2957fa5a8b9af57db3ff202ac8b7dc7
   languageName: node
   linkType: hard
 
@@ -2525,7 +2529,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:3.5.3":
+"chokidar@npm:3.5.3, chokidar@npm:^3.5.3":
   version: 3.5.3
   resolution: "chokidar@npm:3.5.3"
   dependencies:
@@ -2994,6 +2998,13 @@ __metadata:
   dependencies:
     dotenv: ^8.0.0
   checksum: 8e34ea8f5cb216acb0f9cc602752dceef6e1c0b52c39045d6b92fadbefcbfecaf0cc868d3e115c9764860293d62d0bb31d46cfa41d29cb9fc7039797e20de03e
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^14.2.0":
+  version: 14.3.2
+  resolution: "dotenv@npm:14.3.2"
+  checksum: 86c06758915d6facc35275f4a7fafc16705b6f3b44befaa8abca91367991efc8ff8db5437d3cc14778231d19fb97610fe82d60f8a53ba723cdb69fe4171439aa
   languageName: node
   linkType: hard
 
@@ -4031,6 +4042,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hardhat-watcher@npm:^2.1.1":
+  version: 2.5.0
+  resolution: "hardhat-watcher@npm:2.5.0"
+  dependencies:
+    chokidar: ^3.5.3
+  peerDependencies:
+    hardhat: ^2.0.0
+  checksum: e6c0d52865529653733b3fed6887b41a676fc5185eb835909b360e8cc24223a2fc4c398e3874b234fa918ec59be9de86d7fe92963022139c05cf07f027377cbb
+  languageName: node
+  linkType: hard
+
 "has-ansi@npm:^2.0.0":
   version: 2.0.0
   resolution: "has-ansi@npm:2.0.0"
@@ -4818,7 +4840,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^13.0.3, lint-staged@npm:^13.2.0":
+"lint-staged@npm:^13.0.3, lint-staged@npm:^13.2.0, lint-staged@npm:^13.2.2":
   version: 13.2.2
   resolution: "lint-staged@npm:13.2.2"
   dependencies:
@@ -4966,7 +4988,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loglevel@npm:^1.4.1":
+"loglevel@npm:^1.4.1, loglevel@npm:^1.8.1":
   version: 1.8.1
   resolution: "loglevel@npm:1.8.1"
   checksum: a1a62db40291aaeaef2f612334c49e531bff71cc1d01a2acab689ab80d59e092f852ab164a5aedc1a752fdc46b7b162cb097d8a9eb2cf0b299511106c29af61d
@@ -5069,7 +5091,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mangrove-monorepo@workspace:."
   dependencies:
-    "@mangrovedao/mangrove-core": 1.5.1-1
     husky: ^7.0.2
     pinst: ^3.0.0
   languageName: unknown
@@ -5686,7 +5707,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"object-inspect@npm:^1.12.3, object-inspect@npm:^1.9.0":
+"object-inspect@npm:^1.12.3, object-inspect@npm:^1.8.1, object-inspect@npm:^1.9.0":
   version: 1.12.3
   resolution: "object-inspect@npm:1.12.3"
   checksum: dabfd824d97a5f407e6d5d24810d888859f6be394d8b733a77442b277e0808860555176719c5905e765e3743a7cada6b8b0a3b85e5331c530fd418cc8ae991db
@@ -6079,7 +6100,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.3.1, prettier@npm:^2.5.1":
+"prettier@npm:^2.3.1, prettier@npm:^2.5.1, prettier@npm:^2.8.7":
   version: 2.8.8
   resolution: "prettier@npm:2.8.8"
   bin:
@@ -7849,7 +7870,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs@npm:^17.3.0":
+"yargs@npm:^17.3.0, yargs@npm:^17.7.2":
   version: 17.7.2
   resolution: "yargs@npm:17.7.2"
   dependencies:

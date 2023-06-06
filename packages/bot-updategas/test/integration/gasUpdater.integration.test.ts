@@ -46,6 +46,7 @@ describe("GasUpdater integration tests", () => {
       oracleAddress,
       mgvAdmin.signer
     );
+    await oracleContract.setGasPrice(0);
     await oracleContract.setMutator(gasUpdaterSigner.address);
   });
 
