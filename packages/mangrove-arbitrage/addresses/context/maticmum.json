@@ -1,0 +1,42 @@
+[
+  {
+    "address": "0x47897EE61498D02B18794601Ed3A71896A1Ff894",
+    "name": "Deployer"
+  },
+  {
+    "address": "0x5a6272e5d8690ad47Df72BBf7Fb08cE1851b8f54",
+    "name": "Tester"
+  },
+  {
+    "address": "0xeb7A892BB04A8f836bDEeBbf60897A7Af1Bf5d7F",
+    "name": "Aave"
+  },
+  {
+    "address": "0x0b913a76beff3887d35073b8e5530755d60f78c7",
+    "name": "Aave Pool"
+  },
+  {
+    "address": "0xD087ff96281dcf722AEa82aCA57E8545EA9e6C96",
+    "name": "WETH"
+  },
+  {
+    "address": "0xf237dE5664D3c2D2545684E76fef02A3A58A364c",
+    "name": "WMATIC"
+  },
+  {
+    "address": "0xe9DcE89B076BA6107Bb64EF30678efec11939234",
+    "name": "USDC"
+  },
+  {
+    "address": "0xF14f9596430931E177469715c591513308244e8F",
+    "name": "DAI"
+  },
+  {
+    "address": "0x11942A6952324f7Fc63Dc57Ed6Ec767b5fc263D6",
+    "name": "tGNT"
+  },
+  {
+    "address": "0x4d184a4C8d79BbBdCC4E95A1AdEA2454c535280A",
+    "name": "Gasbot"
+  }
+]
