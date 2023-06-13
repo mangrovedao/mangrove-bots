@@ -39,7 +39,7 @@ export class MarketCleaner {
 
     this.#isCleaning = false;
 
-    logger.info("Initalized market cleaner", {
+    logger.info("Initialized market cleaner", {
       base: this.#market.base.name,
       quote: this.#market.quote.name,
       contextInfo: "init",
