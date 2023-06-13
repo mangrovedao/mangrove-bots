@@ -56,7 +56,6 @@ describe("MarketCleaner integration tests", () => {
     accounts = [maker, cleaner];
 
     mgv = await Mangrove.connect({
-      //provider: this.test?.parent?.parent?.ctx.providerUrl,
       signer: cleaner.signer,
     });
     market = await mgv.market({ base: "TokenA", quote: "TokenB" });
