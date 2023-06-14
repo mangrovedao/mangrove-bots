@@ -17,7 +17,7 @@ export class TxUtils {
     this.provider = provider;
   }
 
-  public async getFeeOverrides(): Promise<Fees | void> {
+  public async getFeeOverrides(): Promise<Fees | undefined> {
     let maxFeePerGas;
     let maxPriorityFeePerGas;
 
@@ -65,5 +65,6 @@ export class TxUtils {
     } else {
       this.logger.debug("No overrides of fees registered needed.");
     }
+    return undefined;
   }
 }

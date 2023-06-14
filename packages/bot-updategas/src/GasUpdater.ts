@@ -169,7 +169,7 @@ export class GasUpdater {
         const fees = await this.#txUtils.getFeeOverrides();
         let txOverrides;
 
-        if (typeof fees !== "undefined" && fees !== null) {
+        if (fees !== undefined) {
           txOverrides = {
             maxPriorityFeePerGas: fees.maxPriorityFeePerGas,
             maxFeePerGas: fees.maxFeePerGas,

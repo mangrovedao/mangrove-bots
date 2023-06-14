@@ -167,7 +167,7 @@ class GasHelper {
       const newGasPriceRounded = Math.round(newGasPrice);
 
       let ctx: Promise<ContractTransaction>;
-      if (typeof txOverrides === "undefined" || txOverrides === null) {
+      if (txOverrides === undefined) {
         ctx = oracleContract.setGasPrice(newGasPriceRounded);
       } else {
         ctx = oracleContract.setGasPrice(newGasPriceRounded, txOverrides);
