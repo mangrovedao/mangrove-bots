@@ -1,9 +1,9 @@
-import { PriceUtils } from "@mangrovedao/bot-utils/build/util/priceUtils";
+import { PriceUtils } from "@mangrovedao/bot-utils";
 import Mangrove from "@mangrovedao/mangrove.js";
 import { typechain } from "@mangrovedao/mangrove.js/dist/nodejs/types";
 import { MaxUpdateConstraint } from "./GasUpdater";
-import config from "./util/config";
 import logger from "./util/logger";
+import { ContractTransaction, Overrides } from "ethers";
 
 class GasHelper {
   priceUtils = new PriceUtils(logger);
@@ -155,7 +155,8 @@ class GasHelper {
   async updateMangroveGasPrice(
     newGasPrice: number,
     oracleContract: typechain.MgvOracle,
-    mangrove: Mangrove
+    mangrove: Mangrove,
+    txOverrides?: Overrides
   ): Promise<void> {
     logger.debug(
       "updateMangroveGasPrice: Sending gas update to oracle contract."
@@ -165,9 +166,14 @@ class GasHelper {
       // Round to closest integer before converting to BigNumber
       const newGasPriceRounded = Math.round(newGasPrice);
 
-      await oracleContract
-        .setGasPrice(newGasPriceRounded)
-        .then((tx) => tx.wait());
+      let ctx: Promise<ContractTransaction>;
+      if (typeof txOverrides === "undefined" || txOverrides === null) {
+        ctx = oracleContract.setGasPrice(newGasPriceRounded);
+      } else {
+        ctx = oracleContract.setGasPrice(newGasPriceRounded, txOverrides);
+      }
+
+      await ctx.then((tx) => tx.wait());
 
       logger.info(
         `Succesfully sent Mangrove gas price update to oracle: ${newGasPriceRounded}.`

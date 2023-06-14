@@ -1,6 +1,7 @@
-import { Mangrove, typechain } from "@mangrovedao/mangrove.js";
+import { ethers, Mangrove, typechain } from "@mangrovedao/mangrove.js";
 import GasHelper from "./GasHelper";
 import { logger } from "./util/logger";
+import { TxUtils } from "@mangrovedao/bot-utils";
 
 /**
  * Configuration for an external oracle JSON REST endpoint.
@@ -58,6 +59,7 @@ export class GasUpdater {
   oracleContract: typechain.MgvOracle;
   gasHelper = new GasHelper();
   #maxUpdateConstraint?: MaxUpdateConstraint;
+  #txUtils: TxUtils;
 
   /**
    * Constructs a GasUpdater bot.
@@ -65,6 +67,7 @@ export class GasUpdater {
    * @param acceptableGasGapToOracle The allowed gap between the Mangrove gas
    * price and the external oracle gas price.
    * @param oracleSourceConfiguration The oracle source configuration - see type `OracleSourceConfiguration`.
+   * @param maxUpdateConstraint The max update constraint - see type `MaxUpdateConstraint`.
    */
   constructor(
     mangrove: Mangrove,
@@ -97,6 +100,8 @@ export class GasUpdater {
       oracleAddress,
       mangrove.signer
     );
+
+    this.#txUtils = new TxUtils(this.#mangrove.provider, logger);
   }
 
   /**
@@ -160,10 +165,29 @@ export class GasUpdater {
           return;
         }
 
+        // check for fee overrides via txUtils
+        const fees = await this.#txUtils.getFeeOverrides();
+        let txOverrides;
+
+        if (typeof fees !== "undefined" && fees !== null) {
+          txOverrides = {
+            maxPriorityFeePerGas: fees.maxPriorityFeePerGas,
+            maxFeePerGas: fees.maxFeePerGas,
+          };
+          logger.debug(`Overriding fees with: `, {
+            data: {
+              txOverrides,
+              maxPriorityFeePerGas_in_wei: fees.maxPriorityFeePerGas.toString(),
+              maxFeePerGas_in_wei: fees.maxFeePerGas.toString(),
+            },
+          });
+        }
+
         await this.gasHelper.updateMangroveGasPrice(
           allowedNewGasPrice,
           this.oracleContract,
-          this.#mangrove
+          this.#mangrove,
+          txOverrides
         );
       } else {
         logger.debug(`Determined gas price update not needed.`);
