@@ -15,6 +15,8 @@ import {
 } from "./logging/coreLogger";
 import { createConsoleLogger } from "./logging/consoleLogger";
 import { sleep } from "./util/promiseUtil";
+import { TxUtils } from "./util/txUtils";
+import { PriceUtils } from "./util/priceUtils";
 
 export {
   ErrorWithData,
@@ -31,4 +33,6 @@ export {
   approveMangroveUtils,
   provisionMangroveUtils,
   configUtils,
+  TxUtils,
+  PriceUtils,
 };

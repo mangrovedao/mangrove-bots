@@ -90,6 +90,40 @@ describe("GasHelper unit test suite", () => {
       //Assert
       assert.equal(params, Math.round(newGasPrice));
     });
+
+    it("should use txOverrides when it is provided", async function () {
+      //Arrange
+      const gasHelper = new GasHelper();
+      const mgvOracle = mock<typechain.MgvOracle>();
+      const newGasPrice = 20;
+      const mangrove = mock(Mangrove);
+      const prom: Promise<ContractTransaction> = mock(
+        Promise<ContractTransaction>
+      );
+
+      when(mgvOracle.setGasPrice(anything(), anything())).thenReturn(
+        instance(prom)
+      );
+
+      const txOverrides = {
+        maxFeePerGas: 1000000000,
+        maxPriorityFeePerGas: 1000000000,
+      };
+
+      //Act
+      await gasHelper.updateMangroveGasPrice(
+        newGasPrice,
+        instance(mgvOracle),
+        mangrove,
+        txOverrides
+      );
+
+      const params = capture(mgvOracle.setGasPrice).last();
+      const expected = [newGasPrice, txOverrides];
+
+      //Assert
+      assert.deepEqual(params, expected);
+    });
   });
 
   describe("calculateNewGaspriceFromConstriants", () => {
