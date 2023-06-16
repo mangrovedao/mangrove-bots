@@ -413,6 +413,7 @@ jobs:
       working-directory: packages/bot-arbitrage
       POLYGON_NODE_URL: ${{ secrets.POLYGON_NODE_URL || 'https://polygon.llamarpc.com' }}
       API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
+      GAS_PRICE_FALLBACK: 300 # in case ALCHEMY_API_KEY is not available due to PR from fork
 
     defaults:
       run:
