@@ -38,7 +38,7 @@ jobs:
     - name: Yarn setup (caching yarn dependencies)
       uses: actions/setup-node@v3
       with:
-        node-version: 16.x
+        node-version: 18.x
         cache: 'yarn'
         
     - run: yarn install --immutable
@@ -87,7 +87,7 @@ jobs:
     - name: Yarn setup (caching yarn dependencies)
       uses: actions/setup-node@v3
       with:
-        node-version: 16.x
+        node-version: 18.x
         cache: 'yarn'
         
     - run: yarn install --immutable
@@ -137,7 +137,7 @@ jobs:
     - name: Yarn setup (caching yarn dependencies)
       uses: actions/setup-node@v3
       with:
-        node-version: 16.x
+        node-version: 18.x
         cache: 'yarn'
         
     - run: yarn install --immutable
@@ -181,7 +181,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
 
     steps:
     - name: Checkout
@@ -190,7 +190,7 @@ jobs:
     - name: Yarn setup (caching yarn dependencies)
       uses: actions/setup-node@v3
       with:
-        node-version: 16.x
+        node-version: 18.x
         cache: 'yarn'
 
     - run: yarn install --immutable
@@ -234,7 +234,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
 
     steps:
     - name: Checkout
@@ -243,7 +243,7 @@ jobs:
     - name: Yarn setup (caching yarn dependencies)
       uses: actions/setup-node@v3
       with:
-        node-version: 16.x
+        node-version: 18.x
         cache: 'yarn'
         
     - run: yarn install --immutable
@@ -292,7 +292,7 @@ jobs:
     - name: Yarn setup (caching yarn dependencies)
       uses: actions/setup-node@v3
       with:
-        node-version: 16.x
+        node-version: 18.x
         cache: 'yarn'
 
     - run: yarn install --immutable
@@ -341,7 +341,7 @@ jobs:
     - name: Yarn setup (caching yarn dependencies)
       uses: actions/setup-node@v3
       with:
-        node-version: 16.x
+        node-version: 18.x
         cache: 'yarn'
         
     - run: yarn install --immutable
@@ -428,7 +428,7 @@ jobs:
     - name: Yarn setup (caching yarn dependencies)
       uses: actions/setup-node@v3
       with:
-        node-version: 16.x
+        node-version: 18.x
         cache: 'yarn'
 
     - run: yarn install --immutable
