@@ -31,13 +31,20 @@ export class ArbBot {
       const [base, quote, fee] = marketConfig;
 
       const API_KEY = process.env["API_KEY"];
+      let gasprice: BigNumber;
       if (!API_KEY) {
-        throw new Error("No API key for alchemy");
+        const gaspriceFallback = process.env["GAS_PRICE_FALLBACK"];
+        if (gaspriceFallback) {
+          gasprice = BigNumber.from(gaspriceFallback);
+        } else {
+          throw new Error("No API_KEY for alchemy");
+        }
+      } else {
+        gasprice = await this.priceUtils.getGasPrice(
+          API_KEY,
+          this.mgv.network.name
+        );
       }
-      const gasprice = await this.priceUtils.getGasPrice(
-        API_KEY,
-        this.mgv.network.name
-      );
       const nativeToken = this.getNativeTokenNameAndDecimals(
         this.mgv.network.id
       );
