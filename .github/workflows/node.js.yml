@@ -7,7 +7,7 @@ on:
       - master
       - develop
       - 'run-ci/**'
-  pull_request_target:
+  pull_request:
     branches: [ master, develop, test-pr ]
     types: [opened, synchronize, reopened, labeled]
 
@@ -17,46 +17,10 @@ concurrency:
 
 env:
   NODE_ENV: test
-  # Ternary-esque expression hack: The first line is the condition,
-  # the 2nd line is the value if `true`, the 3rd line is the value if `false`.
-  GIT_REF_TO_TEST: >
-                   ${{  (   github.event_name != 'pull_request_target'
-                         && github.ref )
-                      || format('refs/pull/{0}/merge', github.event.number) }}
+
 jobs:
-  # ==== Job: Security guard ====
-  # The security guard job only allows workflows triggered by external PR's to continue
-  # if they are labelled 'safe to test'.
-  security-guard:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Comment external PR's with first time (before being labelled 'external PR')
-      if: >
-          !(   github.event_name != 'pull_request_target'
-            || github.event.pull_request.head.repo.full_name == github.repository
-            || contains(github.event.pull_request.labels.*.name, 'external PR') )
-      uses: peter-evans/create-or-update-comment@v3
-      with:
-        issue-number: ${{ github.event.pull_request.number }}
-        body: >
-              Pull requests from forks must be reviewed before build and tests are run.
-
-              A maintainer will review and add the 'safe to test' label if everything looks good.
-
-    - name: Label external PR's with 'external PR'
-      if: >
-          !(   github.event_name != 'pull_request_target'
-            || github.event.pull_request.head.repo.full_name == github.repository
-            || contains(github.event.pull_request.labels.*.name, 'external PR') )
-      uses: actions-ecosystem/action-add-labels@v1
-      with:
-        labels: external PR
-
   # ==== Job: Build and test bot-utils ====
   bot-utils:
-    needs: [security-guard]
-
     runs-on: ubuntu-latest
 
     env:
@@ -66,35 +30,15 @@ jobs:
       run:
         working-directory: ${{env.working-directory}}
 
-    permissions:
-      checks: write
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
 
-    # == Git checkout ==
     - name: Checkout
       uses: actions/checkout@v3
-      # Workaround for https://github.com/npm/cli/issues/2610
-      with:
-        persist-credentials: false
-        ref: ${{ env.GIT_REF_TO_TEST }}
-        submodules: recursive
 
-    - name: Reconfigure git to use HTTP authentication
-      # Workaround for https://github.com/npm/cli/issues/2610    
-      run: >
-        git config --global url."https://github.com/".insteadOf
-        ssh://git@github.com/
-
-    # == yarn setup ==
     - name: Yarn setup (caching yarn dependencies)
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 16.x
         cache: 'yarn'
         
     - run: yarn install --immutable
@@ -104,9 +48,8 @@ jobs:
       uses: ./.github/actions/foundry-setup
 
     # == build ==
-
     - name: Bot Utils - Build
-      run: yarn run build-this-package
+      run: yarn run build
 
     - name: Save status of build
       run: echo "bot_utils_built=true" >> $GITHUB_ENV    
@@ -124,34 +67,10 @@ jobs:
         reporter: mocha-json                                # Format of test results
         fail-on-error: 'false'                              # Don't mark this step as failed if tests fail - the test step itself will be marked as failed
 
-     # save artifacts for later stages
-    - name: Zip output
-      uses: montudor/action-zip@v1
-      with: 
-        args: zip -qq -r bot-utils-out.zip ${{env.working-directory}}/build
-
-    - name: Cache bot-utils output as artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: bot-utils-out.zip
-        path: bot-utils-out.zip
-
-    - name: Zip src 
-      uses: montudor/action-zip@v1
-      with: 
-        args: zip -qq -r bot-utils-src.zip ${{env.working-directory}}/src
-
-    - name: Cache bot-utils-src as artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: bot-utils-src.zip
-        path: bot-utils-src.zip
   # ==== End job: bot-utils ====        
 
   # ==== Job: Build and test bot-cleaning ====
   bot-cleaning:
-    needs: [security-guard, bot-utils]
-
     runs-on: ubuntu-latest
 
     env:
@@ -161,35 +80,14 @@ jobs:
       run:
         working-directory: ${{env.working-directory}}
 
-    permissions:
-      checks: write
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
-
-    # == Git checkout ==
     - name: Checkout
       uses: actions/checkout@v3
-      # Workaround for https://github.com/npm/cli/issues/2610
-      with:
-        persist-credentials: false
-        ref: ${{ env.GIT_REF_TO_TEST }}
-        submodules: recursive
 
-    - name: Reconfigure git to use HTTP authentication
-      # Workaround for https://github.com/npm/cli/issues/2610    
-      run: >
-        git config --global url."https://github.com/".insteadOf
-        ssh://git@github.com/
-
-    # == yarn setup ==
     - name: Yarn setup (caching yarn dependencies)
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 16.x
         cache: 'yarn'
         
     - run: yarn install --immutable
@@ -198,20 +96,9 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
 
-    - name: Download cached bot-utils artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: bot-utils-out.zip
-
-    - name: Unzip bot-utils artifact
-      uses: montudor/action-zip@v1
-      with:
-        args: unzip -qq bot-utils-out.zip
-
     # == build ==
-
     - name: Cleaning Bot - Build
-      run: yarn run build-this-package
+      run: yarn run build
 
     - name: Save status of build
       run: echo "cleaning_bot_built=true" >> $GITHUB_ENV    
@@ -233,8 +120,6 @@ jobs:
 
   # ==== Job: Build and test bot-updategas ====
   bot-updategas:
-    needs: [security-guard, bot-utils]
-
     runs-on: ubuntu-latest
 
     env:
@@ -244,35 +129,15 @@ jobs:
       run:
         working-directory: ${{env.working-directory}}
 
-    permissions:
-      checks: write
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
 
-    # == Git checkout ==
     - name: Checkout
       uses: actions/checkout@v3
-      # Workaround for https://github.com/npm/cli/issues/2610
-      with:
-        persist-credentials: false
-        ref: ${{ env.GIT_REF_TO_TEST }}
-        submodules: recursive
 
-    - name: Reconfigure git to use HTTP authentication
-      # Workaround for https://github.com/npm/cli/issues/2610    
-      run: >
-        git config --global url."https://github.com/".insteadOf
-        ssh://git@github.com/
-
-    # == yarn setup ==
     - name: Yarn setup (caching yarn dependencies)
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 16.x
         cache: 'yarn'
         
     - run: yarn install --immutable
@@ -281,21 +146,9 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
 
-    # == download and unzip artefacts ==
-    - name: Download cached bot-utils artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: bot-utils-out.zip
-
-    - name: Unzip bot-utils artifact
-      uses: montudor/action-zip@v1
-      with:
-        args: unzip -qq bot-utils-out.zip
-
     # == build ==
-
     - name: Update Gas Bot - Build
-      run: yarn run build-this-package
+      run: yarn run build
 
     - name: Save status of build
       run: echo "updategas_bot_built=true" >> $GITHUB_ENV    
@@ -317,8 +170,6 @@ jobs:
           
   # ==== Job: Build and test bot-maker-noise ====
   bot-maker-noise:
-    needs: [security-guard, bot-utils]
-
     runs-on: ubuntu-latest
 
     env:
@@ -328,35 +179,18 @@ jobs:
       run:
         working-directory: ${{env.working-directory}}
 
-    permissions:
-      checks: write
-
     strategy:
       matrix:
         node-version: [16.x]
 
     steps:
-
-    # == Git checkout ==
     - name: Checkout
       uses: actions/checkout@v3
-      # Workaround for https://github.com/npm/cli/issues/2610
-      with:
-        persist-credentials: false
-        ref: ${{ env.GIT_REF_TO_TEST }}
-        submodules: recursive
 
-    - name: Reconfigure git to use HTTP authentication
-      # Workaround for https://github.com/npm/cli/issues/2610    
-      run: >
-        git config --global url."https://github.com/".insteadOf
-        ssh://git@github.com/
-
-    # == yarn setup ==
     - name: Yarn setup (caching yarn dependencies)
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 16.x
         cache: 'yarn'
 
     - run: yarn install --immutable
@@ -365,21 +199,9 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
       
-    # == download and unzip artefacts ==
-    - name: Download cached bot-utils artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: bot-utils-out.zip
-
-    - name: Unzip bot-utils artifact
-      uses: montudor/action-zip@v1
-      with:
-        args: unzip -qq bot-utils-out.zip
-
     # == build ==
-
     - name: Noise Maker Bot - Build
-      run: yarn run build-this-package
+      run: yarn run build
 
     - name: Save status of build
       run: echo "bot_maker_noise_built=true" >> $GITHUB_ENV    
@@ -401,8 +223,6 @@ jobs:
           
   # ==== Job: Build and test bot-taker-greedy ====
   bot-taker-greedy:
-    needs: [security-guard, bot-utils]
-
     runs-on: ubuntu-latest
 
     env:
@@ -412,35 +232,18 @@ jobs:
       run:
         working-directory: ${{env.working-directory}}
 
-    permissions:
-      checks: write
-
     strategy:
       matrix:
         node-version: [16.x]
 
     steps:
-
-    # == Git checkout ==
     - name: Checkout
       uses: actions/checkout@v3
-      # Workaround for https://github.com/npm/cli/issues/2610
-      with:
-        persist-credentials: false
-        ref: ${{ env.GIT_REF_TO_TEST }}
-        submodules: recursive
 
-    - name: Reconfigure git to use HTTP authentication
-      # Workaround for https://github.com/npm/cli/issues/2610    
-      run: >
-        git config --global url."https://github.com/".insteadOf
-        ssh://git@github.com/
-
-    # == yarn setup ==
     - name: Yarn setup (caching yarn dependencies)
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 16.x
         cache: 'yarn'
         
     - run: yarn install --immutable
@@ -449,21 +252,9 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
         
-    # == download and unzip artefacts ==
-    - name: Download cached bot-utils artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: bot-utils-out.zip
-
-    - name: Unzip bot-utils artifact
-      uses: montudor/action-zip@v1
-      with:
-        args: unzip -qq bot-utils-out.zip
-
     # == build ==
-
     - name: Greedy Taker Bot - Build
-      run: yarn run build-this-package
+      run: yarn run build
 
     - name: Save status of build
       run: echo "bot_taker_greedy_built=true" >> $GITHUB_ENV    
@@ -485,8 +276,6 @@ jobs:
 
   # ==== Job: Build and test bot-failing-offer ====
   bot-failing-offer:
-    needs: [security-guard, bot-utils]
-
     runs-on: ubuntu-latest
 
     env:
@@ -496,35 +285,14 @@ jobs:
       run:
         working-directory: ${{env.working-directory}}
 
-    permissions:
-      checks: write
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
-
-    # == Git checkout ==
     - name: Checkout
       uses: actions/checkout@v3
-      # Workaround for https://github.com/npm/cli/issues/2610
-      with:
-        persist-credentials: false
-        ref: ${{ env.GIT_REF_TO_TEST }}
-        submodules: recursive
 
-    - name: Reconfigure git to use HTTP authentication
-      # Workaround for https://github.com/npm/cli/issues/2610    
-      run: >
-        git config --global url."https://github.com/".insteadOf
-        ssh://git@github.com/
-
-    # == yarn setup ==
     - name: Yarn setup (caching yarn dependencies)
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 16.x
         cache: 'yarn'
 
     - run: yarn install --immutable
@@ -533,21 +301,9 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
       
-    # == download and unzip artefacts ==
-    - name: Download cached bot-utils artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: bot-utils-out.zip
-
-    - name: Unzip bot-utils artifact
-      uses: montudor/action-zip@v1
-      with:
-        args: unzip -qq bot-utils-out.zip
-
     # == build ==
-
     - name: Failing Offer Bot - Build
-      run: yarn run build-this-package
+      run: yarn run build
 
     - name: Save status of build
       run: echo "bot_failing_offer_built=true" >> $GITHUB_ENV    
@@ -569,37 +325,23 @@ jobs:
 
   # ==== Job: Build and test Mangrove arbitrage contract ====
   mangrove-arbitrage-contract:
-    needs: [security-guard]
-
     runs-on: ubuntu-latest
 
     env:
       working-directory: packages/mangrove-arbitrage
-      POLYGON_NODE_URL: ${{ secrets.POLYGON_NODE_URL }}
-      MUMBAI_NODE_URL: ${{ secrets.MUMBAI_NODE_URL }}
+      POLYGON_NODE_URL: ${{ secrets.POLYGON_NODE_URL || 'https://polygon.llamarpc.com' }}
+      MUMBAI_NODE_URL: ${{ secrets.MUMBAI_NODE_URL || 'unused' }}
       
     steps:
-
-    # == Git checkout ==
     - name: Checkout
       uses: actions/checkout@v3
-      # Workaround for https://github.com/npm/cli/issues/2610
       with:
-        persist-credentials: false
-        ref: ${{ env.GIT_REF_TO_TEST }}
         submodules: recursive
 
-    - name: Reconfigure git to use HTTP authentication
-      # Workaround for https://github.com/npm/cli/issues/2610    
-      run: >
-        git config --global url."https://github.com/".insteadOf
-        ssh://git@github.com/
-
-    # == yarn setup ==
     - name: Yarn setup (caching yarn dependencies)
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 16.x
         cache: 'yarn'
         
     - run: yarn install --immutable
@@ -619,29 +361,27 @@ jobs:
       run: echo "mangrove_arbitrage_built=true" >> $GITHUB_ENV
 
     # Run local Solidity tests
-    - name: Mangrove Solidity Tests
+    - name: Solidity Tests
       run: yarn run test
       working-directory: packages/mangrove-arbitrage
 
-
     # For push runs we also create a coverage report
     - name: Create coverage report
-      if: github.event_name != 'pull_request_target' 
+      if: github.event_name != 'pull_request' 
       run: forge coverage --report lcov
       working-directory: packages/mangrove-arbitrage
-
 
      # == Send coverage report to Coveralls == 
      # Coverallsapp by default uses GITHUB_SHA but that does not necessarily correspond
      # to HEAD because a branch is checked out. We here find the actual SHA for HEAD.
     - name: Set Coveralls vars
       id: coveralls_vars
-      if: github.event_name != 'pull_request_target' 
+      if: github.event_name != 'pull_request' 
       run: echo "::set-output name=sha_for_head::$(git rev-parse HEAD)"
 
     - name: Upload to Coveralls
       uses: coverallsapp/github-action@master
-      if: github.event_name != 'pull_request_target' 
+      if: github.event_name != 'pull_request' 
       with:
         git-commit: ${{ steps.coveralls_vars.outputs.sha_for_head }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -653,7 +393,7 @@ jobs:
     # outputs in gh actions
     # - name: Mangrove Solidity Test Report
     #   uses: dorny/test-reporter@v1
-    #   if: ${{ env.mangrove_built && (success() || failure()) }}
+    #   if: ${{ env.mangrove_arbitrage_built && (success() || failure()) }}
     #   with:
     #     name: Solidity Tests                  # Name of the check run which will be created
     #     path: ${{env.working-directory}}/solidity-mocha-test-report.json # Path to test results
@@ -663,52 +403,31 @@ jobs:
     - run: yarn run precommit
       working-directory: packages/mangrove-arbitrage
 
-  # ==== End job build-and-test ====
+  # ==== End job mangrove-arbitrage-contract ====
 
  # ==== Job: Build and test bot-arbitrage ====
   bot-arbitrage:
-    needs: [security-guard, bot-utils, mangrove-arbitrage-contract]
-
     runs-on: ubuntu-latest
 
     env:
       working-directory: packages/bot-arbitrage
-      POLYGON_NODE_URL: ${{ secrets.POLYGON_NODE_URL }}
+      POLYGON_NODE_URL: ${{ secrets.POLYGON_NODE_URL || 'https://polygon.llamarpc.com' }}
       API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
 
     defaults:
       run:
         working-directory: ${{env.working-directory}}
 
-    permissions:
-      checks: write
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
-
-    # == Git checkout ==
     - name: Checkout
       uses: actions/checkout@v3
-      # Workaround for https://github.com/npm/cli/issues/2610
       with:
-        persist-credentials: false
-        ref: ${{ env.GIT_REF_TO_TEST }}
         submodules: recursive
 
-    - name: Reconfigure git to use HTTP authentication
-      # Workaround for https://github.com/npm/cli/issues/2610    
-      run: >
-        git config --global url."https://github.com/".insteadOf
-        ssh://git@github.com/
-
-    # == yarn setup ==
     - name: Yarn setup (caching yarn dependencies)
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 16.x
         cache: 'yarn'
 
     - run: yarn install --immutable
@@ -717,21 +436,9 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
       
-    # == download and unzip artefacts ==
-    - name: Download cached bot-utils artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: bot-utils-out.zip
-
-    - name: Unzip bot-utils artifact
-      uses: montudor/action-zip@v1
-      with:
-        args: unzip -qq bot-utils-out.zip
-
     # == build ==
-
     - name: Arbitrage Bot - Build
-      run: yarn run build-this-package
+      run: yarn run build
 
     - name: Save status of build
       run: echo "bot_arbitrage_built=true" >> $GITHUB_ENV    
@@ -757,7 +464,6 @@ jobs:
     if: always()
 
     needs:
-    - security-guard
     - bot-utils
     - bot-cleaning
     - bot-maker-noise
