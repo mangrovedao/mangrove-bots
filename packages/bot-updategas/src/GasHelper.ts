@@ -3,7 +3,7 @@ import Mangrove from "@mangrovedao/mangrove.js";
 import { typechain } from "@mangrovedao/mangrove.js/dist/nodejs/types";
 import { MaxUpdateConstraint } from "./GasUpdater";
 import logger from "./util/logger";
-import { ContractTransaction, Overrides } from "ethers";
+import { ContractTransaction, ethers, Overrides } from "ethers";
 
 class GasHelper {
   priceUtils = new PriceUtils(logger);
@@ -30,16 +30,22 @@ class GasHelper {
       throw new Error("No API key for alchemy");
     }
 
-    try {
-      return (
-        await this.priceUtils.getGasPrice(API_KEY, params.network)
-      ).toNumber();
-    } catch (error) {
-      logger.error("Getting gas price estimate from oracle failed", {
-        mangrove: params.mangrove,
-        data: error,
+    return this.priceUtils
+      .getGasPrice(API_KEY, params.network)
+      .then((gaspriceEstimateInWei) => {
+        const gasPriceEstimateInGwei = ethers.utils.formatUnits(
+          gaspriceEstimateInWei,
+          "gwei"
+        );
+        return Number(gasPriceEstimateInGwei);
+      })
+      .catch((error) => {
+        logger.error("Getting gas price estimate from oracle failed", {
+          mangrove: params.mangrove,
+          data: error,
+        });
+        return undefined;
       });
-    }
   }
 
   /**
