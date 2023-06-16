@@ -8,6 +8,12 @@ export interface Fees {
   maxPriorityFeePerGas: BigNumberish;
 }
 
+const PolygonOverrides = {
+  gasstation: "https://gasstation.polygon.technology/v2",
+  maxFeePerGas: BigNumber.from(34000000000),
+  maxPriorityFeePerGas: BigNumber.from(40000000000),
+};
+
 export class TxUtils {
   private logger: CommonLogger;
   private provider: ethers.providers.Provider;
@@ -26,13 +32,11 @@ export class TxUtils {
     // special case Polygon Mainnet, as required fees are underestimated by ethers.js - see https://github.com/ethers-io/ethers.js/issues/2828
     if (chainId === 137) {
       // default values for fees - these are used if the gasstation is not reachable
-      const MaxFeePerGasDefault = BigNumber.from(34000000000);
-      const MaxPriorityFeePerGasDefault = BigNumber.from(40000000000);
 
       try {
         const { data } = await axios({
           method: "get",
-          url: "https://gasstation-mainnet.matic.network/v2",
+          url: PolygonOverrides.gasstation,
         });
 
         maxFeePerGas = ethers.utils.parseUnits(
@@ -55,8 +59,8 @@ export class TxUtils {
         };
       } catch {
         // fall back to defaults
-        maxFeePerGas = MaxFeePerGasDefault;
-        maxPriorityFeePerGas = MaxPriorityFeePerGasDefault;
+        maxFeePerGas = PolygonOverrides.maxFeePerGas;
+        maxPriorityFeePerGas = PolygonOverrides.maxPriorityFeePerGas;
         this.logger.debug(
           "Error in contacting Polygon gasstation - falling back to default fees",
           { data: { maxFeePerGas, maxPriorityFeePerGas } }
