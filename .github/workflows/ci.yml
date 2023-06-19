@@ -47,11 +47,12 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
 
-    - name: build
+    - name: Build
+      id: build
       run: yarn run build
 
      # == run and report tests == 
-    - name: test
+    - name: Test
       run: yarn run test:coverage
 
     - uses: actions/upload-artifact@v2
@@ -89,11 +90,12 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
 
-    - name: build
+    - name: Build
+      id: build
       run: yarn run build
 
      # == run and report tests == 
-    - name: test
+    - name: Test
       run: yarn run test:coverage
 
     - uses: actions/upload-artifact@v2
@@ -132,12 +134,12 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
 
-    # == build ==
-    - name: build
+    - name: Build
+      id: build
       run: yarn run build
 
     # == run and report tests == 
-    - name: test
+    - name: Test
       run: yarn run test:coverage
 
     - uses: actions/upload-artifact@v2
@@ -179,11 +181,12 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
       
-    - name: build
+    - name: Build
+      id: build
       run: yarn run build
 
     # == run and report tests == 
-    - name: test
+    - name: Test
       run: yarn run test:coverage
 
     - uses: actions/upload-artifact@v2
@@ -225,11 +228,12 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
         
-    - name: build
+    - name: Build
+      id: build
       run: yarn run build
 
     # == run and report tests == 
-    - name: test
+    - name: Test
       run: yarn run test:coverage
 
     - uses: actions/upload-artifact@v2
@@ -267,11 +271,12 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
       
-    - name: build
+    - name: Build
+      id: build
       run: yarn run build
 
     # == run and report tests == 
-    - name: test
+    - name: Test
       run: yarn run test:coverage
 
     - uses: actions/upload-artifact@v2
@@ -309,12 +314,11 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
 
-    - name: build
+    - name: Build
       run: yarn run build-this-package
       working-directory: packages/mangrove-arbitrage
 
-    # Run local Solidity tests
-    - name: test
+    - name: Test
       run: yarn run test
       working-directory: packages/mangrove-arbitrage
 
@@ -380,11 +384,12 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
       
-    - name: build
+    - name: Build
+      id: build
       run: yarn run build
 
     # == run and report tests == 
-    - name: test
+    - name: Test
       run: yarn run test:coverage
 
     - uses: actions/upload-artifact@v2
