@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: dorny/test-reporter@v1
+      continue-on-error: true
       if: ${{ always() }}
       with:
         artifact: test-results-bot-utils
@@ -18,6 +19,7 @@ jobs:
         reporter: mocha-json
         fail-on-error: 'false'
     - uses: dorny/test-reporter@v1
+      continue-on-error: true
       if: ${{ always() }}
       with:
         artifact: test-results-bot-cleaning
@@ -26,6 +28,7 @@ jobs:
         reporter: mocha-json
         fail-on-error: 'false'
     - uses: dorny/test-reporter@v1
+      continue-on-error: true
       if: ${{ always() }}
       with:
         artifact: test-results-bot-updategas
@@ -34,6 +37,7 @@ jobs:
         reporter: mocha-json
         fail-on-error: 'false'
     - uses: dorny/test-reporter@v1
+      continue-on-error: true
       if: ${{ always() }}
       with:
         artifact: test-results-bot-maker-noise
@@ -42,6 +46,7 @@ jobs:
         reporter: mocha-json
         fail-on-error: 'false'
     - uses: dorny/test-reporter@v1
+      continue-on-error: true
       if: ${{ always() }}
       with:
         artifact: test-results-bot-taker-greedy
@@ -50,6 +55,7 @@ jobs:
         reporter: mocha-json
         fail-on-error: 'false'
     - uses: dorny/test-reporter@v1
+      continue-on-error: true
       if: ${{ always() }}
       with:
         artifact: test-results-bot-failing-offer
@@ -58,6 +64,7 @@ jobs:
         reporter: mocha-json
         fail-on-error: 'false'
     - uses: dorny/test-reporter@v1
+      continue-on-error: true
       if: ${{ always() }}
       with:
         artifact: test-results-bot-arbitrage
