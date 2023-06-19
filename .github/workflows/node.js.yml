@@ -58,14 +58,11 @@ jobs:
     - name: Bot Utils - Tests
       run: yarn run test:coverage
 
-    - name: Bot Utils - Test Report
-      uses: dorny/test-reporter@v1
-      if: ${{ env.bot_utils_built && (success() || failure()) }}
+    - uses: actions/upload-artifact@v2
+      if: ${{ env.bot_utils_built && (success() || failure())}}
       with:
-        name: Bot Utils - Tests                             # Name of the check run which will be created
-        path: packages/bot-utils/coverage-tests-report.json # Path to test results
-        reporter: mocha-json                                # Format of test results
-        fail-on-error: 'false'                              # Don't mark this step as failed if tests fail - the test step itself will be marked as failed
+        name: test-results-bot-utils
+        path: packages/bot-utils/coverage-tests-report.json
 
   # ==== End job: bot-utils ====        
 
@@ -107,14 +104,11 @@ jobs:
     - name: Cleaning Bot - Tests
       run: yarn run test:coverage
 
-    - name: Cleaning Bot - Test Report
-      uses: dorny/test-reporter@v1
-      if: ${{ env.cleaning_bot_built && (success() || failure()) }}
+    - uses: actions/upload-artifact@v2
+      if: ${{ env.cleaning_bot_built && (success() || failure())}}
       with:
-        name: Cleaning Bot - Tests                             # Name of the check run which will be created
-        path: packages/bot-cleaning/coverage-tests-report.json # Path to test results
-        reporter: mocha-json                                   # Format of test results
-        fail-on-error: 'false'                                 # Don't mark this step as failed if tests fail - the test step itself will be marked as failed
+        name: test-results-bot-cleaning
+        path: packages/bot-cleaning/coverage-tests-report.json
 
   # ==== End job: bot-cleaning ====        
 
@@ -157,14 +151,11 @@ jobs:
     - name: Update Gas Bot - Tests
       run: yarn run test:coverage
 
-    - name: Update Gas Bot - Test Report
-      uses: dorny/test-reporter@v1
-      if: ${{ env.updategas_bot_built && (success() || failure()) }}
+    - uses: actions/upload-artifact@v2
+      if: ${{ env.updategas_bot_built && (success() || failure())}}
       with:
-        name: Update Gas Bot - Tests                            # Name of the check run which will be created
-        path: packages/bot-updategas/coverage-tests-report.json # Path to test results
-        reporter: mocha-json                                    # Format of test results
-        fail-on-error: 'false'                                  # Don't mark this step as failed if tests fail - the test step itself will be marked as failed
+        name: test-results-bot-updategas
+        path: packages/bot-updategas/coverage-tests-report.json
 
   # ==== End job: bot-updategas ====
           
@@ -210,15 +201,12 @@ jobs:
     - name: Noise Maker Bot - Tests
       run: yarn run test:coverage
 
-    - name: Noise Maker Bot - Test Report
-      uses: dorny/test-reporter@v1
-      if: ${{ env.bot_maker_noise_built && (success() || failure()) }}
+    - uses: actions/upload-artifact@v2
+      if: ${{ env.bot_maker_noise_built && (success() || failure())}}
       with:
-        name: Noise Maker Bot - Tests                             # Name of the check run which will be created
-        path: packages/bot-maker-noise/coverage-tests-report.json # Path to test results
-        reporter: mocha-json                                      # Format of test results
-        fail-on-error: 'false'                                    # Don't mark this step as failed if tests fail - the test step itself will be marked as failed
-        
+        name: test-results-bot-maker-noise
+        path: packages/bot-maker-noise/coverage-tests-report.json
+
   # ==== End job: bot-maker-noise ====        
           
   # ==== Job: Build and test bot-taker-greedy ====
@@ -263,15 +251,12 @@ jobs:
     - name: Greedy Taker Bot - Tests
       run: yarn run test:coverage
 
-    - name: Greedy Taker Bot - Test Report
-      uses: dorny/test-reporter@v1
-      if: ${{ env.bot_taker_greedy_built && (success() || failure()) }}
+    - uses: actions/upload-artifact@v2
+      if: ${{ env.bot_taker_greedy_built && (success() || failure())}}
       with:
-        name: Greedy Taker Bot - Tests                             # Name of the check run which will be created
-        path: packages/bot-taker-greedy/coverage-tests-report.json # Path to test results
-        reporter: mocha-json                                       # Format of test results
-        fail-on-error: 'false'                                     # Don't mark this step as failed if tests fail - the test step itself will be marked as failed
-    
+        name: test-results-bot-taker-greedy
+        path: packages/bot-taker-greedy/coverage-tests-report.json
+
   # ==== End job: bot-taker-greedy ====        
 
   # ==== Job: Build and test bot-failing-offer ====
@@ -312,15 +297,12 @@ jobs:
     - name: Failing Offer Bot - Tests
       run: yarn run test:coverage
 
-    - name: Failing Offer Bot - Test Report
-      uses: dorny/test-reporter@v1
-      if: ${{ env.bot_failing_offer_built && (success() || failure()) }}
+    - uses: actions/upload-artifact@v2
+      if: ${{ env.bot_failing_offer_built && (success() || failure())}}
       with:
-        name: Failing Offer Bot - Tests                              # Name of the check run which will be created
-        path: packages/bot-failing-offer/coverage-tests-report.json  # Path to test results
-        reporter: mocha-json                                         # Format of test results
-        fail-on-error: 'false'                                       # Don't mark this step as failed if tests fail - the test step itself will be marked as failed
-        
+        name: test-results-bot-failing-offer
+        path: packages/bot-failing-offer/coverage-tests-report.json
+
   # ==== End job: bot-failing-offer ====        
 
   # ==== Job: Build and test Mangrove arbitrage contract ====
@@ -448,14 +430,12 @@ jobs:
     - name: Arbitrage Bot - Tests
       run: yarn run test:coverage
 
-    - name: Arbitrage Bot - Test Report
-      uses: dorny/test-reporter@v1
-      if: ${{ env.bot_arbitrage_built && (success() || failure()) }}
+    - uses: actions/upload-artifact@v2
+      if: ${{ env.bot_arbitrage_built && (success() || failure())}}
       with:
-        name: Arbitrage Bot - Tests                              # Name of the check run which will be created
-        path: packages/bot-arbitrage/coverage-tests-report.json  # Path to test results
-        reporter: mocha-json                                         # Format of test results
-        fail-on-error: 'false'                                       # Don't mark this step as failed if tests fail - the test step itself will be marked as failed
+        name: test-results-bot-arbitrage
+        path: packages/bot-arbitrage/coverage-tests-report.json
+
   # ==== End job: bot-arbitrage ==== 
 
   # ==== final "check" job, using alls-green to have one single job to check for green workflow ====
