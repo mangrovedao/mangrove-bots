@@ -2,6 +2,7 @@ import { logger } from "./util/logger";
 import { Market, Semibook } from "@mangrovedao/mangrove.js";
 import { Provider } from "@ethersproject/providers";
 import { BigNumber } from "ethers";
+import { TxUtils } from "@mangrovedao/bot-utils";
 
 type OfferCleaningEstimates = {
   bounty: BigNumber; // wei
@@ -27,6 +28,7 @@ export class MarketCleaner {
   #market: Market;
   #provider: Provider;
   #isCleaning: boolean;
+  #txUtils: TxUtils;
 
   /**
    * Constructs a cleaner for the given Mangrove market which will use the given provider for queries and transactions.
@@ -38,6 +40,7 @@ export class MarketCleaner {
     this.#provider = provider;
 
     this.#isCleaning = false;
+    this.#txUtils = new TxUtils(provider, logger);
 
     logger.info("Initialized market cleaner", {
       base: this.#market.base.name,
@@ -220,11 +223,31 @@ export class MarketCleaner {
       offer: offer,
       contextInfo: contextInfo,
     });
-    const snipePromises = await this.#market.snipe({
-      ba: ba,
-      targets: this.#createCollectParams(offer),
-      requireOffersToFail: true,
-    });
+    const fees = await this.#txUtils.getFeeOverrides();
+    let txOverrides = {};
+
+    if (fees !== undefined) {
+      txOverrides = {
+        maxPriorityFeePerGas: fees.maxPriorityFeePerGas,
+        maxFeePerGas: fees.maxFeePerGas,
+      };
+      logger.debug(`Overriding fees with: `, {
+        data: {
+          txOverrides,
+          maxPriorityFeePerGas_in_wei: fees.maxPriorityFeePerGas.toString(),
+          maxFeePerGas_in_wei: fees.maxFeePerGas.toString(),
+        },
+      });
+    }
+
+    const snipePromises = await this.#market.snipe(
+      {
+        ba: ba,
+        targets: this.#createCollectParams(offer),
+        requireOffersToFail: true,
+      },
+      txOverrides
+    );
 
     return snipePromises.result
       .then((result) => {
