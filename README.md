@@ -4,7 +4,7 @@ This repo contains a number of bots for the Mangrove ecosystem - each provided a
 
 The core contracts for Mangrove with example Solidity offer logics live in the [mangrove-core](https://github.com/mangrovedao/mangrove-core) repo. 
 
-The SDK for Mangrove lives in the [mangrove-ts](https://github.com/mangrovedao/mangrove-ts) repo. 
+The SDK for Mangrove lives in the [mangrove.js](https://github.com/mangrovedao/mangrove.js) repo. 
 
 # Documentation
 
