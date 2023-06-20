@@ -56,8 +56,8 @@ describe("ArbBot integration tests", () => {
     });
 
     const arb = mgv.getAddress("MgvArbitrage");
-    const weth = mgv.token("WETH");
-    const dai = mgv.token("DAI");
+    const weth = await mgv.token("WETH");
+    const dai = await mgv.token("DAI");
     await this.server.deal({
       token: weth.address,
       account: this.accounts.maker.address,
@@ -242,9 +242,9 @@ describe("ArbBot integration tests", () => {
     });
 
     it(`should be profitable, exchange on Mangrove first`, async function () {
-      const usdc = mgv.token("USDC");
-      const weth = mgv.token("WETH");
-      const dai = mgv.token("DAI");
+      const usdc = await mgv.token("USDC");
+      const weth = await mgv.token("WETH");
+      const dai = await mgv.token("DAI");
       await this.server.deal({
         token: usdc.address,
         account: this.accounts.maker.address,
@@ -283,7 +283,7 @@ describe("ArbBot integration tests", () => {
       });
       let arbBot = new ArbBot(mgvArbitrager, poolContract);
       let txActivate = await activateTokensWithMgv(
-        [market.base.address, market.quote.address, mgv.token("DAI").address],
+        [market.base.address, market.quote.address, mgv.getAddress("DAI")],
         mgvDeployer
       );
       await mgvTestUtil.waitForTransaction(txActivate);
@@ -344,9 +344,9 @@ describe("ArbBot integration tests", () => {
       const mgvArbAddress = mgv.getAddress("MgvArbitrage");
       let quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
       let baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
-      let holdingTokenBeforeBalance = await mgv
-        .token("DAI")
-        .balanceOf(mgvArbAddress);
+      let holdingTokenBeforeBalance = await (
+        await mgv.token("DAI")
+      ).balanceOf(mgvArbAddress);
       let transactions = await arbBot.run(market, ["WETH", "USDC", 3000], {
         holdingTokens: ["DAI"],
         tokenForExchange: "DAI",
@@ -363,9 +363,9 @@ describe("ArbBot integration tests", () => {
         );
       let quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
       let baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
-      let holdingTokenAfterBalance = await mgv
-        .token("DAI")
-        .balanceOf(mgvArbAddress);
+      let holdingTokenAfterBalance = await (
+        await mgv.token("DAI")
+      ).balanceOf(mgvArbAddress);
       await mgvTestUtil.waitForBlock(market.mgv, receipts.blockNumber);
       assert.ok(!(await market.isLive("asks", offer.id)));
       assert.deepStrictEqual(

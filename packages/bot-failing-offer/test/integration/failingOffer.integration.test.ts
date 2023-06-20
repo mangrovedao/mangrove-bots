@@ -58,8 +58,8 @@ describe("Failing offer integration tests", () => {
 
     deployerMangrove = await Mangrove.connect({ signer: deployer.signer });
 
-    const tokenA = deployerMangrove.token("TokenA");
-    const tokenB = deployerMangrove.token("TokenB");
+    const tokenA = await deployerMangrove.token("TokenA");
+    const tokenB = await deployerMangrove.token("TokenB");
     await tokenA.contract.mintTo(
       this.accounts.maker.address,
       deployerMangrove.toUnits(10, 18)
