@@ -4,7 +4,7 @@ import DevNode from "@mangrovedao/mangrove.js/dist/nodejs/util/devNode";
 import {
   node,
   nodeType,
-  serverParamsType,
+  inputServerParamsType,
 } from "@mangrovedao/mangrove.js/dist/nodejs/util/node";
 import {
   hookInfo,
@@ -24,7 +24,7 @@ const CORE_DIR = path.parse(
 export const mochaHooks = {
   server: { url: "", snapshot: async () => {} },
   async beforeAllImpl(
-    args: serverParamsType,
+    args: inputServerParamsType,
     hook: hookInfo & { node: nodeType }
   ) {
     hook.node = await node(args);
@@ -62,8 +62,8 @@ export const mochaHooks = {
   },
   async beforeAll() {
     dotenv.config();
-    let forkUrl = process.env.POLYGON_NODE_URL;
-    const serverParams: serverParamsType = {
+    const forkUrl = process.env.POLYGON_NODE_URL;
+    const serverParams = {
       host: "127.0.0.1",
       port: 8546, // use 8546 for the actual node, but let all connections go through proxies to be able to cut the connection before snapshot revert.
       pipe: false,
@@ -71,6 +71,7 @@ export const mochaHooks = {
       setMulticallCodeIfAbsent: false, // mangrove.js is supposed to work against servers that only have ToyENS deployed but not Multicall, so we don't deploy Multicall in tests. However mangrove.js needs ToyENS so we let the node ensure it's there.
       forkUrl,
       forkBlockNumber: 39764951,
+      script: "",
     };
 
     await mochaHooks.beforeAllImpl(serverParams, this);
