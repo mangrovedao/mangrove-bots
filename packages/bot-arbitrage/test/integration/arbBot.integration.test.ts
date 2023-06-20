@@ -337,7 +337,7 @@ describe("ArbBot integration tests", () => {
       });
       let arbBot = new ArbBot(mgvArbitrager, poolContract);
       let txActivate = await activateTokensWithMgv(
-        [market.base.address, market.quote.address, mgv.token("DAI").address],
+        [market.base.address, market.quote.address, mgv.getAddress("DAI")],
         mgvDeployer
       );
       await mgvTestUtil.waitForTransaction(txActivate);
