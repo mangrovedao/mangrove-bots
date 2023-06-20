@@ -1,13 +1,13 @@
 import { CommonLogger } from "../logging/coreLogger";
-import { Market } from "@mangrovedao/mangrove.js";
+import { ethers, Market } from "@mangrovedao/mangrove.js";
 import Big from "big.js";
 import { fetchJson } from "ethers/lib/utils";
 import random from "random";
 import { Network, Alchemy } from "alchemy-sdk";
 
 export class PriceUtils {
-  logger: CommonLogger;
-  constructor(_logger: CommonLogger) {
+  logger?: CommonLogger;
+  constructor(_logger?: CommonLogger) {
     this.logger = _logger;
   }
 
@@ -51,7 +51,7 @@ export class PriceUtils {
       market.quote.name
     );
     try {
-      this.logger.debug("Getting external price reference", {
+      this.logger?.debug("Getting external price reference", {
         contextInfo: "maker",
         base: market.base.name,
         quote: market.quote.name,
@@ -63,7 +63,7 @@ export class PriceUtils {
       const price = await externalPrice.price();
       if (price !== undefined) {
         const referencePrice = price;
-        this.logger.info(
+        this.logger?.info(
           "Using external price reference as order book is empty",
           {
             contextInfo: "maker",
@@ -79,7 +79,7 @@ export class PriceUtils {
         return referencePrice;
       }
 
-      this.logger.warn(
+      this.logger?.warn(
         `Response did not contain a ${market.quote.name} field`,
         {
           contextInfo: "maker",
@@ -95,7 +95,7 @@ export class PriceUtils {
 
       return;
     } catch (e) {
-      this.logger.error(`Error encountered while fetching external price`, {
+      this.logger?.error(`Error encountered while fetching external price`, {
         contextInfo: "maker",
         base: market.base.name,
         quote: market.quote.name,
@@ -116,7 +116,7 @@ export class PriceUtils {
     let bestOffer: Market.Offer | undefined = undefined;
     if (offerList.length > 0) {
       bestOffer = offerList[0];
-      this.logger.debug("Best offer on book", {
+      this.logger?.debug("Best offer on book", {
         contextInfo: "maker",
         base: market.base.name,
         quote: market.quote.name,
@@ -130,10 +130,17 @@ export class PriceUtils {
     await this.getExternalPrice(market, ba);
   }
 
+  /**
+   * Queries the alchemy node for the current gas price.
+   * @param APIKEY An API key for alchemy node
+   * @param network The network key (see Network in alchemy-sdk for more info)
+   * @returns the best guess of the current gas price to use in transactions
+   */
   public async getGasPrice(APIKEY: string, network: string) {
-    const networkIndex = Object.entries(Network).find((item) =>
-      item[0].includes(network.toUpperCase())
+    const networkIndex = Object.entries(Network).find(
+      (item) => item[0] === network.toUpperCase()
     );
+
     if (!networkIndex) {
       throw new Error(
         `Given network: ${network}, is not in the alchemy networks`

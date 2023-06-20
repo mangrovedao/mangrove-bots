@@ -30,7 +30,7 @@ class GasHelper {
       throw new Error("No API key for alchemy");
     }
 
-    return this.priceUtils
+    const gaspriceFromOracle = this.priceUtils
       .getGasPrice(API_KEY, params.network)
       .then((gaspriceEstimateInWei) => {
         const gasPriceEstimateInGwei = ethers.utils.formatUnits(
@@ -46,6 +46,12 @@ class GasHelper {
         });
         return undefined;
       });
+
+    logger.debug("Gas price estimate received from oracle", {
+      data: gaspriceFromOracle,
+    });
+
+    return gaspriceFromOracle;
   }
 
   /**
