@@ -271,7 +271,7 @@ export class ArbBot {
             fee: fee,
             minGain: minGain,
           },
-          mgv.token(config.tokenForExchange).address,
+          mgv.getAddress(config.tokenForExchange),
           config.exchangeConfig.fee(givesToken.name)
         );
       } else {
@@ -285,7 +285,7 @@ export class ArbBot {
             fee: fee,
             minGain: minGain,
           },
-          mgv.token(config.tokenForExchange).address
+          mgv.getAddress(config.tokenForExchange)
         );
       }
     }

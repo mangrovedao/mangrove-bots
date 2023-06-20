@@ -215,14 +215,11 @@ export class OfferTaker {
           desiredPrice: externalPrice,
         })
       : [];
-    const [priceComparison, quoteSideOfOffers, buyOrSell]: [
-      "lt" | "gt",
-      "wants" | "gives",
-      "buy" | "sell"
-    ] = ba === "asks" ? ["lt", "wants", "buy"] : ["gt", "gives", "sell"];
+    const [quoteSideOfOffers, buyOrSell]: ["wants" | "gives", "buy" | "sell"] =
+      ba === "asks" ? ["wants", "buy"] : ["gives", "sell"];
 
     const offersWithBetterThanExternalPrice = offers.filter((o) =>
-      o.price[priceComparison](externalPrice)
+      this.#market.trade.isPriceBetter(o.price, externalPrice, ba)
     );
     if (offersWithBetterThanExternalPrice.length <= 0) {
       if (logger.getLevel() <= logger.levels.DEBUG) {
