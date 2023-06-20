@@ -47,25 +47,19 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
 
-    # == build ==
-    - name: Bot Utils - Build
+    - name: Build
+      id: build
       run: yarn run build
 
-    - name: Save status of build
-      run: echo "bot_utils_built=true" >> $GITHUB_ENV    
-
      # == run and report tests == 
-    - name: Bot Utils - Tests
+    - name: Test
       run: yarn run test:coverage
 
-    - name: Bot Utils - Test Report
-      uses: dorny/test-reporter@v1
-      if: ${{ env.bot_utils_built && (success() || failure()) }}
+    - uses: actions/upload-artifact@v2
+      if: ${{ steps.build.conclusion == 'success' && (success() || failure())}}
       with:
-        name: Bot Utils - Tests                             # Name of the check run which will be created
-        path: packages/bot-utils/coverage-tests-report.json # Path to test results
-        reporter: mocha-json                                # Format of test results
-        fail-on-error: 'false'                              # Don't mark this step as failed if tests fail - the test step itself will be marked as failed
+        name: test-results-bot-utils
+        path: packages/bot-utils/coverage-tests-report.json
 
   # ==== End job: bot-utils ====        
 
@@ -96,25 +90,19 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
 
-    # == build ==
-    - name: Cleaning Bot - Build
+    - name: Build
+      id: build
       run: yarn run build
 
-    - name: Save status of build
-      run: echo "cleaning_bot_built=true" >> $GITHUB_ENV    
-
      # == run and report tests == 
-    - name: Cleaning Bot - Tests
+    - name: Test
       run: yarn run test:coverage
 
-    - name: Cleaning Bot - Test Report
-      uses: dorny/test-reporter@v1
-      if: ${{ env.cleaning_bot_built && (success() || failure()) }}
+    - uses: actions/upload-artifact@v2
+      if: ${{ steps.build.conclusion == 'success' && (success() || failure())}}
       with:
-        name: Cleaning Bot - Tests                             # Name of the check run which will be created
-        path: packages/bot-cleaning/coverage-tests-report.json # Path to test results
-        reporter: mocha-json                                   # Format of test results
-        fail-on-error: 'false'                                 # Don't mark this step as failed if tests fail - the test step itself will be marked as failed
+        name: test-results-bot-cleaning
+        path: packages/bot-cleaning/coverage-tests-report.json
 
   # ==== End job: bot-cleaning ====        
 
@@ -146,25 +134,19 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
 
-    # == build ==
-    - name: Update Gas Bot - Build
+    - name: Build
+      id: build
       run: yarn run build
 
-    - name: Save status of build
-      run: echo "updategas_bot_built=true" >> $GITHUB_ENV    
-
     # == run and report tests == 
-    - name: Update Gas Bot - Tests
+    - name: Test
       run: yarn run test:coverage
 
-    - name: Update Gas Bot - Test Report
-      uses: dorny/test-reporter@v1
-      if: ${{ env.updategas_bot_built && (success() || failure()) }}
+    - uses: actions/upload-artifact@v2
+      if: ${{ steps.build.conclusion == 'success' && (success() || failure())}}
       with:
-        name: Update Gas Bot - Tests                            # Name of the check run which will be created
-        path: packages/bot-updategas/coverage-tests-report.json # Path to test results
-        reporter: mocha-json                                    # Format of test results
-        fail-on-error: 'false'                                  # Don't mark this step as failed if tests fail - the test step itself will be marked as failed
+        name: test-results-bot-updategas
+        path: packages/bot-updategas/coverage-tests-report.json
 
   # ==== End job: bot-updategas ====
           
@@ -199,26 +181,20 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
       
-    # == build ==
-    - name: Noise Maker Bot - Build
+    - name: Build
+      id: build
       run: yarn run build
 
-    - name: Save status of build
-      run: echo "bot_maker_noise_built=true" >> $GITHUB_ENV    
-
     # == run and report tests == 
-    - name: Noise Maker Bot - Tests
+    - name: Test
       run: yarn run test:coverage
 
-    - name: Noise Maker Bot - Test Report
-      uses: dorny/test-reporter@v1
-      if: ${{ env.bot_maker_noise_built && (success() || failure()) }}
+    - uses: actions/upload-artifact@v2
+      if: ${{ steps.build.conclusion == 'success' && (success() || failure())}}
       with:
-        name: Noise Maker Bot - Tests                             # Name of the check run which will be created
-        path: packages/bot-maker-noise/coverage-tests-report.json # Path to test results
-        reporter: mocha-json                                      # Format of test results
-        fail-on-error: 'false'                                    # Don't mark this step as failed if tests fail - the test step itself will be marked as failed
-        
+        name: test-results-bot-maker-noise
+        path: packages/bot-maker-noise/coverage-tests-report.json
+
   # ==== End job: bot-maker-noise ====        
           
   # ==== Job: Build and test bot-taker-greedy ====
@@ -252,26 +228,20 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
         
-    # == build ==
-    - name: Greedy Taker Bot - Build
+    - name: Build
+      id: build
       run: yarn run build
 
-    - name: Save status of build
-      run: echo "bot_taker_greedy_built=true" >> $GITHUB_ENV    
-
     # == run and report tests == 
-    - name: Greedy Taker Bot - Tests
+    - name: Test
       run: yarn run test:coverage
 
-    - name: Greedy Taker Bot - Test Report
-      uses: dorny/test-reporter@v1
-      if: ${{ env.bot_taker_greedy_built && (success() || failure()) }}
+    - uses: actions/upload-artifact@v2
+      if: ${{ steps.build.conclusion == 'success' && (success() || failure())}}
       with:
-        name: Greedy Taker Bot - Tests                             # Name of the check run which will be created
-        path: packages/bot-taker-greedy/coverage-tests-report.json # Path to test results
-        reporter: mocha-json                                       # Format of test results
-        fail-on-error: 'false'                                     # Don't mark this step as failed if tests fail - the test step itself will be marked as failed
-    
+        name: test-results-bot-taker-greedy
+        path: packages/bot-taker-greedy/coverage-tests-report.json
+
   # ==== End job: bot-taker-greedy ====        
 
   # ==== Job: Build and test bot-failing-offer ====
@@ -301,26 +271,20 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
       
-    # == build ==
-    - name: Failing Offer Bot - Build
+    - name: Build
+      id: build
       run: yarn run build
 
-    - name: Save status of build
-      run: echo "bot_failing_offer_built=true" >> $GITHUB_ENV    
-
     # == run and report tests == 
-    - name: Failing Offer Bot - Tests
+    - name: Test
       run: yarn run test:coverage
 
-    - name: Failing Offer Bot - Test Report
-      uses: dorny/test-reporter@v1
-      if: ${{ env.bot_failing_offer_built && (success() || failure()) }}
+    - uses: actions/upload-artifact@v2
+      if: ${{ steps.build.conclusion == 'success' && (success() || failure())}}
       with:
-        name: Failing Offer Bot - Tests                              # Name of the check run which will be created
-        path: packages/bot-failing-offer/coverage-tests-report.json  # Path to test results
-        reporter: mocha-json                                         # Format of test results
-        fail-on-error: 'false'                                       # Don't mark this step as failed if tests fail - the test step itself will be marked as failed
-        
+        name: test-results-bot-failing-offer
+        path: packages/bot-failing-offer/coverage-tests-report.json
+
   # ==== End job: bot-failing-offer ====        
 
   # ==== Job: Build and test Mangrove arbitrage contract ====
@@ -350,18 +314,11 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
 
-    # == build ==
-    - name: Solidity Compile
+    - name: Build
       run: yarn run build-this-package
       working-directory: packages/mangrove-arbitrage
 
-    - name: Save status of build
-      # So we can fail-fast and drop the X Test Report steps, if build fails
-      # A tiny bit hacky, but it's simple and works
-      run: echo "mangrove_arbitrage_built=true" >> $GITHUB_ENV
-
-    # Run local Solidity tests
-    - name: Solidity Tests
+    - name: Test
       run: yarn run test
       working-directory: packages/mangrove-arbitrage
 
@@ -388,16 +345,6 @@ jobs:
         path-to-lcov: packages/mangrove-arbitrage/lcov.info
         base-path	: packages/mangrove-arbitrage
         flag-name: solidity
-
-    # NOTE: uncomment once you can manage forge test 
-    # outputs in gh actions
-    # - name: Mangrove Solidity Test Report
-    #   uses: dorny/test-reporter@v1
-    #   if: ${{ env.mangrove_arbitrage_built && (success() || failure()) }}
-    #   with:
-    #     name: Solidity Tests                  # Name of the check run which will be created
-    #     path: ${{env.working-directory}}/solidity-mocha-test-report.json # Path to test results
-    #     reporter: mocha-json                  # Format of test results
 
     # == check precommit works ==
     - run: yarn run precommit
@@ -437,25 +384,20 @@ jobs:
     - name: Foundry Setup
       uses: ./.github/actions/foundry-setup
       
-    # == build ==
-    - name: Arbitrage Bot - Build
+    - name: Build
+      id: build
       run: yarn run build
 
-    - name: Save status of build
-      run: echo "bot_arbitrage_built=true" >> $GITHUB_ENV    
-
     # == run and report tests == 
-    - name: Arbitrage Bot - Tests
+    - name: Test
       run: yarn run test:coverage
 
-    - name: Arbitrage Bot - Test Report
-      uses: dorny/test-reporter@v1
-      if: ${{ env.bot_arbitrage_built && (success() || failure()) }}
+    - uses: actions/upload-artifact@v2
+      if: ${{ steps.build.conclusion == 'success' && (success() || failure())}}
       with:
-        name: Arbitrage Bot - Tests                              # Name of the check run which will be created
-        path: packages/bot-arbitrage/coverage-tests-report.json  # Path to test results
-        reporter: mocha-json                                         # Format of test results
-        fail-on-error: 'false'                                       # Don't mark this step as failed if tests fail - the test step itself will be marked as failed
+        name: test-results-bot-arbitrage
+        path: packages/bot-arbitrage/coverage-tests-report.json
+
   # ==== End job: bot-arbitrage ==== 
 
   # ==== final "check" job, using alls-green to have one single job to check for green workflow ====
