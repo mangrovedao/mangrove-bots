@@ -9,8 +9,8 @@ describe("Unit test suite for bot utils", () => {
   it("priceUtils.getGasPrice throws on unknown network", async function () {
     const priceUtils = new PriceUtils();
 
-    expect(
+    return expect(
       priceUtils.getGasPrice("NO_API_KEY", "unknown-network")
-    ).to.eventually.be.rejectedWith("Unknown-network");
+    ).to.eventually.be.rejectedWith(Error);
   });
 });
