@@ -6,8 +6,8 @@ import random from "random";
 import { Network, Alchemy } from "alchemy-sdk";
 
 export class PriceUtils {
-  logger: CommonLogger;
-  constructor(_logger: CommonLogger) {
+  logger?: CommonLogger;
+  constructor(_logger?: CommonLogger) {
     this.logger = _logger;
   }
 
@@ -51,7 +51,7 @@ export class PriceUtils {
       market.quote.name
     );
     try {
-      this.logger.debug("Getting external price reference", {
+      this.logger?.debug("Getting external price reference", {
         contextInfo: "maker",
         base: market.base.name,
         quote: market.quote.name,
@@ -63,7 +63,7 @@ export class PriceUtils {
       const price = await externalPrice.price();
       if (price !== undefined) {
         const referencePrice = price;
-        this.logger.info(
+        this.logger?.info(
           "Using external price reference as order book is empty",
           {
             contextInfo: "maker",
@@ -79,7 +79,7 @@ export class PriceUtils {
         return referencePrice;
       }
 
-      this.logger.warn(
+      this.logger?.warn(
         `Response did not contain a ${market.quote.name} field`,
         {
           contextInfo: "maker",
@@ -95,7 +95,7 @@ export class PriceUtils {
 
       return;
     } catch (e) {
-      this.logger.error(`Error encountered while fetching external price`, {
+      this.logger?.error(`Error encountered while fetching external price`, {
         contextInfo: "maker",
         base: market.base.name,
         quote: market.quote.name,
@@ -116,7 +116,7 @@ export class PriceUtils {
     let bestOffer: Market.Offer | undefined = undefined;
     if (offerList.length > 0) {
       bestOffer = offerList[0];
-      this.logger.debug("Best offer on book", {
+      this.logger?.debug("Best offer on book", {
         contextInfo: "maker",
         base: market.base.name,
         quote: market.quote.name,
@@ -130,19 +130,46 @@ export class PriceUtils {
     await this.getExternalPrice(market, ba);
   }
 
-  public async getGasPrice(APIKEY: string, network: string) {
-    const networkIndex = Object.entries(Network).find((item) =>
-      item[0].includes(network.toUpperCase())
-    );
-    if (!networkIndex) {
+  /**
+   * Get the Alchemy network corresponding to the chainId.
+   *
+   * @param chainId the chainId of the network to query
+   * @returns the Alchemy network corresponding to the chainId
+   * @remarks One should think that Alchemy provided a method (or an overload of the Alchemy constructor) to do this, but I haven't been able to find it.
+   */
+  getAlchemyNetworkFromChainId(chainId: number): Network | undefined {
+    switch (chainId) {
+      case 137:
+        return Network.MATIC_MAINNET;
+      case 80001:
+        return Network.MATIC_MUMBAI;
+      case 1:
+        return Network.ETH_MAINNET;
+      case 5:
+        return Network.ETH_GOERLI;
+    }
+
+    return undefined;
+  }
+
+  /**
+   * Queries the alchemy node for the current gas price.
+   * @param APIKEY An API key for alchemy node
+   * @param chainId the chainId of the network to query
+   * @returns the best guess of the current gas price to use in transactions
+   */
+  public async getGasPrice(APIKEY: string, chainId: number) {
+    const alchemyNetwork = this.getAlchemyNetworkFromChainId(chainId);
+
+    if (!alchemyNetwork) {
       throw new Error(
-        `Given network: ${network}, is not in the alchemy networks`
+        `Cannot find Alchemy network corresponding to chainId: ${chainId}.`
       );
     }
 
     const alchemy = new Alchemy({
       apiKey: APIKEY,
-      network: networkIndex[1],
+      network: alchemyNetwork,
     });
 
     return await alchemy.core.getGasPrice();
