@@ -1,5 +1,5 @@
 import { CommonLogger } from "../logging/coreLogger";
-import { ethers, Market } from "@mangrovedao/mangrove.js";
+import { Market } from "@mangrovedao/mangrove.js";
 import Big from "big.js";
 import { fetchJson } from "ethers/lib/utils";
 import random from "random";
