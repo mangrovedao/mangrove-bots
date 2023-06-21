@@ -28,7 +28,7 @@ export class ArbBot {
     bidTransaction: ethers.ContractTransaction;
   }> {
     try {
-      const [base, quote, fee] = marketConfig;
+      const [, , fee] = marketConfig;
 
       const API_KEY = process.env["API_KEY"];
       let gasprice: BigNumber;
@@ -271,7 +271,7 @@ export class ArbBot {
             fee: fee,
             minGain: minGain,
           },
-          mgv.token(config.tokenForExchange).address,
+          mgv.getAddress(config.tokenForExchange),
           config.exchangeConfig.fee(givesToken.name)
         );
       } else {
@@ -285,7 +285,7 @@ export class ArbBot {
             fee: fee,
             minGain: minGain,
           },
-          mgv.token(config.tokenForExchange).address
+          mgv.getAddress(config.tokenForExchange)
         );
       }
     }

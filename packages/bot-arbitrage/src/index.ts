@@ -40,8 +40,8 @@ function createAsyncArbTaker(
       const arbPromises = [];
       for (const arbBotValues of arbBotMap.values()) {
         const poolContract = await getPoolContract({
-          in: mgv.token(arbBotValues.base).address,
-          out: mgv.token(arbBotValues.quote).address,
+          in: mgv.getAddress(arbBotValues.base),
+          out: mgv.getAddress(arbBotValues.quote),
           fee: arbBotValues.fee,
           provider: mgv.provider,
         });
@@ -91,8 +91,8 @@ export async function botFunction(
   const arbBotMap: { arbBot: ArbBot; market: Market }[] = [];
   for (const arbBotValues of arbBotMarketMap.values()) {
     const poolContract = await getPoolContract({
-      in: mgv.token(arbBotValues.base).address,
-      out: mgv.token(arbBotValues.quote).address,
+      in: mgv.getAddress(arbBotValues.base),
+      out: mgv.getAddress(arbBotValues.quote),
       fee: arbBotValues.fee,
       provider: mgv.provider,
     });

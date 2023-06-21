@@ -23,7 +23,7 @@ export class ApproveMangroveUtils {
         this.approveMangroveForToken(mgv, tokenConfig, contextInfo)
       );
     }
-    Promise.all(approvalPromises);
+    await Promise.all(approvalPromises);
   }
 
   public async approveMangroveForToken(
@@ -31,7 +31,7 @@ export class ApproveMangroveUtils {
     tokenConfig: TokenConfig,
     contextInfo: string
   ): Promise<void> {
-    const token = mgv.token(tokenConfig.name);
+    const token = await mgv.token(tokenConfig.name);
     const allowance = await token.allowance();
     if (allowance.lt(tokenConfig.targetAllowance)) {
       await token
