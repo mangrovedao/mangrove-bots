@@ -9,7 +9,7 @@ import {
 } from "@mangrovedao/mangrove.js/dist/nodejs/util/node";
 import {
   hookInfo,
-  mochaHooks as mgvMochahooks,
+  mochaHooks as mgvMochaHooks,
 } from "@mangrovedao/mangrove.js/dist/nodejs/util/test/mochaHooks";
 import * as dotenv from "dotenv";
 import * as deploy from "./../deployMgvAndMgvArbitrage";
@@ -40,11 +40,11 @@ export const mochaHooks = {
   },
 
   async beforeEach() {
-    await mgvMochahooks.beforeEachImpl(this);
+    await mgvMochaHooks.beforeEachImpl(this);
   },
 
   async afterAll() {
-    await mgvMochahooks.afterAllImpl(this);
+    await mgvMochaHooks.afterAllImpl(this);
   },
 
   async deployMgvArbitrage(

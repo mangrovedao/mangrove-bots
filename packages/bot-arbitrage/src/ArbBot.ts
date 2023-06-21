@@ -28,7 +28,7 @@ export class ArbBot {
     bidTransaction: ethers.ContractTransaction;
   }> {
     try {
-      const [base, quote, fee] = marketConfig;
+      const [, , fee] = marketConfig;
 
       const API_KEY = process.env["API_KEY"];
       let gasprice: BigNumber;
