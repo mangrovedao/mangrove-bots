@@ -15,7 +15,6 @@ class GasHelper {
    */
   async getGasPriceEstimateFromOracle(params: {
     constantGasPrice: number | undefined;
-    network: string;
     mangrove: Mangrove;
   }): Promise<number | undefined> {
     if (params.constantGasPrice !== undefined) {
@@ -25,13 +24,18 @@ class GasHelper {
       );
       return params.constantGasPrice;
     }
+
+    if (!params.mangrove.network.id) {
+      throw new Error("No network id found for mangrove.");
+    }
+
     const API_KEY = process.env["API_KEY"];
     if (!API_KEY) {
       throw new Error("No API key for alchemy");
     }
 
     const gaspriceFromOracle = this.priceUtils
-      .getGasPrice(API_KEY, params.network)
+      .getGasPrice(API_KEY, params.mangrove.network.id)
       .then((gaspriceEstimateInWei) => {
         const gasPriceEstimateInGwei = ethers.utils.formatUnits(
           gaspriceEstimateInWei,

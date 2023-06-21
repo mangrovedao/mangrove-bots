@@ -4,31 +4,29 @@ import { logger } from "./util/logger";
 import { TxUtils } from "@mangrovedao/bot-utils";
 
 /**
- * Configuration for an external oracle JSON REST endpoint.
- * @param oracleEndpointURL URL for the external oracle - expects a JSON REST endpoint.
- * @param oracleEndpointKey Name of key to lookup in JSON returned by JSON REST endpoint.
- */
-type OracleEndpointConfiguration = {
-  readonly _tag: "Endpoint";
-  readonly network: string;
-};
-
-/**
+ * A constant gas price oracle configuration.
  * @param OracleGasPrice A constant gasprice to be returned by this bot.
  */
-type ConstantOracleConfiguration = {
+export type ConstantOracleConfiguration = {
   readonly _tag: "Constant";
   readonly OracleGasPrice: number;
 };
 
 /**
+ * A directive to use the Alchemy SDK for the chain that the bot is running for.
+ */
+export type AlchemySDKConfiguration = {
+  readonly _tag: "AlchemySDK";
+};
+
+/**
  * An oracle source configuration - should be either a constant gas price
- * oracle or the url of an external oracle (a JSON REST endpoint) and the key
- * to lookup in the JSON returned by the endpoint.
+ * oracle or a directive to use the Alchemy SDK (for the chain that the bot
+ * is running for).
  */
 export type OracleSourceConfiguration =
   | ConstantOracleConfiguration
-  | OracleEndpointConfiguration;
+  | AlchemySDKConfiguration;
 
 /**
  * A Max update constraint6, controls how much a gasprice can change in one transaction
@@ -79,18 +77,10 @@ export class GasUpdater {
     this.#acceptableGasGapToOracle = acceptableGasGapToOracle;
     this.#maxUpdateConstraint = maxUpdateConstraint;
 
-    switch (oracleSourceConfiguration._tag) {
-      case "Constant":
-        this.#constantOracleGasPrice = oracleSourceConfiguration.OracleGasPrice;
-        break;
-      case "Endpoint":
-        this.#network = oracleSourceConfiguration.network;
-        break;
-      default:
-        throw new Error(
-          `Parameter oracleSourceConfiguration must be either ConstantOracleConfiguration or OracleEndpointConfiguration. Found '${oracleSourceConfiguration}'`
-        );
+    if (oracleSourceConfiguration._tag === "Constant") {
+      this.#constantOracleGasPrice = oracleSourceConfiguration.OracleGasPrice;
     }
+
     // Using the mangrove.js address functionallity, since there is no reason to recreate the significant infastructure for only one Contract.
     const oracleAddress = Mangrove.getAddress(
       "MgvOracle",
@@ -128,7 +118,6 @@ export class GasUpdater {
     const oracleGasPriceEstimate =
       await this.gasHelper.getGasPriceEstimateFromOracle({
         constantGasPrice: this.#constantOracleGasPrice,
-        network: this.#network,
         mangrove: this.#mangrove,
       });
 

@@ -1,6 +1,11 @@
 import config from "config";
 import dotenvFlow from "dotenv-flow";
-import { MaxUpdateConstraint, OracleSourceConfiguration } from "../GasUpdater";
+import {
+  MaxUpdateConstraint,
+  OracleSourceConfiguration,
+  AlchemySDKConfiguration,
+  ConstantOracleConfiguration,
+} from "../GasUpdater";
 import logger from "./logger";
 dotenvFlow.config();
 if (!process.env["NODE_CONFIG_DIR"]) {
@@ -73,31 +78,18 @@ export function readAndValidateConfig(): OracleConfig {
     oracleSourceConfiguration = {
       OracleGasPrice: constantOracleGasPrice,
       _tag: "Constant",
-    };
+    } as ConstantOracleConfiguration;
   } else {
-    // basic validatation of endpoint config
-    if (network == null || network == "") {
-      configErrors.push(
-        `Either 'constantOracleGasPrice' or network must be set in config. Found values: constantOracleGasPrice: '${constantOracleGasPrice}', network: '${network}'}'`
-      );
-    }
+    oracleSourceConfiguration = {} as AlchemySDKConfiguration;
     logger.info(
-      `Configuration for oracle endpoint found. Using the configured values.`,
-      {
-        data: { network },
-      }
+      `No configuration for constant oracle gas price found. Using Alchemy as oracle for gas prices.`
     );
+  }
 
-    if (configErrors.length > 0) {
-      throw new Error(
-        `Found following config errors: [${configErrors.join(", ")}]`
-      );
-    }
-
-    oracleSourceConfiguration = {
-      network: network,
-      _tag: "Endpoint",
-    };
+  if (configErrors.length > 0) {
+    throw new Error(
+      `Found following config errors: [${configErrors.join(", ")}]`
+    );
   }
 
   return {

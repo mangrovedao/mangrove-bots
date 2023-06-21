@@ -131,25 +131,45 @@ export class PriceUtils {
   }
 
   /**
+   * Get the Alchemy network corresponding to the chainId.
+   *
+   * @param chainId the chainId of the network to query
+   * @returns the Alchemy network corresponding to the chainId
+   * @remarks One should think that Alchemy provided a method (or an overload of the Alchemy constructor) to do this, but I haven't been able to find it.
+   */
+  getAlchemyNetworkFromChainId(chainId: number): Network | undefined {
+    switch (chainId) {
+      case 137:
+        return Network.MATIC_MAINNET;
+      case 80001:
+        return Network.MATIC_MUMBAI;
+      case 1:
+        return Network.ETH_MAINNET;
+      case 5:
+        return Network.ETH_GOERLI;
+    }
+
+    return undefined;
+  }
+
+  /**
    * Queries the alchemy node for the current gas price.
    * @param APIKEY An API key for alchemy node
-   * @param network The network key (see Network in alchemy-sdk for more info)
+   * @param chainId the chainId of the network to query
    * @returns the best guess of the current gas price to use in transactions
    */
-  public async getGasPrice(APIKEY: string, network: string) {
-    const networkIndex = Object.entries(Network).find(
-      (item) => item[0] === network.toUpperCase()
-    );
+  public async getGasPrice(APIKEY: string, chainId: number) {
+    const alchemyNetwork = this.getAlchemyNetworkFromChainId(chainId);
 
-    if (!networkIndex) {
+    if (!alchemyNetwork) {
       throw new Error(
-        `Given network: ${network}, is not in the alchemy networks`
+        `Cannot find Alchemy network corresponding to chainId: ${chainId}.`
       );
     }
 
     const alchemy = new Alchemy({
       apiKey: APIKEY,
-      network: networkIndex[1],
+      network: alchemyNetwork,
     });
 
     return await alchemy.core.getGasPrice();

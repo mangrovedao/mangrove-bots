@@ -30,6 +30,10 @@ export class ArbBot {
     try {
       const [base, quote, fee] = marketConfig;
 
+      if (!this.mgv.network.id) {
+        throw new Error("No network id found for mangrove.");
+      }
+
       const API_KEY = process.env["API_KEY"];
       let gasprice: BigNumber;
       if (!API_KEY) {
@@ -42,7 +46,7 @@ export class ArbBot {
       } else {
         gasprice = await this.priceUtils.getGasPrice(
           API_KEY,
-          this.mgv.network.name
+          this.mgv.network.id!
         );
       }
       const nativeToken = this.getNativeTokenNameAndDecimals(

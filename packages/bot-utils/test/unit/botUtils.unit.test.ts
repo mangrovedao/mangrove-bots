@@ -10,7 +10,7 @@ describe("Unit test suite for bot utils", () => {
     const priceUtils = new PriceUtils();
 
     return expect(
-      priceUtils.getGasPrice("NO_API_KEY", "unknown-network")
+      priceUtils.getGasPrice("NO_API_KEY", 9999)
     ).to.eventually.be.rejectedWith(Error);
   });
 });
