@@ -30,7 +30,7 @@ export async function deployMgvArbitrage(params: {
     url: params.url,
     provider: params.provider,
     env,
-    script: "MgvArbitrageTestDeployer --legacy",
+    script: "MgvArbitrageTestDeployer",
     mnemonic: params.mnemonic,
     coreDir: params.coreDir,
     pipe: false,
