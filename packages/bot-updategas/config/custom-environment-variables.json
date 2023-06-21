@@ -8,7 +8,6 @@
     "__name": "CONSTANT_ORACLE_GAS_PRICE",
     "__format": "number"
   },
-  "network": "NETWORK",
   "runEveryXHours": {
     "__name": "RUN_EVERY_X_HOURS",
     "__format": "number"

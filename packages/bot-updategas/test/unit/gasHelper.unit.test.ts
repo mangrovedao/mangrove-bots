@@ -24,7 +24,6 @@ describe("GasHelper unit test suite", () => {
       //Act
       const result = await gasHelper.getGasPriceEstimateFromOracle({
         constantGasPrice: constantGasPrice,
-        network: "polygon-mumbai",
         mangrove: instance(mangrove),
       });
 
