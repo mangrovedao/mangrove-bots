@@ -5,6 +5,7 @@ import {
   node,
   nodeType,
   inputServerParamsType,
+  serverType,
 } from "@mangrovedao/mangrove.js/dist/nodejs/util/node";
 import {
   hookInfo,
@@ -22,7 +23,7 @@ const CORE_DIR = path.parse(
 ).dir;
 
 export const mochaHooks = {
-  server: { url: "", snapshot: async () => {} },
+  server: undefined as serverType,
   async beforeAllImpl(
     args: inputServerParamsType,
     hook: hookInfo & { node: nodeType }
@@ -48,7 +49,7 @@ export const mochaHooks = {
 
   async deployMgvArbitrage(
     provider: ethers.providers.JsonRpcProvider,
-    hookInfo: any
+    hookInfo: hookInfo
   ) {
     await deploy.deployMgvArbitrage({
       provider,
@@ -71,7 +72,6 @@ export const mochaHooks = {
       setMulticallCodeIfAbsent: false, // mangrove.js is supposed to work against servers that only have ToyENS deployed but not Multicall, so we don't deploy Multicall in tests. However mangrove.js needs ToyENS so we let the node ensure it's there.
       forkUrl,
       forkBlockNumber: 39764951,
-      script: "",
     };
 
     await mochaHooks.beforeAllImpl(serverParams, this);
