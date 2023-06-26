@@ -1,5 +1,5 @@
 import { BaseProvider } from "@ethersproject/providers";
-import { ExitCode, Setup } from "@mangrovedao/bot-utils/build/setup";
+import { ExitCode, Setup } from "@mangrovedao/bot-utils";
 import { Mangrove, Market } from "@mangrovedao/mangrove.js";
 import dotenvFlow from "dotenv-flow";
 import { Wallet } from "ethers";
@@ -7,7 +7,6 @@ import http from "http";
 import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
 import { ArbBot } from "./ArbBot";
 import { getPoolContract } from "./uniswap/libs/uniswapUtils";
-import { activateTokensWithMgv } from "./util/ArbBotUtils";
 import config from "./util/config";
 import { ConfigUtils } from "./util/configUtils";
 import { logger } from "./util/logger";

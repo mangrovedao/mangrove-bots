@@ -12,7 +12,7 @@ import { Wallet } from "@ethersproject/wallet";
 import Mangrove, { enableLogging } from "@mangrovedao/mangrove.js";
 
 import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
-import { ExitCode, Setup } from "@mangrovedao/bot-utils/build/setup";
+import { ExitCode, Setup } from "@mangrovedao/bot-utils";
 
 enableLogging();
 

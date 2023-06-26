@@ -21,6 +21,9 @@
   "references": [
     {
       "path": "../../node_modules/@mangrovedao/mangrove.js"
+    },
+    {
+      "path": "../bot-utils"
     }
   ]
 }

@@ -16,7 +16,7 @@ import {
   configUtils,
   provisionMangroveUtils,
 } from "@mangrovedao/bot-utils";
-import { ExitCode, Setup } from "@mangrovedao/bot-utils/build/setup";
+import { ExitCode, Setup } from "@mangrovedao/bot-utils";
 import { FailingOffer } from "./FailingOffer";
 import config from "./util/config";
 import logger from "./util/logger";
@@ -43,7 +43,7 @@ const botFunction = async (
 
   await approvalUtil.approveMangroveForTokens(mgv, tokenConfigs, "init");
 
-  let failingOffers = await failingOfferUtils.startFailingOffersForMarkets(
+  const failingOffers = await failingOfferUtils.startFailingOffersForMarkets(
     mgv,
     signer.address
   );

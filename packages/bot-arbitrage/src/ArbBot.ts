@@ -4,7 +4,7 @@ import dotenvFlow from "dotenv-flow";
 import { MgvArbitrage__factory } from "./types/typechain";
 import { logger } from "./util/logger";
 import { ArbConfig } from "./util/configUtils";
-import { PriceUtils } from "@mangrovedao/bot-utils/build/util/priceUtils";
+import { PriceUtils } from "@mangrovedao/bot-utils";
 import { BigNumber, BigNumberish } from "ethers";
 import Big from "big.js";
 dotenvFlow.config();
