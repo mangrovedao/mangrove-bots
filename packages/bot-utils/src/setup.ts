@@ -1,6 +1,6 @@
 import { CommonLogger } from "./logging/coreLogger";
 
-import Mangrove, { ethers } from "@mangrovedao/mangrove.js";
+import Mangrove from "@mangrovedao/mangrove.js";
 import { IConfig } from "config";
 import http from "http";
 import { ToadScheduler } from "toad-scheduler";

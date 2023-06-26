@@ -5116,9 +5116,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mangrove-monorepo@workspace:.":
+"mangrove-bots@workspace:.":
   version: 0.0.0-use.local
-  resolution: "mangrove-monorepo@workspace:."
+  resolution: "mangrove-bots@workspace:."
   dependencies:
     husky: ^7.0.2
     pinst: ^3.0.0

@@ -14,9 +14,13 @@ import { MarketConfig } from "./MarketConfig";
 import { OfferTaker } from "./OfferTaker";
 
 import { BaseProvider } from "@ethersproject/providers";
-import { approveMangroveUtils, configUtils } from "@mangrovedao/bot-utils";
-import { ExitCode, Setup } from "@mangrovedao/bot-utils/build/setup";
-import { BalanceUtils } from "@mangrovedao/bot-utils/build/util/balanceUtils";
+import {
+  approveMangroveUtils,
+  configUtils,
+  ExitCode,
+  Setup,
+  BalanceUtils,
+} from "@mangrovedao/bot-utils";
 import { ToadScheduler } from "toad-scheduler";
 
 enableLogging();
