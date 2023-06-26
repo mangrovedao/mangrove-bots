@@ -6,8 +6,7 @@
 
 import { BaseProvider } from "@ethersproject/providers";
 import { Wallet } from "@ethersproject/wallet";
-import { configUtils } from "@mangrovedao/bot-utils";
-import { ExitCode, Setup } from "@mangrovedao/bot-utils/build/setup";
+import { ConfigUtils, ExitCode, Setup } from "@mangrovedao/bot-utils";
 import Mangrove, { enableLogging } from "@mangrovedao/mangrove.js";
 import http from "http";
 import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
@@ -21,7 +20,7 @@ enableLogging();
 
 const scheduler = new ToadScheduler();
 const setup = new Setup(config);
-const configUtil = new configUtils.ConfigUtils(config);
+const configUtil = new ConfigUtils(config);
 
 function createAsyncMarketCleaner(
   mgv: Mangrove,

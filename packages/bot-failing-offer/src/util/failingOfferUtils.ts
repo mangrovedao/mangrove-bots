@@ -1,8 +1,8 @@
 import Mangrove from "@mangrovedao/mangrove.js";
 import config from "./config";
 
-import { Setup } from "@mangrovedao/bot-utils/build/setup";
-import { ConfigUtils } from "@mangrovedao/bot-utils/build/util/configUtils";
+import { Setup } from "@mangrovedao/bot-utils";
+import { ConfigUtils } from "@mangrovedao/bot-utils";
 import Big from "big.js";
 import { FailingOffer } from "../FailingOffer";
 import { TokenPair } from "../index";

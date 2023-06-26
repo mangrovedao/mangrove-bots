@@ -13,9 +13,10 @@ import { Wallet } from "@ethersproject/wallet";
 import { BaseProvider } from "@ethersproject/providers";
 import { OfferMaker } from "./OfferMaker";
 import { MarketConfig } from "./MarketConfig";
-import { ExitCode, Setup } from "@mangrovedao/bot-utils/build/setup";
-import { BalanceUtils } from "@mangrovedao/bot-utils/build/util/balanceUtils";
 import {
+  ExitCode,
+  Setup,
+  BalanceUtils,
   approveMangroveUtils,
   configUtils,
   provisionMangroveUtils,

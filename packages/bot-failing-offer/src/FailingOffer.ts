@@ -4,8 +4,8 @@ import config from "./util/config";
 import random from "random";
 import { MakerConfig } from "./util/failingOfferUtils";
 import logger from "./util/logger";
-import { PriceUtils } from "@mangrovedao/bot-utils/build/util/priceUtils";
-import { PostOfferUtils } from "@mangrovedao/bot-utils/build/util/postOfferUtils";
+import { PriceUtils } from "@mangrovedao/bot-utils";
+import { PostOfferUtils } from "@mangrovedao/bot-utils";
 
 export class FailingOffer {
   #market: Market;
@@ -90,7 +90,7 @@ export class FailingOffer {
       return;
     }
 
-    let ba: Market.BA =
+    const ba: Market.BA =
       random.float(0, 1) < this.#bidProbability ? "bids" : "asks";
     const referencePrice = await this.priceUtils.getReferencePrice(
       this.#market,
@@ -146,7 +146,7 @@ export class FailingOffer {
         });
         return txInfo;
       })
-      .catch((e) => {
+      .catch(() => {
         this.postOfferUtils.logOffer(
           "Post of offer failed",
           "error",

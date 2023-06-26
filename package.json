@@ -1,6 +1,6 @@
 {
     "private": true,
-    "name": "mangrove-monorepo",
+    "name": "mangrove-bots",
     "workspaces": {
         "packages": [
             "packages/*"
