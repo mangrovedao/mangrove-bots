@@ -41,15 +41,10 @@ export function readAndValidateConfig(): OracleConfig {
 
   // - oracle source config
   let constantOracleGasPrice: number | undefined;
-  let network = "";
   let maxUpdateConstraint: MaxUpdateConstraint = {};
 
   if (config.has("constantOracleGasPrice")) {
     constantOracleGasPrice = config.get<number>("constantOracleGasPrice");
-  }
-
-  if (config.has("network")) {
-    network = config.get<string>("network");
   }
 
   if (config.has("maxUpdateConstraint")) {

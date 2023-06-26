@@ -27,10 +27,7 @@ function createAsyncArbTaker(
   return new AsyncTask(
     "arb bot task",
     async () => {
-      const blockNumber = await mgv.provider.getBlockNumber().catch((e) => {
-        logger.debug("Error on getting blockNumber via ethers", { data: e });
-        return -1;
-      });
+      const blockNumber = mgv.reliableProvider.blockManager.getLastBlock();
       const contextInfo = `block#=${blockNumber}`;
 
       logger.trace("Scheduled bot task running...", { contextInfo });

@@ -22,11 +22,18 @@ export class ArbBot {
   public async run(
     market: Market,
     marketConfig: [string, string, number],
-    config: ArbConfig
+    config: ArbConfig,
+    contextInfo?: string
   ): Promise<{
     askTransaction: ethers.ContractTransaction;
     bidTransaction: ethers.ContractTransaction;
   }> {
+    logger.info("Checking whether Mangrove market can be arb'ed...", {
+      base: market.base.name,
+      quote: market.quote.name,
+      contextInfo,
+    });
+
     try {
       const [, , fee] = marketConfig;
 
@@ -63,7 +70,8 @@ export class ArbBot {
           config,
           fee,
           gasprice,
-          holdsTokenPrice
+          holdsTokenPrice,
+          contextInfo
         ),
         bidTransaction: await this.doArbIfProfitable(
           market,
@@ -71,12 +79,15 @@ export class ArbBot {
           config,
           fee,
           gasprice,
-          holdsTokenPrice
+          holdsTokenPrice,
+          contextInfo
         ),
       };
     } catch (error) {
-      logger.error("Error starting bots for market", { data: marketConfig });
-      logger.error(error);
+      logger.error("Error starting bots for market", {
+        data: { marketConfig, error },
+        contextInfo,
+      });
       throw error;
     }
   }
@@ -96,7 +107,8 @@ export class ArbBot {
     config: ArbConfig,
     fee: number,
     gasprice: BigNumber,
-    holdsTokenPrice: Big
+    holdsTokenPrice: Big,
+    contextInfo?: string
   ): Promise<ethers.ContractTransaction> {
     const { inbound_tkn: givesToken, outbound_tkn: wantsToken } =
       market.getOutboundInbound(BA);
@@ -114,7 +126,8 @@ export class ArbBot {
         config,
         fee,
         gasprice,
-        holdsTokenPrice
+        holdsTokenPrice,
+        contextInfo
       );
       if (result.isProfitable) {
         return (await this.doArbitrage(
@@ -138,7 +151,8 @@ export class ArbBot {
     config: ArbConfig,
     fee: number,
     gasprice: BigNumber,
-    holdsTokenPrice: Big
+    holdsTokenPrice: Big,
+    contextInfo?: string
   ): Promise<{
     isProfitable: boolean;
     costInHoldingToken: BigNumberish;
@@ -170,7 +184,7 @@ export class ArbBot {
         costInHoldingToken: costInHoldingToken.toString(),
       };
     } catch (e) {
-      logger.debug(e);
+      logger.debug(e, { contextInfo });
       return { isProfitable: false, costInHoldingToken: 0 };
     }
   }

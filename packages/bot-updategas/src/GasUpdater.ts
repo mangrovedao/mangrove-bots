@@ -1,4 +1,4 @@
-import { ethers, Mangrove, typechain } from "@mangrovedao/mangrove.js";
+import { Mangrove, typechain } from "@mangrovedao/mangrove.js";
 import GasHelper from "./GasHelper";
 import { logger } from "./util/logger";
 import { TxUtils } from "@mangrovedao/bot-utils";
@@ -100,18 +100,19 @@ export class GasUpdater {
    * gas price to use to the oracle contract, which this bot works together
    * with.
    */
-  public async checkSetGasprice(): Promise<void> {
+  public async checkSetGasprice(contextInfo?: string): Promise<void> {
     //NOTE: Possibly suitable protection against reentrancy
 
-    logger.info(`Checking whether Mangrove gas price needs updating...`);
+    logger.info(`Checking whether Mangrove gas price needs updating...`, {
+      contextInfo,
+    });
 
     const globalConfig = await this.#mangrove.config();
-    if (globalConfig.dead) {
-      logger.error("`Mangrove is dead, skipping update.");
-      return;
-    }
 
-    logger.debug("Mangrove global config retrieved", { data: globalConfig });
+    logger.debug("Mangrove global config retrieved", {
+      data: globalConfig,
+      contextInfo,
+    });
 
     const currentMangroveGasPrice = globalConfig.gasprice;
 
@@ -130,8 +131,9 @@ export class GasUpdater {
         );
 
       if (shouldUpdateGasPrice) {
-        logger.debug(`Determined gas price update needed. `, {
+        logger.debug("Determined gas price update needed.", {
           data: { newGasPrice },
+          contextInfo,
         });
         const allowedNewGasPrice =
           this.gasHelper.calculateNewGaspriceFromConstraints(
@@ -139,8 +141,9 @@ export class GasUpdater {
             currentMangroveGasPrice,
             this.#maxUpdateConstraint
           );
-        logger.debug(`Determined new gas price from max constraints. `, {
+        logger.debug("Determined new gas price from max constraints.", {
           data: { allowedNewGasPrice },
+          contextInfo,
         });
         const [isAllowed] = this.gasHelper.shouldUpdateMangroveGasPrice(
           currentMangroveGasPrice,
@@ -149,7 +152,8 @@ export class GasUpdater {
         );
         if (!isAllowed) {
           logger.error(
-            "The max update constraint is lowering/increasing the gas price, so that it is within the acceptableGasGap"
+            "The max update constraint is lowering/increasing the gas price, so that it is within the acceptableGasGap",
+            { contextInfo }
           );
           return;
         }
@@ -163,12 +167,13 @@ export class GasUpdater {
             maxPriorityFeePerGas: fees.maxPriorityFeePerGas,
             maxFeePerGas: fees.maxFeePerGas,
           };
-          logger.debug(`Overriding fees with: `, {
+          logger.debug("Overriding fees with:", {
             data: {
               txOverrides,
               maxPriorityFeePerGas_in_wei: fees.maxPriorityFeePerGas.toString(),
               maxFeePerGas_in_wei: fees.maxFeePerGas.toString(),
             },
+            contextInfo,
           });
         }
 
@@ -176,16 +181,22 @@ export class GasUpdater {
           allowedNewGasPrice,
           this.oracleContract,
           this.#mangrove,
-          txOverrides
+          txOverrides,
+          contextInfo
         );
       } else {
-        logger.debug(`Determined gas price update not needed.`);
+        logger.debug("Determined gas price update not needed.", {
+          contextInfo,
+        });
       }
     } else {
       const network = this.#network;
       logger.error(
         "Error getting gas price from oracle endpoint, skipping update. Oracle endpoint config:",
-        { data: { network: network } }
+        {
+          data: { network: network },
+          contextInfo,
+        }
       );
     }
   }

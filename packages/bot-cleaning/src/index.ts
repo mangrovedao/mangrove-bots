@@ -31,10 +31,7 @@ function createAsyncMarketCleaner(
   return new AsyncTask(
     "cleaning bot task",
     async () => {
-      const blockNumber = await mgv.provider.getBlockNumber().catch((e) => {
-        logger.error("Error on getting blockNumber via ethers", { data: e });
-        return -1;
-      });
+      const blockNumber = mgv.reliableProvider.blockManager.getLastBlock();
       const contextInfo = `block#=${blockNumber}`;
 
       logger.debug("Scheduled bot task running...", { contextInfo });
