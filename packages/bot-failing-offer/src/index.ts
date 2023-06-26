@@ -52,13 +52,11 @@ const botFunction = async (
   });
 };
 
-const server = setup.createServer();
-
 const main = async () => {
-  await setup.startBot("failing offer bot", botFunction, server, scheduler);
+  await setup.startBot("failing offer bot", botFunction, scheduler);
 };
 
 main().catch((e) => {
   logger.error(e);
-  setup.stopAndExit(ExitCode.ExceptionInMain, server, scheduler);
+  setup.stopAndExit(ExitCode.ExceptionInMain, scheduler);
 });

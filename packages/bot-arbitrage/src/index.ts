@@ -3,7 +3,6 @@ import { ExitCode, Setup } from "@mangrovedao/bot-utils";
 import { Mangrove, Market } from "@mangrovedao/mangrove.js";
 import dotenvFlow from "dotenv-flow";
 import { Wallet } from "ethers";
-import http from "http";
 import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
 import { ArbBot } from "./ArbBot";
 import { getPoolContract } from "./uniswap/libs/uniswapUtils";
@@ -21,7 +20,6 @@ const configUtil = new ConfigUtils(config);
 function createAsyncArbTaker(
   mgv: Mangrove,
   arbBotMap: Set<MarketPairAndFee>,
-  server: http.Server,
   scheduler: ToadScheduler
 ) {
   return new AsyncTask(
@@ -31,7 +29,7 @@ function createAsyncArbTaker(
       const contextInfo = `block#=${blockNumber}`;
 
       logger.trace("Scheduled bot task running...", { contextInfo });
-      await setup.exitIfMangroveIsKilled(mgv, contextInfo, server, scheduler);
+      await setup.exitIfMangroveIsKilled(mgv, contextInfo, scheduler);
 
       const arbPromises = [];
       for (const arbBotValues of arbBotMap.values()) {
@@ -57,7 +55,7 @@ function createAsyncArbTaker(
     },
     (err: Error) => {
       logger.error(err);
-      setup.stopAndExit(ExitCode.ErrorInAsyncTask, server, scheduler);
+      setup.stopAndExit(ExitCode.ErrorInAsyncTask, scheduler);
     }
   );
 }
@@ -103,7 +101,7 @@ export async function botFunction(
     });
   }
 
-  const task = createAsyncArbTaker(mgv, arbBotMarketMap, server, scheduler);
+  const task = createAsyncArbTaker(mgv, arbBotMarketMap, scheduler);
 
   const job = new SimpleIntervalJob(
     {
@@ -116,13 +114,11 @@ export async function botFunction(
   scheduler.addSimpleIntervalJob(job);
 }
 
-const server = setup.createServer();
-
 const main = async () => {
-  await setup.startBot("ARB bot", botFunction, server, scheduler);
+  await setup.startBot("ARB bot", botFunction, scheduler);
 };
 
 main().catch((e) => {
   logger.error(e);
-  setup.stopAndExit(ExitCode.ExceptionInMain, server, scheduler);
+  setup.stopAndExit(ExitCode.ExceptionInMain, scheduler);
 });
