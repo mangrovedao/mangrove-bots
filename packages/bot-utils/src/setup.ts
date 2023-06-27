@@ -17,6 +17,9 @@ import { ConfigUtils } from "./util/configUtils";
 
 import express, { Express, Request, Response } from "express";
 
+import { readdirSync, readFileSync } from "fs";
+import { join } from "path";
+
 import mangroveJsPackageJson from "../../../node_modules/@mangrovedao/mangrove.js/package.json";
 import reliableEventSubscriberPackageJson from "../../../node_modules/@mangrovedao/reliable-event-subscriber/package.json";
 
@@ -38,6 +41,45 @@ export type TokenConfig = {
   name: string;
   targetAllowance: number;
 };
+
+// Get name and version of all installed packages
+// 1. Get a list of all directories in the `node_modules` folder
+const nodeModulesDir = "../../node_modules";
+const packageOrScopeNames = readdirSync(nodeModulesDir).filter(
+  (name) => !name.startsWith(".")
+); // Exclude hidden directories
+
+// 2. Function to read the package.json file and extract name and version
+function getPackageInfo(packagePath: string): {
+  name: string;
+  version: string;
+} {
+  const packageFile = readFileSync(packagePath, "utf8");
+  const { name, version } = JSON.parse(packageFile);
+  return { name, version };
+}
+
+// Loop through each package or scope and extract the package info
+const packageInfos = packageOrScopeNames.flatMap((packageOrScopeName) => {
+  if (packageOrScopeName.startsWith("@")) {
+    // Scoped package
+    const scopeDir = join(nodeModulesDir, packageOrScopeName);
+    const scopedPackageNames = readdirSync(scopeDir).filter(
+      (name) => !name.startsWith(".")
+    ); // Exclude hidden directories
+
+    return scopedPackageNames.map((scopedPackageName) => {
+      const packageDir = join(scopeDir, scopedPackageName);
+      const packagePath = join(packageDir, "package.json");
+      return getPackageInfo(packagePath);
+    });
+  } else {
+    // Unscoped package
+    const packageDir = join(nodeModulesDir, packageOrScopeName);
+    const packagePath = join(packageDir, "package.json");
+    return getPackageInfo(packagePath);
+  }
+});
 
 export class Setup {
   #config: IConfig;
@@ -149,16 +191,7 @@ export class Setup {
 
     app.get("/environmentInformation.json", (req: Request, res: Response) => {
       res.json({
-        dependencies: [
-          {
-            name: "@mangrovedao/mangrove.js",
-            version: mangroveJsPackageJson.version,
-          },
-          {
-            name: "@mangrovedao/reliable-event-subscriber",
-            version: reliableEventSubscriberPackageJson.version,
-          },
-        ],
+        dependencies: packageInfos,
         network: mgv.network,
         addresses: Mangrove.getAllAddresses(mgv.network.name),
       });
