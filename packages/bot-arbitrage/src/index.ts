@@ -1,5 +1,10 @@
 import { BaseProvider } from "@ethersproject/providers";
-import { BalanceUtils, ExitCode, Setup } from "@mangrovedao/bot-utils";
+import {
+  BalanceUtils,
+  ExitCode,
+  LatestMarketActivity,
+  Setup,
+} from "@mangrovedao/bot-utils";
 import { Mangrove, Market } from "@mangrovedao/mangrove.js";
 import dotenvFlow from "dotenv-flow";
 import { Wallet } from "ethers";
@@ -32,6 +37,9 @@ function createAsyncArbTaker(
     async () => {
       const block = mgv.reliableProvider.blockManager.getLastBlock();
       const contextInfo = `block#=${block.number}`;
+
+      setup.latestActivity.latestBlock = block;
+      setup.latestActivity.lastActive = new Date().toISOString();
 
       logger.trace("Scheduled bot task running...", { contextInfo });
       await setup.exitIfMangroveIsKilled(mgv, contextInfo, scheduler);
@@ -69,6 +77,9 @@ export async function botFunction(
   provider: BaseProvider
 ) {
   const botConfig = configUtil.getAndValidateArbConfig();
+
+  const latestMarketActivities: LatestMarketActivity[] = [];
+  setup.latestActivity.markets = latestMarketActivities;
 
   const marketConfigs = botConfig.markets;
   const arbBotMarketMap = new Set<MarketPairAndFee>();
@@ -108,9 +119,19 @@ export async function botFunction(
       base: arbBotValues.base,
       quote: arbBotValues.quote,
     });
+
+    // Create object for tracking latest activity
+    const latestMarketActivity = {
+      base: market.base.name,
+      quote: market.quote.name,
+      latestBlock: undefined,
+      lastActive: undefined,
+    };
+    latestMarketActivities.push(latestMarketActivity);
+
     logger.info(`Starting bot for ${arbBotValues.base}/${arbBotValues.quote}`);
     arbBotMap.push({
-      arbBot: new ArbBot(mgv, poolContract),
+      arbBot: new ArbBot(mgv, poolContract, latestMarketActivity),
       market: market,
       fee: arbBotValues.fee,
     });

@@ -4,7 +4,7 @@ import dotenvFlow from "dotenv-flow";
 import { MgvArbitrage__factory } from "./types/typechain";
 import { logger } from "./util/logger";
 import { ArbConfig } from "./util/configUtils";
-import { PriceUtils } from "@mangrovedao/bot-utils";
+import { LatestMarketActivity, PriceUtils } from "@mangrovedao/bot-utils";
 import { BigNumber, BigNumberish } from "ethers";
 import Big from "big.js";
 dotenvFlow.config();
@@ -19,10 +19,16 @@ export class ArbBot {
   mgv: Mangrove;
   poolContract: ethers.Contract;
   priceUtils = new PriceUtils(logger);
+  #latestMarketActivity: LatestMarketActivity;
 
-  constructor(_mgv: Mangrove, _poolContract: ethers.Contract) {
+  constructor(
+    _mgv: Mangrove,
+    _poolContract: ethers.Contract,
+    latestMarketActivity: LatestMarketActivity
+  ) {
     this.mgv = _mgv;
     this.poolContract = _poolContract;
+    this.#latestMarketActivity = latestMarketActivity;
   }
 
   public async run(
@@ -39,6 +45,9 @@ export class ArbBot {
       quote: market.quote.name,
       contextInfo,
     });
+    this.#latestMarketActivity.latestBlock =
+      this.mgv.reliableProvider.blockManager.getLastBlock();
+    this.#latestMarketActivity.lastActive = new Date().toISOString();
 
     try {
       const [, , fee] = marketConfig;
