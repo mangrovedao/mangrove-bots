@@ -6,6 +6,9 @@ import config from "./config";
 const consoleLogFormat = format.printf(
   ({ level, message, timestamp, ...metadata }) => {
     let msg = `${timestamp} [${level}] `;
+    if (metadata.contextInfo) {
+      msg += `[${metadata.contextInfo}] `;
+    }
     msg += message;
     if (metadata.data !== undefined) {
       msg += ` | data: ${safeStringify(metadata.data)}`;

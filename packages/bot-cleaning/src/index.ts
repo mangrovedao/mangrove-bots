@@ -8,7 +8,6 @@ import { BaseProvider } from "@ethersproject/providers";
 import { Wallet } from "@ethersproject/wallet";
 import { ConfigUtils, ExitCode, Setup } from "@mangrovedao/bot-utils";
 import Mangrove, { enableLogging } from "@mangrovedao/mangrove.js";
-import http from "http";
 import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
 import { MarketCleaner } from "./MarketCleaner";
 import config from "./util/config";
@@ -25,20 +24,16 @@ const configUtil = new ConfigUtils(config);
 function createAsyncMarketCleaner(
   mgv: Mangrove,
   marketCleanerMap: Map<MarketPair, MarketCleaner>,
-  server: http.Server,
   scheduler: ToadScheduler
 ) {
   return new AsyncTask(
     "cleaning bot task",
     async () => {
-      const blockNumber = await mgv.provider.getBlockNumber().catch((e) => {
-        logger.error("Error on getting blockNumber via ethers", { data: e });
-        return -1;
-      });
+      const blockNumber = mgv.reliableProvider.blockManager.getLastBlock();
       const contextInfo = `block#=${blockNumber}`;
 
       logger.debug("Scheduled bot task running...", { contextInfo });
-      await setup.exitIfMangroveIsKilled(mgv, contextInfo, server, scheduler);
+      await setup.exitIfMangroveIsKilled(mgv, contextInfo, scheduler);
 
       const cleaningPromises = [];
       for (const marketCleaner of marketCleanerMap.values()) {
@@ -48,7 +43,7 @@ function createAsyncMarketCleaner(
     },
     (err: Error) => {
       logger.error(err);
-      setup.stopAndExit(ExitCode.ErrorInAsyncTask, server, scheduler);
+      setup.stopAndExit(ExitCode.ErrorInAsyncTask, scheduler);
     }
   );
 }
@@ -81,12 +76,7 @@ async function botFunction(
     data: { runEveryXMinutes: botConfig.runEveryXMinutes },
   });
 
-  const task = createAsyncMarketCleaner(
-    mgv,
-    marketCleanerMap,
-    server,
-    scheduler
-  );
+  const task = createAsyncMarketCleaner(mgv, marketCleanerMap, scheduler);
 
   const job = new SimpleIntervalJob(
     {
@@ -99,13 +89,11 @@ async function botFunction(
   scheduler.addSimpleIntervalJob(job);
 }
 
-const server = setup.createServer();
-
 const main = async () => {
-  await setup.startBot("cleaner bot", botFunction, server, scheduler);
+  await setup.startBot("cleaner bot", botFunction, scheduler);
 };
 
 main().catch((e) => {
   logger.error(e);
-  setup.stopAndExit(ExitCode.ExceptionInMain, server, scheduler);
+  setup.stopAndExit(ExitCode.ExceptionInMain, scheduler);
 });

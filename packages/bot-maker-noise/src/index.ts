@@ -78,13 +78,12 @@ const botFunction = async (
 
   await startMakersForMarkets(mgv, signer.address);
 };
-const server = setup.createServer();
 
 const main = async () => {
-  await setup.startBot("maker noise bot", botFunction, server);
+  await setup.startBot("maker noise bot", botFunction);
 };
 
 main().catch((e) => {
   logger.error(e);
-  setup.stopAndExit(ExitCode.ExceptionInMain, server);
+  setup.stopAndExit(ExitCode.ExceptionInMain);
 });

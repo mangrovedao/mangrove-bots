@@ -172,10 +172,14 @@ class GasHelper {
     newGasPrice: number,
     oracleContract: typechain.MgvOracle,
     mangrove: Mangrove,
-    txOverrides?: Overrides
+    txOverrides?: Overrides,
+    contextInfo?: string
   ): Promise<void> {
     logger.debug(
-      "updateMangroveGasPrice: Sending gas update to oracle contract."
+      "updateMangroveGasPrice: Sending gas update to oracle contract.",
+      {
+        contextInfo,
+      }
     );
 
     try {
@@ -192,12 +196,16 @@ class GasHelper {
       await ctx.then((tx) => tx.wait());
 
       logger.info(
-        `Succesfully sent Mangrove gas price update to oracle: ${newGasPriceRounded}.`
+        `Succesfully sent Mangrove gas price update to oracle: ${newGasPriceRounded}.`,
+        {
+          contextInfo,
+        }
       );
     } catch (e) {
       logger.error("setGasprice failed", {
         mangrove: mangrove,
         data: e,
+        contextInfo,
       });
     }
   }

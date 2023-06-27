@@ -14,8 +14,7 @@
     "clean-this-package": "forge clean",
     "clean": "yarn workspaces foreach -vpiR --topological-dev --from $npm_package_name run clean-this-package",
     "test": "forge test -vvv",
-    "test-with-dependencies": "yarn workspaces foreach -vpiR --topological-dev --from $npm_package_name run test",
-    "write-env-info-file": "node ./scripts/writeEnvInfoFile.js"
+    "test-with-dependencies": "yarn workspaces foreach -vpiR --topological-dev --from $npm_package_name run test"
   },
   "lint-staged": {
     "*.sol": "forge fmt",

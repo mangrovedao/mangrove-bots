@@ -13,9 +13,15 @@ import { getDefaultProvider } from "ethers";
 import { BaseProvider } from "@ethersproject/providers";
 import { Wallet } from "@ethersproject/wallet";
 import { NonceManager } from "@ethersproject/experimental";
-import finalhandler from "finalhandler";
-import serveStatic from "serve-static";
 import { ConfigUtils } from "./util/configUtils";
+
+import express, { Express, Request, Response } from "express";
+
+import { readdirSync, readFileSync } from "fs";
+import { join } from "path";
+
+import mangroveJsPackageJson from "../../../node_modules/@mangrovedao/mangrove.js/package.json";
+import reliableEventSubscriberPackageJson from "../../../node_modules/@mangrovedao/reliable-event-subscriber/package.json";
 
 export enum ExitCode {
   Normal = 0,
@@ -36,10 +42,51 @@ export type TokenConfig = {
   targetAllowance: number;
 };
 
+// Get name and version of all installed packages
+// 1. Get a list of all directories in the `node_modules` folder
+const nodeModulesDir = "../../node_modules";
+const packageOrScopeNames = readdirSync(nodeModulesDir).filter(
+  (name) => !name.startsWith(".")
+); // Exclude hidden directories
+
+// 2. Function to read the package.json file and extract name and version
+function getPackageInfo(packagePath: string): {
+  name: string;
+  version: string;
+} {
+  const packageFile = readFileSync(packagePath, "utf8");
+  const { name, version } = JSON.parse(packageFile);
+  return { name, version };
+}
+
+// Loop through each package or scope and extract the package info
+const packageInfos = packageOrScopeNames.flatMap((packageOrScopeName) => {
+  if (packageOrScopeName.startsWith("@")) {
+    // Scoped package
+    const scopeDir = join(nodeModulesDir, packageOrScopeName);
+    const scopedPackageNames = readdirSync(scopeDir).filter(
+      (name) => !name.startsWith(".")
+    ); // Exclude hidden directories
+
+    return scopedPackageNames.map((scopedPackageName) => {
+      const packageDir = join(scopeDir, scopedPackageName);
+      const packagePath = join(packageDir, "package.json");
+      return getPackageInfo(packagePath);
+    });
+  } else {
+    // Unscoped package
+    const packageDir = join(nodeModulesDir, packageOrScopeName);
+    const packagePath = join(packageDir, "package.json");
+    return getPackageInfo(packagePath);
+  }
+});
+
 export class Setup {
   #config: IConfig;
   logger: CommonLogger;
   configUtils: ConfigUtils;
+  server?: http.Server;
+
   constructor(config: IConfig) {
     this.#config = config;
     this.logger = log.logger(config);
@@ -49,29 +96,24 @@ export class Setup {
   public async exitIfMangroveIsKilled(
     mgv: Mangrove,
     contextInfo: string,
-    server: http.Server,
     scheduler?: ToadScheduler
   ): Promise<void> {
     const globalConfig = await mgv.config();
     // FIXME maybe this should be a property/method on Mangrove.
     if (globalConfig.dead) {
       this.logger.warn("Mangrove is dead, stopping the bot", { contextInfo });
-      this.stopAndExit(ExitCode.MangroveIsKilled, server, scheduler);
+      this.stopAndExit(ExitCode.MangroveIsKilled, scheduler);
     }
   }
 
-  public stopAndExit(
-    exitStatusCode: number,
-    server: http.Server,
-    scheduler?: ToadScheduler
-  ) {
+  public stopAndExit(exitStatusCode: number, scheduler?: ToadScheduler) {
     // Stop gracefully
     this.logger.info("Stopping and exiting", {
       data: { exitCode: exitStatusCode },
     });
     process.exitCode = exitStatusCode;
     scheduler?.stop();
-    server.close();
+    this.server?.close();
   }
 
   public async startBot(
@@ -81,7 +123,6 @@ export class Setup {
       signer: Wallet,
       provider: BaseProvider
     ) => Promise<void>,
-    server: http.Server,
     scheduler?: ToadScheduler
   ) {
     this.logger.info(`Starting ${name}...`, { contextInfo: "init" });
@@ -89,12 +130,12 @@ export class Setup {
     // Exiting on unhandled rejections and exceptions allows the app platform to restart the bot
     process.on("unhandledRejection", (reason) => {
       this.logger.error("Unhandled Rejection", { data: reason });
-      this.stopAndExit(ExitCode.UnhandledRejection, server, scheduler);
+      this.stopAndExit(ExitCode.UnhandledRejection, scheduler);
     });
 
     process.on("uncaughtException", (err) => {
       this.logger.error(`Uncaught Exception: ${err.message}`);
-      this.stopAndExit(ExitCode.UncaughtException, server, scheduler);
+      this.stopAndExit(ExitCode.UncaughtException, scheduler);
     });
 
     const providerHttpUrl = process.env["RPC_HTTP_URL"];
@@ -136,21 +177,30 @@ export class Setup {
       },
     });
 
-    await this.exitIfMangroveIsKilled(mgv, "init", server, scheduler);
+    await this.exitIfMangroveIsKilled(mgv, "init", scheduler);
 
     await botFunction(mgv, signer, provider);
+
+    this.server = this.createServer(mgv);
   }
 
-  public createServer() {
-    // The node http server is used solely to serve static information files for environment management
-    const staticBasePath = "./static";
-    const serve = serveStatic(staticBasePath, { index: false });
+  // Starts an Express server which serves environment information
+  createServer(mgv: Mangrove): http.Server {
+    const app: Express = express();
+    const port = process.env.PORT || 8080;
 
-    const server = http.createServer(function (req, res) {
-      const done = finalhandler(req, res);
-      serve(req, res, () => done(undefined)); // 'undefined' means no error
+    app.get("/environmentInformation.json", (req: Request, res: Response) => {
+      res.json({
+        dependencies: packageInfos,
+        network: mgv.network,
+        addresses: Mangrove.getAllAddresses(mgv.network.name),
+      });
     });
-    server.listen(process.env.PORT || 8080);
-    return server;
+
+    return app.listen(port, () => {
+      this.logger.info(
+        `[server]: Server is running at http://localhost:${port}`
+      );
+    });
   }
 }
