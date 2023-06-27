@@ -38,20 +38,16 @@ async function botFunction(
   const task = new AsyncTask(
     "gas-updater bot task",
     async () => {
-      const blockNumber = await mgv.provider.getBlockNumber().catch((e) => {
-        logger.debug("Error on getting blockNumber via ethers", { data: e });
-        return -1;
-      });
-
+      const blockNumber = mgv.reliableProvider.blockManager.getLastBlock();
       const contextInfo = `block#=${blockNumber}`;
 
-      logger.debug(`Scheduled bot task running on block ${blockNumber}...`);
-      await setup.exitIfMangroveIsKilled(mgv, contextInfo, server, scheduler);
-      await gasUpdater.checkSetGasprice();
+      logger.debug("Scheduled bot task running...", { contextInfo });
+      await setup.exitIfMangroveIsKilled(mgv, contextInfo, scheduler);
+      await gasUpdater.checkSetGasprice(contextInfo);
     },
     (err: Error) => {
       logger.error(err);
-      setup.stopAndExit(ExitCode.ErrorInAsyncTask, server, scheduler);
+      setup.stopAndExit(ExitCode.ErrorInAsyncTask, scheduler);
     }
   );
 
@@ -66,13 +62,11 @@ async function botFunction(
   scheduler.addSimpleIntervalJob(job);
 }
 
-const server = setup.createServer();
-
 const main = async () => {
-  await setup.startBot("update gas bot", botFunction, server, scheduler);
+  await setup.startBot("update gas bot", botFunction, scheduler);
 };
 
 main().catch((e) => {
   logger.error(e);
-  setup.stopAndExit(ExitCode.ExceptionInMain, server, scheduler);
+  setup.stopAndExit(ExitCode.ExceptionInMain, scheduler);
 });

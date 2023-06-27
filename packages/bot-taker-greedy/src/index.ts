@@ -81,13 +81,11 @@ async function botFunction(
   await startTakersForMarkets(mgv, signer.address, scheduler);
 }
 
-const server = setup.createServer();
-
 const main = async () => {
-  await setup.startBot("taker greedy bot", botFunction, server, scheduler);
+  await setup.startBot("taker greedy bot", botFunction, scheduler);
 };
 
 main().catch((e) => {
   logger.error(e);
-  setup.stopAndExit(ExitCode.ExceptionInMain, server, scheduler);
+  setup.stopAndExit(ExitCode.ExceptionInMain, scheduler);
 });

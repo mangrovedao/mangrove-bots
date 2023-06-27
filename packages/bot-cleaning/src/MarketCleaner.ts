@@ -60,7 +60,7 @@ export class MarketCleaner {
       logger.debug("Already cleaning so ignoring request to clean", {
         base: this.#market.base.name,
         quote: this.#market.quote.name,
-        contextInfo: contextInfo,
+        contextInfo,
       });
 
       return;
@@ -70,20 +70,20 @@ export class MarketCleaner {
     try {
       this.#isCleaning = true;
 
+      logger.info("Cleaning market", {
+        base: this.#market.base.name,
+        quote: this.#market.quote.name,
+        contextInfo,
+      });
+
       if (!(await this.#market.isActive())) {
         logger.warn(`Market is closed so ignoring request to clean`, {
           base: this.#market.base.name,
           quote: this.#market.quote.name,
-          contextInfo: contextInfo,
+          contextInfo,
         });
         return;
       }
-
-      logger.info("Cleaning market", {
-        base: this.#market.base.name,
-        quote: this.#market.quote.name,
-        contextInfo: contextInfo,
-      });
 
       // TODO I think this is not quite EIP-1559 terminology - should fix
       const gasPrice = await this.#estimateGasPrice(this.#provider);
@@ -92,7 +92,7 @@ export class MarketCleaner {
       logger.info("Order book retrieved", {
         base: this.#market.base.name,
         quote: this.#market.quote.name,
-        contextInfo: contextInfo,
+        contextInfo,
         data: {
           asksCount: asks.size(),
           bidsCount: bids.size(),
@@ -167,7 +167,7 @@ export class MarketCleaner {
         quote: this.#market.quote.name,
         ba: ba,
         offer: offer,
-        contextInfo: contextInfo,
+        contextInfo,
         data: { estimates },
       });
     }
@@ -193,7 +193,7 @@ export class MarketCleaner {
           quote: this.#market.quote.name,
           ba: ba,
           offer: offer,
-          contextInfo: contextInfo,
+          contextInfo,
           data: { bounty },
         });
         return { willOfferFail: true, bounty: bounty };
@@ -204,7 +204,7 @@ export class MarketCleaner {
           quote: this.#market.quote.name,
           ba: ba,
           offer: offer,
-          contextInfo: contextInfo,
+          contextInfo,
           data: e,
         });
         return { willOfferFail: false };
@@ -221,7 +221,7 @@ export class MarketCleaner {
       quote: this.#market.quote.name,
       ba: ba,
       offer: offer,
-      contextInfo: contextInfo,
+      contextInfo,
     });
     const fees = await this.#txUtils.getFeeOverrides();
     let txOverrides = {};
@@ -256,14 +256,14 @@ export class MarketCleaner {
           quote: this.#market.quote.name,
           ba: ba,
           offerId: offer.id,
-          contextInfo: contextInfo,
+          contextInfo,
         });
         logger.debug("Details for cleaned offer", {
           base: this.#market.base.name,
           quote: this.#market.quote.name,
           ba: ba,
           offer: offer,
-          contextInfo: contextInfo,
+          contextInfo,
           data: { result },
         });
       })
@@ -273,14 +273,14 @@ export class MarketCleaner {
           quote: this.#market.quote.name,
           ba: ba,
           offerId: offer.id,
-          contextInfo: contextInfo,
+          contextInfo,
         });
         logger.debug("Details for failed cleaning", {
           base: this.#market.base.name,
           quote: this.#market.quote.name,
           ba: ba,
           offer: offer,
-          contextInfo: contextInfo,
+          contextInfo,
           data: e,
         });
       });

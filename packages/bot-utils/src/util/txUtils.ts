@@ -23,13 +23,17 @@ export class TxUtils {
     this.provider = provider;
   }
 
-  public async getFeeOverrides(chainId?: Number): Promise<Fees | undefined> {
+  public async getFeeOverrides(
+    chainId?: number,
+    contextInfo?: string
+  ): Promise<Fees | undefined> {
     let maxFeePerGas;
     let maxPriorityFeePerGas;
 
     if (!chainId && !this.provider) {
       this.logger?.error(
-        "No `chainId` given and no provider available to get chainId."
+        "No `chainId` given and no provider available to get chainId.",
+        { contextInfo }
       );
       return undefined;
     }
@@ -58,6 +62,7 @@ export class TxUtils {
 
         this.logger?.debug("Fees via Polygon Gasstation", {
           data: { maxFeePerGas, maxPriorityFeePerGas },
+          contextInfo,
         });
 
         return {
@@ -70,11 +75,13 @@ export class TxUtils {
         maxPriorityFeePerGas = PolygonOverrides.maxPriorityFeePerGas;
         this.logger?.debug(
           "Error in contacting Polygon gasstation - falling back to default fees",
-          { data: { maxFeePerGas, maxPriorityFeePerGas } }
+          { data: { maxFeePerGas, maxPriorityFeePerGas }, contextInfo }
         );
       }
     } else {
-      this.logger?.debug("No overrides of fees registered needed.");
+      this.logger?.debug("No overrides of fees registered needed.", {
+        contextInfo,
+      });
     }
     return undefined;
   }
