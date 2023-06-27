@@ -26,6 +26,7 @@
     "test:coverage": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/coverage-tests.json --exit ",
     "typechain": "ts-node --transpileOnly src/util/runTypechain.ts",
     "demo": "ts-node --transpileOnly scripts/demoScript.ts",
+    "logMarket": "ts-node --transpileOnly scripts/logMarket.ts",
     "start": "node build/index.js",
     "startLocal": "node build/local.js"
   },
