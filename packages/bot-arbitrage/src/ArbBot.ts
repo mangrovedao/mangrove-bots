@@ -9,6 +9,12 @@ import { BigNumber, BigNumberish } from "ethers";
 import Big from "big.js";
 dotenvFlow.config();
 
+const whitelist = [
+  "MgvArbitrage/notProfitable",
+  "MgvArbitrage/notMinGain",
+  "Too little received",
+];
+
 export class ArbBot {
   mgv: Mangrove;
   poolContract: ethers.Contract;
@@ -130,6 +136,17 @@ export class ArbBot {
         contextInfo
       );
       if (result.isProfitable) {
+        logger.info(`Arbitrage is profitable`, {
+          data: {
+            offer: bestId,
+            BA,
+            wants: bestOffer.wants,
+            gives: bestOffer.gives,
+          },
+          base: market.base.name,
+          quote: market.quote.name,
+          contextInfo,
+        });
         return (await this.doArbitrage(
           bestId,
           wantsToken,
@@ -139,7 +156,28 @@ export class ArbBot {
           config,
           fee
         )) as ethers.ContractTransaction;
+      } else {
+        logger.info(`Arbitrage is not profitable`, {
+          data: {
+            offer: bestId,
+            BA,
+            wants: bestOffer.wants,
+            gives: bestOffer.gives,
+          },
+          base: market.base.name,
+          quote: market.quote.name,
+          contextInfo,
+        });
       }
+    } else {
+      logger.info(`No best offer found`, {
+        base: market.base.name,
+        quote: market.quote.name,
+        contextInfo,
+        data: {
+          BA,
+        },
+      });
     }
   }
 
@@ -184,6 +222,15 @@ export class ArbBot {
         costInHoldingToken: costInHoldingToken.toString(),
       };
     } catch (e) {
+      if (e["reason"]) {
+        const reason: string = e["reason"].toString();
+        const isWhiteListed = whitelist
+          .map((wl) => reason.includes(wl))
+          .includes(true);
+        if (!isWhiteListed) {
+          logger.error(e, { contextInfo });
+        }
+      }
       logger.debug(e, { contextInfo });
       return { isProfitable: false, costInHoldingToken: 0 };
     }

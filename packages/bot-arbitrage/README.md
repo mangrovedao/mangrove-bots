@@ -10,7 +10,7 @@ The following strategy is followed in order to execute an arbitrage opportunity:
 - Uses that price and volume to check price on Uniswap v3
 - If the there is an arbitrage opportunity, it tries to execute the trades.
 - If the trades were not profitable, the transaction will revert.
-- The amount of gasSpent for the transaction is calculated and taken into account if the transaction is profitable. It not, the transaction is executed.
+- The amount of gasSpent for the transaction is calculated and taken into account if the transaction is profitable. If it is profitable, then the transaction is executed.
 
 ### Options
 
