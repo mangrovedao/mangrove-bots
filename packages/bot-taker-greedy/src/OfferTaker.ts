@@ -223,8 +223,8 @@ export class OfferTaker {
     );
     if (offersWithBetterThanExternalPrice.length <= 0) {
       if (logger.getLevel() <= logger.levels.DEBUG) {
-        const blockNumber = await this.#market.mgv.provider.getBlockNumber();
-        const block = await this.#market.mgv.provider.getBlock(blockNumber);
+        const block =
+          this.#market.mgv.reliableProvider.blockManager.getLastBlock();
         logger.debug("No offer better than external price", {
           contextInfo: "taker",
           base: this.#market.base.name,
@@ -233,7 +233,7 @@ export class OfferTaker {
           data: {
             bestFetchedPrice: offers[0]?.price,
             externalPrice: externalPrice,
-            blockNumber: blockNumber,
+            blockNumber: block.number,
             blockHash: block.hash,
           },
         });

@@ -29,8 +29,8 @@ function createAsyncMarketCleaner(
   return new AsyncTask(
     "cleaning bot task",
     async () => {
-      const blockNumber = mgv.reliableProvider.blockManager.getLastBlock();
-      const contextInfo = `block#=${blockNumber}`;
+      const block = mgv.reliableProvider.blockManager.getLastBlock();
+      const contextInfo = `block#=${block.number}`;
 
       logger.debug("Scheduled bot task running...", { contextInfo });
       await setup.exitIfMangroveIsKilled(mgv, contextInfo, scheduler);
