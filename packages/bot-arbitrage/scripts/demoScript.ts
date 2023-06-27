@@ -90,7 +90,7 @@ const main = async () => {
 
   await directLP.newBid({
     wants: 1,
-    gives: 2000,
+    gives: 200,
     fund: provision,
   });
 

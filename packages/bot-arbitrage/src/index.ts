@@ -1,5 +1,5 @@
 import { BaseProvider } from "@ethersproject/providers";
-import { ExitCode, Setup } from "@mangrovedao/bot-utils";
+import { BalanceUtils, ExitCode, Setup } from "@mangrovedao/bot-utils";
 import { Mangrove, Market } from "@mangrovedao/mangrove.js";
 import dotenvFlow from "dotenv-flow";
 import { Wallet } from "ethers";
@@ -12,6 +12,11 @@ import { logger } from "./util/logger";
 
 dotenvFlow.config();
 
+type TokenConfig = {
+  name: string;
+};
+
+const balanceUtils = new BalanceUtils(config);
 const setup = new Setup(config);
 const scheduler = new ToadScheduler();
 export type MarketPairAndFee = { base: string; quote: string; fee: number };
@@ -44,7 +49,8 @@ function createAsyncArbTaker(
             configUtil.buildArbConfig(
               arbBotValues.market.base.name,
               arbBotValues.market.quote.name
-            )
+            ),
+            contextInfo
           )
         );
       }
@@ -66,6 +72,7 @@ export async function botFunction(
 
   const marketConfigs = botConfig.markets;
   const arbBotMarketMap = new Set<MarketPairAndFee>();
+  const tokens: TokenConfig[] = [];
   for (const marketConfig of marketConfigs) {
     const [base, quote] = marketConfig;
     arbBotMarketMap.add({
@@ -73,7 +80,17 @@ export async function botFunction(
       quote,
       fee: marketConfig[2],
     });
+    tokens.push({ name: base }, { name: quote });
   }
+  const holdingTokens: TokenConfig[] = configUtil
+    .getHoldingTokenConfig()
+    .map((token) => ({ name: token }));
+  await balanceUtils.logTokenBalances(
+    mgv,
+    await mgv.signer.getAddress(),
+    tokens.concat(holdingTokens),
+    "init"
+  );
 
   // create and schedule task
   logger.info(`Running bot every ${botConfig.runEveryXMinutes} minutes.`, {
