@@ -106,7 +106,10 @@ describe("ArbBot integration tests", () => {
         fee: 3000,
         provider: mgv.provider,
       });
-      const arbBot = new ArbBot(mgvArbitrager, poolContract);
+      const arbBot = new ArbBot(mgvArbitrager, poolContract, {
+        base: market.base.name,
+        quote: market.quote.name,
+      });
       const txActivate = await activateTokensWithMgv(
         [market.base.address, market.quote.address],
         mgvDeployer
@@ -161,7 +164,10 @@ describe("ArbBot integration tests", () => {
         fee: 3000,
         provider: mgv.provider,
       });
-      const arbBot = new ArbBot(mgvArbitrager, poolContract);
+      const arbBot = new ArbBot(mgvArbitrager, poolContract, {
+        base: market.base.name,
+        quote: market.quote.name,
+      });
       const txActivate = await activateTokensWithMgv(
         [market.base.address, market.quote.address],
         mgvDeployer
@@ -210,7 +216,10 @@ describe("ArbBot integration tests", () => {
         fee: 3000,
         provider: mgv.provider,
       });
-      const arbBot = new ArbBot(mgvArbitrager, poolContract);
+      const arbBot = new ArbBot(mgvArbitrager, poolContract, {
+        base: market.base.name,
+        quote: market.quote.name,
+      });
       const txActivate = await activateTokensWithMgv(
         [market.base.address, market.quote.address],
         mgvDeployer
@@ -285,7 +294,10 @@ describe("ArbBot integration tests", () => {
         fee: 3000,
         provider: mgv.provider,
       });
-      const arbBot = new ArbBot(mgvArbitrager, poolContract);
+      const arbBot = new ArbBot(mgvArbitrager, poolContract, {
+        base: market.base.name,
+        quote: market.quote.name,
+      });
       const txActivate = await activateTokensWithMgv(
         [market.base.address, market.quote.address, mgv.getAddress("DAI")],
         mgvDeployer
@@ -339,7 +351,10 @@ describe("ArbBot integration tests", () => {
         fee: 3000,
         provider: mgv.provider,
       });
-      const arbBot = new ArbBot(mgvArbitrager, poolContract);
+      const arbBot = new ArbBot(mgvArbitrager, poolContract, {
+        base: market.base.name,
+        quote: market.quote.name,
+      });
       const txActivate = await activateTokensWithMgv(
         [market.base.address, market.quote.address, mgv.getAddress("DAI")],
         mgvDeployer
