@@ -19,7 +19,7 @@ const configUtil = new ConfigUtils(config);
 
 function createAsyncArbTaker(
   mgv: Mangrove,
-  arbBotMap: Set<MarketPairAndFee>,
+  arbBotMap: { arbBot: ArbBot; market: Market; fee: number }[],
   scheduler: ToadScheduler
 ) {
   return new AsyncTask(
@@ -33,21 +33,18 @@ function createAsyncArbTaker(
 
       const arbPromises = [];
       for (const arbBotValues of arbBotMap.values()) {
-        const poolContract = await getPoolContract({
-          in: mgv.getAddress(arbBotValues.base),
-          out: mgv.getAddress(arbBotValues.quote),
-          fee: arbBotValues.fee,
-          provider: mgv.provider,
-        });
-        const market = await mgv.market({
-          base: arbBotValues.base,
-          quote: arbBotValues.quote,
-        });
         arbPromises.push(
-          new ArbBot(mgv, poolContract).run(
-            market,
-            [arbBotValues.base, arbBotValues.quote, arbBotValues.fee],
-            configUtil.buildArbConfig(arbBotValues.base, arbBotValues.quote)
+          arbBotValues.arbBot.run(
+            arbBotValues.market,
+            [
+              arbBotValues.market.base.name,
+              arbBotValues.market.quote.name,
+              arbBotValues.fee,
+            ],
+            configUtil.buildArbConfig(
+              arbBotValues.market.base.name,
+              arbBotValues.market.quote.name
+            )
           )
         );
       }
@@ -82,7 +79,7 @@ export async function botFunction(
   logger.info(`Running bot every ${botConfig.runEveryXMinutes} minutes.`, {
     data: { runEveryXMinutes: botConfig.runEveryXMinutes },
   });
-  const arbBotMap: { arbBot: ArbBot; market: Market }[] = [];
+  const arbBotMap: { arbBot: ArbBot; market: Market; fee: number }[] = [];
   for (const arbBotValues of arbBotMarketMap.values()) {
     const poolContract = await getPoolContract({
       in: mgv.getAddress(arbBotValues.base),
@@ -98,10 +95,11 @@ export async function botFunction(
     arbBotMap.push({
       arbBot: new ArbBot(mgv, poolContract),
       market: market,
+      fee: arbBotValues.fee,
     });
   }
 
-  const task = createAsyncArbTaker(mgv, arbBotMarketMap, scheduler);
+  const task = createAsyncArbTaker(mgv, arbBotMap, scheduler);
 
   const job = new SimpleIntervalJob(
     {
