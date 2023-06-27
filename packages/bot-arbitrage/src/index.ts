@@ -25,8 +25,8 @@ function createAsyncArbTaker(
   return new AsyncTask(
     "arb bot task",
     async () => {
-      const blockNumber = mgv.reliableProvider.blockManager.getLastBlock();
-      const contextInfo = `block#=${blockNumber}`;
+      const block = mgv.reliableProvider.blockManager.getLastBlock();
+      const contextInfo = `block#=${block.number}`;
 
       logger.trace("Scheduled bot task running...", { contextInfo });
       await setup.exitIfMangroveIsKilled(mgv, contextInfo, scheduler);
