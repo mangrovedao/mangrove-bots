@@ -42,7 +42,7 @@ contract MgvArbitrage is AccessControlled {
   }
 
   /// @notice The router used to do the swap on Uniswap
-  ISwapRouter router = ISwapRouter(0xE592427A0AEce92De3Edee1F18E0157C05861564);
+  ISwapRouter public router = ISwapRouter(0xE592427A0AEce92De3Edee1F18E0157C05861564);
 
   receive() external payable virtual {}
 
