@@ -13,7 +13,7 @@ contract MgvArbitrageActivateTokens is Deployer {
     innerRun({
       tkn1: IERC20(envAddressOrName("TKN1")),
       tkn2: IERC20(envAddressOrName("TKN2")),
-      arbitrageContract: envAddressOrName("ARBITRAGECONTRACT")
+      arbitrageContract: envAddressOrName("ARBITRAGECONTRACT", "MgvArbitrage")
     });
   }
 
