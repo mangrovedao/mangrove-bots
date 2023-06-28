@@ -12,11 +12,8 @@ import "mgv_test/lib/MangroveTest.sol";
 contract MgvArbitrageActivateTokensTest is Deployer, Test2 {
   MgvArbitrageActivateTokens mgvArbActivateTokens;
   MgvArbitrageDeployer mgvArbDeployer;
-  IERC20 dai;
-  IERC20 usdc;
-  address mgv;
-
-  address arbitrager = freshAddress("arbitrager");
+  IERC20 tokenA;
+  IERC20 tokenB;
 
   function setUp() public {
     address admin = broadcaster();
@@ -24,15 +21,19 @@ contract MgvArbitrageActivateTokensTest is Deployer, Test2 {
     deployer.broadcaster(admin);
     deployer.innerRun(admin, 0, 0, freshAddress("gasbot"));
 
-    mgv = fork.get("Mangrove");
-    dai = IERC20(fork.get("TokenA"));
-    usdc = IERC20(fork.get("TokenB"));
+    address mgv = fork.get("Mangrove");
+    tokenA = IERC20(fork.get("TokenA"));
+    tokenB = IERC20(fork.get("TokenB"));
     mgvArbDeployer = new MgvArbitrageDeployer();
-    mgvArbDeployer.innerRun({admin: admin, mgv: mgv, arbitrager: arbitrager});
+    mgvArbDeployer.innerRun({admin: admin, mgv: mgv, arbitrager: freshAddress("arbitrager")});
     mgvArbActivateTokens = new MgvArbitrageActivateTokens();
   }
 
   function test_innerRun() public {
-    mgvArbActivateTokens.innerRun({tkn1: dai, tkn2: usdc, arbitrageContract: payable(address(mgvArbDeployer.mgvArb()))});
+    mgvArbActivateTokens.innerRun({
+      tkn1: tokenA,
+      tkn2: tokenB,
+      arbitrageContract: payable(address(mgvArbDeployer.mgvArb()))
+    });
   }
 }
