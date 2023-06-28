@@ -2,24 +2,37 @@
 pragma solidity ^0.8.10;
 
 import {Deployer} from "mgv_script/lib/Deployer.sol";
-import {MangroveDeployer} from "mgv_script/core/deployers/MangroveDeployer.s.sol";
+import {MgvArbitrageActivateTokens} from "script/MgvArbitrageActivateTokens.s.sol";
 import {MgvArbitrageDeployer} from "script/MgvArbitrageDeployer.s.sol";
-
-import {Test2, Test} from "mgv_lib/Test2.sol";
+import {IERC20} from "mgv_src/IERC20.sol";
+import "mgv_test/lib/forks/Polygon.sol";
+import {MangroveJsDeploy} from "mgv_script/toy/MangroveJs.s.sol";
+import "mgv_test/lib/MangroveTest.sol";
 
 contract MgvArbitrageActivateTokensTest is Deployer, Test2 {
+  MgvArbitrageActivateTokens mgvArbActivateTokens;
   MgvArbitrageDeployer mgvArbDeployer;
-  MangroveDeployer mgvDeployer;
-  address admin = freshAddress("");
+  IERC20 dai;
+  IERC20 usdc;
+  address mgv;
+
   address arbitrager = freshAddress("arbitrager");
 
   function setUp() public {
-    mgvDeployer = new MangroveDeployer();
-    mgvDeployer.innerRun({chief: admin, gasprice: 1, gasmax: 2_000_000, gasbot: address(0)});
+    address admin = broadcaster();
+    MangroveJsDeploy deployer = new MangroveJsDeploy();
+    deployer.broadcaster(admin);
+    deployer.innerRun(admin, 0, 0, freshAddress("gasbot"));
+
+    mgv = fork.get("Mangrove");
+    dai = IERC20(fork.get("TokenA"));
+    usdc = IERC20(fork.get("TokenB"));
     mgvArbDeployer = new MgvArbitrageDeployer();
+    mgvArbDeployer.innerRun({admin: admin, mgv: mgv, arbitrager: arbitrager});
+    mgvArbActivateTokens = new MgvArbitrageActivateTokens();
   }
 
   function test_innerRun() public {
-    mgvArbDeployer.innerRun({admin: admin, mgv: address(mgvDeployer.mgv()), arbitrager: arbitrager});
+    mgvArbActivateTokens.innerRun({tkn1: dai, tkn2: usdc, arbitrageContract: payable(address(mgvArbDeployer.mgvArb()))});
   }
 }
