@@ -1,6 +1,7 @@
 import { CommonLogger } from "./logging/coreLogger";
 
 import Mangrove from "@mangrovedao/mangrove.js";
+import { BlockManager } from "@mangrovedao/reliable-event-subscriber";
 import { IConfig } from "config";
 import http from "http";
 import { ToadScheduler } from "toad-scheduler";
@@ -20,9 +21,6 @@ import express, { Express, Request, Response } from "express";
 import { readdirSync, readFileSync } from "fs";
 import { join } from "path";
 
-import mangroveJsPackageJson from "../../../node_modules/@mangrovedao/mangrove.js/package.json";
-import reliableEventSubscriberPackageJson from "../../../node_modules/@mangrovedao/reliable-event-subscriber/package.json";
-
 export enum ExitCode {
   Normal = 0,
   UncaughtException = 1,
@@ -40,6 +38,23 @@ export type BotConfig = {
 export type TokenConfig = {
   name: string;
   targetAllowance: number;
+};
+
+// ISO 8601
+export type timestamp = string;
+
+export type LatestMarketActivity = {
+  base: string;
+  quote: string;
+  latestBlock?: BlockManager.Block;
+  lastActive?: timestamp;
+};
+
+// The type of data that the /latestActivity endpoint will serve
+export type LatestActivity = {
+  latestBlock?: BlockManager.Block;
+  lastActive?: timestamp;
+  markets?: LatestMarketActivity[];
 };
 
 // Get name and version of all installed packages
@@ -86,11 +101,16 @@ export class Setup {
   logger: CommonLogger;
   configUtils: ConfigUtils;
   server?: http.Server;
+  latestActivity: LatestActivity;
 
   constructor(config: IConfig) {
     this.#config = config;
     this.logger = log.logger(config);
     this.configUtils = new ConfigUtils(config);
+    this.latestActivity = {
+      latestBlock: undefined,
+      lastActive: undefined,
+    };
   }
 
   public async exitIfMangroveIsKilled(
@@ -195,6 +215,10 @@ export class Setup {
         network: mgv.network,
         addresses: Mangrove.getAllAddresses(mgv.network.name),
       });
+    });
+
+    app.get("/latestActivity", (req: Request, res: Response) => {
+      res.json(this.latestActivity);
     });
 
     return app.listen(port, () => {

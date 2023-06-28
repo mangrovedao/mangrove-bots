@@ -85,7 +85,10 @@ describe("MarketCleaner integration tests", () => {
       const tx = await mgvTestUtil.postNewRevertingOffer(market, ba, maker);
       await mgvTestUtil.waitForBlock(market.mgv, tx.blockNumber);
 
-      const marketCleaner = new MarketCleaner(market, cleanerProvider);
+      const marketCleaner = new MarketCleaner(market, cleanerProvider, {
+        base: market.base.name,
+        quote: market.quote.name,
+      });
 
       // Act
       await marketCleaner.clean();
@@ -106,7 +109,10 @@ describe("MarketCleaner integration tests", () => {
       const tx = await mgvTestUtil.postNewSucceedingOffer(market, ba, maker);
       await mgvTestUtil.waitForBlock(market.mgv, tx.blockNumber);
 
-      const marketCleaner = new MarketCleaner(market, cleanerProvider);
+      const marketCleaner = new MarketCleaner(market, cleanerProvider, {
+        base: market.base.name,
+        quote: market.quote.name,
+      });
 
       // Act
       await marketCleaner.clean();

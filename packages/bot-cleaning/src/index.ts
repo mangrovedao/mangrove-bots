@@ -6,7 +6,12 @@
 
 import { BaseProvider } from "@ethersproject/providers";
 import { Wallet } from "@ethersproject/wallet";
-import { ConfigUtils, ExitCode, Setup } from "@mangrovedao/bot-utils";
+import {
+  ConfigUtils,
+  ExitCode,
+  LatestMarketActivity,
+  Setup,
+} from "@mangrovedao/bot-utils";
 import Mangrove, { enableLogging } from "@mangrovedao/mangrove.js";
 import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
 import { MarketCleaner } from "./MarketCleaner";
@@ -32,6 +37,9 @@ function createAsyncMarketCleaner(
       const block = mgv.reliableProvider.blockManager.getLastBlock();
       const contextInfo = `block#=${block.number}`;
 
+      setup.latestActivity.latestBlock = block;
+      setup.latestActivity.lastActive = new Date().toISOString();
+
       logger.debug("Scheduled bot task running...", { contextInfo });
       await setup.exitIfMangroveIsKilled(mgv, contextInfo, scheduler);
 
@@ -55,6 +63,9 @@ async function botFunction(
 ) {
   const botConfig = configUtil.getAndValidateConfig();
 
+  const latestMarketActivities: LatestMarketActivity[] = [];
+  setup.latestActivity.markets = latestMarketActivities;
+
   const marketConfigs = botConfig.markets;
   const marketCleanerMap = new Map<MarketPair, MarketCleaner>();
   for (const marketConfig of marketConfigs) {
@@ -65,9 +76,18 @@ async function botFunction(
       bookOptions: { maxOffers: 200 },
     });
 
+    // Create object for tracking latest activity
+    const latestMarketActivity = {
+      base,
+      quote,
+      latestBlock: undefined,
+      lastActive: undefined,
+    };
+    latestMarketActivities.push(latestMarketActivity);
+
     marketCleanerMap.set(
       { base: market.base.name, quote: market.quote.name },
-      new MarketCleaner(market, provider)
+      new MarketCleaner(market, provider, latestMarketActivity)
     );
   }
 

@@ -2,7 +2,7 @@ import { logger } from "./util/logger";
 import { Market, Semibook } from "@mangrovedao/mangrove.js";
 import { Provider } from "@ethersproject/providers";
 import { BigNumber } from "ethers";
-import { TxUtils } from "@mangrovedao/bot-utils";
+import { LatestMarketActivity, TxUtils } from "@mangrovedao/bot-utils";
 
 type OfferCleaningEstimates = {
   bounty: BigNumber; // wei
@@ -29,15 +29,22 @@ export class MarketCleaner {
   #provider: Provider;
   #isCleaning: boolean;
   #txUtils: TxUtils;
+  #latestMarketActivity: LatestMarketActivity;
 
   /**
    * Constructs a cleaner for the given Mangrove market which will use the given provider for queries and transactions.
    * @param market The Mangrove market to clean.
    * @param provider The provider to use for queries and transactions.
+   * @param latestMarketActivity An object to write the latest activity to. {@link Setup} makes this available through a JSON endpoint for easy monitoring.
    */
-  constructor(market: Market, provider: Provider) {
+  constructor(
+    market: Market,
+    provider: Provider,
+    latestMarketActivity: LatestMarketActivity
+  ) {
     this.#market = market;
     this.#provider = provider;
+    this.#latestMarketActivity = latestMarketActivity;
 
     this.#isCleaning = false;
     this.#txUtils = new TxUtils(provider, logger);
@@ -75,6 +82,9 @@ export class MarketCleaner {
         quote: this.#market.quote.name,
         contextInfo,
       });
+      this.#latestMarketActivity.latestBlock =
+        this.#market.mgv.reliableProvider.blockManager.getLastBlock();
+      this.#latestMarketActivity.lastActive = new Date().toISOString();
 
       if (!(await this.#market.isActive())) {
         logger.warn(`Market is closed so ignoring request to clean`, {
