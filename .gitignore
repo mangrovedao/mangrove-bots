@@ -30,3 +30,4 @@ out.html
 merged.info
 packages/bot-arbitrage/src/types/typechain
 packages/bot-arbitrage/broadcast
+*.keystore
