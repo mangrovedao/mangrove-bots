@@ -42,4 +42,6 @@ We only want the admin of the contract to be able to withdraw tokens, and activa
 
 The reason for this is, that we can keep the funds for the contract very secure, but still allow the arbitrager to do the arbitrage. The reason only the admin address can activate tokens, that this could potentionally be used to drain the contract, by activating "fake" tokens.
 
-Be aware that you cannot update the admin, arbitrager or mgv address. Meaning if you want to change these, you'll need to deploy a new contract.
+Admin can be changed, but only by the admin address.
+Aritrager can be changed, but only by the admin address.
+Mgv address can be changed, but only by the admin address.

@@ -46,6 +46,18 @@ contract MgvArbitrage is AccessControlled {
 
   receive() external payable virtual {}
 
+  /// @notice This enables the admin to change the arbitrager.
+  /// @param newArbitrager The new arbitrager
+  function setArbitrager(address newArbitrager) external onlyAdmin {
+    arbitrager = newArbitrager;
+  }
+
+  /// @notice This enables the admin to change the Mangrove address.
+  /// @param newMgv The new Mangrove address
+  function setMgv(IMangrove newMgv) external onlyAdmin {
+    mgv = newMgv;
+  }
+
   /// @notice This enables the admin to withdraw tokens from the contract. Notice that only the admin can call this.
   /// @param token The token to be withdrawn
   /// @param amount The amount to be withdrawn
