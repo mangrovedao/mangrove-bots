@@ -10,7 +10,7 @@ contract MgvArbitrageDeployer is Deployer {
 
   function run() public {
     innerRun({
-      admin: envAddressOrName("CHIEF"),
+      admin: envAddressOrName("CHIEF", broadcaster()),
       arbitrager: envAddressOrName("ARBITRAGER"),
       mgv: envAddressOrName("MGV", "Mangrove")
     });
