@@ -390,4 +390,34 @@ contract MgvArbitrageTest is MangroveTest {
     vm.prank(admin);
     arbStrat.activateTokens(tokens);
   }
+
+  function test_onlyAdminCanSetAdmin() public {
+    vm.prank(seller);
+    vm.expectRevert("AccessControlled/Invalid");
+    arbStrat.setAdmin(seller);
+
+    vm.prank(admin);
+    arbStrat.setAdmin(seller);
+    assertEq(arbStrat.admin(), seller, "Should have changed the admin");
+  }
+
+  function test_onlyAdminCanSetArbitrager() public {
+    vm.prank(seller);
+    vm.expectRevert("AccessControlled/Invalid");
+    arbStrat.setArbitrager(seller);
+
+    vm.prank(admin);
+    arbStrat.setArbitrager(seller);
+    assertEq(arbStrat.arbitrager(), seller, "Should have changed the arbitrager");
+  }
+
+  function test_onlyAdminCanSetMgv() public {
+    vm.prank(seller);
+    vm.expectRevert("AccessControlled/Invalid");
+    arbStrat.setMgv(IMangrove(seller));
+
+    vm.prank(admin);
+    arbStrat.setMgv(IMangrove(seller));
+    assertEq(address(arbStrat.mgv()), seller, "Should have changed the mgv");
+  }
 }
