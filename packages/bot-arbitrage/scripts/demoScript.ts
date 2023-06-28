@@ -4,12 +4,13 @@ import * as eth from "@mangrovedao/mangrove.js/dist/nodejs/eth";
 import { deal } from "@mangrovedao/mangrove.js/dist/nodejs/util/deal.js";
 import { deployMgvArbitrage } from "../src/util/deployMgvAndMgvArbitrage";
 import { activateTokensWithSigner } from "../src/util/ArbBotUtils";
+import path from "path";
 
 // run this from the bot-arbitrage folder
 const main = async () => {
   var parsed = require("dotenv").config();
 
-  const provider = new ethers.providers.WebSocketProvider(
+  const provider = new ethers.providers.JsonRpcProvider(
     process.env.LOCAL_NODE_URL
   );
 
@@ -18,7 +19,7 @@ const main = async () => {
   const mnemonic = new eth.Mnemonic(LOCAL_MNEMONIC);
 
   const wallet = new ethers.Wallet(mnemonic.key(1), provider);
-  let core_dir = process.cwd() + "/mangrove-arbitrage";
+  let core_dir = path.parse(require.resolve("../../mangrove-arbitrage")).dir;
 
   await deployMgvArbitrage({
     provider,
@@ -89,7 +90,7 @@ const main = async () => {
 
   await directLP.newBid({
     wants: 1,
-    gives: 2000,
+    gives: 200,
     fund: provision,
   });
 

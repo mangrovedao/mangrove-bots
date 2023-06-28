@@ -1,5 +1,5 @@
 import { BaseProvider } from "@ethersproject/providers";
-import { ExitCode, Setup } from "@mangrovedao/bot-utils";
+import { BalanceUtils, ExitCode, Setup } from "@mangrovedao/bot-utils";
 import { Mangrove, Market } from "@mangrovedao/mangrove.js";
 import dotenvFlow from "dotenv-flow";
 import { Wallet } from "ethers";
@@ -12,6 +12,11 @@ import { logger } from "./util/logger";
 
 dotenvFlow.config();
 
+type TokenConfig = {
+  name: string;
+};
+
+const balanceUtils = new BalanceUtils(config);
 const setup = new Setup(config);
 const scheduler = new ToadScheduler();
 export type MarketPairAndFee = { base: string; quote: string; fee: number };
@@ -19,7 +24,7 @@ const configUtil = new ConfigUtils(config);
 
 function createAsyncArbTaker(
   mgv: Mangrove,
-  arbBotMap: Set<MarketPairAndFee>,
+  arbBotMap: { arbBot: ArbBot; market: Market; fee: number }[],
   scheduler: ToadScheduler
 ) {
   return new AsyncTask(
@@ -33,21 +38,19 @@ function createAsyncArbTaker(
 
       const arbPromises = [];
       for (const arbBotValues of arbBotMap.values()) {
-        const poolContract = await getPoolContract({
-          in: mgv.getAddress(arbBotValues.base),
-          out: mgv.getAddress(arbBotValues.quote),
-          fee: arbBotValues.fee,
-          provider: mgv.provider,
-        });
-        const market = await mgv.market({
-          base: arbBotValues.base,
-          quote: arbBotValues.quote,
-        });
         arbPromises.push(
-          new ArbBot(mgv, poolContract).run(
-            market,
-            [arbBotValues.base, arbBotValues.quote, arbBotValues.fee],
-            configUtil.buildArbConfig(arbBotValues.base, arbBotValues.quote)
+          arbBotValues.arbBot.run(
+            arbBotValues.market,
+            [
+              arbBotValues.market.base.name,
+              arbBotValues.market.quote.name,
+              arbBotValues.fee,
+            ],
+            configUtil.buildArbConfig(
+              arbBotValues.market.base.name,
+              arbBotValues.market.quote.name
+            ),
+            contextInfo
           )
         );
       }
@@ -69,6 +72,7 @@ export async function botFunction(
 
   const marketConfigs = botConfig.markets;
   const arbBotMarketMap = new Set<MarketPairAndFee>();
+  const tokens: TokenConfig[] = [];
   for (const marketConfig of marketConfigs) {
     const [base, quote] = marketConfig;
     arbBotMarketMap.add({
@@ -76,13 +80,23 @@ export async function botFunction(
       quote,
       fee: marketConfig[2],
     });
+    tokens.push({ name: base }, { name: quote });
   }
+  const holdingTokens: TokenConfig[] = configUtil
+    .getHoldingTokenConfig()
+    .map((token) => ({ name: token }));
+  await balanceUtils.logTokenBalances(
+    mgv,
+    await mgv.signer.getAddress(),
+    tokens.concat(holdingTokens),
+    "init"
+  );
 
   // create and schedule task
   logger.info(`Running bot every ${botConfig.runEveryXMinutes} minutes.`, {
     data: { runEveryXMinutes: botConfig.runEveryXMinutes },
   });
-  const arbBotMap: { arbBot: ArbBot; market: Market }[] = [];
+  const arbBotMap: { arbBot: ArbBot; market: Market; fee: number }[] = [];
   for (const arbBotValues of arbBotMarketMap.values()) {
     const poolContract = await getPoolContract({
       in: mgv.getAddress(arbBotValues.base),
@@ -98,10 +112,11 @@ export async function botFunction(
     arbBotMap.push({
       arbBot: new ArbBot(mgv, poolContract),
       market: market,
+      fee: arbBotValues.fee,
     });
   }
 
-  const task = createAsyncArbTaker(mgv, arbBotMarketMap, scheduler);
+  const task = createAsyncArbTaker(mgv, arbBotMap, scheduler);
 
   const job = new SimpleIntervalJob(
     {

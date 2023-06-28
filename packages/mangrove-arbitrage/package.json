@@ -18,7 +18,7 @@
   },
   "lint-staged": {
     "*.sol": "forge fmt",
-    "*.{js,css,md,json}": "prettier --write --ignore-unknown"
+    "!(*index).{js,css,md,json}": "prettier --write --ignore-unknown"
   },
   "dependencies": {
     "@uniswap/swap-router-contracts": "^1.3.0",
