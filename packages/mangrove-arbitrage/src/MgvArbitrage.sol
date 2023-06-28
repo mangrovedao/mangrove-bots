@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: BSD 2-Clause License
+// SPDX-License-Identifier: BSD-2-Clause
 pragma solidity ^0.8.13;
 
 import {ISwapRouter} from "@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol";
