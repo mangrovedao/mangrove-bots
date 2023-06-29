@@ -103,9 +103,12 @@ export class GasUpdater {
   public async checkSetGasprice(contextInfo?: string): Promise<void> {
     //NOTE: Possibly suitable protection against reentrancy
 
-    logger.info(`Checking whether Mangrove gas price needs updating...`, {
-      contextInfo,
-    });
+    logger.info(
+      `Heartbeat - Checking whether Mangrove gas price needs updating...`,
+      {
+        contextInfo,
+      }
+    );
 
     const globalConfig = await this.#mangrove.config();
 
