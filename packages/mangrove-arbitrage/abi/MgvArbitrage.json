@@ -289,6 +289,19 @@
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "router",
+      "outputs": [
+        {
+          "internalType": "contract ISwapRouter",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -297,6 +310,32 @@
         }
       ],
       "name": "setAdmin",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newArbitrager",
+          "type": "address"
+        }
+      ],
+      "name": "setArbitrager",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IMangrove",
+          "name": "newMgv",
+          "type": "address"
+        }
+      ],
+      "name": "setMgv",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

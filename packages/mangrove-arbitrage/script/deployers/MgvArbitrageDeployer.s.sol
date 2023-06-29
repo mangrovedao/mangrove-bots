@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.13;
 
 import {Deployer} from "mgv_script/lib/Deployer.sol";
@@ -10,7 +10,7 @@ contract MgvArbitrageDeployer is Deployer {
 
   function run() public {
     innerRun({
-      admin: envAddressOrName("CHIEF"),
+      admin: envAddressOrName("CHIEF", broadcaster()),
       arbitrager: envAddressOrName("ARBITRAGER"),
       mgv: envAddressOrName("MGV", "Mangrove")
     });
