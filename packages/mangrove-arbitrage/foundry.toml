@@ -24,3 +24,13 @@ zkevm={key="${ZKEVM_API_KEY}",chain=1101,url="https://api-zkevm.polygonscan.com/
 tab_width=2
 int_types="short"
 number_underscores="thousands"
+
+# If you use scripts from this repo but don't want to set/use config fields that
+# depend on environment variables, set FOUNDRY_PROFILE=no_env_vars. It's not
+# necessary to reset the [rpc_endpoints] section since it's lazily loaded.
+[profile.no_env_vars.etherscan]
+mumbai={key=""}
+polygon={key=""}
+goerli={key=""}
+testnet_zkevm={key="",chain=1442,url="https://api-testnet-zkevm.polygonscan.com/api"}
+zkevm={key="",chain=1101,url="https://api-zkevm.polygonscan.com/api"}
