@@ -40,11 +40,14 @@ export class ArbBot {
     askTransaction: ethers.ContractTransaction;
     bidTransaction: ethers.ContractTransaction;
   }> {
-    logger.info("Checking whether Mangrove market can be arb'ed...", {
-      base: market.base.name,
-      quote: market.quote.name,
-      contextInfo,
-    });
+    logger.info(
+      "Heartbeat - Checking whether Mangrove market can be arb'ed...",
+      {
+        base: market.base.name,
+        quote: market.quote.name,
+        contextInfo,
+      }
+    );
     this.#latestMarketActivity.latestBlock =
       this.mgv.reliableProvider.blockManager.getLastBlock();
     this.#latestMarketActivity.lastActive = new Date().toISOString();

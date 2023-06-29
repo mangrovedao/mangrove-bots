@@ -77,7 +77,7 @@ export class MarketCleaner {
     try {
       this.#isCleaning = true;
 
-      logger.info("Cleaning market", {
+      logger.info("Heartbeat - Cleaning market", {
         base: this.#market.base.name,
         quote: this.#market.quote.name,
         contextInfo,
