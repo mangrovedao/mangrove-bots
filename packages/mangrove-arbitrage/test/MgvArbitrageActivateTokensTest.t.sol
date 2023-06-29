@@ -1,9 +1,9 @@
-// SPDX-License-Identifier:	AGPL-3.0
+// SPDX-License-Identifier: BSD-2-Clause
 pragma solidity ^0.8.10;
 
 import {Deployer} from "mgv_script/lib/Deployer.sol";
 import {MgvArbitrageActivateTokens} from "script/MgvArbitrageActivateTokens.s.sol";
-import {MgvArbitrageDeployer} from "script/MgvArbitrageDeployer.s.sol";
+import {MgvArbitrageDeployer} from "script/deployers/MgvArbitrageDeployer.s.sol";
 import {IERC20} from "mgv_src/IERC20.sol";
 import "mgv_test/lib/forks/Polygon.sol";
 import {MangroveJsDeploy} from "mgv_script/toy/MangroveJs.s.sol";

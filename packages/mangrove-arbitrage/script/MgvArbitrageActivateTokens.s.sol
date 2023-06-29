@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.13;
 
 import {Deployer} from "mgv_script/lib/Deployer.sol";
@@ -13,7 +13,7 @@ contract MgvArbitrageActivateTokens is Deployer {
     innerRun({
       tkn1: IERC20(envAddressOrName("TKN1")),
       tkn2: IERC20(envAddressOrName("TKN2")),
-      arbitrageContract: envAddressOrName("ARBITRAGECONTRACT")
+      arbitrageContract: envAddressOrName("ARBITRAGECONTRACT", "MgvArbitrage")
     });
   }
 
