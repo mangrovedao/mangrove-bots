@@ -100,19 +100,22 @@ export class OfferTaker {
   }
 
   async #tradeIfPricesAreBetterThanExternalSignal(): Promise<void> {
+    const block = this.#market.mgv.reliableProvider.blockManager.getLastBlock();
+    const contextInfo = `block#=${block.number}`;
+
     // const baseTokenBalancePromise = this.#market.base.contract.balanceOf(
     //   this.#takerAddress
     // );
     // const quoteTokenBalancePromise = this.#market.quote.contract.balanceOf(
     //   this.#takerAddress
     // );
-    const externalPrice = await this.#getExternalPrice();
+    const externalPrice = await this.#getExternalPrice(contextInfo);
 
     if (externalPrice === undefined) {
       logger.info(
-        "No external price found, so not buying anything at this time",
+        "Heartbeat - No external price found, so not buying anything at this time",
         {
-          contextInfo: "taker",
+          contextInfo,
           base: this.#market.base.name,
           quote: this.#market.quote.name,
         }
@@ -136,21 +139,23 @@ export class OfferTaker {
     const asksTradePromise =
       this.#tradeOnSemibookIfPricesAreBetterThanExternalSignal(
         "asks",
-        externalPrice
+        externalPrice,
+        contextInfo
       );
     const bidsTradePromise =
       this.#tradeOnSemibookIfPricesAreBetterThanExternalSignal(
         "bids",
-        externalPrice
+        externalPrice,
+        contextInfo
       );
     await asksTradePromise;
     await bidsTradePromise;
   }
 
-  async #getExternalPrice(): Promise<Big | undefined> {
+  async #getExternalPrice(contextInfo: string): Promise<Big | undefined> {
     try {
       logger.debug("Fetching external price", {
-        contextInfo: "taker",
+        contextInfo,
         base: this.#market.base.name,
         quote: this.#market.quote.name,
         data: {
@@ -162,7 +167,7 @@ export class OfferTaker {
       if (json[this.#market.quote.name] !== undefined) {
         const externalPrice = new Big(json[this.#market.quote.name]);
         logger.debug("Received external price", {
-          contextInfo: "taker",
+          contextInfo,
           base: this.#market.base.name,
           quote: this.#market.quote.name,
           data: {
@@ -176,7 +181,7 @@ export class OfferTaker {
       logger.warn(
         `Response did not contain a ${this.#market.quote.name} field`,
         {
-          contextInfo: "taker",
+          contextInfo,
           base: this.#market.base.name,
           quote: this.#market.quote.name,
           data: {
@@ -189,7 +194,7 @@ export class OfferTaker {
       return;
     } catch (e) {
       logger.error(`Error encountered while fetching external price`, {
-        contextInfo: "taker",
+        contextInfo,
         base: this.#market.base.name,
         quote: this.#market.quote.name,
         data: {
@@ -205,7 +210,8 @@ export class OfferTaker {
 
   async #tradeOnSemibookIfPricesAreBetterThanExternalSignal(
     ba: BA,
-    externalPrice: Big
+    externalPrice: Big,
+    contextInfo: string
   ): Promise<void> {
     const semibook = this.#market.getSemibook(ba);
 
@@ -222,22 +228,20 @@ export class OfferTaker {
       this.#market.trade.isPriceBetter(o.price, externalPrice, ba)
     );
     if (offersWithBetterThanExternalPrice.length <= 0) {
-      if (logger.getLevel() <= logger.levels.DEBUG) {
-        const block =
-          this.#market.mgv.reliableProvider.blockManager.getLastBlock();
-        logger.debug("No offer better than external price", {
-          contextInfo: "taker",
-          base: this.#market.base.name,
-          quote: this.#market.quote.name,
-          ba,
-          data: {
-            bestFetchedPrice: offers[0]?.price,
-            externalPrice: externalPrice,
-            blockNumber: block.number,
-            blockHash: block.hash,
-          },
-        });
-      }
+      const block =
+        this.#market.mgv.reliableProvider.blockManager.getLastBlock();
+      logger.info("Heartbeat - No offer better than external price", {
+        contextInfo,
+        base: this.#market.base.name,
+        quote: this.#market.quote.name,
+        ba,
+        data: {
+          bestFetchedPrice: offers[0]?.price,
+          externalPrice: externalPrice,
+          blockNumber: block.number,
+          blockHash: block.hash,
+        },
+      });
       return;
     }
 
@@ -245,8 +249,8 @@ export class OfferTaker {
       .slice(0, this.#takerConfig.offerCountCap - 1)
       .reduce((v, o) => v.add(o[quoteSideOfOffers]), Big(0));
 
-    logger.debug(`Posting ${buyOrSell} market order`, {
-      contextInfo: "taker",
+    logger.info(`Heartbeat - Posting ${buyOrSell} market order`, {
+      contextInfo,
       base: this.#market.base.name,
       quote: this.#market.quote.name,
       ba,
@@ -258,13 +262,19 @@ export class OfferTaker {
       },
     });
     try {
+      const tradeParams = { total: total, price: externalPrice };
+      const gasLowerBound = await this.#market.trade.estimateGas(
+        buyOrSell,
+        tradeParams,
+        this.#market
+      );
       const buyOrSellPromise = await this.#market[buyOrSell](
-        { total: total, price: externalPrice },
+        { ...tradeParams, gasLowerBound },
         {}
       );
       const result = await buyOrSellPromise.result;
       logger.info(`Successfully completed ${buyOrSell} order`, {
-        contextInfo: "taker",
+        contextInfo,
         base: this.#market.base.name,
         quote: this.#market.quote.name,
         ba,
@@ -282,7 +292,7 @@ export class OfferTaker {
       });
     } catch (e) {
       logger.error(`Error occurred while ${buyOrSell}ing`, {
-        contextInfo: "taker",
+        contextInfo,
         base: this.#market.base.name,
         quote: this.#market.quote.name,
         ba,
