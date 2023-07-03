@@ -3,7 +3,7 @@
   "providerType": "http",
   "markets": [["WETH", "DAI", 3000]],
   "runEveryXMinutes": 0.5,
-  "holdingTokens": ["DAI"],
+  "holdingTokens": [["DAI"]],
   "tokenForExchange": "DAI",
   "exchangeFee": [
     { "token": "USDC", "fee": 100 },

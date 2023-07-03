@@ -3,4 +3,5 @@
 exports.MgvArbitrage = {};
 exports.MgvArbitrage['MgvArbitrage'] = require("./out/MgvArbitrage.sol/MgvArbitrage.json");
 exports.addresses.deployed = {};
-exports.addresses.deployed['empty'] = require("./addresses/deployed/empty.js");
+exports.addresses.deployed['matic'] = require("./addresses/deployed/matic.json");
+exports.addresses.deployed['maticmum'] = require("./addresses/deployed/maticmum.json");
