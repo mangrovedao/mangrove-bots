@@ -9,7 +9,7 @@
     "__name": "RUN_EVERY_X_MINUTES",
     "__format": "number"
   },
-  "holdingToken": {
+  "holdingTokens": {
     "__name": "HOLDING_TOKENS",
     "__format": "json"
   },

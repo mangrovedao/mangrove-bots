@@ -84,14 +84,29 @@ export class ConfigUtils extends botConfigUtils.ConfigUtils {
     if (!this.#config.has("holdingTokens")) {
       throw new Error("No holdingTokens have been configured");
     }
-    const holdingTokens = this.#config.get<Array<string>>("holdingTokens");
+    const holdingTokens = this.#config.get<Array<[string]>>("holdingTokens");
+    this.logger.info("Holding tokens", { data: { holdingTokens } });
     if (!Array.isArray(holdingTokens)) {
       throw new ErrorWithData(
         "ExchangeFee configuration is malformed, should be an array of ExchangeFee's",
         holdingTokens
       );
+    } else {
+      for (const token of holdingTokens) {
+        if (
+          !Array.isArray(token) ||
+          token.length != 1 ||
+          typeof token[0] !== "string"
+        ) {
+          throw new ErrorWithData(
+            "ExchangeFee configuration is malformed, should be an array of ExchangeFee's",
+            holdingTokens
+          );
+          break;
+        }
+      }
     }
-    return holdingTokens;
+    return holdingTokens.map((token) => token[0]);
   }
 
   public getExchangeFeeConfig(): ExchangeFee[] {
