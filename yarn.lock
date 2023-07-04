@@ -1279,7 +1279,7 @@ __metadata:
     "@espendk/json-file-reporter": ^1.4.2
     "@ethersproject/experimental": ^5.7.0
     "@ethersproject/hardware-wallets": ^5.7.0
-    "@mangrovedao/mangrove.js": ^1.4.3
+    "@mangrovedao/mangrove.js": ^1.4.5
     "@types/big.js": ^6.1.6
     "@types/chai": ^4.3.4
     "@types/chai-as-promised": ^7.1.5
@@ -1342,19 +1342,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mangrovedao/mangrove-core@npm:1.5.4":
-  version: 1.5.4
-  resolution: "@mangrovedao/mangrove-core@npm:1.5.4"
-  checksum: f3e44124d3cd05a96ecceffe777989adf5acc39a0f02e0b89ad7a33127361c85f5e00937cea609833d00b4ac9a86217b2ad3e23caa4ce75d01727d38ef593514
+"@mangrovedao/mangrove-core@npm:1.5.5":
+  version: 1.5.5
+  resolution: "@mangrovedao/mangrove-core@npm:1.5.5"
+  checksum: 9141439a12102ffbd5c4b7d9c8707bf5063592b50d6cffb5b83bc8a61e27547460f099f5ab76db9d83f0f47d65d2a6da2277fb98da2d04fa40f13d03126f1f8f
   languageName: node
   linkType: hard
 
-"@mangrovedao/mangrove.js@npm:^1.4.3":
-  version: 1.4.3
-  resolution: "@mangrovedao/mangrove.js@npm:1.4.3"
+"@mangrovedao/mangrove.js@npm:^1.4.5":
+  version: 1.4.5
+  resolution: "@mangrovedao/mangrove.js@npm:1.4.5"
   dependencies:
     "@ethersproject/experimental": ^5.7.0
-    "@mangrovedao/mangrove-core": 1.5.4
+    "@mangrovedao/mangrove-core": 1.5.5
     "@mangrovedao/reliable-event-subscriber": 1.1.22
     "@types/object-inspect": ^1.8.1
     "@types/triple-beam": ^1.3.2
@@ -1373,7 +1373,7 @@ __metadata:
     yargs: ^17.3.0
   bin:
     mgv: ./dist/nodejs/cli/mgv.js
-  checksum: eed823d35743b90a32c1abad10a077b261a94569387178fcc98644a4d732b5a3f76028b4783c2fda5c9fa0b19fe940bebc8e0a1cc7b61b71364255589afad84a
+  checksum: 8620c3b436114e23c85acbda05ffb6c7e923cb971e3b6c2409f8f3efc111f0ea2f5c454532467c33561ae1ea8b7f8a1c029ebc4fbd7f44faf6afb48d7e1324f9
   languageName: node
   linkType: hard
 
