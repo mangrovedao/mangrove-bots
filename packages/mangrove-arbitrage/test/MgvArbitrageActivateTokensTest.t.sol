@@ -19,7 +19,7 @@ contract MgvArbitrageActivateTokensTest is Deployer, Test2 {
     address admin = broadcaster();
     MangroveJsDeploy deployer = new MangroveJsDeploy();
     deployer.broadcaster(admin);
-    deployer.innerRun(admin, 0, 0, freshAddress("gasbot"));
+    deployer.innerRun(0, 0, freshAddress("gasbot"));
 
     address mgv = fork.get("Mangrove");
     tokenA = IERC20(fork.get("TokenA"));
