@@ -76,6 +76,7 @@ export async function botFunction(
   signer: Wallet,
   provider: BaseProvider
 ) {
+  mgv.setAddress("MgvArbitrage", "0x774D3089F08ba6cc67FD8EAC06040936D096308D");
   const botConfig = configUtil.getAndValidateArbConfig();
 
   const latestMarketActivities: LatestMarketActivity[] = [];
