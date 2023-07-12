@@ -1279,7 +1279,7 @@ __metadata:
     "@espendk/json-file-reporter": ^1.4.2
     "@ethersproject/experimental": ^5.7.0
     "@ethersproject/hardware-wallets": ^5.7.0
-    "@mangrovedao/mangrove.js": ^1.4.8
+    "@mangrovedao/mangrove.js": ^1.4.9
     "@types/big.js": ^6.1.6
     "@types/chai": ^4.3.4
     "@types/chai-as-promised": ^7.1.5
@@ -1349,13 +1349,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mangrovedao/mangrove.js@npm:^1.4.8":
-  version: 1.4.8
-  resolution: "@mangrovedao/mangrove.js@npm:1.4.8"
+"@mangrovedao/mangrove.js@npm:^1.4.9":
+  version: 1.4.9
+  resolution: "@mangrovedao/mangrove.js@npm:1.4.9"
   dependencies:
     "@ethersproject/experimental": ^5.7.0
     "@mangrovedao/mangrove-core": ^1.5.6
-    "@mangrovedao/reliable-event-subscriber": 1.1.23
+    "@mangrovedao/reliable-event-subscriber": 1.1.24
     "@types/object-inspect": ^1.8.1
     "@types/triple-beam": ^1.3.2
     async-mutex: ^0.4.0
@@ -1373,13 +1373,13 @@ __metadata:
     yargs: ^17.3.0
   bin:
     mgv: ./dist/nodejs/cli/mgv.js
-  checksum: e2386845880f9ec72db9eb7661e8c097e57409112c0e0304517781d05fc8882a6978bd0251442599397bbd3904d062938ed8d830fb868599579f515ec1838e9b
+  checksum: 4ca3e4edafdc0d8ea9771e6d8d9aa05d46563e74e79517cdcc9a45bd3f2b1e40b6289213fa09c38cfdb33456a663efb12ed59dd1341e809e03ff8754f77c0707
   languageName: node
   linkType: hard
 
-"@mangrovedao/reliable-event-subscriber@npm:1.1.23":
-  version: 1.1.23
-  resolution: "@mangrovedao/reliable-event-subscriber@npm:1.1.23"
+"@mangrovedao/reliable-event-subscriber@npm:1.1.24":
+  version: 1.1.24
+  resolution: "@mangrovedao/reliable-event-subscriber@npm:1.1.24"
   dependencies:
     "@ethersproject/providers": ^5.7.2
     async-mutex: ^0.4.0
@@ -1387,7 +1387,7 @@ __metadata:
     ethers: ^5.7.2
     isomorphic-ws: ^5.0.0
     ws: ^8.13.0
-  checksum: d32479a346b97f3a795304c570ff8b709bba9617340caa61eee7c9c1397b39c91c64c1b27779614e7343f408caf4e410899870f47d2cc4dad8b78421553e8ecb
+  checksum: 39eb00b91400213dd402c95355f6786529a008e490eaac0084c2e720d94d68e7121e07a770de2ed1186a928016ad811532a47b73712d1f76ee644c870aa18b2a
   languageName: node
   linkType: hard
 
