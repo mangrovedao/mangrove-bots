@@ -217,21 +217,30 @@ export class ArbBot {
         fee
       );
       const costInNative = gasprice.mul(gasused);
-      const costInHoldingToken = holdsTokenPrice
-        .mul(costInNative.toString())
-        .round();
+      const holdingToken = await wantsToken.mgv.token(config.tokenForExchange);
+      const costInNativeReadable = wantsToken.mgv.fromUnits(
+        costInNative.toString(),
+        18
+      );
+      const costInHoldingToken = holdsTokenPrice.mul(
+        costInNativeReadable.toString()
+      );
+      const costInHoldingTokenInUnits = holdingToken.toUnits(
+        costInHoldingToken.toString()
+      );
+
       await this.staticArb(
         bestId,
         wantsToken,
         bestOffer,
         givesToken,
-        costInHoldingToken.toString(),
+        costInHoldingTokenInUnits.toString(),
         config,
         fee
       );
       return {
         isProfitable: true,
-        costInHoldingToken: costInHoldingToken.toString(),
+        costInHoldingToken: costInHoldingTokenInUnits.toString(),
       };
     } catch (e) {
       if (e["reason"]) {
@@ -304,10 +313,7 @@ export class ArbBot {
   ) {
     const holdsToken = config.holdingTokens.includes(givesToken.name);
     const mgv = givesToken.mgv;
-    const arbAddress = Mangrove.getAddress(
-      "MgvArbitrage",
-      (await this.mgv.provider.getNetwork()).name
-    );
+    const arbAddress = Mangrove.getAddress("MgvArbitrage", mgv.network.name);
     const arbContract = MgvArbitrage__factory.connect(
       arbAddress,
       this.mgv.signer
