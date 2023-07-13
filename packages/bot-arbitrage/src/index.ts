@@ -5,7 +5,7 @@ import {
   LatestMarketActivity,
   Setup,
 } from "@mangrovedao/bot-utils";
-import { Mangrove, Market } from "@mangrovedao/mangrove.js";
+import Mangrove, { Market, enableLogging } from "@mangrovedao/mangrove.js";
 import dotenvFlow from "dotenv-flow";
 import { Wallet } from "ethers";
 import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
@@ -16,6 +16,8 @@ import { ConfigUtils } from "./util/configUtils";
 import { logger } from "./util/logger";
 
 dotenvFlow.config();
+
+enableLogging();
 
 type TokenConfig = {
   name: string;
