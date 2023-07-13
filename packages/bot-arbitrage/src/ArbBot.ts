@@ -208,6 +208,20 @@ export class ArbBot {
     costInHoldingToken: BigNumberish;
   }> {
     try {
+      const balance = await givesToken.balanceOf(
+        Mangrove.getAddress("MgvArbitrage", this.mgv.network.name)
+      );
+      if (bestOffer.wants.gt(balance)) {
+        logger.info(`Not enough balance to do arb`, {
+          base: bestOffer.wants.toString(),
+          quote: balance.toString(),
+          contextInfo,
+        });
+        return {
+          isProfitable: false,
+          costInHoldingToken: BigNumber.from(0),
+        };
+      }
       const gasused = await this.estimateArbGas(
         bestId,
         wantsToken,
