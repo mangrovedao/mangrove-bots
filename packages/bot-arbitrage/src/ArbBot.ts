@@ -4,7 +4,11 @@ import dotenvFlow from "dotenv-flow";
 import { MgvArbitrage__factory } from "./types/typechain";
 import { logger } from "./util/logger";
 import { ArbConfig } from "./util/configUtils";
-import { LatestMarketActivity, PriceUtils } from "@mangrovedao/bot-utils";
+import {
+  LatestMarketActivity,
+  PriceUtils,
+  TxUtils,
+} from "@mangrovedao/bot-utils";
 import { BigNumber, BigNumberish } from "ethers";
 import Big from "big.js";
 dotenvFlow.config();
@@ -20,6 +24,7 @@ export class ArbBot {
   poolContract: ethers.Contract;
   priceUtils = new PriceUtils(logger);
   #latestMarketActivity: LatestMarketActivity;
+  #txUtils: TxUtils;
 
   constructor(
     _mgv: Mangrove,
@@ -29,6 +34,7 @@ export class ArbBot {
     this.mgv = _mgv;
     this.poolContract = _poolContract;
     this.#latestMarketActivity = latestMarketActivity;
+    this.#txUtils = new TxUtils(_mgv.provider, logger);
   }
 
   public async run(
@@ -311,6 +317,23 @@ export class ArbBot {
     estimateGas = false,
     staticCall = false
   ) {
+    const fees = await this.#txUtils.getFeeOverrides();
+    let txOverrides = {};
+
+    if (fees !== undefined) {
+      txOverrides = {
+        maxPriorityFeePerGas: fees.maxPriorityFeePerGas,
+        maxFeePerGas: fees.maxFeePerGas,
+      };
+      logger.debug(`Overriding fees with: `, {
+        data: {
+          txOverrides,
+          maxPriorityFeePerGas_in_wei: fees.maxPriorityFeePerGas.toString(),
+          maxFeePerGas_in_wei: fees.maxFeePerGas.toString(),
+        },
+      });
+    }
+
     const holdsToken = config.holdingTokens.includes(givesToken.name);
     const mgv = givesToken.mgv;
     const arbAddress = Mangrove.getAddress("MgvArbitrage", mgv.network.name);
@@ -333,15 +356,18 @@ export class ArbBot {
       givesToken.decimals
     ).toString();
     if (holdsToken) {
-      return await correctCall.doArbitrage({
-        offerId: bestId,
-        takerWantsToken: wantsToken.address,
-        takerWants: takerWants,
-        takerGivesToken: givesToken.address,
-        takerGives: takerGives,
-        fee: fee,
-        minGain: minGain,
-      });
+      return await correctCall.doArbitrage(
+        {
+          offerId: bestId,
+          takerWantsToken: wantsToken.address,
+          takerWants: takerWants,
+          takerGivesToken: givesToken.address,
+          takerGives: takerGives,
+          fee: fee,
+          minGain: minGain,
+        },
+        txOverrides
+      );
     } else if (config.exchangeConfig) {
       if ("fee" in config.exchangeConfig) {
         return await correctCall.doArbitrageExchangeOnUniswap(
@@ -355,7 +381,8 @@ export class ArbBot {
             minGain: minGain,
           },
           mgv.getAddress(config.tokenForExchange),
-          config.exchangeConfig.fee(givesToken.name)
+          config.exchangeConfig.fee(givesToken.name),
+          txOverrides
         );
       } else {
         return await correctCall.doArbitrageExchangeOnMgv(
@@ -368,7 +395,8 @@ export class ArbBot {
             fee: fee,
             minGain: minGain,
           },
-          mgv.getAddress(config.tokenForExchange)
+          mgv.getAddress(config.tokenForExchange),
+          txOverrides
         );
       }
     }
