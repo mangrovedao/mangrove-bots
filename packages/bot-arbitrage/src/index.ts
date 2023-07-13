@@ -101,7 +101,7 @@ export async function botFunction(
     .map((token) => ({ name: token }));
   await balanceUtils.logTokenBalances(
     mgv,
-    await mgv.signer.getAddress(),
+    Mangrove.getAddress("MgvArbitrage", mgv.network.name),
     tokens.concat(holdingTokens),
     "init"
   );
