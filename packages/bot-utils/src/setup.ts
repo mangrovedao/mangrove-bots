@@ -187,7 +187,10 @@ export class Setup {
       signer: nonceManager,
       providerWsUrl: providerType == "http" ? undefined : providerWsUrl,
     });
-    setInterval(checkFreshness(this.logger, mgv), CHECK_FRESHNESS_INTERVAL_MS);
+    setInterval(
+      () => checkFreshness(this.logger, mgv),
+      CHECK_FRESHNESS_INTERVAL_MS
+    );
 
     if (providerType == "http") {
       this.logger.warn(

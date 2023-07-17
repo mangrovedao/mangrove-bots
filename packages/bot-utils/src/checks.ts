@@ -4,7 +4,7 @@ import { CommonLogger } from "./logging/coreLogger";
 const FRESHNESS_BLOCK_SECONDS = 60 * 5; // TODO: should be more precise
 const HOW_MANY_BLOCK_BACK = 10;
 
-export const checkFreshness = (logger: CommonLogger, mgv: Mangrove) => {
+export const checkFreshness = async (logger: CommonLogger, mgv: Mangrove) => {
   const lastBlock = mgv.reliableProvider.blockManager.getLastBlock();
   try {
     // HOW_MANY_BLOCK_BACK is used to reduce chance to get unknown block on an rpc
