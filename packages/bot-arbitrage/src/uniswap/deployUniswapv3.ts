@@ -78,12 +78,12 @@ export class UniswapV3Deployer {
         .getPool(token1Address, token2Address, poolFee);
       logger.debug("poolAddress", poolAddress);
 
-      const pool = new Contract(
-        poolAddress,
-        artifacts.UniswapV3Pool.abi,
-        actor.provider
-      );
-
+      // const pool = new Contract(
+      //   poolAddress,
+      //   artifacts.UniswapV3Pool.abi,
+      //   actor.provider
+      // );
+      //
       // logger.debug("------------------");
       // logger.debug("fee", await pool.fee());
       // logger.debug("slot0", await pool.slot0());
