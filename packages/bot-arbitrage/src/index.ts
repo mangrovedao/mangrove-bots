@@ -10,10 +10,14 @@ import dotenvFlow from "dotenv-flow";
 import { Wallet } from "ethers";
 import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
 import { ArbBot } from "./ArbBot";
-import { getPoolContract } from "./uniswap/libs/uniswapUtils";
 import config from "./util/config";
 import { ConfigUtils } from "./util/configUtils";
 import { logger } from "./util/logger";
+import { getPoolInfo } from "./uniswap/pool";
+import { Token } from "@uniswap/sdk-core";
+
+export const POOL_FACTORY_CONTRACT_ADDRESS =
+  "0x1F98431c8aD98523631AE4a59f267346ea31F984";
 
 dotenvFlow.config();
 
@@ -112,12 +116,15 @@ export async function botFunction(
   });
   const arbBotMap: { arbBot: ArbBot; market: Market; fee: number }[] = [];
   for (const arbBotValues of arbBotMarketMap.values()) {
-    const poolContract = await getPoolContract({
-      in: mgv.getAddress(arbBotValues.base),
-      out: mgv.getAddress(arbBotValues.quote),
-      fee: arbBotValues.fee,
-      provider: mgv.provider,
-    });
+    const base = await mgv.token(arbBotValues.base);
+    const quote = await mgv.token(arbBotValues.quote);
+    const poolInfo = await getPoolInfo(
+      POOL_FACTORY_CONTRACT_ADDRESS,
+      new Token(mgv.network.id, base.address, base.decimals),
+      new Token(mgv.network.id, quote.address, quote.decimals),
+      arbBotValues.fee,
+      mgv.provider
+    );
     const market = await mgv.market({
       base: arbBotValues.base,
       quote: arbBotValues.quote,
@@ -134,7 +141,7 @@ export async function botFunction(
 
     logger.info(`Starting bot for ${arbBotValues.base}/${arbBotValues.quote}`);
     arbBotMap.push({
-      arbBot: new ArbBot(mgv, poolContract, latestMarketActivity),
+      arbBot: new ArbBot(mgv, poolInfo.poolContract, latestMarketActivity),
       market: market,
       fee: arbBotValues.fee,
     });
