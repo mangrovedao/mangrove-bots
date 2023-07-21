@@ -49,27 +49,6 @@ export async function mintPosition(params: {
     params.token1.decimals
   );
 
-  // Give approval to the contract to transfer tokens
-  const tokenInApproval = await getTokenTransferApproval(
-    params.token0,
-    params.nfManagerAddress,
-    params.provider,
-    params.signer
-  );
-  const tokenOutApproval = await getTokenTransferApproval(
-    params.token1,
-    params.nfManagerAddress,
-    params.provider,
-    params.signer
-  );
-
-  // Fail if transfer approvals do not go through
-  if (
-    tokenInApproval !== TransactionState.Sent ||
-    tokenOutApproval !== TransactionState.Sent
-  ) {
-    return TransactionState.Failed;
-  }
   const token0CurrenyAmount = CurrencyAmount.fromRawAmount(
     params.token0,
     readableToken0Amount
@@ -204,6 +183,7 @@ export async function getPositionInfo(
 
 export async function getTokenTransferApproval(
   token: Token,
+  amount: BigNumber,
   nfManagerAddress: string,
   provider: ethers.providers.Provider,
   signer: ethers.Signer
@@ -214,11 +194,10 @@ export async function getTokenTransferApproval(
       ERC20_ABI,
       provider
     );
-    const uint256Max =
-      "115792089237316195423570985008687907853269984665640564039457584007913129639935";
+
     const transaction = await tokenContract.populateTransaction.approve(
       nfManagerAddress,
-      uint256Max
+      amount
     );
 
     return sendTransactionViaWallet(transaction, signer);

@@ -1,7 +1,6 @@
 import { Signer, Contract, ContractFactory, BigNumber } from "ethers";
 import WETH9 from "@uniswap/hardhat-v3-deploy/src/util/WETH9.json";
 import { linkLibraries } from "./linkLibraries";
-import bn from "bignumber.js";
 import { logger } from "../util/logger";
 
 type ContractJson = { abi: any; bytecode: string };
@@ -29,12 +28,7 @@ export type UniswapV3Contracts = {
 };
 
 export class UniswapV3Deployer {
-  public static async deploy(
-    actor: Signer,
-    token1Address: string,
-    token2Address: string,
-    poolFee: number
-  ): Promise<UniswapV3Contracts | {}> {
+  public static async deploy(actor: Signer): Promise<UniswapV3Contracts | {}> {
     const deployer = new UniswapV3Deployer(actor);
 
     try {
@@ -61,34 +55,6 @@ export class UniswapV3Deployer {
         positionDescriptor.address
       );
       logger.debug("deployed positionManager");
-
-      const sqrtPrice = encodePriceSqrt(1, 1);
-      await positionManager
-        .connect(actor)
-        .createAndInitializePoolIfNecessary(
-          token1Address,
-          token2Address,
-          poolFee,
-          sqrtPrice,
-          { gasLimit: 5000000 }
-        );
-
-      const poolAddress = await factory
-        .connect(actor)
-        .getPool(token1Address, token2Address, poolFee);
-      logger.debug("poolAddress", poolAddress);
-
-      // const pool = new Contract(
-      //   poolAddress,
-      //   artifacts.UniswapV3Pool.abi,
-      //   actor.provider
-      // );
-      //
-      // logger.debug("------------------");
-      // logger.debug("fee", await pool.fee());
-      // logger.debug("slot0", await pool.slot0());
-      // logger.debug("liquidity", await pool.liquidity());
-      // logger.debug("------------------");
 
       return {
         weth9,
@@ -206,15 +172,4 @@ export class UniswapV3Deployer {
     logger.debug("deployed contract", contract.address);
     return contract;
   }
-}
-bn.config({ EXPONENTIAL_AT: 999999, DECIMAL_PLACES: 40 });
-function encodePriceSqrt(reserve1: bn.Value, reserve0: bn.Value) {
-  return BigNumber.from(
-    new bn(reserve1.toString())
-      .div(reserve0.toString())
-      .sqrt()
-      .multipliedBy(new bn(2).pow(96))
-      .integerValue(3)
-      .toString()
-  );
 }
