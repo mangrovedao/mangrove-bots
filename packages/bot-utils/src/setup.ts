@@ -20,6 +20,9 @@ import express, { Express, Request, Response } from "express";
 
 import { readdirSync, readFileSync } from "fs";
 import { join } from "path";
+import { checkFreshness } from "./checks";
+
+const CHECK_FRESHNESS_INTERVAL_MS = 1000 * 60;
 
 export enum ExitCode {
   Normal = 0,
@@ -184,6 +187,11 @@ export class Setup {
       signer: nonceManager,
       providerWsUrl: providerType == "http" ? undefined : providerWsUrl,
     });
+    setInterval(
+      () => checkFreshness(this.logger, mgv),
+      CHECK_FRESHNESS_INTERVAL_MS
+    );
+
     if (providerType == "http") {
       this.logger.warn(
         `Using HTTP provider, this is not recommended for production`
