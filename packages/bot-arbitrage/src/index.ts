@@ -16,9 +16,6 @@ import { logger } from "./util/logger";
 import { getPoolInfo } from "./uniswap/pool";
 import { Token } from "@uniswap/sdk-core";
 
-export const POOL_FACTORY_CONTRACT_ADDRESS =
-  "0x1F98431c8aD98523631AE4a59f267346ea31F984";
-
 dotenvFlow.config();
 
 enableLogging();
@@ -82,7 +79,6 @@ export async function botFunction(
   signer: Wallet,
   provider: BaseProvider
 ) {
-  mgv.setAddress("MgvArbitrage", "0x774D3089F08ba6cc67FD8EAC06040936D096308D");
   const botConfig = configUtil.getAndValidateArbConfig();
 
   const latestMarketActivities: LatestMarketActivity[] = [];
@@ -118,8 +114,9 @@ export async function botFunction(
   for (const arbBotValues of arbBotMarketMap.values()) {
     const base = await mgv.token(arbBotValues.base);
     const quote = await mgv.token(arbBotValues.quote);
+    const factoryAddress = mgv.getAddress("UniswapV3Factory");
     const poolInfo = await getPoolInfo(
-      POOL_FACTORY_CONTRACT_ADDRESS,
+      factoryAddress,
       new Token(mgv.network.id, base.address, base.decimals),
       new Token(mgv.network.id, quote.address, quote.decimals),
       arbBotValues.fee,

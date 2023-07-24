@@ -19,7 +19,7 @@ import { ConfigUtils } from "./util/configUtils";
 import express, { Express, Request, Response } from "express";
 
 import { readdirSync, readFileSync } from "fs";
-import { join } from "path";
+import path, { join } from "path";
 import { checkFreshness } from "./checks";
 
 const CHECK_FRESHNESS_INTERVAL_MS = 1000 * 60;
@@ -187,6 +187,8 @@ export class Setup {
       signer: nonceManager,
       providerWsUrl: providerType == "http" ? undefined : providerWsUrl,
     });
+    this.importLocalAddresses(mgv);
+
     setInterval(
       () => checkFreshness(this.logger, mgv),
       CHECK_FRESHNESS_INTERVAL_MS
@@ -210,6 +212,32 @@ export class Setup {
     await botFunction(mgv, signer, provider);
 
     this.server = this.createServer(mgv);
+  }
+
+  importLocalAddresses(mgv: Mangrove) {
+    const networkName = mgv.network.name;
+    const addressesPath = path.resolve(
+      process.cwd(),
+      "src",
+      "constants",
+      "addresses.json"
+    );
+    try {
+      const addressesByNetwork = JSON.parse(
+        readFileSync(addressesPath, "utf8")
+      ) as { [networkName: string]: { [name: string]: string } };
+
+      const addresses = addressesByNetwork[networkName];
+      if (!addresses) {
+        this.logger.info(`No local addresses found for network ${networkName}`);
+      }
+      for (const [name, address] of Object.entries(addresses)) {
+        mgv.setAddress(name, address);
+      }
+    } catch (e) {
+      this.logger.debug(e);
+      this.logger.info(`Not able to read local addresses on ${networkName}`);
+    }
   }
 
   // Starts an Express server which serves environment information
