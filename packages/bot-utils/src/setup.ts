@@ -232,7 +232,12 @@ export class Setup {
         this.logger.info(`No local addresses found for network ${networkName}`);
       }
       for (const [name, address] of Object.entries(addresses)) {
-        mgv.setAddress(name, address);
+        try {
+          const address = mgv.getAddress(name);
+          this.logger.warn(`Address ${name} already set to ${address}`);
+        } catch (e) {
+          mgv.setAddress(name, address);
+        }
       }
     } catch (e) {
       this.logger.debug(e);
