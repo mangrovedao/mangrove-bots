@@ -336,7 +336,7 @@ export class ArbBot {
 
     const holdsToken = config.holdingTokens.includes(givesToken.name);
     const mgv = givesToken.mgv;
-    const arbAddress = Mangrove.getAddress("MgvArbitrage", mgv.network.name);
+    const arbAddress = mgv.getAddress("MgvArbitrage");
     const arbContract = MgvArbitrage__factory.connect(
       arbAddress,
       this.mgv.signer
