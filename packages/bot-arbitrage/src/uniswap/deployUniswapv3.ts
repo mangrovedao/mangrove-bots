@@ -14,10 +14,6 @@ const artifacts: { [name: string]: ContractJson } = {
   WETH9,
 };
 
-// TODO: Should replace these with the proper typechain output.
-// type INonfungiblePositionManager = Contract;
-// type IUniswapV3Factory = Contract;
-
 export type UniswapV3Contracts = {
   weth9: Contract;
   factory: Contract;

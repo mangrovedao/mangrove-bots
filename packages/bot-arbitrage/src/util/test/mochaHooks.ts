@@ -18,10 +18,7 @@ import {
   UniswapV3Contracts,
   UniswapV3Deployer,
 } from "../../uniswap/deployUniswapv3";
-import {
-  getTokenTransferApproval,
-  mintPosition,
-} from "../../uniswap/deployPosition";
+import { mintPosition } from "../../uniswap/deployPosition";
 import { Token } from "@uniswap/sdk-core";
 import { initPool } from "../../uniswap/initializePool";
 

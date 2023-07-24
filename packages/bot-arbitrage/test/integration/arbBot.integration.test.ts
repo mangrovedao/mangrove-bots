@@ -307,7 +307,7 @@ describe("ArbBot integration tests", () => {
       const mgvArbAddress = mgv.getAddress("MgvArbitrage");
       const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
       const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
-      const holdingDaieforeBalance = await dai.balanceOf(mgvArbAddress);
+      const holdingDaiBeforeBalance = await dai.balanceOf(mgvArbAddress);
       const txs = await arbBot.run(market, ["WETH", "USDC", 3000], {
         holdingTokens: ["DAI"],
         tokenForExchange: "DAI",
@@ -322,7 +322,7 @@ describe("ArbBot integration tests", () => {
       assert.deepStrictEqual(
         baseAfterBalance.minus(baseBeforeBalance).lte(1),
         true,
-        `Base Should have the same amount of base, before (less then 1, because of rounding): ${baseBeforeBalance.toString()}  after:${baseAfterBalance.toString()}`
+        `Base Should have the same amount of base as before (less then 1, because of rounding): ${baseBeforeBalance.toString()}  after:${baseAfterBalance.toString()}`
       );
       assert.deepStrictEqual(
         quoteBeforeBalance,
@@ -330,7 +330,7 @@ describe("ArbBot integration tests", () => {
         "Quote Should have the same amount of base"
       );
       assert.ok(
-        holdingDaieforeBalance < holdingWethfterBalance,
+        holdingDaiBeforeBalance < holdingWethfterBalance,
         "Should have gained holding token"
       );
     });
@@ -393,7 +393,7 @@ describe("ArbBot integration tests", () => {
       assert.deepStrictEqual(
         baseAfterBalance.minus(baseBeforeBalance).lte(1),
         true,
-        `Base Should have the same amount of base, before (less then 1, because of rounding): ${baseBeforeBalance.toString()}  after:${baseAfterBalance.toString()}`
+        `Base Should have the same amount of base as before (less then 1, because of rounding): ${baseBeforeBalance.toString()}  after:${baseAfterBalance.toString()}`
       );
       assert.deepStrictEqual(
         quoteBeforeBalance,
