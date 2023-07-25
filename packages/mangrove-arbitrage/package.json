@@ -8,7 +8,7 @@
     "precommit": "lint-staged",
     "prepack": "yarn build",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "build-this-package": "forge build && node copyArtifacts && node buildIndex",
+    "build-this-package": "forge build && node copyAddresses && node copyArtifacts && node buildIndex",
     "heroku-build-this-package": "echo NOT BUILDING MANGROVE ARBITRAGE CONTRACT",
     "build": "yarn install && yarn workspaces foreach -vpiR --topological-dev --from $npm_package_name run build-this-package",
     "clean-this-package": "forge clean",
