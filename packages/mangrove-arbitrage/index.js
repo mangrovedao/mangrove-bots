@@ -6,4 +6,3 @@ exports.MgvArbitrageForTest = {};
 exports.MgvArbitrageForTest['MgvArbitrageForTest'] = require("./out/MgvArbitrageForTest.sol/MgvArbitrageForTest.json");
 exports.addresses.deployed = {};
 exports.addresses.deployed['matic'] = require("./addresses/deployed/matic.json");
-exports.addresses.deployed['maticmum'] = require("./addresses/deployed/maticmum.json");
