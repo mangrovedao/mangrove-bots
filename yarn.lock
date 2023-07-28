@@ -1282,7 +1282,7 @@ __metadata:
     "@espendk/json-file-reporter": ^1.4.2
     "@ethersproject/experimental": ^5.7.0
     "@ethersproject/hardware-wallets": ^5.7.0
-    "@mangrovedao/mangrove.js": ^1.4.11
+    "@mangrovedao/mangrove.js": ^1.4.16
     "@types/big.js": ^6.1.6
     "@types/chai": ^4.3.4
     "@types/chai-as-promised": ^7.1.5
@@ -1352,13 +1352,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mangrovedao/mangrove.js@npm:^1.4.11":
-  version: 1.4.11
-  resolution: "@mangrovedao/mangrove.js@npm:1.4.11"
+"@mangrovedao/mangrove.js@npm:^1.4.16":
+  version: 1.4.16
+  resolution: "@mangrovedao/mangrove.js@npm:1.4.16"
   dependencies:
     "@ethersproject/experimental": ^5.7.0
     "@mangrovedao/mangrove-core": ^1.5.6
-    "@mangrovedao/reliable-event-subscriber": 1.1.25
+    "@mangrovedao/reliable-event-subscriber": 1.1.28
     "@types/object-inspect": ^1.8.1
     "@types/triple-beam": ^1.3.2
     async-mutex: ^0.4.0
@@ -1369,6 +1369,7 @@ __metadata:
     just-clone: ^6.2.0
     logform: ^2.5.1
     loglevel: ^1.8.1
+    moize: ^6.1.6
     node-cleanup: ^2.1.2
     object-inspect: ^1.12.3
     triple-beam: ^1.3.0
@@ -1376,13 +1377,13 @@ __metadata:
     yargs: ^17.3.0
   bin:
     mgv: ./dist/nodejs/cli/mgv.js
-  checksum: 85aabe2777432a6ab78e81ca992e8ff228338e120600378c8e489c2c4ac55cd2479d4d81ecafdea55266bf2138115822033c700e62d0a3b331388a9d6280df95
+  checksum: dd7ad21f36eca9b1f73820b7e46a7f56f7678322f3fe0d84ee43a952fa65070e6d2dfdb554e8f643e950515987a35bb95a65cb7df19763a834f6317652aefb29
   languageName: node
   linkType: hard
 
-"@mangrovedao/reliable-event-subscriber@npm:1.1.25":
-  version: 1.1.25
-  resolution: "@mangrovedao/reliable-event-subscriber@npm:1.1.25"
+"@mangrovedao/reliable-event-subscriber@npm:1.1.28":
+  version: 1.1.28
+  resolution: "@mangrovedao/reliable-event-subscriber@npm:1.1.28"
   dependencies:
     "@ethersproject/providers": ^5.7.2
     async-mutex: ^0.4.0
@@ -1390,7 +1391,7 @@ __metadata:
     ethers: ^5.7.2
     isomorphic-ws: ^5.0.0
     ws: ^8.13.0
-  checksum: 331b1f4bf0272be62776b006ba6249ef7bbec50221419962e5a27cbe37f9a4864b4708703a90491263161a204f3196fda066892007778a9f11ddc0f49dcd2324
+  checksum: 54c73839dc03e64612e035667851cfb8ee6891232f802fc155a31e331b6f67db9c862929c2c2fb1bed4556a129b2e466b5f6ed173c3f626508e54c861657e5cb
   languageName: node
   linkType: hard
 
@@ -3850,6 +3851,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fast-equals@npm:^3.0.1":
+  version: 3.0.3
+  resolution: "fast-equals@npm:3.0.3"
+  checksum: e7ac0ae5a10289c773f75654ced22563837336bde7ebb595b7d238a20b77008a821c1ca3526a50e96fe0662ced7454cf99b7488bb64506463a4f4729c523ac4c
+  languageName: node
+  linkType: hard
+
 "fast-glob@npm:^3.2.9":
   version: 3.2.12
   resolution: "fast-glob@npm:3.2.12"
@@ -5547,6 +5555,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"micro-memoize@npm:^4.1.2":
+  version: 4.1.2
+  resolution: "micro-memoize@npm:4.1.2"
+  checksum: 4b02750622d44b5ab31573c629b5d91927dd0c2727743ff75e790c223ab6cd02c48cc3bddea69da0dffb688091a0a71a17944947dd165f8ba9e03728bc30a76d
+  languageName: node
+  linkType: hard
+
 "micromatch@npm:^4.0.4, micromatch@npm:^4.0.5":
   version: 4.0.5
   resolution: "micromatch@npm:4.0.5"
@@ -5801,6 +5816,16 @@ __metadata:
     _mocha: bin/_mocha
     mocha: bin/mocha.js
   checksum: 406c45eab122ffd6ea2003c2f108b2bc35ba036225eee78e0c784b6fa2c7f34e2b13f1dbacef55a4fdf523255d76e4f22d1b5aacda2394bd11666febec17c719
+  languageName: node
+  linkType: hard
+
+"moize@npm:^6.1.6":
+  version: 6.1.6
+  resolution: "moize@npm:6.1.6"
+  dependencies:
+    fast-equals: ^3.0.1
+    micro-memoize: ^4.1.2
+  checksum: a81c56e8d3d30ad0c324369ab636e48b9799abb7f5e0955250f99744dbea456848107d293436face8e12acf7bc820e759048118083cc37644a4c95a37c66e566
   languageName: node
   linkType: hard
 
