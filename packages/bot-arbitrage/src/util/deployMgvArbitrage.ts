@@ -7,6 +7,7 @@ export async function deployMgvArbitrage(params: {
   provider: ethers.providers.JsonRpcProvider;
   url: string;
   arbitrager: string;
+  univ3Router: string;
   mnemonic: eth.Mnemonic;
   coreDir: string;
   setToyENSCodeIfAbsent: boolean;
@@ -24,13 +25,14 @@ export async function deployMgvArbitrage(params: {
   const env = {
     ...process.env,
     ARBITRAGER: params.arbitrager,
+    UNI_V3_ROUTER: params.univ3Router,
   };
 
   await runScript({
     url: params.url,
     provider: params.provider,
     env,
-    script: "MgvArbitragePolygonTestDeployer",
+    script: "MgvArbitrageTestDeployer",
     mnemonic: params.mnemonic,
     coreDir: params.coreDir,
     pipe: false,

@@ -10,10 +10,11 @@ import dotenvFlow from "dotenv-flow";
 import { Wallet } from "ethers";
 import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
 import { ArbBot } from "./ArbBot";
-import { getPoolContract } from "./uniswap/libs/uniswapUtils";
 import config from "./util/config";
 import { ConfigUtils } from "./util/configUtils";
 import { logger } from "./util/logger";
+import { getPoolInfo } from "./uniswap/pool";
+import { Token } from "@uniswap/sdk-core";
 
 dotenvFlow.config();
 
@@ -78,7 +79,6 @@ export async function botFunction(
   signer: Wallet,
   provider: BaseProvider
 ) {
-  mgv.setAddress("MgvArbitrage", "0x774D3089F08ba6cc67FD8EAC06040936D096308D");
   const botConfig = configUtil.getAndValidateArbConfig();
 
   const latestMarketActivities: LatestMarketActivity[] = [];
@@ -112,12 +112,16 @@ export async function botFunction(
   });
   const arbBotMap: { arbBot: ArbBot; market: Market; fee: number }[] = [];
   for (const arbBotValues of arbBotMarketMap.values()) {
-    const poolContract = await getPoolContract({
-      in: mgv.getAddress(arbBotValues.base),
-      out: mgv.getAddress(arbBotValues.quote),
-      fee: arbBotValues.fee,
-      provider: mgv.provider,
-    });
+    const base = await mgv.token(arbBotValues.base);
+    const quote = await mgv.token(arbBotValues.quote);
+    const factoryAddress = mgv.getAddress("UniswapV3Factory");
+    const poolInfo = await getPoolInfo(
+      factoryAddress,
+      new Token(mgv.network.id, base.address, base.decimals),
+      new Token(mgv.network.id, quote.address, quote.decimals),
+      arbBotValues.fee,
+      mgv.provider
+    );
     const market = await mgv.market({
       base: arbBotValues.base,
       quote: arbBotValues.quote,
@@ -134,7 +138,7 @@ export async function botFunction(
 
     logger.info(`Starting bot for ${arbBotValues.base}/${arbBotValues.quote}`);
     arbBotMap.push({
-      arbBot: new ArbBot(mgv, poolContract, latestMarketActivity),
+      arbBot: new ArbBot(mgv, poolInfo.poolContract, latestMarketActivity),
       market: market,
       fee: arbBotValues.fee,
     });

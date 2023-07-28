@@ -3,7 +3,7 @@ src = 'src'
 out = 'out'
 # libs = ["/Users/kejlberg/Mangrove/mangrove-bots-deploy/node_modules", "lib"]
 libs = ["../../node_modules", "lib"]
-remappings = ['@uniswap/=../../node_modules/@uniswap/']
+remappings = ['@uniswap/=../../node_modules/@uniswap/', '@openzeppelin/=../../node_modules/@openzeppelin/']
 fs_permissions = [{ access = "read-write", path = "./addresses/"}, { access = "read", path = "./out/" }]
 solc_version="0.8.17"
 auto_detect_remappings = false

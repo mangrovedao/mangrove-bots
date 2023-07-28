@@ -309,7 +309,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/abi@npm:5.7.0, @ethersproject/abi@npm:^5.7.0":
+"@ethersproject/abi@npm:5.7.0, @ethersproject/abi@npm:^5.0.12, @ethersproject/abi@npm:^5.7.0":
   version: 5.7.0
   resolution: "@ethersproject/abi@npm:5.7.0"
   dependencies:
@@ -354,7 +354,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/address@npm:5.7.0, @ethersproject/address@npm:^5.7.0":
+"@ethersproject/address@npm:5.7.0, @ethersproject/address@npm:^5.0.2, @ethersproject/address@npm:^5.7.0":
   version: 5.7.0
   resolution: "@ethersproject/address@npm:5.7.0"
   dependencies:
@@ -636,7 +636,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/solidity@npm:5.7.0":
+"@ethersproject/solidity@npm:5.7.0, @ethersproject/solidity@npm:^5.0.9":
   version: 5.7.0
   resolution: "@ethersproject/solidity@npm:5.7.0"
   dependencies:
@@ -1002,8 +1002,11 @@ __metadata:
     "@types/shelljs": ^0.8.11
     "@typescript-eslint/eslint-plugin": ^5.59.9
     "@typescript-eslint/parser": ^5.48.1
+    "@uniswap/hardhat-v3-deploy": ^0.1.1
+    "@uniswap/sdk-core": ^4.0.6
     "@uniswap/v3-core": ^1.0.1
     "@uniswap/v3-periphery": ^1.4.3
+    "@uniswap/v3-sdk": ^3.10.0
     big.js: ^6.2.1
     chai: ^4.3.7
     chai-as-promised: ^7.1.1
@@ -1455,6 +1458,13 @@ __metadata:
     mkdirp: ^1.0.4
     rimraf: ^3.0.2
   checksum: 52dc02259d98da517fae4cb3a0a3850227bdae4939dda1980b788a7670636ca2b4a01b58df03dd5f65c1e3cb70c50fa8ce5762b582b3f499ec30ee5ce1fd9380
+  languageName: node
+  linkType: hard
+
+"@openzeppelin/contracts@npm:3.4.1-solc-0.7-2":
+  version: 3.4.1-solc-0.7-2
+  resolution: "@openzeppelin/contracts@npm:3.4.1-solc-0.7-2"
+  checksum: 3608a4065f65946117caa543ef72477ce637bd5cc4f4853303b5f5b6c26516f8b50898ea3a8486e2877689cae81453ce22c72c8624c77c363c63f019b4086ffa
   languageName: node
   linkType: hard
 
@@ -1951,6 +1961,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@uniswap/hardhat-v3-deploy@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@uniswap/hardhat-v3-deploy@npm:0.1.1"
+  dependencies:
+    "@uniswap/v3-core": 1.0.0
+    "@uniswap/v3-periphery": ^1.0.1
+    cli-table3: ^0.6.0
+  peerDependencies:
+    hardhat: ^2.0.0
+  checksum: d7cd486dbc44038ff71497f087c05277fc5877b361fb43c6fed47e0a7c76c518640bdcb7c66a2b9537b960a4249832499c9d345034c6f9cebbe0d6f812bcae9a
+  languageName: node
+  linkType: hard
+
 "@uniswap/lib@npm:^4.0.1-alpha":
   version: 4.0.1-alpha
   resolution: "@uniswap/lib@npm:4.0.1-alpha"
@@ -1958,7 +1981,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uniswap/swap-router-contracts@npm:^1.3.0":
+"@uniswap/sdk-core@npm:^4, @uniswap/sdk-core@npm:^4.0.6":
+  version: 4.0.6
+  resolution: "@uniswap/sdk-core@npm:4.0.6"
+  dependencies:
+    "@ethersproject/address": ^5.0.2
+    big.js: ^5.2.2
+    decimal.js-light: ^2.5.0
+    jsbi: ^3.1.4
+    tiny-invariant: ^1.1.0
+    toformat: ^2.0.0
+  checksum: 0dd876d117c2d359a09047fafb5e80e8312b4db2cb0078a968d0ebbdb0a294558e8a0ea13678b113a9c2026f7c394193eb56650a250fd0c52ec51680c8aed3bc
+  languageName: node
+  linkType: hard
+
+"@uniswap/swap-router-contracts@npm:^1.2.1, @uniswap/swap-router-contracts@npm:^1.3.0":
   version: 1.3.0
   resolution: "@uniswap/swap-router-contracts@npm:1.3.0"
   dependencies:
@@ -2007,7 +2044,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uniswap/v3-periphery@npm:^1.4.3":
+"@uniswap/v3-periphery@npm:^1.0.1, @uniswap/v3-periphery@npm:^1.1.1, @uniswap/v3-periphery@npm:^1.4.3":
   version: 1.4.3
   resolution: "@uniswap/v3-periphery@npm:1.4.3"
   dependencies:
@@ -2017,6 +2054,33 @@ __metadata:
     "@uniswap/v3-core": 1.0.0
     base64-sol: 1.0.1
   checksum: 50636951fc0a7737cfeef988ab38f4ddf26f6165a19df95b84294929088cc8b05fdbc7910168610ce9daebcce5d7a408fa5a02228ef9dfb73c23c695acc8b741
+  languageName: node
+  linkType: hard
+
+"@uniswap/v3-sdk@npm:^3.10.0":
+  version: 3.10.0
+  resolution: "@uniswap/v3-sdk@npm:3.10.0"
+  dependencies:
+    "@ethersproject/abi": ^5.0.12
+    "@ethersproject/solidity": ^5.0.9
+    "@uniswap/sdk-core": ^4
+    "@uniswap/swap-router-contracts": ^1.2.1
+    "@uniswap/v3-periphery": ^1.1.1
+    "@uniswap/v3-staker": 1.0.0
+    tiny-invariant: ^1.1.0
+    tiny-warning: ^1.0.3
+  checksum: 664d40550aa5c88b21bce3dc209746bc61490e4afaa5686d12d6a5839e26211ae5093d82eeff3e3ec80df5df3eb1d40f9a7510b61a389e2779a9b1e5eca9ed25
+  languageName: node
+  linkType: hard
+
+"@uniswap/v3-staker@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@uniswap/v3-staker@npm:1.0.0"
+  dependencies:
+    "@openzeppelin/contracts": 3.4.1-solc-0.7-2
+    "@uniswap/v3-core": 1.0.0
+    "@uniswap/v3-periphery": ^1.0.1
+  checksum: 5a68e59f33d4761956ad735c8ce5ea6e566076bd260ea0a0bb4b3a0db237719e39f21a22eb0a5a231141efdf0154bfe03f690612d632898f33192b4442c888b3
   languageName: node
   linkType: hard
 
@@ -2415,6 +2479,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"big.js@npm:^5.2.2":
+  version: 5.2.2
+  resolution: "big.js@npm:5.2.2"
+  checksum: b89b6e8419b097a8fb4ed2399a1931a68c612bce3cfd5ca8c214b2d017531191070f990598de2fc6f3f993d91c0f08aa82697717f6b3b8732c9731866d233c9e
+  languageName: node
+  linkType: hard
+
 "big.js@npm:^6.2.1":
   version: 6.2.1
   resolution: "big.js@npm:6.2.1"
@@ -2772,6 +2843,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cli-table3@npm:^0.6.0":
+  version: 0.6.3
+  resolution: "cli-table3@npm:0.6.3"
+  dependencies:
+    "@colors/colors": 1.5.0
+    string-width: ^4.2.0
+  dependenciesMeta:
+    "@colors/colors":
+      optional: true
+  checksum: 09897f68467973f827c04e7eaadf13b55f8aec49ecd6647cc276386ea660059322e2dd8020a8b6b84d422dbdd619597046fa89cbbbdc95b2cea149a2df7c096c
+  languageName: node
+  linkType: hard
+
 "cli-truncate@npm:^2.1.0":
   version: 2.1.0
   resolution: "cli-truncate@npm:2.1.0"
@@ -3086,6 +3170,13 @@ __metadata:
   version: 4.0.0
   resolution: "decamelize@npm:4.0.0"
   checksum: b7d09b82652c39eead4d6678bb578e3bebd848add894b76d0f6b395bc45b2d692fb88d977e7cfb93c4ed6c119b05a1347cef261174916c2e75c0a8ca57da1809
+  languageName: node
+  linkType: hard
+
+"decimal.js-light@npm:^2.5.0":
+  version: 2.5.1
+  resolution: "decimal.js-light@npm:2.5.1"
+  checksum: f5a2c7eac1c4541c8ab8a5c8abea64fc1761cefc7794bd5f8afd57a8a78d1b51785e0c4e4f85f4895a043eaa90ddca1edc3981d1263eb6ddce60f32bf5fe66c9
   languageName: node
   linkType: hard
 
@@ -5074,6 +5165,13 @@ __metadata:
   bin:
     js-yaml: bin/js-yaml.js
   checksum: bef146085f472d44dee30ec34e5cf36bf89164f5d585435a3d3da89e52622dff0b188a580e4ad091c3341889e14cb88cac6e4deb16dc5b1e9623bb0601fc255c
+  languageName: node
+  linkType: hard
+
+"jsbi@npm:^3.1.4":
+  version: 3.2.5
+  resolution: "jsbi@npm:3.2.5"
+  checksum: 642d1bb139ad1c1e96c4907eb159565e980a0d168487626b493d0d0b7b341da0e43001089d3b21703fe17b18a7a6c0f42c92026f71d54471ed0a0d1b3015ec0f
   languageName: node
   linkType: hard
 
@@ -7524,6 +7622,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tiny-invariant@npm:^1.1.0":
+  version: 1.3.1
+  resolution: "tiny-invariant@npm:1.3.1"
+  checksum: 872dbd1ff20a21303a2fd20ce3a15602cfa7fcf9b228bd694a52e2938224313b5385a1078cb667ed7375d1612194feaca81c4ecbe93121ca1baebe344de4f84c
+  languageName: node
+  linkType: hard
+
+"tiny-warning@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "tiny-warning@npm:1.0.3"
+  checksum: da62c4acac565902f0624b123eed6dd3509bc9a8d30c06e017104bedcf5d35810da8ff72864400ad19c5c7806fc0a8323c68baf3e326af7cb7d969f846100d71
+  languageName: node
+  linkType: hard
+
 "to-fast-properties@npm:^2.0.0":
   version: 2.0.0
   resolution: "to-fast-properties@npm:2.0.0"
@@ -7544,6 +7656,13 @@ __metadata:
   version: 2.2.0
   resolution: "toad-scheduler@npm:2.2.0"
   checksum: ba5ccd788a6f2b40a69988f70ddcd1caad5594cfca81fe7aec1acf30d5eb1ac24481542f877d0bc972fa688f6cc448202db64a28384bd0fedd9a1116eba18dc0
+  languageName: node
+  linkType: hard
+
+"toformat@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "toformat@npm:2.0.0"
+  checksum: c75341911a811a85c309e2c3eb8e9c7b60f26e2c629170179fc92ed339a2faf44433ebde75d4ac6dbe6f55a2aa044e1d4cd5242dbdd5e4c047babbe6defd8387
   languageName: node
   linkType: hard
 

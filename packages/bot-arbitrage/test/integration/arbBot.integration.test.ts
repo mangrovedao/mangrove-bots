@@ -5,11 +5,12 @@ import { afterEach, beforeEach, describe, it } from "mocha";
 
 import { Mangrove, mgvTestUtil } from "@mangrovedao/mangrove.js";
 
+import { Token } from "@uniswap/sdk-core";
 import assert from "assert";
-import { logger } from "../../src/util/logger";
 import { ArbBot } from "../../src/ArbBot";
-import { getPoolContract } from "../../src/uniswap/libs/uniswapUtils";
+import { getPoolInfo } from "../../src/uniswap/pool";
 import { activateTokensWithMgv } from "../../src/util/ArbBotUtils";
+import { logger } from "../../src/util/logger";
 
 let mgv: Mangrove;
 let mgvDeployer: Mangrove;
@@ -29,6 +30,7 @@ describe("ArbBot integration tests", () => {
         batchSize: 5,
       },
     });
+
     mgvDeployer = await Mangrove.connect({
       privateKey: this.accounts.deployer.key,
       provider: mgv.provider,
@@ -58,21 +60,13 @@ describe("ArbBot integration tests", () => {
     const arb = mgv.getAddress("MgvArbitrage");
     const weth = await mgv.token("WETH");
     const dai = await mgv.token("DAI");
-    await this.server.deal({
-      token: weth.address,
-      account: this.accounts.maker.address,
-      amount: 100,
-    });
+    const usdc = await mgv.token("USDC");
+    await weth.contract.mintTo(this.accounts.maker.address, weth.toUnits(100));
+    await dai.contract.mintTo(this.accounts.maker.address, dai.toUnits(100000));
+    await dai.contract.mintTo(arb, dai.toUnits(10000));
 
-    await this.server.deal({
-      token: dai.address,
-      account: this.accounts.maker.address,
-      amount: 100000,
-    });
-
-    await this.server.deal({ token: dai.address, account: arb, amount: 10000 });
     logger.debug(
-      `--label ${this.accounts.maker.address}:maker --label ${this.accounts.deployer.address}:deployer --label ${arb}:arbContract --label ${weth.address}:weth --label ${dai.address}:dai --label ${mgv.address}:mangrove`
+      `--label ${this.accounts.maker.address}:maker --label ${this.accounts.deployer.address}:deployer --label ${arb}:arbContract --label ${weth.address}:weth --label ${dai.address}:dai --label ${mgv.address}:mangrove --label ${usdc.address}:usdc`
     );
 
     mgvTestUtil.setConfig(mgv, this.accounts, mgvDeployer);
@@ -95,18 +89,20 @@ describe("ArbBot integration tests", () => {
       const provision = await lp.computeAskProvision();
       const offer = await lp.newAsk({ wants: 1, gives: 1, fund: provision });
       await mgvTestUtil.waitForTransaction(
-        await market.base.approve(mgv.address, 1000)
+        await market.base.approve(mgv.address, 1)
       );
       await mgvTestUtil.waitForTransaction(
-        await market.quote.approve(mgv.address, 1000)
+        await market.quote.approve(mgv.address, 1)
       );
-      const poolContract = await getPoolContract({
-        in: market.base.address,
-        out: market.quote.address,
-        fee: 3000,
-        provider: mgv.provider,
-      });
-      const arbBot = new ArbBot(mgvArbitrager, poolContract, {
+      const factoryAddress = mgv.getAddress("UniswapV3Factory");
+      const poolInfo = await getPoolInfo(
+        factoryAddress,
+        new Token(mgv.network.id!, market.base.address, market.base.decimals),
+        new Token(mgv.network.id!, market.quote.address, market.quote.decimals),
+        3000,
+        mgv.provider
+      );
+      const arbBot = new ArbBot(mgvArbitrager, poolInfo.poolContract, {
         base: market.base.name,
         quote: market.quote.name,
       });
@@ -114,7 +110,7 @@ describe("ArbBot integration tests", () => {
         [market.base.address, market.quote.address],
         mgvDeployer
       );
-      await mgvTestUtil.waitForTransaction(txActivate);
+      await mgvTestUtil.waitForTransaction(txActivate!);
       const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
       const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
       const txs = await arbBot.run(market, ["WETH", "DAI", 3000], {
@@ -122,7 +118,7 @@ describe("ArbBot integration tests", () => {
         tokenForExchange: "DAI",
         exchangeConfig: {
           exchange: "Uniswap",
-          fee: () => 100,
+          fee: () => 3000,
         },
       });
       const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
@@ -153,18 +149,17 @@ describe("ArbBot integration tests", () => {
         fund: provision,
       });
       await mgvTestUtil.waitForTransaction(
-        await market.base.approve(mgv.address, 100000)
+        await market.quote.approve(mgv.address, 10000)
       );
-      await mgvTestUtil.waitForTransaction(
-        await market.quote.approve(mgv.address, 100000)
+      const factoryAddress = mgv.getAddress("UniswapV3Factory");
+      const poolInfo = await getPoolInfo(
+        factoryAddress,
+        new Token(mgv.network.id!, market.quote.address, market.quote.decimals),
+        new Token(mgv.network.id!, market.base.address, market.base.decimals),
+        3000,
+        mgv.provider
       );
-      const poolContract = await getPoolContract({
-        in: market.quote.address,
-        out: market.base.address,
-        fee: 3000,
-        provider: mgv.provider,
-      });
-      const arbBot = new ArbBot(mgvArbitrager, poolContract, {
+      const arbBot = new ArbBot(mgvArbitrager, poolInfo.poolContract, {
         base: market.base.name,
         quote: market.quote.name,
       });
@@ -172,7 +167,7 @@ describe("ArbBot integration tests", () => {
         [market.base.address, market.quote.address],
         mgvDeployer
       );
-      await mgvTestUtil.waitForTransaction(txActivate);
+      await mgvTestUtil.waitForTransaction(txActivate!);
       const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
       const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
       const txs = await arbBot.run(market, ["WETH", "DAI", 3000], {
@@ -205,18 +200,17 @@ describe("ArbBot integration tests", () => {
       const provision = await lp.computeAskProvision();
       const offer = await lp.newAsk({ wants: 2000, gives: 1, fund: provision });
       await mgvTestUtil.waitForTransaction(
-        await market.base.approve(mgv.address, 1000)
+        await market.base.approve(mgv.address, 1)
       );
-      await mgvTestUtil.waitForTransaction(
-        await market.quote.approve(mgv.address, 1000)
+      const factoryAddress = mgv.getAddress("UniswapV3Factory");
+      const poolInfo = await getPoolInfo(
+        factoryAddress,
+        new Token(mgv.network.id!, market.base.address, market.base.decimals),
+        new Token(mgv.network.id!, market.quote.address, market.quote.decimals),
+        3000,
+        mgv.provider
       );
-      const poolContract = await getPoolContract({
-        in: market.base.address,
-        out: market.quote.address,
-        fee: 3000,
-        provider: mgv.provider,
-      });
-      const arbBot = new ArbBot(mgvArbitrager, poolContract, {
+      const arbBot = new ArbBot(mgvArbitrager, poolInfo.poolContract, {
         base: market.base.name,
         quote: market.quote.name,
       });
@@ -224,7 +218,7 @@ describe("ArbBot integration tests", () => {
         [market.base.address, market.quote.address],
         mgvDeployer
       );
-      await mgvTestUtil.waitForTransaction(txActivate);
+      await mgvTestUtil.waitForTransaction(txActivate!);
       const mgvArbAddress = mgv.getAddress("MgvArbitrage");
       const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
       const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
@@ -233,7 +227,7 @@ describe("ArbBot integration tests", () => {
         tokenForExchange: "DAI",
         exchangeConfig: {
           exchange: "Uniswap",
-          fee: () => 100,
+          fee: () => 3000,
         },
       });
       // try and get revert reason
@@ -258,43 +252,50 @@ describe("ArbBot integration tests", () => {
       const usdc = await mgv.token("USDC");
       const weth = await mgv.token("WETH");
       const dai = await mgv.token("DAI");
-      await this.server.deal({
-        token: usdc.address,
-        account: this.accounts.maker.address,
-        amount: 10000,
-      });
-      await this.server.deal({
-        token: dai.address,
-        account: this.accounts.maker.address,
-        amount: 10000,
-      });
+      await usdc.contract.mintTo(
+        this.accounts.maker.address,
+        usdc.toUnits(100000000)
+      );
+      await dai.contract.mintTo(
+        this.accounts.maker.address,
+        dai.toUnits(100000000)
+      );
 
       const usdcDaiMarket = await mgv.market({ base: "DAI", quote: "USDC" });
-      const lpDAI = await mgv.liquidityProvider(usdcDaiMarket);
-      const provisionDAI = await lpDAI.computeAskProvision();
-      await lpDAI.newAsk({ wants: 10000, gives: 10000, fund: provisionDAI });
-      await lpDAI.newBid({ wants: 10000, gives: 10000, fund: provisionDAI });
+      const lpDaiWeth = await mgv.liquidityProvider(usdcDaiMarket);
+      const provisionAsk = await lpDaiWeth.computeAskProvision();
+      const provisionBid = await lpDaiWeth.computeBidProvision();
+      await lpDaiWeth.newAsk({
+        wants: 200000,
+        gives: 200000,
+        fund: provisionAsk,
+      });
+      await lpDaiWeth.newBid({
+        wants: 200000,
+        gives: 200000,
+        fund: provisionBid,
+      });
       await mgvTestUtil.waitForTransaction(
-        await usdc.approve(mgv.address, 10000)
+        await usdc.approve(mgv.address, 200000)
       );
       await mgvTestUtil.waitForTransaction(
-        await dai.approve(mgv.address, 10000)
+        await dai.approve(mgv.address, 200000)
       );
 
       const market = await mgv.market({ base: "WETH", quote: "USDC" });
       const lp = await mgv.liquidityProvider(market);
       const provision = await lp.computeAskProvision();
       const offer = await lp.newAsk({ wants: 1, gives: 1, fund: provision });
-      await mgvTestUtil.waitForTransaction(
-        await weth.approve(mgv.address, 10000)
+      await mgvTestUtil.waitForTransaction(await weth.approve(mgv.address, 1));
+      const factoryAddress = mgv.getAddress("UniswapV3Factory");
+      const poolInfo = await getPoolInfo(
+        factoryAddress,
+        new Token(mgv.network.id!, market.base.address, market.base.decimals),
+        new Token(mgv.network.id!, market.quote.address, market.quote.decimals),
+        3000,
+        mgv.provider
       );
-      const poolContract = await getPoolContract({
-        in: market.base.address,
-        out: market.quote.address,
-        fee: 3000,
-        provider: mgv.provider,
-      });
-      const arbBot = new ArbBot(mgvArbitrager, poolContract, {
+      const arbBot = new ArbBot(mgvArbitrager, poolInfo.poolContract, {
         base: market.base.name,
         quote: market.quote.name,
       });
@@ -302,34 +303,34 @@ describe("ArbBot integration tests", () => {
         [market.base.address, market.quote.address, mgv.getAddress("DAI")],
         mgvDeployer
       );
-      await mgvTestUtil.waitForTransaction(txActivate);
+      await mgvTestUtil.waitForTransaction(txActivate!);
       const mgvArbAddress = mgv.getAddress("MgvArbitrage");
       const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
       const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
-      const holdingTokenBeforeBalance = await dai.balanceOf(mgvArbAddress);
+      const holdingDaiBeforeBalance = await dai.balanceOf(mgvArbAddress);
       const txs = await arbBot.run(market, ["WETH", "USDC", 3000], {
         holdingTokens: ["DAI"],
         tokenForExchange: "DAI",
         exchangeConfig: { exchange: "Mangrove" },
       });
-      const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
-      const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
-      const holdingTokenAfterBalance = await dai.balanceOf(mgvArbAddress);
       const receipt = await mgvTestUtil.waitForTransaction(txs.askTransaction);
       await mgvTestUtil.waitForBlock(mgv, receipt.blockNumber);
+      const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
+      const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
+      const holdingWethfterBalance = await dai.balanceOf(mgvArbAddress);
       assert.ok(!(await market.isLive("asks", offer.id)));
       assert.deepStrictEqual(
-        baseBeforeBalance,
-        baseAfterBalance,
-        "Should have the same amount of base"
+        baseAfterBalance.minus(baseBeforeBalance).lte(1),
+        true,
+        `Base Should have the same amount of base as before (less then 1, because of rounding): ${baseBeforeBalance.toString()}  after:${baseAfterBalance.toString()}`
       );
       assert.deepStrictEqual(
         quoteBeforeBalance,
         quoteAfterBalance,
-        "Should have the same amount of base"
+        "Quote Should have the same amount of base"
       );
       assert.ok(
-        holdingTokenBeforeBalance < holdingTokenAfterBalance,
+        holdingDaiBeforeBalance < holdingWethfterBalance,
         "Should have gained holding token"
       );
     });
@@ -345,13 +346,15 @@ describe("ArbBot integration tests", () => {
       await mgvTestUtil.waitForTransaction(
         await market.quote.approve(mgv.address, 1000)
       );
-      const poolContract = await getPoolContract({
-        in: market.base.address,
-        out: market.quote.address,
-        fee: 3000,
-        provider: mgv.provider,
-      });
-      const arbBot = new ArbBot(mgvArbitrager, poolContract, {
+      const factoryAddress = mgv.getAddress("UniswapV3Factory");
+      const poolInfo = await getPoolInfo(
+        factoryAddress,
+        new Token(mgv.network.id!, market.base.address, market.base.decimals),
+        new Token(mgv.network.id!, market.quote.address, market.quote.decimals),
+        3000,
+        mgv.provider
+      );
+      const arbBot = new ArbBot(mgvArbitrager, poolInfo.poolContract, {
         base: market.base.name,
         quote: market.quote.name,
       });
@@ -359,17 +362,17 @@ describe("ArbBot integration tests", () => {
         [market.base.address, market.quote.address, mgv.getAddress("DAI")],
         mgvDeployer
       );
-      await mgvTestUtil.waitForTransaction(txActivate);
+      await mgvTestUtil.waitForTransaction(txActivate!);
       const mgvArbAddress = mgv.getAddress("MgvArbitrage");
       const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
       const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
-      const holdingTokenBeforeBalance = await (
+      const holdingDaiBeforeBalance = await (
         await mgv.token("DAI")
       ).balanceOf(mgvArbAddress);
       const transactions = await arbBot.run(market, ["WETH", "USDC", 3000], {
         holdingTokens: ["DAI"],
         tokenForExchange: "DAI",
-        exchangeConfig: { exchange: "Uniswap", fee: () => 100 },
+        exchangeConfig: { exchange: "Uniswap", fee: () => 3000 },
       });
       let receipts;
       if (transactions.askTransaction)
@@ -382,23 +385,23 @@ describe("ArbBot integration tests", () => {
         );
       const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
       const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
-      const holdingTokenAfterBalance = await (
+      const holdingWethfterBalance = await (
         await mgv.token("DAI")
       ).balanceOf(mgvArbAddress);
       await mgvTestUtil.waitForBlock(market.mgv, receipts.blockNumber);
       assert.ok(!(await market.isLive("asks", offer.id)));
       assert.deepStrictEqual(
-        baseBeforeBalance,
-        baseAfterBalance,
-        "Should have the same amount of base"
+        baseAfterBalance.minus(baseBeforeBalance).lte(1),
+        true,
+        `Base Should have the same amount of base as before (less then 1, because of rounding): ${baseBeforeBalance.toString()}  after:${baseAfterBalance.toString()}`
       );
       assert.deepStrictEqual(
         quoteBeforeBalance,
         quoteAfterBalance,
-        "Should have the same amount of base"
+        "Quote Should have the same amount of base"
       );
       assert.ok(
-        holdingTokenBeforeBalance < holdingTokenAfterBalance,
+        holdingDaiBeforeBalance < holdingWethfterBalance,
         "Should have gained holding token"
       );
     });
