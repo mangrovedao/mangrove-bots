@@ -1,0 +1,7 @@
+{
+  "logLevel": "LOG_LEVEL",
+  "runEveryXHours": {
+    "__name": "RUN_EVERY_X_HOURS",
+    "__format": "number"
+  }
+}
