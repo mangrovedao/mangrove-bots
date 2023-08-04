@@ -1,0 +1,26 @@
+query getVolumes($first: Int, $skip: Int, $latestDate: BigInt) {
+  accountVolumeByPairs(
+    first: $first
+    skip: $skip
+    orderBy: updatedDate
+    orderDirection: asc
+    where: { updatedDate_gt: $latestDate }
+  ) {
+    id
+
+    account {
+      id
+      address
+    }
+    updatedDate
+
+    token0
+    token1
+
+    token0Sent
+    token0Received
+
+    token1Sent
+    token1Received
+  }
+}

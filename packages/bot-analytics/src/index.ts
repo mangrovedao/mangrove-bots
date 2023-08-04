@@ -14,6 +14,8 @@ import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
 import { ExitCode, Setup } from "@mangrovedao/bot-utils";
 
 import { PrismaClient } from "@prisma/client";
+import { getVolumes } from "./volume";
+import { getBuiltGraphSDK } from "../.graphclient";
 
 enableLogging();
 
@@ -29,8 +31,17 @@ async function botFunction(
 ) {}
 
 const main = async () => {
-  const chains = await primsa.chain.findFirst();
-  console.log(chains);
+  // const chains = await primsa.chain.findFirst();
+  // console.log(chains);
+
+  const sdk = getBuiltGraphSDK("matic");
+  const test = await getVolumes(sdk, {
+    skip: 0,
+    first: 1000,
+    latestDate: new Date(),
+  });
+
+  console.log(test);
 
   // await primsa.chain.create({
   //   data: {

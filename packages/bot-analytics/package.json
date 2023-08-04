@@ -13,8 +13,9 @@
   "scripts": {
     "precommit": "lint-staged",
     "prepack": "yarn build",
+    "codegen": "graphclient build",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "build-this-package": "tsc",
+    "build-this-package": "yarn codegen && tsc",
     "heroku-build-this-package": "yarn run build-this-package",
     "build": "yarn install && yarn workspaces foreach -vpiR --topological-dev --from $npm_package_name run build-this-package",
     "clean-this-package": "rimraf build tsconfig.tsbuildinfo",
@@ -47,6 +48,7 @@
     "ethers": "^5.7.2",
     "fast-safe-stringify": "^2.1.1",
     "finalhandler": "^1.2.0",
+    "graphql": "^16.6.0",
     "nyc": "^15.1.0",
     "prisma": "^5.1.0",
     "serve-static": "^1.15.0",
@@ -55,6 +57,7 @@
   "devDependencies": {
     "@espendk/json-file-reporter": "^1.4.2",
     "@ethersproject/hardware-wallets": "^5.7.0",
+    "@graphprotocol/client-cli": "^3.0.0",
     "@typechain/ethers-v5": "^10.2.0",
     "@types/chai": "^4.3.4",
     "@types/chai-as-promised": "^7.1.5",

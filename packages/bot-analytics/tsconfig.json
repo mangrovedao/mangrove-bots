@@ -15,9 +15,10 @@
       "*": ["node_modules/*"]
     },
     "composite": true,
-    "rootDir": "src/"
+    "rootDirs": ["./src", "./graphclient"],
+    "skipLibCheck": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", ".graphclient/**/*.ts"],
   "references": [
     {
       "path": "../../node_modules/@mangrovedao/mangrove.js"
