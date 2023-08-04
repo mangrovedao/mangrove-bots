@@ -1,10 +1,16 @@
-query getVolumes($first: Int, $skip: Int, $latestDate: BigInt) {
+query getVolumes(
+  $first: Int
+  $skip: Int
+  $latestDate: BigInt
+  $currentBlockNumber: Int
+) {
   accountVolumeByPairs(
     first: $first
     skip: $skip
     orderBy: updatedDate
     orderDirection: asc
     where: { updatedDate_gt: $latestDate }
+    block: { number: $currentBlockNumber }
   ) {
     id
 

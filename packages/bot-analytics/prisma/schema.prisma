@@ -11,6 +11,79 @@ datasource db {
 }
 
 model Chain {
-  id   Int    @id
-  name String
+  id              Int               @id @unique
+  name            String
+
+  Block           Block[]
+  Token           Token[]
+  Account         Account[]
+  AccountActivity AccountActivity[]
+}
+
+model Block {
+  id Int @id @default(autoincrement()) @unique
+
+  number    Int
+  hash      String
+  timestamp DateTime
+
+  chain   Chain @relation(fields: [chainId], references: [id])
+  chainId Int
+
+  accountActivitiesByFromBlock AccountActivity[] @relation("fromBlockActivities")
+  accountActivitiesByToBlock   AccountActivity[] @relation("toBlockActivities")
+}
+
+model Token {
+  id Int @id @default(autoincrement()) @unique
+
+
+  address  String
+  symbol   String
+  decimals Int
+
+  chain   Chain @relation(fields: [chainId], references: [id])
+  chainId Int
+
+  tokens0 AccountActivity[] @relation("token0")
+  tokens1 AccountActivity[] @relation("token1")
+}
+
+model Account {
+  id Int @id @default(autoincrement()) @unique
+
+
+  address String
+
+  chain           Chain             @relation(fields: [chainId], references: [id])
+  chainId         Int
+  AccountActivity AccountActivity[]
+}
+
+model AccountActivity {
+  id Int @id @default(autoincrement()) @unique
+
+  fromBlock   Block @relation("fromBlockActivities", fields: [fromBlockId], references: [id])
+  fromBlockId Int
+
+  toBlock   Block @relation("toBlockActivities", fields: [toBlockId], references: [id])
+  toBlockId Int
+
+  token0   Token @relation("token0", fields: [token0Id], references: [id])
+  token0Id Int
+
+  token1   Token @relation("token1", fields: [token1Id], references: [id])
+  token1Id Int
+
+  amount0Sent     Int
+  amount0Received Int
+
+  amount1Sent     Int
+  amount1Received Int
+
+  chain   Chain @relation(fields: [chainId], references: [id])
+  chainId Int
+
+  account   Account @relation(fields: [accountId], references: [id])
+  accountId Int
 }

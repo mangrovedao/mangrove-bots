@@ -3,5 +3,18 @@
   "runEveryXHours": {
     "__name": "RUN_EVERY_X_HOURS",
     "__format": "number"
+  },
+  "startingBlock": {
+    "__name": "STARTING_BLOCK",
+    "__format": "number"
+  },
+  "estimatedBlockTimeMs": {
+    "__name": "ESTIMATED_BLOCK_TIME_MS",
+    "__format": "number"
+  },
+  "rpcHttpProvider": "RPC_HTTP_PROVIDER",
+  "blockFinality": {
+    "__name": "BLOCK_FINALITY",
+    "__format": "number"
   }
 }

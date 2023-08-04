@@ -3455,6 +3455,7 @@ export type getVolumesQueryVariables = Exact<{
   first?: InputMaybe<Scalars["Int"]>;
   skip?: InputMaybe<Scalars["Int"]>;
   latestDate?: InputMaybe<Scalars["BigInt"]>;
+  currentBlockNumber?: InputMaybe<Scalars["Int"]>;
 }>;
 
 export type getVolumesQuery = {
@@ -3474,13 +3475,19 @@ export type getVolumesQuery = {
 };
 
 export const getVolumesDocument = gql`
-  query getVolumes($first: Int, $skip: Int, $latestDate: BigInt) {
+  query getVolumes(
+    $first: Int
+    $skip: Int
+    $latestDate: BigInt
+    $currentBlockNumber: Int
+  ) {
     accountVolumeByPairs(
       first: $first
       skip: $skip
       orderBy: updatedDate
       orderDirection: asc
       where: { updatedDate_gt: $latestDate }
+      block: { number: $currentBlockNumber }
     ) {
       id
       account {
