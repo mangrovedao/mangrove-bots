@@ -43,7 +43,8 @@ model Token {
   chain   Chain @relation(fields: [chainId], references: [id])
   chainId Int
 
-  AccountActivity AccountActivity[]
+  token0 AccountActivity[] @relation("token0")
+  token1 AccountActivity[] @relation("token1")
 }
 
 model Account {
@@ -61,14 +62,23 @@ model AccountActivity {
   toBlock   Block @relation("toBlockActivities", fields: [toBlockId], references: [id])
   toBlockId Int
 
-  token   Token @relation(fields: [tokenId], references: [id])
-  tokenId Int
+  token0   Token @relation("token0", fields: [token0Id], references: [id])
+  token0Id Int
 
-  sent     String
-  received String
+  token1   Token @relation("token1", fields: [token1Id], references: [id])
+  token1Id Int
 
-  totalSent     String
-  totalReceived String
+  sent0     String
+  received0 String
+
+  totalSent0     String
+  totalReceived0 String
+
+  sent1     String
+  received1 String
+
+  totalSent1     String
+  totalReceived1 String
 
   chain   Chain @relation(fields: [chainId], references: [id])
   chainId Int
