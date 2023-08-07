@@ -11,17 +11,16 @@ datasource db {
 }
 
 model Chain {
-  id              Int               @id @unique
-  name            String
+  id   Int    @id @unique
+  name String
 
   Block           Block[]
   Token           Token[]
-  Account         Account[]
   AccountActivity AccountActivity[]
 }
 
 model Block {
-  id Int @id @default(autoincrement()) @unique
+  id Int @id @unique @default(autoincrement())
 
   number    Int
   hash      String
@@ -35,8 +34,7 @@ model Block {
 }
 
 model Token {
-  id Int @id @default(autoincrement()) @unique
-
+  id Int @id @unique @default(autoincrement())
 
   address  String
   symbol   String
@@ -45,23 +43,17 @@ model Token {
   chain   Chain @relation(fields: [chainId], references: [id])
   chainId Int
 
-  tokens0 AccountActivity[] @relation("token0")
-  tokens1 AccountActivity[] @relation("token1")
+  AccountActivity AccountActivity[]
 }
 
 model Account {
-  id Int @id @default(autoincrement()) @unique
+  address String @id @unique
 
-
-  address String
-
-  chain           Chain             @relation(fields: [chainId], references: [id])
-  chainId         Int
   AccountActivity AccountActivity[]
 }
 
 model AccountActivity {
-  id Int @id @default(autoincrement()) @unique
+  id Int @id @unique @default(autoincrement())
 
   fromBlock   Block @relation("fromBlockActivities", fields: [fromBlockId], references: [id])
   fromBlockId Int
@@ -69,21 +61,18 @@ model AccountActivity {
   toBlock   Block @relation("toBlockActivities", fields: [toBlockId], references: [id])
   toBlockId Int
 
-  token0   Token @relation("token0", fields: [token0Id], references: [id])
-  token0Id Int
+  token   Token @relation(fields: [tokenId], references: [id])
+  tokenId Int
 
-  token1   Token @relation("token1", fields: [token1Id], references: [id])
-  token1Id Int
+  sent     String
+  received String
 
-  amount0Sent     Int
-  amount0Received Int
-
-  amount1Sent     Int
-  amount1Received Int
+  totalSent     String
+  totalReceived String
 
   chain   Chain @relation(fields: [chainId], references: [id])
   chainId Int
 
-  account   Account @relation(fields: [accountId], references: [id])
-  accountId Int
+  account   Account @relation(fields: [accountId], references: [address])
+  accountId String
 }

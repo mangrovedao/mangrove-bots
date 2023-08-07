@@ -12,3 +12,5 @@ export const chains: Chain[] = [
 ];
 
 export const subgraphMaxFirstValue = 10_000;
+
+export const secondsInADay = 60 * 60 * 24;

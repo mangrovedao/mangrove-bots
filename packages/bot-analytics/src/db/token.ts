@@ -1,13 +1,14 @@
 import { typechain } from "@mangrovedao/mangrove.js";
-import { PrismaClient, PrismaPromise } from "@prisma/client";
+import { PrismaPromise, Token } from "@prisma/client";
 import { ChainContext } from "../types";
+import { PrismaTx } from "./types";
 
 export const generateCreateTokenIfNotExist = (context: ChainContext) => {
   const ierc20 = typechain.IERC20__factory.createInterface();
   return async (
-    prisma: PrismaClient,
+    prisma: PrismaTx,
     address: string
-  ): Promise<PrismaPromise<any> | null> => {
+  ): Promise<PrismaPromise<Token>> => {
     const token = await prisma.token.findFirst({
       where: {
         address,
@@ -16,7 +17,7 @@ export const generateCreateTokenIfNotExist = (context: ChainContext) => {
     });
 
     if (token) {
-      return null;
+      return token;
     }
 
     const calls: typechain.Multicall2.CallStruct[] = [

@@ -1,7 +1,7 @@
 import { typechain } from "@mangrovedao/mangrove.js";
 import { JsonRpcProvider } from "@ethersproject/providers";
 import { Block, Prisma, PrismaClient } from "@prisma/client";
-import { BlockWithoutId } from "./db/types";
+import { Account, AccountVolumeByPair } from "../.graphclient";
 
 export type GetParamsPagination = {
   first: number;
@@ -25,10 +25,22 @@ export type Chain = {
 export type Task = (
   prisma: PrismaClient,
   from: Block,
-  to: BlockWithoutId
+  to: Block
 ) => Prisma.PrismaPromise<any>;
 
 export type ChainContext = Chain & {
   multicall2: typechain.Multicall2;
   provider: JsonRpcProvider;
 };
+
+export type GetVolumesResult = Pick<
+  AccountVolumeByPair,
+  | "id"
+  | "updatedDate"
+  | "token0"
+  | "token1"
+  | "token0Sent"
+  | "token0Received"
+  | "token1Sent"
+  | "token1Received"
+> & { account: Pick<Account, "id" | "address"> };

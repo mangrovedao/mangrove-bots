@@ -19,10 +19,17 @@ import { ExitCode, Setup } from "@mangrovedao/bot-utils";
 
 import { PrismaClient } from "@prisma/client";
 import { inititalizeChains } from "./db/init";
-import { chains } from "./constants";
+import { chains, secondsInADay } from "./constants";
 import { createBlockIfNotExist, getLastStoredBlock } from "./db/block";
 import { ChainContext } from "./types";
 import { generateCreateTokenIfNotExist } from "./db/token";
+import { generateGetAndSaveVolumeTimeSerie } from "./volume";
+import { getBuiltGraphSDK } from "../.graphclient";
+import {
+  estimateBlockCount,
+  generateBlockHeaderToBlockWithoutId,
+} from "./util/util";
+import moize from "moize";
 
 enableLogging();
 
@@ -54,17 +61,6 @@ const main = async () => {
   const startingBlock = await provider.getBlock(startingBlockNumber);
   const latestBlock = await provider.getBlock("latest");
 
-  logger.info(`Starting with params`, {
-    data: {
-      network,
-      startingBlock,
-      estimatedBlockTimeMs,
-      latestBlock,
-      blockFinality,
-      runEveryXHours,
-    },
-  });
-
   const context: ChainContext = {
     chainId: network.chainId,
     name: network.name,
@@ -75,6 +71,9 @@ const main = async () => {
     ),
   };
 
+  const blockHeaderToBlockWithoutId =
+    generateBlockHeaderToBlockWithoutId(context);
+
   await createBlockIfNotExist(prisma, {
     number: startingBlock.number,
     hash: startingBlock.hash,
@@ -84,15 +83,61 @@ const main = async () => {
 
   const lastStoredBlock = await getLastStoredBlock(prisma, context);
 
-  console.log(lastStoredBlock);
+  if (!lastStoredBlock) {
+    throw new Error("Missing starting block");
+  }
 
   const lastSafeBlock = await provider.getBlock(
     latestBlock.number - blockFinality
   );
 
-  // const fn = generateCreateTokenIfNotExist(context);
+  const sdk = getBuiltGraphSDK({
+    chainName: "matic",
+  });
 
-  // fn(prisma, "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174");
+  const createTokenIfNotExist = moize(generateCreateTokenIfNotExist(context));
+
+  const nextBlockNumber =
+    lastStoredBlock.number +
+    estimateBlockCount(secondsInADay, estimatedBlockTimeMs);
+
+  const nextBlock = await provider.getBlock(nextBlockNumber);
+  const nextBlockMinimal = {
+    chainId: context.chainId,
+    number: nextBlock.number,
+    hash: nextBlock.hash,
+    timestamp: new Date(nextBlock.timestamp * 1000),
+  };
+
+  logger.info(`Starting with params`, {
+    data: {
+      network,
+      startingBlock: blockHeaderToBlockWithoutId(startingBlock),
+      estimatedBlockTimeMs,
+      latestBlock: blockHeaderToBlockWithoutId(latestBlock),
+      blockFinality,
+      runEveryXHours,
+      lastStoredBlock,
+      lastSafeBlock: blockHeaderToBlockWithoutId(lastSafeBlock),
+      nextBlockMinimal,
+    },
+  });
+
+  const getFn = generateGetAndSaveVolumeTimeSerie(
+    context,
+    createTokenIfNotExist,
+    sdk
+  );
+
+  prisma.$transaction(async (tx) => {
+    const nextBlockDb = await createBlockIfNotExist(tx, {
+      number: nextBlockMinimal.number,
+      hash: nextBlockMinimal.hash,
+      chainId: context.chainId,
+      timestamp: nextBlockMinimal.timestamp,
+    });
+    await getFn(tx, lastStoredBlock, nextBlockDb);
+  });
 };
 
 main().catch(async (e) => {
