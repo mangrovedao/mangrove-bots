@@ -81,7 +81,7 @@ const main = async () => {
     timestamp: new Date(startingBlock.timestamp * 1000),
   });
 
-  const lastStoredBlock = await getLastStoredBlock(prisma, context);
+  let lastStoredBlock = await getLastStoredBlock(prisma, context);
 
   if (!lastStoredBlock) {
     throw new Error("Missing starting block");
@@ -97,18 +97,6 @@ const main = async () => {
 
   const createTokenIfNotExist = moize(generateCreateTokenIfNotExist(context));
 
-  const nextBlockNumber =
-    lastStoredBlock.number +
-    estimateBlockCount(secondsInADay, estimatedBlockTimeMs);
-
-  const nextBlock = await provider.getBlock(nextBlockNumber);
-  const nextBlockMinimal = {
-    chainId: context.chainId,
-    number: nextBlock.number,
-    hash: nextBlock.hash,
-    timestamp: new Date(nextBlock.timestamp * 1000),
-  };
-
   logger.info(`Starting with params`, {
     data: {
       network,
@@ -119,7 +107,6 @@ const main = async () => {
       runEveryXHours,
       lastStoredBlock,
       lastSafeBlock: blockHeaderToBlockWithoutId(lastSafeBlock),
-      nextBlockMinimal,
     },
   });
 
@@ -129,15 +116,34 @@ const main = async () => {
     sdk
   );
 
-  prisma.$transaction(async (tx) => {
-    const nextBlockDb = await createBlockIfNotExist(tx, {
-      number: nextBlockMinimal.number,
-      hash: nextBlockMinimal.hash,
+  while (lastStoredBlock.number < lastSafeBlock.number) {
+    lastStoredBlock = (await getLastStoredBlock(prisma, context))!;
+    const nextBlockNumber =
+      lastStoredBlock.number +
+      estimateBlockCount(secondsInADay, estimatedBlockTimeMs);
+
+    const nextBlock = await provider.getBlock(nextBlockNumber);
+    const nextBlockMinimal = {
       chainId: context.chainId,
-      timestamp: nextBlockMinimal.timestamp,
+      number: nextBlock.number,
+      hash: nextBlock.hash,
+      timestamp: new Date(nextBlock.timestamp * 1000),
+    };
+
+    logger.info(
+      `get block between ${lastStoredBlock.number} -> ${nextBlockNumber}. (Stopping at ${lastSafeBlock.number})`
+    );
+
+    await prisma.$transaction(async (tx) => {
+      const nextBlockDb = await createBlockIfNotExist(tx, {
+        number: nextBlockMinimal.number,
+        hash: nextBlockMinimal.hash,
+        chainId: context.chainId,
+        timestamp: nextBlockMinimal.timestamp,
+      });
+      await getFn(tx, lastStoredBlock!, nextBlockDb);
     });
-    await getFn(tx, lastStoredBlock, nextBlockDb);
-  });
+  }
 };
 
 main().catch(async (e) => {

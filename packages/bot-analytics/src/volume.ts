@@ -37,80 +37,72 @@ export const generateGetAndSaveVolumeTimeSerie =
         await getVolumes(sdk, params)
       ).accountVolumeByPairs.reduce((acc, vol) => {
         acc[vol.id] = vol;
-        console.log(vol);
         return acc;
       }, {} as Record<string, GetVolumesResult>);
 
-      const accountsActivities = await Promise.all(
-        Object.values(volumes).map<Promise<AccountActivityWithoutId>>(
-          async (vol) => {
-            const account = await getOrCreateAccount(
-              prisma,
-              vol.account.address
-            );
+      const accountsActivities: AccountActivityWithoutId[] = [];
 
-            const token0 = await getOrCreateTokenFn(prisma, vol.token0);
-            const token1 = await getOrCreateTokenFn(prisma, vol.token1);
+      for (const vol of Object.values(volumes)) {
+        const account = await getOrCreateAccount(prisma, vol.account.address);
 
-            const previousActivity = await prisma.accountActivity.findFirst({
-              where: {
-                accountId: account.address,
-                toBlockId: {
-                  lt: to.id,
-                },
-                token0Id: token0.id,
-                token1Id: token1.id,
-                chainId: context.chainId,
-              },
-              orderBy: {
-                fromBlockId: "desc",
-              },
-            });
+        const token0 = await getOrCreateTokenFn(prisma, vol.token0);
+        const token1 = await getOrCreateTokenFn(prisma, vol.token1);
 
-            return {
-              fromBlockId: from.id,
-              toBlockId: to.id,
+        const previousActivity = await prisma.accountActivity.findFirst({
+          where: {
+            accountId: account.address,
+            toBlockId: {
+              lt: to.id,
+            },
+            token0Id: token0.id,
+            token1Id: token1.id,
+            chainId: context.chainId,
+          },
+          orderBy: {
+            fromBlockId: "desc",
+          },
+        });
 
-              token0Id: token0.id,
-              token1Id: token1.id,
+        accountsActivities.push({
+          fromBlockId: from.id,
+          toBlockId: to.id,
 
-              sent0: previousActivity
-                ? (
-                    BigInt(vol.token0Sent) - BigInt(previousActivity.sent0)
-                  ).toString()
-                : vol.token0Sent,
-              received0: previousActivity
-                ? (
-                    BigInt(vol.token0Received) -
-                    BigInt(previousActivity.received0)
-                  ).toString()
-                : vol.token0Received,
+          token0Id: token0.id,
+          token1Id: token1.id,
 
-              totalSent0: vol.token0Sent,
-              totalReceived0: vol.token0Received,
+          sent0: previousActivity
+            ? (
+                BigInt(vol.token0Sent) - BigInt(previousActivity.sent0)
+              ).toString()
+            : vol.token0Sent,
+          received0: previousActivity
+            ? (
+                BigInt(vol.token0Received) - BigInt(previousActivity.received0)
+              ).toString()
+            : vol.token0Received,
 
-              sent1: previousActivity
-                ? (
-                    BigInt(vol.token1Sent) - BigInt(previousActivity.sent1)
-                  ).toString()
-                : vol.token1Sent,
-              received1: previousActivity
-                ? (
-                    BigInt(vol.token1Received) -
-                    BigInt(previousActivity.received1)
-                  ).toString()
-                : vol.token1Received,
+          totalSent0: vol.token0Sent,
+          totalReceived0: vol.token0Received,
 
-              totalSent1: vol.token1Sent,
-              totalReceived1: vol.token1Received,
+          sent1: previousActivity
+            ? (
+                BigInt(vol.token1Sent) - BigInt(previousActivity.sent1)
+              ).toString()
+            : vol.token1Sent,
+          received1: previousActivity
+            ? (
+                BigInt(vol.token1Received) - BigInt(previousActivity.received1)
+              ).toString()
+            : vol.token1Received,
 
-              chainId: context.chainId,
-              accountId: vol.account.address,
-              asMaker: vol.asMaker,
-            };
-          }
-        )
-      );
+          totalSent1: vol.token1Sent,
+          totalReceived1: vol.token1Received,
+
+          chainId: context.chainId,
+          accountId: vol.account.address,
+          asMaker: vol.asMaker,
+        });
+      }
 
       await prisma.accountActivity.createMany({
         data: accountsActivities,
