@@ -85,4 +85,6 @@ model AccountActivity {
 
   account   Account @relation(fields: [accountId], references: [address])
   accountId String
+
+  asMaker Boolean
 }

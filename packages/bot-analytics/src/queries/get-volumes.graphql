@@ -28,5 +28,6 @@ query getVolumes(
 
     token1Sent
     token1Received
+    asMaker
   }
 }

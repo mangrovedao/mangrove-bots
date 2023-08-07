@@ -43,4 +43,5 @@ export type GetVolumesResult = Pick<
   | "token0Received"
   | "token1Sent"
   | "token1Received"
+  | "asMaker"
 > & { account: Pick<Account, "id" | "address"> };
