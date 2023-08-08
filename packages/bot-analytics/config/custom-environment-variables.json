@@ -4,6 +4,7 @@
     "__name": "RUN_EVERY_X_HOURS",
     "__format": "number"
   },
+  "databaseUrl": "DATABASE_URL",
   "startingBlock": {
     "__name": "STARTING_BLOCK",
     "__format": "number"

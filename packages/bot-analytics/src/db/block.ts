@@ -24,7 +24,7 @@ export const createBlockIfNotExist = async (
 };
 
 export const getLastStoredBlock = async (
-  prisma: PrismaClient,
+  prisma: PrismaTx,
   context: ChainContext
 ): Promise<Block | null> => {
   const block = await prisma.block.findFirst({

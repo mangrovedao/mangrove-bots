@@ -9,17 +9,6 @@ import {
 import { subgraphMaxFirstValue } from "./constants";
 import { getOrCreateAccount } from "./db/account";
 
-export const getVolumes = async (sdk: Sdk, params: GetParamsVolumes) => {
-  const result = await sdk.getVolumes({
-    first: params.first,
-    skip: params.skip,
-    latestDate: Math.round(params.latestDate.getTime() / 1000),
-    currentBlockNumber: params.currentBlockNumber,
-  });
-
-  return result;
-};
-
 export const generateGetAndSaveVolumeTimeSerie =
   (context: ChainContext, getOrCreateTokenFn: getOrCreateTokenFn, sdk: Sdk) =>
   async (prisma: PrismaTx, from: Block, to: Block) => {
@@ -34,7 +23,7 @@ export const generateGetAndSaveVolumeTimeSerie =
       };
 
       const volumes = (
-        await getVolumes(sdk, params)
+        await sdk.getVolumes(params)
       ).accountVolumeByPairs.reduce((acc, vol) => {
         acc[vol.id] = vol;
         return acc;

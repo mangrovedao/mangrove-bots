@@ -2,6 +2,7 @@ import { typechain } from "@mangrovedao/mangrove.js";
 import { JsonRpcProvider } from "@ethersproject/providers";
 import { Block, Prisma, PrismaClient } from "@prisma/client";
 import { Account, AccountVolumeByPair } from "../.graphclient";
+import { PrismaTx } from "./db/types";
 
 export type GetParamsPagination = {
   first: number;
@@ -29,6 +30,7 @@ export type Task = (
 ) => Prisma.PrismaPromise<any>;
 
 export type ChainContext = Chain & {
+  blockFinality: number;
   multicall2: typechain.Multicall2;
   provider: JsonRpcProvider;
 };
@@ -45,3 +47,9 @@ export type GetVolumesResult = Pick<
   | "token1Received"
   | "asMaker"
 > & { account: Pick<Account, "id" | "address"> };
+
+export type GetAndSaveVolumeTimeSeriesFn = (
+  prisma: PrismaTx,
+  from: Block,
+  to: Block
+) => Promise<void>;
