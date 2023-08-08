@@ -45,6 +45,7 @@ export const generateGetAndSaveVolumeTimeSerie =
             },
             token0Id: token0.id,
             token1Id: token1.id,
+            asMaker: vol.asMaker,
             chainId: context.chainId,
           },
           orderBy: {

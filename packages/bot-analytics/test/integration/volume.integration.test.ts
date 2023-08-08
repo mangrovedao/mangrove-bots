@@ -33,11 +33,11 @@ describe("Volume tracking", () => {
   };
 
   const account0: Account = {
-    address: "token0",
+    address: "account0",
   };
 
   const account1: Account = {
-    address: "token0",
+    address: "account1",
   };
 
   const token0: TokenWithoutId = {
@@ -83,6 +83,21 @@ describe("Volume tracking", () => {
     },
   });
 
+  const getLatestActivityWithAddressAndType = async (
+    address: string,
+    asMaker: boolean
+  ) => {
+    return prisma!.accountActivity.findFirst({
+      orderBy: {
+        id: "desc",
+      },
+      where: {
+        accountId: address,
+        asMaker: asMaker,
+      },
+    });
+  };
+
   before(async () => {
     const result = await startDb();
 
@@ -95,7 +110,7 @@ describe("Volume tracking", () => {
   it("get volumes series without needed to skip", async () => {
     const volumes: GetVolumesResult[] = [
       {
-        id: `${account0.address}-${token0.address}-${token1.address}`,
+        id: `${account0.address}-${token0.address}-${token1.address}-maker`,
         updatedDate: Date.now(),
         account: {
           id: account0.address,
@@ -108,6 +123,51 @@ describe("Volume tracking", () => {
         token1Sent: "300",
         token1Received: "400",
         asMaker: true,
+      },
+      {
+        id: `${account0.address}-${token0.address}-${token1.address}-taker`,
+        updatedDate: Date.now(),
+        account: {
+          id: account0.address,
+          address: account0.address,
+        },
+        token0: token0.address,
+        token1: token1.address,
+        token0Sent: "10",
+        token0Received: "20",
+        token1Sent: "30",
+        token1Received: "40",
+        asMaker: false,
+      },
+      {
+        id: `${account1.address}-${token0.address}-${token1.address}-maker`,
+        updatedDate: Date.now(),
+        account: {
+          id: account1.address,
+          address: account1.address,
+        },
+        token0: token0.address,
+        token1: token1.address,
+        token0Sent: "400",
+        token0Received: "300",
+        token1Sent: "200",
+        token1Received: "100",
+        asMaker: true,
+      },
+      {
+        id: `${account1.address}-${token0.address}-${token1.address}-taker`,
+        updatedDate: Date.now(),
+        account: {
+          id: account1.address,
+          address: account1.address,
+        },
+        token0: token0.address,
+        token1: token1.address,
+        token0Sent: "40",
+        token0Received: "30",
+        token1Sent: "20",
+        token1Received: "10",
+        asMaker: false,
       },
     ];
     const sdk = generateMockSdk(volumes);
@@ -135,9 +195,10 @@ describe("Volume tracking", () => {
       await getAndSaveVolumeTimeSeries(tx, from, to);
     });
 
-    const accountAcitivity = await prisma!.accountActivity.findFirst();
+    const accountAcitivityAccount0Maker =
+      await getLatestActivityWithAddressAndType(account0.address, true);
 
-    assert.deepEqual(accountAcitivity, {
+    assert.deepEqual(accountAcitivityAccount0Maker, {
       id: 1,
       fromBlockId: 1,
       toBlockId: 2,
@@ -152,8 +213,249 @@ describe("Volume tracking", () => {
       totalSent1: "300",
       totalReceived1: "400",
       chainId: 0,
-      accountId: "token0",
+      accountId: "account0",
       asMaker: true,
+    });
+
+    const accountAcitivityAccount0Taker =
+      await getLatestActivityWithAddressAndType(account0.address, false);
+
+    assert.deepEqual(accountAcitivityAccount0Taker, {
+      id: 2,
+      fromBlockId: 1,
+      toBlockId: 2,
+      token0Id: 1,
+      token1Id: 2,
+      sent0: "10",
+      received0: "20",
+      totalSent0: "10",
+      totalReceived0: "20",
+      sent1: "30",
+      received1: "40",
+      totalSent1: "30",
+      totalReceived1: "40",
+      chainId: 0,
+      accountId: "account0",
+      asMaker: false,
+    });
+
+    const accountAcitivityAccount1Maker =
+      await getLatestActivityWithAddressAndType(account1.address, true);
+
+    assert.deepEqual(accountAcitivityAccount1Maker, {
+      id: 3,
+      fromBlockId: 1,
+      toBlockId: 2,
+      token0Id: 1,
+      token1Id: 2,
+      sent0: "400",
+      received0: "300",
+      totalSent0: "400",
+      totalReceived0: "300",
+      sent1: "200",
+      received1: "100",
+      totalSent1: "200",
+      totalReceived1: "100",
+      chainId: 0,
+      accountId: "account1",
+      asMaker: true,
+    });
+
+    const accountAcitivityAccount1Taker =
+      await getLatestActivityWithAddressAndType(account1.address, false);
+
+    assert.deepEqual(accountAcitivityAccount1Taker, {
+      id: 4,
+      fromBlockId: 1,
+      toBlockId: 2,
+      token0Id: 1,
+      token1Id: 2,
+      sent0: "40",
+      received0: "30",
+      totalSent0: "40",
+      totalReceived0: "30",
+      sent1: "20",
+      received1: "10",
+      totalSent1: "20",
+      totalReceived1: "10",
+      chainId: 0,
+      accountId: "account1",
+      asMaker: false,
+    });
+
+    const volumes2: GetVolumesResult[] = [
+      {
+        id: `${account0.address}-${token0.address}-${token1.address}-maker`,
+        updatedDate: Date.now(),
+        account: {
+          id: account0.address,
+          address: account0.address,
+        },
+        token0: token0.address,
+        token1: token1.address,
+        token0Sent: "200",
+        token0Received: "400",
+        token1Sent: "600",
+        token1Received: "800",
+        asMaker: true,
+      },
+      {
+        id: `${account0.address}-${token0.address}-${token1.address}-taker`,
+        updatedDate: Date.now(),
+        account: {
+          id: account0.address,
+          address: account0.address,
+        },
+        token0: token0.address,
+        token1: token1.address,
+        token0Sent: "20",
+        token0Received: "40",
+        token1Sent: "60",
+        token1Received: "80",
+        asMaker: false,
+      },
+      {
+        id: `${account1.address}-${token0.address}-${token1.address}-maker`,
+        updatedDate: Date.now(),
+        account: {
+          id: account1.address,
+          address: account1.address,
+        },
+        token0: token0.address,
+        token1: token1.address,
+        token0Sent: "800",
+        token0Received: "600",
+        token1Sent: "400",
+        token1Received: "200",
+        asMaker: true,
+      },
+      {
+        id: `${account1.address}-${token0.address}-${token1.address}-taker`,
+        updatedDate: Date.now(),
+        account: {
+          id: account1.address,
+          address: account1.address,
+        },
+        token0: token0.address,
+        token1: token1.address,
+        token0Sent: "80",
+        token0Received: "60",
+        token1Sent: "40",
+        token1Received: "20",
+        asMaker: false,
+      },
+    ];
+
+    const sdk2 = generateMockSdk(volumes2);
+
+    const getAndSaveVolumeTimeSeries2 = generateGetAndSaveVolumeTimeSerie(
+      context,
+      getOrCreateTokenFn,
+      sdk2
+    );
+
+    await prisma!.$transaction(async (tx) => {
+      const from = await createBlockIfNotExist(tx, {
+        number: 3,
+        hash: "0x3",
+        timestamp: new Date(),
+        chainId,
+      });
+
+      const to = await createBlockIfNotExist(tx, {
+        number: 4,
+        hash: "0x4",
+        timestamp: new Date(from.timestamp.getTime() + 1000),
+        chainId,
+      });
+      await getAndSaveVolumeTimeSeries2(tx, from, to);
+    });
+
+    const accountAcitivityAccount0Maker2 =
+      await getLatestActivityWithAddressAndType(account0.address, true);
+
+    assert.deepEqual(accountAcitivityAccount0Maker2, {
+      id: 5,
+      fromBlockId: 3,
+      toBlockId: 4,
+      token0Id: 1,
+      token1Id: 2,
+      sent0: "100",
+      received0: "200",
+      totalSent0: "200",
+      totalReceived0: "400",
+      sent1: "300",
+      received1: "400",
+      totalSent1: "600",
+      totalReceived1: "800",
+      chainId: 0,
+      accountId: "account0",
+      asMaker: true,
+    });
+    const accountAcitivityAccount0Taker2 =
+      await getLatestActivityWithAddressAndType(account0.address, false);
+
+    assert.deepEqual(accountAcitivityAccount0Taker2, {
+      id: 6,
+      fromBlockId: 3,
+      toBlockId: 4,
+      token0Id: 1,
+      token1Id: 2,
+      sent0: "10",
+      received0: "20",
+      totalSent0: "20",
+      totalReceived0: "40",
+      sent1: "30",
+      received1: "40",
+      totalSent1: "60",
+      totalReceived1: "80",
+      chainId: 0,
+      accountId: "account0",
+      asMaker: false,
+    });
+
+    const accountAcitivityAccount1Maker2 =
+      await getLatestActivityWithAddressAndType(account1.address, true);
+
+    assert.deepEqual(accountAcitivityAccount1Maker2, {
+      id: 7,
+      fromBlockId: 3,
+      toBlockId: 4,
+      token0Id: 1,
+      token1Id: 2,
+      sent0: "400",
+      received0: "300",
+      totalSent0: "800",
+      totalReceived0: "600",
+      sent1: "200",
+      received1: "100",
+      totalSent1: "400",
+      totalReceived1: "200",
+      chainId: 0,
+      accountId: "account1",
+      asMaker: true,
+    });
+
+    const accountAcitivityAccount1Taker2 =
+      await getLatestActivityWithAddressAndType(account1.address, false);
+
+    assert.deepEqual(accountAcitivityAccount1Taker2, {
+      id: 8,
+      fromBlockId: 3,
+      toBlockId: 4,
+      token0Id: 1,
+      token1Id: 2,
+      sent0: "40",
+      received0: "30",
+      totalSent0: "80",
+      totalReceived0: "60",
+      sent1: "20",
+      received1: "10",
+      totalSent1: "40",
+      totalReceived1: "20",
+      chainId: 0,
+      accountId: "account1",
+      asMaker: false,
     });
   });
 
