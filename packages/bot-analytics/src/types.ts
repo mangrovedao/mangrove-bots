@@ -48,6 +48,10 @@ export type GetVolumesResult = Pick<
   | "asMaker"
 > & { account: Pick<Account, "id" | "address"> };
 
+export type GetVolumeResults = {
+  accountVolumeByPairs: GetVolumesResult[];
+};
+
 export type GetAndSaveVolumeTimeSeriesFn = (
   prisma: PrismaTx,
   from: Block,

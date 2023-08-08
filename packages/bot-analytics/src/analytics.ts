@@ -1,4 +1,4 @@
-import { Block, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { logger } from "ethers";
 import { secondsInADay } from "./constants";
 import { createBlockIfNotExist, getLastStoredBlock } from "./db/block";
@@ -41,7 +41,7 @@ export const handleRange = async (
     };
 
     logger.info(
-      `get block between ${lastStoredBlock.number} -> ${nextBlockNumber}. (Stopping at ${lastSafeBlock.number})`
+      `get block between ${lastStoredBlock.number} -> ${nextBlockNumber}. (Stopping at ${to.number})`
     );
 
     await prisma.$transaction(async (tx) => {

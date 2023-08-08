@@ -1,4 +1,4 @@
-import { ChainContext, GetParamsVolumes, GetVolumesResult } from "./types";
+import { ChainContext, GetVolumesResult } from "./types";
 import { Sdk } from "../.graphclient/index";
 import { Block } from "@prisma/client";
 import {

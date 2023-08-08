@@ -9,12 +9,14 @@ import {
 
 export type BlockWithoutId = Omit<Block, "id">;
 
+export type TokenWithoutId = Omit<Token, "id">;
+
 export type AccountActivityWithoutId = Omit<AccountActivity, "id">;
 
 export type getOrCreateTokenFn = (
   prisma: PrismaTx,
   address: string
-) => Promise<PrismaPromise<Token>>;
+) => Promise<Token>;
 
 export type PrismaTx = Omit<
   PrismaClient,

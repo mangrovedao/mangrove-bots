@@ -66,5 +66,3 @@ export const startDb = async () => {
     },
   };
 };
-
-startDb();
