@@ -65,7 +65,9 @@ const main = async () => {
   const context: ChainContext = {
     chainId: network.chainId,
     name: network.name,
-    provider,
+    getBlock: async (number: string | number) => {
+      return provider.getBlock(number);
+    },
     blockFinality,
     multicall2: typechain.Multicall2__factory.connect(
       Mangrove.getAddress("Multicall2", network.name),
