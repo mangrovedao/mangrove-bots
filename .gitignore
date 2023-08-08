@@ -30,5 +30,5 @@ out.html
 merged.info
 packages/bot-arbitrage/src/types/typechain
 packages/bot-arbitrage/broadcast
-packages/bot-analytics/.graphclient
+packages/bot-analytics/.graphclient/
 *.keystore
