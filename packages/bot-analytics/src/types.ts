@@ -33,6 +33,7 @@ export type ChainContext = Chain & {
   blockFinality: number;
   multicall2: typechain.Multicall2;
   provider: JsonRpcProvider;
+  subgraphMaxFirstValue: number;
 };
 
 export type GetVolumesResult = Pick<

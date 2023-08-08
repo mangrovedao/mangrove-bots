@@ -30,6 +30,7 @@ describe("Volume tracking", () => {
     blockFinality: 0,
     provider: {} as any,
     multicall2: {} as any,
+    subgraphMaxFirstValue: 100,
   };
 
   const account0: Account = {
@@ -38,6 +39,10 @@ describe("Volume tracking", () => {
 
   const account1: Account = {
     address: "account1",
+  };
+
+  const account3: Account = {
+    address: "account3",
   };
 
   const token0: TokenWithoutId = {
@@ -78,7 +83,10 @@ describe("Volume tracking", () => {
   const generateMockSdk = (results: GetVolumesResult[]) => ({
     getVolumes: async (params: GetParamsVolumes): Promise<GetVolumeResults> => {
       return {
-        accountVolumeByPairs: results.slice(params.skip, params.first),
+        accountVolumeByPairs: results.slice(
+          params.skip,
+          params.skip ? params.first : params.first + 1
+        ),
       };
     },
   });
@@ -455,6 +463,111 @@ describe("Volume tracking", () => {
       totalReceived1: "20",
       chainId: 0,
       accountId: "account1",
+      asMaker: false,
+    });
+  });
+
+  it("get volumes series with skip needed", async () => {
+    const volumes: GetVolumesResult[] = [
+      {
+        id: `${account3.address}-${token0.address}-${token1.address}-maker`,
+        updatedDate: Date.now(),
+        account: {
+          id: account3.address,
+          address: account3.address,
+        },
+        token0: token0.address,
+        token1: token1.address,
+        token0Sent: "100",
+        token0Received: "200",
+        token1Sent: "300",
+        token1Received: "400",
+        asMaker: true,
+      },
+      {
+        id: `${account3.address}-${token0.address}-${token1.address}-taker`,
+        updatedDate: Date.now(),
+        account: {
+          id: account3.address,
+          address: account3.address,
+        },
+        token0: token0.address,
+        token1: token1.address,
+        token0Sent: "10",
+        token0Received: "20",
+        token1Sent: "30",
+        token1Received: "40",
+        asMaker: false,
+      },
+    ];
+    const sdk = generateMockSdk(volumes);
+
+    context.subgraphMaxFirstValue = 1;
+
+    const getAndSaveVolumeTimeSeries = generateGetAndSaveVolumeTimeSerie(
+      context,
+      getOrCreateTokenFn,
+      sdk
+    );
+
+    await prisma!.$transaction(async (tx) => {
+      const from = await createBlockIfNotExist(tx, {
+        number: 1,
+        hash: "0x1",
+        timestamp: new Date(),
+        chainId,
+      });
+
+      const to = await createBlockIfNotExist(tx, {
+        number: 2,
+        hash: "0x2",
+        timestamp: new Date(from.timestamp.getTime() + 1000),
+        chainId,
+      });
+      await getAndSaveVolumeTimeSeries(tx, from, to);
+    });
+
+    const accountAcitivityAccount3Maker =
+      await getLatestActivityWithAddressAndType(account3.address, true);
+
+    assert.deepEqual(accountAcitivityAccount3Maker, {
+      id: 9,
+      fromBlockId: 1,
+      toBlockId: 2,
+      token0Id: 1,
+      token1Id: 2,
+      sent0: "100",
+      received0: "200",
+      totalSent0: "100",
+      totalReceived0: "200",
+      sent1: "300",
+      received1: "400",
+      totalSent1: "300",
+      totalReceived1: "400",
+      chainId: 0,
+      accountId: "account3",
+      asMaker: true,
+    });
+
+    const accountAcitivityAccount3Taker =
+      await getLatestActivityWithAddressAndType(account3.address, false);
+
+    assert.deepEqual(accountAcitivityAccount3Taker, {
+      id: 10,
+      fromBlockId: 1,
+      toBlockId: 2,
+      token0Id: 1,
+      token1Id: 2,
+      sent0: "10",
+      received0: "20",
+      totalSent0: "10",
+      totalReceived0: "20",
+      sent1: "30",
+      received1: "40",
+      totalSent1: "30",
+      totalReceived1: "40",
+      chainId: 0,
+      accountId: "account3",
       asMaker: false,
     });
   });

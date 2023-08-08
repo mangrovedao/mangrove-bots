@@ -11,7 +11,10 @@ export const createBlockIfNotExist = async (
    * but id are auto generated at creation time...
    * */
   let _block = await prisma.block.findFirst({
-    where: block,
+    where: {
+      number: block.number,
+      chainId: block.chainId,
+    },
   });
 
   if (!_block) {

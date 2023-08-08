@@ -6,7 +6,6 @@ import {
   getOrCreateTokenFn,
   PrismaTx,
 } from "./db/types";
-import { subgraphMaxFirstValue } from "./constants";
 import { getOrCreateAccount } from "./db/account";
 
 export const generateGetAndSaveVolumeTimeSerie =
@@ -16,7 +15,7 @@ export const generateGetAndSaveVolumeTimeSerie =
 
     while (true) {
       const params = {
-        first: subgraphMaxFirstValue,
+        first: context.subgraphMaxFirstValue,
         skip,
         currentBlockNumber: to.number,
         latestDate: from.timestamp,
@@ -28,6 +27,10 @@ export const generateGetAndSaveVolumeTimeSerie =
         acc[vol.id] = vol;
         return acc;
       }, {} as Record<string, GetVolumesResult>);
+
+      if (Object.values(volumes).length === 0) {
+        return;
+      }
 
       const accountsActivities: AccountActivityWithoutId[] = [];
 
@@ -98,10 +101,10 @@ export const generateGetAndSaveVolumeTimeSerie =
         data: accountsActivities,
       });
 
-      if (Object.keys(volumes).length < subgraphMaxFirstValue) {
+      if (Object.keys(volumes).length < context.subgraphMaxFirstValue) {
         return;
       }
 
-      skip = subgraphMaxFirstValue;
+      skip += context.subgraphMaxFirstValue;
     }
   };

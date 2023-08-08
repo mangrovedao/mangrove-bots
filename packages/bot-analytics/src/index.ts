@@ -19,7 +19,7 @@ import { ExitCode, Setup } from "@mangrovedao/bot-utils";
 
 import { PrismaClient } from "@prisma/client";
 import { inititalizeChains } from "./db/init";
-import { chains } from "./constants";
+import { chains, subgraphMaxFirstValue } from "./constants";
 import { createBlockIfNotExist } from "./db/block";
 import { ChainContext } from "./types";
 import { generateCreateTokenIfNotExist } from "./db/token";
@@ -68,6 +68,7 @@ const main = async () => {
       Mangrove.getAddress("Multicall2", network.name),
       provider
     ),
+    subgraphMaxFirstValue,
   };
 
   const blockHeaderToBlockWithoutId =
