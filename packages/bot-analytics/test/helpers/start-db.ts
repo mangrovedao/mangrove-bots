@@ -1,7 +1,6 @@
 import waitPort from "wait-port";
 import { exec, spawn } from "child_process";
 import { PrismaClient } from "@prisma/client";
-import { stdout } from "process";
 
 const decoder = new TextDecoder("utf8");
 
@@ -34,22 +33,25 @@ export const startDb = async () => {
     },
   });
 
-  try {
-    await prisma.$executeRaw`DROP SCHEMA mangrove CASCADE`;
-  } catch {}
+  const resetDb = async () => {
+    try {
+      await prisma.$executeRaw`DROP SCHEMA mangrove CASCADE`;
+    } catch {}
 
-  await new Promise<void>((resolve) => {
-    exec("yarn prisma migrate dev", (error, stdout, stderr) => {
-      console.error(error);
-      console.error(stderr);
-      console.log(stdout);
+    await new Promise<void>((resolve) => {
+      exec("yarn prisma migrate dev", (error, stdout, stderr) => {
+        console.error(error);
+        console.error(stderr);
+        console.log(stdout);
 
-      resolve();
+        resolve();
+      });
     });
-  });
+  };
 
   return {
     prisma: prisma,
+    resetDb,
     stop: () => {
       childProcess.kill("SIGKILL");
       return new Promise<void>((resolve) => {
