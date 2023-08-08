@@ -7,20 +7,19 @@ import {
   PrismaTx,
 } from "./db/types";
 import { getOrCreateAccount } from "./db/account";
+import { queryUntilNoData } from "./analytics";
 
 export const generateGetAndSaveVolumeTimeSerie =
   (context: ChainContext, getOrCreateTokenFn: getOrCreateTokenFn, sdk: Sdk) =>
   async (prisma: PrismaTx, from: Block, to: Block) => {
-    let skip = 0;
+    const params = {
+      first: context.subgraphMaxFirstValue,
+      skip: 0,
+      currentBlockNumber: to.number,
+      latestDate: from.timestamp,
+    };
 
-    while (true) {
-      const params = {
-        first: context.subgraphMaxFirstValue,
-        skip,
-        currentBlockNumber: to.number,
-        latestDate: from.timestamp,
-      };
-
+    await queryUntilNoData(context.subgraphMaxFirstValue, params, async () => {
       const volumes = (
         await sdk.getVolumes(params)
       ).accountVolumeByPairs.reduce((acc, vol) => {
@@ -29,7 +28,7 @@ export const generateGetAndSaveVolumeTimeSerie =
       }, {} as Record<string, GetVolumesResult>);
 
       if (Object.values(volumes).length === 0) {
-        return;
+        return 0;
       }
 
       const accountsActivities: AccountActivityWithoutId[] = [];
@@ -101,10 +100,6 @@ export const generateGetAndSaveVolumeTimeSerie =
         data: accountsActivities,
       });
 
-      if (Object.keys(volumes).length < context.subgraphMaxFirstValue) {
-        return;
-      }
-
-      skip += context.subgraphMaxFirstValue;
-    }
+      return accountsActivities.length;
+    });
   };

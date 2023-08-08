@@ -3,8 +3,33 @@ import { logger } from "ethers";
 import { secondsInADay } from "./constants";
 import { createBlockIfNotExist, getLastStoredBlock } from "./db/block";
 import { BlockWithoutId } from "./db/types";
-import { ChainContext, GetAndSaveVolumeTimeSeriesFn } from "./types";
+import {
+  ChainContext,
+  GetAndSaveVolumeTimeSeriesFn,
+  GetParamsPagination,
+  Task,
+} from "./types";
 import { estimateBlockCount } from "./util/util";
+
+export const queryUntilNoData = async (
+  subgraphMaxFirstValue: number,
+  params: GetParamsPagination,
+  task: Task
+) => {
+  let skip = 0;
+
+  while (true) {
+    params.skip = skip;
+
+    const count = await task(params);
+
+    if (count == 0 || count < subgraphMaxFirstValue) {
+      return;
+    }
+
+    skip += subgraphMaxFirstValue;
+  }
+};
 
 export const handleRange = async (
   context: ChainContext,

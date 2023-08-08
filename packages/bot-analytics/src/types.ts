@@ -23,11 +23,7 @@ export type Chain = {
   name: string;
 };
 
-export type Task = (
-  prisma: PrismaClient,
-  from: Block,
-  to: Block
-) => Prisma.PrismaPromise<any>;
+export type Task = (params: GetParamsPagination) => Promise<number>;
 
 export type ChainContext = Chain & {
   blockFinality: number;
