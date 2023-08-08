@@ -1,3 +1,4 @@
+import { Block as BlockHeader } from "@ethersproject/providers";
 import { Account, PrismaClient } from "@prisma/client";
 import { startDb } from "../helpers/start-db";
 
@@ -25,12 +26,28 @@ describe("Volume tracking", () => {
     chainId,
   };
 
+  const blocks: Record<string, BlockHeader> = {
+    "1": {
+      number: 1,
+      hash: "0x1",
+      timestamp: Date.now() / 1000,
+    } as BlockHeader,
+    "2": {
+      number: 2,
+      hash: "0x2",
+      timestamp: Date.now() / 1000 + 2000,
+    } as BlockHeader,
+  };
+
   const context: ChainContext = {
     ...chain,
     blockFinality: 0,
-    provider: {} as any,
+    getBlock: async (number: string | number) => {
+      return blocks[number];
+    },
     multicall2: {} as any,
     subgraphMaxFirstValue: 100,
+    everyXBlock: 1,
   };
 
   const account0: Account = {
@@ -80,10 +97,11 @@ describe("Volume tracking", () => {
     return token;
   };
 
-  const generateMockSdk = (results: GetVolumesResult[]) => ({
+  const generateMockSdk = (results: Record<string, GetVolumesResult[]>) => ({
     getVolumes: async (params: GetParamsVolumes): Promise<GetVolumeResults> => {
+      const _results = results[params.currentBlockNumber];
       return {
-        accountVolumeByPairs: results.slice(
+        accountVolumeByPairs: _results.slice(
           params.skip,
           params.skip ? params.first : params.first + 1
         ),
@@ -178,7 +196,74 @@ describe("Volume tracking", () => {
         asMaker: false,
       },
     ];
-    const sdk = generateMockSdk(volumes);
+
+    const volumes2: GetVolumesResult[] = [
+      {
+        id: `${account0.address}-${token0.address}-${token1.address}-maker`,
+        updatedDate: Date.now(),
+        account: {
+          id: account0.address,
+          address: account0.address,
+        },
+        token0: token0.address,
+        token1: token1.address,
+        token0Sent: "200",
+        token0Received: "400",
+        token1Sent: "600",
+        token1Received: "800",
+        asMaker: true,
+      },
+      {
+        id: `${account0.address}-${token0.address}-${token1.address}-taker`,
+        updatedDate: Date.now(),
+        account: {
+          id: account0.address,
+          address: account0.address,
+        },
+        token0: token0.address,
+        token1: token1.address,
+        token0Sent: "20",
+        token0Received: "40",
+        token1Sent: "60",
+        token1Received: "80",
+        asMaker: false,
+      },
+      {
+        id: `${account1.address}-${token0.address}-${token1.address}-maker`,
+        updatedDate: Date.now(),
+        account: {
+          id: account1.address,
+          address: account1.address,
+        },
+        token0: token0.address,
+        token1: token1.address,
+        token0Sent: "800",
+        token0Received: "600",
+        token1Sent: "400",
+        token1Received: "200",
+        asMaker: true,
+      },
+      {
+        id: `${account1.address}-${token0.address}-${token1.address}-taker`,
+        updatedDate: Date.now(),
+        account: {
+          id: account1.address,
+          address: account1.address,
+        },
+        token0: token0.address,
+        token1: token1.address,
+        token0Sent: "80",
+        token0Received: "60",
+        token1Sent: "40",
+        token1Received: "20",
+        asMaker: false,
+      },
+    ];
+
+    const sdk = generateMockSdk({
+      "2": volumes,
+      "3": volumes2,
+    });
 
     const getAndSaveVolumeTimeSeries = generateGetAndSaveVolumeTimeSerie(
       context,
@@ -291,92 +376,21 @@ describe("Volume tracking", () => {
       asMaker: false,
     });
 
-    const volumes2: GetVolumesResult[] = [
-      {
-        id: `${account0.address}-${token0.address}-${token1.address}-maker`,
-        updatedDate: Date.now(),
-        account: {
-          id: account0.address,
-          address: account0.address,
-        },
-        token0: token0.address,
-        token1: token1.address,
-        token0Sent: "200",
-        token0Received: "400",
-        token1Sent: "600",
-        token1Received: "800",
-        asMaker: true,
-      },
-      {
-        id: `${account0.address}-${token0.address}-${token1.address}-taker`,
-        updatedDate: Date.now(),
-        account: {
-          id: account0.address,
-          address: account0.address,
-        },
-        token0: token0.address,
-        token1: token1.address,
-        token0Sent: "20",
-        token0Received: "40",
-        token1Sent: "60",
-        token1Received: "80",
-        asMaker: false,
-      },
-      {
-        id: `${account1.address}-${token0.address}-${token1.address}-maker`,
-        updatedDate: Date.now(),
-        account: {
-          id: account1.address,
-          address: account1.address,
-        },
-        token0: token0.address,
-        token1: token1.address,
-        token0Sent: "800",
-        token0Received: "600",
-        token1Sent: "400",
-        token1Received: "200",
-        asMaker: true,
-      },
-      {
-        id: `${account1.address}-${token0.address}-${token1.address}-taker`,
-        updatedDate: Date.now(),
-        account: {
-          id: account1.address,
-          address: account1.address,
-        },
-        token0: token0.address,
-        token1: token1.address,
-        token0Sent: "80",
-        token0Received: "60",
-        token1Sent: "40",
-        token1Received: "20",
-        asMaker: false,
-      },
-    ];
-
-    const sdk2 = generateMockSdk(volumes2);
-
-    const getAndSaveVolumeTimeSeries2 = generateGetAndSaveVolumeTimeSerie(
-      context,
-      getOrCreateTokenFn,
-      sdk2
-    );
-
     await prisma!.$transaction(async (tx) => {
       const from = await createBlockIfNotExist(tx, {
-        number: 3,
-        hash: "0x3",
+        number: 2,
+        hash: "0x2",
         timestamp: new Date(),
         chainId,
       });
 
       const to = await createBlockIfNotExist(tx, {
-        number: 4,
-        hash: "0x4",
+        number: 3,
+        hash: "0x3",
         timestamp: new Date(from.timestamp.getTime() + 1000),
         chainId,
       });
-      await getAndSaveVolumeTimeSeries2(tx, from, to);
+      await getAndSaveVolumeTimeSeries(tx, from, to);
     });
 
     const accountAcitivityAccount0Maker2 =
@@ -384,8 +398,8 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount0Maker2, {
       id: 5,
-      fromBlockId: 3,
-      toBlockId: 4,
+      fromBlockId: 2,
+      toBlockId: 3,
       token0Id: 1,
       token1Id: 2,
       sent0: "100",
@@ -405,8 +419,8 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount0Taker2, {
       id: 6,
-      fromBlockId: 3,
-      toBlockId: 4,
+      fromBlockId: 2,
+      toBlockId: 3,
       token0Id: 1,
       token1Id: 2,
       sent0: "10",
@@ -427,8 +441,8 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount1Maker2, {
       id: 7,
-      fromBlockId: 3,
-      toBlockId: 4,
+      fromBlockId: 2,
+      toBlockId: 3,
       token0Id: 1,
       token1Id: 2,
       sent0: "400",
@@ -449,8 +463,8 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount1Taker2, {
       id: 8,
-      fromBlockId: 3,
-      toBlockId: 4,
+      fromBlockId: 2,
+      toBlockId: 3,
       token0Id: 1,
       token1Id: 2,
       sent0: "40",
@@ -500,7 +514,9 @@ describe("Volume tracking", () => {
         asMaker: false,
       },
     ];
-    const sdk = generateMockSdk(volumes);
+    const sdk = generateMockSdk({
+      "2": volumes,
+    });
 
     context.subgraphMaxFirstValue = 1;
 

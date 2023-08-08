@@ -19,13 +19,16 @@ import { ExitCode, Setup } from "@mangrovedao/bot-utils";
 
 import { PrismaClient } from "@prisma/client";
 import { inititalizeChains } from "./db/init";
-import { chains, subgraphMaxFirstValue } from "./constants";
+import { chains, secondsInADay, subgraphMaxFirstValue } from "./constants";
 import { createBlockIfNotExist } from "./db/block";
 import { ChainContext } from "./types";
 import { generateCreateTokenIfNotExist } from "./db/token";
 import { generateGetAndSaveVolumeTimeSerie } from "./volume";
 import { getBuiltGraphSDK } from "../.graphclient";
-import { generateBlockHeaderToBlockWithoutId } from "./util/util";
+import {
+  estimateBlockCount,
+  generateBlockHeaderToBlockWithoutId,
+} from "./util/util";
 import moize from "moize";
 import { handleRange } from "./analytics";
 
@@ -69,6 +72,7 @@ const main = async () => {
       provider
     ),
     subgraphMaxFirstValue,
+    everyXBlock: estimateBlockCount(secondsInADay, estimatedBlockTimeMs),
   };
 
   const blockHeaderToBlockWithoutId =
@@ -111,9 +115,8 @@ const main = async () => {
   await handleRange(
     context,
     prisma,
-    getAndSaveVolumeTimeSeries,
-    blockHeaderToBlockWithoutId(lastSafeBlock),
-    estimatedBlockTimeMs
+    [getAndSaveVolumeTimeSeries],
+    blockHeaderToBlockWithoutId(lastSafeBlock)
   );
 };
 

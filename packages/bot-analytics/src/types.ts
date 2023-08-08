@@ -1,8 +1,8 @@
 import { typechain } from "@mangrovedao/mangrove.js";
-import { JsonRpcProvider } from "@ethersproject/providers";
-import { Block, Prisma, PrismaClient } from "@prisma/client";
+import { Block } from "@prisma/client";
 import { Account, AccountVolumeByPair } from "../.graphclient";
 import { PrismaTx } from "./db/types";
+import { Block as BlockHeader } from "@ethersproject/providers";
 
 export type GetParamsPagination = {
   first: number;
@@ -28,8 +28,9 @@ export type Task = (params: GetParamsPagination) => Promise<number>;
 export type ChainContext = Chain & {
   blockFinality: number;
   multicall2: typechain.Multicall2;
-  provider: JsonRpcProvider;
+  getBlock: (number: number | string | "latest") => Promise<BlockHeader>;
   subgraphMaxFirstValue: number;
+  everyXBlock: number;
 };
 
 export type GetVolumesResult = Pick<
@@ -49,7 +50,7 @@ export type GetVolumeResults = {
   accountVolumeByPairs: GetVolumesResult[];
 };
 
-export type GetAndSaveVolumeTimeSeriesFn = (
+export type GetTimeSeriesFn = (
   prisma: PrismaTx,
   from: Block,
   to: Block

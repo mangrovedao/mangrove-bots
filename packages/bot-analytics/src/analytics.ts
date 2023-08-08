@@ -1,15 +1,13 @@
 import { PrismaClient } from "@prisma/client";
 import { logger } from "ethers";
-import { secondsInADay } from "./constants";
 import { createBlockIfNotExist, getLastStoredBlock } from "./db/block";
 import { BlockWithoutId } from "./db/types";
 import {
   ChainContext,
-  GetAndSaveVolumeTimeSeriesFn,
   GetParamsPagination,
+  GetTimeSeriesFn,
   Task,
 } from "./types";
-import { estimateBlockCount } from "./util/util";
 
 export const queryUntilNoData = async (
   subgraphMaxFirstValue: number,
@@ -34,9 +32,8 @@ export const queryUntilNoData = async (
 export const handleRange = async (
   context: ChainContext,
   prisma: PrismaClient,
-  getAndSaveVolumeTimeSeries: GetAndSaveVolumeTimeSeriesFn,
-  to: BlockWithoutId,
-  estimatedBlockTimeMs: number
+  getTimeSeriesFns: GetTimeSeriesFn[],
+  to: BlockWithoutId
 ) => {
   let lastStoredBlock = (await getLastStoredBlock(prisma, context))!;
   if (!lastStoredBlock) {
@@ -51,13 +48,11 @@ export const handleRange = async (
   });
 
   while (lastStoredBlock.number < to.number) {
-    let nextBlockNumber =
-      lastStoredBlock.number +
-      estimateBlockCount(secondsInADay, estimatedBlockTimeMs);
+    let nextBlockNumber = lastStoredBlock.number + context.everyXBlock;
 
     nextBlockNumber = Math.min(nextBlockNumber, to.number);
 
-    const nextBlock = await context.provider.getBlock(nextBlockNumber);
+    const nextBlock = await context.getBlock(nextBlockNumber);
     const nextBlockMinimal = {
       chainId: context.chainId,
       number: nextBlock.number,
@@ -76,7 +71,11 @@ export const handleRange = async (
         chainId: context.chainId,
         timestamp: nextBlockMinimal.timestamp,
       });
-      await getAndSaveVolumeTimeSeries(tx, lastStoredBlock!, nextBlockDb);
+
+      /* I voluntary choose to handle querying task sycnhronously to avoid race condition */
+      for (const getTimeSeries of getTimeSeriesFns) {
+        await getTimeSeries(tx, lastStoredBlock!, nextBlockDb);
+      }
     });
     lastStoredBlock = (await getLastStoredBlock(prisma, context))!;
   }
