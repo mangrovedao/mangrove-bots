@@ -1,0 +1,21 @@
+query getOpenOffers($first: Int, $skip: Int, $currentBlockNumber: Int) {
+  offers(where: { isOpen: true }) {
+    id
+
+    wants
+    gives
+
+    maker {
+      address
+    }
+
+    market {
+      outbound_tkn
+      inbound_tkn
+    }
+
+    owner {
+      address
+    }
+  }
+}

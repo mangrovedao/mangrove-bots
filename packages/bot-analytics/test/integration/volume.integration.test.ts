@@ -16,6 +16,7 @@ import { inititalizeChains } from "../../src/db/init";
 import assert from "assert";
 import { handleRange } from "../../src/analytics";
 import { generateBlockHeaderToBlockWithoutId } from "../../src/util/util";
+import { Sdk } from "../../.graphclient";
 
 describe("Volume tracking", () => {
   let prisma: PrismaClient | undefined;
@@ -108,17 +109,20 @@ describe("Volume tracking", () => {
     return token;
   };
 
-  const generateMockSdk = (results: Record<string, GetVolumesResult[]>) => ({
-    getVolumes: async (params: GetParamsVolumes): Promise<GetVolumeResults> => {
-      const _results = results[params.currentBlockNumber];
-      return {
-        accountVolumeByPairs: _results.slice(
-          params.skip,
-          params.skip === 0 ? params.first : params.first + params.skip
-        ),
-      };
-    },
-  });
+  const generateMockSdk = (results: Record<string, GetVolumesResult[]>) =>
+    ({
+      getVolumes: async (
+        params: GetParamsVolumes
+      ): Promise<GetVolumeResults> => {
+        const _results = results[params.currentBlockNumber];
+        return {
+          accountVolumeByPairs: _results.slice(
+            params.skip,
+            params.skip === 0 ? params.first : params.first + params.skip
+          ),
+        };
+      },
+    } as Sdk);
 
   const getLatestActivityWithAddressAndType = async (
     address: string,

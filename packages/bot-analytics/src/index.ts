@@ -31,6 +31,7 @@ import {
 } from "./util/util";
 import moize from "moize";
 import { handleRange } from "./analytics";
+import { generateGetAndSaveLiquidityTimeSerie } from "./liquidity";
 
 enableLogging();
 
@@ -93,7 +94,7 @@ const main = async () => {
 
   const createTokenIfNotExist = moize(generateCreateTokenIfNotExist(context));
 
-  const lastSafeBlock = await context.provider.getBlock(
+  const lastSafeBlock = await context.getBlock(
     latestBlock.number - context.blockFinality
   );
 
@@ -114,10 +115,17 @@ const main = async () => {
     sdk
   );
 
+  const getAndSaveLiquidity = generateGetAndSaveLiquidityTimeSerie(
+    context,
+    createTokenIfNotExist,
+    sdk
+  );
+
   await handleRange(
     context,
     prisma,
-    [getAndSaveVolumeTimeSeries],
+    // [getAndSaveVolumeTimeSeries],
+    [getAndSaveLiquidity],
     blockHeaderToBlockWithoutId(lastSafeBlock)
   );
 };

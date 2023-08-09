@@ -1,6 +1,6 @@
 import { typechain } from "@mangrovedao/mangrove.js";
 import { Block } from "@prisma/client";
-import { Account, AccountVolumeByPair } from "../.graphclient";
+import { Account, AccountVolumeByPair, Market, Offer } from "../.graphclient";
 import { PrismaTx } from "./db/types";
 import { Block as BlockHeader } from "@ethersproject/providers";
 
@@ -9,14 +9,13 @@ export type GetParamsPagination = {
   skip: number;
 };
 
-export type GetParamsTimeTravelled = {
+export type GetParamsTimeTravelled = GetParamsPagination & {
   currentBlockNumber: number;
 };
 
-export type GetParamsVolumes = GetParamsTimeTravelled &
-  GetParamsPagination & {
-    latestDate: Date;
-  };
+export type GetParamsVolumes = GetParamsTimeTravelled & {
+  latestDate: Date;
+};
 
 export type Chain = {
   chainId: number;
@@ -55,3 +54,13 @@ export type GetTimeSeriesFn = (
   from: Block,
   to: Block
 ) => Promise<void>;
+
+export type OpenOffer = Pick<Offer, "id" | "wants" | "gives"> & {
+  maker: Pick<Account, "address">;
+  market: Pick<Market, "outbound_tkn" | "inbound_tkn">;
+  owner?: Pick<Account, "address">;
+};
+
+export type GetOpenOffersResult = {
+  offers: OpenOffer[];
+};

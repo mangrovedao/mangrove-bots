@@ -31,6 +31,9 @@ model Block {
 
   accountActivitiesByFromBlock AccountActivity[] @relation("fromBlockActivities")
   accountActivitiesByToBlock   AccountActivity[] @relation("toBlockActivities")
+
+  aggregatedLiquidityByFromBlock AggregatedLiquidityByMarket[] @relation("fromBlockLiquidity")
+  aggregatedLiquidityByToBlock   AggregatedLiquidityByMarket[] @relation("toBlockLiquidity")
 }
 
 model Token {
@@ -45,6 +48,9 @@ model Token {
 
   token0 AccountActivity[] @relation("token0")
   token1 AccountActivity[] @relation("token1")
+
+  aggregatedLiquidityToken0 AggregatedLiquidityByMarket[] @relation("aggregatedLiquidityToken0")
+  aggregatedLiquidityToken1 AggregatedLiquidityByMarket[] @relation("aggregatedLiquidityToken1")
 }
 
 model Account {
@@ -87,4 +93,23 @@ model AccountActivity {
   accountId String
 
   asMaker Boolean
+}
+
+model AggregatedLiquidityByMarket {
+  id Int @id @unique @default(autoincrement())
+
+  fromBlock   Block @relation("fromBlockLiquidity", fields: [fromBlockId], references: [id])
+  fromBlockId Int
+
+  toBlock   Block @relation("toBlockLiquidity", fields: [toBlockId], references: [id])
+  toBlockId Int
+
+  token0   Token @relation("aggregatedLiquidityToken0", fields: [token0Id], references: [id])
+  token0Id Int
+
+  token1   Token @relation("aggregatedLiquidityToken1", fields: [token1Id], references: [id])
+  token1Id Int
+
+  amountToken0 String
+  amountToken1 String
 }

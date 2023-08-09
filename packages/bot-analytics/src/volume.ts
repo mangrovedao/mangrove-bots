@@ -3,14 +3,14 @@ import { Sdk } from "../.graphclient/index";
 import { Block } from "@prisma/client";
 import {
   AccountActivityWithoutId,
-  getOrCreateTokenFn,
+  GetOrCreateTokenFn,
   PrismaTx,
 } from "./db/types";
 import { getOrCreateAccount } from "./db/account";
 import { queryUntilNoData } from "./analytics";
 
 export const generateGetAndSaveVolumeTimeSerie =
-  (context: ChainContext, getOrCreateTokenFn: getOrCreateTokenFn, sdk: Sdk) =>
+  (context: ChainContext, getOrCreateTokenFn: GetOrCreateTokenFn, sdk: Sdk) =>
   async (prisma: PrismaTx, from: Block, to: Block) => {
     const params = {
       first: context.subgraphMaxFirstValue,
