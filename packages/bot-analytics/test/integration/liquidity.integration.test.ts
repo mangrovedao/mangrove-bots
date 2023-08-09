@@ -192,6 +192,32 @@ describe("Available Liquidity tracking", () => {
           inbound_tkn: token1.address,
         },
       },
+      {
+        id: "id3",
+        wants: "300",
+        gives: "400",
+        maker: {
+          address: account0.address,
+        },
+
+        market: {
+          outbound_tkn: token1.address,
+          inbound_tkn: token0.address,
+        },
+      },
+      {
+        id: "id4",
+        wants: "400",
+        gives: "600",
+        maker: {
+          address: account1.address,
+        },
+
+        market: {
+          outbound_tkn: token1.address,
+          inbound_tkn: token0.address,
+        },
+      },
     ];
 
     const openOffers2: OpenOffer[] = [
@@ -264,6 +290,22 @@ describe("Available Liquidity tracking", () => {
       amountToken1: "600",
     });
 
+    const liquidity1Token1Token0 = await getLatestLiquidityWithPairAtBlock(
+      2,
+      token1.address,
+      token0.address
+    );
+
+    assert.deepEqual(liquidity1Token1Token0, {
+      id: 2,
+      fromBlockId: 1,
+      toBlockId: 2,
+      token0Id: 2,
+      token1Id: 1,
+      amountToken0: "700",
+      amountToken1: "1000",
+    });
+
     const liquidity2 = await getLatestLiquidityWithPairAtBlock(
       3,
       token0.address,
@@ -271,7 +313,7 @@ describe("Available Liquidity tracking", () => {
     );
 
     assert.deepEqual(liquidity2, {
-      id: 2,
+      id: 3,
       fromBlockId: 2,
       toBlockId: 3,
       token0Id: 1,
