@@ -1,10 +1,8 @@
 import {
-  Account,
   AccountActivity,
   AggregatedLiquidityByMarket,
   Block,
   PrismaClient,
-  PrismaPromise,
   Token,
 } from "@prisma/client";
 
