@@ -126,7 +126,8 @@ describe("Available Liquidity tracking", () => {
   const getLatestLiquidityWithPairAtBlock = async (
     blockNumber: number,
     token0address: string,
-    token1address: string
+    token1address: string,
+    maker: string
   ) => {
     const token0 = await getOrCreateTokenFn(prisma!, token0address);
     const token1 = await getOrCreateTokenFn(prisma!, token1address);
@@ -147,6 +148,7 @@ describe("Available Liquidity tracking", () => {
         token1Id: token1.id,
 
         toBlockId: block!.id,
+        accountId: maker,
       },
     });
   };
@@ -274,52 +276,118 @@ describe("Available Liquidity tracking", () => {
       blockHeaderToBlockWithoutId(blocks["3"])
     );
 
-    const liquidity1 = await getLatestLiquidityWithPairAtBlock(
-      2,
-      token0.address,
-      token1.address
-    );
+    const liquidity1Account0Token0Token1 =
+      await getLatestLiquidityWithPairAtBlock(
+        2,
+        token0.address,
+        token1.address,
+        account0.address
+      );
 
-    assert.deepEqual(liquidity1, {
+    assert.deepEqual(liquidity1Account0Token0Token1, {
       id: 1,
       fromBlockId: 1,
       toBlockId: 2,
       token0Id: 1,
       token1Id: 2,
-      amountToken0: "300",
-      amountToken1: "600",
+      amountToken0: "100",
+      amountToken1: "200",
+      accountId: account0.address,
     });
 
-    const liquidity1Token1Token0 = await getLatestLiquidityWithPairAtBlock(
-      2,
-      token1.address,
-      token0.address
-    );
+    const liquidity1Account0Token1Token0 =
+      await getLatestLiquidityWithPairAtBlock(
+        2,
+        token1.address,
+        token0.address,
+        account0.address
+      );
 
-    assert.deepEqual(liquidity1Token1Token0, {
-      id: 2,
+    assert.deepEqual(liquidity1Account0Token1Token0, {
+      id: 3,
       fromBlockId: 1,
       toBlockId: 2,
       token0Id: 2,
       token1Id: 1,
-      amountToken0: "700",
-      amountToken1: "1000",
+      amountToken0: "300",
+      amountToken1: "400",
+      accountId: account0.address,
     });
 
-    const liquidity2 = await getLatestLiquidityWithPairAtBlock(
-      3,
-      token0.address,
-      token1.address
-    );
+    const liquidity1Account1Token0Token1 =
+      await getLatestLiquidityWithPairAtBlock(
+        2,
+        token0.address,
+        token1.address,
+        account1.address
+      );
 
-    assert.deepEqual(liquidity2, {
-      id: 3,
+    assert.deepEqual(liquidity1Account1Token0Token1, {
+      id: 2,
+      fromBlockId: 1,
+      toBlockId: 2,
+      token0Id: 1,
+      token1Id: 2,
+      amountToken0: "200",
+      amountToken1: "400",
+      accountId: account1.address,
+    });
+
+    const liquidity1Account1Token1Token0 =
+      await getLatestLiquidityWithPairAtBlock(
+        2,
+        token1.address,
+        token0.address,
+        account1.address
+      );
+
+    assert.deepEqual(liquidity1Account1Token1Token0, {
+      id: 4,
+      fromBlockId: 1,
+      toBlockId: 2,
+      token0Id: 2,
+      token1Id: 1,
+      amountToken0: "400",
+      amountToken1: "600",
+      accountId: account1.address,
+    });
+
+    const liquidity1Account0Token0Token1_2 =
+      await getLatestLiquidityWithPairAtBlock(
+        3,
+        token0.address,
+        token1.address,
+        account0.address
+      );
+
+    assert.deepEqual(liquidity1Account0Token0Token1_2, {
+      id: 5,
       fromBlockId: 2,
       toBlockId: 3,
       token0Id: 1,
       token1Id: 2,
-      amountToken0: "3000",
-      amountToken1: "6000",
+      amountToken0: "1000",
+      amountToken1: "2000",
+      accountId: account0.address,
+    });
+
+    const liquidity1Account1Token0Token1_2 =
+      await getLatestLiquidityWithPairAtBlock(
+        3,
+        token0.address,
+        token1.address,
+        account1.address
+      );
+
+    assert.deepEqual(liquidity1Account1Token0Token1_2, {
+      id: 6,
+      fromBlockId: 2,
+      toBlockId: 3,
+      token0Id: 1,
+      token1Id: 2,
+      amountToken0: "2000",
+      amountToken1: "4000",
+      accountId: account1.address,
     });
   });
 

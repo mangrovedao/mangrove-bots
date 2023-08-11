@@ -7,6 +7,7 @@ import {
 } from "./db/types";
 import { ChainContext } from "./types";
 import { queryUntilNoData } from "./analytics";
+import { getOrCreateAccount } from "./db/account";
 
 export const generateGetAndSaveLiquidityTimeSerie =
   (context: ChainContext, getOrCreateTokenFn: GetOrCreateTokenFn, sdk: Sdk) =>
@@ -26,6 +27,9 @@ export const generateGetAndSaveLiquidityTimeSerie =
       > = {};
 
       for (const offer of offers.offers) {
+        const owner = offer.owner ? offer.owner : offer.maker;
+        const account = await getOrCreateAccount(prisma, owner.address);
+
         const token0 = await getOrCreateTokenFn(
           prisma,
           offer.market.outbound_tkn
@@ -35,7 +39,7 @@ export const generateGetAndSaveLiquidityTimeSerie =
           offer.market.inbound_tkn
         );
 
-        const key = `${token0.address}-${token1.address}`;
+        const key = `${token0.address}-${token1.address}-${account.address}`;
         const liquidity = aggregatedLiquidity[key];
         if (!liquidity) {
           aggregatedLiquidity[key] = {
@@ -47,6 +51,7 @@ export const generateGetAndSaveLiquidityTimeSerie =
 
             amountToken0: BigInt(offer.wants),
             amountToken1: BigInt(offer.gives),
+            accountId: account.address,
           };
         } else {
           liquidity.amountToken0 += BigInt(offer.wants);
@@ -62,6 +67,7 @@ export const generateGetAndSaveLiquidityTimeSerie =
           token1Id: liquidity.token1Id,
           amountToken0: liquidity.amountToken0.toString(),
           amountToken1: liquidity.amountToken1.toString(),
+          accountId: liquidity.accountId,
         })),
       });
 
