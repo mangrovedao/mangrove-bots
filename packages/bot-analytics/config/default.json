@@ -1,4 +1,8 @@
 {
   "logLevel": "debug",
-  "runEveryXHours": 12
+  "runEveryXHours": 12,
+  "databaseUrl": "postgresql://postgres:postgres@localhost:5432/postgres?schema=mangrove",
+  "startingBlock": 43091275,
+  "estimatedBlockTimeMs": 2000,
+  "blockFinality": 200
 }
