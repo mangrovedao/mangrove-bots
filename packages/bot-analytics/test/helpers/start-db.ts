@@ -6,7 +6,12 @@ const decoder = new TextDecoder("utf8");
 
 export const startDb = async () => {
   const filePath = `${__dirname}/../../deploy/docker-compose.yml`;
-  const childProcess = spawn(`docker-compose`, ["--file", filePath, "up"]);
+  const childProcess = spawn(`docker-compose`, [
+    "--file",
+    filePath,
+    "up",
+    "-d",
+  ]);
 
   childProcess.stdout.on("data", (data) => {
     console.log(decoder.decode(data));
