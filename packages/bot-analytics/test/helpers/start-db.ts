@@ -45,7 +45,7 @@ export const startDb = async () => {
 
     await new Promise<void>((resolve) => {
       exec(
-        `export DATABASE_URL=${url} yarn prisma migrate dev`,
+        `export DATABASE_URL=${url} && yarn prisma migrate dev`,
         (error, stdout, stderr) => {
           console.error(error);
           console.error(stderr);
