@@ -5,7 +5,7 @@ import { PrismaClient } from "@prisma/client";
 const decoder = new TextDecoder("utf8");
 
 export const startDb = async () => {
-  const filePath = `${__dirname}/../../deploy/docker-compose.yml`;
+  const filePath = `${__dirname}/../../deploy/test/docker-compose.yml`;
   const childProcess = spawn(`docker-compose`, [
     "--file",
     filePath,
@@ -26,10 +26,10 @@ export const startDb = async () => {
   });
 
   await waitPort({
-    port: 5432,
+    port: 5433,
   });
 
-  const url = `postgresql://postgres:postgres@localhost:5432/postgres?schema=mangrove`;
+  const url = `postgresql://postgres:postgres@localhost:5433/postgres?schema=mangrove`;
   const prisma = new PrismaClient({
     datasources: {
       db: {

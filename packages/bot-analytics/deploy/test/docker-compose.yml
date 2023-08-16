@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  postgres:
+    image: postgres
+
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      PGDATA: /data/test-postgres
+    volumes:
+      - mangrove-test-pg:/data/postgres
+    ports:
+      - "5433:5433"
+    networks:
+      - test-postgres
+    restart: unless-stopped
+
+networks:
+  test-postgres:
+    driver: bridge
+
+volumes:
+  mangrove-test-pg:
