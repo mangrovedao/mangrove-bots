@@ -44,8 +44,8 @@ model Token {
   chain   Chain @relation(fields: [chainId], references: [id])
   chainId Int
 
-  token0 AccountActivity[] @relation("token0")
-  token1 AccountActivity[] @relation("token1")
+  accountActivityAsToken0 AccountActivity[] @relation("token0")
+  accountActivityAsToken1 AccountActivity[] @relation("token1")
 
   aggregatedLiquidityToken0 AggregatedLiquidityByMarket[] @relation("aggregatedLiquidityToken0")
   aggregatedLiquidityToken1 AggregatedLiquidityByMarket[] @relation("aggregatedLiquidityToken1")
