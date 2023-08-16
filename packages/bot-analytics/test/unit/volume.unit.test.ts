@@ -151,7 +151,7 @@ describe("Volume tracking", () => {
     await inititalizeChains(prisma!, [chain]);
   });
 
-  it("test handle range function with skip", async () => {
+  it("get volumes series without needed to skip", async () => {
     const volumes: GetVolumesResult[] = [
       {
         id: `${account0.address}-${token0.address}-${token1.address}-maker`,
@@ -289,13 +289,143 @@ describe("Volume tracking", () => {
       sdk
     );
 
-    await createBlockIfNotExist(prisma!, blockHeaderToDbBlock(blocks["1"]));
-    await handleRange(
-      context,
-      prisma!,
-      [getAndSaveVolumeTimeSeries],
-      blockHeaderToDbBlock(blocks["3"])
-    );
+    await prisma!.$transaction(async (tx) => {
+      const from = await createBlockIfNotExist(tx, {
+        number: 1,
+        hash: "0x1",
+        timestamp: new Date(),
+        chainId,
+      });
+
+      const to = await createBlockIfNotExist(tx, {
+        number: 2,
+        hash: "0x2",
+        timestamp: new Date(from.timestamp.getTime() + 1000),
+        chainId,
+      });
+      await getAndSaveVolumeTimeSeries(tx, from, to);
+    });
+
+    const accountAcitivityAccount0Maker =
+      await getLatestActivityWithAddressAndType(account0.address, true);
+
+    assert.deepEqual(accountAcitivityAccount0Maker, {
+      id: 1,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 1,
+      toBlockChainId: chainId,
+      toBlockNumber: 2,
+      token0ChainId: chainId,
+      token0Address: token0.address,
+      token1ChainId: chainId,
+      token1Address: token1.address,
+      sent0: "100",
+      received0: "200",
+      totalSent0: "100",
+      totalReceived0: "200",
+      sent1: "300",
+      received1: "400",
+      totalSent1: "300",
+      totalReceived1: "400",
+      chainId: 0,
+      accountId: "account0",
+      asMaker: true,
+    });
+
+    const accountAcitivityAccount0Taker =
+      await getLatestActivityWithAddressAndType(account0.address, false);
+
+    assert.deepEqual(accountAcitivityAccount0Taker, {
+      id: 2,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 1,
+      toBlockChainId: chainId,
+      toBlockNumber: 2,
+      token0ChainId: chainId,
+      token0Address: token0.address,
+      token1ChainId: chainId,
+      token1Address: token1.address,
+      sent0: "10",
+      received0: "20",
+      totalSent0: "10",
+      totalReceived0: "20",
+      sent1: "30",
+      received1: "40",
+      totalSent1: "30",
+      totalReceived1: "40",
+      chainId: 0,
+      accountId: "account0",
+      asMaker: false,
+    });
+
+    const accountAcitivityAccount1Maker =
+      await getLatestActivityWithAddressAndType(account1.address, true);
+
+    assert.deepEqual(accountAcitivityAccount1Maker, {
+      id: 3,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 1,
+      toBlockChainId: chainId,
+      toBlockNumber: 2,
+      token0ChainId: chainId,
+      token0Address: token0.address,
+      token1ChainId: chainId,
+      token1Address: token1.address,
+      sent0: "400",
+      received0: "300",
+      totalSent0: "400",
+      totalReceived0: "300",
+      sent1: "200",
+      received1: "100",
+      totalSent1: "200",
+      totalReceived1: "100",
+      chainId: 0,
+      accountId: "account1",
+      asMaker: true,
+    });
+
+    const accountAcitivityAccount1Taker =
+      await getLatestActivityWithAddressAndType(account1.address, false);
+
+    assert.deepEqual(accountAcitivityAccount1Taker, {
+      id: 4,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 1,
+      toBlockChainId: chainId,
+      toBlockNumber: 2,
+      token0ChainId: chainId,
+      token0Address: token0.address,
+      token1ChainId: chainId,
+      token1Address: token1.address,
+      sent0: "40",
+      received0: "30",
+      totalSent0: "40",
+      totalReceived0: "30",
+      sent1: "20",
+      received1: "10",
+      totalSent1: "20",
+      totalReceived1: "10",
+      chainId: 0,
+      accountId: "account1",
+      asMaker: false,
+    });
+
+    await prisma!.$transaction(async (tx) => {
+      const from = await createBlockIfNotExist(tx, {
+        number: 2,
+        hash: "0x2",
+        timestamp: new Date(),
+        chainId,
+      });
+
+      const to = await createBlockIfNotExist(tx, {
+        number: 3,
+        hash: "0x3",
+        timestamp: new Date(from.timestamp.getTime() + 1000),
+        chainId,
+      });
+      await getAndSaveVolumeTimeSeries(tx, from, to);
+    });
 
     const accountAcitivityAccount0Maker2 =
       await getLatestActivityWithAddressAndType(account0.address, true);
@@ -397,6 +527,121 @@ describe("Volume tracking", () => {
       totalReceived1: "20",
       chainId: 0,
       accountId: "account1",
+      asMaker: false,
+    });
+  });
+
+  it("get volumes series with skip needed", async () => {
+    const volumes: GetVolumesResult[] = [
+      {
+        id: `${account3.address}-${token0.address}-${token1.address}-maker`,
+        updatedDate: Date.now(),
+        account: {
+          id: account3.address,
+          address: account3.address,
+        },
+        token0: token0.address,
+        token1: token1.address,
+        token0Sent: "100",
+        token0Received: "200",
+        token1Sent: "300",
+        token1Received: "400",
+        asMaker: true,
+      },
+      {
+        id: `${account3.address}-${token0.address}-${token1.address}-taker`,
+        updatedDate: Date.now(),
+        account: {
+          id: account3.address,
+          address: account3.address,
+        },
+        token0: token0.address,
+        token1: token1.address,
+        token0Sent: "10",
+        token0Received: "20",
+        token1Sent: "30",
+        token1Received: "40",
+        asMaker: false,
+      },
+    ];
+    const sdk = generateMockSdk({
+      "2": volumes,
+    });
+
+    context.subgraphMaxFirstValue = 1;
+
+    const getAndSaveVolumeTimeSeries = generateGetAndSaveVolumeTimeSerie(
+      context,
+      getOrCreateTokenFn,
+      sdk
+    );
+
+    await prisma!.$transaction(async (tx) => {
+      const from = await createBlockIfNotExist(tx, {
+        number: 1,
+        hash: "0x1",
+        timestamp: new Date(),
+        chainId,
+      });
+
+      const to = await createBlockIfNotExist(tx, {
+        number: 2,
+        hash: "0x2",
+        timestamp: new Date(from.timestamp.getTime() + 1000),
+        chainId,
+      });
+      await getAndSaveVolumeTimeSeries(tx, from, to);
+    });
+
+    const accountAcitivityAccount3Maker =
+      await getLatestActivityWithAddressAndType(account3.address, true);
+
+    assert.deepEqual(accountAcitivityAccount3Maker, {
+      id: 1,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 1,
+      toBlockChainId: chainId,
+      toBlockNumber: 2,
+      token0ChainId: chainId,
+      token0Address: token0.address,
+      token1ChainId: chainId,
+      token1Address: token1.address,
+      sent0: "100",
+      received0: "200",
+      totalSent0: "100",
+      totalReceived0: "200",
+      sent1: "300",
+      received1: "400",
+      totalSent1: "300",
+      totalReceived1: "400",
+      chainId: 0,
+      accountId: "account3",
+      asMaker: true,
+    });
+
+    const accountAcitivityAccount3Taker =
+      await getLatestActivityWithAddressAndType(account3.address, false);
+
+    assert.deepEqual(accountAcitivityAccount3Taker, {
+      id: 2,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 1,
+      toBlockChainId: chainId,
+      toBlockNumber: 2,
+      token0ChainId: chainId,
+      token0Address: token0.address,
+      token1ChainId: chainId,
+      token1Address: token1.address,
+      sent0: "10",
+      received0: "20",
+      totalSent0: "10",
+      totalReceived0: "20",
+      sent1: "30",
+      received1: "40",
+      totalSent1: "30",
+      totalReceived1: "40",
+      chainId: 0,
+      accountId: "account3",
       asMaker: false,
     });
   });
