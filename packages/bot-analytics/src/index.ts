@@ -37,12 +37,6 @@ const setup = new Setup(config);
 
 const prisma = new PrismaClient();
 
-async function botFunction(
-  mgv: Mangrove,
-  signer: Wallet,
-  provider: BaseProvider
-) {}
-
 const main = async () => {
   await inititalizeChains(prisma, chains);
 
@@ -85,7 +79,7 @@ const main = async () => {
   });
 
   const sdk = getBuiltGraphSDK({
-    chainName: "matic",
+    chainName: network.name,
   });
 
   const createTokenIfNotExist = moize(generateCreateTokenIfNotExist(context));
