@@ -17,5 +17,9 @@
   "blockFinality": {
     "__name": "BLOCK_FINALITY",
     "__format": "number"
+  },
+  "chains": {
+    "__name": "CHAINS",
+    "__format": "JSON"
   }
 }

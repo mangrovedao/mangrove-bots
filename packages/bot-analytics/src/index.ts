@@ -6,8 +6,6 @@
 import config from "./util/config";
 import { logger } from "./util/logger";
 
-import { BaseProvider } from "@ethersproject/providers";
-import { Wallet } from "@ethersproject/wallet";
 import Mangrove, {
   enableLogging,
   ethers,
@@ -19,9 +17,9 @@ import { ExitCode, Setup } from "@mangrovedao/bot-utils";
 
 import { PrismaClient } from "@prisma/client";
 import { inititalizeChains } from "./db/init";
-import { chains, secondsInADay, subgraphMaxFirstValue } from "./constants";
+import { secondsInADay, subgraphMaxFirstValue } from "./constants";
 import { createBlockIfNotExist } from "./db/block";
-import { ChainContext } from "./types";
+import { Chain, ChainContext } from "./types";
 import { generateCreateTokenIfNotExist } from "./db/token";
 import { generateGetAndSaveVolumeTimeSerie } from "./volume";
 import { getBuiltGraphSDK } from "../.graphclient";
@@ -38,13 +36,15 @@ const setup = new Setup(config);
 const prisma = new PrismaClient();
 
 const main = async () => {
-  await inititalizeChains(prisma, chains);
-
   const rpcHttpProviderUrl = config.get<string>("rpcHttpProvider");
   const startingBlockNumber = config.get<number>("startingBlock");
   const estimatedBlockTimeMs = config.get<number>("estimatedBlockTimeMs");
   const blockFinality = config.get<number>("blockFinality");
   const runEveryXHours = config.get<number>("runEveryXHours");
+
+  const chains = JSON.parse(config.get<string>("chains")) as Chain[];
+
+  await inititalizeChains(prisma, chains);
 
   const provider = new ethers.providers.StaticJsonRpcProvider(
     rpcHttpProviderUrl
@@ -114,13 +114,21 @@ const main = async () => {
   await handleRange(
     context,
     prisma,
-    [getAndSaveLiquidity, getAndSaveVolumeTimeSeries],
+    [
+      // getAndSaveLiquidity,
+      getAndSaveVolumeTimeSeries,
+    ],
     blockHeaderToBlockWithoutId(lastSafeBlock)
   );
 };
 
 main().catch(async (e) => {
   await prisma.$disconnect();
-  logger.error(e);
+  logger.error("erro:", {
+    data: {
+      e,
+      stack: e.stack,
+    },
+  });
   setup.stopAndExit(ExitCode.ExceptionInMain, scheduler);
 });

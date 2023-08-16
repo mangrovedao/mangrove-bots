@@ -66,13 +66,13 @@ export const generateGetAndSaveVolumeTimeSerie =
       first: context.subgraphMaxFirstValue,
       skip: 0,
       currentBlockNumber: to.number,
-      latestDate: from.timestamp,
+      latestDate: from.timestamp.getTime() / 1000,
     };
 
     await queryUntilNoData(context.subgraphMaxFirstValue, params, async () => {
-      const volumes = (
-        await sdk.getVolumes(params)
-      ).accountVolumeByPairs.reduce((acc, vol) => {
+      const results = await sdk.getVolumes(params);
+
+      const volumes = results.accountVolumeByPairs.reduce((acc, vol) => {
         acc[vol.id] = vol;
         return acc;
       }, {} as Record<string, GetVolumesResult>);
