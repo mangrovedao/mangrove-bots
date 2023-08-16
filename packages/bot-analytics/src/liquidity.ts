@@ -48,8 +48,11 @@ export const generateGetAndSaveLiquidityTimeSerie =
             toBlockChainId: context.chainId,
             toBlockNumber: to.number,
 
-            token0Id: token0.id,
-            token1Id: token1.id,
+            token0ChainId: context.chainId,
+            token0Address: token0.address,
+
+            token1ChainId: context.chainId,
+            token1Address: token1.address,
 
             amountToken0: BigInt(offer.wants),
             amountToken1: BigInt(offer.gives),

@@ -24,8 +24,11 @@ export const volumeResultToAccountActivity = (
   toBlockChainId: context.chainId,
   toBlockNumber: to.number,
 
-  token0Id: token0.id,
-  token1Id: token1.id,
+  token0ChainId: context.chainId,
+  token0Address: token0.address,
+
+  token1ChainId: context.chainId,
+  token1Address: token1.address,
 
   sent0: previousActivity
     ? (BigInt(vol.token0Sent) - BigInt(previousActivity.sent0)).toString()
@@ -93,8 +96,11 @@ export const generateGetAndSaveVolumeTimeSerie =
             toBlockNumber: {
               lt: to.number,
             },
-            token0Id: token0.id,
-            token1Id: token1.id,
+            token0ChainId: context.chainId,
+            token0Address: token0.address,
+
+            token1ChainId: context.chainId,
+            token1Address: token1.address,
             asMaker: vol.asMaker,
             chainId: context.chainId,
           },

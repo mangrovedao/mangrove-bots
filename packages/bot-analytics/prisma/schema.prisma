@@ -37,8 +37,6 @@ model Block {
 }
 
 model Token {
-  id Int @id @unique @default(autoincrement())
-
   address  String
   symbol   String
   decimals Int
@@ -51,6 +49,8 @@ model Token {
 
   aggregatedLiquidityToken0 AggregatedLiquidityByMarket[] @relation("aggregatedLiquidityToken0")
   aggregatedLiquidityToken1 AggregatedLiquidityByMarket[] @relation("aggregatedLiquidityToken1")
+
+  @@id([address, chainId])
 }
 
 model Account {
@@ -71,11 +71,13 @@ model AccountActivity {
   toBlockChainId Int
   toBlockNumber Int
 
-  token0   Token @relation("token0", fields: [token0Id], references: [id])
-  token0Id Int
+  token0   Token @relation("token0", fields: [token0ChainId, token0Address], references: [chainId, address])
+  token0ChainId Int
+  token0Address String
 
-  token1   Token @relation("token1", fields: [token1Id], references: [id])
-  token1Id Int
+  token1   Token @relation("token1", fields: [token1ChainId, token1Address], references: [chainId, address])
+  token1ChainId Int
+  token1Address String
 
   sent0     String
   received0 String
@@ -109,11 +111,13 @@ model AggregatedLiquidityByMarket {
   toBlockChainId Int
   toBlockNumber Int
 
-  token0   Token @relation("aggregatedLiquidityToken0", fields: [token0Id], references: [id])
-  token0Id Int
+  token0   Token @relation("aggregatedLiquidityToken0", fields: [token0ChainId, token0Address], references: [chainId, address])
+  token0ChainId Int
+  token0Address String
 
-  token1   Token @relation("aggregatedLiquidityToken1", fields: [token1Id], references: [id])
-  token1Id Int
+  token1   Token @relation("aggregatedLiquidityToken1", fields: [token1ChainId, token1Address], references: [chainId, address])
+  token1ChainId Int
+  token1Address String
 
   amountToken0 String
   amountToken1 String

@@ -141,8 +141,11 @@ describe("Available Liquidity tracking", () => {
         id: "desc",
       },
       where: {
-        token0Id: token0.id,
-        token1Id: token1.id,
+        token0ChainId: chainId,
+        token0Address: token0.address,
+
+        token1ChainId: chainId,
+        token1Address: token1.address,
 
         toBlockNumber: block!.number,
         accountId: maker,
@@ -165,7 +168,7 @@ describe("Available Liquidity tracking", () => {
     await inititalizeChains(prisma!, [chain]);
   });
 
-  it("get liqudiity time series", async () => {
+  it("get liquidity time series", async () => {
     const openOffers1: OpenOffer[] = [
       {
         id: "id1",
@@ -286,8 +289,10 @@ describe("Available Liquidity tracking", () => {
       fromBlockNumber: 1,
       toBlockChainId: chainId,
       toBlockNumber: 2,
-      token0Id: 1,
-      token1Id: 2,
+      token0ChainId: chainId,
+      token0Address: token0.address,
+      token1ChainId: chainId,
+      token1Address: token1.address,
       amountToken0: "100",
       amountToken1: "200",
       accountId: account0.address,
@@ -307,8 +312,10 @@ describe("Available Liquidity tracking", () => {
       fromBlockNumber: 1,
       toBlockChainId: chainId,
       toBlockNumber: 2,
-      token0Id: 2,
-      token1Id: 1,
+      token0ChainId: chainId,
+      token0Address: token1.address,
+      token1ChainId: chainId,
+      token1Address: token0.address,
       amountToken0: "300",
       amountToken1: "400",
       accountId: account0.address,
@@ -328,8 +335,10 @@ describe("Available Liquidity tracking", () => {
       fromBlockNumber: 1,
       toBlockChainId: chainId,
       toBlockNumber: 2,
-      token0Id: 1,
-      token1Id: 2,
+      token0ChainId: chainId,
+      token0Address: token0.address,
+      token1ChainId: chainId,
+      token1Address: token1.address,
       amountToken0: "200",
       amountToken1: "400",
       accountId: account1.address,
@@ -349,8 +358,12 @@ describe("Available Liquidity tracking", () => {
       fromBlockNumber: 1,
       toBlockChainId: chainId,
       toBlockNumber: 2,
-      token0Id: 2,
-      token1Id: 1,
+
+      token0ChainId: chainId,
+      token0Address: token1.address,
+
+      token1ChainId: chainId,
+      token1Address: token0.address,
       amountToken0: "400",
       amountToken1: "600",
       accountId: account1.address,
@@ -370,8 +383,10 @@ describe("Available Liquidity tracking", () => {
       fromBlockNumber: 2,
       toBlockChainId: chainId,
       toBlockNumber: 3,
-      token0Id: 1,
-      token1Id: 2,
+      token0ChainId: chainId,
+      token0Address: token0.address,
+      token1ChainId: chainId,
+      token1Address: token1.address,
       amountToken0: "1000",
       amountToken1: "2000",
       accountId: account0.address,
@@ -391,8 +406,10 @@ describe("Available Liquidity tracking", () => {
       fromBlockNumber: 2,
       toBlockChainId: chainId,
       toBlockNumber: 3,
-      token0Id: 1,
-      token1Id: 2,
+      token0ChainId: chainId,
+      token0Address: token0.address,
+      token1ChainId: chainId,
+      token1Address: token1.address,
       amountToken0: "2000",
       amountToken1: "4000",
       accountId: account1.address,
