@@ -35,8 +35,7 @@ const setup = new Setup(config);
 
 const prisma = new PrismaClient();
 
-const main = async () => {
-  const rpcHttpProviderUrl = config.get<string>("rpcHttpProvider");
+const botFunction = async (mgv: Mangrove) => {
   const startingBlockNumber = config.get<number>("startingBlock");
   const estimatedBlockTimeMs = config.get<number>("estimatedBlockTimeMs");
   const blockFinality = config.get<number>("blockFinality");
@@ -46,9 +45,7 @@ const main = async () => {
 
   await inititalizeChains(prisma, chains);
 
-  const provider = new ethers.providers.StaticJsonRpcProvider(
-    rpcHttpProviderUrl
-  );
+  const provider = mgv.provider;
   const network = await provider.getNetwork();
 
   const startingBlock = await provider.getBlock(startingBlockNumber);
@@ -114,12 +111,13 @@ const main = async () => {
   await handleRange(
     context,
     prisma,
-    [
-      // getAndSaveLiquidity,
-      getAndSaveVolumeTimeSeries,
-    ],
+    [getAndSaveLiquidity, getAndSaveVolumeTimeSeries],
     blockHeaderToBlockWithoutId(lastSafeBlock)
   );
+};
+
+const main = async () => {
+  await setup.startBot("analytics bot", botFunction, scheduler, true, false);
 };
 
 main().catch(async (e) => {

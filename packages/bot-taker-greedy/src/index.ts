@@ -62,11 +62,7 @@ async function startTakersForMarkets(
   }
 }
 
-async function botFunction(
-  mgv: Mangrove,
-  signer: Wallet,
-  provider: BaseProvider
-) {
+async function botFunction(mgv: Mangrove) {
   const tokenConfigs = configUtil.getTokenConfigsOrThrow();
 
   await approvalUtil.approveMangroveForTokens(mgv, tokenConfigs, "init");

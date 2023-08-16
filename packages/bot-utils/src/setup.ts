@@ -143,10 +143,12 @@ export class Setup {
     name: string,
     botFunction: (
       mgv: Mangrove,
-      signer: Wallet,
-      provider: BaseProvider
+      signer?: Wallet,
+      provider?: BaseProvider
     ) => Promise<void>,
-    scheduler?: ToadScheduler
+    scheduler?: ToadScheduler,
+    isHttpBased: boolean = false,
+    needPkey: boolean = true
   ) {
     this.logger.info(`Starting ${name}...`, { contextInfo: "init" });
 
@@ -163,14 +165,14 @@ export class Setup {
 
     const providerHttpUrl = process.env["RPC_HTTP_URL"];
     const providerWsUrl = process.env["RPC_WS_URL"];
-    if (!providerWsUrl) {
+    if (!providerWsUrl && !isHttpBased) {
       throw new Error("No URL for a node has been provided in RPC_WS_URL");
     }
     if (!providerHttpUrl) {
       throw new Error("No URL for a node has been provided in RPC_HTTP_URL");
     }
     const privateKey = process.env["PRIVATE_KEY"];
-    if (!privateKey) {
+    if (!privateKey && needPkey) {
       throw new Error("No private key provided in PRIVATE_KEY");
     }
 
@@ -180,14 +182,9 @@ export class Setup {
       defaultProvider instanceof WebSocketProvider
         ? defaultProvider
         : new StaticJsonRpcProvider(providerHttpUrl);
-    const signer = new Wallet(privateKey, provider);
-    const nonceManager = new NonceManager(signer);
+
+    let mgv: Mangrove;
     const providerType = this.configUtils.getProviderType();
-    const mgv = await Mangrove.connect({
-      signer: nonceManager,
-      providerWsUrl: providerType == "http" ? undefined : providerWsUrl,
-    });
-    this.importLocalAddresses(mgv);
 
     setInterval(
       () => checkFreshness(this.logger, mgv),
@@ -199,6 +196,22 @@ export class Setup {
         `Using HTTP provider, this is not recommended for production`
       );
     }
+    if (needPkey) {
+      const signer = new Wallet(privateKey!, provider);
+      const nonceManager = new NonceManager(signer);
+      mgv = await Mangrove.connect({
+        signer: nonceManager,
+        providerWsUrl: providerType == "http" ? undefined : providerWsUrl,
+      });
+      this.importLocalAddresses(mgv);
+      await botFunction(mgv, signer, provider);
+    } else {
+      mgv = await Mangrove.connect(providerHttpUrl);
+      this.importLocalAddresses(mgv);
+      await botFunction(mgv, undefined, provider);
+    }
+
+    await this.exitIfMangroveIsKilled(mgv, "init", scheduler);
     this.logger.info("Connected to Mangrove", {
       contextInfo: "init",
       data: {
@@ -206,10 +219,6 @@ export class Setup {
         addresses: Mangrove.getAllAddresses(mgv.network.name),
       },
     });
-
-    await this.exitIfMangroveIsKilled(mgv, "init", scheduler);
-
-    await botFunction(mgv, signer, provider);
 
     this.server = this.createServer(mgv);
   }
