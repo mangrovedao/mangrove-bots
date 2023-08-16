@@ -1,4 +1,4 @@
-import { Account, PrismaClient } from "@prisma/client";
+import { Account, Block, PrismaClient } from "@prisma/client";
 import { Block as BlockHeader } from "@ethersproject/providers";
 import {
   Chain,
@@ -7,11 +7,11 @@ import {
   GetParamsTimeTravelled,
   OpenOffer,
 } from "../../src/types";
-import { generateBlockHeaderToBlockWithoutId } from "../../src/util/util";
 import { generateGetAndSaveLiquidityTimeSerie } from "../../src/liquidity";
 import { PrismaTx, TokenWithoutId } from "../../src/db/types";
 import { startDb } from "../helpers/start-db";
 import { inititalizeChains } from "../../src/db/init";
+import { generateBlockHeaderToDbBlock } from "../../src/util/util";
 import { Sdk } from "../../.graphclient";
 import { createBlockIfNotExist } from "../../src/db/block";
 import { handleRange } from "../../src/analytics";
@@ -57,9 +57,6 @@ describe("Available Liquidity tracking", () => {
     subgraphMaxFirstValue: 100,
     everyXBlock: 1,
   };
-
-  const blockHeaderToBlockWithoutId =
-    generateBlockHeaderToBlockWithoutId(context);
 
   const account0: Account = {
     address: "account0",
@@ -147,11 +144,13 @@ describe("Available Liquidity tracking", () => {
         token0Id: token0.id,
         token1Id: token1.id,
 
-        toBlockId: block!.id,
+        toBlockNumber: block!.number,
         accountId: maker,
       },
     });
   };
+
+  const blockHeaderToDbBlock = generateBlockHeaderToDbBlock(context);
 
   before(async () => {
     const result = await startDb();
@@ -264,16 +263,13 @@ describe("Available Liquidity tracking", () => {
       sdk
     );
 
-    await createBlockIfNotExist(
-      prisma!,
-      blockHeaderToBlockWithoutId(blocks["1"])
-    );
+    await createBlockIfNotExist(prisma!, blockHeaderToDbBlock(blocks["1"]));
 
     await handleRange(
       context,
       prisma!,
       [getAndSaveLiquidityTimeSeries],
-      blockHeaderToBlockWithoutId(blocks["3"])
+      blockHeaderToDbBlock(blocks["3"])
     );
 
     const liquidity1Account0Token0Token1 =
@@ -286,8 +282,10 @@ describe("Available Liquidity tracking", () => {
 
     assert.deepEqual(liquidity1Account0Token0Token1, {
       id: 1,
-      fromBlockId: 1,
-      toBlockId: 2,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 1,
+      toBlockChainId: chainId,
+      toBlockNumber: 2,
       token0Id: 1,
       token1Id: 2,
       amountToken0: "100",
@@ -305,8 +303,10 @@ describe("Available Liquidity tracking", () => {
 
     assert.deepEqual(liquidity1Account0Token1Token0, {
       id: 3,
-      fromBlockId: 1,
-      toBlockId: 2,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 1,
+      toBlockChainId: chainId,
+      toBlockNumber: 2,
       token0Id: 2,
       token1Id: 1,
       amountToken0: "300",
@@ -324,8 +324,10 @@ describe("Available Liquidity tracking", () => {
 
     assert.deepEqual(liquidity1Account1Token0Token1, {
       id: 2,
-      fromBlockId: 1,
-      toBlockId: 2,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 1,
+      toBlockChainId: chainId,
+      toBlockNumber: 2,
       token0Id: 1,
       token1Id: 2,
       amountToken0: "200",
@@ -343,8 +345,10 @@ describe("Available Liquidity tracking", () => {
 
     assert.deepEqual(liquidity1Account1Token1Token0, {
       id: 4,
-      fromBlockId: 1,
-      toBlockId: 2,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 1,
+      toBlockChainId: chainId,
+      toBlockNumber: 2,
       token0Id: 2,
       token1Id: 1,
       amountToken0: "400",
@@ -362,8 +366,10 @@ describe("Available Liquidity tracking", () => {
 
     assert.deepEqual(liquidity1Account0Token0Token1_2, {
       id: 5,
-      fromBlockId: 2,
-      toBlockId: 3,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 2,
+      toBlockChainId: chainId,
+      toBlockNumber: 3,
       token0Id: 1,
       token1Id: 2,
       amountToken0: "1000",
@@ -381,8 +387,10 @@ describe("Available Liquidity tracking", () => {
 
     assert.deepEqual(liquidity1Account1Token0Token1_2, {
       id: 6,
-      fromBlockId: 2,
-      toBlockId: 3,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 2,
+      toBlockChainId: chainId,
+      toBlockNumber: 3,
       token0Id: 1,
       token1Id: 2,
       amountToken0: "2000",

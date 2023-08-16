@@ -25,10 +25,7 @@ import { ChainContext } from "./types";
 import { generateCreateTokenIfNotExist } from "./db/token";
 import { generateGetAndSaveVolumeTimeSerie } from "./volume";
 import { getBuiltGraphSDK } from "../.graphclient";
-import {
-  estimateBlockCount,
-  generateBlockHeaderToBlockWithoutId,
-} from "./util/util";
+import { estimateBlockCount, generateBlockHeaderToDbBlock } from "./util/util";
 import moize from "moize";
 import { handleRange } from "./analytics";
 import { generateGetAndSaveLiquidityTimeSerie } from "./liquidity";
@@ -78,8 +75,7 @@ const main = async () => {
     everyXBlock: estimateBlockCount(secondsInADay, estimatedBlockTimeMs),
   };
 
-  const blockHeaderToBlockWithoutId =
-    generateBlockHeaderToBlockWithoutId(context);
+  const blockHeaderToBlockWithoutId = generateBlockHeaderToDbBlock(context);
 
   await createBlockIfNotExist(prisma, {
     number: startingBlock.number,
@@ -124,8 +120,7 @@ const main = async () => {
   await handleRange(
     context,
     prisma,
-    // [getAndSaveVolumeTimeSeries],
-    [getAndSaveLiquidity],
+    [getAndSaveLiquidity, getAndSaveVolumeTimeSeries],
     blockHeaderToBlockWithoutId(lastSafeBlock)
   );
 };

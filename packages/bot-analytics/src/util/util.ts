@@ -1,5 +1,5 @@
 import { Block } from "@ethersproject/providers";
-import { BlockWithoutId } from "../db/types";
+import { Block as PrismaBlock } from "@prisma/client";
 import { ChainContext } from "../types";
 /**
  * estimateBlockCount estimate the amount of block that a chain should produce
@@ -10,11 +10,11 @@ export const estimateBlockCount = (
   blockTimeMs: number
 ): number => timeSeconds / (blockTimeMs / 1000);
 
-export const generateBlockHeaderToBlockWithoutId =
+export const generateBlockHeaderToDbBlock =
   (context: ChainContext) =>
-  (block: Block): BlockWithoutId => ({
+  (block: Block): PrismaBlock => ({
+    chainId: context.chainId,
     number: block.number,
     hash: block.hash,
     timestamp: new Date(block.timestamp * 1000),
-    chainId: context.chainId,
   });

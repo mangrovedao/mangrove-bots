@@ -20,8 +20,6 @@ model Chain {
 }
 
 model Block {
-  id Int @id @unique @default(autoincrement())
-
   number    Int
   hash      String
   timestamp DateTime
@@ -34,6 +32,8 @@ model Block {
 
   aggregatedLiquidityByFromBlock AggregatedLiquidityByMarket[] @relation("fromBlockLiquidity")
   aggregatedLiquidityByToBlock   AggregatedLiquidityByMarket[] @relation("toBlockLiquidity")
+
+  @@id([number, chainId])
 }
 
 model Token {
@@ -63,11 +63,13 @@ model Account {
 model AccountActivity {
   id Int @id @unique @default(autoincrement())
 
-  fromBlock   Block @relation("fromBlockActivities", fields: [fromBlockId], references: [id])
-  fromBlockId Int
+  fromBlock   Block @relation("fromBlockActivities", fields: [fromBlockChainId, fromBlockNumber], references: [chainId, number])
+  fromBlockChainId Int
+  fromBlockNumber Int
 
-  toBlock   Block @relation("toBlockActivities", fields: [toBlockId], references: [id])
-  toBlockId Int
+  toBlock   Block @relation("toBlockActivities", fields: [toBlockChainId, toBlockNumber], references: [chainId, number])
+  toBlockChainId Int
+  toBlockNumber Int
 
   token0   Token @relation("token0", fields: [token0Id], references: [id])
   token0Id Int
@@ -99,11 +101,13 @@ model AccountActivity {
 model AggregatedLiquidityByMarket {
   id Int @id @unique @default(autoincrement())
 
-  fromBlock   Block @relation("fromBlockLiquidity", fields: [fromBlockId], references: [id])
-  fromBlockId Int
+  fromBlock   Block @relation("fromBlockLiquidity", fields: [fromBlockChainId, fromBlockNumber], references: [chainId, number])
+  fromBlockChainId Int
+  fromBlockNumber Int
 
-  toBlock   Block @relation("toBlockLiquidity", fields: [toBlockId], references: [id])
-  toBlockId Int
+  toBlock   Block @relation("toBlockLiquidity", fields: [toBlockChainId, toBlockNumber], references: [chainId, number])
+  toBlockChainId Int
+  toBlockNumber Int
 
   token0   Token @relation("aggregatedLiquidityToken0", fields: [token0Id], references: [id])
   token0Id Int

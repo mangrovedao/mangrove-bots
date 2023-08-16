@@ -15,7 +15,7 @@ import { createBlockIfNotExist } from "../../src/db/block";
 import { inititalizeChains } from "../../src/db/init";
 import assert from "assert";
 import { handleRange } from "../../src/analytics";
-import { generateBlockHeaderToBlockWithoutId } from "../../src/util/util";
+import { generateBlockHeaderToDbBlock } from "../../src/util/util";
 import { Sdk } from "../../.graphclient";
 
 describe("Volume tracking", () => {
@@ -59,8 +59,7 @@ describe("Volume tracking", () => {
     everyXBlock: 1,
   };
 
-  const blockHeaderToBlockWithoutId =
-    generateBlockHeaderToBlockWithoutId(context);
+  const blockHeaderToDbBlock = generateBlockHeaderToDbBlock(context);
 
   const account0: Account = {
     address: "account0",
@@ -312,8 +311,10 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount0Maker, {
       id: 1,
-      fromBlockId: 1,
-      toBlockId: 2,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 1,
+      toBlockChainId: chainId,
+      toBlockNumber: 2,
       token0Id: 1,
       token1Id: 2,
       sent0: "100",
@@ -334,8 +335,10 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount0Taker, {
       id: 2,
-      fromBlockId: 1,
-      toBlockId: 2,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 1,
+      toBlockChainId: chainId,
+      toBlockNumber: 2,
       token0Id: 1,
       token1Id: 2,
       sent0: "10",
@@ -356,8 +359,10 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount1Maker, {
       id: 3,
-      fromBlockId: 1,
-      toBlockId: 2,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 1,
+      toBlockChainId: chainId,
+      toBlockNumber: 2,
       token0Id: 1,
       token1Id: 2,
       sent0: "400",
@@ -378,8 +383,10 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount1Taker, {
       id: 4,
-      fromBlockId: 1,
-      toBlockId: 2,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 1,
+      toBlockChainId: chainId,
+      toBlockNumber: 2,
       token0Id: 1,
       token1Id: 2,
       sent0: "40",
@@ -417,8 +424,10 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount0Maker2, {
       id: 5,
-      fromBlockId: 2,
-      toBlockId: 3,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 2,
+      toBlockChainId: chainId,
+      toBlockNumber: 3,
       token0Id: 1,
       token1Id: 2,
       sent0: "100",
@@ -438,8 +447,10 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount0Taker2, {
       id: 6,
-      fromBlockId: 2,
-      toBlockId: 3,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 2,
+      toBlockChainId: chainId,
+      toBlockNumber: 3,
       token0Id: 1,
       token1Id: 2,
       sent0: "10",
@@ -460,8 +471,10 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount1Maker2, {
       id: 7,
-      fromBlockId: 2,
-      toBlockId: 3,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 2,
+      toBlockChainId: chainId,
+      toBlockNumber: 3,
       token0Id: 1,
       token1Id: 2,
       sent0: "400",
@@ -482,8 +495,10 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount1Taker2, {
       id: 8,
-      fromBlockId: 2,
-      toBlockId: 3,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 2,
+      toBlockChainId: chainId,
+      toBlockNumber: 3,
       token0Id: 1,
       token1Id: 2,
       sent0: "40",
@@ -567,8 +582,10 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount3Maker, {
       id: 1,
-      fromBlockId: 1,
-      toBlockId: 2,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 1,
+      toBlockChainId: chainId,
+      toBlockNumber: 2,
       token0Id: 1,
       token1Id: 2,
       sent0: "100",
@@ -589,8 +606,10 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount3Taker, {
       id: 2,
-      fromBlockId: 1,
-      toBlockId: 2,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 1,
+      toBlockChainId: chainId,
+      toBlockNumber: 2,
       token0Id: 1,
       token1Id: 2,
       sent0: "10",
@@ -745,15 +764,12 @@ describe("Volume tracking", () => {
       sdk
     );
 
-    await createBlockIfNotExist(
-      prisma!,
-      blockHeaderToBlockWithoutId(blocks["1"])
-    );
+    await createBlockIfNotExist(prisma!, blockHeaderToDbBlock(blocks["1"]));
     await handleRange(
       context,
       prisma!,
       [getAndSaveVolumeTimeSeries],
-      blockHeaderToBlockWithoutId(blocks["3"])
+      blockHeaderToDbBlock(blocks["3"])
     );
 
     const accountAcitivityAccount0Maker2 =
@@ -761,8 +777,10 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount0Maker2, {
       id: 5,
-      fromBlockId: 2,
-      toBlockId: 3,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 2,
+      toBlockChainId: chainId,
+      toBlockNumber: 3,
       token0Id: 1,
       token1Id: 2,
       sent0: "100",
@@ -782,8 +800,10 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount0Taker2, {
       id: 6,
-      fromBlockId: 2,
-      toBlockId: 3,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 2,
+      toBlockChainId: chainId,
+      toBlockNumber: 3,
       token0Id: 1,
       token1Id: 2,
       sent0: "10",
@@ -804,8 +824,10 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount1Maker2, {
       id: 7,
-      fromBlockId: 2,
-      toBlockId: 3,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 2,
+      toBlockChainId: chainId,
+      toBlockNumber: 3,
       token0Id: 1,
       token1Id: 2,
       sent0: "400",
@@ -826,8 +848,10 @@ describe("Volume tracking", () => {
 
     assert.deepEqual(accountAcitivityAccount1Taker2, {
       id: 8,
-      fromBlockId: 2,
-      toBlockId: 3,
+      fromBlockChainId: chainId,
+      fromBlockNumber: 2,
+      toBlockChainId: chainId,
+      toBlockNumber: 3,
       token0Id: 1,
       token1Id: 2,
       sent0: "40",

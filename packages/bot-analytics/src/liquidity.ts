@@ -43,8 +43,10 @@ export const generateGetAndSaveLiquidityTimeSerie =
         const liquidity = aggregatedLiquidity[key];
         if (!liquidity) {
           aggregatedLiquidity[key] = {
-            fromBlockId: from.id,
-            toBlockId: to.id,
+            fromBlockChainId: context.chainId,
+            fromBlockNumber: from.number,
+            toBlockChainId: context.chainId,
+            toBlockNumber: to.number,
 
             token0Id: token0.id,
             token1Id: token1.id,
@@ -61,13 +63,9 @@ export const generateGetAndSaveLiquidityTimeSerie =
 
       await prisma.aggregatedLiquidityByMarket.createMany({
         data: Object.values(aggregatedLiquidity).map((liquidity) => ({
-          fromBlockId: liquidity.fromBlockId,
-          toBlockId: liquidity.toBlockId,
-          token0Id: liquidity.token0Id,
-          token1Id: liquidity.token1Id,
+          ...liquidity,
           amountToken0: liquidity.amountToken0.toString(),
           amountToken1: liquidity.amountToken1.toString(),
-          accountId: liquidity.accountId,
         })),
       });
 

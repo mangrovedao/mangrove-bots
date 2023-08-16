@@ -1,7 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import { Block, PrismaClient } from "@prisma/client";
 import { logger } from "ethers";
 import { createBlockIfNotExist, getLastStoredBlock } from "./db/block";
-import { BlockWithoutId } from "./db/types";
 import {
   ChainContext,
   GetParamsPagination,
@@ -33,7 +32,7 @@ export const handleRange = async (
   context: ChainContext,
   prisma: PrismaClient,
   getTimeSeriesFns: GetTimeSeriesFn[],
-  to: BlockWithoutId
+  to: Block
 ) => {
   let lastStoredBlock = (await getLastStoredBlock(prisma, context))!;
   if (!lastStoredBlock) {

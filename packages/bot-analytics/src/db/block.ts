@@ -1,10 +1,10 @@
 import { Block, PrismaClient } from "@prisma/client";
 import { ChainContext } from "../types";
-import { BlockWithoutId, PrismaTx } from "./types";
+import { PrismaTx } from "./types";
 
 export const createBlockIfNotExist = async (
   prisma: PrismaTx,
-  block: BlockWithoutId
+  block: Block
 ): Promise<Block> => {
   /*
    * here I was unable to use upsert as the typescript compiler want me to provide an id

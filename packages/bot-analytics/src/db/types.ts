@@ -1,12 +1,9 @@
 import {
   AccountActivity,
   AggregatedLiquidityByMarket,
-  Block,
   PrismaClient,
   Token,
 } from "@prisma/client";
-
-export type BlockWithoutId = Omit<Block, "id">;
 
 export type TokenWithoutId = Omit<Token, "id">;
 
