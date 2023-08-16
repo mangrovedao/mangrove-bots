@@ -11,7 +11,7 @@ services:
     volumes:
       - mangrove-test-pg:/data/postgres
     ports:
-      - "5433:5433"
+      - "5433:5432"
     networks:
       - test-postgres
     restart: unless-stopped
