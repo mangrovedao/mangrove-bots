@@ -25,7 +25,7 @@
     "test:unit": "cross-env NODE_ENV=test DATABASE_URL=\"postgresql://postgres:postgres@localhost:5432/postgres?schema=mangrove\" nyc --reporter=lcov mocha --config test/mocha/config/unit-tests.json --exit",
     "test:integration": "cross-env NODE_ENV=test DATABASE_URL=\"postgresql://postgres:postgres@localhost:5432/postgres?schema=mangrove\" nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/integration-tests.json --exit ",
     "test:coverage": "cross-env NODE_ENV=test DATABASE_URL=\"postgresql://postgres:postgres@localhost:5432/postgres?schema=mangrove\" nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/coverage-tests.json --exit ",
-    "start": "node build/index.js",
+    "start": "node build/src/index.js",
     "prisma:pull": "npx prisma pull",
     "prisma:deploy": "npx prisma migrate deploy",
     "prisma:reset": "prisma migrate reset -f",
