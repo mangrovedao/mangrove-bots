@@ -1,7 +1,9 @@
 import { typechain } from "@mangrovedao/mangrove.js";
-import { Token } from "@prisma/client";
+import { Block, Token } from "@prisma/client";
+import { getPrice, generateGetPairTokenToUSD } from "../util/priceApi";
 import { ChainContext } from "../types";
 import { PrismaTx } from "./types";
+import { logger } from "ethers";
 
 export const generateCreateTokenIfNotExist = (context: ChainContext) => {
   const ierc20 = typechain.IERC20__factory.createInterface();
@@ -48,6 +50,54 @@ export const generateCreateTokenIfNotExist = (context: ChainContext) => {
       },
     });
 
+    context.seenTokens.add(token);
+
     return token;
+  };
+};
+
+export const generateGetTokensPrices = async (context: ChainContext) => {
+  const getPairTokenToUSD = await generateGetPairTokenToUSD(context.exchange);
+
+  return async (prisma: PrismaTx, from: Block, to: Block): Promise<void> => {
+    const result = await Promise.all(
+      Array.from(context.seenTokens.values()).map(async (token) => {
+        const pair = getPairTokenToUSD(token.symbol);
+        if (!pair) {
+          return {
+            token,
+            price: {
+              open: 0,
+              high: 0,
+              low: 0,
+              close: 0,
+              volume: 0,
+            },
+          };
+        }
+        const price = await getPrice(
+          context.exchange,
+          pair.id,
+          "1d",
+          from.timestamp
+        );
+
+        return {
+          token,
+          price,
+        };
+      })
+    );
+
+    const tokensPriceCreationParams = result.map((tokenInfo) => ({
+      tokenAddress: tokenInfo.token.address,
+      chainId: tokenInfo.token.chainId,
+      price: tokenInfo.price.high,
+      since: from.timestamp,
+      until: to.timestamp,
+    }));
+    await prisma.tokenPrice.createMany({
+      data: tokensPriceCreationParams,
+    });
   };
 };

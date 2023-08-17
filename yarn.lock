@@ -2714,6 +2714,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.59.9
     "@typescript-eslint/parser": ^5.48.1
     big.js: ^6.2.1
+    ccxt: ^4.0.65
     chai: ^4.3.7
     chai-as-promised: ^7.1.1
     config: ^3.3.9
@@ -4782,6 +4783,15 @@ __metadata:
     tslib: ^2.0.3
     upper-case-first: ^2.0.2
   checksum: 41fa8fa87f6d24d0835a2b4a9341a3eaecb64ac29cd7c5391f35d6175a0fa98ab044e7f2602e1ec3afc886231462ed71b5b80c590b8b41af903ec2c15e5c5931
+  languageName: node
+  linkType: hard
+
+"ccxt@npm:^4.0.65":
+  version: 4.0.65
+  resolution: "ccxt@npm:4.0.65"
+  dependencies:
+    ws: ^8.8.1
+  checksum: 8ca7aa57f8c8cc7a6587ef02735c229646a2a47abc2257ef31993cbe305a6dfe994a35b9e2379f4ad48da77853328d0c41979f2559ba463aeda36a4ef3f1fb1e
   languageName: node
   linkType: hard
 
@@ -11423,7 +11433,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:8.13.0, ws@npm:^8.12.0, ws@npm:^8.13.0":
+"ws@npm:8.13.0, ws@npm:^8.12.0, ws@npm:^8.13.0, ws@npm:^8.8.1":
   version: 8.13.0
   resolution: "ws@npm:8.13.0"
   peerDependencies:

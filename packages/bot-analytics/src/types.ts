@@ -1,8 +1,9 @@
 import { typechain } from "@mangrovedao/mangrove.js";
-import { Block } from "@prisma/client";
+import { Block, Token } from "@prisma/client";
 import { Account, AccountVolumeByPair, Market, Offer } from "../.graphclient";
 import { PrismaTx } from "./db/types";
 import { Block as BlockHeader } from "@ethersproject/providers";
+import { binance } from "ccxt";
 
 export type GetParamsPagination = {
   first: number;
@@ -30,6 +31,8 @@ export type ChainContext = Chain & {
   getBlock: (number: number | string | "latest") => Promise<BlockHeader>;
   subgraphMaxFirstValue: number;
   everyXBlock: number;
+  exchange: binance;
+  seenTokens: Set<Token>;
 };
 
 export type GetVolumesResult = Pick<

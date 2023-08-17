@@ -49,8 +49,21 @@ model Token {
 
   aggregatedLiquidityToken0 AggregatedLiquidityByMarket[] @relation("aggregatedLiquidityToken0")
   aggregatedLiquidityToken1 AggregatedLiquidityByMarket[] @relation("aggregatedLiquidityToken1")
+  TokenPrice                TokenPrice[]
 
   @@id([address, chainId])
+}
+
+model TokenPrice {
+  token        Token  @relation(fields: [tokenAddress, chainId], references: [address, chainId])
+  tokenAddress String
+  chainId      Int
+
+  price     Decimal
+  since DateTime
+  until DateTime
+
+  @@id([tokenAddress, chainId, since, until])
 }
 
 model Account {
@@ -61,19 +74,19 @@ model Account {
 }
 
 model AccountActivity {
-  fromBlock   Block @relation("fromBlockActivities", fields: [fromBlockChainId, fromBlockNumber], references: [chainId, number])
+  fromBlock        Block @relation("fromBlockActivities", fields: [fromBlockChainId, fromBlockNumber], references: [chainId, number])
   fromBlockChainId Int
-  fromBlockNumber Int
+  fromBlockNumber  Int
 
-  toBlock   Block @relation("toBlockActivities", fields: [toBlockChainId, toBlockNumber], references: [chainId, number])
+  toBlock        Block @relation("toBlockActivities", fields: [toBlockChainId, toBlockNumber], references: [chainId, number])
   toBlockChainId Int
-  toBlockNumber Int
+  toBlockNumber  Int
 
-  token0   Token @relation("token0", fields: [token0ChainId, token0Address], references: [chainId, address])
+  token0        Token  @relation("token0", fields: [token0ChainId, token0Address], references: [chainId, address])
   token0ChainId Int
   token0Address String
 
-  token1   Token @relation("token1", fields: [token1ChainId, token1Address], references: [chainId, address])
+  token1        Token  @relation("token1", fields: [token1ChainId, token1Address], references: [chainId, address])
   token1ChainId Int
   token1Address String
 
@@ -101,19 +114,19 @@ model AccountActivity {
 }
 
 model AggregatedLiquidityByMarket {
-  fromBlock   Block @relation("fromBlockLiquidity", fields: [fromBlockChainId, fromBlockNumber], references: [chainId, number])
+  fromBlock        Block @relation("fromBlockLiquidity", fields: [fromBlockChainId, fromBlockNumber], references: [chainId, number])
   fromBlockChainId Int
-  fromBlockNumber Int
+  fromBlockNumber  Int
 
-  toBlock   Block @relation("toBlockLiquidity", fields: [toBlockChainId, toBlockNumber], references: [chainId, number])
+  toBlock        Block @relation("toBlockLiquidity", fields: [toBlockChainId, toBlockNumber], references: [chainId, number])
   toBlockChainId Int
-  toBlockNumber Int
+  toBlockNumber  Int
 
-  token0   Token @relation("aggregatedLiquidityToken0", fields: [token0ChainId, token0Address], references: [chainId, address])
+  token0        Token  @relation("aggregatedLiquidityToken0", fields: [token0ChainId, token0Address], references: [chainId, address])
   token0ChainId Int
   token0Address String
 
-  token1   Token @relation("aggregatedLiquidityToken1", fields: [token1ChainId, token1Address], references: [chainId, address])
+  token1        Token  @relation("aggregatedLiquidityToken1", fields: [token1ChainId, token1Address], references: [chainId, address])
   token1ChainId Int
   token1Address String
 

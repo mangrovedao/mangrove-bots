@@ -6,11 +6,7 @@
 import config from "./util/config";
 import { logger } from "./util/logger";
 
-import Mangrove, {
-  enableLogging,
-  ethers,
-  typechain,
-} from "@mangrovedao/mangrove.js";
+import Mangrove, { enableLogging, typechain } from "@mangrovedao/mangrove.js";
 
 import { ToadScheduler } from "toad-scheduler";
 import { ExitCode, Setup } from "@mangrovedao/bot-utils";
@@ -20,13 +16,17 @@ import { inititalizeChains } from "./db/init";
 import { secondsInADay, subgraphMaxFirstValue } from "./constants";
 import { createBlockIfNotExist } from "./db/block";
 import { Chain, ChainContext } from "./types";
-import { generateCreateTokenIfNotExist } from "./db/token";
+import {
+  generateCreateTokenIfNotExist,
+  generateGetTokensPrices,
+} from "./db/token";
 import { generateGetAndSaveVolumeTimeSerie } from "./volume";
 import { getBuiltGraphSDK } from "../.graphclient";
 import { estimateBlockCount, generateBlockHeaderToDbBlock } from "./util/util";
 import moize from "moize";
 import { handleRange } from "./analytics";
 import { generateGetAndSaveLiquidityTimeSerie } from "./liquidity";
+import { binance } from "ccxt";
 
 enableLogging();
 
@@ -51,6 +51,8 @@ const botFunction = async (mgv: Mangrove) => {
   const startingBlock = await provider.getBlock(startingBlockNumber);
   const latestBlock = await provider.getBlock("latest");
 
+  const exchange = new binance();
+
   const context: ChainContext = {
     chainId: network.chainId,
     name: network.name,
@@ -64,6 +66,8 @@ const botFunction = async (mgv: Mangrove) => {
     ),
     subgraphMaxFirstValue,
     everyXBlock: estimateBlockCount(secondsInADay, estimatedBlockTimeMs),
+    exchange,
+    seenTokens: new Set(),
   };
 
   const blockHeaderToBlockWithoutId = generateBlockHeaderToDbBlock(context);
@@ -108,10 +112,12 @@ const botFunction = async (mgv: Mangrove) => {
     sdk
   );
 
+  const getTokensPrice = await generateGetTokensPrices(context);
+
   await handleRange(
     context,
     prisma,
-    [getAndSaveLiquidity, getAndSaveVolumeTimeSeries],
+    [getAndSaveLiquidity, getAndSaveVolumeTimeSeries, getTokensPrice],
     blockHeaderToBlockWithoutId(lastSafeBlock)
   );
 };
