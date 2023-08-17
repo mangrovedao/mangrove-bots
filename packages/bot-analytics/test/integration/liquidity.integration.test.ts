@@ -138,7 +138,7 @@ describe("Available Liquidity tracking", () => {
 
     return prisma!.aggregatedLiquidityByMarket.findFirst({
       orderBy: {
-        id: "desc",
+        toBlockNumber: "desc",
       },
       where: {
         token0ChainId: chainId,
@@ -284,7 +284,6 @@ describe("Available Liquidity tracking", () => {
       );
 
     assert.deepEqual(liquidity1Account0Token0Token1, {
-      id: 1,
       fromBlockChainId: chainId,
       fromBlockNumber: 1,
       toBlockChainId: chainId,
@@ -307,7 +306,6 @@ describe("Available Liquidity tracking", () => {
       );
 
     assert.deepEqual(liquidity1Account0Token1Token0, {
-      id: 3,
       fromBlockChainId: chainId,
       fromBlockNumber: 1,
       toBlockChainId: chainId,
@@ -330,7 +328,6 @@ describe("Available Liquidity tracking", () => {
       );
 
     assert.deepEqual(liquidity1Account1Token0Token1, {
-      id: 2,
       fromBlockChainId: chainId,
       fromBlockNumber: 1,
       toBlockChainId: chainId,
@@ -353,7 +350,6 @@ describe("Available Liquidity tracking", () => {
       );
 
     assert.deepEqual(liquidity1Account1Token1Token0, {
-      id: 4,
       fromBlockChainId: chainId,
       fromBlockNumber: 1,
       toBlockChainId: chainId,
@@ -378,7 +374,6 @@ describe("Available Liquidity tracking", () => {
       );
 
     assert.deepEqual(liquidity1Account0Token0Token1_2, {
-      id: 5,
       fromBlockChainId: chainId,
       fromBlockNumber: 2,
       toBlockChainId: chainId,
@@ -401,7 +396,6 @@ describe("Available Liquidity tracking", () => {
       );
 
     assert.deepEqual(liquidity1Account1Token0Token1_2, {
-      id: 6,
       fromBlockChainId: chainId,
       fromBlockNumber: 2,
       toBlockChainId: chainId,

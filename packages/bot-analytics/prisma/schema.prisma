@@ -101,8 +101,6 @@ model AccountActivity {
 }
 
 model AggregatedLiquidityByMarket {
-  id Int @id @unique @default(autoincrement())
-
   fromBlock   Block @relation("fromBlockLiquidity", fields: [fromBlockChainId, fromBlockNumber], references: [chainId, number])
   fromBlockChainId Int
   fromBlockNumber Int
@@ -124,4 +122,6 @@ model AggregatedLiquidityByMarket {
 
   account   Account @relation(fields: [accountId], references: [address])
   accountId String
+
+  @@id([fromBlockChainId, fromBlockNumber, toBlockNumber, token0Address, token1Address, accountId])
 }
