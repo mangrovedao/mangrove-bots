@@ -33,11 +33,11 @@ const approvalUtil = new approveMangroveUtils.ApproveMangroveUtils(config);
 const configUtil = new configUtils.ConfigUtils(config);
 const scheduler = new ToadScheduler();
 
-const botFunction = async (
-  mgv: Mangrove,
-  signer: Wallet,
-  provider: BaseProvider
-) => {
+const botFunction = async (mgv: Mangrove, signer?: Wallet) => {
+  if (!signer) {
+    throw new Error("Missing signer");
+  }
+
   await provisionUtil.provisionMakerOnMangrove(mgv, signer.address, "init");
   const tokenConfigs = configUtil.getTokenConfigsOrThrow();
 

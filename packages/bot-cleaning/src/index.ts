@@ -56,11 +56,7 @@ function createAsyncMarketCleaner(
   );
 }
 
-async function botFunction(
-  mgv: Mangrove,
-  signer: Wallet,
-  provider: BaseProvider
-) {
+async function botFunction(mgv: Mangrove, signer?: Wallet) {
   const botConfig = configUtil.getAndValidateConfig();
 
   const latestMarketActivities: LatestMarketActivity[] = [];
@@ -87,7 +83,7 @@ async function botFunction(
 
     marketCleanerMap.set(
       { base: market.base.name, quote: market.quote.name },
-      new MarketCleaner(market, provider, latestMarketActivity)
+      new MarketCleaner(market, mgv.provider, latestMarketActivity)
     );
   }
 

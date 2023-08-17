@@ -19,11 +19,7 @@ enableLogging();
 const scheduler = new ToadScheduler();
 const setup = new Setup(config);
 
-async function botFunction(
-  mgv: Mangrove,
-  signer: Wallet,
-  provider: BaseProvider
-) {
+async function botFunction(mgv: Mangrove, signer?: Wallet) {
   const oracleConfig: OracleConfig = readAndValidateConfig();
 
   const gasUpdater = new GasUpdater(

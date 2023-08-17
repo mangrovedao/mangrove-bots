@@ -74,11 +74,7 @@ function createAsyncArbTaker(
   );
 }
 
-export async function botFunction(
-  mgv: Mangrove,
-  signer: Wallet,
-  provider: BaseProvider
-) {
+export async function botFunction(mgv: Mangrove, signer?: Wallet) {
   const botConfig = configUtil.getAndValidateArbConfig();
 
   const latestMarketActivities: LatestMarketActivity[] = [];

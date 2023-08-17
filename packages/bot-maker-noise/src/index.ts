@@ -10,7 +10,6 @@ import Mangrove, { enableLogging } from "@mangrovedao/mangrove.js";
 
 import { Wallet } from "@ethersproject/wallet";
 
-import { BaseProvider } from "@ethersproject/providers";
 import { OfferMaker } from "./OfferMaker";
 import { MarketConfig } from "./MarketConfig";
 import {
@@ -58,11 +57,10 @@ async function startMakersForMarkets(
   }
 }
 
-const botFunction = async (
-  mgv: Mangrove,
-  signer: Wallet,
-  provider: BaseProvider
-) => {
+const botFunction = async (mgv: Mangrove, signer?: Wallet) => {
+  if (!signer) {
+    throw new Error("Missing signer");
+  }
   await provisionUtil.provisionMakerOnMangrove(mgv, signer.address, "init");
 
   const tokenConfigs = configUtil.getTokenConfigsOrThrow();

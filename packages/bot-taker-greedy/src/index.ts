@@ -62,7 +62,11 @@ async function startTakersForMarkets(
   }
 }
 
-async function botFunction(mgv: Mangrove) {
+async function botFunction(mgv: Mangrove, signer?: Wallet) {
+  if (!signer) {
+    throw new Error("Missing signer");
+  }
+
   const tokenConfigs = configUtil.getTokenConfigsOrThrow();
 
   await approvalUtil.approveMangroveForTokens(mgv, tokenConfigs, "init");

@@ -141,11 +141,7 @@ export class Setup {
 
   public async startBot(
     name: string,
-    botFunction: (
-      mgv: Mangrove,
-      signer?: Wallet,
-      provider?: BaseProvider
-    ) => Promise<void>,
+    botFunction: (mgv: Mangrove, signer?: Wallet) => Promise<void>,
     scheduler?: ToadScheduler,
     isHttpBased: boolean = false,
     needPkey: boolean = true
@@ -204,11 +200,11 @@ export class Setup {
         providerWsUrl: providerType == "http" ? undefined : providerWsUrl,
       });
       this.importLocalAddresses(mgv);
-      await botFunction(mgv, signer, provider);
+      await botFunction(mgv, signer);
     } else {
       mgv = await Mangrove.connect(providerHttpUrl);
       this.importLocalAddresses(mgv);
-      await botFunction(mgv, undefined, provider);
+      await botFunction(mgv, undefined);
     }
 
     await this.exitIfMangroveIsKilled(mgv, "init", scheduler);
