@@ -44,7 +44,13 @@ Here's an example configuration file with instances of all possible configuratio
   "databaseUrl": "postgresql://postgres:postgres@localhost:5432/postgres?schema=mangrove",
   "startingBlock": 43091275,
   "estimatedBlockTimeMs": 2000,
-  "blockFinality": 200
+  "blockFinality": 200,
+  "chains": [
+    {
+      "number": 137,
+      "name": "matic"
+    }
+  ]
 }
 ```
 
@@ -54,6 +60,7 @@ Here's an example configuration file with instances of all possible configuratio
 - `startingBlock`: Block number which will be use to start indexing from. Every interaction that happen before this block number will be ignored.
 - `estimatedBlockTimeMs`: The estiamted block time of the chain you're running on.
 - `blockFinality`: Count of block buffer between latest block and latest analysed block.
+- `chains`: An array with chains number and name.
 
 It is possible to override parts of the configuration with environment variables. This is controlled by [./config/custom-environment-variables.json](./config/custom-environment-variables.json). The structure of this file mirrors the configuration structure but with names of environment variables in the places where these can override a part of the configuration.
 
