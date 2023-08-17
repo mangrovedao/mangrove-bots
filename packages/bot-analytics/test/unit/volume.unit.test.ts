@@ -129,7 +129,7 @@ describe("Volume tracking", () => {
   ) => {
     return prisma!.accountActivity.findFirst({
       orderBy: {
-        id: "desc",
+        toBlockNumber: "desc",
       },
       where: {
         accountId: address,
@@ -310,7 +310,6 @@ describe("Volume tracking", () => {
       await getLatestActivityWithAddressAndType(account0.address, true);
 
     assert.deepEqual(accountAcitivityAccount0Maker, {
-      id: 1,
       fromBlockChainId: chainId,
       fromBlockNumber: 1,
       toBlockChainId: chainId,
@@ -336,7 +335,6 @@ describe("Volume tracking", () => {
       await getLatestActivityWithAddressAndType(account0.address, false);
 
     assert.deepEqual(accountAcitivityAccount0Taker, {
-      id: 2,
       fromBlockChainId: chainId,
       fromBlockNumber: 1,
       toBlockChainId: chainId,
@@ -362,7 +360,6 @@ describe("Volume tracking", () => {
       await getLatestActivityWithAddressAndType(account1.address, true);
 
     assert.deepEqual(accountAcitivityAccount1Maker, {
-      id: 3,
       fromBlockChainId: chainId,
       fromBlockNumber: 1,
       toBlockChainId: chainId,
@@ -388,7 +385,6 @@ describe("Volume tracking", () => {
       await getLatestActivityWithAddressAndType(account1.address, false);
 
     assert.deepEqual(accountAcitivityAccount1Taker, {
-      id: 4,
       fromBlockChainId: chainId,
       fromBlockNumber: 1,
       toBlockChainId: chainId,
@@ -431,7 +427,6 @@ describe("Volume tracking", () => {
       await getLatestActivityWithAddressAndType(account0.address, true);
 
     assert.deepEqual(accountAcitivityAccount0Maker2, {
-      id: 5,
       fromBlockChainId: chainId,
       fromBlockNumber: 2,
       toBlockChainId: chainId,
@@ -456,7 +451,6 @@ describe("Volume tracking", () => {
       await getLatestActivityWithAddressAndType(account0.address, false);
 
     assert.deepEqual(accountAcitivityAccount0Taker2, {
-      id: 6,
       fromBlockChainId: chainId,
       fromBlockNumber: 2,
       toBlockChainId: chainId,
@@ -482,7 +476,6 @@ describe("Volume tracking", () => {
       await getLatestActivityWithAddressAndType(account1.address, true);
 
     assert.deepEqual(accountAcitivityAccount1Maker2, {
-      id: 7,
       fromBlockChainId: chainId,
       fromBlockNumber: 2,
       toBlockChainId: chainId,
@@ -508,7 +501,6 @@ describe("Volume tracking", () => {
       await getLatestActivityWithAddressAndType(account1.address, false);
 
     assert.deepEqual(accountAcitivityAccount1Taker2, {
-      id: 8,
       fromBlockChainId: chainId,
       fromBlockNumber: 2,
       toBlockChainId: chainId,
@@ -597,7 +589,6 @@ describe("Volume tracking", () => {
       await getLatestActivityWithAddressAndType(account3.address, true);
 
     assert.deepEqual(accountAcitivityAccount3Maker, {
-      id: 1,
       fromBlockChainId: chainId,
       fromBlockNumber: 1,
       toBlockChainId: chainId,
@@ -623,7 +614,6 @@ describe("Volume tracking", () => {
       await getLatestActivityWithAddressAndType(account3.address, false);
 
     assert.deepEqual(accountAcitivityAccount3Taker, {
-      id: 2,
       fromBlockChainId: chainId,
       fromBlockNumber: 1,
       toBlockChainId: chainId,

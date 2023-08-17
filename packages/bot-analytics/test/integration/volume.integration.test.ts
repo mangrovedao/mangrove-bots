@@ -129,7 +129,7 @@ describe("Volume tracking", () => {
   ) => {
     return prisma!.accountActivity.findFirst({
       orderBy: {
-        id: "desc",
+        toBlockNumber: "desc",
       },
       where: {
         accountId: address,
@@ -301,7 +301,6 @@ describe("Volume tracking", () => {
       await getLatestActivityWithAddressAndType(account0.address, true);
 
     assert.deepEqual(accountAcitivityAccount0Maker2, {
-      id: 5,
       fromBlockChainId: chainId,
       fromBlockNumber: 2,
       toBlockChainId: chainId,
@@ -326,7 +325,6 @@ describe("Volume tracking", () => {
       await getLatestActivityWithAddressAndType(account0.address, false);
 
     assert.deepEqual(accountAcitivityAccount0Taker2, {
-      id: 6,
       fromBlockChainId: chainId,
       fromBlockNumber: 2,
       toBlockChainId: chainId,
@@ -352,7 +350,6 @@ describe("Volume tracking", () => {
       await getLatestActivityWithAddressAndType(account1.address, true);
 
     assert.deepEqual(accountAcitivityAccount1Maker2, {
-      id: 7,
       fromBlockChainId: chainId,
       fromBlockNumber: 2,
       toBlockChainId: chainId,
@@ -378,7 +375,6 @@ describe("Volume tracking", () => {
       await getLatestActivityWithAddressAndType(account1.address, false);
 
     assert.deepEqual(accountAcitivityAccount1Taker2, {
-      id: 8,
       fromBlockChainId: chainId,
       fromBlockNumber: 2,
       toBlockChainId: chainId,
