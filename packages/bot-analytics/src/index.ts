@@ -19,11 +19,11 @@ import { Chain, ChainContext } from "./types";
 import {
   generateCreateTokenIfNotExist,
   generateGetTokensPrices,
+  loadTokens,
 } from "./db/token";
 import { generateGetAndSaveVolumeTimeSerie } from "./volume";
 import { getBuiltGraphSDK } from "../.graphclient";
 import { estimateBlockCount, generateBlockHeaderToDbBlock } from "./util/util";
-import moize from "moize";
 import { handleRange } from "./analytics";
 import { generateGetAndSaveLiquidityTimeSerie } from "./liquidity";
 import { binance } from "ccxt";
@@ -70,6 +70,8 @@ const botFunction = async (mgv: Mangrove) => {
     seenTokens: new Set(),
   };
 
+  await loadTokens(context, prisma);
+
   const blockHeaderToBlockWithoutId = generateBlockHeaderToDbBlock(context);
 
   await createBlockIfNotExist(prisma, {
@@ -83,7 +85,7 @@ const botFunction = async (mgv: Mangrove) => {
     chainName: network.name,
   });
 
-  const createTokenIfNotExist = moize(generateCreateTokenIfNotExist(context));
+  const createTokenIfNotExist = generateCreateTokenIfNotExist(context);
 
   const lastSafeBlock = await context.getBlock(
     latestBlock.number - context.blockFinality

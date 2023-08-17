@@ -3,11 +3,11 @@ import { Block, Token } from "@prisma/client";
 import { getPrice, generateGetPairTokenToUSD } from "../util/priceApi";
 import { ChainContext } from "../types";
 import { PrismaTx } from "./types";
-import { logger } from "ethers";
+import moize from "moize";
 
 export const generateCreateTokenIfNotExist = (context: ChainContext) => {
   const ierc20 = typechain.IERC20__factory.createInterface();
-  return async (prisma: PrismaTx, address: string): Promise<Token> => {
+  const fn = async (prisma: PrismaTx, address: string): Promise<Token> => {
     let token = await prisma.token.findFirst({
       where: {
         address,
@@ -54,6 +54,13 @@ export const generateCreateTokenIfNotExist = (context: ChainContext) => {
 
     return token;
   };
+  const ignoreFirstArg = (args: (string | null)[]) => args.slice(1);
+
+  return moize.compose(
+    moize.infinite,
+    moize.promise,
+    moize.transformArgs(ignoreFirstArg)
+  )(fn);
 };
 
 export const generateGetTokensPrices = async (context: ChainContext) => {
@@ -77,7 +84,7 @@ export const generateGetTokensPrices = async (context: ChainContext) => {
         }
         const price = await getPrice(
           context.exchange,
-          pair.id,
+          pair.symbol,
           "1d",
           from.timestamp
         );
@@ -100,4 +107,15 @@ export const generateGetTokensPrices = async (context: ChainContext) => {
       data: tokensPriceCreationParams,
     });
   };
+};
+
+export const loadTokens = async (context: ChainContext, prisma: PrismaTx) => {
+  const tokens = await prisma.token.findMany({
+    where: {
+      chainId: context.chainId,
+    },
+  });
+  if (tokens) {
+    tokens.forEach((token) => context.seenTokens.add(token));
+  }
 };

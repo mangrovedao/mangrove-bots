@@ -11,6 +11,9 @@ export const getPrice = moize(
       since.getTime(),
       1
     );
+    if (!klines || klines.length === 0) {
+      throw new Error(`Missing price ${pair} ${since}`);
+    }
 
     const [timestamp, open, high, low, close, volume] = klines[0];
 
@@ -26,8 +29,7 @@ export const getPrice = moize(
 
 export const generateGetPairTokenToUSD = async (exchange: binance) => {
   const pairs = await exchange.loadMarkets();
-
-  return moize((symbol: string): Market | undefined => {
+  const fn = (symbol: string): Market | undefined => {
     symbol = symbol.toUpperCase();
     let pair = pairs[`${symbol}/USD`];
     if (!pair) {
@@ -47,5 +49,7 @@ export const generateGetPairTokenToUSD = async (exchange: binance) => {
     }
 
     return pair;
-  });
+  };
+
+  return moize.infinite(fn);
 };
