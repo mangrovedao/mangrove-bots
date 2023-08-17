@@ -1,4 +1,4 @@
-A simple configurable analytics bot for the Mangrove.
+A simple configurable analytics bot for the Mangrove Dex.
 
 # Installation
 
