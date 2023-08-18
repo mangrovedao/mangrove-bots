@@ -17,6 +17,7 @@ import assert from "assert";
 import { handleRange } from "../../src/analytics";
 import { generateBlockHeaderToDbBlock } from "../../src/util/util";
 import { Sdk } from "../../.graphclient";
+import { binance } from "ccxt";
 
 describe("Volume tracking", () => {
   let prisma: PrismaClient | undefined;
@@ -57,6 +58,8 @@ describe("Volume tracking", () => {
     multicall2: {} as any,
     subgraphMaxFirstValue: 100,
     everyXBlock: 1,
+    exchange: new binance(),
+    seenTokens: new Set(),
   };
 
   const blockHeaderToDbBlock = generateBlockHeaderToDbBlock(context);

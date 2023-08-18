@@ -16,6 +16,7 @@ import { Sdk } from "../../.graphclient";
 import { createBlockIfNotExist } from "../../src/db/block";
 import { handleRange } from "../../src/analytics";
 import assert from "assert";
+import { binance } from "ccxt";
 
 describe("Available Liquidity tracking", () => {
   let prisma: PrismaClient | undefined;
@@ -56,6 +57,8 @@ describe("Available Liquidity tracking", () => {
     multicall2: {} as any,
     subgraphMaxFirstValue: 100,
     everyXBlock: 1,
+    exchange: new binance(),
+    seenTokens: new Set(),
   };
 
   const account0: Account = {
