@@ -1,0 +1,7 @@
+{
+  "logLevel": "info",
+  "providerType": "http",
+  "kandelAddress": "",
+  "market": ["WETH", "DAI"],
+  "runEveryXMinutes": 10
+}

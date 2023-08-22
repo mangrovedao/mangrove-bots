@@ -1,0 +1,13 @@
+{
+  "mainnet": {},
+  "rinkeby": {},
+  "goerli": {},
+  "kovan": {},
+  "ropsten": {},
+  "maticmum": {},
+  "local": {},
+  "matic": {
+    "MgvArbitrage": "0x774D3089F08ba6cc67FD8EAC06040936D096308D",
+    "UniswapV3Factory": "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+  }
+}

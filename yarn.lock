@@ -1129,6 +1129,60 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@mangrovedao/bot-kandel-exit@workspace:packages/bot-kandel-exit":
+  version: 0.0.0-use.local
+  resolution: "@mangrovedao/bot-kandel-exit@workspace:packages/bot-kandel-exit"
+  dependencies:
+    "@espendk/json-file-reporter": ^1.4.2
+    "@ethersproject/experimental": ^5.7.0
+    "@ethersproject/hardware-wallets": ^5.7.0
+    "@mangrovedao/bot-utils": "workspace:*"
+    "@mangrovedao/mangrove-arbitrage": "workspace:*"
+    "@types/big.js": ^6.1.6
+    "@types/chai": ^4.3.4
+    "@types/chai-as-promised": ^7.1.5
+    "@types/config": ^3.3.0
+    "@types/dotenv-flow": ^3.2.0
+    "@types/finalhandler": ^1.2.0
+    "@types/mocha": ^9.0.0
+    "@types/node": ^20.3.0
+    "@types/serve-static": ^1.15.0
+    "@types/shelljs": ^0.8.11
+    "@typescript-eslint/eslint-plugin": ^5.59.9
+    "@typescript-eslint/parser": ^5.48.1
+    "@uniswap/hardhat-v3-deploy": ^0.1.1
+    "@uniswap/sdk-core": ^4.0.6
+    "@uniswap/v3-core": ^1.0.1
+    "@uniswap/v3-periphery": ^1.4.3
+    "@uniswap/v3-sdk": ^3.10.0
+    big.js: ^6.2.1
+    chai: ^4.3.7
+    chai-as-promised: ^7.1.1
+    config: ^3.3.8
+    cross-env: ^7.0.3
+    dotenv-flow: ^3.2.0
+    eslint: ^8.31.0
+    eslint-config-prettier: ^8.5.0
+    ethers: ^5.7.2
+    fast-safe-stringify: ^2.1.1
+    finalhandler: ^1.2.0
+    lint-staged: ^13.0.3
+    mocha: ^10.0.0
+    mocha-multi-reporters: ^1.5.1
+    npm-run-all: ^4.1.5
+    nyc: ^15.1.0
+    prettier: 2.7.1
+    prettier-eslint: ^15.0.1
+    rimraf: ^5.0.1
+    serve-static: ^1.15.0
+    shelljs: ^0.8.5
+    toad-scheduler: ^2.2.0
+    transparent-proxy: ^1.12.1
+    ts-node: ^10.9.1
+    typescript: ^4.7.0
+  languageName: unknown
+  linkType: soft
+
 "@mangrovedao/bot-maker-noise@workspace:packages/bot-maker-noise":
   version: 0.0.0-use.local
   resolution: "@mangrovedao/bot-maker-noise@workspace:packages/bot-maker-noise"
