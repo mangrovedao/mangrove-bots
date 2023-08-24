@@ -1,16 +1,9 @@
-import {
-  Currency,
-  CurrencyAmount,
-  Percent,
-  Token,
-  TradeType,
-} from "@uniswap/sdk-core";
+import { CurrencyAmount, Percent, Token, TradeType } from "@uniswap/sdk-core";
 import {
   FeeAmount,
   Pool,
   Route,
   SwapOptions,
-  SwapQuoter,
   SwapRouter,
   Trade,
 } from "@uniswap/v3-sdk";
@@ -19,7 +12,6 @@ import JSBI from "jsbi";
 
 import { MgvToken } from "@mangrovedao/mangrove.js";
 import { MAX_FEE_PER_GAS, MAX_PRIORITY_FEE_PER_GAS } from "./constants";
-import { fromReadableAmount } from "./conversion";
 import { getPoolInfo } from "./pool";
 import { sendTransactionViaWallet } from "./transcation";
 
@@ -68,7 +60,7 @@ export async function createTrade(
     route: swapRoute,
     inputAmount: CurrencyAmount.fromRawAmount(
       uniInToken,
-      fromReadableAmount(inAmount, inToken.decimals).toString()
+      inToken.toUnits(inAmount).toString()
     ),
     outputAmount: CurrencyAmount.fromRawAmount(uniOutToken, JSBI.BigInt(0)),
     tradeType: TradeType.EXACT_INPUT,
@@ -113,37 +105,4 @@ export async function executeTrade(
   const res = await sendTransactionViaWallet(tx, signer);
 
   return res;
-}
-
-// Helper Quoting and Pool Functions
-
-async function getOutputQuote(
-  inToken: Token,
-  inAmount: number,
-  qouterAddress: string,
-  route: Route<Currency, Currency>,
-  provider: ethers.providers.Provider
-) {
-  if (!provider) {
-    throw new Error("Provider required to get pool state");
-  }
-
-  const { calldata } = await SwapQuoter.quoteCallParameters(
-    route,
-    CurrencyAmount.fromRawAmount(
-      inToken,
-      fromReadableAmount(inAmount, inToken.decimals)
-    ),
-    TradeType.EXACT_INPUT,
-    {
-      useQuoterV2: true,
-    }
-  );
-
-  const quoteCallReturnData = await provider.call({
-    to: qouterAddress,
-    data: calldata,
-  });
-
-  return ethers.utils.defaultAbiCoder.decode(["uint256"], quoteCallReturnData);
 }

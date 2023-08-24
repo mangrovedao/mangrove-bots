@@ -24,12 +24,10 @@
     "test:integration": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/integration-tests.json --exit ",
     "test:unit": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/unit-tests.json --exit ",
     "test:coverage": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/coverage-tests.json --exit ",
-    "typechain": "ts-node --transpileOnly src/util/runTypechain.ts",
     "deployKandel": "ts-node --transpileOnly scripts/deployKandel.ts",
     "takeAllBids": "ts-node --transpileOnly scripts/takeAllBids.ts",
     "logMarket": "ts-node --transpileOnly scripts/logMarket.ts",
-    "start": "node build/index.js",
-    "startLocal": "node build/local.js"
+    "start": "node build/index.js"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"

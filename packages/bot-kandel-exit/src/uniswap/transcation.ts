@@ -1,13 +1,5 @@
 import { BigNumber, ethers } from "ethers";
 
-export enum TransactionState {
-  Failed = "Failed",
-  New = "New",
-  Rejected = "Rejected",
-  Sending = "Sending",
-  Sent = "Sent",
-}
-
 export async function sendTransactionViaWallet(
   transaction: ethers.providers.TransactionRequest,
   signer: ethers.Signer

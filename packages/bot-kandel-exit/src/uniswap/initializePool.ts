@@ -103,8 +103,5 @@ export function encodePriceSqrt(
       ),
     },
   };
-  logger.debug("", {
-    data: priceInfo,
-  });
   return priceInfo;
 }

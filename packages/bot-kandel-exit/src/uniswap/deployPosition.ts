@@ -1,4 +1,4 @@
-import { CurrencyAmount, Fraction, Percent, Token } from "@uniswap/sdk-core";
+import { CurrencyAmount, Percent, Token } from "@uniswap/sdk-core";
 import {
   MintOptions,
   NonfungiblePositionManager,
@@ -8,15 +8,14 @@ import {
 } from "@uniswap/v3-sdk";
 import { BigNumber, ethers } from "ethers";
 
+import { MgvToken } from "@mangrovedao/mangrove.js";
 import {
   MAX_FEE_PER_GAS,
   MAX_PRIORITY_FEE_PER_GAS,
   NONFUNGIBLE_POSITION_MANAGER_ABI,
 } from "./constants";
-import { fromReadableAmount } from "./conversion";
 import { getPoolInfo } from "./pool";
 import { sendTransactionViaWallet } from "./transcation";
-import { MgvToken } from "@mangrovedao/mangrove.js";
 
 export interface PositionInfo {
   tickLower: number;
@@ -127,28 +126,4 @@ export async function constructPosition(
       .quotient,
     useFullPrecision: true,
   });
-}
-
-export async function getPositionIds(
-  nfManagerAddress: string,
-  provider: ethers.providers.Provider
-): Promise<number[]> {
-  const positionContract = new ethers.Contract(
-    nfManagerAddress,
-    NONFUNGIBLE_POSITION_MANAGER_ABI,
-    provider
-  );
-
-  // Get number of positions
-  const balance: number = await positionContract.balanceOf(nfManagerAddress);
-
-  // Get all positions
-  const tokenIds = [];
-  for (let i = 0; i < balance; i++) {
-    const tokenOfOwnerByIndex: number =
-      await positionContract.tokenOfOwnerByIndex(nfManagerAddress, i);
-    tokenIds.push(tokenOfOwnerByIndex);
-  }
-
-  return tokenIds;
 }
