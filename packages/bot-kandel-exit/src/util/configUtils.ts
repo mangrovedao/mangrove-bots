@@ -1,4 +1,3 @@
-import { ErrorWithData } from "@mangrovedao/bot-utils";
 import { IConfig } from "config";
 import { configUtils as botConfigUtils } from "@mangrovedao/bot-utils";
 import { MarketConfig } from "./Configs";

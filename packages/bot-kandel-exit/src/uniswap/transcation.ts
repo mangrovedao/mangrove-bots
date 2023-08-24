@@ -11,7 +11,7 @@ export enum TransactionState {
 export async function sendTransactionViaWallet(
   transaction: ethers.providers.TransactionRequest,
   signer: ethers.Signer
-): Promise<TransactionState> {
+): Promise<ethers.providers.TransactionReceipt> {
   if (transaction.value) {
     transaction.value = BigNumber.from(transaction.value);
   }
@@ -20,7 +20,7 @@ export async function sendTransactionViaWallet(
   let receipt = null;
   const provider = signer.provider;
   if (!provider) {
-    return TransactionState.Failed;
+    return null;
   }
 
   while (receipt === null) {
@@ -37,9 +37,5 @@ export async function sendTransactionViaWallet(
   }
 
   // Transaction was successful if status === 1
-  if (receipt) {
-    return TransactionState.Sent;
-  } else {
-    return TransactionState.Failed;
-  }
+  return receipt;
 }

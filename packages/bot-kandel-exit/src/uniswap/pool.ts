@@ -1,3 +1,4 @@
+import { MgvToken } from "@mangrovedao/mangrove.js";
 import { Token } from "@uniswap/sdk-core";
 import IUniswapV3PoolABI from "@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json";
 import { computePoolAddress } from "@uniswap/v3-sdk";
@@ -16,15 +17,15 @@ interface PoolInfo {
 
 export async function getPoolInfo(
   poolFactoryAddress: string,
-  token0: Token,
-  token1: Token,
+  token0: MgvToken,
+  token1: MgvToken,
   poolFee: number,
   provider: ethers.providers.Provider
 ): Promise<PoolInfo> {
   const currentPoolAddress = computePoolAddress({
     factoryAddress: poolFactoryAddress,
-    tokenA: token0,
-    tokenB: token1,
+    tokenA: new Token(token0.mgv.network.id, token0.address, token0.decimals),
+    tokenB: new Token(token1.mgv.network.id, token1.address, token1.decimals),
     fee: poolFee,
   });
 

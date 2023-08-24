@@ -1,7 +1,7 @@
 {
   "logLevel": "debug",
   "providerType": "http",
-  "kandelAddress": "",
-  "market": ["WETH", "DAI"],
+  "kandelAddress": "0x77d9531De0a5aB4DbD87519859B5770A590EDcf7",
+  "market": { "base": "WETH", "quote": "USDC" },
   "runEveryXMinutes": 0.5
 }

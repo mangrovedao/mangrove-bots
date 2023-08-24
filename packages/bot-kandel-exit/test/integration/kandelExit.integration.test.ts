@@ -4,27 +4,23 @@
 import { afterEach, beforeEach, describe, it } from "mocha";
 
 import {
-  KandelFarm,
   KandelInstance,
   KandelStrategies,
   Mangrove,
   mgvTestUtil,
 } from "@mangrovedao/mangrove.js";
 
-import { Token } from "@uniswap/sdk-core";
 import assert from "assert";
-import { getPoolInfo } from "../../src/uniswap/pool";
 import { logger } from "../../src/util/logger";
-import { waitForTransactions } from "@mangrovedao/mangrove.js/src/util/test/mgvIntegrationTestUtil";
+import { exitKandelIfNoBids } from "../../src/util/ExitKandel";
 
-let mgv: Mangrove;
-let mgvDeployer: Mangrove;
-let mgvArbitrager: Mangrove;
+let mgvKandel: Mangrove;
+let mgvTaker: Mangrove;
 let kandel: KandelInstance;
 
 describe("Kandel exit integration tests", () => {
   beforeEach(async function () {
-    mgv = await Mangrove.connect({
+    mgvKandel = await Mangrove.connect({
       privateKey: this.accounts.maker.key,
       provider: this.server.url,
       blockManagerOptions: {
@@ -37,9 +33,9 @@ describe("Kandel exit integration tests", () => {
       },
     });
 
-    mgvDeployer = await Mangrove.connect({
-      privateKey: this.accounts.deployer.key,
-      provider: mgv.provider,
+    mgvTaker = await Mangrove.connect({
+      privateKey: this.accounts.cleaner.key,
+      provider: mgvKandel.provider,
       blockManagerOptions: {
         maxBlockCached: 5,
         maxRetryGetBlock: 10,
@@ -50,32 +46,25 @@ describe("Kandel exit integration tests", () => {
       },
     });
 
-    mgvArbitrager = await Mangrove.connect({
-      privateKey: this.accounts.arbitrager.key,
-      provider: this.server.url,
-      blockManagerOptions: {
-        maxBlockCached: 5,
-        maxRetryGetBlock: 10,
-        retryDelayGetBlockMs: 500,
-        maxRetryGetLogs: 10,
-        retryDelayGetLogsMs: 500,
-        batchSize: 5,
-      },
-    });
-
-    const weth = await mgv.token("WETH");
-    const dai = await mgv.token("DAI");
-    const usdc = await mgv.token("USDC");
-    await weth.contract.mintTo(this.accounts.maker.address, weth.toUnits(100));
-    await dai.contract.mintTo(this.accounts.maker.address, dai.toUnits(100000));
+    const weth = await mgvKandel.token("WETH");
+    const usdc = await mgvKandel.token("USDC");
+    await weth.contract.mintTo(this.accounts.maker.address, weth.toUnits(10));
     await usdc.contract.mintTo(
       this.accounts.maker.address,
+      usdc.toUnits(20000)
+    );
+    await weth.contract.mintTo(
+      this.accounts.cleaner.address,
+      weth.toUnits(100)
+    );
+    await usdc.contract.mintTo(
+      this.accounts.cleaner.address,
       usdc.toUnits(100000)
     );
 
-    const market = await mgv.market({ base: "WETH", quote: "USDC" });
+    const market = await mgvKandel.market({ base: "WETH", quote: "USDC" });
 
-    const kandelStrats = new KandelStrategies(mgv);
+    const kandelStrats = new KandelStrategies(mgvKandel);
 
     const { kandelPromise } = await kandelStrats.seeder.sow({
       market,
@@ -88,44 +77,148 @@ describe("Kandel exit integration tests", () => {
     market.close();
 
     logger.debug(
-      `--label ${this.accounts.maker.address}:maker --label ${this.accounts.deployer.address}:deployer --label ${arb}:arbContract --label ${weth.address}:weth --label ${dai.address}:dai --label ${mgv.address}:mangrove --label ${usdc.address}:usdc`
+      `--label ${this.accounts.maker.address}:maker --label ${this.accounts.deployer.address}:deployer --label ${weth.address}:weth --label ${mgvKandel.address}:mangrove --label ${usdc.address}:usdc`
     );
 
-    mgvTestUtil.setConfig(mgv, this.accounts, mgvDeployer);
-    mgvTestUtil.initPollOfTransactionTracking(mgvDeployer.provider);
+    mgvTestUtil.setConfig(mgvKandel, this.accounts, mgvTaker);
+    mgvTestUtil.initPollOfTransactionTracking(mgvTaker.provider);
   });
 
   afterEach(async function () {
     mgvTestUtil.stopPollOfTransactionTracking();
-    mgvDeployer.disconnect();
-    mgv.disconnect();
-    mgvArbitrager.disconnect();
+    mgvTaker.disconnect();
+    mgvKandel.disconnect();
   });
 
-  describe("test arb bot", () => {
+  describe("test exit kandel", () => {
     it(`Should exit kandel`, async function () {
-      const market = await mgv.market({ base: "WETH", quote: "USDC" });
-      const kandelStrats = new KandelStrategies(mgv);
+      const makerMarket = await mgvKandel.market({
+        base: "WETH",
+        quote: "USDC",
+      });
+      const kandelStrats = new KandelStrategies(mgvKandel);
       const distribution = kandelStrats
-        .generator(market)
+        .generator(makerMarket)
         .calculateDistribution({
-          priceParams: { minPrice: 900, ratio: 1.01, pricePoints: 6 },
-          midPrice: 1000,
+          priceParams: { minPrice: 1500, ratio: 1.04, pricePoints: 6 },
+          midPrice: 1634,
           initialAskGives: 1,
         });
-      const receipts = await waitForTransactions(
-        kandel.populate({
-          distribution,
-          depositBaseAmount: 10,
-          depositQuoteAmount: 20000,
-        })
+      const approvalTxs = await kandel.approveIfHigher(10, 20000);
+      await approvalTxs[0]?.wait();
+      await approvalTxs[1]?.wait();
+      const txs = await kandel.populate({
+        distribution,
+        depositBaseAmount: 10,
+        depositQuoteAmount: 20000,
+      });
+      const receipt = await txs[0].wait();
+      await mgvTestUtil.waitForBlock(mgvKandel, receipt.blockNumber);
+      const kandelOffersBids = (await kandel.getOffers()).filter(
+        (o) => o.offerType == "bids"
       );
-      await mgvTestUtil.waitForBlock(
-        kandel.market.mgv,
-        receipts[receipts.length - 1].blockNumber
+      assert.strictEqual(kandelOffersBids.length, 3);
+      const takerMarket = await mgvTaker.market({
+        base: "WETH",
+        quote: "USDC",
+      });
+      let approveTx = await takerMarket.base.approveMangrove();
+      await approveTx.wait();
+      approveTx = await takerMarket.quote.approveMangrove();
+      await approveTx.wait();
+      const tx = await takerMarket.sell({
+        wants: 10,
+        gives: 23000,
+        fillWants: false,
+      });
+      const buyReceipt = await (await tx.response).wait();
+      await mgvTestUtil.waitForBlock(mgvKandel, buyReceipt.blockNumber);
+      const allKandelOffers = await kandel.getOffers();
+      const kandelOffersBidsAfterBuy = allKandelOffers.filter(
+        (o) => o.offerType == "bids" && makerMarket.isLiveOffer(o.offer)
       );
-      const offers = await kandel.getOffers();
-      console.log(offers);
+      const kandelOffersAsksAfterBuy = allKandelOffers.filter(
+        (o) => o.offerType == "asks" && makerMarket.isLiveOffer(o.offer)
+      );
+      assert.strictEqual(allKandelOffers.length, 9);
+      assert.strictEqual(kandelOffersAsksAfterBuy.length, 6);
+      assert.strictEqual(kandelOffersBidsAfterBuy.length, 0);
+
+      const quoteBalanceBeforeExit = await makerMarket.quote.balanceOf(
+        kandel.address
+      );
+      const baseBalanceBeforeExit = await makerMarket.base.balanceOf(
+        kandel.address
+      );
+      const exit = await exitKandelIfNoBids(kandel, makerMarket, mgvKandel);
+      const exitBlockNumber = exit.reduce(
+        (acc, tx) => (acc > tx.blockNumber ? acc : tx.blockNumber),
+        0
+      );
+      await mgvTestUtil.waitForBlock(mgvKandel, exitBlockNumber);
+
+      const allKandelOffersAfterExit = await kandel.getOffers();
+      const liveKandelOffersAfterExit = allKandelOffersAfterExit.filter((o) =>
+        makerMarket.isLiveOffer(o.offer)
+      );
+      assert.strictEqual(liveKandelOffersAfterExit.length, 0);
+      const quoteBalanceAfterExit = (
+        await makerMarket.quote.balanceOf(this.accounts.maker.address)
+      ).toNumber();
+      const baseBalanceAfterExit = (
+        await makerMarket.base.balanceOf(this.accounts.maker.address)
+      ).toNumber();
+      const uniPrice =
+        (quoteBalanceAfterExit - quoteBalanceBeforeExit.toNumber()) /
+        baseBalanceBeforeExit.toNumber();
+      assert.strictEqual(uniPrice - (uniPrice % 1), 1634);
+      assert.strictEqual(baseBalanceAfterExit, 0);
+    });
+
+    it(`Should not exit kandel`, async function () {
+      const makerMarket = await mgvKandel.market({
+        base: "WETH",
+        quote: "USDC",
+      });
+      const kandelStrats = new KandelStrategies(mgvKandel);
+      const distribution = kandelStrats
+        .generator(makerMarket)
+        .calculateDistribution({
+          priceParams: { minPrice: 1500, ratio: 1.04, pricePoints: 6 },
+          midPrice: 1634,
+          initialAskGives: 1,
+        });
+      const approvalTxs = await kandel.approveIfHigher(10, 20000);
+      await approvalTxs[0]?.wait();
+      await approvalTxs[1]?.wait();
+      const txs = await kandel.populate({
+        distribution,
+        depositBaseAmount: 10,
+        depositQuoteAmount: 20000,
+      });
+      const receipt = await txs[0].wait();
+      await mgvTestUtil.waitForBlock(mgvKandel, receipt.blockNumber);
+      const kandelOffers = await kandel.getOffers();
+      const kandelOffersBids = kandelOffers.filter(
+        (o) => o.offerType == "bids" && makerMarket.isLiveOffer(o.offer)
+      );
+      assert.strictEqual(kandelOffersBids.length, 3);
+
+      const exit = await exitKandelIfNoBids(kandel, makerMarket, mgvKandel);
+      assert.strictEqual(exit, undefined);
+      const allKandelOffersAfterExit = await kandel.getOffers();
+      const liveKandelOffersAfterExit = allKandelOffersAfterExit.filter((o) =>
+        makerMarket.isLiveOffer(o.offer)
+      );
+      assert.strictEqual(liveKandelOffersAfterExit.length, 6);
+      const quoteBalanceAfterExit = (
+        await makerMarket.quote.balanceOf(kandel.address)
+      ).toNumber();
+      const baseBalanceAfterExit = (
+        await makerMarket.base.balanceOf(kandel.address)
+      ).toNumber();
+      assert.strictEqual(quoteBalanceAfterExit, 20000);
+      assert.strictEqual(baseBalanceAfterExit, 10);
     });
   });
 });

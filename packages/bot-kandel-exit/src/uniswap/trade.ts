@@ -17,16 +17,11 @@ import {
 import { Signer, ethers } from "ethers";
 import JSBI from "jsbi";
 
-import {
-  ERC20_ABI,
-  QUOTER_CONTRACT_ADDRESS,
-  SWAP_ROUTER_ADDRESS,
-  TOKEN_AMOUNT_TO_APPROVE_FOR_TRANSFER,
-} from "./constants";
+import { MgvToken } from "@mangrovedao/mangrove.js";
 import { MAX_FEE_PER_GAS, MAX_PRIORITY_FEE_PER_GAS } from "./constants";
-import { getPoolInfo } from "./pool";
 import { fromReadableAmount } from "./conversion";
-import { TransactionState, sendTransactionViaWallet } from "./transcation";
+import { getPoolInfo } from "./pool";
+import { sendTransactionViaWallet } from "./transcation";
 
 export type TokenTrade = Trade<Token, Token, TradeType>;
 
@@ -34,9 +29,9 @@ export type TokenTrade = Trade<Token, Token, TradeType>;
 
 export async function createTrade(
   poolFactoryAddress: string,
-  inToken: Token,
+  inToken: MgvToken,
   inAmount: number,
-  outToken: Token,
+  outToken: MgvToken,
   fee: FeeAmount,
   provider: ethers.providers.Provider
 ): Promise<TokenTrade> {
@@ -48,34 +43,34 @@ export async function createTrade(
     provider
   );
 
+  const uniInToken = new Token(
+    inToken.mgv.network.id,
+    inToken.address,
+    inToken.decimals
+  );
+  const uniOutToken = new Token(
+    outToken.mgv.network.id,
+    outToken.address,
+    outToken.decimals
+  );
   const pool = new Pool(
-    inToken,
-    outToken,
+    uniInToken,
+    uniOutToken,
     fee,
     poolInfo.sqrtPriceX96.toString(),
     poolInfo.liquidity.toString(),
     poolInfo.tick
   );
 
-  const swapRoute = new Route([pool], inToken, outToken);
-
-  const amountOut = await getOutputQuote(
-    inToken,
-    inAmount,
-    swapRoute,
-    provider
-  );
+  const swapRoute = new Route([pool], uniInToken, uniOutToken);
 
   const uncheckedTrade = Trade.createUncheckedTrade({
     route: swapRoute,
     inputAmount: CurrencyAmount.fromRawAmount(
-      inToken,
+      uniInToken,
       fromReadableAmount(inAmount, inToken.decimals).toString()
     ),
-    outputAmount: CurrencyAmount.fromRawAmount(
-      outToken,
-      JSBI.BigInt(amountOut)
-    ),
+    outputAmount: CurrencyAmount.fromRawAmount(uniOutToken, JSBI.BigInt(0)),
     tradeType: TradeType.EXACT_INPUT,
   });
 
@@ -83,27 +78,20 @@ export async function createTrade(
 }
 
 export async function executeTrade(
-  outToken: Token,
+  inToken: MgvToken,
   trade: TokenTrade,
+  swapRouterAddress: string,
   signer: Signer,
   provider: ethers.providers.Provider
-): Promise<TransactionState> {
+): Promise<ethers.providers.TransactionReceipt> {
   const walletAddress = await signer.getAddress();
   if (!walletAddress || !provider) {
     throw new Error("Cannot execute a trade without a connected wallet");
   }
 
   // Give approval to the router to spend the token
-  const tokenApproval = await getTokenTransferApproval(
-    outToken,
-    provider,
-    signer
-  );
-
-  // Fail if transfer approvals do not go through
-  if (tokenApproval !== TransactionState.Sent) {
-    return TransactionState.Failed;
-  }
+  const approveTx = await inToken.approve(swapRouterAddress);
+  await approveTx.wait();
 
   const options: SwapOptions = {
     slippageTolerance: new Percent(500, 10000), // 50 bips, or 0.50%
@@ -115,7 +103,7 @@ export async function executeTrade(
 
   const tx = {
     data: methodParameters.calldata,
-    to: SWAP_ROUTER_ADDRESS,
+    to: swapRouterAddress,
     value: methodParameters.value,
     from: walletAddress,
     maxFeePerGas: MAX_FEE_PER_GAS,
@@ -132,6 +120,7 @@ export async function executeTrade(
 async function getOutputQuote(
   inToken: Token,
   inAmount: number,
+  qouterAddress: string,
   route: Route<Currency, Currency>,
   provider: ethers.providers.Provider
 ) {
@@ -152,39 +141,9 @@ async function getOutputQuote(
   );
 
   const quoteCallReturnData = await provider.call({
-    to: QUOTER_CONTRACT_ADDRESS,
+    to: qouterAddress,
     data: calldata,
   });
 
   return ethers.utils.defaultAbiCoder.decode(["uint256"], quoteCallReturnData);
-}
-
-export async function getTokenTransferApproval(
-  token: Token,
-  provider: ethers.providers.Provider,
-  signer: Signer
-): Promise<TransactionState> {
-  const address = await signer.getAddress();
-  if (!provider || !address) {
-    console.log("No Provider Found");
-    return TransactionState.Failed;
-  }
-
-  try {
-    const tokenContract = new ethers.Contract(
-      token.address,
-      ERC20_ABI,
-      provider
-    );
-
-    const transaction = await tokenContract.populateTransaction.approve(
-      SWAP_ROUTER_ADDRESS,
-      TOKEN_AMOUNT_TO_APPROVE_FOR_TRANSFER
-    );
-
-    return sendTransactionViaWallet(transaction, signer);
-  } catch (e) {
-    console.error(e);
-    return TransactionState.Failed;
-  }
 }

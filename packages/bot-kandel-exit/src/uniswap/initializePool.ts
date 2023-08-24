@@ -35,7 +35,7 @@ export async function initPool(params: {
     .connect(params.actor)
     .getPool(params.token1.address, params.token2.address, params.poolFee);
   logger.debug(
-    `poolAddress: ${poolAddress}, token1: ${params.token1.address}, token2: ${params.token2.address}, fee: ${params.poolFee}`
+    `sqrtPrice: ${sqrtPrice} poolAddress: ${poolAddress}, token1: ${params.token1.name} ${params.token1.address}, token2: ${params.token2.name} ${params.token2.address}, fee: ${params.poolFee}`
   );
 }
 
@@ -58,50 +58,47 @@ export function encodePriceSqrt(
   reserve1Name: string
 ) {
   bn.config({ EXPONENTIAL_AT: 999999, DECIMAL_PLACES: 40 });
-  const usableDecimals0 = getCorrectDecimal(reserve0Decimals, reserve1Decimals);
-  const usableDecimals1 = getCorrectDecimal(reserve1Decimals, reserve0Decimals);
-  const correctReservce0 = new bn(reserve0.toString()).multipliedBy(
-    new bn(10).pow(usableDecimals1)
+  const decimal = Math.abs(reserve0Decimals - reserve1Decimals);
+  const correctReserve0 = new bn(reserve0.toString()).multipliedBy(
+    new bn(10).pow(reserve1Decimals)
   );
-  const correctReservce1 = new bn(reserve1.toString()).multipliedBy(
-    new bn(10).pow(usableDecimals0)
+  const correctReserve1 = new bn(reserve1.toString()).multipliedBy(
+    new bn(10).pow(reserve0Decimals)
   );
 
-  const bnNumber = new bn(correctReservce0.toString())
-    .div(correctReservce1.toString())
+  const sqrtPrice = new bn(correctReserve0.toString())
+    .div(correctReserve1.toString())
     .sqrt()
     .multipliedBy(new bn(2).pow(96))
     .integerValue(3);
 
-  const p4 = bnNumber.pow(2).div(new bn(2).pow(192));
-  const p5 = new bn(1).div(p4);
+  const rawPrice = sqrtPrice.pow(2).div(new bn(2).pow(192));
+  const rawInvertedPrice = new bn(1).div(rawPrice);
   const priceInfo = {
-    sqrtPrice: bnNumber.toString(),
+    sqrtPrice: sqrtPrice.toString(),
     reserve0Decimals,
     reserve1Decimals,
-    usableDecimals0,
-    usableDecimals1,
     price: {
       reserve0Name,
-      price: p4.div(
+      price: rawPrice.div(
         new bn(10).pow(
           reserve0Decimals == reserve1Decimals
             ? 0
             : reserve0Decimals > reserve1Decimals
-            ? -reserve1Decimals
-            : usableDecimals0
+            ? -decimal
+            : decimal
         )
       ),
     },
     priceInverse: {
       reserve1Name,
-      price: p5.div(
+      price: rawInvertedPrice.div(
         new bn(10).pow(
           reserve0Decimals == reserve1Decimals
             ? 0
             : reserve0Decimals > reserve1Decimals
-            ? usableDecimals1
-            : -reserve0Decimals
+            ? decimal
+            : -decimal
         )
       ),
     },

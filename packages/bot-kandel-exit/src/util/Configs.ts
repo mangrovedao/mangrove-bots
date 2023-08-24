@@ -1,4 +1,4 @@
 export type MarketConfig = {
-  baseToken: string;
-  quoteToken: string;
+  base: string;
+  quote: string;
 };

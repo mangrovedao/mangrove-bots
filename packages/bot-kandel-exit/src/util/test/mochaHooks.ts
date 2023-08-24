@@ -2,9 +2,9 @@ import Mangrove, { ethers } from "@mangrovedao/mangrove.js";
 import * as eth from "@mangrovedao/mangrove.js/dist/nodejs/eth";
 import DevNode from "@mangrovedao/mangrove.js/dist/nodejs/util/devNode";
 import {
+  inputServerParamsType,
   node,
   nodeType,
-  inputServerParamsType,
   serverType,
 } from "@mangrovedao/mangrove.js/dist/nodejs/util/node";
 import {
@@ -12,21 +12,19 @@ import {
   mochaHooks as mgvMochaHooks,
 } from "@mangrovedao/mangrove.js/dist/nodejs/util/test/mochaHooks";
 import * as dotenv from "dotenv";
-import * as deploy from "../deployMgvArbitrage";
 import path from "path";
+import { mintPosition } from "../../uniswap/deployPosition";
 import {
   UniswapV3Contracts,
   UniswapV3Deployer,
 } from "../../uniswap/deployUniswapv3";
-import { mintPosition } from "../../uniswap/deployPosition";
-import { Token } from "@uniswap/sdk-core";
 import { initPool } from "../../uniswap/initializePool";
 
 const LOCAL_MNEMONIC =
   "test test test test test test test test test test test junk";
 const mnemonic = new eth.Mnemonic(LOCAL_MNEMONIC);
 const CORE_DIR = path.parse(
-  require.resolve("../../../../mangrove-arbitrage")
+  require.resolve("../../../../../node_modules/@mangrovedao/mangrove-core")
 ).dir;
 
 export const mochaHooks = {
@@ -79,23 +77,6 @@ export const mochaHooks = {
 export const sleep = (ms: number): Promise<void> => {
   return new Promise((cb) => setTimeout(cb, ms));
 };
-async function deployMgvArbitrage(
-  provider: ethers.providers.JsonRpcProvider,
-  univ3Router: string,
-  serverUrl: string,
-  arbitrager: string
-) {
-  await deploy.deployMgvArbitrage({
-    provider,
-    url: serverUrl,
-    univ3Router: univ3Router,
-    arbitrager: arbitrager,
-    mnemonic: mnemonic,
-    coreDir: CORE_DIR,
-    setToyENSCodeIfAbsent: false,
-    setMulticallCodeIfAbsent: false,
-  });
-}
 
 async function deployUniswap(
   provider: ethers.providers.JsonRpcProvider,
@@ -106,7 +87,6 @@ async function deployUniswap(
     provider: serverUrl,
   });
   const weth = await thisMgv.token("WETH");
-  const dai = await thisMgv.token("DAI");
   const usdc = await thisMgv.token("USDC");
 
   const wallet = new ethers.Wallet(mnemonic.key(0), provider);
@@ -121,30 +101,10 @@ async function deployUniswap(
     token1: usdc,
     token1Value: "1",
     token2: weth,
-    token2Value: "1600",
-    poolFee: 3000,
-  });
-  await initPool({
-    positionManager: uniContracts.positionManager,
-    factory: uniContracts.factory,
-    actor: signer,
-    token1: weth,
-    token1Value: "1600",
-    token2: dai,
-    token2Value: "1",
+    token2Value: "1639",
     poolFee: 3000,
   });
 
-  await initPool({
-    positionManager: uniContracts.positionManager,
-    factory: uniContracts.factory,
-    actor: signer,
-    token1: usdc,
-    token1Value: "1",
-    token2: dai,
-    token2Value: "1",
-    poolFee: 3000,
-  });
   thisMgv.setAddress("UniswapV3Router", uniContracts.router.address);
   thisMgv.setAddress("UniswapV3Factory", uniContracts.factory.address);
   thisMgv.setAddress(
@@ -157,67 +117,25 @@ async function deployUniswap(
   );
   thisMgv.setAddress("UniswapV3WETH9", uniContracts.weth9.address);
 
-  await weth.contract.setMintLimit(weth.toUnits(10000));
-  await dai.contract.setMintLimit(dai.toUnits(100000000));
-  await usdc.contract.setMintLimit(usdc.toUnits(100000000));
-  await weth.contract.mintTo(wallet.address, weth.toUnits(10000));
-  await dai.contract.mintTo(wallet.address, dai.toUnits(16000000));
-  await usdc.contract.mintTo(wallet.address, usdc.toUnits(16000000));
+  await weth.contract.setMintLimit(weth.toUnits(1000000));
+  await usdc.contract.setMintLimit(usdc.toUnits(10000000000));
+  await weth.contract.mintTo(wallet.address, weth.toUnits(1000000));
+  await usdc.contract.mintTo(wallet.address, usdc.toUnits(1600000000));
 
   await weth.contract.approve(
     uniContracts.positionManager.address,
-    weth.toUnits(10000)
-  );
-  await dai.contract.approve(
-    uniContracts.positionManager.address,
-    dai.toUnits(16000000)
+    weth.toUnits(1000000)
   );
   await usdc.contract.approve(
     uniContracts.positionManager.address,
-    usdc.toUnits(16000000)
-  );
-
-  const uniWethToken = new Token(
-    thisMgv.network.id,
-    weth.address,
-    weth.decimals
-  );
-  const uniDaiToken = new Token(thisMgv.network.id, dai.address, dai.decimals);
-  const uniUsdcToken = new Token(
-    thisMgv.network.id,
-    usdc.address,
-    usdc.decimals
+    usdc.toUnits(1600000000)
   );
 
   await mintPosition({
-    token0: uniWethToken,
-    token0Amount: 100,
-    token1: uniDaiToken,
-    token1Amount: 160000,
-    poolFee: 3000,
-    nfManagerAddress: uniContracts.positionManager.address,
-    poolFactoryAddress: uniContracts.factory.address,
-    provider: provider,
-    signer: signer,
-  });
-
-  await mintPosition({
-    token0: uniUsdcToken,
-    token0Amount: 160000,
-    token1: uniWethToken,
-    token1Amount: 100,
-    poolFee: 3000,
-    nfManagerAddress: uniContracts.positionManager.address,
-    poolFactoryAddress: uniContracts.factory.address,
-    provider: provider,
-    signer: signer,
-  });
-
-  await mintPosition({
-    token0: new Token(thisMgv.network.id, usdc.address, usdc.decimals),
-    token0Amount: 1000000,
-    token1: new Token(thisMgv.network.id, dai.address, dai.decimals),
-    token1Amount: 1000000,
+    token0: usdc,
+    token0Amount: 160000000,
+    token1: weth,
+    token1Amount: 100000,
     poolFee: 3000,
     nfManagerAddress: uniContracts.positionManager.address,
     poolFactoryAddress: uniContracts.factory.address,

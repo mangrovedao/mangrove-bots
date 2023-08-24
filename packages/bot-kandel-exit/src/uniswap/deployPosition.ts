@@ -1,10 +1,10 @@
-import { CurrencyAmount, Percent, Token } from "@uniswap/sdk-core";
+import { CurrencyAmount, Fraction, Percent, Token } from "@uniswap/sdk-core";
 import {
   MintOptions,
-  nearestUsableTick,
   NonfungiblePositionManager,
   Pool,
   Position,
+  nearestUsableTick,
 } from "@uniswap/v3-sdk";
 import { BigNumber, ethers } from "ethers";
 
@@ -12,12 +12,11 @@ import {
   MAX_FEE_PER_GAS,
   MAX_PRIORITY_FEE_PER_GAS,
   NONFUNGIBLE_POSITION_MANAGER_ABI,
-  ERC20_ABI,
-  TOKEN_AMOUNT_TO_APPROVE_FOR_TRANSFER,
 } from "./constants";
 import { fromReadableAmount } from "./conversion";
-import { TransactionState, sendTransactionViaWallet } from "./transcation";
 import { getPoolInfo } from "./pool";
+import { sendTransactionViaWallet } from "./transcation";
+import { MgvToken } from "@mangrovedao/mangrove.js";
 
 export interface PositionInfo {
   tickLower: number;
@@ -30,38 +29,21 @@ export interface PositionInfo {
 }
 
 export async function mintPosition(params: {
-  token0: Token;
+  token0: MgvToken;
   token0Amount: number;
-  token1: Token;
+  token1: MgvToken;
   token1Amount: number;
   poolFee: number;
   nfManagerAddress: string;
   poolFactoryAddress: string;
   provider: ethers.providers.Provider;
   signer: ethers.Signer;
-}): Promise<TransactionState> {
-  const readableToken0Amount = fromReadableAmount(
-    params.token0Amount,
-    params.token0.decimals
-  );
-  const readableToken1Amount = fromReadableAmount(
-    params.token1Amount,
-    params.token1.decimals
-  );
-
-  const token0CurrenyAmount = CurrencyAmount.fromRawAmount(
-    params.token0,
-    readableToken0Amount
-  );
-
-  const token1CurrenyAmount = CurrencyAmount.fromRawAmount(
-    params.token1,
-    readableToken1Amount
-  );
-
+}): Promise<ethers.providers.TransactionReceipt> {
   const positionToMint = await constructPosition(
-    token0CurrenyAmount,
-    token1CurrenyAmount,
+    params.token0,
+    params.token0.toUnits(params.token0Amount),
+    params.token1,
+    params.token1.toUnits(params.token1Amount),
     params.poolFactoryAddress,
     params.poolFee,
     params.provider
@@ -93,8 +75,10 @@ export async function mintPosition(params: {
 }
 
 export async function constructPosition(
-  token0Amount: CurrencyAmount<Token>,
-  token1Amount: CurrencyAmount<Token>,
+  token0: MgvToken,
+  token0Amount: BigNumber,
+  token1: MgvToken,
+  token1Amount: BigNumber,
   poolFactoryAddress: string,
   poolFee: number,
   provider: ethers.providers.Provider
@@ -102,16 +86,26 @@ export async function constructPosition(
   // get pool info
   const poolInfo = await getPoolInfo(
     poolFactoryAddress,
-    token0Amount.currency,
-    token1Amount.currency,
+    token0,
+    token1,
     poolFee,
     provider
   );
 
+  const uniToken0 = new Token(
+    token0.mgv.network.id,
+    token0.address,
+    token0.decimals
+  );
+  const uniToken1 = new Token(
+    token1.mgv.network.id,
+    token1.address,
+    token1.decimals
+  );
   // construct pool instance
   const configuredPool = new Pool(
-    token0Amount.currency,
-    token1Amount.currency,
+    uniToken0,
+    uniToken1,
     poolInfo.fee,
     poolInfo.sqrtPriceX96.toString(),
     poolInfo.liquidity.toString(),
@@ -127,8 +121,10 @@ export async function constructPosition(
     tickUpper:
       nearestUsableTick(poolInfo.tick, poolInfo.tickSpacing) +
       poolInfo.tickSpacing * 2,
-    amount0: token0Amount.quotient,
-    amount1: token1Amount.quotient,
+    amount0: CurrencyAmount.fromRawAmount(uniToken0, token0Amount.toString())
+      .quotient,
+    amount1: CurrencyAmount.fromRawAmount(uniToken1, token1Amount.toString())
+      .quotient,
     useFullPrecision: true,
   });
 }

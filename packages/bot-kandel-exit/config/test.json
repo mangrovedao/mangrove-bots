@@ -2,6 +2,6 @@
   "logLevel": "error",
   "providerType": "http",
   "kandelAddress": "",
-  "market": ["WETH", "DAI"],
+  "market": { "base": "WETH", "quote": "USDC" },
   "runEveryXMinutes": 10
 }

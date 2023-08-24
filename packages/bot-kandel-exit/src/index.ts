@@ -9,11 +9,10 @@ import Mangrove, {
   Market,
   enableLogging,
 } from "@mangrovedao/mangrove.js";
-import { Token } from "@uniswap/sdk-core";
 import dotenvFlow from "dotenv-flow";
-import { BigNumber, Wallet } from "ethers";
+import { Wallet } from "ethers";
 import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
-import { createTrade, executeTrade } from "./uniswap/trade";
+import { exitKandelIfNoBids } from "./util/ExitKandel";
 import config from "./util/config";
 import { ConfigUtils } from "./util/configUtils";
 import { logger } from "./util/logger";
@@ -22,7 +21,6 @@ dotenvFlow.config();
 
 enableLogging();
 
-const balanceUtils = new BalanceUtils(config);
 const setup = new Setup(config);
 const scheduler = new ToadScheduler();
 export type MarketPairAndFee = { base: string; quote: string; fee: number };
@@ -56,15 +54,14 @@ function createAsyncKandelExit(
 
 export async function botFunction(mgv: Mangrove, signer?: Wallet) {
   const botConfig = configUtil.getAndValidateKandelExitConfig();
+  mgv.setAddress("UniswapV3Factory");
 
   const latestMarketActivities: LatestMarketActivity[] = [];
   setup.latestActivity.markets = latestMarketActivities;
 
-  const arbBotMarketMap = new Set<MarketPairAndFee>();
-
   const market = await mgv.market({
-    base: botConfig.market.baseToken,
-    quote: botConfig.market.quoteToken,
+    base: botConfig.market.base,
+    quote: botConfig.market.quote,
   });
 
   const kandel = await KandelInstance.create({
@@ -72,7 +69,6 @@ export async function botFunction(mgv: Mangrove, signer?: Wallet) {
     signer: signer,
     market: market,
   });
-  await exitKandelIfNoBids(kandel, market, mgv);
 
   // create and schedule task
   logger.info(`Running bot every ${botConfig.runEveryXMinutes} minutes.`, {
@@ -109,54 +105,3 @@ main().catch((e) => {
   logger.error(e);
   setup.stopAndExit(ExitCode.ExceptionInMain, scheduler);
 });
-
-export async function exitKandelIfNoBids(
-  kandel: KandelInstance,
-  market: Market,
-  mgv: Mangrove
-) {
-  const offers = await kandel.getOffers();
-  const hasBids = offers.reduce((acc, offer) => {
-    if (offer.offerType == "bids") {
-      const live = market.isLiveOffer(offer.offer);
-      if (live) {
-        return live;
-      } else {
-        return acc;
-      }
-    }
-    return acc;
-  }, false);
-
-  if (!hasBids) {
-    logger.info("No bids found, exiting");
-    const signerAdderss = await mgv.signer.getAddress();
-    await kandel.retractAndWithdraw();
-    const baseBalance = await kandel.getBase().balanceOf(signerAdderss);
-    const factoryAddress = mgv.getAddress("UniswapV3Factory");
-    const inToken = new Token(
-      mgv.network.id,
-      market.base.address,
-      market.base.decimals
-    );
-    const outToken = new Token(
-      mgv.network.id,
-      market.quote.address,
-      market.quote.decimals
-    );
-    const tokeTrade = await createTrade(
-      factoryAddress,
-      inToken,
-      market.base.fromUnits(BigNumber.from(baseBalance)).toNumber(),
-      outToken,
-      500,
-      mgv.provider
-    );
-    const tx = await executeTrade(
-      outToken,
-      tokeTrade,
-      mgv.signer,
-      mgv.provider
-    );
-  }
-}
