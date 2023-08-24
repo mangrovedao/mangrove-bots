@@ -1336,7 +1336,7 @@ __metadata:
     "@espendk/json-file-reporter": ^1.4.2
     "@ethersproject/experimental": ^5.7.0
     "@ethersproject/hardware-wallets": ^5.7.0
-    "@mangrovedao/mangrove.js": 1.4.17
+    "@mangrovedao/mangrove.js": ^1.4.17
     "@types/big.js": ^6.1.6
     "@types/chai": ^4.3.4
     "@types/chai-as-promised": ^7.1.5
@@ -1406,7 +1406,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mangrovedao/mangrove.js@npm:1.4.17":
+"@mangrovedao/mangrove.js@npm:^1.4.17":
   version: 1.4.17
   resolution: "@mangrovedao/mangrove.js@npm:1.4.17"
   dependencies:
