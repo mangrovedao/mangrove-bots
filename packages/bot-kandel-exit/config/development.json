@@ -1,7 +1,7 @@
 {
   "logLevel": "debug",
   "providerType": "http",
-  "kandelAddress": "0x77d9531De0a5aB4DbD87519859B5770A590EDcf7",
+  "kandelAddress": "0xb7941103a96b6256ED74c403DBA0F729c66ce642",
   "market": { "base": "WETH", "quote": "USDC" },
   "runEveryXMinutes": 0.5
 }

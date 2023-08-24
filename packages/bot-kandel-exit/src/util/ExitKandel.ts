@@ -39,10 +39,11 @@ export async function exitKandelIfNoBids(
     );
     const baseBalance = await kandel.getBase().balanceOf(signerAdderss);
     const factoryAddress = mgv.getAddress("UniswapV3Factory");
-
+    const quoterAddress = mgv.getAddress("UniswapV3Quoter");
     const swapRouterAddress = mgv.getAddress("UniswapV3Router");
     const tokenTrade = await createTrade(
       factoryAddress,
+      quoterAddress,
       market.base,
       baseBalance.toNumber(),
       market.quote,

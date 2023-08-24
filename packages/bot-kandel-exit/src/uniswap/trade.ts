@@ -1,9 +1,16 @@
-import { CurrencyAmount, Percent, Token, TradeType } from "@uniswap/sdk-core";
+import {
+  Currency,
+  CurrencyAmount,
+  Percent,
+  Token,
+  TradeType,
+} from "@uniswap/sdk-core";
 import {
   FeeAmount,
   Pool,
   Route,
   SwapOptions,
+  SwapQuoter,
   SwapRouter,
   Trade,
 } from "@uniswap/v3-sdk";
@@ -21,6 +28,7 @@ export type TokenTrade = Trade<Token, Token, TradeType>;
 
 export async function createTrade(
   poolFactoryAddress: string,
+  quoterAddress: string,
   inToken: MgvToken,
   inAmount: number,
   outToken: MgvToken,
@@ -56,13 +64,24 @@ export async function createTrade(
 
   const swapRoute = new Route([pool], uniInToken, uniOutToken);
 
+  const amountOut = await getOutputQuote(
+    swapRoute,
+    provider,
+    inToken,
+    inAmount,
+    quoterAddress
+  );
+
   const uncheckedTrade = Trade.createUncheckedTrade({
     route: swapRoute,
     inputAmount: CurrencyAmount.fromRawAmount(
       uniInToken,
       inToken.toUnits(inAmount).toString()
     ),
-    outputAmount: CurrencyAmount.fromRawAmount(uniOutToken, JSBI.BigInt(0)),
+    outputAmount: CurrencyAmount.fromRawAmount(
+      uniOutToken,
+      JSBI.BigInt(amountOut)
+    ),
     tradeType: TradeType.EXACT_INPUT,
   });
 
@@ -105,4 +124,35 @@ export async function executeTrade(
   const res = await sendTransactionViaWallet(tx, signer);
 
   return res;
+}
+
+async function getOutputQuote(
+  route: Route<Currency, Currency>,
+  provider: ethers.providers.Provider,
+  inToken: MgvToken,
+  inAmount: number,
+  quoterAddress: string
+) {
+  if (!provider) {
+    throw new Error("Provider required to get pool state");
+  }
+
+  const { calldata } = await SwapQuoter.quoteCallParameters(
+    route,
+    CurrencyAmount.fromRawAmount(
+      new Token(inToken.mgv.network.id, inToken.address, inToken.decimals),
+      inToken.toUnits(inAmount).toString()
+    ),
+    TradeType.EXACT_INPUT,
+    {
+      useQuoterV2: true,
+    }
+  );
+
+  const quoteCallReturnData = await provider.call({
+    to: quoterAddress,
+    data: calldata,
+  });
+
+  return ethers.utils.defaultAbiCoder.decode(["uint256"], quoteCallReturnData);
 }

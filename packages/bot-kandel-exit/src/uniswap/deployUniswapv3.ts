@@ -12,6 +12,7 @@ const artifacts: { [name: string]: ContractJson } = {
   NonfungibleTokenPositionDescriptor: require("@uniswap/v3-periphery/artifacts/contracts/NonfungibleTokenPositionDescriptor.sol/NonfungibleTokenPositionDescriptor.json"),
   NonfungiblePositionManager: require("@uniswap/v3-periphery/artifacts/contracts/NonfungiblePositionManager.sol/NonfungiblePositionManager.json"),
   WETH9,
+  QuoterV2: require("@uniswap/swap-router-contracts/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json"),
 };
 
 export type UniswapV3Contracts = {
@@ -21,6 +22,7 @@ export type UniswapV3Contracts = {
   nftDescriptorLibrary: Contract;
   positionDescriptor: Contract;
   positionManager: Contract;
+  quoter: Contract;
 };
 
 export class UniswapV3Deployer {
@@ -52,6 +54,11 @@ export class UniswapV3Deployer {
       );
       logger.debug("deployed positionManager");
 
+      const quoter = await deployer.deployQuoter(
+        factory.address,
+        weth9.address
+      );
+
       return {
         weth9,
         factory,
@@ -59,6 +66,7 @@ export class UniswapV3Deployer {
         nftDescriptorLibrary,
         positionDescriptor,
         positionManager,
+        quoter,
       };
     } catch (e) {
       console.error(e);
@@ -86,6 +94,15 @@ export class UniswapV3Deployer {
       artifacts.WETH9.abi,
       artifacts.WETH9.bytecode,
       [],
+      this.deployer
+    );
+  }
+
+  async deployQuoter(factoryAddress: string, weth9Address: string) {
+    return this.deployContract<Contract>(
+      artifacts.QuoterV2.abi,
+      artifacts.QuoterV2.bytecode,
+      [factoryAddress, weth9Address],
       this.deployer
     );
   }
