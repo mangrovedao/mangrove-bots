@@ -27,6 +27,7 @@
     "typechain": "ts-node --transpileOnly src/util/runTypechain.ts",
     "deployKandel": "ts-node --transpileOnly scripts/deployKandel.ts",
     "takeAllBids": "ts-node --transpileOnly scripts/takeAllBids.ts",
+    "logMarket": "ts-node --transpileOnly scripts/logMarket.ts",
     "start": "node build/index.js",
     "startLocal": "node build/local.js"
   },

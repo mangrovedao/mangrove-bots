@@ -76,6 +76,18 @@ const main = async () => {
   market.consoleAsks();
   market.consoleBids();
   console.log("kandelAddress", kandel.address);
+  const kandelBaseBalance = await market.base.balanceOf(kandel.address);
+  const kandelQuoteBalance = await market.quote.balanceOf(kandel.address);
+  const makerBaseBalance = await market.base.balanceOf(wallet.address);
+  const makerQuoteBalance = await market.quote.balanceOf(wallet.address);
+  const kandelOffersLive = (await kandel.getOffers()).filter((offer) =>
+    market.isLiveOffer(offer.offer)
+  );
+  console.log("kandelBaseBalance", kandelBaseBalance.toString());
+  console.log("kandelQuoteBalance", kandelQuoteBalance.toString());
+  console.log("makerBaseBalance", makerBaseBalance.toString());
+  console.log("makerQuoteBalance", makerQuoteBalance.toString());
+  console.log("kandelOffersLive", kandelOffersLive.length);
 };
 
 main();

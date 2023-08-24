@@ -54,7 +54,6 @@ function createAsyncKandelExit(
 
 export async function botFunction(mgv: Mangrove, signer?: Wallet) {
   const botConfig = configUtil.getAndValidateKandelExitConfig();
-  mgv.setAddress("UniswapV3Factory");
 
   const latestMarketActivities: LatestMarketActivity[] = [];
   setup.latestActivity.markets = latestMarketActivities;

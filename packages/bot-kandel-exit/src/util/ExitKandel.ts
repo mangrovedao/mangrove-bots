@@ -23,9 +23,12 @@ export async function exitKandelIfNoBids(
     }
     return acc;
   }, false);
-
+  const hasLiveKandelOffers =
+    offers.filter((offer) => market.isLiveOffer(offer.offer)).length > 0;
   logger.info(`hasBids  ${hasBids}`);
-  if (!hasBids) {
+  logger.info(`hasLiveKandelOffers  ${hasLiveKandelOffers}`);
+
+  if (!hasBids && hasLiveKandelOffers) {
     const signerAdderss = await mgv.signer.getAddress();
     const retractTx = await kandel.retractAndWithdraw();
     const retractReciepts = await Promise.all(
@@ -53,6 +56,7 @@ export async function exitKandelIfNoBids(
       mgv.signer,
       mgv.provider
     );
+    logger.info("Kandel has been exited and base swapped to quote");
     return [...retractReciepts, executeReceipt];
   }
 }
