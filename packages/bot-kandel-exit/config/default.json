@@ -1,0 +1,7 @@
+{
+  "logLevel": "info",
+  "providerType": "http",
+  "kandelAddress": "",
+  "market": { "base": "WETH", "quote": "USDC" },
+  "runEveryXMinutes": 10
+}

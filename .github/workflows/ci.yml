@@ -400,6 +400,51 @@ jobs:
 
   # ==== End job: bot-arbitrage ==== 
 
+   # ==== Job: Build and test bot-kandel-exti ====
+  bot-kandel-exit:
+    runs-on: ubuntu-latest
+
+    env:
+      working-directory: packages/bot-kandel-exit
+
+    defaults:
+      run:
+        working-directory: ${{env.working-directory}}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Yarn setup (caching yarn dependencies)
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+        cache: 'yarn'
+
+    - run: yarn install --immutable
+      working-directory: . # Yarn must run in root to ensure monorepo setup
+
+    - name: Foundry Setup
+      uses: ./.github/actions/foundry-setup
+      
+    - name: Build
+      id: build
+      run: yarn run build
+
+    # == run and report tests == 
+    - name: Test
+      run: yarn run test:coverage
+
+    - uses: actions/upload-artifact@v2
+      if: ${{ steps.build.conclusion == 'success' && (success() || failure())}}
+      with:
+        name: test-results-bot-kandel-exit
+        path: packages/bot-kandel-exit/coverage-tests-report.json
+
+  # ==== End job: bot-kandel-exit ==== 
+
   # ==== final "check" job, using alls-green to have one single job to check for green workflow ====
   # see https://github.com/re-actors/alls-green
 
@@ -414,6 +459,7 @@ jobs:
     - bot-taker-greedy
     - bot-updategas
     - bot-arbitrage
+    - bot-kandel-exit
     - mangrove-arbitrage-contract
 
     runs-on: ubuntu-latest
