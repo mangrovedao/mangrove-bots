@@ -105,6 +105,7 @@ export class Setup {
   configUtils: ConfigUtils;
   server?: http.Server;
   latestActivity: LatestActivity;
+  whitelistedAddreses: Set<string>;
 
   constructor(config: IConfig) {
     this.#config = config;
@@ -114,6 +115,8 @@ export class Setup {
       latestBlock: undefined,
       lastActive: undefined,
     };
+
+    this.whitelistedAddreses = this.configUtils.getWhitelistedAddressesSet();
   }
 
   public async exitIfMangroveIsKilled(

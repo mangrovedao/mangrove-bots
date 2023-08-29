@@ -7,6 +7,7 @@
 import { BaseProvider } from "@ethersproject/providers";
 import { Wallet } from "@ethersproject/wallet";
 import {
+  configUtils,
   ConfigUtils,
   ExitCode,
   LatestMarketActivity,
@@ -87,7 +88,12 @@ async function botFunction(
 
     marketCleanerMap.set(
       { base: market.base.name, quote: market.quote.name },
-      new MarketCleaner(market, provider, latestMarketActivity)
+      new MarketCleaner(
+        market,
+        provider,
+        latestMarketActivity,
+        setup.whitelistedAddreses
+      )
     );
   }
 
