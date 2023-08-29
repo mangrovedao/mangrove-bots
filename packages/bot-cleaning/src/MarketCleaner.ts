@@ -4,6 +4,7 @@ import { Provider } from "@ethersproject/providers";
 import { BigNumber } from "ethers";
 import { LatestMarketActivity, TxUtils } from "@mangrovedao/bot-utils";
 import { maxGasReq } from "./constants";
+import Big from "big.js";
 
 type OfferCleaningEstimates = {
   bounty: BigNumber; // wei
@@ -139,12 +140,22 @@ export class MarketCleaner {
         this.#whitelistedDustCleaningMaker &&
         this.#whitelistedDustCleaningMaker.has(offer.maker)
       ) {
+        // price is in outboundTkn
+        const price = offer.wants.div(offer.gives).round(); // wants: inboundTkn, gives: outboundTkn
+
         cleaningPromises.push(
-          this.#cleanOffer(offer, ba, gasPrice, 0, 1, contextInfo)
+          this.#cleanOffer(offer, ba, gasPrice, price, new Big(1), contextInfo) // takerWants: outboundTkn, gives: inboundTkn
         );
       } else {
         cleaningPromises.push(
-          this.#cleanOffer(offer, ba, gasPrice, 0, 0, contextInfo)
+          this.#cleanOffer(
+            offer,
+            ba,
+            gasPrice,
+            new Big(0),
+            new Big(0),
+            contextInfo
+          )
         );
       }
     }
@@ -155,8 +166,8 @@ export class MarketCleaner {
     offer: Market.Offer,
     ba: Market.BA,
     gasPrice: BigNumber,
-    takerWants: number,
-    takerGives: number,
+    takerWants: Big,
+    takerGives: Big,
     contextInfo?: string
   ): Promise<void> {
     const { willOfferFail, bounty } = await this.#willOfferFail(
@@ -203,8 +214,8 @@ export class MarketCleaner {
   async #willOfferFail(
     offer: Market.Offer,
     ba: Market.BA,
-    takerWants: number,
-    takerGives: number,
+    takerWants: Big,
+    takerGives: Big,
     contextInfo?: string
   ): Promise<{ willOfferFail: boolean; bounty?: BigNumber }> {
     const raw = await this.#market.getRawSnipeParams({
@@ -243,8 +254,8 @@ export class MarketCleaner {
   async #collectOffer(
     offer: Market.Offer,
     ba: Market.BA,
-    takerWants: number,
-    takerGives: number,
+    takerWants: Big,
+    takerGives: Big,
     contextInfo?: string
   ): Promise<void> {
     logger.debug("Cleaning offer", {
@@ -319,7 +330,7 @@ export class MarketCleaner {
 
   #createCollectParams(
     offer: Market.Offer,
-    takerWants: number,
+    takerWants: Big,
     takerGives: number
   ): Market.SnipeParams["targets"] {
     return [{ offerId: offer.id, takerWants, takerGives, gasLimit: maxGasReq }];
@@ -367,7 +378,7 @@ export class MarketCleaner {
     ba: Market.BA,
     bounty: BigNumber,
     gasPrice: BigNumber,
-    takerWants: number,
+    takerWants: Big,
     takerGives: number
   ): Promise<OfferCleaningEstimates> {
     const gas = await this.#estimateGas(offer, ba, takerWants, takerGives);
@@ -391,7 +402,7 @@ export class MarketCleaner {
   async #estimateGas(
     offer: Market.Offer,
     ba: Market.BA,
-    takerWants: number,
+    takerWants: Big,
     takerGives: number
   ): Promise<BigNumber> {
     const raw = await this.#market.getRawSnipeParams({
