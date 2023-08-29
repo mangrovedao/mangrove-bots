@@ -25,9 +25,13 @@ import { initPool } from "../../uniswap/initializePool";
 const LOCAL_MNEMONIC =
   "test test test test test test test test test test test junk";
 const mnemonic = new eth.Mnemonic(LOCAL_MNEMONIC);
-const CORE_DIR = path.parse(
+const Arb_root = path.parse(
   require.resolve("../../../../mangrove-arbitrage")
 ).dir;
+
+// const strats_root = path.parse(
+//   require.resolve("../../../../..")
+// ).dir;
 
 export const mochaHooks = {
   server: undefined as serverType,
@@ -61,6 +65,7 @@ export const mochaHooks = {
       port: 8546, // use 8546 for the actual node, but let all connections go through proxies to be able to cut the connection before snapshot revert.
       pipe: false,
       script: "MangroveJsDeploy",
+      // root: strats_root,
       deploy: true,
       setMulticallCodeIfAbsent: false, // mangrove.js is supposed to work against servers that only have ToyENS deployed but not Multicall, so we don't deploy Multicall in tests. However mangrove.js needs ToyENS so we let the node ensure it's there.
     };
@@ -95,7 +100,7 @@ async function deployMgvArbitrage(
     univ3Router: univ3Router,
     arbitrager: arbitrager,
     mnemonic: mnemonic,
-    coreDir: CORE_DIR,
+    coreDir: Arb_root,
     setToyENSCodeIfAbsent: false,
     setMulticallCodeIfAbsent: false,
   });
