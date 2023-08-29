@@ -143,8 +143,17 @@ export class MarketCleaner {
         // price is in outboundTkn
         const price = offer.wants.div(offer.gives).round(); // wants: inboundTkn, gives: outboundTkn
 
+        const inboundTkn =
+          ba == "bids" ? semibook.market.base : semibook.market.quote;
         cleaningPromises.push(
-          this.#cleanOffer(offer, ba, gasPrice, price, new Big(1), contextInfo) // takerWants: outboundTkn, gives: inboundTkn
+          this.#cleanOffer(
+            offer,
+            ba,
+            gasPrice,
+            price,
+            new Big(1).div(new Big(10).pow(inboundTkn.decimals)),
+            contextInfo
+          ) // takerWants: outboundTkn, takerGives: inboundTkn
         );
       } else {
         cleaningPromises.push(
@@ -331,7 +340,7 @@ export class MarketCleaner {
   #createCollectParams(
     offer: Market.Offer,
     takerWants: Big,
-    takerGives: number
+    takerGives: Big
   ): Market.SnipeParams["targets"] {
     return [{ offerId: offer.id, takerWants, takerGives, gasLimit: maxGasReq }];
     // FIXME 2021-12-01: The below result may have been affected by wrong order of inbound/outbound tokens
@@ -379,7 +388,7 @@ export class MarketCleaner {
     bounty: BigNumber,
     gasPrice: BigNumber,
     takerWants: Big,
-    takerGives: number
+    takerGives: Big
   ): Promise<OfferCleaningEstimates> {
     const gas = await this.#estimateGas(offer, ba, takerWants, takerGives);
     const totalCost = gas.mul(gasPrice);
@@ -403,7 +412,7 @@ export class MarketCleaner {
     offer: Market.Offer,
     ba: Market.BA,
     takerWants: Big,
-    takerGives: number
+    takerGives: Big
   ): Promise<BigNumber> {
     const raw = await this.#market.getRawSnipeParams({
       ba: ba,
