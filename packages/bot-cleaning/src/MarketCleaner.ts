@@ -342,7 +342,14 @@ export class MarketCleaner {
     takerWants: Big,
     takerGives: Big
   ): Market.SnipeParams["targets"] {
-    return [{ offerId: offer.id, takerWants, takerGives, gasLimit: maxGasReq }];
+    return [
+      {
+        offerId: offer.id,
+        takerWants: takerWants.toFixed(),
+        takerGives: takerGives.toFixed(),
+        gasLimit: maxGasReq,
+      },
+    ];
     // FIXME 2021-12-01: The below result may have been affected by wrong order of inbound/outbound tokens
     // FIXME The following are the result of different strategies per 2021-10-26:
     // WORKS:
