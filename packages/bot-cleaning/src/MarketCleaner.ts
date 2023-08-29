@@ -138,20 +138,25 @@ export class MarketCleaner {
     for (const offer of semibook) {
       if (
         this.#whitelistedDustCleaningMaker &&
-        this.#whitelistedDustCleaningMaker.has(offer.maker)
+        this.#whitelistedDustCleaningMaker.has(offer.maker.toLowerCase())
       ) {
-        // price is in outboundTkn
-        const price = offer.wants.div(offer.gives).round(); // wants: inboundTkn, gives: outboundTkn
-
         const inboundTkn =
           ba == "bids" ? semibook.market.base : semibook.market.quote;
+        const outboundTkn =
+          ba == "bids" ? semibook.market.quote : semibook.market.base;
+
+        const takerWants = new Big(1).div(
+          new Big(10).pow(outboundTkn.decimals)
+        );
+        const takerGives = new Big(1).div(new Big(10).pow(inboundTkn.decimals));
+
         cleaningPromises.push(
           this.#cleanOffer(
             offer,
             ba,
             gasPrice,
-            price,
-            new Big(1).div(new Big(10).pow(inboundTkn.decimals)),
+            takerWants,
+            takerGives,
             contextInfo
           ) // takerWants: outboundTkn, takerGives: inboundTkn
         );
