@@ -29,10 +29,6 @@ const Arb_root = path.parse(
   require.resolve("../../../../mangrove-arbitrage")
 ).dir;
 
-// const strats_root = path.parse(
-//   require.resolve("../../../../..")
-// ).dir;
-
 export const mochaHooks = {
   server: undefined as serverType,
   async beforeAllImpl(
