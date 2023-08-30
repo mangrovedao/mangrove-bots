@@ -61,7 +61,6 @@ export const mochaHooks = {
       port: 8546, // use 8546 for the actual node, but let all connections go through proxies to be able to cut the connection before snapshot revert.
       pipe: false,
       script: "MangroveJsDeploy",
-      // root: strats_root,
       deploy: true,
       setMulticallCodeIfAbsent: false, // mangrove.js is supposed to work against servers that only have ToyENS deployed but not Multicall, so we don't deploy Multicall in tests. However mangrove.js needs ToyENS so we let the node ensure it's there.
     };
