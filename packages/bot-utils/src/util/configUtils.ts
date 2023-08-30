@@ -98,14 +98,4 @@ export class ConfigUtils {
 
     return { markets, runEveryXMinutes };
   }
-
-  public getWhitelistedAddressesSet(): Set<string> {
-    const whiteListedAddresses = this.#config.get<string[]>(
-      "addressesWithDustCleaningWhitelist"
-    );
-
-    return new Set<string>(
-      whiteListedAddresses.map((addr) => addr.toLowerCase())
-    );
-  }
 }

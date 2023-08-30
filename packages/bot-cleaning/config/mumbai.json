@@ -6,5 +6,6 @@
     ["DAI", "USDC"]
   ],
   "runEveryXMinutes": 10,
+  "whitelistedRunEveryXMinutes": 10,
   "addressesWithDustCleaningWhitelist": []
 }

@@ -8,6 +8,11 @@
     "__name": "RUN_EVERY_X_MINUTES",
     "__format": "number"
   },
+
+  "whitelistedRunEveryXMinutes": {
+    "__name": "WHITELISTED_RUN_EVERY_X_MINUTES",
+    "__format": "number"
+  },
   "addressesWithDustCleaningWhitelist": {
     "__name": "ADDRESSES_WITH_DUST_CLEANING_WHITELIST",
     "__format": "json"

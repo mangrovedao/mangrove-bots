@@ -62,7 +62,10 @@ export class MarketCleaner {
    * @param contextInfo Context information that is included in logs.
    * @returns A promise that fulfills when all offers have been evaluated and all cleaning transactions have been mined.
    */
-  public async clean(contextInfo?: string): Promise<void> {
+  public async clean(
+    shouldOnlyCleanWhitelisted: boolean = false,
+    contextInfo?: string
+  ): Promise<void> {
     // TODO non-thread safe reentrancy lock - is this is an issue in JS?
     if (this.#isCleaning) {
       logger.debug("Already cleaning so ignoring request to clean", {
@@ -114,12 +117,14 @@ export class MarketCleaner {
         asks,
         "asks",
         gasPrice,
+        shouldOnlyCleanWhitelisted,
         contextInfo
       );
       const bidsCleaningPromise = this.#cleanSemibook(
         bids,
         "bids",
         gasPrice,
+        shouldOnlyCleanWhitelisted,
         contextInfo
       );
       await Promise.allSettled([asksCleaningPromise, bidsCleaningPromise]);
@@ -132,6 +137,7 @@ export class MarketCleaner {
     semibook: Semibook,
     ba: Market.BA,
     gasPrice: BigNumber,
+    shouldOnlyCleanWhitelisted: boolean,
     contextInfo?: string
   ): Promise<PromiseSettledResult<void>[]> {
     const cleaningPromises: Promise<void>[] = [];
@@ -161,6 +167,9 @@ export class MarketCleaner {
           ) // takerWants: outboundTkn, takerGives: inboundTkn
         );
       } else {
+        if (shouldOnlyCleanWhitelisted) {
+          continue;
+        }
         cleaningPromises.push(
           this.#cleanOffer(
             offer,
