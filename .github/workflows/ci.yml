@@ -42,8 +42,8 @@ jobs:
         cache: 'yarn'
         
     - name: Foundry Setup
-      uses: ./.github/actions/foundry-setup
-        
+      uses: mangrovedao/.github/.github/actions/foundry-setup@master  
+      
     - run: yarn install --immutable
       working-directory: . # Yarn must run in root to ensure monorepo setup
 
@@ -85,10 +85,11 @@ jobs:
         cache: 'yarn'
         
     - name: Foundry Setup
-      uses: ./.github/actions/foundry-setup
+      uses: mangrovedao/.github/.github/actions/foundry-setup@master
         
     - run: yarn install --immutable
       working-directory: . # Yarn must run in root to ensure monorepo setup
+      
 
     - name: Build
       id: build
@@ -129,10 +130,10 @@ jobs:
         cache: 'yarn'
         
     - name: Foundry Setup
-      uses: ./.github/actions/foundry-setup
-        
+      uses: mangrovedao/.github/.github/actions/foundry-setup@master  
+      
     - run: yarn install --immutable
-      working-directory: . # Yarn must run in root to ensure monorepo setup
+      working-directory: . # Yarn must run in root to ensure monorepo setupuses: mangrovedao/.github/.github/actions/foundry-setup@master
 
     - name: Build
       id: build
@@ -176,10 +177,10 @@ jobs:
         cache: 'yarn'
 
     - name: Foundry Setup
-      uses: ./.github/actions/foundry-setup
-
+      uses: mangrovedao/.github/.github/actions/foundry-setup@master  
+      
     - run: yarn install --immutable
-      working-directory: . # Yarn must run in root to ensure monorepo setup
+      working-directory: . # Yarn must run in root to ensure monorepo setupuses: mangrovedao/.github/.github/actions/foundry-setup@master
       
     - name: Build
       id: build
@@ -223,7 +224,7 @@ jobs:
         cache: 'yarn'
 
     - name: Foundry Setup
-      uses: ./.github/actions/foundry-setup
+      uses: mangrovedao/.github/.github/actions/foundry-setup@master
         
     - run: yarn install --immutable
       working-directory: . # Yarn must run in root to ensure monorepo setup
@@ -266,10 +267,10 @@ jobs:
         cache: 'yarn'
 
     - name: Foundry Setup
-      uses: ./.github/actions/foundry-setup
-
+      uses: mangrovedao/.github/.github/actions/foundry-setup@master  
+      
     - run: yarn install --immutable
-      working-directory: . # Yarn must run in root to ensure monorepo setup
+      working-directory: . # Yarn must run in root to ensure monorepo setupuses: mangrovedao/.github/.github/actions/foundry-setup@master
       
     - name: Build
       id: build
@@ -309,10 +310,10 @@ jobs:
         cache: 'yarn'
 
     - name: Foundry Setup
-      uses: ./.github/actions/foundry-setup
-        
+      uses: mangrovedao/.github/.github/actions/foundry-setup@master  
+      
     - run: yarn install --immutable
-      working-directory: . # Yarn must run in root to ensure monorepo setup
+      working-directory: . # Yarn must run in root to ensure monorepo setupuses: mangrovedao/.github/.github/actions/foundry-setup@master
 
     - name: Build
       run: yarn run build-this-package
@@ -379,10 +380,10 @@ jobs:
         cache: 'yarn'
 
     - name: Foundry Setup
-      uses: ./.github/actions/foundry-setup
-
+      uses: mangrovedao/.github/.github/actions/foundry-setup@master  
+      
     - run: yarn install --immutable
-      working-directory: . # Yarn must run in root to ensure monorepo setup
+      working-directory: . # Yarn must run in root to ensure monorepo setupuses: mangrovedao/.github/.github/actions/foundry-setup@master
       
     - name: Build
       id: build
