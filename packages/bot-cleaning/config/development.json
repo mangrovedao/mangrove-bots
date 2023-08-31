@@ -1,5 +1,7 @@
 {
   "logLevel": "debug",
   "markets": [["WETH", "DAI"]],
-  "runEveryXMinutes": 0.5
+  "runEveryXMinutes": 0.5,
+  "whitelistedRunEveryXMinutes": 10,
+  "addressesWithDustCleaningWhitelist": []
 }

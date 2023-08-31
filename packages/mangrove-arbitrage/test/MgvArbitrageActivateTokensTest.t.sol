@@ -6,7 +6,7 @@ import {MgvArbitrageActivateTokens} from "script/MgvArbitrageActivateTokens.s.so
 import {MgvArbitrageDeployer} from "script/deployers/MgvArbitrageDeployer.s.sol";
 import {IERC20} from "mgv_src/IERC20.sol";
 import "mgv_test/lib/forks/Polygon.sol";
-import {MangroveJsDeploy} from "mgv_script/toy/MangroveJs.s.sol";
+import {MangroveJsDeploy} from "mgv_strat_script/toy/MangroveJs.s.sol";
 import "mgv_test/lib/MangroveTest.sol";
 
 contract MgvArbitrageActivateTokensTest is Deployer, Test2 {
