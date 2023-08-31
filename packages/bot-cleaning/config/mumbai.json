@@ -5,5 +5,7 @@
     ["WETH", "USDC"],
     ["DAI", "USDC"]
   ],
-  "runEveryXMinutes": 10
+  "runEveryXMinutes": 10,
+  "whitelistedRunEveryXMinutes": 10,
+  "addressesWithDustCleaningWhitelist": []
 }

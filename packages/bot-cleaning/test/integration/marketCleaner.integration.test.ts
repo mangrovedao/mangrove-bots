@@ -13,7 +13,8 @@ import { mgvTestUtil } from "@mangrovedao/mangrove.js";
 import { ethers } from "ethers";
 import { Provider } from "@ethersproject/abstract-provider";
 
-import { MarketCleaner } from "../../build/MarketCleaner";
+import { MarketCleaner } from "../../src/MarketCleaner";
+import { sleep } from "@mangrovedao/bot-utils";
 
 let maker: mgvTestUtil.Account; // Owner of SimpleTestMaker contract
 let cleaner: mgvTestUtil.Account; // Owner of cleaner EOA
@@ -133,5 +134,83 @@ describe("MarketCleaner integration tests", () => {
         ),
       ]);
     });
+  });
+
+  it(`asks Should clean offer with non zero takerWants and takerGives`, async function () {
+    await mgvTestUtil.mint(market.quote, cleaner, 1);
+
+    const result = await (
+      await market.quote.approve(mgv.address, { amount: "1", overrides: {} })
+    ).wait();
+    await mgvTestUtil.waitForBlock(mgv, result.blockNumber);
+
+    // Arrange
+    let txReceipt = await mgvTestUtil.postNewFailingOffer(
+      market,
+      "asks",
+      maker
+    );
+    await mgvTestUtil.waitForBlock(market.mgv, txReceipt.blockNumber!);
+
+    const whitelistedSets = new Set<string>();
+    const marketCleaner = new MarketCleaner(
+      market,
+      cleanerProvider,
+      {
+        base: market.base.name,
+        quote: market.quote.name,
+      },
+      whitelistedSets
+    );
+
+    let book = await market.requestBook();
+    whitelistedSets.add(book.asks[0].maker.toLowerCase());
+
+    // Act
+    await marketCleaner.clean();
+
+    book = await market.requestBook();
+
+    expect(book).to.have.property("asks").which.is.empty;
+  });
+
+  it(`bids Should clean offer with non zero takerWants and takerGives`, async function () {
+    await mgvTestUtil.mint(market.base, cleaner, 1);
+
+    const result = await (
+      await market.base.approve(mgv.address, { amount: "1", overrides: {} })
+    ).wait();
+    await mgvTestUtil.waitForBlock(mgv, result.blockNumber);
+
+    // Arrange
+    const txReceipt = await mgvTestUtil.postNewFailingOffer(
+      market,
+      "bids",
+      maker
+    );
+    await mgvTestUtil.waitForBlock(market.mgv, txReceipt.blockNumber!);
+
+    const whitelistedSets = new Set<string>();
+    const marketCleaner = new MarketCleaner(
+      market,
+      cleanerProvider,
+      {
+        base: market.base.name,
+        quote: market.quote.name,
+      },
+      whitelistedSets
+    );
+
+    let book = await market.requestBook();
+    whitelistedSets.add(book.bids[0].maker.toLowerCase());
+
+    // Act
+    await marketCleaner.clean();
+
+    await sleep(5000);
+
+    book = await market.requestBook();
+
+    expect(book).to.have.property("bids").which.is.empty;
   });
 });
