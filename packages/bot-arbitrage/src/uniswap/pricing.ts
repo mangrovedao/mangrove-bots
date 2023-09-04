@@ -28,5 +28,19 @@ export const generateGetOutputQuote = (
 
       return amount;
     },
+    quoteExactOutputSingle: async (
+      poolInfo: MinimalPoolInfo,
+      outAmount: string
+    ): Promise<BigNumber> => {
+      const inAmount = await quoterContract.callStatic.quoteExactOutputSingle(
+        poolInfo.token0,
+        poolInfo.token1,
+        poolInfo.fee,
+        outAmount,
+        0
+      );
+
+      return inAmount;
+    },
   };
 };

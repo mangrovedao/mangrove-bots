@@ -430,15 +430,21 @@ describe("ArbBot integration tests", () => {
 
     const pricer = generateGetOutputQuote(uniswapV3QuoterAddress, mgv.provider);
 
-    const value = await pricer.quoteExactInputSingle(
-      {
-        token0: poolInfo.token0,
-        token1: poolInfo.token1,
-        fee: poolInfo.fee,
-      },
-      "100"
-    );
+    const minimalPoolInfo = {
+      token0: poolInfo.token0,
+      token1: poolInfo.token1,
+      fee: poolInfo.fee,
+    };
+
+    const value = await pricer.quoteExactInputSingle(minimalPoolInfo, "100");
 
     assert.equal(value.toNumber(), 158399);
+
+    const input = await pricer.quoteExactOutputSingle(
+      minimalPoolInfo,
+      value.toString()
+    );
+
+    assert.equal(input.toNumber(), 100);
   });
 });
