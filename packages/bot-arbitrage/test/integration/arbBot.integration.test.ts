@@ -11,7 +11,8 @@ import { ArbBot } from "../../src/ArbBot";
 import { getPoolInfo } from "../../src/uniswap/pool";
 import { activateTokensWithMgv } from "../../src/util/ArbBotUtils";
 import { logger } from "../../src/util/logger";
-import { generateGetOutputQuote } from "../../src/uniswap/pricing";
+import { generateUniQuoter } from "../../src/uniswap/pricing";
+import Big from "big.js";
 
 let mgv: Mangrove;
 let mgvDeployer: Mangrove;
@@ -103,10 +104,30 @@ describe("ArbBot integration tests", () => {
         3000,
         mgv.provider
       );
-      const arbBot = new ArbBot(mgvArbitrager, poolInfo.poolContract, {
-        base: market.base.name,
-        quote: market.quote.name,
-      });
+      const pricer = generateUniQuoter(
+        mgv.getAddress("UniswapV3Quoter"),
+        mgv.provider
+      );
+      const arbBot = new ArbBot(
+        mgvArbitrager,
+        pricer,
+        {
+          base: market.base.name,
+          quote: market.quote.name,
+        },
+        {
+          holdingTokens: {
+            DAI: {
+              name: "DAI",
+              balance: await market.quote.balanceOf(mgvArbitrager.address),
+            },
+          },
+          tokenForExchange: {
+            name: "DAI",
+            balance: await market.quote.balanceOf(mgvArbitrager.address),
+          },
+        }
+      );
       const txActivate = await activateTokensWithMgv(
         [market.base.address, market.quote.address],
         mgvDeployer
@@ -160,10 +181,31 @@ describe("ArbBot integration tests", () => {
         3000,
         mgv.provider
       );
-      const arbBot = new ArbBot(mgvArbitrager, poolInfo.poolContract, {
-        base: market.base.name,
-        quote: market.quote.name,
-      });
+
+      const pricer = generateUniQuoter(
+        mgv.getAddress("UniswapV3Quoter"),
+        mgv.provider
+      );
+      const arbBot = new ArbBot(
+        mgvArbitrager,
+        pricer,
+        {
+          base: market.base.name,
+          quote: market.quote.name,
+        },
+        {
+          holdingTokens: {
+            DAI: {
+              name: "DAI",
+              balance: await market.quote.balanceOf(mgvArbitrager.address),
+            },
+          },
+          tokenForExchange: {
+            name: "DAI",
+            balance: await market.quote.balanceOf(mgvArbitrager.address),
+          },
+        }
+      );
       const txActivate = await activateTokensWithMgv(
         [market.base.address, market.quote.address],
         mgvDeployer
@@ -211,10 +253,31 @@ describe("ArbBot integration tests", () => {
         3000,
         mgv.provider
       );
-      const arbBot = new ArbBot(mgvArbitrager, poolInfo.poolContract, {
-        base: market.base.name,
-        quote: market.quote.name,
-      });
+
+      const pricer = generateUniQuoter(
+        mgv.getAddress("UniswapV3Quoter"),
+        mgv.provider
+      );
+      const arbBot = new ArbBot(
+        mgvArbitrager,
+        pricer,
+        {
+          base: market.base.name,
+          quote: market.quote.name,
+        },
+        {
+          holdingTokens: {
+            DAI: {
+              name: "DAI",
+              balance: await market.quote.balanceOf(mgvArbitrager.address),
+            },
+          },
+          tokenForExchange: {
+            name: "DAI",
+            balance: await market.quote.balanceOf(mgvArbitrager.address),
+          },
+        }
+      );
       const txActivate = await activateTokensWithMgv(
         [market.base.address, market.quote.address],
         mgvDeployer
@@ -296,10 +359,30 @@ describe("ArbBot integration tests", () => {
         3000,
         mgv.provider
       );
-      const arbBot = new ArbBot(mgvArbitrager, poolInfo.poolContract, {
-        base: market.base.name,
-        quote: market.quote.name,
-      });
+      const pricer = generateUniQuoter(
+        mgv.getAddress("UniswapV3Quoter"),
+        mgv.provider
+      );
+      const arbBot = new ArbBot(
+        mgvArbitrager,
+        pricer,
+        {
+          base: market.base.name,
+          quote: market.quote.name,
+        },
+        {
+          holdingTokens: {
+            DAI: {
+              name: "DAI",
+              balance: await market.quote.balanceOf(mgvArbitrager.address),
+            },
+          },
+          tokenForExchange: {
+            name: "DAI",
+            balance: await market.quote.balanceOf(mgvArbitrager.address),
+          },
+        }
+      );
       const txActivate = await activateTokensWithMgv(
         [market.base.address, market.quote.address, mgv.getAddress("DAI")],
         mgvDeployer
@@ -355,10 +438,31 @@ describe("ArbBot integration tests", () => {
         3000,
         mgv.provider
       );
-      const arbBot = new ArbBot(mgvArbitrager, poolInfo.poolContract, {
-        base: market.base.name,
-        quote: market.quote.name,
-      });
+
+      const pricer = generateUniQuoter(
+        mgv.getAddress("UniswapV3Quoter"),
+        mgv.provider
+      );
+      const arbBot = new ArbBot(
+        mgvArbitrager,
+        pricer,
+        {
+          base: market.base.name,
+          quote: market.quote.name,
+        },
+        {
+          holdingTokens: {
+            DAI: {
+              name: "DAI",
+              balance: await market.quote.balanceOf(mgvArbitrager.address),
+            },
+          },
+          tokenForExchange: {
+            name: "DAI",
+            balance: await market.quote.balanceOf(mgvArbitrager.address),
+          },
+        }
+      );
       const txActivate = await activateTokensWithMgv(
         [market.base.address, market.quote.address, mgv.getAddress("DAI")],
         mgvDeployer
@@ -428,7 +532,7 @@ describe("ArbBot integration tests", () => {
       mgv.provider
     );
 
-    const pricer = generateGetOutputQuote(uniswapV3QuoterAddress, mgv.provider);
+    const pricer = generateUniQuoter(uniswapV3QuoterAddress, mgv.provider);
 
     const minimalPoolInfo = {
       token0: poolInfo.token0,

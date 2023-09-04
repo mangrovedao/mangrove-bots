@@ -11,6 +11,8 @@ import {
 } from "@mangrovedao/bot-utils";
 import { BigNumber, BigNumberish } from "ethers";
 import Big from "big.js";
+import { Pricer } from "./uniswap/pricing";
+import { Context } from "./types";
 dotenvFlow.config();
 
 const whitelist = [
@@ -28,11 +30,11 @@ export class ArbBot {
 
   constructor(
     _mgv: Mangrove,
-    _poolContract: ethers.Contract,
-    latestMarketActivity: LatestMarketActivity
+    private pricer: Pricer,
+    latestMarketActivity: LatestMarketActivity,
+    private context: Context
   ) {
     this.mgv = _mgv;
-    this.poolContract = _poolContract;
     this.#latestMarketActivity = latestMarketActivity;
     this.#txUtils = new TxUtils(_mgv.provider, logger);
   }

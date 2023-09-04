@@ -3,10 +3,21 @@ import Quoter from "@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Qu
 import { BigNumber, Contract } from "ethers";
 import { MinimalPoolInfo } from "./types";
 
-export const generateGetOutputQuote = (
+export type Pricer = {
+  quoteExactInputSingle: (
+    poolInfo: MinimalPoolInfo,
+    inAmount: string
+  ) => Promise<BigNumber>;
+  quoteExactOutputSingle: (
+    poolInfo: MinimalPoolInfo,
+    outAmount: string
+  ) => Promise<BigNumber>;
+};
+
+export const generateUniQuoter = (
   quoterContractAddress: string,
   provider: Provider
-) => {
+): Pricer => {
   const quoterContract = new Contract(
     quoterContractAddress,
     Quoter.abi,
