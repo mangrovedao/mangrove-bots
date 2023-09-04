@@ -11,6 +11,7 @@ import { ArbBot } from "../../src/ArbBot";
 import { getPoolInfo } from "../../src/uniswap/pool";
 import { activateTokensWithMgv } from "../../src/util/ArbBotUtils";
 import { logger } from "../../src/util/logger";
+import { generateGetOutputQuote } from "../../src/uniswap/pricing";
 
 let mgv: Mangrove;
 let mgvDeployer: Mangrove;
@@ -407,5 +408,37 @@ describe("ArbBot integration tests", () => {
     });
 
     //TODO: Test configs
+  });
+
+  it("get quote from uniswap", async () => {
+    const weth = await mgv.token("WETH");
+    const dai = await mgv.token("DAI");
+
+    const uniswapV3FactoryAddress = mgv.getAddress("UniswapV3Factory");
+    const uniswapV3QuoterAddress = mgv.getAddress("UniswapV3Quoter");
+
+    const wethToken = new Token(mgv.network.id!, weth.address, weth.decimals);
+    const daiToken = new Token(mgv.network.id!, dai.address, dai.decimals);
+
+    const poolInfo = await getPoolInfo(
+      uniswapV3FactoryAddress,
+      wethToken,
+      daiToken,
+      3000,
+      mgv.provider
+    );
+
+    const pricer = generateGetOutputQuote(uniswapV3QuoterAddress, mgv.provider);
+
+    const value = await pricer.quoteExactInputSingle(
+      {
+        token0: poolInfo.token0,
+        token1: poolInfo.token1,
+        fee: poolInfo.fee,
+      },
+      "100"
+    );
+
+    assert.equal(value.toNumber(), 158399);
   });
 });

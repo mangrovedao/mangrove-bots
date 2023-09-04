@@ -7,6 +7,7 @@ type ContractJson = { abi: any; bytecode: string };
 const artifacts: { [name: string]: ContractJson } = {
   UniswapV3Factory: require("@uniswap/v3-core/artifacts/contracts/UniswapV3Factory.sol/UniswapV3Factory.json"),
   UniswapV3Pool: require("@uniswap/v3-core/artifacts/contracts/UniswapV3Pool.sol/UniswapV3Pool.json"),
+  Quoter: require("@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Quoter.json"),
   SwapRouter: require("@uniswap/v3-periphery/artifacts/contracts/SwapRouter.sol/SwapRouter.json"),
   NFTDescriptor: require("@uniswap/v3-periphery/artifacts/contracts/libraries/NFTDescriptor.sol/NFTDescriptor.json"),
   NonfungibleTokenPositionDescriptor: require("@uniswap/v3-periphery/artifacts/contracts/NonfungibleTokenPositionDescriptor.sol/NonfungibleTokenPositionDescriptor.json"),
@@ -18,6 +19,7 @@ export type UniswapV3Contracts = {
   weth9: Contract;
   factory: Contract;
   router: Contract;
+  quoter: Contract;
   nftDescriptorLibrary: Contract;
   positionDescriptor: Contract;
   positionManager: Contract;
@@ -38,6 +40,11 @@ export class UniswapV3Deployer {
         weth9.address
       );
       logger.debug("deployed router");
+      const quoter = await deployer.deployQuoter(
+        factory.address,
+        weth9.address
+      );
+      logger.debug("deployed quoter");
       const nftDescriptorLibrary = await deployer.deployNFTDescriptorLibrary();
       logger.debug("deployed nftDescriptorLibrary");
       const positionDescriptor = await deployer.deployPositionDescriptor(
@@ -56,6 +63,7 @@ export class UniswapV3Deployer {
         weth9,
         factory,
         router,
+        quoter,
         nftDescriptorLibrary,
         positionDescriptor,
         positionManager,
@@ -94,6 +102,15 @@ export class UniswapV3Deployer {
     return this.deployContract<Contract>(
       artifacts.SwapRouter.abi,
       artifacts.SwapRouter.bytecode,
+      [factoryAddress, weth9Address],
+      this.deployer
+    );
+  }
+
+  async deployQuoter(factoryAddress: string, weth9Address: string) {
+    return this.deployContract<Contract>(
+      artifacts.Quoter.abi,
+      artifacts.Quoter.bytecode,
       [factoryAddress, weth9Address],
       this.deployer
     );
