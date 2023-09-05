@@ -632,7 +632,7 @@ describe("ArbBot integration tests", () => {
       assert.equal(makerQuoteAfterBalance.toNumber() < 1, true);
     });
 
-    it.only(`should find arb and do arb, bid`, async function () {
+    it(`should find arb and do arb, bid`, async function () {
       const market = await mgv.market({ base: "WETH", quote: "DAI" });
       const mgvArbAddress = mgv.getAddress("MgvArbitrage");
 
