@@ -55,6 +55,7 @@ Here's an example configuration file with instances of all possible configuratio
   "oracleURL_Key": "standard",
   "oracleURL_subKey": "maxFee",
   "runEveryXHours": 8,
+  "overEstimateOracleGasPriceByXPercent": 0.15,
   "maxUpdateConstraint": {
     "constant": 20,
     "percentage": 5

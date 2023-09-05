@@ -3,5 +3,5 @@
   "acceptableGasGapToOracle": 0.5,
   "maxUpdateConstraint": {},
   "runEveryXHours": 8,
-  "overestimateOracleGasPriceByXPercent": 0.15
+  "overEstimateOracleGasPriceByXPercent": 0.15
 }
