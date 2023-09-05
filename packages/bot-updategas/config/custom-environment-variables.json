@@ -12,6 +12,10 @@
     "__name": "RUN_EVERY_X_HOURS",
     "__format": "number"
   },
+  "overEstimateOracleGasPriceByXPercent": {
+    "__name": "OVERESTIMATE_ORACLE_GASPRICE_BY_X_PERCENT",
+    "__format": "nubmer"
+  },
   "maxUpdateConstraint": {
     "constant": {
       "__name": "MAX_UPDATE_CONSTRAINT_CONSTANT",

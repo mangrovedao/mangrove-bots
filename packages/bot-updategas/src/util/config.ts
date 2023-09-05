@@ -18,11 +18,13 @@ export type OracleConfig = {
   acceptableGasGapToOracle: number;
   runEveryXHours: number;
   oracleSourceConfiguration: OracleSourceConfiguration;
+  overEstimateOracleGasPriceByXPercent: number;
 };
 
 export function readAndValidateConfig(): OracleConfig {
   let acceptableGasGapToOracle = 0;
   let runEveryXHours = 0;
+  let overEstimateOracleGasPriceByXPercent = 0;
 
   const configErrors: string[] = [];
   // - acceptable gap
@@ -81,6 +83,13 @@ export function readAndValidateConfig(): OracleConfig {
     );
   }
 
+  overEstimateOracleGasPriceByXPercent = config.get<number>(
+    "overestimateOracleGasPriceByXPercent"
+  );
+  if (overEstimateOracleGasPriceByXPercent === undefined) {
+    configErrors.push("overestimateOracleGasPriceByXPercent is undefined");
+  }
+
   if (configErrors.length > 0) {
     throw new Error(
       `Found following config errors: [${configErrors.join(", ")}]`
@@ -91,5 +100,6 @@ export function readAndValidateConfig(): OracleConfig {
     acceptableGasGapToOracle: acceptableGasGapToOracle,
     oracleSourceConfiguration: oracleSourceConfiguration,
     runEveryXHours: runEveryXHours,
+    overEstimateOracleGasPriceByXPercent,
   };
 }
