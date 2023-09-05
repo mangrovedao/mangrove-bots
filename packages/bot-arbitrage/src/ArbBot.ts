@@ -13,6 +13,7 @@ import { BigNumber, BigNumberish } from "ethers";
 import Big from "big.js";
 import { Pricer } from "./uniswap/pricing";
 import { Context } from "./types";
+import { PoolInfo } from "./uniswap/types";
 dotenvFlow.config();
 
 const whitelist = [
@@ -23,13 +24,13 @@ const whitelist = [
 
 export class ArbBot {
   mgv: Mangrove;
-  poolContract: ethers.Contract;
   priceUtils = new PriceUtils(logger);
   #latestMarketActivity: LatestMarketActivity;
   #txUtils: TxUtils;
 
   constructor(
     _mgv: Mangrove,
+    private poolInfo: PoolInfo,
     private pricer: Pricer,
     latestMarketActivity: LatestMarketActivity,
     private context: Context
@@ -349,11 +350,14 @@ export class ArbBot {
       ? arbContract.estimateGas
       : arbContract;
 
-    const takerWants = UnitCalculations.toUnits(
+    const takerWantsAsBig = bestOffer.gives;
+    let takerWants = UnitCalculations.toUnits(
       bestOffer.gives,
       wantsToken.decimals
     ).toString();
-    const takerGives = UnitCalculations.toUnits(
+
+    const takerGivesAsBig = bestOffer.wants;
+    let takerGives = UnitCalculations.toUnits(
       bestOffer.wants,
       givesToken.decimals
     ).toString();
@@ -371,7 +375,27 @@ export class ArbBot {
         txOverrides
       );
     } else if (config.exchangeConfig) {
+      /* only uniswap exchange as fee */
       if ("fee" in config.exchangeConfig) {
+        // if exchange is uniswap
+        const poolInfo = {
+          token0: this.poolInfo.token0,
+          token1: this.poolInfo.token1,
+          fee: this.poolInfo.fee,
+        };
+        const maxTakerGives = await this.pricer.quoteExactInputSingle(
+          poolInfo,
+          this.context.tokenForExchange.balance.toFixed()
+        );
+        const maxTakerGivesAsBig = givesToken.fromUnits(maxTakerGives);
+
+        if (maxTakerGivesAsBig.lt(takerGivesAsBig)) {
+          //then we needs to partial fill
+          takerGives = givesToken.toUnits(maxTakerGivesAsBig).toString();
+          const newTakerWants = bestOffer.price.mul(maxTakerGivesAsBig);
+          takerWants = wantsToken.toUnits(newTakerWants).toString();
+        }
+
         return await correctCall.doArbitrageExchangeOnUniswap(
           {
             offerId: bestId,

@@ -108,8 +108,10 @@ describe("ArbBot integration tests", () => {
         mgv.getAddress("UniswapV3Quoter"),
         mgv.provider
       );
+
       const arbBot = new ArbBot(
         mgvArbitrager,
+        poolInfo,
         pricer,
         {
           base: market.base.name,
@@ -119,12 +121,14 @@ describe("ArbBot integration tests", () => {
           holdingTokens: {
             DAI: {
               name: "DAI",
-              balance: await market.quote.balanceOf(mgvArbitrager.address),
+              balance: await market.quote.balanceOf(
+                this.accounts.maker.address
+              ),
             },
           },
           tokenForExchange: {
             name: "DAI",
-            balance: await market.quote.balanceOf(mgvArbitrager.address),
+            balance: await market.quote.balanceOf(this.accounts.maker.address),
           },
         }
       );
@@ -188,6 +192,7 @@ describe("ArbBot integration tests", () => {
       );
       const arbBot = new ArbBot(
         mgvArbitrager,
+        poolInfo,
         pricer,
         {
           base: market.base.name,
@@ -197,12 +202,14 @@ describe("ArbBot integration tests", () => {
           holdingTokens: {
             DAI: {
               name: "DAI",
-              balance: await market.quote.balanceOf(mgvArbitrager.address),
+              balance: await market.quote.balanceOf(
+                this.accounts.maker.address
+              ),
             },
           },
           tokenForExchange: {
             name: "DAI",
-            balance: await market.quote.balanceOf(mgvArbitrager.address),
+            balance: await market.quote.balanceOf(this.accounts.maker.address),
           },
         }
       );
@@ -260,6 +267,7 @@ describe("ArbBot integration tests", () => {
       );
       const arbBot = new ArbBot(
         mgvArbitrager,
+        poolInfo,
         pricer,
         {
           base: market.base.name,
@@ -269,12 +277,14 @@ describe("ArbBot integration tests", () => {
           holdingTokens: {
             DAI: {
               name: "DAI",
-              balance: await market.quote.balanceOf(mgvArbitrager.address),
+              balance: await market.quote.balanceOf(
+                this.accounts.maker.address
+              ),
             },
           },
           tokenForExchange: {
             name: "DAI",
-            balance: await market.quote.balanceOf(mgvArbitrager.address),
+            balance: await market.quote.balanceOf(this.accounts.maker.address),
           },
         }
       );
@@ -365,6 +375,7 @@ describe("ArbBot integration tests", () => {
       );
       const arbBot = new ArbBot(
         mgvArbitrager,
+        poolInfo,
         pricer,
         {
           base: market.base.name,
@@ -374,12 +385,14 @@ describe("ArbBot integration tests", () => {
           holdingTokens: {
             DAI: {
               name: "DAI",
-              balance: await market.quote.balanceOf(mgvArbitrager.address),
+              balance: await market.quote.balanceOf(
+                this.accounts.maker.address
+              ),
             },
           },
           tokenForExchange: {
             name: "DAI",
-            balance: await market.quote.balanceOf(mgvArbitrager.address),
+            balance: await market.quote.balanceOf(this.accounts.maker.address),
           },
         }
       );
@@ -443,8 +456,11 @@ describe("ArbBot integration tests", () => {
         mgv.getAddress("UniswapV3Quoter"),
         mgv.provider
       );
+
+      const dai = await mgv.token("DAI");
       const arbBot = new ArbBot(
         mgvArbitrager,
+        poolInfo,
         pricer,
         {
           base: market.base.name,
@@ -454,12 +470,12 @@ describe("ArbBot integration tests", () => {
           holdingTokens: {
             DAI: {
               name: "DAI",
-              balance: await market.quote.balanceOf(mgvArbitrager.address),
+              balance: await dai.balanceOf(this.accounts.maker.address),
             },
           },
           tokenForExchange: {
             name: "DAI",
-            balance: await market.quote.balanceOf(mgvArbitrager.address),
+            balance: await dai.balanceOf(this.accounts.maker.address),
           },
         }
       );
@@ -509,6 +525,111 @@ describe("ArbBot integration tests", () => {
         holdingDaiBeforeBalance < holdingWethfterBalance,
         "Should have gained holding token"
       );
+    });
+
+    it.only(`should partial fill be profitable, exchange on Uniswap first`, async function () {
+      const market = await mgv.market({ base: "WETH", quote: "USDC" });
+      const lp = await mgv.liquidityProvider(market);
+      const provision = await lp.computeAskProvision();
+      const offer = await lp.newAsk({ wants: 1, gives: 1, fund: provision });
+      await mgvTestUtil.waitForTransaction(
+        await market.base.approve(mgv.address, 1000)
+      );
+      await mgvTestUtil.waitForTransaction(
+        await market.quote.approve(mgv.address, 1000)
+      );
+      const factoryAddress = mgv.getAddress("UniswapV3Factory");
+      const poolInfo = await getPoolInfo(
+        factoryAddress,
+        new Token(mgv.network.id!, market.base.address, market.base.decimals),
+        new Token(mgv.network.id!, market.quote.address, market.quote.decimals),
+        3000,
+        mgv.provider
+      );
+
+      const pricer = generateUniQuoter(
+        mgv.getAddress("UniswapV3Quoter"),
+        mgv.provider
+      );
+
+      const holdingTokensFakeBalance = new Big(100);
+      const arbBot = new ArbBot(
+        mgvArbitrager,
+        poolInfo,
+        pricer,
+        {
+          base: market.base.name,
+          quote: market.quote.name,
+        },
+        {
+          holdingTokens: {
+            DAI: {
+              name: "DAI",
+              balance: holdingTokensFakeBalance,
+            },
+          },
+          tokenForExchange: {
+            name: "DAI",
+            balance: holdingTokensFakeBalance,
+          },
+        }
+      );
+      const txActivate = await activateTokensWithMgv(
+        [market.base.address, market.quote.address, mgv.getAddress("DAI")],
+        mgvDeployer
+      );
+      await mgvTestUtil.waitForTransaction(txActivate!);
+      const mgvArbAddress = mgv.getAddress("MgvArbitrage");
+      const makerAddress = await this.accounts.maker.address;
+
+      const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
+      const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
+      const holdingDaiBeforeBalance = await (
+        await mgv.token("DAI")
+      ).balanceOf(mgvArbAddress);
+      const transactions = await arbBot.run(market, ["WETH", "USDC", 3000], {
+        holdingTokens: ["DAI"],
+        tokenForExchange: "DAI",
+        exchangeConfig: { exchange: "Uniswap", fee: () => 3000 },
+      });
+      let receipts;
+      if (transactions.askTransaction)
+        receipts = await mgvTestUtil.waitForTransaction(
+          transactions.askTransaction
+        );
+      else
+        receipts = await mgvTestUtil.waitForTransaction(
+          transactions.bidTransaction
+        );
+      const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
+      const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
+
+      const makerBaseAfterBalance = await market.base.balanceOf(makerAddress);
+      const makerQuoteAfterBalance = await market.quote.balanceOf(makerAddress);
+
+      const holdingWethfterBalance = await (
+        await mgv.token("DAI")
+      ).balanceOf(mgvArbAddress);
+      await mgvTestUtil.waitForBlock(market.mgv, receipts.blockNumber);
+
+      assert.ok(!(await market.isLive("asks", offer.id)));
+      assert.deepStrictEqual(
+        baseAfterBalance.minus(baseBeforeBalance).lte(1),
+        true,
+        `Base Should have the same amount of base as before (less then 1, because of rounding): ${baseBeforeBalance.toString()}  after:${baseAfterBalance.toString()}`
+      );
+      assert.deepStrictEqual(
+        quoteBeforeBalance,
+        quoteAfterBalance,
+        "Quote Should have the same amount of base"
+      );
+      assert.ok(
+        holdingDaiBeforeBalance < holdingWethfterBalance,
+        "Should have gained holding token"
+      );
+      /* check if the offer has been partially filled */
+      assert.equal(makerBaseAfterBalance.toNumber() > 99, true);
+      assert.equal(makerQuoteAfterBalance.toNumber() < 1, true);
     });
 
     //TODO: Test configs

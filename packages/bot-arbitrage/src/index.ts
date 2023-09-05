@@ -177,7 +177,7 @@ export async function botFunction(
       mgv.provider
     );
     arbBotMap.push({
-      arbBot: new ArbBot(mgv, pricer, latestMarketActivity, context),
+      arbBot: new ArbBot(mgv, poolInfo, pricer, latestMarketActivity, context),
       market: market,
       fee: arbBotValues.fee,
     });
