@@ -65,6 +65,8 @@ describe("GasUpdater integration tests", () => {
       "maxUpdateConstraint"
     );
 
+    const overestimateOracleGasPriceByXPercent = 0;
+
     const oracleSourceConfiguration: OracleSourceConfiguration = {
       OracleGasPrice: constantGasPrice,
       _tag: "Constant",
@@ -75,6 +77,7 @@ describe("GasUpdater integration tests", () => {
       mgv,
       acceptableGasGapToOracle,
       oracleSourceConfiguration,
+      overestimateOracleGasPriceByXPercent,
       maxUpdateConstraint
     );
 
@@ -101,6 +104,8 @@ describe("GasUpdater integration tests", () => {
       _tag: "Constant",
     };
 
+    const overestimateOracleGasPriceByXPercent = 0;
+
     const maxUpdateConstraint: MaxUpdateConstraint = {
       constant: 0.4,
     };
@@ -110,6 +115,7 @@ describe("GasUpdater integration tests", () => {
       mgv,
       acceptableGasGapToOracle,
       oracleSourceConfiguration,
+      overestimateOracleGasPriceByXPercent,
       maxUpdateConstraint
     );
 
@@ -127,7 +133,7 @@ describe("GasUpdater integration tests", () => {
       "acceptableGasGapToOracle"
     );
 
-    const constantGasPrice = config.get<number>("constantOracleGasPrice");
+    const constantGasPrice = 0;
 
     const oracleSourceConfiguration: OracleSourceConfiguration = {
       OracleGasPrice: constantGasPrice,
@@ -138,11 +144,16 @@ describe("GasUpdater integration tests", () => {
       percentage: 5,
     };
 
+    const overestimateOracleGasPriceByXPercent = config.get<number>(
+      "overestimateOracleGasPriceByXPercent"
+    );
+
     // setup gasUpdater
     const gasUpdater = new GasUpdater(
       mgv,
       acceptableGasGapToOracle,
       oracleSourceConfiguration,
+      overestimateOracleGasPriceByXPercent,
       maxUpdateConstraint
     );
 
@@ -152,5 +163,46 @@ describe("GasUpdater integration tests", () => {
     // Assert
     const globalConfig = await mgv.config();
     return Promise.all([expect(globalConfig.gasprice).to.equal(0)]);
+  });
+
+  it("should set the gas price with overestimate of 15% in Mangrove, when GasUpdater is run", async function () {
+    // read in configured test config - skipping gas oracle URL, as we use constant here
+    const acceptableGasGapToOracle = config.get<number>(
+      "acceptableGasGapToOracle"
+    );
+
+    const constantGasPrice = config.get<number>("constantOracleGasPrice");
+    const maxUpdateConstraint = config.get<MaxUpdateConstraint>(
+      "maxUpdateConstraint"
+    );
+
+    const overestimateOracleGasPriceByXPercent = 0.15;
+
+    const oracleSourceConfiguration: OracleSourceConfiguration = {
+      OracleGasPrice: constantGasPrice,
+      _tag: "Constant",
+    };
+
+    // setup gasUpdater
+    const gasUpdater = new GasUpdater(
+      mgv,
+      acceptableGasGapToOracle,
+      oracleSourceConfiguration,
+      overestimateOracleGasPriceByXPercent,
+      maxUpdateConstraint
+    );
+
+    // Test
+    await gasUpdater.checkSetGasprice();
+
+    // Assert
+    const globalConfig = await mgv.config();
+    return Promise.all([
+      expect(globalConfig.gasprice).to.equal(
+        Math.round(
+          constantGasPrice * (1 + overestimateOracleGasPriceByXPercent)
+        )
+      ),
+    ]);
   });
 });
