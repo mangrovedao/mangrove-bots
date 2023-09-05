@@ -68,6 +68,7 @@ Here's an example configuration file with instances of all possible configuratio
 - `oracleURL`: URL for an external oracle - expects a JSON REST endpoint a la <https://gasstation-mainnet.matic.network/>. _This setting is only used if `constantOracleGasPrice` is not given._
 - `oracleURL_Key`: Name of key to lookup in JSON returned by JSON REST endpoint at `oracleURL`.
 - `runEveryXHours`: Schedule bot to run with an interval of this many hours.
+- `overEstimateOracleGasPriceByXPercent`: This sets delta in percent that will be applied to the gas oracle source
 - `maxUpdateConstraint`:
   If both `constant` and `percentage` is used, the minimum gas change of the 2 is used.
   - `constant`: This sets the max change to the gas price as a constant number.
