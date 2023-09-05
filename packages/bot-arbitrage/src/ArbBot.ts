@@ -1,6 +1,5 @@
 import { Mangrove, Market, MgvToken, ethers } from "@mangrovedao/mangrove.js";
 import UnitCalculations from "@mangrovedao/mangrove.js/dist/nodejs/util/unitCalculations";
-import dotenvFlow from "dotenv-flow";
 import { MgvArbitrage__factory } from "./types/typechain";
 import { logger } from "./util/logger";
 import { ArbConfig } from "./util/configUtils";
@@ -11,7 +10,6 @@ import {
 } from "@mangrovedao/bot-utils";
 import { BigNumber, BigNumberish } from "ethers";
 import Big from "big.js";
-dotenvFlow.config();
 
 const whitelist = [
   "MgvArbitrage/notProfitable",
