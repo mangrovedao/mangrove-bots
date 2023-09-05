@@ -34,7 +34,9 @@ async function botFunction(
   );
 
   // create and schedule task
-  logger.info(`Running bot every ${oracleConfig.runEveryXHours} hours.`);
+  logger.info(
+    `Running bot every ${oracleConfig.runEveryXHours} hours and overEstimateOracleGasPriceByXPercent = ${oracleConfig.overEstimateOracleGasPriceByXPercent}`
+  );
 
   const task = new AsyncTask(
     "gas-updater bot task",
