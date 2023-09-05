@@ -56,6 +56,7 @@ export class GasUpdater {
   #network = "";
   oracleContract: typechain.MgvOracle;
   gasHelper = new GasHelper();
+  #overEstimateOracleGasPriceByXPercent: number;
   #maxUpdateConstraint?: MaxUpdateConstraint;
   #txUtils: TxUtils;
 
@@ -71,11 +72,14 @@ export class GasUpdater {
     mangrove: Mangrove,
     acceptableGasGapToOracle: number,
     oracleSourceConfiguration: OracleSourceConfiguration,
+    overEstimateOracleGasPriceByXPercent: number,
     maxUpdateConstraint?: MaxUpdateConstraint
   ) {
     this.#mangrove = mangrove;
     this.#acceptableGasGapToOracle = acceptableGasGapToOracle;
     this.#maxUpdateConstraint = maxUpdateConstraint;
+    this.#overEstimateOracleGasPriceByXPercent =
+      overEstimateOracleGasPriceByXPercent;
 
     if (oracleSourceConfiguration._tag === "Constant") {
       this.#constantOracleGasPrice = oracleSourceConfiguration.OracleGasPrice;
@@ -119,13 +123,14 @@ export class GasUpdater {
 
     const currentMangroveGasPrice = globalConfig.gasprice;
 
-    const oracleGasPriceEstimate =
+    let oracleGasPriceEstimate =
       await this.gasHelper.getGasPriceEstimateFromOracle({
         constantGasPrice: this.#constantOracleGasPrice,
         mangrove: this.#mangrove,
       });
 
     if (oracleGasPriceEstimate !== undefined) {
+      oracleGasPriceEstimate *= 1 + this.#overEstimateOracleGasPriceByXPercent;
       const [shouldUpdateGasPrice, newGasPrice] =
         this.gasHelper.shouldUpdateMangroveGasPrice(
           currentMangroveGasPrice,

@@ -29,7 +29,8 @@ async function botFunction(
   const gasUpdater = new GasUpdater(
     mgv,
     oracleConfig.acceptableGasGapToOracle,
-    oracleConfig.oracleSourceConfiguration
+    oracleConfig.oracleSourceConfiguration,
+    oracleConfig.overEstimateOracleGasPriceByXPercent
   );
 
   // create and schedule task
