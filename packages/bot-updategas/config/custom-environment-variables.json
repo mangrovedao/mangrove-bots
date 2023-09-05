@@ -14,7 +14,7 @@
   },
   "overEstimateOracleGasPriceByXPercent": {
     "__name": "OVERESTIMATE_ORACLE_GASPRICE_BY_X_PERCENT",
-    "__format": "nubmer"
+    "__format": "number"
   },
   "maxUpdateConstraint": {
     "constant": {
