@@ -84,10 +84,10 @@ export function readAndValidateConfig(): OracleConfig {
   }
 
   overEstimateOracleGasPriceByXPercent = config.get<number>(
-    "overestimateOracleGasPriceByXPercent"
+    "overEstimateOracleGasPriceByXPercent"
   );
   if (overEstimateOracleGasPriceByXPercent === undefined) {
-    configErrors.push("overestimateOracleGasPriceByXPercent is undefined");
+    configErrors.push("overEstimateOracleGasPriceByXPercent is undefined");
   }
 
   if (configErrors.length > 0) {
