@@ -144,9 +144,7 @@ describe("GasUpdater integration tests", () => {
       percentage: 5,
     };
 
-    const overestimateOracleGasPriceByXPercent = config.get<number>(
-      "overestimateOracleGasPriceByXPercent"
-    );
+    const overestimateOracleGasPriceByXPercent = 0;
 
     // setup gasUpdater
     const gasUpdater = new GasUpdater(
