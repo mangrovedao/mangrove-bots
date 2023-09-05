@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@ethersproject/experimental": "^5.7.0",
-    "@mangrovedao/mangrove.js": "1.4.18-1",
+    "@mangrovedao/mangrove.js": "https://github.com/mangrovedao/mangrove.js.git#5404ba0d6a4f214e0f6b955ca23605477fd9a64d",
     "@types/big.js": "^6.1.6",
     "@types/express": "^4.17.17",
     "@types/finalhandler": "^1.2.0",
