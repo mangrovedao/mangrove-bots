@@ -110,7 +110,7 @@ async function botFunction(
         market,
         provider,
         latestMarketActivity,
-        new Set(whitelistedAddreses)
+        new Set(whitelistedAddreses.map((addr) => addr.toLowerCase()))
       )
     );
   }
