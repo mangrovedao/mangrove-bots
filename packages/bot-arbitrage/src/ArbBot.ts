@@ -350,7 +350,6 @@ export class ArbBot {
       ? arbContract.estimateGas
       : arbContract;
 
-    const takerWantsAsBig = bestOffer.gives;
     let takerWants = UnitCalculations.toUnits(
       bestOffer.gives,
       wantsToken.decimals

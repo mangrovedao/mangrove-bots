@@ -632,7 +632,7 @@ describe("ArbBot integration tests", () => {
       assert.equal(makerQuoteAfterBalance.toNumber() < 1, true);
     });
 
-    it(`should find arb and do arb, bid`, async function () {
+    it(`should find partial arb and do arb, bid`, async function () {
       const market = await mgv.market({ base: "WETH", quote: "DAI" });
       const mgvArbAddress = mgv.getAddress("MgvArbitrage");
 
@@ -688,10 +688,6 @@ describe("ArbBot integration tests", () => {
       );
       await mgvTestUtil.waitForTransaction(txActivate!);
       const makerAddress = await this.accounts.maker.address;
-      const makerBaseBeforeBalance = await market.base.balanceOf(makerAddress);
-      const makerQuoteBeforeBalance = await market.quote.balanceOf(
-        makerAddress
-      );
 
       const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
       const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
