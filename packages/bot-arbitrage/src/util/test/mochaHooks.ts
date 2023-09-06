@@ -25,7 +25,7 @@ import { initPool } from "../../uniswap/initializePool";
 const LOCAL_MNEMONIC =
   "test test test test test test test test test test test junk";
 const mnemonic = new eth.Mnemonic(LOCAL_MNEMONIC);
-const Arb_root = path.parse(
+const CORE_DIR = path.parse(
   require.resolve("../../../../mangrove-arbitrage")
 ).dir;
 
@@ -95,7 +95,7 @@ async function deployMgvArbitrage(
     univ3Router: univ3Router,
     arbitrager: arbitrager,
     mnemonic: mnemonic,
-    coreDir: Arb_root,
+    coreDir: CORE_DIR,
     setToyENSCodeIfAbsent: false,
     setMulticallCodeIfAbsent: false,
   });
