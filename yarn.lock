@@ -1282,7 +1282,7 @@ __metadata:
     "@espendk/json-file-reporter": ^1.4.2
     "@ethersproject/experimental": ^5.7.0
     "@ethersproject/hardware-wallets": ^5.7.0
-    "@mangrovedao/mangrove.js": "https://github.com/mangrovedao/mangrove.js.git#5404ba0d6a4f214e0f6b955ca23605477fd9a64d"
+    "@mangrovedao/mangrove.js": "https://github.com/mangrovedao/mangrove.js.git#fee14425efd0fa83fea21c2a18d4404c08935b6c"
     "@types/big.js": ^6.1.6
     "@types/chai": ^4.3.4
     "@types/chai-as-promised": ^7.1.5
@@ -1352,9 +1352,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mangrovedao/mangrove.js@https://github.com/mangrovedao/mangrove.js.git#5404ba0d6a4f214e0f6b955ca23605477fd9a64d":
-  version: 1.4.18
-  resolution: "@mangrovedao/mangrove.js@https://github.com/mangrovedao/mangrove.js.git#commit=5404ba0d6a4f214e0f6b955ca23605477fd9a64d"
+"@mangrovedao/mangrove.js@https://github.com/mangrovedao/mangrove.js.git#fee14425efd0fa83fea21c2a18d4404c08935b6c":
+  version: 1.4.19
+  resolution: "@mangrovedao/mangrove.js@https://github.com/mangrovedao/mangrove.js.git#commit=fee14425efd0fa83fea21c2a18d4404c08935b6c"
   dependencies:
     "@ethersproject/experimental": ^5.7.0
     "@mangrovedao/mangrove-core": ^1.5.7
@@ -1377,7 +1377,7 @@ __metadata:
     yargs: ^17.3.0
   bin:
     mgv: ./dist/nodejs/cli/mgv.js
-  checksum: 36d06f872c05cbc9a779933db9eaa55ce42dd203ab7fec84b2fd088b04f994e3c407d1dbf2bb47c3d56da4b76197308f0b69d12d5d1dc6e058dae5bae7f35086
+  checksum: 58034f2f859fda5ca7593f1d9b628b0b8f03f35554e4744ba69cfa567981088b8d2a6d064c054b6004fce233caa89b57de3c49175e533c647b6204b141cbf8eb
   languageName: node
   linkType: hard
 
