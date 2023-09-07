@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 
 import {Deployer} from "mgv_script/lib/Deployer.sol";
 import {MangroveDeployer} from "mgv_script/core/deployers/MangroveDeployer.s.sol";
-import {MangroveOrderDeployer} from "mgv_strat_script/strategies/mangroveOrder/deployers/MangroveOrderDeployer.s.sol";
+import {MangroveOrderDeployer} from "mgv_script/strategies/mangroveOrder/deployers/MangroveOrderDeployer.s.sol";
 import {ActivateMarket} from "mgv_script/core/ActivateMarket.s.sol";
 import {MgvArbitrage} from "src/MgvArbitrage.sol";
 import {IMangrove} from "mgv_src/IMangrove.sol";

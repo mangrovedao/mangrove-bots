@@ -1,5 +1,6 @@
-import config from "config";
 import dotenvFlow from "dotenv-flow";
+dotenvFlow.config();
+import config from "config";
 import {
   MaxUpdateConstraint,
   OracleSourceConfiguration,
@@ -7,7 +8,6 @@ import {
   ConstantOracleConfiguration,
 } from "../GasUpdater";
 import logger from "./logger";
-dotenvFlow.config();
 if (!process.env["NODE_CONFIG_DIR"]) {
   process.env["NODE_CONFIG_DIR"] = __dirname + "/../../config/";
 }
@@ -84,10 +84,10 @@ export function readAndValidateConfig(): OracleConfig {
   }
 
   overEstimateOracleGasPriceByXPercent = config.get<number>(
-    "overestimateOracleGasPriceByXPercent"
+    "overEstimateOracleGasPriceByXPercent"
   );
   if (overEstimateOracleGasPriceByXPercent === undefined) {
-    configErrors.push("overestimateOracleGasPriceByXPercent is undefined");
+    configErrors.push("overEstimateOracleGasPriceByXPercent is undefined");
   }
 
   if (configErrors.length > 0) {
