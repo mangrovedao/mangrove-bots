@@ -233,6 +233,21 @@ export class ArbBot {
         costInHoldingToken.toString()
       );
 
+      logger.debug(`try to arb but is not profitable`, {
+        data: {
+          wantsToken,
+          givesToken,
+          bestOffer,
+          gasused,
+          gasprice,
+          costInNative,
+          costInNativeReadable,
+          holdingToken,
+          costInHoldingToken,
+          costInHoldingTokenInUnits,
+        },
+      });
+
       await this.staticArb(
         bestId,
         wantsToken,
