@@ -355,12 +355,22 @@ export class ArbBot {
       wantsToken.decimals
     ).toString();
 
-    const takerGivesAsBig = bestOffer.wants;
+    let takerGivesAsBig = bestOffer.wants;
     let takerGives = UnitCalculations.toUnits(
       bestOffer.wants,
       givesToken.decimals
     ).toString();
+
     if (holdsToken) {
+      const _givesToken = this.context.holdingTokens[givesToken.name];
+      if (_givesToken) {
+        if (_givesToken.balance.lt(takerGivesAsBig)) {
+          takerGivesAsBig = _givesToken.balance;
+          takerGives = givesToken.toUnits(takerGivesAsBig).toString();
+          const newTakerWants = bestOffer.price.mul(takerGivesAsBig);
+          takerWants = wantsToken.toUnits(newTakerWants).toString();
+        }
+      }
       return await correctCall.doArbitrage(
         {
           offerId: bestId,

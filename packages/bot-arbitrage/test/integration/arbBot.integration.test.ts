@@ -730,6 +730,194 @@ describe("ArbBot integration tests", () => {
       );
     });
 
+    it(`should partial find arb and do arb, ask`, async function () {
+      const weth = await mgv.token("WETH");
+
+      const market = await mgv.market({ base: "WETH", quote: "DAI" });
+      const mgvArbAddress = mgv.getAddress("MgvArbitrage");
+
+      const lp = await mgv.liquidityProvider(market);
+      const provision = await lp.computeAskProvision();
+      const offer = await lp.newAsk({ wants: 10, gives: 10, fund: provision });
+      await mgvTestUtil.waitForTransaction(
+        await market.base.approve(mgv.address, 1)
+      );
+      await mgvTestUtil.waitForTransaction(
+        await market.quote.approve(mgv.address, 1)
+      );
+      const factoryAddress = mgv.getAddress("UniswapV3Factory");
+      const poolInfo = await getPoolInfo(
+        factoryAddress,
+        new Token(mgv.network.id!, market.base.address, market.base.decimals),
+        new Token(mgv.network.id!, market.quote.address, market.quote.decimals),
+        3000,
+        mgv.provider
+      );
+      const pricer = generateUniQuoter(
+        mgv.getAddress("UniswapV3Quoter"),
+        mgv.provider
+      );
+
+      await weth.contract.mintTo(mgvArbAddress, weth.toUnits(1));
+      const fakeBalance = await weth.balanceOf(mgvArbAddress);
+      const arbBot = new ArbBot(
+        mgvArbitrager,
+        poolInfo,
+        pricer,
+        {
+          base: market.base.name,
+          quote: market.quote.name,
+        },
+        {
+          holdingTokens: {
+            DAI: {
+              name: "DAI",
+              balance: fakeBalance,
+            },
+            WETH: {
+              name: "WETH",
+              balance: fakeBalance,
+            },
+          },
+          tokenForExchange: {
+            name: "DAI",
+            balance: fakeBalance,
+          },
+        }
+      );
+      const txActivate = await activateTokensWithMgv(
+        [market.base.address, market.quote.address],
+        mgvDeployer
+      );
+      await mgvTestUtil.waitForTransaction(txActivate!);
+      const makerAddress = this.accounts.maker.address;
+
+      const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
+      const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
+      const txs = await arbBot.run(market, ["WETH", "DAI", 3000], {
+        holdingTokens: ["DAI"],
+        tokenForExchange: "DAI",
+        exchangeConfig: {
+          exchange: "Uniswap",
+          fee: () => 3000,
+        },
+      });
+      const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
+      const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
+      const receipt = await mgvTestUtil.waitForTransaction(txs.askTransaction);
+      await mgvTestUtil.waitForBlock(mgv, receipt.blockNumber);
+
+      const makerQuoteAfterBalance = await market.quote.balanceOf(makerAddress);
+      const makerBaseAfterBalance = await market.base.balanceOf(makerAddress);
+
+      assert.ok(!(await market.isLive("asks", offer.id)));
+      assert.deepStrictEqual(
+        baseBeforeBalance,
+        baseAfterBalance,
+        "Should have the same amount of base"
+      );
+      assert.ok(
+        quoteBeforeBalance < quoteAfterBalance,
+        "Should have gained quote"
+      );
+
+      assert.equal(makerBaseAfterBalance.toNumber(), 99);
+      assert.equal(makerQuoteAfterBalance.toNumber(), 100001);
+    });
+
+    it(`should find arb and do arb, bid`, async function () {
+      const market = await mgv.market({ base: "WETH", quote: "DAI" });
+      const mgvArbAddress = mgv.getAddress("MgvArbitrage");
+
+      const lp = await mgv.liquidityProvider(market);
+      const provision = await lp.computeBidProvision();
+      const offer = await lp.newBid({
+        wants: 1,
+        gives: 10000,
+        fund: provision,
+      });
+      await mgvTestUtil.waitForTransaction(
+        await market.quote.approve(mgv.address, 10000)
+      );
+      const factoryAddress = mgv.getAddress("UniswapV3Factory");
+      const poolInfo = await getPoolInfo(
+        factoryAddress,
+        new Token(mgv.network.id!, market.quote.address, market.quote.decimals),
+        new Token(mgv.network.id!, market.base.address, market.base.decimals),
+        3000,
+        mgv.provider
+      );
+
+      const pricer = generateUniQuoter(
+        mgv.getAddress("UniswapV3Quoter"),
+        mgv.provider
+      );
+
+      const weth = await mgv.token("WETH");
+      await weth.contract.mintTo(mgvArbAddress, weth.toUnits(1));
+
+      const arbBot = new ArbBot(
+        mgvArbitrager,
+        poolInfo,
+        pricer,
+        {
+          base: market.base.name,
+          quote: market.quote.name,
+        },
+        {
+          holdingTokens: {
+            DAI: {
+              name: "DAI",
+              balance: await market.base.balanceOf(this.accounts.maker.address),
+            },
+          },
+          tokenForExchange: {
+            name: "WETH",
+            balance: await market.base.balanceOf(this.accounts.maker.address),
+          },
+        }
+      );
+      const txActivate = await activateTokensWithMgv(
+        [market.base.address, market.quote.address],
+        mgvDeployer
+      );
+      await mgvTestUtil.waitForTransaction(txActivate!);
+      const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
+      const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
+
+      const makerAddress = this.accounts.maker.address;
+
+      const txs = await arbBot.run(market, ["WETH", "DAI", 3000], {
+        holdingTokens: ["WETH"],
+        tokenForExchange: "WETH",
+        exchangeConfig: {
+          exchange: "Uniswap",
+          fee: () => 3000,
+        },
+      });
+      const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
+      const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
+      const receipt = await mgvTestUtil.waitForTransaction(txs.bidTransaction);
+      await mgvTestUtil.waitForBlock(mgv, receipt.blockNumber);
+
+      const makerQuoteAfterBalance = await market.quote.balanceOf(makerAddress);
+      const makerBaseAfterBalance = await market.base.balanceOf(makerAddress);
+      assert.ok(!(await market.isLive("asks", offer.id)));
+      assert.deepStrictEqual(
+        quoteBeforeBalance.toNumber(),
+        quoteAfterBalance.toNumber(),
+
+        "Should have the same amount of quote"
+      );
+      assert.ok(
+        baseBeforeBalance < baseAfterBalance,
+        "Should have gained base"
+      );
+
+      assert.equal(makerBaseAfterBalance.toNumber(), 101);
+      assert.equal(makerQuoteAfterBalance.toNumber(), 90000);
+    });
+
     //TODO: Test configs
   });
 
