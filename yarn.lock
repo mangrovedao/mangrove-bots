@@ -1282,7 +1282,7 @@ __metadata:
     "@espendk/json-file-reporter": ^1.4.2
     "@ethersproject/experimental": ^5.7.0
     "@ethersproject/hardware-wallets": ^5.7.0
-    "@mangrovedao/mangrove.js": 1.4.18-1
+    "@mangrovedao/mangrove.js": 1.4.20
     "@types/big.js": ^6.1.6
     "@types/chai": ^4.3.4
     "@types/chai-as-promised": ^7.1.5
@@ -1334,8 +1334,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@mangrovedao/mangrove-arbitrage@workspace:packages/mangrove-arbitrage"
   dependencies:
-    "@mangrovedao/mangrove-core": ^1.5.8-1
-    "@mangrovedao/mangrove-strats": ^0.0.2-0
     "@uniswap/swap-router-contracts": ^1.3.0
     "@uniswap/v3-core": ^1.0.1
     "@uniswap/v3-periphery": ^1.4.3
@@ -1347,30 +1345,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mangrovedao/mangrove-core@npm:^1.5.8-1":
-  version: 1.5.8-1
-  resolution: "@mangrovedao/mangrove-core@npm:1.5.8-1"
-  checksum: 84a6e8c435267bdbda85000298723c7e20c4dfab93dc1fbcf8ac9b83f27c2ad35da36810311bce3f64904559b3aad3fe95e4f995de93228908acd19dec3e706c
+"@mangrovedao/mangrove-core@npm:^1.5.7":
+  version: 1.5.7
+  resolution: "@mangrovedao/mangrove-core@npm:1.5.7"
+  checksum: 24d711e29fa40f22861a2e2aa306eba0190f597469f61862d1bfbfee0b2cd069afab2d331369167ceff1490207f82abd31f7e31e4fab15f69398fa25fb663aab
   languageName: node
   linkType: hard
 
-"@mangrovedao/mangrove-strats@npm:^0.0.2-0":
-  version: 0.0.2-0
-  resolution: "@mangrovedao/mangrove-strats@npm:0.0.2-0"
-  dependencies:
-    "@mangrovedao/mangrove-core": ^1.5.8-1
-  checksum: 2eca98d7f087a01480ae85b1bf1905495f5f64efd11d3f0fbb10d7118e40bf8fd5fbdd063a80100903d9e46581d2448cf2b81a5fde11d1cd3b61a3f783174fcc
-  languageName: node
-  linkType: hard
-
-"@mangrovedao/mangrove.js@npm:1.4.18-1":
-  version: 1.4.18-1
-  resolution: "@mangrovedao/mangrove.js@npm:1.4.18-1"
+"@mangrovedao/mangrove.js@npm:1.4.20":
+  version: 1.4.20
+  resolution: "@mangrovedao/mangrove.js@npm:1.4.20"
   dependencies:
     "@ethersproject/experimental": ^5.7.0
-    "@mangrovedao/mangrove-core": ^1.5.8-1
-    "@mangrovedao/mangrove-strats": ^0.0.2-0
-    "@mangrovedao/reliable-event-subscriber": 1.1.28
+    "@mangrovedao/mangrove-core": ^1.5.7
+    "@mangrovedao/reliable-event-subscriber": 1.1.29
     "@types/object-inspect": ^1.8.1
     "@types/triple-beam": ^1.3.2
     async-mutex: ^0.4.0
@@ -1389,13 +1377,13 @@ __metadata:
     yargs: ^17.3.0
   bin:
     mgv: ./dist/nodejs/cli/mgv.js
-  checksum: a287b403228d494e1aaf3a03b3139488e1972f2302f752946874f189941c58ace0832c13fe296e79587215d8b8957df872fb901259673f8209e90abcc09353e7
+  checksum: c9b36c015f58bc16a4713d56e4d44127f6d22b8016a5e740a33b663a4effaa93cd58052262cc4724c0ea22343abb7bedccf4f2777b2f0d043235e57c823235ea
   languageName: node
   linkType: hard
 
-"@mangrovedao/reliable-event-subscriber@npm:1.1.28":
-  version: 1.1.28
-  resolution: "@mangrovedao/reliable-event-subscriber@npm:1.1.28"
+"@mangrovedao/reliable-event-subscriber@npm:1.1.29":
+  version: 1.1.29
+  resolution: "@mangrovedao/reliable-event-subscriber@npm:1.1.29"
   dependencies:
     "@ethersproject/providers": ^5.7.2
     async-mutex: ^0.4.0
@@ -1403,7 +1391,7 @@ __metadata:
     ethers: ^5.7.2
     isomorphic-ws: ^5.0.0
     ws: ^8.13.0
-  checksum: 54c73839dc03e64612e035667851cfb8ee6891232f802fc155a31e331b6f67db9c862929c2c2fb1bed4556a129b2e466b5f6ed173c3f626508e54c861657e5cb
+  checksum: 94c27e49fd3e1e181821b25f30e74a91a975b05424f647a0aabb2c56c5c8af086b1902a794104142fd6f60f159dc887f5d8a7cd944d383421fe3f7c4ec4b0ae9
   languageName: node
   linkType: hard
 

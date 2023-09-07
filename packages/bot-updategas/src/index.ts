@@ -69,7 +69,7 @@ async function botFunction(
 }
 
 const main = async () => {
-  await setup.startBot("update gas bot", botFunction, scheduler);
+  await setup.startBot("update gas bot", botFunction, scheduler, true);
 };
 
 main().catch((e) => {

@@ -32,7 +32,7 @@ export async function deployMgvArbitrage(params: {
     env,
     script: "MgvArbitragePolygonTestDeployer",
     mnemonic: params.mnemonic,
-    root: params.coreDir,
+    coreDir: params.coreDir,
     pipe: false,
     stateCache: false,
     stateCacheFile: "",
