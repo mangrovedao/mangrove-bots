@@ -235,10 +235,10 @@ export class ArbBot {
 
       logger.debug(`try to arb but is not profitable`, {
         data: {
-          wantsToken,
-          givesToken,
+          wantsToken: wantsToken.address,
+          givesToken: givesToken.address,
           bestOffer,
-          gasused,
+          gasused: gasused,
           gasprice,
           costInNative,
           costInNativeReadable,
