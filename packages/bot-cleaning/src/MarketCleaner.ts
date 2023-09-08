@@ -151,10 +151,14 @@ export class MarketCleaner {
         const outboundTkn =
           ba == "bids" ? semibook.market.quote : semibook.market.base;
 
-        const takerWants = new Big(1).div(
-          new Big(10).pow(outboundTkn.decimals)
+        let takerWants = new Big(1).div(new Big(10).pow(outboundTkn.decimals));
+        let takerGives = inboundTkn.fromUnits(
+          takerWants.mul(offer.price!).toString()
         );
-        const takerGives = new Big(1).div(new Big(10).pow(inboundTkn.decimals));
+        if (outboundTkn.decimals > inboundTkn.decimals) {
+          takerGives = new Big(1).div(new Big(10).pow(inboundTkn.decimals));
+          takerWants = takerGives.mul(new Big(1).div(offer.price!).round());
+        }
 
         cleaningPromises.push(
           this.#cleanOffer(
@@ -200,6 +204,7 @@ export class MarketCleaner {
       takerGives,
       contextInfo
     );
+
     if (!willOfferFail || bounty === undefined || bounty.eq(0)) {
       return;
     }
