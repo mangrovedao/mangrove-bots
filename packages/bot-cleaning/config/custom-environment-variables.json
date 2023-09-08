@@ -16,5 +16,6 @@
   "addressesWithDustCleaningWhitelist": {
     "__name": "ADDRESSES_WITH_DUST_CLEANING_WHITELIST",
     "__format": "json"
-  }
+  },
+  "takerToImpersonate": "TAKER_TO_IMPERSONATE"
 }

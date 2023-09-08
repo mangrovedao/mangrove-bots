@@ -82,6 +82,11 @@ async function botFunction(
     throw new Error("whitelistedRunEveryXMinutes is missing");
   }
 
+  const takerToImpersonate = config.get<string>("takerToImpersonate");
+  if (!takerToImpersonate) {
+    throw new Error("takerToImpersonate is missing");
+  }
+
   const latestMarketActivities: LatestMarketActivity[] = [];
   setup.latestActivity.markets = latestMarketActivities;
 
@@ -110,7 +115,8 @@ async function botFunction(
         market,
         provider,
         latestMarketActivity,
-        new Set(whitelistedAddreses.map((addr) => addr.toLowerCase()))
+        new Set(whitelistedAddreses.map((addr) => addr.toLowerCase())),
+        takerToImpersonate
       )
     );
   }

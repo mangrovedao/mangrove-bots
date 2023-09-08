@@ -29,6 +29,7 @@ export class MarketCleaner {
   #txUtils: TxUtils;
   #latestMarketActivity: LatestMarketActivity;
   #whitelistedDustCleaningMaker?: Set<String>;
+  #takerToImpersonate?: string;
 
   /**
    * Constructs a cleaner for the given Mangrove market which will use the given provider for queries and transactions.
@@ -40,12 +41,14 @@ export class MarketCleaner {
     market: Market,
     provider: Provider,
     latestMarketActivity: LatestMarketActivity,
-    whitelistedDustCleaningMaker?: Set<String>
+    whitelistedDustCleaningMaker?: Set<String>,
+    takerToImpersonate?: string
   ) {
     this.#market = market;
     this.#provider = provider;
     this.#latestMarketActivity = latestMarketActivity;
     this.#whitelistedDustCleaningMaker = whitelistedDustCleaningMaker;
+    this.#takerToImpersonate = takerToImpersonate;
 
     this.#isCleaning = false;
     this.#txUtils = new TxUtils(provider, logger);
@@ -195,6 +198,7 @@ export class MarketCleaner {
     gasPrice: BigNumber,
     takerWants: Big,
     takerGives: Big,
+    takerToImpersonate?: string,
     contextInfo?: string
   ): Promise<void> {
     const { willOfferFail, bounty } = await this.#willOfferFail(
@@ -202,6 +206,7 @@ export class MarketCleaner {
       ba,
       takerWants,
       takerGives,
+      takerToImpersonate,
       contextInfo
     );
 
@@ -244,6 +249,7 @@ export class MarketCleaner {
     ba: Market.BA,
     takerWants: Big,
     takerGives: Big,
+    takerToImpersonate?: string,
     contextInfo?: string
   ): Promise<{ willOfferFail: boolean; bounty?: BigNumber }> {
     const raw = await this.#market.getRawSnipeParams({
@@ -253,8 +259,22 @@ export class MarketCleaner {
       fillWants: false,
     });
 
-    return this.#market.mgv.cleanerContract.callStatic
-      .collect(raw.outboundTkn, raw.inboundTkn, raw.targets, raw.fillWants)
+    const call = takerToImpersonate
+      ? this.#market.mgv.cleanerContract.callStatic.collectByImpersonation(
+          raw.outboundTkn,
+          raw.inboundTkn,
+          raw.targets,
+          raw.fillWants,
+          takerToImpersonate
+        )
+      : this.#market.mgv.cleanerContract.callStatic.collect(
+          raw.outboundTkn,
+          raw.inboundTkn,
+          raw.targets,
+          raw.fillWants
+        );
+
+    return call
       .then((bounty) => {
         logger.debug("Static collect of offer succeeded", {
           base: this.#market.base.name,
