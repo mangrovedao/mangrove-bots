@@ -730,7 +730,7 @@ describe("ArbBot integration tests", () => {
       );
     });
 
-    it(`should partial find arb and do arb, ask`, async function () {
+    it(`should find partial arb and do arb, ask`, async function () {
       const weth = await mgv.token("WETH");
 
       const market = await mgv.market({ base: "WETH", quote: "DAI" });
@@ -825,7 +825,7 @@ describe("ArbBot integration tests", () => {
       assert.equal(makerQuoteAfterBalance.toNumber(), 100001);
     });
 
-    it(`should find arb and do arb, bid`, async function () {
+    it(`should find partial arb and do arb, bid`, async function () {
       const market = await mgv.market({ base: "WETH", quote: "DAI" });
       const mgvArbAddress = mgv.getAddress("MgvArbitrage");
 
