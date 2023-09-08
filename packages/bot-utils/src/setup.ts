@@ -146,7 +146,8 @@ export class Setup {
       signer: Wallet,
       provider: BaseProvider
     ) => Promise<void>,
-    scheduler?: ToadScheduler
+    scheduler?: ToadScheduler,
+    shouldNotListenToNewEvents: boolean = false
   ) {
     this.logger.info(`Starting ${name}...`, { contextInfo: "init" });
 
@@ -186,13 +187,16 @@ export class Setup {
     const mgv = await Mangrove.connect({
       signer: nonceManager,
       providerWsUrl: providerType == "http" ? undefined : providerWsUrl,
+      shouldNotListenToNewEvents: shouldNotListenToNewEvents,
     });
     this.importLocalAddresses(mgv);
 
-    setInterval(
-      () => checkFreshness(this.logger, mgv),
-      CHECK_FRESHNESS_INTERVAL_MS
-    );
+    if (!shouldNotListenToNewEvents) {
+      setInterval(
+        () => checkFreshness(this.logger, mgv),
+        CHECK_FRESHNESS_INTERVAL_MS
+      );
+    }
 
     if (providerType == "http") {
       this.logger.warn(

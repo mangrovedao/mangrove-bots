@@ -1,3 +1,5 @@
+import dotenvFlow from "dotenv-flow";
+dotenvFlow.config();
 import { BaseProvider } from "@ethersproject/providers";
 import {
   BalanceUtils,
@@ -5,12 +7,8 @@ import {
   LatestMarketActivity,
   Setup,
 } from "@mangrovedao/bot-utils";
-import Mangrove, {
-  Market,
-  enableLogging,
-  typechain,
-} from "@mangrovedao/mangrove.js";
-import dotenvFlow from "dotenv-flow";
+import Mangrove, { Market, enableLogging } from "@mangrovedao/mangrove.js";
+
 import { Wallet } from "ethers";
 import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
 import { ArbBot } from "./ArbBot";
@@ -21,8 +19,6 @@ import { getPoolInfo } from "./uniswap/pool";
 import { Token } from "@uniswap/sdk-core";
 import { generateUniQuoter } from "./uniswap/pricing";
 import { Context, TokenConfig } from "./types";
-
-dotenvFlow.config();
 
 enableLogging();
 

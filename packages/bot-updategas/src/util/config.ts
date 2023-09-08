@@ -1,5 +1,6 @@
-import config from "config";
 import dotenvFlow from "dotenv-flow";
+dotenvFlow.config();
+import config from "config";
 import {
   MaxUpdateConstraint,
   OracleSourceConfiguration,
@@ -7,7 +8,6 @@ import {
   ConstantOracleConfiguration,
 } from "../GasUpdater";
 import logger from "./logger";
-dotenvFlow.config();
 if (!process.env["NODE_CONFIG_DIR"]) {
   process.env["NODE_CONFIG_DIR"] = __dirname + "/../../config/";
 }
@@ -18,11 +18,13 @@ export type OracleConfig = {
   acceptableGasGapToOracle: number;
   runEveryXHours: number;
   oracleSourceConfiguration: OracleSourceConfiguration;
+  overEstimateOracleGasPriceByXPercent: number;
 };
 
 export function readAndValidateConfig(): OracleConfig {
   let acceptableGasGapToOracle = 0;
   let runEveryXHours = 0;
+  let overEstimateOracleGasPriceByXPercent = 0;
 
   const configErrors: string[] = [];
   // - acceptable gap
@@ -81,6 +83,13 @@ export function readAndValidateConfig(): OracleConfig {
     );
   }
 
+  overEstimateOracleGasPriceByXPercent = config.get<number>(
+    "overEstimateOracleGasPriceByXPercent"
+  );
+  if (overEstimateOracleGasPriceByXPercent === undefined) {
+    configErrors.push("overEstimateOracleGasPriceByXPercent is undefined");
+  }
+
   if (configErrors.length > 0) {
     throw new Error(
       `Found following config errors: [${configErrors.join(", ")}]`
@@ -91,5 +100,6 @@ export function readAndValidateConfig(): OracleConfig {
     acceptableGasGapToOracle: acceptableGasGapToOracle,
     oracleSourceConfiguration: oracleSourceConfiguration,
     runEveryXHours: runEveryXHours,
+    overEstimateOracleGasPriceByXPercent,
   };
 }

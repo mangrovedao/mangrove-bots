@@ -3,6 +3,8 @@ import { Market, Semibook } from "@mangrovedao/mangrove.js";
 import { Provider } from "@ethersproject/providers";
 import { BigNumber } from "ethers";
 import { LatestMarketActivity, TxUtils } from "@mangrovedao/bot-utils";
+import { maxGasReq } from "./constants";
+import Big from "big.js";
 
 type OfferCleaningEstimates = {
   bounty: BigNumber; // wei
@@ -11,10 +13,6 @@ type OfferCleaningEstimates = {
   totalCost: BigNumber; // wei
   netResult: BigNumber; // wei
 };
-
-// FIXME move to Mangrove.js
-// const maxWantsOrGives = BigNumber.from(2).pow(96).sub(1);
-const maxGasReq = Number.MAX_SAFE_INTEGER - 1;
 
 /**
  * A cleaner class for a single Mangrove market which snipes offers that fail and collects the bounty.
@@ -30,6 +28,7 @@ export class MarketCleaner {
   #isCleaning: boolean;
   #txUtils: TxUtils;
   #latestMarketActivity: LatestMarketActivity;
+  #whitelistedDustCleaningMaker?: Set<String>;
 
   /**
    * Constructs a cleaner for the given Mangrove market which will use the given provider for queries and transactions.
@@ -40,11 +39,13 @@ export class MarketCleaner {
   constructor(
     market: Market,
     provider: Provider,
-    latestMarketActivity: LatestMarketActivity
+    latestMarketActivity: LatestMarketActivity,
+    whitelistedDustCleaningMaker?: Set<String>
   ) {
     this.#market = market;
     this.#provider = provider;
     this.#latestMarketActivity = latestMarketActivity;
+    this.#whitelistedDustCleaningMaker = whitelistedDustCleaningMaker;
 
     this.#isCleaning = false;
     this.#txUtils = new TxUtils(provider, logger);
@@ -61,7 +62,10 @@ export class MarketCleaner {
    * @param contextInfo Context information that is included in logs.
    * @returns A promise that fulfills when all offers have been evaluated and all cleaning transactions have been mined.
    */
-  public async clean(contextInfo?: string): Promise<void> {
+  public async clean(
+    shouldOnlyCleanWhitelisted: boolean = false,
+    contextInfo?: string
+  ): Promise<void> {
     // TODO non-thread safe reentrancy lock - is this is an issue in JS?
     if (this.#isCleaning) {
       logger.debug("Already cleaning so ignoring request to clean", {
@@ -113,12 +117,14 @@ export class MarketCleaner {
         asks,
         "asks",
         gasPrice,
+        shouldOnlyCleanWhitelisted,
         contextInfo
       );
       const bidsCleaningPromise = this.#cleanSemibook(
         bids,
         "bids",
         gasPrice,
+        shouldOnlyCleanWhitelisted,
         contextInfo
       );
       await Promise.allSettled([asksCleaningPromise, bidsCleaningPromise]);
@@ -131,11 +137,50 @@ export class MarketCleaner {
     semibook: Semibook,
     ba: Market.BA,
     gasPrice: BigNumber,
+    shouldOnlyCleanWhitelisted: boolean,
     contextInfo?: string
   ): Promise<PromiseSettledResult<void>[]> {
     const cleaningPromises: Promise<void>[] = [];
     for (const offer of semibook) {
-      cleaningPromises.push(this.#cleanOffer(offer, ba, gasPrice, contextInfo));
+      if (
+        this.#whitelistedDustCleaningMaker &&
+        this.#whitelistedDustCleaningMaker.has(offer.maker.toLowerCase())
+      ) {
+        const inboundTkn =
+          ba == "bids" ? semibook.market.base : semibook.market.quote;
+        const outboundTkn =
+          ba == "bids" ? semibook.market.quote : semibook.market.base;
+
+        const takerWants = new Big(1).div(
+          new Big(10).pow(outboundTkn.decimals)
+        );
+        const takerGives = new Big(1).div(new Big(10).pow(inboundTkn.decimals));
+
+        cleaningPromises.push(
+          this.#cleanOffer(
+            offer,
+            ba,
+            gasPrice,
+            takerWants,
+            takerGives,
+            contextInfo
+          ) // takerWants: outboundTkn, takerGives: inboundTkn
+        );
+      } else {
+        if (shouldOnlyCleanWhitelisted) {
+          continue;
+        }
+        cleaningPromises.push(
+          this.#cleanOffer(
+            offer,
+            ba,
+            gasPrice,
+            new Big(0),
+            new Big(0),
+            contextInfo
+          )
+        );
+      }
     }
     return Promise.allSettled(cleaningPromises);
   }
@@ -144,11 +189,15 @@ export class MarketCleaner {
     offer: Market.Offer,
     ba: Market.BA,
     gasPrice: BigNumber,
+    takerWants: Big,
+    takerGives: Big,
     contextInfo?: string
   ): Promise<void> {
     const { willOfferFail, bounty } = await this.#willOfferFail(
       offer,
       ba,
+      takerWants,
+      takerGives,
       contextInfo
     );
     if (!willOfferFail || bounty === undefined || bounty.eq(0)) {
@@ -159,7 +208,9 @@ export class MarketCleaner {
       offer,
       ba,
       bounty,
-      gasPrice
+      gasPrice,
+      takerWants,
+      takerGives
     );
     if (estimates.netResult.gt(0)) {
       logger.info("Identified offer that is profitable to clean", {
@@ -170,7 +221,7 @@ export class MarketCleaner {
         data: { estimates },
       });
       // TODO Do we have the liquidity to do the snipe?
-      await this.#collectOffer(offer, ba, contextInfo);
+      await this.#collectOffer(offer, ba, takerWants, takerGives, contextInfo);
     } else {
       logger.debug("Offer is not profitable to clean", {
         base: this.#market.base.name,
@@ -186,11 +237,13 @@ export class MarketCleaner {
   async #willOfferFail(
     offer: Market.Offer,
     ba: Market.BA,
+    takerWants: Big,
+    takerGives: Big,
     contextInfo?: string
   ): Promise<{ willOfferFail: boolean; bounty?: BigNumber }> {
     const raw = await this.#market.getRawSnipeParams({
       ba: ba,
-      targets: this.#createCollectParams(offer),
+      targets: this.#createCollectParams(offer, takerWants, takerGives),
       requireOffersToFail: true,
       fillWants: false,
     });
@@ -224,6 +277,8 @@ export class MarketCleaner {
   async #collectOffer(
     offer: Market.Offer,
     ba: Market.BA,
+    takerWants: Big,
+    takerGives: Big,
     contextInfo?: string
   ): Promise<void> {
     logger.debug("Cleaning offer", {
@@ -253,7 +308,7 @@ export class MarketCleaner {
     const snipePromises = await this.#market.snipe(
       {
         ba: ba,
-        targets: this.#createCollectParams(offer),
+        targets: this.#createCollectParams(offer, takerWants, takerGives),
         requireOffersToFail: true,
       },
       txOverrides
@@ -296,9 +351,18 @@ export class MarketCleaner {
       });
   }
 
-  #createCollectParams(offer: Market.Offer): Market.SnipeParams["targets"] {
+  #createCollectParams(
+    offer: Market.Offer,
+    takerWants: Big,
+    takerGives: Big
+  ): Market.SnipeParams["targets"] {
     return [
-      { offerId: offer.id, takerWants: 0, takerGives: 0, gasLimit: maxGasReq },
+      {
+        offerId: offer.id,
+        takerWants: takerWants.toFixed(),
+        takerGives: takerGives.toFixed(),
+        gasLimit: maxGasReq,
+      },
     ];
     // FIXME 2021-12-01: The below result may have been affected by wrong order of inbound/outbound tokens
     // FIXME The following are the result of different strategies per 2021-10-26:
@@ -343,9 +407,11 @@ export class MarketCleaner {
     offer: Market.Offer,
     ba: Market.BA,
     bounty: BigNumber,
-    gasPrice: BigNumber
+    gasPrice: BigNumber,
+    takerWants: Big,
+    takerGives: Big
   ): Promise<OfferCleaningEstimates> {
-    const gas = await this.#estimateGas(offer, ba);
+    const gas = await this.#estimateGas(offer, ba, takerWants, takerGives);
     const totalCost = gas.mul(gasPrice);
     const netResult = bounty.sub(totalCost);
     return {
@@ -363,10 +429,15 @@ export class MarketCleaner {
     return gasPrice;
   }
 
-  async #estimateGas(offer: Market.Offer, ba: Market.BA): Promise<BigNumber> {
+  async #estimateGas(
+    offer: Market.Offer,
+    ba: Market.BA,
+    takerWants: Big,
+    takerGives: Big
+  ): Promise<BigNumber> {
     const raw = await this.#market.getRawSnipeParams({
       ba: ba,
-      targets: this.#createCollectParams(offer),
+      targets: this.#createCollectParams(offer, takerWants, takerGives),
       requireOffersToFail: true,
     });
 
