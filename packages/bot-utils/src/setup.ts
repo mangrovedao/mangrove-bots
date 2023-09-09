@@ -191,10 +191,12 @@ export class Setup {
     });
     this.importLocalAddresses(mgv);
 
-    setInterval(
-      () => checkFreshness(this.logger, mgv),
-      CHECK_FRESHNESS_INTERVAL_MS
-    );
+    if (!shouldNotListenToNewEvents) {
+      setInterval(
+        () => checkFreshness(this.logger, mgv),
+        CHECK_FRESHNESS_INTERVAL_MS
+      );
+    }
 
     if (providerType == "http") {
       this.logger.warn(
