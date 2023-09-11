@@ -139,17 +139,15 @@ describe("MarketCleaner integration tests", () => {
   it(`asks Should clean offer with non zero takerWants and takerGives`, async function () {
     await mgvTestUtil.mint(market.quote, cleaner, 1);
 
-    const result = await (
-      await market.quote.approve(mgv.address, { amount: "1", overrides: {} })
-    ).wait();
-    await mgvTestUtil.waitForBlock(mgv, result.blockNumber);
+    await market.quote.approveIfNotInfinite(mgv.address);
 
     // Arrange
-    let txReceipt = await mgvTestUtil.postNewFailingOffer(
+    const txReceipt = await mgvTestUtil.postNewOffer({
       market,
-      "asks",
-      maker
-    );
+      ba: "asks",
+      maker,
+      shouldFail: true,
+    });
     await mgvTestUtil.waitForBlock(market.mgv, txReceipt.blockNumber!);
 
     const whitelistedSets = new Set<string>();
@@ -166,12 +164,18 @@ describe("MarketCleaner integration tests", () => {
     let book = await market.requestBook();
     whitelistedSets.add(book.asks[0].maker.toLowerCase());
 
+    const cleanerAddr = await mgv.signer.getAddress();
+    const beforeBalance = await mgv.provider.getBalance(cleanerAddr);
     // Act
     await marketCleaner.clean();
+    const afterBalance = await mgv.provider.getBalance(cleanerAddr);
 
     book = await market.requestBook();
 
     expect(book).to.have.property("asks").which.is.empty;
+    expect(afterBalance.gt(beforeBalance)).to.satisfy(
+      (val: any) => val == true
+    );
   });
 
   it(`bids Should clean offer with non zero takerWants and takerGives`, async function () {
@@ -183,11 +187,14 @@ describe("MarketCleaner integration tests", () => {
     await mgvTestUtil.waitForBlock(mgv, result.blockNumber);
 
     // Arrange
-    const txReceipt = await mgvTestUtil.postNewFailingOffer(
+    const txReceipt = await mgvTestUtil.postNewOffer({
       market,
-      "bids",
-      maker
-    );
+      ba: "bids",
+      maker,
+      shouldFail: true,
+      wants: 1,
+      gives: 100000000,
+    });
     await mgvTestUtil.waitForBlock(market.mgv, txReceipt.blockNumber!);
 
     const whitelistedSets = new Set<string>();
@@ -204,13 +211,23 @@ describe("MarketCleaner integration tests", () => {
     let book = await market.requestBook();
     whitelistedSets.add(book.bids[0].maker.toLowerCase());
 
+    const cleanerAddr = await mgv.signer.getAddress();
+
+    const beforeBalance = await mgv.provider.getBalance(cleanerAddr);
+
     // Act
     await marketCleaner.clean();
+
+    const afterBalance = await mgv.provider.getBalance(cleanerAddr);
 
     await sleep(5000);
 
     book = await market.requestBook();
 
     expect(book).to.have.property("bids").which.is.empty;
+
+    expect(afterBalance.gt(beforeBalance)).to.satisfy(
+      (val: any) => val == true
+    );
   });
 });

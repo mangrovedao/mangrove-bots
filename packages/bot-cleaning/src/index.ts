@@ -88,7 +88,7 @@ async function botFunction(
   const marketConfigs = botConfig.markets;
   const marketCleanerMap = new Map<MarketPair, MarketCleaner>();
   for (const marketConfig of marketConfigs) {
-    const [base, quote] = marketConfig;
+    const [base, quote, takerToImpersonate] = marketConfig;
     const market = await mgv.market({
       base: base,
       quote: quote,
@@ -110,7 +110,8 @@ async function botFunction(
         market,
         provider,
         latestMarketActivity,
-        new Set(whitelistedAddreses.map((addr) => addr.toLowerCase()))
+        new Set(whitelistedAddreses.map((addr) => addr.toLowerCase())),
+        takerToImpersonate
       )
     );
   }
