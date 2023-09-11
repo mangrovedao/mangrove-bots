@@ -82,9 +82,9 @@ async function botFunction(
     throw new Error("whitelistedRunEveryXMinutes is missing");
   }
 
-  const takerToImpersonate = config.get<string>("takerToImpersonate");
-  if (!takerToImpersonate) {
-    throw new Error("takerToImpersonate is missing");
+  let takerToImpersonate = config.get<string | undefined>("takerToImpersonate");
+  if (takerToImpersonate !== undefined && takerToImpersonate.length === 0) {
+    takerToImpersonate = undefined;
   }
 
   const latestMarketActivities: LatestMarketActivity[] = [];
