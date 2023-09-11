@@ -82,18 +82,13 @@ async function botFunction(
     throw new Error("whitelistedRunEveryXMinutes is missing");
   }
 
-  let takerToImpersonate = config.get<string | undefined>("takerToImpersonate");
-  if (takerToImpersonate !== undefined && takerToImpersonate.length === 0) {
-    takerToImpersonate = undefined;
-  }
-
   const latestMarketActivities: LatestMarketActivity[] = [];
   setup.latestActivity.markets = latestMarketActivities;
 
   const marketConfigs = botConfig.markets;
   const marketCleanerMap = new Map<MarketPair, MarketCleaner>();
   for (const marketConfig of marketConfigs) {
-    const [base, quote] = marketConfig;
+    const [base, quote, takerToImpersonate] = marketConfig;
     const market = await mgv.market({
       base: base,
       quote: quote,
