@@ -4,7 +4,6 @@
  * @module
  */
 
-import { BaseProvider } from "@ethersproject/providers";
 import { Wallet } from "@ethersproject/wallet";
 import {
   ConfigUtils,
@@ -29,7 +28,8 @@ const configUtil = new ConfigUtils(config);
 function createAsyncMarketCleaner(
   mgv: Mangrove,
   marketCleanerMap: Map<MarketPair, MarketCleaner>,
-  scheduler: ToadScheduler
+  scheduler: ToadScheduler,
+  whitelistedCleanOnly: boolean
 ) {
   return new AsyncTask(
     "cleaning bot task",
@@ -45,7 +45,9 @@ function createAsyncMarketCleaner(
 
       const cleaningPromises = [];
       for (const marketCleaner of marketCleanerMap.values()) {
-        cleaningPromises.push(marketCleaner.clean(contextInfo));
+        cleaningPromises.push(
+          marketCleaner.clean(whitelistedCleanOnly, contextInfo)
+        );
       }
       await Promise.allSettled(cleaningPromises);
     },
@@ -58,6 +60,21 @@ function createAsyncMarketCleaner(
 
 async function botFunction(mgv: Mangrove, signer?: Wallet) {
   const botConfig = configUtil.getAndValidateConfig();
+
+  /* bot specific config */
+  const whitelistedAddreses = config.get<string[]>(
+    "addressesWithDustCleaningWhitelist"
+  );
+  if (!whitelistedAddreses) {
+    throw new Error("No whitelistedAddreses list");
+  }
+
+  const whitelistedRunEveryXMinutes = config.get<number>(
+    "whitelistedRunEveryXMinutes"
+  );
+  if (!whitelistedRunEveryXMinutes) {
+    throw new Error("whitelistedRunEveryXMinutes is missing");
+  }
 
   const latestMarketActivities: LatestMarketActivity[] = [];
   setup.latestActivity.markets = latestMarketActivities;
@@ -83,7 +100,12 @@ async function botFunction(mgv: Mangrove, signer?: Wallet) {
 
     marketCleanerMap.set(
       { base: market.base.name, quote: market.quote.name },
-      new MarketCleaner(market, mgv.provider, latestMarketActivity)
+      new MarketCleaner(
+        market,
+        mgv.provider,
+        latestMarketActivity,
+        new Set(whitelistedAddreses.map((addr) => addr.toLowerCase()))
+      )
     );
   }
 
@@ -92,7 +114,18 @@ async function botFunction(mgv: Mangrove, signer?: Wallet) {
     data: { runEveryXMinutes: botConfig.runEveryXMinutes },
   });
 
-  const task = createAsyncMarketCleaner(mgv, marketCleanerMap, scheduler);
+  const task = createAsyncMarketCleaner(
+    mgv,
+    marketCleanerMap,
+    scheduler,
+    false
+  );
+  const whiteListedTask = createAsyncMarketCleaner(
+    mgv,
+    marketCleanerMap,
+    scheduler,
+    true
+  );
 
   const job = new SimpleIntervalJob(
     {
@@ -102,7 +135,16 @@ async function botFunction(mgv: Mangrove, signer?: Wallet) {
     task
   );
 
+  const whitelistedJob = new SimpleIntervalJob(
+    {
+      minutes: whitelistedRunEveryXMinutes,
+      runImmediately: false,
+    },
+    whiteListedTask
+  );
+
   scheduler.addSimpleIntervalJob(job);
+  scheduler.addSimpleIntervalJob(whitelistedJob);
 }
 
 const main = async () => {

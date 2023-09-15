@@ -45,7 +45,7 @@ jobs:
       working-directory: . # Yarn must run in root to ensure monorepo setup
 
     - name: Foundry Setup
-      uses: ./.github/actions/foundry-setup
+      uses: mangrovedao/.github/.github/actions/foundry-setup@master
 
     - name: Build
       id: build
@@ -88,7 +88,7 @@ jobs:
       working-directory: . # Yarn must run in root to ensure monorepo setup
 
     - name: Foundry Setup
-      uses: ./.github/actions/foundry-setup
+      uses: mangrovedao/.github/.github/actions/foundry-setup@master
 
     - name: Build
       id: build
@@ -132,7 +132,7 @@ jobs:
       working-directory: . # Yarn must run in root to ensure monorepo setup
 
     - name: Foundry Setup
-      uses: ./.github/actions/foundry-setup
+      uses: mangrovedao/.github/.github/actions/foundry-setup@master
 
     - name: Build
       id: build
@@ -179,7 +179,7 @@ jobs:
       working-directory: . # Yarn must run in root to ensure monorepo setup
 
     - name: Foundry Setup
-      uses: ./.github/actions/foundry-setup
+      uses: mangrovedao/.github/.github/actions/foundry-setup@master
       
     - name: Build
       id: build
@@ -226,7 +226,7 @@ jobs:
       working-directory: . # Yarn must run in root to ensure monorepo setup
 
     - name: Foundry Setup
-      uses: ./.github/actions/foundry-setup
+      uses: mangrovedao/.github/.github/actions/foundry-setup@master
         
     - name: Build
       id: build
@@ -269,7 +269,7 @@ jobs:
       working-directory: . # Yarn must run in root to ensure monorepo setup
 
     - name: Foundry Setup
-      uses: ./.github/actions/foundry-setup
+      uses: mangrovedao/.github/.github/actions/foundry-setup@master
       
     - name: Build
       id: build
@@ -352,7 +352,7 @@ jobs:
       working-directory: . # Yarn must run in root to ensure monorepo setup
 
     - name: Foundry Setup
-      uses: ./.github/actions/foundry-setup
+      uses: mangrovedao/.github/.github/actions/foundry-setup@master
 
     - name: Build
       run: yarn run build-this-package
@@ -422,7 +422,7 @@ jobs:
       working-directory: . # Yarn must run in root to ensure monorepo setup
 
     - name: Foundry Setup
-      uses: ./.github/actions/foundry-setup
+      uses: mangrovedao/.github/.github/actions/foundry-setup@master
       
     - name: Build
       id: build

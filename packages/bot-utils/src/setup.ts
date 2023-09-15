@@ -11,7 +11,6 @@ import {
   WebSocketProvider,
 } from "@ethersproject/providers";
 import { getDefaultProvider } from "ethers";
-import { BaseProvider } from "@ethersproject/providers";
 import { Wallet } from "@ethersproject/wallet";
 import { NonceManager } from "@ethersproject/experimental";
 import { ConfigUtils } from "./util/configUtils";
@@ -144,7 +143,8 @@ export class Setup {
     botFunction: (mgv: Mangrove, signer?: Wallet) => Promise<void>,
     scheduler?: ToadScheduler,
     isHttpBased: boolean = false,
-    needPkey: boolean = true
+    needPkey: boolean = true,
+    shouldNotListenToNewEvents: boolean = false
   ) {
     this.logger.info(`Starting ${name}...`, { contextInfo: "init" });
 
@@ -182,11 +182,6 @@ export class Setup {
     let mgv: Mangrove;
     const providerType = this.configUtils.getProviderType();
 
-    setInterval(
-      () => checkFreshness(this.logger, mgv),
-      CHECK_FRESHNESS_INTERVAL_MS
-    );
-
     if (providerType == "http") {
       this.logger.warn(
         `Using HTTP provider, this is not recommended for production`
@@ -198,13 +193,24 @@ export class Setup {
       mgv = await Mangrove.connect({
         signer: nonceManager,
         providerWsUrl: providerType == "http" ? undefined : providerWsUrl,
+        shouldNotListenToNewEvents,
       });
       this.importLocalAddresses(mgv);
       await botFunction(mgv, signer);
     } else {
-      mgv = await Mangrove.connect(providerHttpUrl);
+      mgv = await Mangrove.connect({
+        provider: providerHttpUrl,
+        shouldNotListenToNewEvents,
+      });
       this.importLocalAddresses(mgv);
       await botFunction(mgv, undefined);
+    }
+
+    if (!shouldNotListenToNewEvents) {
+      setInterval(
+        () => checkFreshness(this.logger, mgv),
+        CHECK_FRESHNESS_INTERVAL_MS
+      );
     }
 
     await this.exitIfMangroveIsKilled(mgv, "init", scheduler);

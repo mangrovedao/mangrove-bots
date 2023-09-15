@@ -125,7 +125,14 @@ const botFunction = async (mgv: Mangrove) => {
 };
 
 const main = async () => {
-  await setup.startBot("analytics bot", botFunction, scheduler, true, false);
+  await setup.startBot(
+    "analytics bot",
+    botFunction,
+    scheduler,
+    true,
+    false,
+    true
+  );
 };
 
 main().catch(async (e) => {
