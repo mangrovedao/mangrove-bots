@@ -5,6 +5,27 @@ import { fetchJson } from "ethers/lib/utils";
 import random from "random";
 import { Network, Alchemy } from "alchemy-sdk";
 
+type PriceApiResponse = {
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume: number;
+  date: string;
+};
+
+/* A lot of CEX does not have pair with USDC, we can convert to usd as the ratio is almost 1:1
+ * It's not critical in this application as if USDC depeg, we will over estimate the actual gas
+ * cost of an arbitrage, and that's ok.
+ **/
+export const converter = (token: string) => {
+  if (token.toUpperCase() === "USDC") {
+    return "USD";
+  }
+
+  return token.toUpperCase();
+};
+
 export class PriceUtils {
   logger?: CommonLogger;
   constructor(_logger?: CommonLogger) {
@@ -21,6 +42,13 @@ export class PriceUtils {
     return price.gt(0) ? price : referencePrice;
   }
 
+  async priceFromJson(json: any, outToken: string) {
+    if (json[outToken] !== undefined) {
+      const referencePrice = new Big(json[outToken]);
+      return referencePrice;
+    }
+  }
+
   public getExternalPriceFromInAndOut(
     inToken: string,
     outToken: string
@@ -29,20 +57,26 @@ export class PriceUtils {
     getJson: () => Promise<any>;
     price: () => Promise<Big | undefined>;
   } {
-    const cryptoCompareUrl = `https://min-api.cryptocompare.com/data/price?fsym=${inToken}&tsyms=${outToken}`;
-    return {
-      apiUrl: cryptoCompareUrl,
-      getJson: () => fetchJson(cryptoCompareUrl),
-      price: async () =>
-        this.priceFromJson(await fetchJson(cryptoCompareUrl), outToken),
-    };
-  }
+    const priceApiUrl = `https://prod-price-api-32327e5e7126.herokuapp.com/prices/${converter(
+      inToken
+    )}/${converter(outToken)}/1m`;
 
-  async priceFromJson(json: any, outToken: string) {
-    if (json[outToken] !== undefined) {
-      const referencePrice = new Big(json[outToken]);
-      return referencePrice;
-    }
+    return {
+      apiUrl: priceApiUrl,
+      getJson: () => fetchJson(priceApiUrl),
+      price: async () => {
+        try {
+          const price = (await fetchJson(priceApiUrl)) as PriceApiResponse;
+          return new Big(price.close);
+        } catch (e) {
+          const cryptoCompareUrl = `https://min-api.cryptocompare.com/data/price?fsym=${inToken}&tsyms=${outToken}`;
+          return this.priceFromJson(
+            await fetchJson(cryptoCompareUrl),
+            outToken
+          );
+        }
+      },
+    };
   }
 
   public async getExternalPrice(market: Market, ba: Market.BA) {
