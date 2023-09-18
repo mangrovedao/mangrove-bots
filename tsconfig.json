@@ -26,6 +26,9 @@
         "path": "./packages/bot-failing-offer",
       },
       {
+        "path": "./packages/bot-analytics",
+      },
+      {
         "path": "./packages/bot-arbitrage",
       }
     ]
