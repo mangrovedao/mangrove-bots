@@ -3,7 +3,7 @@
   "runEveryXHours": 12,
   "databaseUrl": "postgresql://postgres:postgres@localhost:5432/postgres?schema=mangrove",
   "startingBlock": 43091275,
-  "estimatedBlockTimeMs": 2000,
   "blockFinality": 200,
-  "chains": "[{\"chainId\":137,\"name\":\"matic\"},{\"chainId\":80001,\"name\":\"maticmum\"}]"
+  "chains": "[{\"chainId\":137,\"name\":\"matic\"},{\"chainId\":80001,\"name\":\"maticmum\"}]",
+  "everyXBlock": 43200
 }

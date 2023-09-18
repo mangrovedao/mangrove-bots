@@ -37,9 +37,9 @@ const prisma = new PrismaClient();
 
 const botFunction = async (mgv: Mangrove) => {
   const startingBlockNumber = config.get<number>("startingBlock");
-  const estimatedBlockTimeMs = config.get<number>("estimatedBlockTimeMs");
   const blockFinality = config.get<number>("blockFinality");
   const runEveryXHours = config.get<number>("runEveryXHours");
+  const everyXBlock = config.get<number>("everyXBlock");
 
   const chains = JSON.parse(config.get<string>("chains")) as Chain[];
 
@@ -65,7 +65,7 @@ const botFunction = async (mgv: Mangrove) => {
       provider
     ),
     subgraphMaxFirstValue,
-    everyXBlock: estimateBlockCount(secondsInADay, estimatedBlockTimeMs),
+    everyXBlock: everyXBlock,
     exchange,
     seenTokens: new Set(),
   };
@@ -95,7 +95,7 @@ const botFunction = async (mgv: Mangrove) => {
     data: {
       network,
       startingBlock: blockHeaderToBlockWithoutId(startingBlock),
-      estimatedBlockTimeMs,
+      everyXBlock,
       latestBlock: blockHeaderToBlockWithoutId(latestBlock),
       blockFinality,
       runEveryXHours,

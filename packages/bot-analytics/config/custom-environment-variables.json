@@ -9,10 +9,6 @@
     "__name": "STARTING_BLOCK",
     "__format": "number"
   },
-  "estimatedBlockTimeMs": {
-    "__name": "ESTIMATED_BLOCK_TIME_MS",
-    "__format": "number"
-  },
   "rpcHttpProvider": "RPC_HTTP_PROVIDER",
   "blockFinality": {
     "__name": "BLOCK_FINALITY",
@@ -21,5 +17,9 @@
   "chains": {
     "__name": "CHAINS",
     "__format": "JSON"
+  },
+  "everyXBlock": {
+    "__name": "EVERY_X_BLOCK",
+    "__format": "number"
   }
 }
