@@ -15,7 +15,7 @@ import { ExitCode, Setup } from "@mangrovedao/bot-utils";
 import { PrismaClient } from "@prisma/client";
 import { inititalizeChains } from "./db/init";
 import { subgraphMaxFirstValue } from "./constants";
-import { createBlockIfNotExist } from "./db/block";
+import { createBlockIfNotExist, getLastStoredBlock } from "./db/block";
 import { Chain, ChainContext, PriceMocks } from "./types";
 import {
   generateCreateTokenIfNotExist,
@@ -50,7 +50,33 @@ const botFunction = async (mgv: Mangrove) => {
   const provider = mgv.provider;
   const network = await provider.getNetwork();
 
-  const startingBlock = await provider.getBlock(startingBlockNumber);
+  const exchange = new binance();
+
+  const context: ChainContext = {
+    chainId: network.chainId,
+    name: network.name,
+    getBlock: async (number: string | number) => {
+      return provider.getBlock(number);
+    },
+    blockFinality,
+    multicall2: typechain.Multicall2__factory.connect(
+      Mangrove.getAddress("Multicall2", network.name),
+      provider
+    ),
+    subgraphMaxFirstValue,
+    everyXBlock: everyXBlock,
+    exchange,
+    seenTokens: new Set(),
+    priceMocks,
+  };
+
+  const lastBlock = (await getLastStoredBlock(prisma, context))!;
+
+  const startingBlock =
+    lastBlock === undefined
+      ? await provider.getBlock(startingBlockNumber)
+      : await provider.getBlock(lastBlock.number);
+
   const latestBlock = await provider.getBlock("latest");
 
   const lastSafeBlock = await provider.getBlock(
@@ -73,26 +99,6 @@ const botFunction = async (mgv: Mangrove) => {
   const shouldRunUntilBlock = await provider.getBlock(
     shoundRunUntilBlockNumber
   );
-
-  const exchange = new binance();
-
-  const context: ChainContext = {
-    chainId: network.chainId,
-    name: network.name,
-    getBlock: async (number: string | number) => {
-      return provider.getBlock(number);
-    },
-    blockFinality,
-    multicall2: typechain.Multicall2__factory.connect(
-      Mangrove.getAddress("Multicall2", network.name),
-      provider
-    ),
-    subgraphMaxFirstValue,
-    everyXBlock: everyXBlock,
-    exchange,
-    seenTokens: new Set(),
-    priceMocks,
-  };
 
   await loadTokens(context, prisma);
 
