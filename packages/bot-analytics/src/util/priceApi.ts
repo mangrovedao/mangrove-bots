@@ -29,10 +29,24 @@ export const getPrice = moize(
   }
 );
 
+const unwrapToken = (symbol: string) => {
+  switch (symbol) {
+    case "WETH":
+      return "ETH";
+    case "WMATIC":
+      return "MATIC";
+    case "WBTC":
+      return "BTC";
+  }
+  return symbol;
+};
+
 export const generateGetPairTokenToUSD = async (exchange: binance) => {
   const pairs = await exchange.loadMarkets();
   const fn = (symbol: string): Market | undefined => {
     symbol = symbol.toUpperCase();
+    symbol = unwrapToken(symbol);
+
     let pair = pairs[`${symbol}/USD`];
     if (!pair) {
       pair = pairs[`USD/${symbol}`];
