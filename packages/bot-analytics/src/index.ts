@@ -73,7 +73,7 @@ const botFunction = async (mgv: Mangrove) => {
   const lastBlock = (await getLastStoredBlock(prisma, context))!;
 
   const startingBlock =
-    lastBlock === undefined
+    lastBlock === null
       ? await provider.getBlock(startingBlockNumber)
       : await provider.getBlock(lastBlock.number);
 
