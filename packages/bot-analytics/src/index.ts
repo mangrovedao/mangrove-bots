@@ -2,7 +2,8 @@
  * A simple configurable gas price update bot for the Mangrove DEX.
  * @module
  */
-
+import dotenvFlow from "dotenv-flow";
+dotenvFlow.config();
 import config from "./util/config";
 import { logger } from "./util/logger";
 
@@ -13,7 +14,7 @@ import { ExitCode, Setup } from "@mangrovedao/bot-utils";
 
 import { PrismaClient } from "@prisma/client";
 import { inititalizeChains } from "./db/init";
-import { secondsInADay, subgraphMaxFirstValue } from "./constants";
+import { subgraphMaxFirstValue } from "./constants";
 import { createBlockIfNotExist } from "./db/block";
 import { Chain, ChainContext } from "./types";
 import {
@@ -23,7 +24,7 @@ import {
 } from "./db/token";
 import { generateGetAndSaveVolumeTimeSerie } from "./volume";
 import { getBuiltGraphSDK } from "../.graphclient";
-import { estimateBlockCount, generateBlockHeaderToDbBlock } from "./util/util";
+import { generateBlockHeaderToDbBlock } from "./util/util";
 import { handleRange } from "./analytics";
 import { generateGetAndSaveLiquidityTimeSerie } from "./liquidity";
 import { binance } from "ccxt";
