@@ -16,7 +16,7 @@
   },
   "chains": {
     "__name": "CHAINS",
-    "__format": "JSON"
+    "__format": "json"
   },
   "everyXBlock": {
     "__name": "EVERY_X_BLOCK",

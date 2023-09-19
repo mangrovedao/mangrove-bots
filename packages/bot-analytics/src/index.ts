@@ -42,7 +42,7 @@ const botFunction = async (mgv: Mangrove) => {
   const runEveryXHours = config.get<number>("runEveryXHours");
   const everyXBlock = config.get<number>("everyXBlock");
 
-  const chains = JSON.parse(config.get<string>("chains")) as Chain[];
+  const chains = config.get<Chain[]>("chains");
 
   await inititalizeChains(prisma, chains);
 
