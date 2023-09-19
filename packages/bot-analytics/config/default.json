@@ -8,5 +8,6 @@
     { "chainId": 137, "name": "matic" },
     { "chainId": 80001, "name": "maticmum" }
   ],
-  "everyXBlock": 43200
+  "everyXBlock": 43200,
+  "pricesMocks": { "PxUSDC": [0, 0, 0, 0, 0, 0] }
 }

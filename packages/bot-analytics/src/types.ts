@@ -3,7 +3,7 @@ import { Block, Token } from "@prisma/client";
 import { Account, AccountVolumeByPair, Market, Offer } from "../.graphclient";
 import { PrismaTx } from "./db/types";
 import { Block as BlockHeader } from "@ethersproject/providers";
-import { binance } from "ccxt";
+import { binance, OHLCV } from "ccxt";
 
 export type GetParamsPagination = {
   first: number;
@@ -25,6 +25,8 @@ export type Chain = {
 
 export type Task = (params: GetParamsPagination) => Promise<number>;
 
+export type PriceMocks = Record<string, OHLCV>;
+
 export type ChainContext = Chain & {
   blockFinality: number;
   multicall2: typechain.Multicall2;
@@ -33,6 +35,7 @@ export type ChainContext = Chain & {
   everyXBlock: number;
   exchange: binance;
   seenTokens: Set<Token>;
+  priceMocks: PriceMocks;
 };
 
 export type GetVolumesResult = Pick<

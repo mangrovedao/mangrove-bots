@@ -21,5 +21,9 @@
   "everyXBlock": {
     "__name": "EVERY_X_BLOCK",
     "__format": "number"
+  },
+  "priceMocks": {
+    "__name": "PRICE_MOCKS",
+    "__format": "json"
   }
 }

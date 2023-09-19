@@ -16,7 +16,7 @@ import { PrismaClient } from "@prisma/client";
 import { inititalizeChains } from "./db/init";
 import { subgraphMaxFirstValue } from "./constants";
 import { createBlockIfNotExist } from "./db/block";
-import { Chain, ChainContext } from "./types";
+import { Chain, ChainContext, PriceMocks } from "./types";
 import {
   generateCreateTokenIfNotExist,
   generateGetTokensPrices,
@@ -41,6 +41,7 @@ const botFunction = async (mgv: Mangrove) => {
   const blockFinality = config.get<number>("blockFinality");
   const runEveryXHours = config.get<number>("runEveryXHours");
   const everyXBlock = config.get<number>("everyXBlock");
+  const priceMocks = config.get<PriceMocks>("priceMocks");
 
   const chains = config.get<Chain[]>("chains");
 
@@ -66,7 +67,8 @@ const botFunction = async (mgv: Mangrove) => {
   }
 
   const maxAllowedRange = Math.floor(blockDifference / everyXBlock);
-  const shoundRunUntilBlockNumber = maxAllowedRange * everyXBlock;
+  const shoundRunUntilBlockNumber =
+    startingBlock.number + maxAllowedRange * everyXBlock;
 
   const shouldRunUntilBlock = await provider.getBlock(
     shoundRunUntilBlockNumber
@@ -89,6 +91,7 @@ const botFunction = async (mgv: Mangrove) => {
     everyXBlock: everyXBlock,
     exchange,
     seenTokens: new Set(),
+    priceMocks,
   };
 
   await loadTokens(context, prisma);

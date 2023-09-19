@@ -4,6 +4,7 @@ import { getPrice, generateGetPairTokenToUSD } from "../util/priceApi";
 import { ChainContext } from "../types";
 import { PrismaTx } from "./types";
 import moize from "moize";
+import logger from "../util/logger";
 
 export const generateCreateTokenIfNotExist = (context: ChainContext) => {
   const ierc20 = typechain.IERC20__factory.createInterface();
@@ -71,6 +72,25 @@ export const generateGetTokensPrices = async (context: ChainContext) => {
       Array.from(context.seenTokens.values()).map(async (token) => {
         const pair = getPairTokenToUSD(token.symbol);
         if (!pair) {
+          if (context.priceMocks[token.symbol]) {
+            logger.info(`Using mocked price for token ${token.symbol}`);
+            const [timestamp, open, high, low, close, volume] =
+              context.priceMocks[token.symbol];
+            return {
+              token,
+              price: {
+                open,
+                high,
+                low,
+                close,
+                volume,
+              },
+            };
+          }
+
+          logger.warn(
+            `Missing price for token ${token.symbol}, setting price to zero`
+          );
           return {
             token,
             price: {
