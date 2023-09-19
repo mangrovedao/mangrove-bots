@@ -2,7 +2,7 @@ sources:
   - name: Mangrove
     handler:
       graphql:
-        endpoint: https://mangrove-api-proxy-466fefe29e0a.herokuapp.com/mangrove-subgraph/v0.0.6-analytics-4/{context.chainName:matic}
+        endpoint: https://mangrove-api-proxy-466fefe29e0a.herokuapp.com/mangrove-subgraph/v0.0.8-analytics/{context.chainName:matic}
     transforms:
       - autoPagination:
         validateSchema: true
