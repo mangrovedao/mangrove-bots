@@ -117,12 +117,18 @@ const botFunction = async (mgv: Mangrove) => {
 
   const getTokensPrice = await generateGetTokensPrices(context);
 
-  await handleRange(
-    context,
-    prisma,
-    [getAndSaveLiquidity, getAndSaveVolumeTimeSeries, getTokensPrice],
-    blockHeaderToBlockWithoutId(lastSafeBlock)
-  );
+  try {
+    await handleRange(
+      context,
+      prisma,
+      [getAndSaveLiquidity, getAndSaveVolumeTimeSeries, getTokensPrice],
+      blockHeaderToBlockWithoutId(lastSafeBlock)
+    );
+  } catch (e) {
+    logger.error(`handleRange failed`, {
+      data: e,
+    });
+  }
 };
 
 const main = async () => {
