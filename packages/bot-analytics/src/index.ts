@@ -144,6 +144,7 @@ const botFunction = async (mgv: Mangrove) => {
       [getAndSaveLiquidity, getAndSaveVolumeTimeSeries, getTokensPrice],
       blockHeaderToBlockWithoutId(shouldRunUntilBlock)
     );
+    logger.info("handleRange succesfully finnished");
   } catch (e) {
     logger.error(`handleRange failed`, {
       data: e,
