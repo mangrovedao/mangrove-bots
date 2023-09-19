@@ -52,6 +52,26 @@ const botFunction = async (mgv: Mangrove) => {
   const startingBlock = await provider.getBlock(startingBlockNumber);
   const latestBlock = await provider.getBlock("latest");
 
+  const lastSafeBlock = await provider.getBlock(
+    latestBlock.number - blockFinality
+  );
+
+  const blockDifference = lastSafeBlock.number - startingBlock.number;
+
+  if (blockDifference < everyXBlock) {
+    logger.info(
+      `Do not run as blockDifference (${blockDifference}) < everyXBlock (${everyXBlock})`
+    );
+    return;
+  }
+
+  const maxAllowedRange = Math.floor(blockDifference / everyXBlock);
+  const shoundRunUntilBlockNumber = maxAllowedRange * everyXBlock;
+
+  const shouldRunUntilBlock = await provider.getBlock(
+    shoundRunUntilBlockNumber
+  );
+
   const exchange = new binance();
 
   const context: ChainContext = {
@@ -88,16 +108,13 @@ const botFunction = async (mgv: Mangrove) => {
 
   const createTokenIfNotExist = generateCreateTokenIfNotExist(context);
 
-  const lastSafeBlock = await context.getBlock(
-    latestBlock.number - context.blockFinality
-  );
-
   logger.info(`Starting with params`, {
     data: {
       network,
       startingBlock: blockHeaderToBlockWithoutId(startingBlock),
       everyXBlock,
       latestBlock: blockHeaderToBlockWithoutId(latestBlock),
+      shouldRunUntilBlock: blockHeaderToBlockWithoutId(shouldRunUntilBlock),
       blockFinality,
       runEveryXHours,
     },
@@ -122,7 +139,7 @@ const botFunction = async (mgv: Mangrove) => {
       context,
       prisma,
       [getAndSaveLiquidity, getAndSaveVolumeTimeSeries, getTokensPrice],
-      blockHeaderToBlockWithoutId(lastSafeBlock)
+      blockHeaderToBlockWithoutId(shouldRunUntilBlock)
     );
   } catch (e) {
     logger.error(`handleRange failed`, {
