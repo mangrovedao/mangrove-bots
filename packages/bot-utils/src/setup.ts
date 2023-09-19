@@ -138,6 +138,22 @@ export class Setup {
     this.server?.close();
   }
 
+  private async connectToMgvAndStartWebServer(
+    scheduler: ToadScheduler,
+    mgv: Mangrove
+  ) {
+    await this.exitIfMangroveIsKilled(mgv, "init", scheduler);
+    this.logger.info("Connected to Mangrove", {
+      contextInfo: "init",
+      data: {
+        network: mgv.network,
+        addresses: Mangrove.getAllAddresses(mgv.network.name),
+      },
+    });
+
+    this.server = this.createServer(mgv);
+  }
+
   public async startBot(
     name: string,
     botFunction: (mgv: Mangrove, signer?: Wallet) => Promise<void>,
@@ -196,6 +212,7 @@ export class Setup {
         shouldNotListenToNewEvents,
       });
       this.importLocalAddresses(mgv);
+      await this.connectToMgvAndStartWebServer(scheduler!, mgv);
       await botFunction(mgv, signer);
     } else {
       mgv = await Mangrove.connect({
@@ -203,6 +220,7 @@ export class Setup {
         shouldNotListenToNewEvents,
       });
       this.importLocalAddresses(mgv);
+      await this.connectToMgvAndStartWebServer(scheduler!, mgv);
       await botFunction(mgv, undefined);
     }
 
@@ -212,17 +230,6 @@ export class Setup {
         CHECK_FRESHNESS_INTERVAL_MS
       );
     }
-
-    await this.exitIfMangroveIsKilled(mgv, "init", scheduler);
-    this.logger.info("Connected to Mangrove", {
-      contextInfo: "init",
-      data: {
-        network: mgv.network,
-        addresses: Mangrove.getAllAddresses(mgv.network.name),
-      },
-    });
-
-    this.server = this.createServer(mgv);
   }
 
   importLocalAddresses(mgv: Mangrove) {
