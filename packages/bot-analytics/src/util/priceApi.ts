@@ -12,7 +12,9 @@ export const getPrice = moize(
       1
     );
     if (!klines || klines.length === 0) {
-      throw new Error(`Missing price ${pair} ${since}`);
+      throw new Error(
+        `Missing price ${pair} ${since} with timeframe ${timeframe}`
+      );
     }
 
     const [timestamp, open, high, low, close, volume] = klines[0];
