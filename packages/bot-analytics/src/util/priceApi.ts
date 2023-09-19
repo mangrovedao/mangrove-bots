@@ -1,5 +1,5 @@
 import { binance, Market } from "ccxt";
-import { logger } from "ethers";
+import logger from "../util/logger";
 import moize from "moize";
 
 export const getPrice = moize(

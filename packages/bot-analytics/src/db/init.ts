@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { logger } from "ethers";
+import logger from "../util/logger";
 import { Chain } from "../types";
 
 export const inititalizeChains = async (

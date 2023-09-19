@@ -1,5 +1,5 @@
 import { Block, PrismaClient } from "@prisma/client";
-import { logger } from "ethers";
+import logger from "./util/logger";
 import { createBlockIfNotExist, getLastStoredBlock } from "./db/block";
 import {
   ChainContext,
