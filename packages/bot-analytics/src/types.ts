@@ -49,7 +49,7 @@ export type GetVolumesResult = Pick<
   | "token1Sent"
   | "token1Received"
   | "asMaker"
-> & { account: Pick<Account, "id" | "address"> };
+> & { account: Pick<Account, "address" | "creationDate"> };
 
 export type GetVolumeResults = {
   accountVolumeByPairs: GetVolumesResult[];

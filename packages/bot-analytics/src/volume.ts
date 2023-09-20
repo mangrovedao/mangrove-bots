@@ -87,7 +87,7 @@ export const generateGetAndSaveVolumeTimeSerie =
         const account = await getOrCreateAccount(
           prisma,
           vol.account.address,
-          to.timestamp
+          new Date(vol.account.creationDate * 1000)
         );
 
         const token0 = await getOrCreateTokenFn(

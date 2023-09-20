@@ -15,8 +15,8 @@ query getVolumes(
     id
 
     account {
-      id
       address
+      creationDate
     }
     updatedDate
 

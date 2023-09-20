@@ -7,6 +7,7 @@ query getOpenOffers($first: Int, $skip: Int, $currentBlockNumber: Int) {
 
     maker {
       address
+      creationDate
     }
 
     market {
@@ -16,6 +17,7 @@ query getOpenOffers($first: Int, $skip: Int, $currentBlockNumber: Int) {
 
     owner {
       address
+      creationDate
     }
   }
 }

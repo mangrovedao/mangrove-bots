@@ -31,7 +31,7 @@ export const generateGetAndSaveLiquidityTimeSerie =
         const account = await getOrCreateAccount(
           prisma,
           owner.address,
-          to.timestamp
+          new Date(owner.creationDate * 1000)
         );
 
         const token0 = await getOrCreateTokenFn(
