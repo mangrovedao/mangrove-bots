@@ -141,7 +141,6 @@ export const generateGetAndSaveVolumeTimeSerie =
         );
       }
 
-      console.log(accountsActivities);
       await prisma.accountActivity.createMany({
         data: accountsActivities,
       });
