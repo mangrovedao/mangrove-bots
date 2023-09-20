@@ -18,6 +18,7 @@ import { handleRange } from "../../src/analytics";
 import { generateBlockHeaderToDbBlock } from "../../src/util/util";
 import { Sdk } from "../../.graphclient";
 import { binance } from "ccxt";
+import { transformVolumeWithDecimalsToString } from "../helpers/utils";
 
 describe("Volume tracking", () => {
   let prisma: PrismaClient | undefined;
@@ -60,27 +61,30 @@ describe("Volume tracking", () => {
     everyXBlock: 1,
     exchange: new binance(),
     seenTokens: new Set(),
+    priceMocks: {},
   };
 
   const blockHeaderToDbBlock = generateBlockHeaderToDbBlock(context);
 
-  const account0: Account = {
+  const nowAsDate = new Date();
+  const now = nowAsDate.getTime() / 1000;
+
+  const account0 = {
     address: "account0",
+    createdAt: now,
   };
 
-  const account1: Account = {
+  const account1 = {
     address: "account1",
+    createdAt: now,
   };
 
-  const account3: Account = {
-    address: "account3",
-  };
-
-  const token0: TokenWithoutId = {
+  const token0 = {
     address: "token0",
     symbol: "tkn0",
     decimals: 18,
     chainId,
+    createdAt: nowAsDate,
   };
 
   const token1: TokenWithoutId = {
@@ -88,6 +92,7 @@ describe("Volume tracking", () => {
     symbol: "tkn1",
     decimals: 18,
     chainId,
+    createdAt: nowAsDate,
   };
 
   const tokens = {
@@ -160,8 +165,8 @@ describe("Volume tracking", () => {
         id: `${account0.address}-${token0.address}-${token1.address}-maker`,
         updatedDate: Date.now(),
         account: {
-          id: account0.address,
           address: account0.address,
+          creationDate: now,
         },
         token0: token0.address,
         token1: token1.address,
@@ -175,8 +180,8 @@ describe("Volume tracking", () => {
         id: `${account0.address}-${token0.address}-${token1.address}-taker`,
         updatedDate: Date.now(),
         account: {
-          id: account0.address,
           address: account0.address,
+          creationDate: now,
         },
         token0: token0.address,
         token1: token1.address,
@@ -190,8 +195,8 @@ describe("Volume tracking", () => {
         id: `${account1.address}-${token0.address}-${token1.address}-maker`,
         updatedDate: Date.now(),
         account: {
-          id: account1.address,
           address: account1.address,
+          creationDate: now,
         },
         token0: token0.address,
         token1: token1.address,
@@ -205,8 +210,8 @@ describe("Volume tracking", () => {
         id: `${account1.address}-${token0.address}-${token1.address}-taker`,
         updatedDate: Date.now(),
         account: {
-          id: account1.address,
           address: account1.address,
+          creationDate: now,
         },
         token0: token0.address,
         token1: token1.address,
@@ -223,8 +228,8 @@ describe("Volume tracking", () => {
         id: `${account0.address}-${token0.address}-${token1.address}-maker`,
         updatedDate: Date.now(),
         account: {
-          id: account0.address,
           address: account0.address,
+          creationDate: now,
         },
         token0: token0.address,
         token1: token1.address,
@@ -238,8 +243,8 @@ describe("Volume tracking", () => {
         id: `${account0.address}-${token0.address}-${token1.address}-taker`,
         updatedDate: Date.now(),
         account: {
-          id: account0.address,
           address: account0.address,
+          creationDate: now,
         },
         token0: token0.address,
         token1: token1.address,
@@ -253,8 +258,8 @@ describe("Volume tracking", () => {
         id: `${account1.address}-${token0.address}-${token1.address}-maker`,
         updatedDate: Date.now(),
         account: {
-          id: account1.address,
           address: account1.address,
+          creationDate: now,
         },
         token0: token0.address,
         token1: token1.address,
@@ -268,8 +273,8 @@ describe("Volume tracking", () => {
         id: `${account1.address}-${token0.address}-${token1.address}-taker`,
         updatedDate: Date.now(),
         account: {
-          id: account1.address,
           address: account1.address,
+          creationDate: now,
         },
         token0: token0.address,
         token1: token1.address,
@@ -303,101 +308,113 @@ describe("Volume tracking", () => {
     const accountAcitivityAccount0Maker2 =
       await getLatestActivityWithAddressAndType(account0.address, true);
 
-    assert.deepEqual(accountAcitivityAccount0Maker2, {
-      fromBlockChainId: chainId,
-      fromBlockNumber: 2,
-      toBlockChainId: chainId,
-      toBlockNumber: 3,
-      token0ChainId: chainId,
-      token0Address: token0.address,
-      token1ChainId: chainId,
-      token1Address: token1.address,
-      sent0: "100",
-      received0: "200",
-      totalSent0: "200",
-      totalReceived0: "400",
-      sent1: "300",
-      received1: "400",
-      totalSent1: "600",
-      totalReceived1: "800",
-      chainId: 0,
-      accountId: "account0",
-      asMaker: true,
-    });
+    assert.deepEqual(
+      transformVolumeWithDecimalsToString(accountAcitivityAccount0Maker2),
+      {
+        fromBlockChainId: chainId,
+        fromBlockNumber: 2,
+        toBlockChainId: chainId,
+        toBlockNumber: 3,
+        token0ChainId: chainId,
+        token0Address: token0.address,
+        token1ChainId: chainId,
+        token1Address: token1.address,
+        sent0: "100",
+        received0: "200",
+        totalSent0: "200",
+        totalReceived0: "400",
+        sent1: "300",
+        received1: "400",
+        totalSent1: "600",
+        totalReceived1: "800",
+        chainId: 0,
+        accountId: "account0",
+        asMaker: true,
+      }
+    );
     const accountAcitivityAccount0Taker2 =
       await getLatestActivityWithAddressAndType(account0.address, false);
 
-    assert.deepEqual(accountAcitivityAccount0Taker2, {
-      fromBlockChainId: chainId,
-      fromBlockNumber: 2,
-      toBlockChainId: chainId,
-      toBlockNumber: 3,
-      token0ChainId: chainId,
-      token0Address: token0.address,
-      token1ChainId: chainId,
-      token1Address: token1.address,
-      sent0: "10",
-      received0: "20",
-      totalSent0: "20",
-      totalReceived0: "40",
-      sent1: "30",
-      received1: "40",
-      totalSent1: "60",
-      totalReceived1: "80",
-      chainId: 0,
-      accountId: "account0",
-      asMaker: false,
-    });
+    assert.deepEqual(
+      transformVolumeWithDecimalsToString(accountAcitivityAccount0Taker2),
+      {
+        fromBlockChainId: chainId,
+        fromBlockNumber: 2,
+        toBlockChainId: chainId,
+        toBlockNumber: 3,
+        token0ChainId: chainId,
+        token0Address: token0.address,
+        token1ChainId: chainId,
+        token1Address: token1.address,
+        sent0: "10",
+        received0: "20",
+        totalSent0: "20",
+        totalReceived0: "40",
+        sent1: "30",
+        received1: "40",
+        totalSent1: "60",
+        totalReceived1: "80",
+        chainId: 0,
+        accountId: "account0",
+        asMaker: false,
+      }
+    );
 
     const accountAcitivityAccount1Maker2 =
       await getLatestActivityWithAddressAndType(account1.address, true);
 
-    assert.deepEqual(accountAcitivityAccount1Maker2, {
-      fromBlockChainId: chainId,
-      fromBlockNumber: 2,
-      toBlockChainId: chainId,
-      toBlockNumber: 3,
-      token0ChainId: chainId,
-      token0Address: token0.address,
-      token1ChainId: chainId,
-      token1Address: token1.address,
-      sent0: "400",
-      received0: "300",
-      totalSent0: "800",
-      totalReceived0: "600",
-      sent1: "200",
-      received1: "100",
-      totalSent1: "400",
-      totalReceived1: "200",
-      chainId: 0,
-      accountId: "account1",
-      asMaker: true,
-    });
+    assert.deepEqual(
+      transformVolumeWithDecimalsToString(accountAcitivityAccount1Maker2),
+      {
+        fromBlockChainId: chainId,
+        fromBlockNumber: 2,
+        toBlockChainId: chainId,
+        toBlockNumber: 3,
+        token0ChainId: chainId,
+        token0Address: token0.address,
+        token1ChainId: chainId,
+        token1Address: token1.address,
+        sent0: "400",
+        received0: "300",
+        totalSent0: "800",
+        totalReceived0: "600",
+        sent1: "200",
+        received1: "100",
+        totalSent1: "400",
+        totalReceived1: "200",
+        chainId: 0,
+        accountId: "account1",
+        asMaker: true,
+      }
+    );
 
     const accountAcitivityAccount1Taker2 =
       await getLatestActivityWithAddressAndType(account1.address, false);
 
-    assert.deepEqual(accountAcitivityAccount1Taker2, {
-      fromBlockChainId: chainId,
-      fromBlockNumber: 2,
-      toBlockChainId: chainId,
-      toBlockNumber: 3,
-      token0ChainId: chainId,
-      token0Address: token0.address,
-      token1ChainId: chainId,
-      token1Address: token1.address,
-      sent0: "40",
-      received0: "30",
-      totalSent0: "80",
-      totalReceived0: "60",
-      sent1: "20",
-      received1: "10",
-      totalSent1: "40",
-      totalReceived1: "20",
-      chainId: 0,
-      accountId: "account1",
-      asMaker: false,
-    });
+    assert.deepEqual(
+      transformVolumeWithDecimalsToString(accountAcitivityAccount1Taker2),
+      {
+        fromBlockChainId: chainId,
+        fromBlockNumber: 2,
+        toBlockChainId: chainId,
+        toBlockNumber: 3,
+        token0ChainId: chainId,
+        token0Address: token0.address,
+        token1ChainId: chainId,
+        token1Address: token1.address,
+        sent0: "40",
+        received0: "30",
+        totalSent0: "80",
+        totalReceived0: "60",
+        sent1: "20",
+        received1: "10",
+        totalSent1: "40",
+        totalReceived1: "20",
+        chainId: 0,
+        accountId: "account1",
+        asMaker: false,
+      }
+    );
   });
 
   after(async () => {

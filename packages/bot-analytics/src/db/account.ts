@@ -10,7 +10,7 @@ export const getOrCreateAccount = moize(
       update: {},
       create: {
         address: _address,
-        createdAt: currentTime,
+        createdAt: currentTime.toISOString(),
       },
     });
   }

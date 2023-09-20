@@ -1,7 +1,7 @@
+import "./config";
 import { createLogger, CommonLogger, format } from "@mangrovedao/bot-utils";
 import os from "os";
 import safeStringify from "fast-safe-stringify";
-import config from "./config";
 
 const consoleLogFormat = format.printf(
   ({ level, message, timestamp, ...metadata }) => {
@@ -33,7 +33,7 @@ const consoleLogFormat = format.printf(
   }
 );
 
-const logLevel = config.get<string>("logLevel");
+const logLevel = process.env.LOG_LEVEL!;
 export const logger: CommonLogger = createLogger(
   consoleLogFormat,
   logLevel,

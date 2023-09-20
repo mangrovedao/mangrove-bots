@@ -62,9 +62,9 @@ export type GetTimeSeriesFn = (
 ) => Promise<void>;
 
 export type OpenOffer = Pick<Offer, "id" | "wants" | "gives"> & {
-  maker: Pick<Account, "address">;
+  maker: Pick<Account, "address" | "creationDate">;
   market: Pick<Market, "outbound_tkn" | "inbound_tkn">;
-  owner?: Pick<Account, "address">;
+  owner?: Pick<Account, "address" | "creationDate">;
 };
 
 export type GetOpenOffersResult = {

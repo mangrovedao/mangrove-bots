@@ -60,13 +60,13 @@ export const generateGetAndSaveLiquidityTimeSerie =
             token1ChainId: context.chainId,
             token1Address: token1.address,
 
-            amountToken0: BigInt(offer.wants),
-            amountToken1: BigInt(offer.gives),
+            amountToken0: BigInt(offer.gives),
+            amountToken1: BigInt(offer.wants),
             accountId: account.address,
           };
         } else {
-          liquidity.amountToken0 += BigInt(offer.wants);
-          liquidity.amountToken1 += BigInt(offer.gives);
+          liquidity.amountToken0 += BigInt(offer.gives);
+          liquidity.amountToken1 += BigInt(offer.wants);
         }
       }
 

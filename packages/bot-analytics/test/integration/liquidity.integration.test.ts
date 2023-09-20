@@ -1,4 +1,4 @@
-import { Account, Block, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { Block as BlockHeader } from "@ethersproject/providers";
 import {
   Chain,
@@ -17,6 +17,7 @@ import { createBlockIfNotExist } from "../../src/db/block";
 import { handleRange } from "../../src/analytics";
 import assert from "assert";
 import { binance } from "ccxt";
+import { transformLiquidityWithDecimalsToString } from "../helpers/utils";
 
 describe("Available Liquidity tracking", () => {
   let prisma: PrismaClient | undefined;
@@ -59,25 +60,28 @@ describe("Available Liquidity tracking", () => {
     everyXBlock: 1,
     exchange: new binance(),
     seenTokens: new Set(),
+    priceMocks: {},
   };
 
-  const account0: Account = {
+  const nowAsDate = new Date();
+  const now = nowAsDate.getTime() / 1000;
+
+  const account0 = {
     address: "account0",
+    createdAt: now,
   };
 
-  const account1: Account = {
+  const account1 = {
     address: "account1",
+    createdAt: now,
   };
 
-  const account3: Account = {
-    address: "account3",
-  };
-
-  const token0: TokenWithoutId = {
+  const token0 = {
     address: "token0",
     symbol: "tkn0",
     decimals: 18,
     chainId,
+    createdAt: nowAsDate,
   };
 
   const token1: TokenWithoutId = {
@@ -85,6 +89,7 @@ describe("Available Liquidity tracking", () => {
     symbol: "tkn1",
     decimals: 18,
     chainId,
+    createdAt: nowAsDate,
   };
 
   const tokens = {
@@ -179,6 +184,7 @@ describe("Available Liquidity tracking", () => {
         gives: "200",
         maker: {
           address: account0.address,
+          creationDate: now,
         },
 
         market: {
@@ -192,6 +198,7 @@ describe("Available Liquidity tracking", () => {
         gives: "400",
         maker: {
           address: account1.address,
+          creationDate: now,
         },
 
         market: {
@@ -205,6 +212,7 @@ describe("Available Liquidity tracking", () => {
         gives: "400",
         maker: {
           address: account0.address,
+          creationDate: now,
         },
 
         market: {
@@ -218,6 +226,7 @@ describe("Available Liquidity tracking", () => {
         gives: "600",
         maker: {
           address: account1.address,
+          creationDate: now,
         },
 
         market: {
@@ -234,6 +243,7 @@ describe("Available Liquidity tracking", () => {
         gives: "2000",
         maker: {
           address: account0.address,
+          creationDate: now,
         },
 
         market: {
@@ -247,6 +257,7 @@ describe("Available Liquidity tracking", () => {
         gives: "4000",
         maker: {
           address: account1.address,
+          creationDate: now,
         },
 
         market: {
@@ -286,19 +297,22 @@ describe("Available Liquidity tracking", () => {
         account0.address
       );
 
-    assert.deepEqual(liquidity1Account0Token0Token1, {
-      fromBlockChainId: chainId,
-      fromBlockNumber: 1,
-      toBlockChainId: chainId,
-      toBlockNumber: 2,
-      token0ChainId: chainId,
-      token0Address: token0.address,
-      token1ChainId: chainId,
-      token1Address: token1.address,
-      amountToken0: "100",
-      amountToken1: "200",
-      accountId: account0.address,
-    });
+    assert.deepEqual(
+      transformLiquidityWithDecimalsToString(liquidity1Account0Token0Token1),
+      {
+        fromBlockChainId: chainId,
+        fromBlockNumber: 1,
+        toBlockChainId: chainId,
+        toBlockNumber: 2,
+        token0ChainId: chainId,
+        token0Address: token0.address,
+        token1ChainId: chainId,
+        token1Address: token1.address,
+        amountToken0: "200",
+        amountToken1: "100",
+        accountId: account0.address,
+      }
+    );
 
     const liquidity1Account0Token1Token0 =
       await getLatestLiquidityWithPairAtBlock(
@@ -308,19 +322,22 @@ describe("Available Liquidity tracking", () => {
         account0.address
       );
 
-    assert.deepEqual(liquidity1Account0Token1Token0, {
-      fromBlockChainId: chainId,
-      fromBlockNumber: 1,
-      toBlockChainId: chainId,
-      toBlockNumber: 2,
-      token0ChainId: chainId,
-      token0Address: token1.address,
-      token1ChainId: chainId,
-      token1Address: token0.address,
-      amountToken0: "300",
-      amountToken1: "400",
-      accountId: account0.address,
-    });
+    assert.deepEqual(
+      transformLiquidityWithDecimalsToString(liquidity1Account0Token1Token0),
+      {
+        fromBlockChainId: chainId,
+        fromBlockNumber: 1,
+        toBlockChainId: chainId,
+        toBlockNumber: 2,
+        token0ChainId: chainId,
+        token0Address: token1.address,
+        token1ChainId: chainId,
+        token1Address: token0.address,
+        amountToken0: "400",
+        amountToken1: "300",
+        accountId: account0.address,
+      }
+    );
 
     const liquidity1Account1Token0Token1 =
       await getLatestLiquidityWithPairAtBlock(
@@ -330,19 +347,22 @@ describe("Available Liquidity tracking", () => {
         account1.address
       );
 
-    assert.deepEqual(liquidity1Account1Token0Token1, {
-      fromBlockChainId: chainId,
-      fromBlockNumber: 1,
-      toBlockChainId: chainId,
-      toBlockNumber: 2,
-      token0ChainId: chainId,
-      token0Address: token0.address,
-      token1ChainId: chainId,
-      token1Address: token1.address,
-      amountToken0: "200",
-      amountToken1: "400",
-      accountId: account1.address,
-    });
+    assert.deepEqual(
+      transformLiquidityWithDecimalsToString(liquidity1Account1Token0Token1),
+      {
+        fromBlockChainId: chainId,
+        fromBlockNumber: 1,
+        toBlockChainId: chainId,
+        toBlockNumber: 2,
+        token0ChainId: chainId,
+        token0Address: token0.address,
+        token1ChainId: chainId,
+        token1Address: token1.address,
+        amountToken0: "400",
+        amountToken1: "200",
+        accountId: account1.address,
+      }
+    );
 
     const liquidity1Account1Token1Token0 =
       await getLatestLiquidityWithPairAtBlock(
@@ -352,21 +372,24 @@ describe("Available Liquidity tracking", () => {
         account1.address
       );
 
-    assert.deepEqual(liquidity1Account1Token1Token0, {
-      fromBlockChainId: chainId,
-      fromBlockNumber: 1,
-      toBlockChainId: chainId,
-      toBlockNumber: 2,
+    assert.deepEqual(
+      transformLiquidityWithDecimalsToString(liquidity1Account1Token1Token0),
+      {
+        fromBlockChainId: chainId,
+        fromBlockNumber: 1,
+        toBlockChainId: chainId,
+        toBlockNumber: 2,
 
-      token0ChainId: chainId,
-      token0Address: token1.address,
+        token0ChainId: chainId,
+        token0Address: token1.address,
 
-      token1ChainId: chainId,
-      token1Address: token0.address,
-      amountToken0: "400",
-      amountToken1: "600",
-      accountId: account1.address,
-    });
+        token1ChainId: chainId,
+        token1Address: token0.address,
+        amountToken0: "600",
+        amountToken1: "400",
+        accountId: account1.address,
+      }
+    );
 
     const liquidity1Account0Token0Token1_2 =
       await getLatestLiquidityWithPairAtBlock(
@@ -376,19 +399,22 @@ describe("Available Liquidity tracking", () => {
         account0.address
       );
 
-    assert.deepEqual(liquidity1Account0Token0Token1_2, {
-      fromBlockChainId: chainId,
-      fromBlockNumber: 2,
-      toBlockChainId: chainId,
-      toBlockNumber: 3,
-      token0ChainId: chainId,
-      token0Address: token0.address,
-      token1ChainId: chainId,
-      token1Address: token1.address,
-      amountToken0: "1000",
-      amountToken1: "2000",
-      accountId: account0.address,
-    });
+    assert.deepEqual(
+      transformLiquidityWithDecimalsToString(liquidity1Account0Token0Token1_2),
+      {
+        fromBlockChainId: chainId,
+        fromBlockNumber: 2,
+        toBlockChainId: chainId,
+        toBlockNumber: 3,
+        token0ChainId: chainId,
+        token0Address: token0.address,
+        token1ChainId: chainId,
+        token1Address: token1.address,
+        amountToken0: "2000",
+        amountToken1: "1000",
+        accountId: account0.address,
+      }
+    );
 
     const liquidity1Account1Token0Token1_2 =
       await getLatestLiquidityWithPairAtBlock(
@@ -398,19 +424,22 @@ describe("Available Liquidity tracking", () => {
         account1.address
       );
 
-    assert.deepEqual(liquidity1Account1Token0Token1_2, {
-      fromBlockChainId: chainId,
-      fromBlockNumber: 2,
-      toBlockChainId: chainId,
-      toBlockNumber: 3,
-      token0ChainId: chainId,
-      token0Address: token0.address,
-      token1ChainId: chainId,
-      token1Address: token1.address,
-      amountToken0: "2000",
-      amountToken1: "4000",
-      accountId: account1.address,
-    });
+    assert.deepEqual(
+      transformLiquidityWithDecimalsToString(liquidity1Account1Token0Token1_2),
+      {
+        fromBlockChainId: chainId,
+        fromBlockNumber: 2,
+        toBlockChainId: chainId,
+        toBlockNumber: 3,
+        token0ChainId: chainId,
+        token0Address: token0.address,
+        token1ChainId: chainId,
+        token1Address: token1.address,
+        amountToken0: "4000",
+        amountToken1: "2000",
+        accountId: account1.address,
+      }
+    );
   });
 
   after(async () => {
