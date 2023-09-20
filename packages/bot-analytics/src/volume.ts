@@ -107,7 +107,6 @@ export const generateGetAndSaveVolumeTimeSerie =
           to.timestamp
         );
 
-        console.log("here");
         const previousActivity = await prisma.accountActivity.findFirst({
           where: {
             accountId: account.address,

@@ -1,5 +1,5 @@
 query getOpenOffers($first: Int, $skip: Int, $currentBlockNumber: Int) {
-  offers(where: { isOpen: true }) {
+  offers(where: { isOpen: true }, block: { number: $currentBlockNumber }) {
     id
 
     wants
