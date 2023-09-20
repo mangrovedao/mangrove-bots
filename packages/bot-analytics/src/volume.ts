@@ -32,13 +32,13 @@ export const volumeResultToAccountActivity = (
 
   sent0: previousActivity
     ? (
-        BigInt(vol.token0Sent) - BigInt(previousActivity.sent0.toString())
+        BigInt(vol.token0Sent) - BigInt(previousActivity.totalSent0.toString())
       ).toString()
     : vol.token0Sent,
   received0: previousActivity
     ? (
         BigInt(vol.token0Received) -
-        BigInt(previousActivity.received0.toString())
+        BigInt(previousActivity.totalReceived0.toString())
       ).toString()
     : vol.token0Received,
 
@@ -47,13 +47,13 @@ export const volumeResultToAccountActivity = (
 
   sent1: previousActivity
     ? (
-        BigInt(vol.token1Sent) - BigInt(previousActivity.sent1.toString())
+        BigInt(vol.token1Sent) - BigInt(previousActivity.totalSent1.toString())
       ).toString()
     : vol.token1Sent,
   received1: previousActivity
     ? (
         BigInt(vol.token1Received) -
-        BigInt(previousActivity.received1.toString())
+        BigInt(previousActivity.totalReceived1.toString())
       ).toString()
     : vol.token1Received,
 
