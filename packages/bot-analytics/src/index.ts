@@ -9,7 +9,7 @@ import { logger } from "./util/logger";
 
 import Mangrove, { enableLogging, typechain } from "@mangrovedao/mangrove.js";
 
-import { ToadScheduler } from "toad-scheduler";
+import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
 import { ExitCode, Setup } from "@mangrovedao/bot-utils";
 
 import { PrismaClient } from "@prisma/client";
@@ -28,6 +28,7 @@ import { generateBlockHeaderToDbBlock } from "./util/util";
 import { handleRange } from "./analytics";
 import { generateGetAndSaveLiquidityTimeSerie } from "./liquidity";
 import { binance } from "ccxt";
+import { Wallet } from "ethers";
 
 enableLogging();
 
@@ -36,7 +37,7 @@ const setup = new Setup(config);
 
 const prisma = new PrismaClient();
 
-const botFunction = async (mgv: Mangrove) => {
+const botTask = async (mgv: Mangrove) => {
   const startingBlockNumber = config.get<number>("startingBlock");
   const blockFinality = config.get<number>("blockFinality");
   const runEveryXHours = config.get<number>("runEveryXHours");
@@ -156,6 +157,31 @@ const botFunction = async (mgv: Mangrove) => {
       data: e,
     });
   }
+};
+
+export const botFunction = async (mgv: Mangrove, signer?: Wallet) => {
+  const runEveryXHours = config.get<number>("runEveryXHours");
+
+  const task = new AsyncTask(
+    "bot-analytics task",
+    async () => {
+      await botTask(mgv);
+    },
+    (err: Error) => {
+      logger.error(err);
+      setup.stopAndExit(ExitCode.ErrorInAsyncTask, scheduler);
+    }
+  );
+
+  const job = new SimpleIntervalJob(
+    {
+      hours: runEveryXHours,
+      runImmediately: true,
+    },
+    task
+  );
+
+  scheduler.addSimpleIntervalJob(job);
 };
 
 const main = async () => {
