@@ -84,10 +84,22 @@ export const generateGetAndSaveVolumeTimeSerie =
       const accountsActivities: AccountActivityWithoutId[] = [];
 
       for (const vol of Object.values(volumes)) {
-        const account = await getOrCreateAccount(prisma, vol.account.address);
+        const account = await getOrCreateAccount(
+          prisma,
+          vol.account.address,
+          to.timestamp
+        );
 
-        const token0 = await getOrCreateTokenFn(prisma, vol.token0);
-        const token1 = await getOrCreateTokenFn(prisma, vol.token1);
+        const token0 = await getOrCreateTokenFn(
+          prisma,
+          vol.token0,
+          to.timestamp
+        );
+        const token1 = await getOrCreateTokenFn(
+          prisma,
+          vol.token1,
+          to.timestamp
+        );
 
         const previousActivity = await prisma.accountActivity.findFirst({
           where: {

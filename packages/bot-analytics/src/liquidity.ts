@@ -28,15 +28,21 @@ export const generateGetAndSaveLiquidityTimeSerie =
 
       for (const offer of offers.offers) {
         const owner = offer.owner ? offer.owner : offer.maker;
-        const account = await getOrCreateAccount(prisma, owner.address);
+        const account = await getOrCreateAccount(
+          prisma,
+          owner.address,
+          to.timestamp
+        );
 
         const token0 = await getOrCreateTokenFn(
           prisma,
-          offer.market.outbound_tkn
+          offer.market.outbound_tkn,
+          to.timestamp
         );
         const token1 = await getOrCreateTokenFn(
           prisma,
-          offer.market.inbound_tkn
+          offer.market.inbound_tkn,
+          to.timestamp
         );
 
         const key = `${token0.address}-${token1.address}-${account.address}`;

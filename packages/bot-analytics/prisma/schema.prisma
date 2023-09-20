@@ -37,6 +37,8 @@ model Block {
 }
 
 model Token {
+  createdAt DateTime
+
   address  String
   symbol   String
   decimals Int
@@ -68,6 +70,8 @@ model TokenPrice {
 
 model Account {
   address String @id @unique
+
+  createdAt DateTime
 
   AccountActivity             AccountActivity[]
   AggregatedLiquidityByMarket AggregatedLiquidityByMarket[]

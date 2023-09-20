@@ -8,7 +8,11 @@ import logger from "../util/logger";
 
 export const generateCreateTokenIfNotExist = (context: ChainContext) => {
   const ierc20 = typechain.IERC20__factory.createInterface();
-  const fn = async (prisma: PrismaTx, address: string): Promise<Token> => {
+  const fn = async (
+    prisma: PrismaTx,
+    address: string,
+    currentTime: Date
+  ): Promise<Token> => {
     let token = await prisma.token.findFirst({
       where: {
         address,
@@ -48,6 +52,7 @@ export const generateCreateTokenIfNotExist = (context: ChainContext) => {
         symbol,
         decimals,
         chainId: context.chainId,
+        createdAt: currentTime,
       },
     });
 

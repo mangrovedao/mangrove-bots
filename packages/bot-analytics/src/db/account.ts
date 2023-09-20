@@ -2,7 +2,7 @@ import moize from "moize";
 import { PrismaTx } from "./types";
 
 export const getOrCreateAccount = moize(
-  async (prisma: PrismaTx, _address: string) => {
+  async (prisma: PrismaTx, _address: string, currentTime: Date) => {
     return prisma.account.upsert({
       where: {
         address: _address,
@@ -10,6 +10,7 @@ export const getOrCreateAccount = moize(
       update: {},
       create: {
         address: _address,
+        createdAt: currentTime,
       },
     });
   }

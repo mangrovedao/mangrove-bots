@@ -24,7 +24,8 @@ export type AggregatedLiquidityWithoutIdAndValuesAsBigInt = Omit<
 
 export type GetOrCreateTokenFn = (
   prisma: PrismaTx,
-  address: string
+  address: string,
+  currentTime: Date
 ) => Promise<Token>;
 
 export type PrismaTx = Omit<
