@@ -94,17 +94,17 @@ model AccountActivity {
   token1ChainId Int
   token1Address String
 
-  sent0     String
-  received0 String
+  sent0     Decimal
+  received0 Decimal
 
-  totalSent0     String
-  totalReceived0 String
+  totalSent0     Decimal
+  totalReceived0 Decimal
 
-  sent1     String
-  received1 String
+  sent1     Decimal
+  received1 Decimal
 
-  totalSent1     String
-  totalReceived1 String
+  totalSent1     Decimal
+  totalReceived1 Decimal
 
   chain   Chain @relation(fields: [chainId], references: [id])
   chainId Int
@@ -134,8 +134,8 @@ model AggregatedLiquidityByMarket {
   token1ChainId Int
   token1Address String
 
-  amountToken0 String
-  amountToken1 String
+  amountToken0 Decimal
+  amountToken1 Decimal
 
   account   Account @relation(fields: [accountId], references: [address])
   accountId String

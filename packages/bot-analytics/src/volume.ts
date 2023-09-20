@@ -31,11 +31,14 @@ export const volumeResultToAccountActivity = (
   token1Address: token1.address,
 
   sent0: previousActivity
-    ? (BigInt(vol.token0Sent) - BigInt(previousActivity.sent0)).toString()
+    ? (
+        BigInt(vol.token0Sent) - BigInt(previousActivity.sent0.toString())
+      ).toString()
     : vol.token0Sent,
   received0: previousActivity
     ? (
-        BigInt(vol.token0Received) - BigInt(previousActivity.received0)
+        BigInt(vol.token0Received) -
+        BigInt(previousActivity.received0.toString())
       ).toString()
     : vol.token0Received,
 
@@ -43,11 +46,14 @@ export const volumeResultToAccountActivity = (
   totalReceived0: vol.token0Received,
 
   sent1: previousActivity
-    ? (BigInt(vol.token1Sent) - BigInt(previousActivity.sent1)).toString()
+    ? (
+        BigInt(vol.token1Sent) - BigInt(previousActivity.sent1.toString())
+      ).toString()
     : vol.token1Sent,
   received1: previousActivity
     ? (
-        BigInt(vol.token1Received) - BigInt(previousActivity.received1)
+        BigInt(vol.token1Received) -
+        BigInt(previousActivity.received1.toString())
       ).toString()
     : vol.token1Received,
 
@@ -101,6 +107,7 @@ export const generateGetAndSaveVolumeTimeSerie =
           to.timestamp
         );
 
+        console.log("here");
         const previousActivity = await prisma.accountActivity.findFirst({
           where: {
             accountId: account.address,
@@ -134,6 +141,7 @@ export const generateGetAndSaveVolumeTimeSerie =
         );
       }
 
+      console.log(accountsActivities);
       await prisma.accountActivity.createMany({
         data: accountsActivities,
       });
