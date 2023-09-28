@@ -33,7 +33,7 @@ const consoleLogFormat = format.printf(
   }
 );
 
-const logLevel = process.env.LOG_LEVEL!;
+const logLevel = process.env.LOG_LEVEL ? process.env.LOG_LEVEL : "debug";
 export const logger: CommonLogger = createLogger(
   consoleLogFormat,
   logLevel,
