@@ -1,0 +1,13 @@
+{
+  "logLevel": "debug",
+  "runEveryXHours": 12,
+  "databaseUrl": "postgresql://postgres:postgres@localhost:5432/postgres?schema=mangrove",
+  "startingBlock": 43091275,
+  "blockFinality": 200,
+  "chains": [
+    { "chainId": 137, "name": "matic" },
+    { "chainId": 80001, "name": "maticmum" }
+  ],
+  "everyXBlock": 43200,
+  "priceMocks": { "PxUSDC": [0, 0, 0, 0, 0, 0] }
+}
