@@ -231,7 +231,14 @@ export class MarketCleaner {
         data: { estimates },
       });
       // TODO Do we have the liquidity to do the snipe?
-      await this.#collectOffer(offer, ba, takerWants, takerGives, contextInfo);
+      await this.#collectOffer(
+        offer,
+        ba,
+        takerWants,
+        takerGives,
+        takerToImpersonate,
+        contextInfo
+      );
     } else {
       logger.debug("Offer is not profitable to clean", {
         base: this.#market.base.name,
@@ -304,6 +311,7 @@ export class MarketCleaner {
     ba: Market.BA,
     takerWants: Big,
     takerGives: Big,
+    takerToImpersonate?: string,
     contextInfo?: string
   ): Promise<void> {
     logger.debug("Cleaning offer", {
@@ -330,18 +338,31 @@ export class MarketCleaner {
       });
     }
 
-    const snipePromises = await this.#market.snipe(
-      {
-        ba: ba,
-        targets: this.#createCollectParams(offer, takerWants, takerGives),
-        requireOffersToFail: true,
-      },
-      txOverrides
-    );
+    const raw = await this.#market.getRawSnipeParams({
+      ba: ba,
+      targets: this.#createCollectParams(offer, takerWants, takerGives),
+      requireOffersToFail: true,
+      fillWants: false,
+    });
 
-    return snipePromises.result
+    const call = takerToImpersonate
+      ? this.#market.mgv.cleanerContract.collectByImpersonation(
+          raw.outboundTkn,
+          raw.inboundTkn,
+          raw.targets,
+          raw.fillWants,
+          takerToImpersonate
+        )
+      : this.#market.mgv.cleanerContract.collect(
+          raw.outboundTkn,
+          raw.inboundTkn,
+          raw.targets,
+          raw.fillWants
+        );
+
+    return call
       .then((result) => {
-        logger.info("Successfully cleaned offer", {
+        logger.info("Successfully cleaning offer", {
           base: this.#market.base.name,
           quote: this.#market.quote.name,
           ba: ba,

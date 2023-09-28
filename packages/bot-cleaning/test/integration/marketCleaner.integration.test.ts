@@ -230,4 +230,71 @@ describe("MarketCleaner integration tests", () => {
       (val: any) => val == true
     );
   });
+
+  it(`Should clean by Impersonating`, async function () {
+    // Testing with new params
+    const mgvNewInstance = await Mangrove.connect({
+      privateKey: this.accounts.arbitrager.key,
+      provider: this.server.url,
+    });
+
+    const marketNew = await mgvNewInstance.market({
+      base: "TokenA",
+      quote: "TokenB",
+    });
+    await mgvTestUtil.mint(marketNew.base, cleaner, 1);
+    await mgvTestUtil.mint(marketNew.base, this.accounts.arbitrager, 1);
+
+    const result = await (
+      await marketNew.base.approve(mgvNewInstance.address, {
+        amount: "1",
+        overrides: {},
+      })
+    ).wait();
+    await mgvTestUtil.waitForBlock(mgvNewInstance, result.blockNumber);
+
+    const txReceipt = await mgvTestUtil.postNewOffer({
+      market,
+      ba: "bids",
+      maker,
+      shouldFail: true,
+      wants: 1,
+      gives: 100000000,
+    });
+    await mgvTestUtil.waitForBlock(marketNew.mgv, txReceipt.blockNumber!);
+
+    const whitelistedSets = new Set<string>();
+    const marketCleaner = new MarketCleaner(
+      marketNew,
+      cleanerProvider,
+      {
+        base: market.base.name,
+        quote: market.quote.name,
+      },
+      whitelistedSets,
+      this.accounts.deployer.address
+    );
+
+    let book = await marketNew.requestBook();
+    whitelistedSets.add(book.bids[0].maker.toLowerCase());
+
+    const cleanerAddr = await mgvNewInstance.signer.getAddress();
+
+    const beforeBalance = await mgvNewInstance.provider.getBalance(cleanerAddr);
+
+    // Act
+    await marketCleaner.clean();
+
+    const afterBalance = await mgvNewInstance.provider.getBalance(cleanerAddr);
+
+    await sleep(5000);
+
+    book = await marketNew.requestBook();
+
+    expect(book).to.have.property("bids").which.is.empty;
+
+    expect(afterBalance.gt(beforeBalance)).to.satisfy(
+      (val: any) => val == true
+    );
+  });
 });
