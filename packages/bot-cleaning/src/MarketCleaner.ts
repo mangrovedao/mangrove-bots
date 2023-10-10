@@ -56,6 +56,9 @@ export class MarketCleaner {
     logger.info("Initialized market cleaner", {
       base: this.#market.base.name,
       quote: this.#market.quote.name,
+      takerToImpersonate: takerToImpersonate
+        ? takerToImpersonate
+        : "no impersonation, address use to clean is cleaner one",
       contextInfo: "init",
     });
   }
@@ -234,6 +237,7 @@ export class MarketCleaner {
       logger.info("Identified offer that is profitable to clean", {
         base: this.#market.base.name,
         quote: this.#market.quote.name,
+        takerToImpersonate: this.#takerToImpersonate,
         ba: ba,
         offer: offer,
         data: { estimates },
@@ -244,6 +248,7 @@ export class MarketCleaner {
       logger.debug("Offer is not profitable to clean", {
         base: this.#market.base.name,
         quote: this.#market.quote.name,
+        takerToImpersonate: this.#takerToImpersonate,
         ba: ba,
         offer: offer,
         contextInfo,
