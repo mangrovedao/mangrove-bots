@@ -147,6 +147,8 @@ describe("MarketCleaner integration tests", () => {
       ba: "asks",
       maker,
       shouldFail: true,
+      wants: market.quote.toUnits(1600),
+      gives: market.base.toUnits(1),
     });
     await mgvTestUtil.waitForBlock(market.mgv, txReceipt.blockNumber!);
 
@@ -192,8 +194,8 @@ describe("MarketCleaner integration tests", () => {
       ba: "bids",
       maker,
       shouldFail: true,
-      wants: 1,
-      gives: 100000000,
+      wants: market.base.toUnits(1),
+      gives: market.quote.toUnits(1600),
     });
     await mgvTestUtil.waitForBlock(market.mgv, txReceipt.blockNumber!);
 
@@ -220,8 +222,6 @@ describe("MarketCleaner integration tests", () => {
 
     const afterBalance = await mgv.provider.getBalance(cleanerAddr);
 
-    await sleep(5000);
-
     book = await market.requestBook();
 
     expect(book).to.have.property("bids").which.is.empty;
@@ -233,63 +233,62 @@ describe("MarketCleaner integration tests", () => {
 
   it(`Should clean by Impersonating`, async function () {
     // Testing with new params
-    const mgvNewInstance = await Mangrove.connect({
+    const mgvArbitrager = await Mangrove.connect({
       privateKey: this.accounts.arbitrager.key,
       provider: this.server.url,
     });
 
-    const marketNew = await mgvNewInstance.market({
+    const arbitragerAddress = this.accounts.arbitrager.address;
+
+    const marketAribtrager = await mgvArbitrager.market({
       base: "TokenA",
       quote: "TokenB",
     });
-    await mgvTestUtil.mint(marketNew.base, cleaner, 1);
-    await mgvTestUtil.mint(marketNew.base, this.accounts.arbitrager, 1);
+    await mgvTestUtil.mint(marketAribtrager.base, cleaner, 1);
+    await mgvTestUtil.mint(marketAribtrager.base, this.accounts.arbitrager, 1);
 
     const result = await (
-      await marketNew.base.approve(mgvNewInstance.address, {
+      await marketAribtrager.base.approve(mgv.address, {
         amount: "1",
         overrides: {},
       })
     ).wait();
-    await mgvTestUtil.waitForBlock(mgvNewInstance, result.blockNumber);
+    await mgvTestUtil.waitForBlock(mgvArbitrager, result.blockNumber);
 
     const txReceipt = await mgvTestUtil.postNewOffer({
       market,
       ba: "bids",
       maker,
       shouldFail: true,
-      wants: 1,
-      gives: 100000000,
+      wants: market.base.toUnits(1),
+      gives: market.quote.toUnits(1600),
     });
-    await mgvTestUtil.waitForBlock(marketNew.mgv, txReceipt.blockNumber!);
+    await mgvTestUtil.waitForBlock(
+      marketAribtrager.mgv,
+      txReceipt.blockNumber!
+    );
 
     const whitelistedSets = new Set<string>();
     const marketCleaner = new MarketCleaner(
-      marketNew,
+      marketAribtrager,
       cleanerProvider,
       {
         base: market.base.name,
         quote: market.quote.name,
       },
       whitelistedSets,
-      this.accounts.deployer.address
+      arbitragerAddress
     );
 
-    let book = await marketNew.requestBook();
+    let book = await marketAribtrager.requestBook();
     whitelistedSets.add(book.bids[0].maker.toLowerCase());
 
-    const cleanerAddr = await mgvNewInstance.signer.getAddress();
-
-    const beforeBalance = await mgvNewInstance.provider.getBalance(cleanerAddr);
-
+    const beforeBalance = await mgv.provider.getBalance(arbitragerAddress);
     // Act
     await marketCleaner.clean();
+    const afterBalance = await mgv.provider.getBalance(arbitragerAddress);
 
-    const afterBalance = await mgvNewInstance.provider.getBalance(cleanerAddr);
-
-    await sleep(5000);
-
-    book = await marketNew.requestBook();
+    book = await marketAribtrager.requestBook();
 
     expect(book).to.have.property("bids").which.is.empty;
 

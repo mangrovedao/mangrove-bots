@@ -149,18 +149,28 @@ export class MarketCleaner {
         this.#whitelistedDustCleaningMaker &&
         this.#whitelistedDustCleaningMaker.has(offer.maker.toLowerCase())
       ) {
+        if (!offer.price) {
+          continue;
+        }
+
         const inboundTkn =
           ba == "bids" ? semibook.market.base : semibook.market.quote;
         const outboundTkn =
           ba == "bids" ? semibook.market.quote : semibook.market.base;
 
-        let takerWants = new Big(1).div(new Big(10).pow(outboundTkn.decimals));
-        let takerGives = inboundTkn.fromUnits(
-          takerWants.mul(offer.price!).toString()
-        );
-        if (outboundTkn.decimals > inboundTkn.decimals) {
-          takerGives = new Big(1).div(new Big(10).pow(inboundTkn.decimals));
-          takerWants = takerGives.mul(new Big(1).div(offer.price!).round());
+        let price = offer.price;
+        if (ba === "bids") {
+          price = new Big(1).div(offer.price);
+        }
+
+        /* this logic find the minimum takerGives */
+        const minPossibleWantsVolume = inboundTkn.fromUnits(1);
+        let minGivesVolume = outboundTkn.fromUnits("1");
+        let minWantsVolume = price.mul(minGivesVolume);
+
+        if (minWantsVolume.lt(minPossibleWantsVolume)) {
+          minWantsVolume = minPossibleWantsVolume;
+          minGivesVolume = new Big(1).div(price).mul(minWantsVolume);
         }
 
         cleaningPromises.push(
@@ -168,8 +178,8 @@ export class MarketCleaner {
             offer,
             ba,
             gasPrice,
-            takerWants,
-            takerGives,
+            minGivesVolume, // takerWants
+            minWantsVolume, // takerGives
             contextInfo
           ) // takerWants: outboundTkn, takerGives: inboundTkn
         );
@@ -198,7 +208,6 @@ export class MarketCleaner {
     gasPrice: BigNumber,
     takerWants: Big,
     takerGives: Big,
-    takerToImpersonate?: string,
     contextInfo?: string
   ): Promise<void> {
     const { willOfferFail, bounty } = await this.#willOfferFail(
@@ -206,7 +215,6 @@ export class MarketCleaner {
       ba,
       takerWants,
       takerGives,
-      takerToImpersonate,
       contextInfo
     );
 
@@ -231,14 +239,7 @@ export class MarketCleaner {
         data: { estimates },
       });
       // TODO Do we have the liquidity to do the snipe?
-      await this.#collectOffer(
-        offer,
-        ba,
-        takerWants,
-        takerGives,
-        takerToImpersonate,
-        contextInfo
-      );
+      await this.#collectOffer(offer, ba, takerWants, takerGives, contextInfo);
     } else {
       logger.debug("Offer is not profitable to clean", {
         base: this.#market.base.name,
@@ -256,7 +257,6 @@ export class MarketCleaner {
     ba: Market.BA,
     takerWants: Big,
     takerGives: Big,
-    takerToImpersonate?: string,
     contextInfo?: string
   ): Promise<{ willOfferFail: boolean; bounty?: BigNumber }> {
     const raw = await this.#market.getRawSnipeParams({
@@ -266,13 +266,13 @@ export class MarketCleaner {
       fillWants: false,
     });
 
-    const call = takerToImpersonate
+    const call = this.#takerToImpersonate
       ? this.#market.mgv.cleanerContract.callStatic.collectByImpersonation(
           raw.outboundTkn,
           raw.inboundTkn,
           raw.targets,
           raw.fillWants,
-          takerToImpersonate
+          this.#takerToImpersonate
         )
       : this.#market.mgv.cleanerContract.callStatic.collect(
           raw.outboundTkn,
@@ -311,7 +311,6 @@ export class MarketCleaner {
     ba: Market.BA,
     takerWants: Big,
     takerGives: Big,
-    takerToImpersonate?: string,
     contextInfo?: string
   ): Promise<void> {
     logger.debug("Cleaning offer", {
@@ -345,13 +344,13 @@ export class MarketCleaner {
       fillWants: false,
     });
 
-    const call = takerToImpersonate
+    const call = this.#takerToImpersonate
       ? this.#market.mgv.cleanerContract.collectByImpersonation(
           raw.outboundTkn,
           raw.inboundTkn,
           raw.targets,
           raw.fillWants,
-          takerToImpersonate
+          this.#takerToImpersonate
         )
       : this.#market.mgv.cleanerContract.collect(
           raw.outboundTkn,
