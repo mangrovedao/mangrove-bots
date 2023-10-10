@@ -361,7 +361,7 @@ export class MarketCleaner {
 
     return call
       .then((result) => {
-        logger.info("Successfully cleaning offer", {
+        logger.info("Successfully cleaned offer", {
           base: this.#market.base.name,
           quote: this.#market.quote.name,
           ba: ba,
