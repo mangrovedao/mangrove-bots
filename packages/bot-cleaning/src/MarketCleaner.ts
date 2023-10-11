@@ -59,7 +59,7 @@ export class MarketCleaner {
       quote: this.#market.quote.name,
       takerToImpersonate: takerToImpersonate
         ? takerToImpersonate
-        : "no impersonation, address use to clean is cleaner one",
+        : "no impersonation, the bot account will be used for cleaning",
       contextInfo: "init",
     });
   }
