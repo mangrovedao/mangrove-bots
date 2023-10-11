@@ -5,6 +5,7 @@ import { BigNumber } from "ethers";
 import { LatestMarketActivity, TxUtils } from "@mangrovedao/bot-utils";
 import { maxGasReq } from "./constants";
 import Big from "big.js";
+import { cleanUsingMinimalAmountOfFunds } from "./strategies";
 
 type OfferCleaningEstimates = {
   bounty: BigNumber; // wei
@@ -152,37 +153,19 @@ export class MarketCleaner {
         this.#whitelistedDustCleaningMaker &&
         this.#whitelistedDustCleaningMaker.has(offer.maker.toLowerCase())
       ) {
-        if (!offer.price) {
-          continue;
-        }
-
-        const inboundTkn =
-          ba == "bids" ? semibook.market.base : semibook.market.quote;
-        const outboundTkn =
-          ba == "bids" ? semibook.market.quote : semibook.market.base;
-
-        let price = offer.price;
-        if (ba === "bids") {
-          price = new Big(1).div(offer.price);
-        }
-
-        /* this logic find the minimum takerGives */
-        const minPossibleWantsVolume = inboundTkn.fromUnits(1);
-        let minGivesVolume = outboundTkn.fromUnits("1");
-        let minWantsVolume = price.mul(minGivesVolume);
-
-        if (minWantsVolume.lt(minPossibleWantsVolume)) {
-          minWantsVolume = minPossibleWantsVolume;
-          minGivesVolume = new Big(1).div(price).mul(minWantsVolume);
-        }
+        const cleaningParams = cleanUsingMinimalAmountOfFunds(
+          semibook.market,
+          ba,
+          offer
+        );
 
         cleaningPromises.push(
           this.#cleanOffer(
             offer,
             ba,
             gasPrice,
-            minGivesVolume, // takerWants
-            minWantsVolume, // takerGives
+            cleaningParams.takerWants,
+            cleaningParams.takerGives,
             contextInfo
           ) // takerWants: outboundTkn, takerGives: inboundTkn
         );

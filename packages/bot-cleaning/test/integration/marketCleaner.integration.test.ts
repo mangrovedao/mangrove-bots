@@ -14,7 +14,6 @@ import { ethers } from "ethers";
 import { Provider } from "@ethersproject/abstract-provider";
 
 import { MarketCleaner } from "../../src/MarketCleaner";
-import { sleep } from "@mangrovedao/bot-utils";
 
 let maker: mgvTestUtil.Account; // Owner of SimpleTestMaker contract
 let cleaner: mgvTestUtil.Account; // Owner of cleaner EOA
