@@ -16,6 +16,10 @@ const consoleLogFormat = format.printf(
       }
       msg += "] ";
     }
+
+    if (metadata.takerToImpersonate) {
+      msg += `[impersonate: ${metadata.takerToImpersonate}]`;
+    }
     if (metadata.contextInfo) {
       msg += `[${metadata.contextInfo}] `;
     }

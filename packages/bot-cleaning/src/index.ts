@@ -7,7 +7,6 @@
 import { BaseProvider } from "@ethersproject/providers";
 import { Wallet } from "@ethersproject/wallet";
 import {
-  configUtils,
   ConfigUtils,
   ExitCode,
   LatestMarketActivity,
