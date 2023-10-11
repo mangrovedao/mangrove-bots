@@ -216,7 +216,8 @@ export class MarketCleaner {
       takerWants,
       takerGives
     );
-    if (estimates.netResult.gt(0)) {
+
+    if (estimates.netResult.gt(0) || true) {
       logger.info("Identified offer that is profitable to clean", {
         base: this.#market.base.name,
         quote: this.#market.quote.name,
@@ -338,13 +339,15 @@ export class MarketCleaner {
           raw.inboundTkn,
           raw.targets,
           raw.fillWants,
-          this.#takerToImpersonate
+          this.#takerToImpersonate,
+          txOverrides
         )
       : this.#market.mgv.cleanerContract.collect(
           raw.outboundTkn,
           raw.inboundTkn,
           raw.targets,
-          raw.fillWants
+          raw.fillWants,
+          txOverrides
         );
 
     return call
@@ -474,13 +477,23 @@ export class MarketCleaner {
       requireOffersToFail: true,
     });
 
-    const gasEstimate =
-      await this.#market.mgv.cleanerContract.estimateGas.collect(
-        raw.outboundTkn,
-        raw.inboundTkn,
-        raw.targets,
-        raw.fillWants
-      );
+    const call = this.#takerToImpersonate
+      ? this.#market.mgv.cleanerContract.estimateGas.collectByImpersonation(
+          raw.outboundTkn,
+          raw.inboundTkn,
+          raw.targets,
+          raw.fillWants,
+          this.#takerToImpersonate
+        )
+      : this.#market.mgv.cleanerContract.estimateGas.collect(
+          raw.outboundTkn,
+          raw.inboundTkn,
+          raw.targets,
+          raw.fillWants
+        );
+
+    const gasEstimate = await call;
+
     return gasEstimate;
   }
 }
