@@ -24,11 +24,7 @@ class MockMarket {
   constructor(public base: MockMgvToken, public quote: MockMgvToken) {}
 }
 
-const generateMockOfferWithGivesAndWants = (
-  gives: Big,
-  wants: Big,
-  price: Big
-) => ({
+const generateMockOfferWithGivesAndWants = (gives: Big, wants: Big) => ({
   id: 1,
   prev: undefined,
   gasprice: 1,
@@ -37,7 +33,7 @@ const generateMockOfferWithGivesAndWants = (
   wants: wants,
   gives: gives,
   volume: new Big(1),
-  price,
+  price: new Big(0),
   next: undefined,
   offer_gasbase: 1,
 });
@@ -51,7 +47,6 @@ describe("Unit test suite for strategies", () => {
     const market = new MockMarket(WETH, USDC) as Market;
     const ask: Market.Offer = generateMockOfferWithGivesAndWants(
       new Big(1),
-      new Big(1600),
       new Big(1600)
     );
 
@@ -67,8 +62,7 @@ describe("Unit test suite for strategies", () => {
     const market = new MockMarket(WETH, USDC) as Market;
     const bid: Market.Offer = generateMockOfferWithGivesAndWants(
       new Big(1600),
-      new Big(1),
-      new Big(1600)
+      new Big(1)
     );
 
     const results = cleanUsingMinimalAmountOfFunds(market, "bids", bid);
@@ -83,35 +77,25 @@ describe("Unit test suite for strategies", () => {
     const market = new MockMarket(USDC, USDT) as Market;
     const ask: Market.Offer = generateMockOfferWithGivesAndWants(
       new Big(1.001),
-      new Big(0.999),
-      new Big(1.001).div(new Big(0.999))
+      new Big(0.999)
     );
 
     const results = cleanUsingMinimalAmountOfFunds(market, "asks", ask);
 
-    expect(
-      USDT.fromUnits(USDT.toUnits(results.takerGives)).toString()
-    ).to.equal("0.000001");
-    expect(results.takerWants.toString()).to.equal(
-      new Big(1).div(new Big(10).pow(USDC.decimals)).toString()
-    );
+    expect(USDC.toUnits(results.takerWants).toString()).to.equal("1");
+    expect(USDT.toUnits(results.takerGives).toString()).to.equal("1");
   });
 
   it("USDC/USDT bid: test cleanUsingMinimalAmountOfFunds token with same decimals", async () => {
     const market = new MockMarket(USDC, USDT) as Market;
     const bid: Market.Offer = generateMockOfferWithGivesAndWants(
       new Big(0.999),
-      new Big(1.001),
-      new Big(1.001).div(new Big(0.999))
+      new Big(1.001)
     );
 
     const results = cleanUsingMinimalAmountOfFunds(market, "bids", bid);
 
-    expect(
-      USDC.fromUnits(USDC.toUnits(results.takerWants)).toString()
-    ).to.equal("0.000001");
-    expect(results.takerGives.toString()).to.equal(
-      new Big(1).div(new Big(10).pow(USDT.decimals)).toString()
-    );
+    expect(USDT.toUnits(results.takerWants).toString()).to.equal("1");
+    expect(USDC.toUnits(results.takerGives).toString()).to.equal("1");
   });
 });
