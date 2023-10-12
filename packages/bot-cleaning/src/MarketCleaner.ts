@@ -217,7 +217,7 @@ export class MarketCleaner {
       takerGives
     );
 
-    if (estimates.netResult.gt(0) || true) {
+    if (estimates.netResult.gt(0)) {
       logger.info("Identified offer that is profitable to clean", {
         base: this.#market.base.name,
         quote: this.#market.quote.name,
