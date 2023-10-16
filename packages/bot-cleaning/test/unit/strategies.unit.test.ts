@@ -53,7 +53,7 @@ describe("Unit test suite for strategies", () => {
     const results = cleanUsingMinimalAmountOfFunds(market, "asks", ask);
 
     expect(results.takerGives.toString()).to.equal(
-      new Big(1).div(new Big(10).pow(USDC.decimals)).toString()
+      new Big(1).div(new Big(10).pow(USDC.decimals)).mul(2).toString()
     );
     expect(results.takerWants.toString()).to.equal("6.25e-10");
   });
@@ -67,7 +67,7 @@ describe("Unit test suite for strategies", () => {
 
     const results = cleanUsingMinimalAmountOfFunds(market, "bids", bid);
 
-    expect(results.takerGives.toString()).to.equal("6.25e-10");
+    expect(results.takerGives.toString()).to.equal("6.25000001e-10");
     expect(results.takerWants.toString()).to.equal(
       new Big(1).div(new Big(10).pow(USDC.decimals)).toString()
     );
@@ -83,7 +83,7 @@ describe("Unit test suite for strategies", () => {
     const results = cleanUsingMinimalAmountOfFunds(market, "asks", ask);
 
     expect(USDC.toUnits(results.takerWants).toString()).to.equal("1");
-    expect(USDT.toUnits(results.takerGives).toString()).to.equal("1");
+    expect(USDT.toUnits(results.takerGives).toString()).to.equal("2");
   });
 
   it("USDC/USDT bid: test cleanUsingMinimalAmountOfFunds token with same decimals", async () => {
@@ -96,6 +96,6 @@ describe("Unit test suite for strategies", () => {
     const results = cleanUsingMinimalAmountOfFunds(market, "bids", bid);
 
     expect(USDT.toUnits(results.takerWants).toString()).to.equal("1");
-    expect(USDC.toUnits(results.takerGives).toString()).to.equal("1");
+    expect(USDC.toUnits(results.takerGives).toString()).to.equal("2");
   });
 });

@@ -42,6 +42,6 @@ export const cleanUsingMinimalAmountOfFunds = (
 
   return {
     takerWants: minGivesVolume,
-    takerGives: minWantsVolume,
+    takerGives: minWantsVolume.plus(inboundTkn.fromUnits(1).toString()),
   };
 };
