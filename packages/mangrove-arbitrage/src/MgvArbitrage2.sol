@@ -11,9 +11,7 @@ import {IUniswapV3SwapCallback} from "lib/v3-core/contracts/interfaces/callback/
 
 struct ArbParams {
   IERC20 takerGivesToken;
-  uint64 takerGivesTokenUSD;
   IERC20 takerWantsToken;
-  uint64 takerWantsTokenUSD;
   IUniswapV3Pool pool;
 }
 
@@ -33,12 +31,8 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     mgv = _mgv;
   }
 
-  function setPool(address pool, bool authorized) external adminOrCaller(msg.sender) {
+  function setPool(address pool, bool authorized) external onlyAdmin {
     pools[pool] = authorized;
-  }
-
-  function convertToUSD(uint asset1, uint dollarPrice, uint dec1) internal pure returns (uint price) {
-    price = (asset1 * dollarPrice) / 10 ** dec1;
   }
 
   /// @notice This enables the admin to withdraw tokens from the contract. Notice that only the admin can call this.
@@ -63,52 +57,60 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     uint wantsTokenBalance;
     uint bestOfferId;
     MgvStructs.OfferUnpacked bestOffer;
+    uint minAmount;
     uint totalGot;
     uint totalGave;
     uint totalPenalty;
   }
 
-  function doArbitrage(ArbParams calldata params) public returns (uint) {
+  function doArbitrageFirstMangroveThenUniswap(ArbParams calldata params) public {
     HeapVars memory vars;
     vars.givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
     vars.wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
+
     vars.bestOfferId = mgv.best(address(params.takerWantsToken), address(params.takerGivesToken));
     vars.bestOffer =
       mgv.offers(address(params.takerWantsToken), address(params.takerGivesToken), vars.bestOfferId).to_struct();
 
-    (vars.totalGot, vars.totalGave, vars.totalPenalty,) = mgv.marketOrder(
-      address(params.takerWantsToken), address(params.takerGivesToken), 0, vars.givesTokenBalance, false
-    );
-
-    bool zeroForOne = address(params.takerWantsToken) < address(params.takerGivesToken); // tokenIn < tokenOut
-    (int amount0, int amount1) = params.pool.swap(
-      address(this),
-      zeroForOne,
-      int(vars.totalGot),
-      zeroForOne ? MIN_SQRT_RATIO + 1 : MAX_SQRT_RATIO - 1,
-      abi.encode(params.takerWantsToken)
-    );
-    if (amount0 < amount1) {
-      amount0 = amount1;
+    if (vars.bestOffer.gives < vars.givesTokenBalance) {
+      vars.minAmount = vars.bestOffer.gives;
+    } else {
+      vars.minAmount = vars.givesTokenBalance;
     }
 
-    uint8 takerGivesTokenDecimals = params.takerGivesToken.decimals();
-    uint8 takerWantsTokenDecimals = params.takerWantsToken.decimals();
-    uint dollarValue = convertToUSD(vars.givesTokenBalance, params.takerGivesTokenUSD, takerGivesTokenDecimals)
-      + convertToUSD(vars.wantsTokenBalance, params.takerWantsTokenUSD, takerWantsTokenDecimals);
+    (vars.totalGot, vars.totalGave, vars.totalPenalty,) =
+      mgv.marketOrder(address(params.takerWantsToken), address(params.takerGivesToken), 0, vars.minAmount, false);
 
-    vars.givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
-    vars.wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
+    (uint deltaTakerWants, uint deltaTakerGives) = lowLevelUniswapSwap(
+      address(params.takerWantsToken), address(params.takerGivesToken), int(vars.totalGot), params.pool
+    );
 
-    uint afterDollarValue = convertToUSD(vars.givesTokenBalance, params.takerGivesTokenUSD, takerGivesTokenDecimals)
-      + convertToUSD(vars.wantsTokenBalance, params.takerWantsTokenUSD, takerWantsTokenDecimals);
+    require(
+      vars.givesTokenBalance <= vars.givesTokenBalance - vars.totalGave + deltaTakerGives, "MgvArbitrage/notProfitable"
+    );
+    require(vars.wantsTokenBalance <= vars.totalGot - deltaTakerGives, "MgvArbitrage/notProfitable");
+  }
 
-    require(afterDollarValue > dollarValue, "MgvArbitrage/notProfitable");
-    return uint(amount0);
+  function lowLevelUniswapSwap(address givesToken, address wantsToken, int amountIn, IUniswapV3Pool pool)
+    internal
+    returns (uint amountGivesToken, uint amountWantsToken)
+  {
+    bool zeroForOne = givesToken < wantsToken; // tokenIn < tokenOut
+    (int amount0, int amount1) = pool.swap(
+      address(this), zeroForOne, amountIn, zeroForOne ? MIN_SQRT_RATIO + 1 : MAX_SQRT_RATIO - 1, abi.encode(givesToken)
+    );
+
+    if (amount0 > amount1) {
+      amountGivesToken = uint(-amount0);
+      amountWantsToken = uint(amount1);
+    } else {
+      amountGivesToken = uint(amount1);
+      amountWantsToken = uint(-amount0);
+    }
   }
 
   function uniswapV3SwapCallback(int amount0Delta, int amount1Delta, bytes calldata data) external {
-    require(pools[msg.sender] == true);
+    require(pools[msg.sender] == true); // ensure only approved UniswapV3 can call this function
     address tokenToTransfer = abi.decode(data, (address));
 
     uint amountToPay = amount0Delta > 0 ? uint(amount0Delta) : uint(amount1Delta);
@@ -124,6 +126,5 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
       TransferLib.approveToken(tokens[i], address(mgv), type(uint).max);
       TransferLib.approveToken(tokens[i], pool, type(uint).max);
     }
-    (this).setPool(pool, true);
   }
 }

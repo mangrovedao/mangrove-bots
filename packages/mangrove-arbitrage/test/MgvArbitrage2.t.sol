@@ -104,8 +104,11 @@ contract MgvArbitrageTest is MangroveTest {
   }
 
   function test_isProfitable() public {
-    vm.prank(admin);
+    vm.startPrank(admin);
     arbStrat.activateTokens(tokens, address(uniswapV3PoolWETHUSDC3000));
+    arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
+    vm.stopPrank();
+
     deal($(USDC), address(arbStrat), cash(USDC, 20000));
     deal($(WETH), seller, cash(WETH, 10));
     vm.prank(seller);
@@ -119,28 +122,24 @@ contract MgvArbitrageTest is MangroveTest {
       pivotId: 0
     });
 
-    ArbParams memory params = ArbParams({
-      takerGivesToken: USDC,
-      takerGivesTokenUSD: 10010, // 1.0010 USD use 4 decimals
-      takerWantsToken: WETH,
-      takerWantsTokenUSD: 16000000, // 1600.0000
-      pool: uniswapV3PoolWETHUSDC3000
-    });
+    ArbParams memory params = ArbParams({takerGivesToken: USDC, takerWantsToken: WETH, pool: uniswapV3PoolWETHUSDC3000});
 
     uint usdcBalanceBefore = USDC.balanceOf(address(arbStrat));
     uint wethBalanceBefore = WETH.balanceOf(address(arbStrat));
     vm.prank(admin);
-    uint amountOut = arbStrat.doArbitrage(params);
+    arbStrat.doArbitrageFirstMangroveThenUniswap(params);
     uint usdcBalanceAfter = USDC.balanceOf(address(arbStrat));
     uint wethBalanceAfter = WETH.balanceOf(address(arbStrat));
     assertTrue(usdcBalanceAfter > usdcBalanceBefore, "Should have increased usdcBalance ");
     assertTrue(wethBalanceAfter == wethBalanceBefore, "Should have the same wethBalance");
-    assertTrue(amountOut > usdcBalanceBefore, "Amount out should be larger than the initial offer on Mangrove");
   }
 
   function test_isNotProfitable() public {
-    vm.prank(admin);
+    vm.startPrank(admin);
     arbStrat.activateTokens(tokens, address(uniswapV3PoolWETHUSDC3000));
+    arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
+    vm.stopPrank();
+
     deal($(USDC), address(arbStrat), cash(USDC, 20000));
     deal($(WETH), seller, cash(WETH, 10));
     vm.prank(seller);
@@ -154,17 +153,11 @@ contract MgvArbitrageTest is MangroveTest {
       pivotId: 0
     });
 
-    ArbParams memory params = ArbParams({
-      takerGivesToken: USDC,
-      takerGivesTokenUSD: 10010, // 1.0010 USD use 4 decimals
-      takerWantsToken: WETH,
-      takerWantsTokenUSD: 16000000, // 1600.0000
-      pool: uniswapV3PoolWETHUSDC3000
-    });
+    ArbParams memory params = ArbParams({takerGivesToken: USDC, takerWantsToken: WETH, pool: uniswapV3PoolWETHUSDC3000});
 
     vm.prank(admin);
     vm.expectRevert("MgvArbitrage/notProfitable");
-    arbStrat.doArbitrage(params);
+    arbStrat.doArbitrageFirstMangroveThenUniswap(params);
   }
   //
   // function test_offerFailedOnMangrove() public {
