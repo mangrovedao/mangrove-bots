@@ -58,30 +58,27 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
     uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
 
-    (uint totalGot, uint totalGave,) = mangroveMarketOrder(params, givesTokenBalance);
+    (uint totalGot, uint totalGave,) =
+      mangroveMarketOrder(address(params.takerWantsToken), address(params.takerGivesToken), givesTokenBalance);
 
     (uint deltaTakerWants, uint deltaTakerGives) =
       lowLevelUniswapSwap(address(params.takerWantsToken), address(params.takerGivesToken), int(totalGot), params.pool);
 
     require(givesTokenBalance <= givesTokenBalance - totalGave + deltaTakerGives, "MgvArbitrage/notProfitable");
-
     require(wantsTokenBalance <= totalGot - deltaTakerWants, "MgvArbitrage/notProfitable");
   }
 
-  function mangroveMarketOrder(ArbParams memory params, uint givesTokenBalance)
+  function mangroveMarketOrder(address givesToken, address wantsToken, uint givesTokenBalance)
     internal
     returns (uint totalGot, uint totalGave, uint totalPenalty)
   {
-    uint bestOfferId = mgv.best(address(params.takerWantsToken), address(params.takerGivesToken));
-    MgvStructs.OfferUnpacked memory bestOffer =
-      mgv.offers(address(params.takerWantsToken), address(params.takerGivesToken), bestOfferId).to_struct();
+    uint bestOfferId = mgv.best(givesToken, wantsToken);
+    MgvStructs.OfferUnpacked memory bestOffer = mgv.offers(givesToken, wantsToken, bestOfferId).to_struct();
 
     if (bestOffer.gives < givesTokenBalance) {
-      (totalGot, totalGave, totalPenalty,) =
-        mgv.marketOrder(address(params.takerWantsToken), address(params.takerGivesToken), 0, bestOffer.gives, false);
+      (totalGot, totalGave, totalPenalty,) = mgv.marketOrder(givesToken, wantsToken, 0, bestOffer.gives, false);
     } else {
-      (totalGot, totalGave, totalPenalty,) =
-        mgv.marketOrder(address(params.takerWantsToken), address(params.takerGivesToken), 0, givesTokenBalance, false);
+      (totalGot, totalGave, totalPenalty,) = mgv.marketOrder(givesToken, wantsToken, 0, givesTokenBalance, false);
     }
   }
 
