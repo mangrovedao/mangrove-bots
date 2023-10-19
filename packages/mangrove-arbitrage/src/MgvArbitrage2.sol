@@ -54,18 +54,96 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     (success,) = to.call{value: amount}("");
   }
 
+  /**
+   * @notice This function performs an arbitrage by first exchanging `takerGivesToken` for `takerWantsToken` using Mangrove, and then it swaps the received `takerWantsToken` back to `takerGivesToken` using Uniswap.
+   *
+   * @dev This function is designed to exploit arbitrage opportunities between the Mangrove market and a Uniswap V3 pool. Let's consider an example where the Mangrove market (takerWantsToken/takerGivesToken) is structured as follows:
+   *
+   * ```
+   * {
+   *    outboundTkn: takerWantsToken,
+   *    inboundTkn: takerGivesToken,
+   *    gives: x,
+   *    wants: y,
+   *    // ... (other properties)
+   * }
+   * ```
+   * The arbitrageur's balance of `takerGivesToken` is `z`.
+   *
+   * This function calculates the minimum between `z` and `y`, and then performs a `marketOrder` with `fillWants` set to `false` and `takerGives` set to the minimum value between `z` and `y`. The `marketOrder` returns `totalGot` (in `takerWantsToken`) and `totalGave` (in `takerGivesToken`). It then swaps `totalGot` tokens using Uniswap, which returns `deltaTakerWants` (in `takerWantsToken`) and `deltaTakerGives` (in `takerGivesToken).
+   *
+   * After these operations, the function checks that the balances of `takerGivesToken` and `takerWantsToken` have increased. If the balances have not increased, the transaction reverts, indicating that the arbitrage was not profitable.
+   *
+   * @param params An `ArbParams` struct containing the necessary information for the arbitrage operation.
+   */
   function doArbitrageFirstMangroveThenUniswap(ArbParams calldata params) public {
     uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
     uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
 
-    (uint totalGot, uint totalGave,) =
-      mangroveMarketOrder(address(params.takerWantsToken), address(params.takerGivesToken), givesTokenBalance);
+    MgvStructs.OfferUnpacked memory bestOffer =
+      getMinimumAmountBetweenBalanceAndBestOffer(address(params.takerWantsToken), address(params.takerGivesToken));
+
+    (uint totalGot, uint totalGave,,) = mgv.marketOrder(
+      address(params.takerWantsToken),
+      address(params.takerGivesToken),
+      0,
+      bestOffer.wants > givesTokenBalance ? givesTokenBalance : bestOffer.wants,
+      false
+    );
 
     (uint deltaTakerWants, uint deltaTakerGives) =
       lowLevelUniswapSwap(address(params.takerWantsToken), address(params.takerGivesToken), int(totalGot), params.pool);
 
     require(givesTokenBalance <= givesTokenBalance - totalGave + deltaTakerGives, "MgvArbitrage/notProfitable");
     require(wantsTokenBalance <= totalGot - deltaTakerWants, "MgvArbitrage/notProfitable");
+  }
+
+  /**
+   * @notice This function performs an arbitrage by first exchanging `takerGivesToken` for `takerWantsToken` using Uniswap, and then it swaps the received `takerWantsToken` back to `takerGivesToken` using Uniswap.
+   *
+   * @dev This function is designed to execute arbitrage opportunities between the Mangrove market and a Uniswap V3 pool. Let's consider an example where the Mangrove market (takerWantsToken/takerGivesToken) is structured as follows:
+   *
+   * ```
+   * {
+   *    outboundTkn: takerWantsToken,
+   *    inboundTkn: takerGivesToken,
+   *    gives: x,
+   *    wants: y,
+   *    // ... (other properties)
+   * }
+   * ```
+   *
+   * The primary objective of this function is to exchange a specified amount of `takerGivesToken` (z) to acquire an exact quantity of `takerWantsToken` (y) using uniswap
+   * and subsequently swap the acquired `takerWantsToken` for `takerGivesToken` using Mangrove.
+   * After these operations, the function checks that the balances of `takerGivesToken` and `takerWantsToken` have increased. If the balances have not increased, the transaction reverts, indicating that the arbitrage was not profitable.
+   *
+   * @param params An `ArbParams` struct containing the necessary information for the arbitrage operation.
+   */
+  function doArbitrageFirstUniwapThenMangrove(ArbParams calldata params) public {
+    uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
+    uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
+
+    MgvStructs.OfferUnpacked memory bestOffer =
+      getMinimumAmountBetweenBalanceAndBestOffer(address(params.takerGivesToken), address(params.takerWantsToken));
+
+    (uint deltaGives, uint deltaWants) = lowLevelUniswapSwap(
+      address(params.takerGivesToken), address(params.takerWantsToken), -int(bestOffer.wants), params.pool
+    ); // compute minimum between my balance and wants converted using offer price
+
+    (uint totalGot, uint totalGave,,) =
+      mgv.marketOrder(address(params.takerGivesToken), address(params.takerWantsToken), 0, deltaWants, false);
+
+    require(givesTokenBalance <= givesTokenBalance + totalGot - deltaGives, "MgvArbitrage/notProfitable");
+    require(wantsTokenBalance <= wantsTokenBalance + deltaWants - totalGave, "MgvArbitrage/notProfitable");
+  }
+
+  function getMinimumAmountBetweenBalanceAndBestOffer(address outboundTkn, address inboundTkn)
+    internal
+    view
+    returns (MgvStructs.OfferUnpacked memory bestOffer)
+  {
+    uint bestOfferId = mgv.best(outboundTkn, inboundTkn);
+    bestOffer = mgv.offers(outboundTkn, inboundTkn, bestOfferId).to_struct();
   }
 
   function mangroveMarketOrder(address givesToken, address wantsToken, uint givesTokenBalance)
@@ -84,19 +162,23 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
 
   function lowLevelUniswapSwap(address givesToken, address wantsToken, int amountIn, IUniswapV3Pool pool)
     internal
-    returns (uint amountGivesToken, uint amountWantsToken)
+    returns (uint amountGives, uint amountWants)
   {
     bool zeroForOne = givesToken < wantsToken; // tokenIn < tokenOut
     (int amount0, int amount1) = pool.swap(
       address(this), zeroForOne, amountIn, zeroForOne ? MIN_SQRT_RATIO + 1 : MAX_SQRT_RATIO - 1, abi.encode(givesToken)
     );
 
-    if (amount0 > amount1) {
-      amountGivesToken = uint(-amount0);
-      amountWantsToken = uint(amount1);
+    if (amount0 > 0) {
+      amountGives = uint(amount0);
     } else {
-      amountGivesToken = uint(amount1);
-      amountWantsToken = uint(-amount0);
+      amountWants = uint(-amount0);
+    }
+
+    if (amount1 > 0) {
+      amountGives = uint(amount1);
+    } else {
+      amountWants = uint(-amount1);
     }
   }
 
