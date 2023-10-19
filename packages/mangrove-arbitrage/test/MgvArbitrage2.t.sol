@@ -7,7 +7,6 @@ import {PinnedPolygonFork} from "src/MyPinnedPolygon.sol"; // have to use ar pol
 import {TestToken} from "mgv_test/lib/tokens/TestToken.sol";
 import {IERC20} from "mgv_src/MgvLib.sol";
 import {IUniswapV3Pool} from "lib/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
-import "src/MgvArbitrage2.sol";
 
 contract MgvArbitrageTest is MangroveTest {
   PinnedPolygonFork fork;

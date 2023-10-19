@@ -9,6 +9,8 @@ import {TransferLib} from "mgv_src/strategies/utils/TransferLib.sol";
 import {IUniswapV3Pool} from "lib/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
 import {IUniswapV3SwapCallback} from "lib/v3-core/contracts/interfaces/callback/IUniswapV3SwapCallback.sol";
 
+import "forge-std/console.sol";
+
 struct ArbParams {
   IERC20 takerGivesToken;
   IERC20 takerWantsToken;
@@ -52,43 +54,35 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     (success,) = to.call{value: amount}("");
   }
 
-  struct HeapVars {
-    uint givesTokenBalance;
-    uint wantsTokenBalance;
-    uint bestOfferId;
-    MgvStructs.OfferUnpacked bestOffer;
-    uint minAmount;
-    uint totalGot;
-    uint totalGave;
-    uint totalPenalty;
+  function doArbitrageFirstMangroveThenUniswap(ArbParams calldata params) public {
+    uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
+    uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
+
+    (uint totalGot, uint totalGave,) = mangroveMarketOrder(params, givesTokenBalance);
+
+    (uint deltaTakerWants, uint deltaTakerGives) =
+      lowLevelUniswapSwap(address(params.takerWantsToken), address(params.takerGivesToken), int(totalGot), params.pool);
+
+    require(givesTokenBalance <= givesTokenBalance - totalGave + deltaTakerGives, "MgvArbitrage/notProfitable");
+
+    require(wantsTokenBalance <= totalGot - deltaTakerWants, "MgvArbitrage/notProfitable");
   }
 
-  function doArbitrageFirstMangroveThenUniswap(ArbParams calldata params) public {
-    HeapVars memory vars;
-    vars.givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
-    vars.wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
+  function mangroveMarketOrder(ArbParams memory params, uint givesTokenBalance)
+    internal
+    returns (uint totalGot, uint totalGave, uint totalPenalty)
+  {
+    uint bestOfferId = mgv.best(address(params.takerWantsToken), address(params.takerGivesToken));
+    MgvStructs.OfferUnpacked memory bestOffer =
+      mgv.offers(address(params.takerWantsToken), address(params.takerGivesToken), bestOfferId).to_struct();
 
-    vars.bestOfferId = mgv.best(address(params.takerWantsToken), address(params.takerGivesToken));
-    vars.bestOffer =
-      mgv.offers(address(params.takerWantsToken), address(params.takerGivesToken), vars.bestOfferId).to_struct();
-
-    if (vars.bestOffer.gives < vars.givesTokenBalance) {
-      vars.minAmount = vars.bestOffer.gives;
+    if (bestOffer.gives < givesTokenBalance) {
+      (totalGot, totalGave, totalPenalty,) =
+        mgv.marketOrder(address(params.takerWantsToken), address(params.takerGivesToken), 0, bestOffer.gives, false);
     } else {
-      vars.minAmount = vars.givesTokenBalance;
+      (totalGot, totalGave, totalPenalty,) =
+        mgv.marketOrder(address(params.takerWantsToken), address(params.takerGivesToken), 0, givesTokenBalance, false);
     }
-
-    (vars.totalGot, vars.totalGave, vars.totalPenalty,) =
-      mgv.marketOrder(address(params.takerWantsToken), address(params.takerGivesToken), 0, vars.minAmount, false);
-
-    (uint deltaTakerWants, uint deltaTakerGives) = lowLevelUniswapSwap(
-      address(params.takerWantsToken), address(params.takerGivesToken), int(vars.totalGot), params.pool
-    );
-
-    require(
-      vars.givesTokenBalance <= vars.givesTokenBalance - vars.totalGave + deltaTakerGives, "MgvArbitrage/notProfitable"
-    );
-    require(vars.wantsTokenBalance <= vars.totalGot - deltaTakerGives, "MgvArbitrage/notProfitable");
   }
 
   function lowLevelUniswapSwap(address givesToken, address wantsToken, int amountIn, IUniswapV3Pool pool)
