@@ -19,9 +19,8 @@ struct ArbParams {
 }
 
 contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
-  /// @dev The minimum value that can be returned from #getSqrtRatioAtTick. Equivalent to getSqrtRatioAtTick(MIN_TICK)
+  /// copied from v3-core repo to interact with low level swap function of uniwap
   uint160 internal constant MIN_SQRT_RATIO = 4295128739;
-  /// @dev The maximum value that can be returned from #getSqrtRatioAtTick. Equivalent to getSqrtRatioAtTick(MAX_TICK)
   uint160 internal constant MAX_SQRT_RATIO = 1461446703485210103287273052203988822378723970342;
 
   IMangrove public mgv;
@@ -33,6 +32,8 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
   constructor(IMangrove _mgv, address admin) AccessControlled(admin) {
     mgv = _mgv;
   }
+
+  receive() external payable virtual {}
 
   function setPool(address pool, bool authorized) external onlyAdmin {
     pools[pool] = authorized;
