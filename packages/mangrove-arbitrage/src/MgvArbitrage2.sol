@@ -135,7 +135,7 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
    * @param params An `ArbParams` struct containing the necessary information for the arbitrage operation.
    */
   function doArbitrageFirstUniwapThenMangrove(ArbParams calldata params) public onlyAdmin {
-    uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
+    // uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
     uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
 
     MgvStructs.OfferUnpacked memory bestOffer =
@@ -148,9 +148,7 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     (uint totalGot, uint totalGave,,) =
       mgv.marketOrder(address(params.takerGivesToken), address(params.takerWantsToken), 0, deltaWants, false);
 
-    require(
-      givesTokenBalance + params.minimumGain <= givesTokenBalance + totalGot - deltaGives, "MgvArbitrage/notProfitable"
-    );
+    require(params.minimumGain + deltaGives <= totalGot, "MgvArbitrage/notProfitable");
     require(wantsTokenBalance <= wantsTokenBalance + deltaWants - totalGave, "MgvArbitrage/notProfitable");
   }
 
