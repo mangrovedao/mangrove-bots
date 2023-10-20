@@ -37,6 +37,11 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
 
   receive() external payable virtual {}
 
+  /**
+   * @notice Authorize or unauthorize a specific Uniswap pool to call the 'uniswapV3SwapCallback' function.
+   * @param pool The address of the Uniswap pool.
+   * @param authorized A boolean flag indicating whether the pool is authorized (true) or unauthorized (false) to call the 'uniswapV3SwapCallback' function.
+   */
   function setPool(address pool, bool authorized) external onlyAdmin {
     pools[pool] = authorized;
   }
