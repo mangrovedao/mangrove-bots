@@ -11,6 +11,10 @@ import {IUniswapV3SwapCallback} from "lib/v3-core/contracts/interfaces/callback/
 
 import "forge-std/console.sol";
 
+/// @param takerGivesToken The token the taker gives
+/// @param takerWantsToken The token the taker wants
+/// @param pool The Uniswap pool
+/// @param minimumGain The minimum amount the arbitrage needs to gain
 struct ArbParams {
   IERC20 takerGivesToken;
   IERC20 takerWantsToken;
@@ -150,6 +154,12 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     require(wantsTokenBalance <= wantsTokenBalance + deltaWants - totalGave, "MgvArbitrage/notProfitable");
   }
 
+  /**
+   * @notice Retrieves the best mangrove offer for a given market pair of outbound token and inbound token onplatformMangrove.
+   * @param outboundTkn The token sent by the offer maker.
+   * @param inboundTkn The token sent by the offer taker.
+   * @return bestOffer A struct containing the best offer parameters.
+   */
   function mangroveGetBestOffer(address outboundTkn, address inboundTkn)
     internal
     view
@@ -159,27 +169,22 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     bestOffer = mgv.offers(outboundTkn, inboundTkn, bestOfferId).to_struct();
   }
 
-  function mangroveMarketOrder(address givesToken, address wantsToken, uint givesTokenBalance)
-    internal
-    returns (uint totalGot, uint totalGave, uint totalPenalty)
-  {
-    uint bestOfferId = mgv.best(givesToken, wantsToken);
-    MgvStructs.OfferUnpacked memory bestOffer = mgv.offers(givesToken, wantsToken, bestOfferId).to_struct();
-
-    if (bestOffer.gives < givesTokenBalance) {
-      (totalGot, totalGave, totalPenalty,) = mgv.marketOrder(givesToken, wantsToken, 0, bestOffer.gives, false);
-    } else {
-      (totalGot, totalGave, totalPenalty,) = mgv.marketOrder(givesToken, wantsToken, 0, givesTokenBalance, false);
-    }
-  }
-
-  function lowLevelUniswapSwap(address givesToken, address wantsToken, int amountIn, IUniswapV3Pool pool)
+  /**
+   * @notice Executes a low-level call to the Uniswap V3 `swap` function for exchanging tokens.
+   * @param givesToken The token to be exchanged.
+   * @param wantsToken The token to be received in the exchange.
+   * @param amount The amount to be swapped, specified as a positive integer if selling `givesToken` or a negative integer if selling `givesToken` to obtain the exact `amount` of the `wantsToken.
+   * @param pool The Uniswap V3 pool where the swap will take place.
+   * @return amountGives The amount of `givesToken` sent in the swap.
+   * @return amountWants The amount of `wantsToken` received in the swap.
+   */
+  function lowLevelUniswapSwap(address givesToken, address wantsToken, int amount, IUniswapV3Pool pool)
     internal
     returns (uint amountGives, uint amountWants)
   {
     bool zeroForOne = givesToken < wantsToken; // tokenIn < tokenOut
     (int amount0, int amount1) = pool.swap(
-      address(this), zeroForOne, amountIn, zeroForOne ? MIN_SQRT_RATIO + 1 : MAX_SQRT_RATIO - 1, abi.encode(givesToken)
+      address(this), zeroForOne, amount, zeroForOne ? MIN_SQRT_RATIO + 1 : MAX_SQRT_RATIO - 1, abi.encode(givesToken)
     );
 
     if (amount0 > 0) {
@@ -195,6 +200,7 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     }
   }
 
+  /// @inheritdoc IUniswapV3SwapCallback
   function uniswapV3SwapCallback(int amount0Delta, int amount1Delta, bytes calldata data) external {
     require(pools[msg.sender] == true); // ensure only approved UniswapV3 can call this function
     // TODO: maybe we should check that we first called doArbitrage fn ?
