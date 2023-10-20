@@ -9,8 +9,6 @@ import {TransferLib} from "mgv_src/strategies/utils/TransferLib.sol";
 import {IUniswapV3Pool} from "lib/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
 import {IUniswapV3SwapCallback} from "lib/v3-core/contracts/interfaces/callback/IUniswapV3SwapCallback.sol";
 
-import "forge-std/console.sol";
-
 /// @param takerGivesToken The token the taker gives
 /// @param takerWantsToken The token the taker wants
 /// @param pool The Uniswap pool
