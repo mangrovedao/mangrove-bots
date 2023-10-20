@@ -37,6 +37,12 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     pools[pool] = authorized;
   }
 
+  /// @notice This enables the admin to change the Mangrove address.
+  /// @param newMgv The new Mangrove address
+  function setMgv(IMangrove newMgv) external onlyAdmin {
+    mgv = newMgv;
+  }
+
   /// @notice This enables the admin to withdraw tokens from the contract. Notice that only the admin can call this.
   /// @param token The token to be withdrawn
   /// @param amount The amount to be withdrawn
@@ -128,7 +134,7 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
 
     (uint deltaGives, uint deltaWants) = lowLevelUniswapSwap(
       address(params.takerGivesToken), address(params.takerWantsToken), -int(bestOffer.wants), params.pool
-    ); // compute minimum between my balance and wants converted using offer price
+    ); // TODO: compute minimum between my balance and wants converted using offer price
 
     (uint totalGot, uint totalGave,,) =
       mgv.marketOrder(address(params.takerGivesToken), address(params.takerWantsToken), 0, deltaWants, false);
@@ -184,6 +190,7 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
 
   function uniswapV3SwapCallback(int amount0Delta, int amount1Delta, bytes calldata data) external {
     require(pools[msg.sender] == true); // ensure only approved UniswapV3 can call this function
+    // TODO: maybe we should check that we first called doArbitrage fn ?
     address tokenToTransfer = abi.decode(data, (address));
 
     uint amountToPay = amount0Delta > 0 ? uint(amount0Delta) : uint(amount1Delta);
@@ -194,10 +201,9 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
   /// @notice This approves all the necessary tokens on Mangrove and the Uniswap router
   /// It is only the admin that can call this function
   /// @param tokens The tokens to approve
-  function activateTokens(IERC20[] calldata tokens, address pool) external onlyAdmin {
+  function activateTokens(IERC20[] calldata tokens) external onlyAdmin {
     for (uint i = 0; i < tokens.length; ++i) {
       TransferLib.approveToken(tokens[i], address(mgv), type(uint).max);
-      TransferLib.approveToken(tokens[i], pool, type(uint).max);
     }
   }
 }
