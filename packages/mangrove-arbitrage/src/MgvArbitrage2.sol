@@ -109,10 +109,7 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     (uint deltaTakerWants, uint deltaTakerGives) =
       lowLevelUniswapSwap(address(params.takerWantsToken), address(params.takerGivesToken), int(totalGot), params.pool);
 
-    require(
-      givesTokenBalance + params.minimumGain <= givesTokenBalance - totalGave + deltaTakerGives,
-      "MgvArbitrage/notProfitable"
-    );
+    require(params.minimumGain + totalGave <= deltaTakerGives, "MgvArbitrage/notProfitable");
     require(wantsTokenBalance <= totalGot - deltaTakerWants, "MgvArbitrage/notProfitable");
   }
 
