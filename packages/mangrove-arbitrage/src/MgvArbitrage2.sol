@@ -91,7 +91,7 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
    *
    * @param params An `ArbParams` struct containing the necessary information for the arbitrage operation.
    */
-  function doArbitrageFirstMangroveThenUniswap(ArbParams calldata params) public {
+  function doArbitrageFirstMangroveThenUniswap(ArbParams calldata params) public onlyAdmin {
     uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
     uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
 
@@ -137,7 +137,7 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
    *
    * @param params An `ArbParams` struct containing the necessary information for the arbitrage operation.
    */
-  function doArbitrageFirstUniwapThenMangrove(ArbParams calldata params) public {
+  function doArbitrageFirstUniwapThenMangrove(ArbParams calldata params) public onlyAdmin {
     uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
     uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
 
