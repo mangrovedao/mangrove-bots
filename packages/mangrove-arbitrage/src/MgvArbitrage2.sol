@@ -15,6 +15,7 @@ struct ArbParams {
   IERC20 takerGivesToken;
   IERC20 takerWantsToken;
   IUniswapV3Pool pool;
+  uint160 minimumGain; // if zero then ignored
 }
 
 contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
@@ -100,7 +101,10 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     (uint deltaTakerWants, uint deltaTakerGives) =
       lowLevelUniswapSwap(address(params.takerWantsToken), address(params.takerGivesToken), int(totalGot), params.pool);
 
-    require(givesTokenBalance <= givesTokenBalance - totalGave + deltaTakerGives, "MgvArbitrage/notProfitable");
+    require(
+      givesTokenBalance + params.minimumGain <= givesTokenBalance - totalGave + deltaTakerGives,
+      "MgvArbitrage/notProfitable"
+    );
     require(wantsTokenBalance <= totalGot - deltaTakerWants, "MgvArbitrage/notProfitable");
   }
 
@@ -139,7 +143,9 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     (uint totalGot, uint totalGave,,) =
       mgv.marketOrder(address(params.takerGivesToken), address(params.takerWantsToken), 0, deltaWants, false);
 
-    require(givesTokenBalance <= givesTokenBalance + totalGot - deltaGives, "MgvArbitrage/notProfitable");
+    require(
+      givesTokenBalance + params.minimumGain <= givesTokenBalance + totalGot - deltaGives, "MgvArbitrage/notProfitable"
+    );
     require(wantsTokenBalance <= wantsTokenBalance + deltaWants - totalGave, "MgvArbitrage/notProfitable");
   }
 

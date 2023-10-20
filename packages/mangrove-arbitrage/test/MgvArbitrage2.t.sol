@@ -104,7 +104,12 @@ contract MgvArbitrageTest is MangroveTest {
       pivotId: 0
     });
 
-    ArbParams memory params = ArbParams({takerGivesToken: USDC, takerWantsToken: WETH, pool: uniswapV3PoolWETHUSDC3000});
+    ArbParams memory params = ArbParams({
+      takerGivesToken: USDC,
+      takerWantsToken: WETH,
+      pool: uniswapV3PoolWETHUSDC3000,
+      minimumGain: uint160(cash(USDC, 100))
+    });
 
     uint usdcBalanceBefore = USDC.balanceOf(address(arbStrat));
     uint wethBalanceBefore = WETH.balanceOf(address(arbStrat));
@@ -114,6 +119,37 @@ contract MgvArbitrageTest is MangroveTest {
     uint wethBalanceAfter = WETH.balanceOf(address(arbStrat));
     assertTrue(usdcBalanceAfter > usdcBalanceBefore, "Should have increased usdcBalance");
     assertTrue(wethBalanceAfter == wethBalanceBefore, "Should have the same wethBalance");
+  }
+
+  function test_isNotProfitableBecauseGainToLowFirstMangroveThenUniswapWETHUSDC() public {
+    vm.startPrank(admin);
+    arbStrat.activateTokens(tokens);
+    arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
+    vm.stopPrank();
+
+    deal($(USDC), address(arbStrat), cash(USDC, 20000));
+    deal($(WETH), seller, cash(WETH, 10));
+    vm.prank(seller);
+    mgv.newOffer{value: 1 ether}({
+      outbound_tkn: $(WETH),
+      inbound_tkn: $(USDC),
+      wants: cash(USDC, 1000),
+      gives: cash(WETH, 1),
+      gasreq: 50_000,
+      gasprice: 0,
+      pivotId: 0
+    });
+
+    ArbParams memory params = ArbParams({
+      takerGivesToken: USDC,
+      takerWantsToken: WETH,
+      pool: uniswapV3PoolWETHUSDC3000,
+      minimumGain: uint160(cash(USDC, 10000))
+    });
+
+    vm.prank(admin);
+    vm.expectRevert("MgvArbitrage/notProfitable");
+    arbStrat.doArbitrageFirstMangroveThenUniswap(params);
   }
 
   function test_isNotProfitableFirstMangroveThenUniswapWETHUSDC() public {
@@ -135,7 +171,8 @@ contract MgvArbitrageTest is MangroveTest {
       pivotId: 0
     });
 
-    ArbParams memory params = ArbParams({takerGivesToken: USDC, takerWantsToken: WETH, pool: uniswapV3PoolWETHUSDC3000});
+    ArbParams memory params =
+      ArbParams({takerGivesToken: USDC, takerWantsToken: WETH, pool: uniswapV3PoolWETHUSDC3000, minimumGain: 0});
 
     vm.prank(admin);
     vm.expectRevert("MgvArbitrage/notProfitable");
@@ -161,7 +198,8 @@ contract MgvArbitrageTest is MangroveTest {
       pivotId: 0
     });
 
-    ArbParams memory params = ArbParams({takerGivesToken: WETH, takerWantsToken: USDC, pool: uniswapV3PoolWETHUSDC3000});
+    ArbParams memory params =
+      ArbParams({takerGivesToken: WETH, takerWantsToken: USDC, pool: uniswapV3PoolWETHUSDC3000, minimumGain: 0});
 
     uint usdcBalanceBefore = USDC.balanceOf(address(arbStrat));
     uint wethBalanceBefore = WETH.balanceOf(address(arbStrat));
@@ -172,6 +210,37 @@ contract MgvArbitrageTest is MangroveTest {
 
     assertTrue(usdcBalanceAfter == usdcBalanceBefore, "Should have the same usdc balance");
     assertTrue(wethBalanceAfter > wethBalanceBefore, "Should have increase weth balance");
+  }
+
+  function test_isNotProfitableGainToLowPriceUniswapFirstThenMangroveWETHUSDC() public {
+    vm.startPrank(admin);
+    arbStrat.activateTokens(tokens);
+    arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
+    vm.stopPrank();
+
+    deal($(WETH), address(arbStrat), cash(WETH, 2));
+    deal($(WETH), seller, cash(WETH, 10));
+    vm.prank(seller);
+    mgv.newOffer{value: 1 ether}({
+      outbound_tkn: $(WETH),
+      inbound_tkn: $(USDC),
+      wants: cash(USDC, 2000),
+      gives: cash(WETH, 2),
+      gasreq: 50_000,
+      gasprice: 0,
+      pivotId: 0
+    });
+
+    ArbParams memory params = ArbParams({
+      takerGivesToken: WETH,
+      takerWantsToken: USDC,
+      pool: uniswapV3PoolWETHUSDC3000,
+      minimumGain: uint160(cash(WETH, 3))
+    });
+
+    vm.prank(admin);
+    vm.expectRevert("MgvArbitrage/notProfitable");
+    arbStrat.doArbitrageFirstUniwapThenMangrove(params);
   }
 
   function test_isNotProfitablePriceUniswapFirstThenMangroveWETHUSDC() public {
@@ -193,7 +262,8 @@ contract MgvArbitrageTest is MangroveTest {
       pivotId: 0
     });
 
-    ArbParams memory params = ArbParams({takerGivesToken: WETH, takerWantsToken: USDC, pool: uniswapV3PoolWETHUSDC3000});
+    ArbParams memory params =
+      ArbParams({takerGivesToken: WETH, takerWantsToken: USDC, pool: uniswapV3PoolWETHUSDC3000, minimumGain: 0});
 
     vm.prank(admin);
     vm.expectRevert(); // revert because taker does not have enough USDC when selling his ETH.
@@ -223,7 +293,8 @@ contract MgvArbitrageTest is MangroveTest {
       pivotId: 0
     });
 
-    ArbParams memory params = ArbParams({takerGivesToken: WETH, takerWantsToken: USDC, pool: uniswapV3PoolWETHUSDC3000});
+    ArbParams memory params =
+      ArbParams({takerGivesToken: WETH, takerWantsToken: USDC, pool: uniswapV3PoolWETHUSDC3000, minimumGain: 0});
 
     uint usdcBalanceBefore = USDC.balanceOf(address(arbStrat));
     uint wethBalanceBefore = WETH.balanceOf(address(arbStrat));
@@ -254,7 +325,8 @@ contract MgvArbitrageTest is MangroveTest {
       pivotId: 0
     });
 
-    ArbParams memory params = ArbParams({takerGivesToken: WETH, takerWantsToken: USDC, pool: uniswapV3PoolWETHUSDC3000});
+    ArbParams memory params =
+      ArbParams({takerGivesToken: WETH, takerWantsToken: USDC, pool: uniswapV3PoolWETHUSDC3000, minimumGain: 0});
 
     vm.prank(admin);
     vm.expectRevert("MgvArbitrage/notProfitable");
@@ -280,7 +352,8 @@ contract MgvArbitrageTest is MangroveTest {
       pivotId: 0
     });
 
-    ArbParams memory params = ArbParams({takerGivesToken: USDC, takerWantsToken: WETH, pool: uniswapV3PoolWETHUSDC3000});
+    ArbParams memory params =
+      ArbParams({takerGivesToken: USDC, takerWantsToken: WETH, pool: uniswapV3PoolWETHUSDC3000, minimumGain: 0});
 
     uint usdcBalanceBefore = USDC.balanceOf(address(arbStrat));
     uint wethBalanceBefore = WETH.balanceOf(address(arbStrat));
@@ -312,7 +385,8 @@ contract MgvArbitrageTest is MangroveTest {
       pivotId: 0
     });
 
-    ArbParams memory params = ArbParams({takerGivesToken: USDC, takerWantsToken: WETH, pool: uniswapV3PoolWETHUSDC3000});
+    ArbParams memory params =
+      ArbParams({takerGivesToken: USDC, takerWantsToken: WETH, pool: uniswapV3PoolWETHUSDC3000, minimumGain: 0});
 
     vm.prank(admin);
     vm.expectRevert();
