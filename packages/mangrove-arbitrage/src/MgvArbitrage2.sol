@@ -89,7 +89,7 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
 
     MgvStructs.OfferUnpacked memory bestOffer =
-      getMinimumAmountBetweenBalanceAndBestOffer(address(params.takerWantsToken), address(params.takerGivesToken));
+      mangroveGetBestOffer(address(params.takerWantsToken), address(params.takerGivesToken));
 
     (uint totalGot, uint totalGave,,) = mgv.marketOrder(
       address(params.takerWantsToken),
@@ -135,7 +135,7 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
 
     MgvStructs.OfferUnpacked memory bestOffer =
-      getMinimumAmountBetweenBalanceAndBestOffer(address(params.takerGivesToken), address(params.takerWantsToken));
+      mangroveGetBestOffer(address(params.takerGivesToken), address(params.takerWantsToken));
 
     (uint deltaGives, uint deltaWants) = lowLevelUniswapSwap(
       address(params.takerGivesToken), address(params.takerWantsToken), -int(bestOffer.wants), params.pool
@@ -150,7 +150,7 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     require(wantsTokenBalance <= wantsTokenBalance + deltaWants - totalGave, "MgvArbitrage/notProfitable");
   }
 
-  function getMinimumAmountBetweenBalanceAndBestOffer(address outboundTkn, address inboundTkn)
+  function mangroveGetBestOffer(address outboundTkn, address inboundTkn)
     internal
     view
     returns (MgvStructs.OfferUnpacked memory bestOffer)
