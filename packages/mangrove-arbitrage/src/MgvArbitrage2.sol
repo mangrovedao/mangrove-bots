@@ -66,11 +66,9 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     }
   }
 
-  /**
-   * @notice Authorize or unauthorize a specific Uniswap pool to call the 'uniswapV3SwapCallback' function.
-   * @param pool The address of the Uniswap pool.
-   * @param authorized A boolean flag indicating whether the pool is authorized (true) or unauthorized (false) to call the 'uniswapV3SwapCallback' function.
-   */
+  /// @notice Authorize or unauthorize a specific Uniswap pool to call the 'uniswapV3SwapCallback' function.
+  /// @param pool The address of the Uniswap pool.
+  /// @param authorized A boolean flag indicating whether the pool is authorized (true) or unauthorized (false) to call the 'uniswapV3SwapCallback' function.
   function setPool(address pool, bool authorized) external onlyAdmin {
     pools[pool] = authorized;
   }
@@ -98,28 +96,21 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     (success,) = to.call{value: amount}("");
   }
 
-  /**
-   * @notice This function performs an arbitrage by first exchanging `takerGivesToken` for `takerWantsToken` using Mangrove, and then it swaps the received `takerWantsToken` back to `takerGivesToken` using Uniswap.
-   *
-   * @dev This function is designed to exploit arbitrage opportunities between the Mangrove market and a Uniswap V3 pool. Let's consider an example where the Mangrove market (takerWantsToken/takerGivesToken) is structured as follows:
-   *
-   * ```
-   * {
-   *    outboundTkn: takerWantsToken,
-   *    inboundTkn: takerGivesToken,
-   *    gives: x,
-   *    wants: y,
-   *    // ... (other properties)
-   * }
-   * ```
-   * The arbitrageur's balance of `takerGivesToken` is `z`.
-   *
-   * This function calculates the minimum between `z` and `y`, and then performs a `marketOrder` with `fillWants` set to `false` and `takerGives` set to the minimum value between `z` and `y`. The `marketOrder` returns `totalGot` (in `takerWantsToken`) and `totalGave` (in `takerGivesToken`). It then swaps `totalGot` tokens using Uniswap, which returns `deltaTakerWants` (in `takerWantsToken`) and `deltaTakerGives` (in `takerGivesToken).
-   *
-   * After these operations, the function checks that the balances of `takerGivesToken` and `takerWantsToken` have increased. If the balances have not increased, the transaction reverts, indicating that the arbitrage was not profitable.
-   *
-   * @param params An `ArbParams` struct containing the necessary information for the arbitrage operation.
-   */
+  /// @notice This function performs an arbitrage by first exchanging `takerGivesToken` for `takerWantsToken` using Mangrove, and then it swaps the received `takerWantsToken` back to `takerGivesToken` using Uniswap.
+  /// @dev This function is designed to exploit arbitrage opportunities between the Mangrove market and a Uniswap V3 pool. Let's consider an example where the Mangrove market (takerWantsToken/takerGivesToken) is structured as follows:
+  /// ```
+  /// {
+  ///    outboundTkn: takerWantsToken,
+  ///    inboundTkn: takerGivesToken,
+  ///    gives: x,
+  ///    wants: y,
+  ///    // ... (other properties)
+  /// }
+  /// ```
+  /// The arbitrageur's balance of `takerGivesToken` is `z`.
+  /// This function calculates the minimum between `z` and `y`, and then performs a `marketOrder` with `fillWants` set to `false` and `takerGives` set to the minimum value between `z` and `y`. The `marketOrder` returns `totalGot` (in `takerWantsToken`) and `totalGave` (in `takerGivesToken`). It then swaps `totalGot` tokens using Uniswap, which returns `deltaTakerWants` (in `takerWantsToken`) and `deltaTakerGives` (in `takerGivesToken).
+  /// After these operations, the function checks that the balances of `takerGivesToken` and `takerWantsToken` have increased. If the balances have not increased, the transaction reverts, indicating that the arbitrage was not profitable.
+  /// @param params An `ArbParams` struct containing the necessary information for the arbitrage operation.
   function doArbitrageFirstMangroveThenUniswap(ArbParams calldata params) public onlyAdmin {
     uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
     uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
@@ -142,27 +133,25 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     require(wantsTokenBalance <= totalGot - deltaTakerWants, "MgvArbitrage/notProfitable");
   }
 
-  /**
-   * @notice This function performs an arbitrage by first exchanging `takerGivesToken` for `takerWantsToken` using Uniswap, and then it swaps the received `takerWantsToken` back to `takerGivesToken` using Uniswap.
-   *
-   * @dev This function is designed to execute arbitrage opportunities between the Mangrove market and a Uniswap V3 pool. Let's consider an example where the Mangrove market (takerWantsToken/takerGivesToken) is structured as follows:
-   *
-   * ```
-   * {
-   *    outboundTkn: takerWantsToken,
-   *    inboundTkn: takerGivesToken,
-   *    gives: x,
-   *    wants: y,
-   *    // ... (other properties)
-   * }
-   * ```
-   *
-   * The primary objective of this function is to exchange a specified amount of `takerGivesToken` (z) to acquire an exact quantity of `takerWantsToken` (y) using uniswap
-   * and subsequently swap the acquired `takerWantsToken` for `takerGivesToken` using Mangrove.
-   * After these operations, the function checks that the balances of `takerGivesToken` and `takerWantsToken` have increased. If the balances have not increased, the transaction reverts, indicating that the arbitrage was not profitable.
-   *
-   * @param params An `ArbParams` struct containing the necessary information for the arbitrage operation.
-   */
+  /// @notice This function performs an arbitrage by first exchanging `takerGivesToken` for `takerWantsToken` using Uniswap, and then it swaps the received `takerWantsToken` back to `takerGivesToken` using Uniswap.
+  ///
+  /// @dev This function is designed to execute arbitrage opportunities between the Mangrove market and a Uniswap V3 pool. Let's consider an example where the Mangrove market (takerWantsToken/takerGivesToken) is structured as follows:
+  ///
+  /// ```
+  /// {
+  ///    outboundTkn: takerWantsToken,
+  ///    inboundTkn: takerGivesToken,
+  ///    gives: x,
+  ///    wants: y,
+  ///    // ... (other properties)
+  /// }
+  /// ```
+  ///
+  /// The primary objective of this function is to exchange a specified amount of `takerGivesToken` (z) to acquire an exact quantity of `takerWantsToken` (y) using uniswap
+  /// and subsequently swap the acquired `takerWantsToken` for `takerGivesToken` using Mangrove.
+  /// After these operations, the function checks that the balances of `takerGivesToken` and `takerWantsToken` have increased. If the balances have not increased, the transaction reverts, indicating that the arbitrage was not profitable.
+  ///
+  /// @param params An `ArbParams` struct containing the necessary information for the arbitrage operation.
   function doArbitrageFirstUniwapThenMangrove(ArbParams calldata params) public onlyAdmin {
     uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
 
@@ -187,12 +176,10 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     require(wantsTokenBalance <= wantsTokenBalance + deltaWants - totalGave, "MgvArbitrage/notProfitable");
   }
 
-  /**
-   * @notice Retrieves the best mangrove offer for a given market pair of outbound token and inbound token onplatformMangrove.
-   * @param outboundTkn The token sent by the offer maker.
-   * @param inboundTkn The token sent by the offer taker.
-   * @return bestOffer A struct containing the best offer parameters.
-   */
+  ///@notice Retrieves the best mangrove offer for a given market pair of outbound token and inbound token onplatformMangrove.
+  ///@param outboundTkn The token sent by the offer maker.
+  ///@param inboundTkn The token sent by the offer taker.
+  ///@return bestOffer A struct containing the best offer parameters.
   function mangroveGetBestOffer(address outboundTkn, address inboundTkn)
     internal
     view
@@ -202,15 +189,13 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     bestOffer = mgv.offers(outboundTkn, inboundTkn, bestOfferId).to_struct();
   }
 
-  /**
-   * @notice Executes a low-level call to the Uniswap V3 `swap` function for exchanging tokens.
-   * @param givesToken The token to be exchanged.
-   * @param wantsToken The token to be received in the exchange.
-   * @param amount The amount to be swapped, specified as a positive integer if selling `givesToken` or a negative integer if selling `givesToken` to obtain the exact `amount` of the `wantsToken.
-   * @param pool The Uniswap V3 pool where the swap will take place.
-   * @return amountGives The amount of `givesToken` sent in the swap.
-   * @return amountWants The amount of `wantsToken` received in the swap.
-   */
+  /// @notice Executes a low-level call to the Uniswap V3 `swap` function for exchanging tokens.
+  /// @param givesToken The token to be exchanged.
+  /// @param wantsToken The token to be received in the exchange.
+  /// @param amount The amount to be swapped, specified as a positive integer if selling `givesToken` or a negative integer if selling `givesToken` to obtain the exact `amount` of the `wantsToken.
+  /// @param pool The Uniswap V3 pool where the swap will take place.
+  /// @return amountGives The amount of `givesToken` sent in the swap.
+  /// @return amountWants The amount of `wantsToken` received in the swap.
   function lowLevelUniswapSwap(address givesToken, address wantsToken, int amount, IUniswapV3Pool pool)
     internal
     returns (uint amountGives, uint amountWants)
