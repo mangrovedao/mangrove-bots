@@ -36,7 +36,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Yarn setup (caching yarn dependencies)
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: 18.x
         cache: 'yarn'
@@ -79,7 +79,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Yarn setup (caching yarn dependencies)
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: 18.x
         cache: 'yarn'
@@ -123,7 +123,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Yarn setup (caching yarn dependencies)
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: 18.x
         cache: 'yarn'
@@ -170,7 +170,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Yarn setup (caching yarn dependencies)
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: 18.x
         cache: 'yarn'
@@ -217,7 +217,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Yarn setup (caching yarn dependencies)
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: 18.x
         cache: 'yarn'
@@ -260,7 +260,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Yarn setup (caching yarn dependencies)
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: 18.x
         cache: 'yarn'
@@ -303,7 +303,7 @@ jobs:
         submodules: recursive
 
     - name: Yarn setup (caching yarn dependencies)
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: 18.x
         cache: 'yarn'
@@ -373,7 +373,7 @@ jobs:
         submodules: recursive
 
     - name: Yarn setup (caching yarn dependencies)
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: 18.x
         cache: 'yarn'
