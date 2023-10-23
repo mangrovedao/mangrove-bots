@@ -8,6 +8,7 @@ import {AccessControlled} from "mgv_src/strategies/utils/AccessControlled.sol";
 import {TransferLib} from "mgv_src/strategies/utils/TransferLib.sol";
 import {IUniswapV3Pool} from "lib/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
 import {IUniswapV3SwapCallback} from "lib/v3-core/contracts/interfaces/callback/IUniswapV3SwapCallback.sol";
+import {FullMath} from "./FullMath.sol";
 
 /// @param takerGivesToken The token the taker gives
 /// @param takerWantsToken The token the taker wants
@@ -36,6 +37,34 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
   }
 
   receive() external payable virtual {}
+
+  function getPrice(IUniswapV3Pool pool, uint token0Decimals) internal view returns (uint price) {
+    (uint160 sqrtPriceX96,,,,,,) = pool.slot0();
+    uint numerator1 = uint(sqrtPriceX96) * uint(sqrtPriceX96);
+    uint numerator2 = 10 ** token0Decimals;
+    return FullMath.mulDiv(numerator1, numerator2, 1 << 192);
+  }
+
+  function estimateUniswapV3PriceAndAmount(IUniswapV3Pool pool, IERC20 takerGivesToken, uint balance)
+    internal
+    view
+    returns (uint amount)
+  {
+    IERC20 token0 = IERC20(pool.token0());
+    IERC20 token1 = IERC20(pool.token1());
+
+    uint token0Decimals = token0.decimals();
+    uint token1Decimals = token1.decimals();
+    uint price = getPrice(pool, token0Decimals);
+
+    if (token1 == takerGivesToken) {
+      // price is in takerWantsToken
+      amount = 10 ** token0Decimals * balance / price;
+    } else {
+      // price is in takerGivesToken
+      amount = (balance * price) / 10 ** token0Decimals;
+    }
+  }
 
   /**
    * @notice Authorize or unauthorize a specific Uniswap pool to call the 'uniswapV3SwapCallback' function.
@@ -135,14 +164,20 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
    * @param params An `ArbParams` struct containing the necessary information for the arbitrage operation.
    */
   function doArbitrageFirstUniwapThenMangrove(ArbParams calldata params) public onlyAdmin {
-    // uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
+    uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
+
+    uint maxAmount = estimateUniswapV3PriceAndAmount(params.pool, params.takerGivesToken, givesTokenBalance);
+
     uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
 
     MgvStructs.OfferUnpacked memory bestOffer =
       mangroveGetBestOffer(address(params.takerGivesToken), address(params.takerWantsToken));
 
     (uint deltaGives, uint deltaWants) = lowLevelUniswapSwap(
-      address(params.takerGivesToken), address(params.takerWantsToken), -int(bestOffer.wants), params.pool
+      address(params.takerGivesToken),
+      address(params.takerWantsToken),
+      bestOffer.wants < maxAmount ? -int(bestOffer.wants) : int(givesTokenBalance),
+      params.pool
     ); // TODO: compute minimum between my balance and wants converted using offer price
 
     (uint totalGot, uint totalGave,,) =
