@@ -57,13 +57,11 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     returns (uint amount)
   {
     IERC20 token0 = IERC20(pool.token0());
-    IERC20 token1 = IERC20(pool.token1());
 
     uint token0Decimals = token0.decimals();
-    uint token1Decimals = token1.decimals();
     uint price = getPrice(pool, token0Decimals);
 
-    if (token1 == takerGivesToken) {
+    if (token0 != takerGivesToken) {
       // price is in takerWantsToken
       amount = 10 ** token0Decimals * balance / price;
     } else {
