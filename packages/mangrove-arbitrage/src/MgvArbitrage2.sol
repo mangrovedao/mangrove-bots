@@ -169,9 +169,11 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     (uint deltaGives, uint deltaWants) = lowLevelUniswapSwap(
       address(params.takerGivesToken),
       address(params.takerWantsToken),
+      // compute minimum between my total balance of "takerGivesToken" into "takerWantsToken"
+      // and bestOffer.wants. This permit us to partial fill an offer using first uniswap.
       bestOffer.wants < maxAmount ? -int(bestOffer.wants) : int(givesTokenBalance),
       params.pool
-    ); // TODO: compute minimum between my balance and wants converted using offer price
+    );
 
     (uint totalGot, uint totalGave,,) =
       mgv.marketOrder(address(params.takerGivesToken), address(params.takerWantsToken), 0, deltaWants, false);
