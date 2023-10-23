@@ -60,6 +60,7 @@ Here's an example configuration file with instances of all possible configuratio
   ],
   "runEveryXMinutes": 10,
   "whitelistedRunEveryXMinutes": 2,
+  "allowedLostPercentage": 0,
   "addressesWithDustCleaningWhitelist": ["0xaaaa"]
 }
 ```
@@ -68,6 +69,7 @@ Here's an example configuration file with instances of all possible configuratio
 - `markets`: An array of array string, Each market is represented of an array of at least two elements. Two first elements are the market tokens and the third element is the address that will be impersonated for cleaning.
 - `runEveryXMinutes`: Schedule bot to run with an interval of this many minutes.
 - `whitelistedRunEveryXMinutes`: Schedule whitelisted feature bot to run with an interval of this many minutes.
+- `allowedLostPercentage`: Allowed native token lost as a percentage.
 - `addressesWithDustCleaningWhitelist`: An array of all maker addresses that the bot should tried to clean eveyr whitelistedRunEveryXMinutes.
 
 It is possible to override parts of the configuration with environment variables. This is controlled by [./config/custom-environment-variables.json](./config/custom-environment-variables.json). The structure of this file mirrors the configuration structure but with names of environment variables in the places where these can override a part of the configuration.
