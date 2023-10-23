@@ -38,6 +38,7 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
 
   receive() external payable virtual {}
 
+  /// copied from there: https://ethereum.stackexchange.com/a/136961
   function getPrice(IUniswapV3Pool pool, uint token0Decimals) internal view returns (uint price) {
     (uint160 sqrtPriceX96,,,,,,) = pool.slot0();
     uint numerator1 = uint(sqrtPriceX96) * uint(sqrtPriceX96);
@@ -45,7 +46,12 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     return FullMath.mulDiv(numerator1, numerator2, 1 << 192);
   }
 
-  function estimateUniswapV3PriceAndAmount(IUniswapV3Pool pool, IERC20 takerGivesToken, uint balance)
+  /// @notice Estimate the amount of a token you will receive from a Uniswap V3 pool for a given input amount.
+  /// @param pool The Uniswap V3 pool you want to estimate the trade in.
+  /// @param takerGivesToken The token you provide as input.
+  /// @param balance The amount of the input token you want to trade.
+  /// @return amount The estimated amount of the other token you will receive.
+  function estimateHowMuchUniswapV3CanGive(IUniswapV3Pool pool, IERC20 takerGivesToken, uint balance)
     internal
     view
     returns (uint amount)
@@ -155,7 +161,7 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
   function doArbitrageFirstUniwapThenMangrove(ArbParams calldata params) public onlyAdmin {
     uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
 
-    uint maxAmount = estimateUniswapV3PriceAndAmount(params.pool, params.takerGivesToken, givesTokenBalance);
+    uint maxAmount = estimateHowMuchUniswapV3CanGive(params.pool, params.takerGivesToken, givesTokenBalance);
 
     uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
 
