@@ -32,15 +32,7 @@ contract MgvArbitrageActivateTokens is Deployer {
       tkn1.allowance(arbitrageContract, address(mgvArb.mgv())) == type(uint).max, "tkn1 allowance not set for mangrove"
     );
     require(
-      tkn1.allowance(arbitrageContract, address(mgvArb.router())) == type(uint).max,
-      "tkn1 allowance not set for uniswap router"
-    );
-    require(
       tkn2.allowance(arbitrageContract, address(mgvArb.mgv())) == type(uint).max, "tkn2 allowance not set for mangrove"
-    );
-    require(
-      tkn2.allowance(arbitrageContract, address(mgvArb.router())) == type(uint).max,
-      "tkn2 allowance not set for uniswap router"
     );
   }
 }

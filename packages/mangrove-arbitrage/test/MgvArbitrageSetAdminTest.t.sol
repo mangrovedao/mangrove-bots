@@ -4,9 +4,9 @@ pragma solidity ^0.8.10;
 import {Deployer} from "mgv_script/lib/Deployer.sol";
 import {MgvArbitrageSetAdmin} from "script/MgvArbitrageSetAdmin.s.sol";
 import {MgvArbitrageDeployer} from "script/deployers/MgvArbitrageDeployer.s.sol";
-import {IERC20} from "mgv_src/IERC20.sol";
+import {IERC20} from "mgv_lib/IERC20.sol";
 import "mgv_test/lib/forks/Polygon.sol";
-import {MangroveJsDeploy} from "mgv_script/toy/MangroveJs.s.sol";
+import {MangroveJsDeploy} from "mgv_strats_script/toy/MangroveJs.s.sol";
 import "mgv_test/lib/MangroveTest.sol";
 
 contract MgvArbitrageSetAdminTest is Deployer, Test2 {

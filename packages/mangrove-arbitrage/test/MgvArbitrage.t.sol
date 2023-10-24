@@ -3,9 +3,10 @@ pragma solidity ^0.8.10;
 
 import {MangroveTest} from "mgv_test/lib/MangroveTest.sol";
 
-import {PinnedPolygonFork} from "src/MyPinnedPolygon.sol"; // have to use ar polygon fork on a newer block
+import {PinnedPolygonFork} from "mgv_test/lib/forks/Polygon.sol"; // have to use ar polygon fork on a newer block
 import {TestToken} from "mgv_test/lib/tokens/TestToken.sol";
-import {IERC20} from "mgv_src/MgvLib.sol";
+import {IERC20, OLKey} from "@mgv/src/core/MgvLib.sol";
+import {IUniswapV3Pool} from "lib/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
 import "src/MgvArbitrage.sol";
 
 contract MgvArbitrageTest is MangroveTest {
@@ -18,8 +19,10 @@ contract MgvArbitrageTest is MangroveTest {
   address payable taker;
   address payable seller;
   address payable lp;
-  address payable arbitrager;
   address payable admin;
+  address payable arbitrager;
+
+  IUniswapV3Pool uniswapV3PoolWETHUSDC3000 = IUniswapV3Pool(0x0e44cEb592AcFC5D3F09D996302eB4C499ff8c10);
 
   IERC20[] tokens;
 
@@ -27,14 +30,20 @@ contract MgvArbitrageTest is MangroveTest {
 
   function setUp() public override {
     // use the pinned Polygon fork
-    fork = new PinnedPolygonFork(); // use polygon fork to use dai, usdc and weth addresses
+    fork = new PinnedPolygonFork(39764951); // use polygon fork to use dai, usdc and weth addresses
     fork.setUp();
     mgv = setupMangrove();
     WETH = IERC20(fork.get("WETH"));
     USDC = IERC20(fork.get("USDC"));
     DAI = IERC20(fork.get("DAI"));
-    setupMarket(WETH, USDC);
-    setupMarket(DAI, USDC);
+
+    olKey = OLKey(address(WETH), address(USDC), options.defaultTickSpacing);
+    lo = olKey.flipped();
+    setupMarket(olKey);
+
+    olKey = OLKey(address(DAI), address(USDC), options.defaultTickSpacing);
+    lo = olKey.flipped();
+    setupMarket(olKey);
 
     tokens = new IERC20[](3);
     tokens[0] = WETH;
@@ -42,13 +51,14 @@ contract MgvArbitrageTest is MangroveTest {
     tokens[2] = DAI;
 
     admin = freshAddress();
-    arbitrager = freshAddress();
     taker = freshAddress();
     fork.set("taker", taker);
     seller = freshAddress();
     fork.set("seller", seller);
     lp = freshAddress();
     fork.set("lp", lp);
+    arbitrager = freshAddress();
+    fork.set("arbitrager", arbitrager);
 
     deal($(USDC), lp, cash(USDC, 100000));
     deal($(DAI), lp, cash(DAI, 100000));
@@ -61,31 +71,15 @@ contract MgvArbitrageTest is MangroveTest {
     WETH.approve($(mgv), type(uint).max);
     vm.stopPrank();
 
-    vm.startPrank(lp);
-    mgv.newOffer{value: 1 ether}({
-      outbound_tkn: $(USDC),
-      inbound_tkn: $(DAI),
-      wants: cash(DAI, 10000),
-      gives: cash(USDC, 10000),
-      gasreq: 50_000,
-      gasprice: 0,
-      pivotId: 0
-    });
-    mgv.newOffer({
-      outbound_tkn: $(DAI),
-      inbound_tkn: $(USDC),
-      wants: cash(USDC, 10000),
-      gives: cash(DAI, 10000),
-      gasreq: 50_000,
-      gasprice: 0,
-      pivotId: 0
-    });
-    USDC.approve($(mgv), type(uint).max);
-    DAI.approve($(mgv), type(uint).max);
+    vm.startPrank(seller);
+    WETH.approve(address(mgv), type(uint).max);
+    USDC.approve(address(mgv), type(uint).max);
     vm.stopPrank();
 
-    vm.prank(seller);
+    vm.startPrank(arbitrager);
     WETH.approve(address(mgv), type(uint).max);
+    USDC.approve(address(mgv), type(uint).max);
+    vm.stopPrank();
 
     deployStrat();
   }
@@ -95,7 +89,7 @@ contract MgvArbitrageTest is MangroveTest {
       _mgv: IMangrove($(mgv)),
       admin: admin,
       _arbitrager: arbitrager
-      });
+    });
     fork.set("MgvArbitrage", address(arbStrat));
 
     vm.startPrank(taker);
@@ -103,257 +97,437 @@ contract MgvArbitrageTest is MangroveTest {
     vm.stopPrank();
   }
 
-  function test_isProfitable() public {
-    vm.prank(admin);
+  /*
+   * Offer WETH / USDC
+   */
+  function test_isProfitableFirstMangroveThenUniswapWETHUSDC() public {
+    vm.startPrank(admin);
     arbStrat.activateTokens(tokens);
+    arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
+    vm.stopPrank();
+
     deal($(USDC), address(arbStrat), cash(USDC, 20000));
     deal($(WETH), seller, cash(WETH, 10));
+
+    OLKey memory olKey = OLKey($(WETH), $(USDC), options.defaultTickSpacing);
+
     vm.prank(seller);
-    uint offerId = mgv.newOffer{value: 1 ether}({
-      outbound_tkn: $(WETH),
-      inbound_tkn: $(USDC),
-      wants: cash(USDC, 1000),
+    mgv.newOfferByVolume{value: 1 ether}({
+      olKey: olKey,
       gives: cash(WETH, 1),
+      wants: cash(USDC, 1000),
       gasreq: 50_000,
-      gasprice: 0,
-      pivotId: 0
+      gasprice: 0
     });
 
     ArbParams memory params = ArbParams({
-      offerId: offerId,
-      takerWantsToken: $(WETH),
-      takerWants: cash(WETH, 1),
-      takerGivesToken: $(USDC),
-      takerGives: cash(USDC, 1000),
-      fee: 3000,
-      minGain: 0
+      takerGivesToken: USDC,
+      takerWantsToken: WETH,
+      tickSpacing: 1,
+      pool: uniswapV3PoolWETHUSDC3000,
+      minimumGain: uint160(cash(USDC, 100))
     });
 
     uint usdcBalanceBefore = USDC.balanceOf(address(arbStrat));
     uint wethBalanceBefore = WETH.balanceOf(address(arbStrat));
-    vm.prank(arbitrager);
-    uint amountOut = arbStrat.doArbitrage(params);
+    vm.prank(admin);
+    arbStrat.doArbitrageFirstMangroveThenUniswap(params);
     uint usdcBalanceAfter = USDC.balanceOf(address(arbStrat));
     uint wethBalanceAfter = WETH.balanceOf(address(arbStrat));
-    assertTrue(usdcBalanceAfter > usdcBalanceBefore, "Should have increased usdcBalance ");
+    assertTrue(usdcBalanceAfter > usdcBalanceBefore, "Should have increased usdcBalance");
     assertTrue(wethBalanceAfter == wethBalanceBefore, "Should have the same wethBalance");
-    assertTrue(amountOut > params.takerGives, "Amount out should be larger than the initial offer on Mangrove");
   }
 
-  function test_isNotProfitable() public {
-    vm.prank(admin);
+  function test_isNotProfitableBecauseGainToLowFirstMangroveThenUniswapWETHUSDC() public {
+    vm.startPrank(admin);
     arbStrat.activateTokens(tokens);
+    arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
+    vm.stopPrank();
+
     deal($(USDC), address(arbStrat), cash(USDC, 20000));
     deal($(WETH), seller, cash(WETH, 10));
+
+    OLKey memory olKey = OLKey($(WETH), $(USDC), options.defaultTickSpacing);
+
     vm.prank(seller);
-    uint offerId = mgv.newOffer{value: 1 ether}({
-      outbound_tkn: $(WETH),
-      inbound_tkn: $(USDC),
-      wants: cash(USDC, 10000),
-      gives: cash(WETH, 1),
-      gasreq: 50_000,
-      gasprice: 0,
-      pivotId: 0
-    });
-
-    ArbParams memory params = ArbParams({
-      offerId: offerId,
-      takerWantsToken: $(WETH),
-      takerWants: cash(WETH, 1),
-      takerGivesToken: $(USDC),
-      takerGives: cash(USDC, 10000),
-      fee: 3000,
-      minGain: 0
-    });
-
-    vm.prank(arbitrager);
-    vm.expectRevert("Too little received");
-    arbStrat.doArbitrage(params);
-  }
-
-  function test_offerFailedOnMangrove() public {
-    vm.prank(admin);
-    arbStrat.activateTokens(tokens);
-    deal($(USDC), address(arbStrat), cash(USDC, 20000));
-    vm.prank(seller);
-    uint offerId = mgv.newOffer{value: 1 ether}({
-      outbound_tkn: $(WETH),
-      inbound_tkn: $(USDC),
+    mgv.newOfferByVolume{value: 1 ether}({
+      olKey: olKey,
       wants: cash(USDC, 1000),
       gives: cash(WETH, 1),
       gasreq: 50_000,
-      gasprice: 0,
-      pivotId: 0
+      gasprice: 0
     });
 
     ArbParams memory params = ArbParams({
-      offerId: offerId,
-      takerWantsToken: $(WETH),
-      takerWants: cash(WETH, 1),
-      takerGivesToken: $(USDC),
-      takerGives: cash(USDC, 1000),
-      fee: 3000,
-      minGain: 0
+      takerGivesToken: USDC,
+      takerWantsToken: WETH,
+      tickSpacing: options.defaultTickSpacing,
+      pool: uniswapV3PoolWETHUSDC3000,
+      minimumGain: uint160(cash(USDC, 10000))
     });
-    vm.prank(arbitrager);
-    vm.expectRevert("MgvArbitrage/snipeFail");
-    arbStrat.doArbitrage(params);
+
+    vm.prank(admin);
+    vm.expectRevert("MgvArbitrage/notProfitable");
+    arbStrat.doArbitrageFirstMangroveThenUniswap(params);
   }
 
-  function test_isProfitable_exchangeDaiCurrency_Uniswap() public {
-    vm.prank(admin);
+  function test_isNotProfitableFirstMangroveThenUniswapWETHUSDC() public {
+    vm.startPrank(admin);
     arbStrat.activateTokens(tokens);
-    deal($(DAI), address(arbStrat), cash(DAI, 2000));
+    arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
+    vm.stopPrank();
+
+    deal($(USDC), address(arbStrat), cash(USDC, 20000));
     deal($(WETH), seller, cash(WETH, 10));
+
+    OLKey memory olKey = OLKey($(WETH), $(USDC), options.defaultTickSpacing);
+
     vm.prank(seller);
-    uint offerId = mgv.newOffer{value: 1 ether}({
-      outbound_tkn: $(WETH),
-      inbound_tkn: $(USDC),
-      wants: cash(USDC, 1000),
+    mgv.newOfferByVolume{value: 1 ether}({
+      olKey: olKey,
+      wants: cash(USDC, 2000),
       gives: cash(WETH, 1),
       gasreq: 50_000,
-      gasprice: 0,
-      pivotId: 0
+      gasprice: 0
     });
 
     ArbParams memory params = ArbParams({
-      offerId: offerId,
-      takerWantsToken: $(WETH),
-      takerWants: cash(WETH, 1),
-      takerGivesToken: $(USDC),
-      takerGives: cash(USDC, 1000),
-      fee: 3000,
-      minGain: 0
+      takerGivesToken: USDC,
+      takerWantsToken: WETH,
+      tickSpacing: options.defaultTickSpacing,
+      pool: uniswapV3PoolWETHUSDC3000,
+      minimumGain: 0
+    });
+
+    vm.prank(admin);
+    vm.expectRevert("MgvArbitrage/notProfitable");
+    arbStrat.doArbitrageFirstMangroveThenUniswap(params);
+  }
+
+  function test_isProfitablePriceUniswapFirstThenMangroveWETHUSDC() public {
+    vm.startPrank(admin);
+    arbStrat.activateTokens(tokens);
+    arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
+    vm.stopPrank();
+
+    deal($(WETH), address(arbStrat), cash(WETH, 2));
+    deal($(WETH), seller, cash(WETH, 10));
+
+    OLKey memory olKey = OLKey($(WETH), $(USDC), options.defaultTickSpacing);
+
+    vm.prank(seller);
+    mgv.newOfferByVolume{value: 1 ether}({
+      olKey: olKey,
+      wants: cash(USDC, 2000),
+      gives: cash(WETH, 2),
+      gasreq: 50_000,
+      gasprice: 0
+    });
+
+    ArbParams memory params = ArbParams({
+      takerGivesToken: WETH,
+      takerWantsToken: USDC,
+      tickSpacing: options.defaultTickSpacing,
+      pool: uniswapV3PoolWETHUSDC3000,
+      minimumGain: 0
     });
 
     uint usdcBalanceBefore = USDC.balanceOf(address(arbStrat));
     uint wethBalanceBefore = WETH.balanceOf(address(arbStrat));
-    uint daiBalanceBefore = DAI.balanceOf(address(arbStrat));
-    vm.prank(arbitrager);
-    uint amountOut = arbStrat.doArbitrageExchangeOnUniswap(params, address(DAI), 100);
-    uint daiBalanceAfter = DAI.balanceOf(address(arbStrat));
+    vm.prank(admin);
+    arbStrat.doArbitrageFirstUniwapThenMangrove(params);
     uint usdcBalanceAfter = USDC.balanceOf(address(arbStrat));
     uint wethBalanceAfter = WETH.balanceOf(address(arbStrat));
-    assertEq(usdcBalanceAfter, usdcBalanceBefore, "Should have the same usdcBalance ");
-    assertEq(wethBalanceAfter, wethBalanceBefore, "Should have the same wethBalance");
-    assertGt(daiBalanceAfter, daiBalanceBefore, "Should have increased daiBalance");
-    assertGt(amountOut, params.takerGives, "Amount out should be larger than the initial offer on Mangrove");
+
+    assertTrue(usdcBalanceAfter == usdcBalanceBefore, "Should have the same usdc balance");
+    assertTrue(wethBalanceAfter > wethBalanceBefore, "Should have increase weth balance");
   }
 
-  function test_isNotProfitable_exchangeDaiCurrency_Uniswap() public {
-    vm.prank(admin);
+  function test_isProfitablePriceUniswapFirstThenMangroveWETHUSDCPartialFill() public {
+    vm.startPrank(admin);
     arbStrat.activateTokens(tokens);
-    deal($(DAI), address(arbStrat), cash(DAI, 2000));
+    arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
+    vm.stopPrank();
+
+    deal($(WETH), address(arbStrat), cash(WETH, 1));
     deal($(WETH), seller, cash(WETH, 10));
+
+    OLKey memory olKey = OLKey($(WETH), $(USDC), options.defaultTickSpacing);
+
     vm.prank(seller);
-    uint offerId = mgv.newOffer{value: 1 ether}({
-      outbound_tkn: $(WETH),
-      inbound_tkn: $(USDC),
-      wants: cash(USDC, 1000),
-      gives: cash(WETH, 1),
+    mgv.newOfferByVolume{value: 1 ether}({
+      olKey: olKey,
+      wants: cash(USDC, 2000),
+      gives: cash(WETH, 2),
       gasreq: 50_000,
-      gasprice: 0,
-      pivotId: 0
+      gasprice: 0
     });
 
     ArbParams memory params = ArbParams({
-      offerId: offerId,
-      takerWantsToken: $(WETH),
-      takerWants: cash(WETH, 1),
-      takerGivesToken: $(USDC),
-      takerGives: cash(USDC, 1000),
-      fee: 3000,
-      minGain: cash(DAI, 1000)
-    });
-
-    vm.prank(arbitrager);
-    vm.expectRevert("MgvArbitrage/notMinGain");
-    arbStrat.doArbitrageExchangeOnUniswap(params, address(DAI), 100);
-  }
-
-  function test_isProfitable_exchangeDaiCurrency_Mgv() public {
-    vm.prank(admin);
-    arbStrat.activateTokens(tokens);
-    deal($(DAI), address(arbStrat), cash(DAI, 2000));
-    deal($(WETH), seller, cash(WETH, 10));
-    vm.prank(seller);
-    uint offerId = mgv.newOffer{value: 1 ether}({
-      outbound_tkn: $(WETH),
-      inbound_tkn: $(USDC),
-      wants: cash(USDC, 1000),
-      gives: cash(WETH, 1),
-      gasreq: 50_000,
-      gasprice: 0,
-      pivotId: 0
-    });
-
-    ArbParams memory params = ArbParams({
-      offerId: offerId,
-      takerWantsToken: $(WETH),
-      takerWants: cash(WETH, 1),
-      takerGivesToken: $(USDC),
-      takerGives: cash(USDC, 1000),
-      fee: 3000,
-      minGain: 0
+      takerGivesToken: WETH,
+      takerWantsToken: USDC,
+      tickSpacing: options.defaultTickSpacing,
+      pool: uniswapV3PoolWETHUSDC3000,
+      minimumGain: 0
     });
 
     uint usdcBalanceBefore = USDC.balanceOf(address(arbStrat));
     uint wethBalanceBefore = WETH.balanceOf(address(arbStrat));
-    uint daiBalanceBefore = DAI.balanceOf(address(arbStrat));
-    vm.prank(arbitrager);
-    uint amountOut = arbStrat.doArbitrageExchangeOnMgv(params, address(DAI));
-    uint daiBalanceAfter = DAI.balanceOf(address(arbStrat));
+    vm.prank(admin);
+    arbStrat.doArbitrageFirstUniwapThenMangrove(params);
     uint usdcBalanceAfter = USDC.balanceOf(address(arbStrat));
     uint wethBalanceAfter = WETH.balanceOf(address(arbStrat));
-    assertEq(usdcBalanceAfter, usdcBalanceBefore, "Should have the same usdcBalance ");
-    assertEq(wethBalanceAfter, wethBalanceBefore, "Should have the same wethBalance");
-    assertGt(daiBalanceAfter, daiBalanceBefore, "Should have increased daiBalance");
-    assertGt(amountOut, params.takerGives, "Amount out should be larger than the initial offer on Mangrove");
+
+    assertTrue(usdcBalanceAfter == usdcBalanceBefore, "Should have the same usdc balance");
+    assertTrue(wethBalanceAfter > wethBalanceBefore, "Should have increase weth balance");
   }
 
-  function test_isNotProfitable_exchangeDaiCurrency_Mgv() public {
-    vm.prank(admin);
+  function test_isNotProfitableGainToLowPriceUniswapFirstThenMangroveWETHUSDC() public {
+    vm.startPrank(admin);
     arbStrat.activateTokens(tokens);
-    deal($(DAI), address(arbStrat), cash(DAI, 2000));
+    arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
+    vm.stopPrank();
+
+    OLKey memory olKey = OLKey($(WETH), $(USDC), options.defaultTickSpacing);
+
+    deal($(WETH), address(arbStrat), cash(WETH, 2));
     deal($(WETH), seller, cash(WETH, 10));
     vm.prank(seller);
-    uint offerId = mgv.newOffer{value: 1 ether}({
-      outbound_tkn: $(WETH),
-      inbound_tkn: $(USDC),
-      wants: cash(USDC, 1000),
-      gives: cash(WETH, 1),
+    mgv.newOfferByVolume{value: 1 ether}({
+      olKey: olKey,
+      wants: cash(USDC, 2000),
+      gives: cash(WETH, 2),
       gasreq: 50_000,
-      gasprice: 0,
-      pivotId: 0
+      gasprice: 0
     });
 
     ArbParams memory params = ArbParams({
-      offerId: offerId,
-      takerWantsToken: $(WETH),
-      takerWants: cash(WETH, 1),
-      takerGivesToken: $(USDC),
-      takerGives: cash(USDC, 1000),
-      fee: 3000,
-      minGain: cash(DAI, 1000)
+      takerGivesToken: WETH,
+      takerWantsToken: USDC,
+      tickSpacing: options.defaultTickSpacing,
+      pool: uniswapV3PoolWETHUSDC3000,
+      minimumGain: uint160(cash(WETH, 3))
     });
 
-    vm.prank(arbitrager);
-    vm.expectRevert("MgvArbitrage/notMinGain");
-    arbStrat.doArbitrageExchangeOnMgv(params, address(DAI));
+    vm.prank(admin);
+    vm.expectRevert("MgvArbitrage/notProfitable");
+    arbStrat.doArbitrageFirstUniwapThenMangrove(params);
   }
 
-  function test_canWithdrawToken() public {
-    uint daiAmount = cash(DAI, 2000);
-    deal($(DAI), address(arbStrat), daiAmount);
-    uint sellerDaiBalance = DAI.balanceOf(address(seller));
+  function test_isNotProfitablePriceUniswapFirstThenMangroveWETHUSDC() public {
+    vm.startPrank(admin);
+    arbStrat.activateTokens(tokens);
+    arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
+    vm.stopPrank();
 
+    OLKey memory olKey = OLKey($(WETH), $(USDC), options.defaultTickSpacing);
+
+    deal($(WETH), address(arbStrat), cash(WETH, 2));
+    deal($(WETH), seller, cash(WETH, 10));
     vm.prank(seller);
-    vm.expectRevert("AccessControlled/Invalid");
-    arbStrat.withdrawToken($(DAI), daiAmount, address(seller));
+    mgv.newOfferByVolume{value: 1 ether}({
+      olKey: olKey,
+      wants: cash(USDC, 4000),
+      gives: cash(WETH, 2),
+      gasreq: 50_000,
+      gasprice: 0
+    });
+
+    ArbParams memory params = ArbParams({
+      takerGivesToken: WETH,
+      takerWantsToken: USDC,
+      tickSpacing: options.defaultTickSpacing,
+      pool: uniswapV3PoolWETHUSDC3000,
+      minimumGain: 0
+    });
 
     vm.prank(admin);
-    arbStrat.withdrawToken($(DAI), daiAmount, address(seller));
-    assertEq(DAI.balanceOf(address(seller)) - sellerDaiBalance, daiAmount, "Should have withdrawn the DAI");
+    vm.expectRevert(); // revert because taker does not have enough USDC when selling his ETH.
+    arbStrat.doArbitrageFirstUniwapThenMangrove(params);
+  }
+
+  /*
+   * Offer USDC / WETH
+   */
+
+  function test_isProfitableFirstMangroveThenUniswapUSDCWETH() public {
+    vm.startPrank(admin);
+    arbStrat.activateTokens(tokens);
+    arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
+    vm.stopPrank();
+
+    OLKey memory olKey = OLKey($(USDC), $(WETH), options.defaultTickSpacing);
+
+    deal($(WETH), address(arbStrat), cash(WETH, 10));
+    deal($(USDC), seller, cash(USDC, 2000));
+    vm.prank(seller);
+    mgv.newOfferByVolume{value: 1 ether}({
+      olKey: olKey,
+      wants: cash(WETH, 1),
+      gives: cash(USDC, 2000),
+      gasreq: 50_000,
+      gasprice: 0
+    });
+
+    ArbParams memory params = ArbParams({
+      takerGivesToken: WETH,
+      takerWantsToken: USDC,
+      tickSpacing: options.defaultTickSpacing,
+      pool: uniswapV3PoolWETHUSDC3000,
+      minimumGain: 0
+    });
+
+    uint usdcBalanceBefore = USDC.balanceOf(address(arbStrat));
+    uint wethBalanceBefore = WETH.balanceOf(address(arbStrat));
+    vm.prank(admin);
+    arbStrat.doArbitrageFirstMangroveThenUniswap(params);
+    uint usdcBalanceAfter = USDC.balanceOf(address(arbStrat));
+    uint wethBalanceAfter = WETH.balanceOf(address(arbStrat));
+    assertTrue(usdcBalanceAfter == usdcBalanceBefore, "Should have the same usdcBalance");
+    assertTrue(wethBalanceAfter > wethBalanceBefore, "Should have increase wethBalance");
+  }
+
+  function test_isNotProfitableFirstMangroveThenUniswapUSDCWETH() public {
+    vm.startPrank(admin);
+    arbStrat.activateTokens(tokens);
+    arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
+    vm.stopPrank();
+
+    OLKey memory olKey = OLKey($(USDC), $(WETH), options.defaultTickSpacing);
+
+    deal($(WETH), address(arbStrat), cash(WETH, 10));
+    deal($(USDC), seller, cash(USDC, 2000));
+    vm.prank(seller);
+    mgv.newOfferByVolume{value: 1 ether}({
+      olKey: olKey,
+      wants: cash(WETH, 1),
+      gives: cash(USDC, 1000),
+      gasreq: 50_000,
+      gasprice: 0
+    });
+
+    ArbParams memory params = ArbParams({
+      takerGivesToken: WETH,
+      takerWantsToken: USDC,
+      tickSpacing: options.defaultTickSpacing,
+      pool: uniswapV3PoolWETHUSDC3000,
+      minimumGain: 0
+    });
+
+    vm.prank(admin);
+    vm.expectRevert("MgvArbitrage/notProfitable");
+    arbStrat.doArbitrageFirstMangroveThenUniswap(params);
+  }
+
+  function test_isProfitablePriceUniswapFirstThenMangroveUSDCWETH() public {
+    vm.startPrank(admin);
+    arbStrat.activateTokens(tokens);
+    arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
+    vm.stopPrank();
+
+    deal($(USDC), address(arbStrat), cash(USDC, 1000));
+    deal($(USDC), seller, cash(USDC, 2000));
+
+    OLKey memory olKey = OLKey($(USDC), $(WETH), options.defaultTickSpacing);
+
+    vm.prank(seller);
+    mgv.newOfferByVolume{value: 1 ether}({
+      olKey: olKey,
+      wants: cash(WETH, 1),
+      gives: cash(USDC, 2000),
+      gasreq: 50_000,
+      gasprice: 0
+    });
+
+    ArbParams memory params = ArbParams({
+      takerGivesToken: USDC,
+      takerWantsToken: WETH,
+      tickSpacing: options.defaultTickSpacing,
+      pool: uniswapV3PoolWETHUSDC3000,
+      minimumGain: 0
+    });
+
+    uint usdcBalanceBefore = USDC.balanceOf(address(arbStrat));
+    uint wethBalanceBefore = WETH.balanceOf(address(arbStrat));
+    vm.prank(admin);
+    arbStrat.doArbitrageFirstUniwapThenMangrove(params);
+    uint usdcBalanceAfter = USDC.balanceOf(address(arbStrat));
+    uint wethBalanceAfter = WETH.balanceOf(address(arbStrat));
+
+    assertTrue(usdcBalanceAfter > usdcBalanceBefore, "Should have increased usdcBalance");
+    assertTrue(wethBalanceAfter == wethBalanceBefore, "Should have the same wetBalance");
+  }
+
+  function test_isProfitablePriceUniswapFirstThenMangroveUSDCWETHPartialFill() public {
+    vm.startPrank(admin);
+    arbStrat.activateTokens(tokens);
+    arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
+    vm.stopPrank();
+
+    deal($(USDC), address(arbStrat), cash(USDC, 40000));
+    deal($(USDC), seller, cash(USDC, 2000));
+
+    OLKey memory olKey = OLKey($(USDC), $(WETH), options.defaultTickSpacing);
+
+    vm.prank(seller);
+    mgv.newOfferByVolume{value: 1 ether}({
+      olKey: olKey,
+      wants: cash(WETH, 1),
+      gives: cash(USDC, 2000),
+      gasreq: 50_000,
+      gasprice: 0
+    });
+
+    ArbParams memory params = ArbParams({
+      takerGivesToken: USDC,
+      takerWantsToken: WETH,
+      tickSpacing: options.defaultTickSpacing,
+      pool: uniswapV3PoolWETHUSDC3000,
+      minimumGain: 0
+    });
+
+    uint usdcBalanceBefore = USDC.balanceOf(address(arbStrat));
+    uint wethBalanceBefore = WETH.balanceOf(address(arbStrat));
+    vm.prank(admin);
+    arbStrat.doArbitrageFirstUniwapThenMangrove(params);
+    uint usdcBalanceAfter = USDC.balanceOf(address(arbStrat));
+    uint wethBalanceAfter = WETH.balanceOf(address(arbStrat));
+
+    assertTrue(usdcBalanceAfter > usdcBalanceBefore, "Should have increased usdcBalance");
+    assertTrue(wethBalanceAfter == wethBalanceBefore, "Should have the same wetBalance");
+  }
+
+  function test_isNotProfitablePriceUniswapFirstThenMangroveUSDCWETH() public {
+    vm.startPrank(admin);
+    arbStrat.activateTokens(tokens);
+    arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
+    vm.stopPrank();
+
+    deal($(USDC), address(arbStrat), cash(USDC, 40000));
+    deal($(USDC), seller, cash(USDC, 2000));
+
+    OLKey memory olKey = OLKey($(USDC), $(WETH), options.defaultTickSpacing);
+
+    vm.prank(seller);
+    mgv.newOfferByVolume{value: 1 ether}({
+      olKey: olKey,
+      wants: cash(WETH, 8),
+      gives: cash(USDC, 2000),
+      gasreq: 50_000,
+      gasprice: 0
+    });
+
+    ArbParams memory params = ArbParams({
+      takerGivesToken: USDC,
+      takerWantsToken: WETH,
+      tickSpacing: options.defaultTickSpacing,
+      pool: uniswapV3PoolWETHUSDC3000,
+      minimumGain: 0
+    });
+
+    vm.prank(admin);
+    vm.expectRevert();
+    arbStrat.doArbitrageFirstUniwapThenMangrove(params);
   }
 
   function test_canWithdrawNative() public {
@@ -366,20 +540,6 @@ contract MgvArbitrageTest is MangroveTest {
     vm.prank(admin);
     arbStrat.withdrawNative(10 ether, address(seller));
     assertEq(address(seller).balance - sellerNativeBalance, 10 ether, "Should have withdrawn the Native");
-  }
-
-  function test_needsActivateTokens() public {
-    IERC20[] memory needs = arbStrat.needsActivateTokens(tokens);
-
-    for (uint i = 0; i < needs.length; ++i) {
-      assertNot0x(address(needs[0]));
-    }
-    vm.prank(admin);
-    arbStrat.activateTokens(tokens);
-    needs = arbStrat.needsActivateTokens(tokens);
-    for (uint i = 0; i < needs.length; ++i) {
-      assertEq(address(needs[0]), address(0), "Should not need to activate tokens");
-    }
   }
 
   function test_onlyAdminCanActivateTokens() public {
@@ -399,16 +559,6 @@ contract MgvArbitrageTest is MangroveTest {
     vm.prank(admin);
     arbStrat.setAdmin(seller);
     assertEq(arbStrat.admin(), seller, "Should have changed the admin");
-  }
-
-  function test_onlyAdminCanSetArbitrager() public {
-    vm.prank(seller);
-    vm.expectRevert("AccessControlled/Invalid");
-    arbStrat.setArbitrager(seller);
-
-    vm.prank(admin);
-    arbStrat.setArbitrager(seller);
-    assertEq(arbStrat.arbitrager(), seller, "Should have changed the arbitrager");
   }
 
   function test_onlyAdminCanSetMgv() public {
