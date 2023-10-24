@@ -133,7 +133,7 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
       lowLevelUniswapSwap(address(params.takerWantsToken), address(params.takerGivesToken), int(totalGot), params.pool);
 
     require(params.minimumGain + totalGave <= deltaTakerGives, "MgvArbitrage/notProfitable");
-    require(wantsTokenBalance <= totalGot - deltaTakerWants, "MgvArbitrage/notProfitable");
+    require(wantsTokenBalance + deltaTakerWants <= totalGot, "MgvArbitrage/notProfitable");
   }
 
   /// @notice This function performs an arbitrage by first exchanging `takerGivesToken` for `takerWantsToken` using Uniswap, and then it swaps the received `takerWantsToken` back to `takerGivesToken` using Uniswap.
