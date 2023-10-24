@@ -119,14 +119,13 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
     uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
 
-    MgvStructs.OfferUnpacked memory bestOffer =
-      mangroveGetBestOffer(address(params.takerWantsToken), address(params.takerGivesToken));
+    uint bestOfferWants = mangroveGetBestOfferWants(address(params.takerWantsToken), address(params.takerGivesToken));
 
     (uint totalGot, uint totalGave,,) = mgv.marketOrder(
       address(params.takerWantsToken),
       address(params.takerGivesToken),
       0,
-      bestOffer.wants > givesTokenBalance ? givesTokenBalance : bestOffer.wants,
+      bestOfferWants > givesTokenBalance ? givesTokenBalance : bestOfferWants,
       false
     );
 
@@ -163,15 +162,14 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
 
     uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
 
-    MgvStructs.OfferUnpacked memory bestOffer =
-      mangroveGetBestOffer(address(params.takerGivesToken), address(params.takerWantsToken));
+    uint bestOfferWants = mangroveGetBestOfferWants(address(params.takerGivesToken), address(params.takerWantsToken));
 
     (uint deltaGives, uint deltaWants) = lowLevelUniswapSwap(
       address(params.takerGivesToken),
       address(params.takerWantsToken),
       // compute minimum between my total balance of "takerGivesToken" into "takerWantsToken"
-      // and bestOffer.wants. This permit us to partial fill an offer using first uniswap.
-      bestOffer.wants < maxAmount ? -int(bestOffer.wants) : int(givesTokenBalance),
+      // and bestOfferWants. This permit us to partial fill an offer using first uniswap.
+      bestOfferWants < maxAmount ? -int(bestOfferWants) : int(givesTokenBalance),
       params.pool
     );
 
@@ -182,17 +180,13 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
     require(wantsTokenBalance + totalGave <= wantsTokenBalance + deltaWants, "MgvArbitrage/notProfitable");
   }
 
-  ///@notice Retrieves the best mangrove offer for a given market pair of outbound token and inbound token onplatformMangrove.
+  ///@notice Retrieves wants from the best mangrove offer for a given market pair of outbound token and inbound token on Mangrove.
   ///@param outboundTkn The token sent by the offer maker.
   ///@param inboundTkn The token sent by the offer taker.
-  ///@return bestOffer A struct containing the best offer parameters.
-  function mangroveGetBestOffer(address outboundTkn, address inboundTkn)
-    internal
-    view
-    returns (MgvStructs.OfferUnpacked memory bestOffer)
-  {
+  ///@return wants A struct containing the best offer wants.
+  function mangroveGetBestOfferWants(address outboundTkn, address inboundTkn) internal view returns (uint wants) {
     uint bestOfferId = mgv.best(outboundTkn, inboundTkn);
-    bestOffer = mgv.offers(outboundTkn, inboundTkn, bestOfferId).to_struct();
+    wants = mgv.offers(outboundTkn, inboundTkn, bestOfferId).wants();
   }
 
   /// @notice Executes a low-level call to the Uniswap V3 `swap` function for exchanging tokens.
