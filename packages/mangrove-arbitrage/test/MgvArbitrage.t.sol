@@ -57,7 +57,7 @@ contract MgvArbitrageTest is MangroveTest {
     fork.set("seller", seller);
     lp = freshAddress();
     fork.set("lp", lp);
-    arbitrager = freshAddress();
+    arbitrager = admin;
     fork.set("arbitrager", arbitrager);
 
     deal($(USDC), lp, cash(USDC, 100000));

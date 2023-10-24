@@ -30,6 +30,8 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
   IMangrove public mgv;
   address public arbitrager;
 
+  bool isArbitraging;
+
   mapping(address => bool) pools;
 
   /// @param _mgv The Mangrove instance to be arbitraged
@@ -124,7 +126,7 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
   /// This function calculates the minimum between `z` and `y`, and then performs a `marketOrder` with `fillWants` set to `false` and `takerGives` set to the minimum value between `z` and `y`. The `marketOrder` returns `totalGot` (in `takerWantsToken`) and `totalGave` (in `takerGivesToken`). It then swaps `totalGot` tokens using Uniswap, which returns `deltaTakerWants` (in `takerWantsToken`) and `deltaTakerGives` (in `takerGivesToken).
   /// After these operations, the function checks that the balances of `takerGivesToken` and `takerWantsToken` have increased. If the balances have not increased, the transaction reverts, indicating that the arbitrage was not profitable.
   /// @param params An `ArbParams` struct containing the necessary information for the arbitrage operation.
-  function doArbitrageFirstMangroveThenUniswap(ArbParams calldata params) public onlyAdmin {
+  function doArbitrageFirstMangroveThenUniswap(ArbParams calldata params) public onlyArbitrager {
     uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
     uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
 
@@ -134,6 +136,7 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
     (uint totalGot, uint totalGave,,) =
       mgv.marketOrderByVolume(olKey, 0, bestOfferWants > givesTokenBalance ? givesTokenBalance : bestOfferWants, false);
 
+    isArbitraging = true;
     (uint deltaTakerWants, uint deltaTakerGives) =
       lowLevelUniswapSwap(address(params.takerWantsToken), address(params.takerGivesToken), int(totalGot), params.pool);
 
@@ -160,7 +163,7 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
   /// After these operations, the function checks that the balances of `takerGivesToken` and `takerWantsToken` have increased. If the balances have not increased, the transaction reverts, indicating that the arbitrage was not profitable.
   ///
   /// @param params An `ArbParams` struct containing the necessary information for the arbitrage operation.
-  function doArbitrageFirstUniwapThenMangrove(ArbParams calldata params) public onlyAdmin {
+  function doArbitrageFirstUniwapThenMangrove(ArbParams calldata params) public onlyArbitrager {
     uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
 
     uint maxAmount = estimateHowMuchUniswapV3CanGive(params.pool, params.takerGivesToken, givesTokenBalance);
@@ -170,6 +173,7 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
     OLKey memory olKey = OLKey(address(params.takerGivesToken), address(params.takerWantsToken), params.tickSpacing);
     uint bestOfferWants = mangroveGetBestOfferWants(olKey);
 
+    isArbitraging = true;
     (uint deltaGives, uint deltaWants) = lowLevelUniswapSwap(
       address(params.takerGivesToken),
       address(params.takerWantsToken),
@@ -225,6 +229,8 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
   /// @inheritdoc IUniswapV3SwapCallback
   function uniswapV3SwapCallback(int amount0Delta, int amount1Delta, bytes calldata data) external {
     require(pools[msg.sender] == true); // ensure only approved UniswapV3 can call this function
+    require(isArbitraging == true);
+    isArbitraging = false;
     // TODO: maybe we should check that we first called doArbitrage fn ?
     address tokenToTransfer = abi.decode(data, (address));
 
