@@ -85,10 +85,15 @@ describe("MarketCleaner integration tests", () => {
       const tx = await mgvTestUtil.postNewRevertingOffer(market, ba, maker);
       await mgvTestUtil.waitForBlock(market.mgv, tx.blockNumber);
 
-      const marketCleaner = new MarketCleaner(market, cleanerProvider, {
-        base: market.base.name,
-        quote: market.quote.name,
-      });
+      const marketCleaner = new MarketCleaner(
+        market,
+        cleanerProvider,
+        {
+          base: market.base.name,
+          quote: market.quote.name,
+        },
+        0
+      );
 
       // Act
       await marketCleaner.clean();
@@ -109,10 +114,15 @@ describe("MarketCleaner integration tests", () => {
       const tx = await mgvTestUtil.postNewSucceedingOffer(market, ba, maker);
       await mgvTestUtil.waitForBlock(market.mgv, tx.blockNumber);
 
-      const marketCleaner = new MarketCleaner(market, cleanerProvider, {
-        base: market.base.name,
-        quote: market.quote.name,
-      });
+      const marketCleaner = new MarketCleaner(
+        market,
+        cleanerProvider,
+        {
+          base: market.base.name,
+          quote: market.quote.name,
+        },
+        0
+      );
 
       // Act
       await marketCleaner.clean();
@@ -159,6 +169,7 @@ describe("MarketCleaner integration tests", () => {
         base: market.base.name,
         quote: market.quote.name,
       },
+      0,
       whitelistedSets
     );
 
@@ -206,6 +217,7 @@ describe("MarketCleaner integration tests", () => {
         base: market.base.name,
         quote: market.quote.name,
       },
+      0,
       whitelistedSets
     );
 
@@ -275,6 +287,7 @@ describe("MarketCleaner integration tests", () => {
         base: market.base.name,
         quote: market.quote.name,
       },
+      0,
       whitelistedSets,
       arbitragerAddress
     );
