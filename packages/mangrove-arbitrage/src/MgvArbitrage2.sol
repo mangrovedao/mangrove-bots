@@ -179,7 +179,7 @@ contract MgvArbitrage2 is AccessControlled, IUniswapV3SwapCallback {
       mgv.marketOrder(address(params.takerGivesToken), address(params.takerWantsToken), 0, deltaWants, false);
 
     require(params.minimumGain + deltaGives <= totalGot, "MgvArbitrage/notProfitable");
-    require(wantsTokenBalance <= wantsTokenBalance + deltaWants - totalGave, "MgvArbitrage/notProfitable");
+    require(wantsTokenBalance + totalGave <= wantsTokenBalance + deltaWants, "MgvArbitrage/notProfitable");
   }
 
   ///@notice Retrieves the best mangrove offer for a given market pair of outbound token and inbound token onplatformMangrove.
