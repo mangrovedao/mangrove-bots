@@ -308,4 +308,71 @@ describe("MarketCleaner integration tests", () => {
       (val: any) => val == true
     );
   });
+
+  it(`Should clean by Impersonating and should ignore gascost`, async function () {
+    // Testing with new params
+    const mgvArbitrager = await Mangrove.connect({
+      privateKey: this.accounts.arbitrager.key,
+      provider: this.server.url,
+    });
+
+    const arbitragerAddress = this.accounts.arbitrager.address;
+
+    const marketAribtrager = await mgvArbitrager.market({
+      base: "TokenA",
+      quote: "TokenB",
+    });
+    await mgvTestUtil.mint(marketAribtrager.base, cleaner, 1);
+    await mgvTestUtil.mint(marketAribtrager.base, this.accounts.arbitrager, 1);
+
+    const result = await (
+      await marketAribtrager.base.approve(mgv.address, {
+        amount: "1",
+        overrides: {},
+      })
+    ).wait();
+    await mgvTestUtil.waitForBlock(mgvArbitrager, result.blockNumber);
+
+    const txReceipt = await mgvTestUtil.postNewOffer({
+      market,
+      ba: "bids",
+      maker,
+      shouldFail: true,
+      wants: market.base.toUnits(1),
+      gives: market.quote.toUnits(1600),
+    });
+    await mgvTestUtil.waitForBlock(
+      marketAribtrager.mgv,
+      txReceipt.blockNumber!
+    );
+
+    const whitelistedSets = new Set<string>();
+    const marketCleaner = new MarketCleaner(
+      marketAribtrager,
+      cleanerProvider,
+      {
+        base: market.base.name,
+        quote: market.quote.name,
+      },
+      1,
+      whitelistedSets,
+      arbitragerAddress
+    );
+
+    let book = await marketAribtrager.requestBook();
+    whitelistedSets.add(book.bids[0].maker.toLowerCase());
+
+    const beforeBalance = await mgv.provider.getBalance(arbitragerAddress);
+    // Act
+    await marketCleaner.clean();
+    const afterBalance = await mgv.provider.getBalance(arbitragerAddress);
+
+    book = await marketAribtrager.requestBook();
+
+    expect(book).to.have.property("bids").which.is.empty;
+
+    expect(afterBalance.gt(beforeBalance)).to.satisfy(
+      (val: any) => val == true
+    );
+  });
 });

@@ -451,6 +451,7 @@ export class MarketCleaner {
     takerGives: Big
   ): Promise<OfferCleaningEstimates> {
     const gas = await this.#estimateGas(offer, ba, takerWants, takerGives);
+
     const totalCost = gas.mul(gasPrice).mul(1 - this.#allowedLostPercentage);
     const netResult = bounty.sub(totalCost);
     return {
