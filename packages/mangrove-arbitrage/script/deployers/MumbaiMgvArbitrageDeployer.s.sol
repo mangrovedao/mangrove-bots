@@ -14,10 +14,6 @@ contract MumbaiMgvArbitrageDeployer is Deployer {
 
   function runWithChainSpecificParams() public {
     arbDeployer = new MgvArbitrageDeployer();
-    arbDeployer.innerRun({
-      admin: broadcaster(),
-      arbitrager: envAddressOrName("ARBITRAGER", "Arbitrager"),
-      mgv: envAddressOrName("MGV", "Mangrove")
-    });
+    arbDeployer.innerRun({admin: broadcaster(), mgv: envAddressOrName("MGV", "Mangrove")});
   }
 }

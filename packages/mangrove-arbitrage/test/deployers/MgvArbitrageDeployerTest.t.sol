@@ -9,12 +9,11 @@ import {Test2, Test} from "mgv_lib/Test2.sol";
 
 contract MgvArbitrageDeployerTest is BaseMgvArbitrageDeployerTest {
   function setUp() public {
-    arbitrager = freshAddress("arbitrager");
     admin = freshAddress("chief");
 
     mgvDeployer = new MangroveDeployer();
     mgvDeployer.innerRun({chief: admin, gasprice: 1, gasmax: 2_000_000, gasbot: address(0)});
     mgvArbDeployer = new MgvArbitrageDeployer();
-    mgvArbDeployer.innerRun({admin: admin, arbitrager: arbitrager, mgv: address(mgvDeployer.mgv())});
+    mgvArbDeployer.innerRun({admin: admin, mgv: address(mgvDeployer.mgv())});
   }
 }

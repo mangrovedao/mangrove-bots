@@ -20,7 +20,6 @@ contract MgvArbitrageTest is MangroveTest {
   address payable seller;
   address payable lp;
   address payable admin;
-  address payable arbitrager;
 
   IUniswapV3Pool uniswapV3PoolWETHUSDC3000 = IUniswapV3Pool(0x0e44cEb592AcFC5D3F09D996302eB4C499ff8c10);
 
@@ -57,8 +56,6 @@ contract MgvArbitrageTest is MangroveTest {
     fork.set("seller", seller);
     lp = freshAddress();
     fork.set("lp", lp);
-    arbitrager = admin;
-    fork.set("arbitrager", arbitrager);
 
     deal($(USDC), lp, cash(USDC, 100000));
     deal($(DAI), lp, cash(DAI, 100000));
@@ -76,19 +73,13 @@ contract MgvArbitrageTest is MangroveTest {
     USDC.approve(address(mgv), type(uint).max);
     vm.stopPrank();
 
-    vm.startPrank(arbitrager);
-    WETH.approve(address(mgv), type(uint).max);
-    USDC.approve(address(mgv), type(uint).max);
-    vm.stopPrank();
-
     deployStrat();
   }
 
   function deployStrat() public {
     arbStrat = new MgvArbitrage({
       _mgv: IMangrove($(mgv)),
-      admin: admin,
-      _arbitrager: arbitrager
+      admin: admin
     });
     fork.set("MgvArbitrage", address(arbStrat));
 

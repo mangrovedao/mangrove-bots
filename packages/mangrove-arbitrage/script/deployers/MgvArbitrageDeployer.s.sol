@@ -9,23 +9,18 @@ contract MgvArbitrageDeployer is Deployer {
   MgvArbitrage public mgvArb;
 
   function run() public {
-    innerRun({
-      admin: envAddressOrName("CHIEF", broadcaster()),
-      arbitrager: envAddressOrName("ARBITRAGER"),
-      mgv: envAddressOrName("MGV", "Mangrove")
-    });
+    innerRun({admin: envAddressOrName("CHIEF", broadcaster()), mgv: envAddressOrName("MGV", "Mangrove")});
     outputDeployment();
   }
 
-  function innerRun(address admin, address arbitrager, address mgv) public {
+  function innerRun(address admin, address mgv) public {
     broadcast();
-    mgvArb = new MgvArbitrage(IMangrove(payable(mgv)), admin, arbitrager);
+    mgvArb = new MgvArbitrage(IMangrove(payable(mgv)), admin);
     fork.set("MgvArbitrage", address(mgvArb));
-    smokeTest(admin, arbitrager, mgv);
+    smokeTest(admin, mgv);
   }
 
-  function smokeTest(address admin, address arbitrager, address mgv) public view {
-    require(mgvArb.arbitrager() == arbitrager, "Wrong arbitrager address");
+  function smokeTest(address admin, address mgv) public view {
     require(mgvArb.admin() == admin, "Wrong admin address");
     require(address(mgvArb.mgv()) == mgv, "Wrong mgv address");
     require(fork.get("MgvArbitrage") != address(0), "MgvArbitrage address not set");

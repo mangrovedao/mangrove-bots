@@ -10,8 +10,6 @@ import {Test2, Test} from "mgv_lib/Test2.sol";
 contract MumbaiMgvArbitrageDeployerTest is BaseMgvArbitrageDeployerTest {
   function setUp() public {
     admin = broadcaster();
-    arbitrager = freshAddress("arbitrager");
-    fork.set("Arbitrager", arbitrager);
 
     mgvDeployer = new MangroveDeployer();
     mgvDeployer.innerRun({chief: admin, gasprice: 1, gasmax: 2_000_000, gasbot: address(0)});

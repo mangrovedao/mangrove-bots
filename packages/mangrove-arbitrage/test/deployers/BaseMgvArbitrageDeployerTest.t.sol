@@ -11,10 +11,8 @@ abstract contract BaseMgvArbitrageDeployerTest is Deployer, Test2 {
   MgvArbitrageDeployer mgvArbDeployer;
   MangroveDeployer mgvDeployer;
   address admin;
-  address arbitrager;
 
   function test_toy_ens_has_addresses() public {
-    assertEq(mgvArbDeployer.mgvArb().arbitrager(), arbitrager, "Wrong arbitrager address");
     assertEq(mgvArbDeployer.mgvArb().admin(), admin, "Wrong admin address");
     assertEq(address(mgvArbDeployer.mgvArb().mgv()), fork.get("Mangrove"), "Wrong mgv address");
     assertEq(fork.get("MgvArbitrage"), address(mgvArbDeployer.mgvArb()), "MgvArbitrage address not correct");

@@ -25,7 +25,7 @@ contract MgvArbitrageActivateTokensTest is Deployer, Test2 {
     tokenA = IERC20(fork.get("TokenA"));
     tokenB = IERC20(fork.get("TokenB"));
     mgvArbDeployer = new MgvArbitrageDeployer();
-    mgvArbDeployer.innerRun({admin: admin, mgv: mgv, arbitrager: freshAddress("arbitrager")});
+    mgvArbDeployer.innerRun({admin: admin, mgv: mgv});
     mgvArbActivateTokens = new MgvArbitrageActivateTokens();
   }
 

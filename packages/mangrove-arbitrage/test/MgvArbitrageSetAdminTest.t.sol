@@ -24,7 +24,7 @@ contract MgvArbitrageSetAdminTest is Deployer, Test2 {
 
     address mgv = fork.get("Mangrove");
     mgvArbDeployer = new MgvArbitrageDeployer();
-    mgvArbDeployer.innerRun({admin: admin, mgv: mgv, arbitrager: freshAddress("arbitrager")});
+    mgvArbDeployer.innerRun({admin: admin, mgv: mgv});
     mgvArbitrageSetAdmin = new MgvArbitrageSetAdmin();
   }
 
