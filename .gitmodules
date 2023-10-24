@@ -1,6 +1,11 @@
 [submodule "packages/mangrove-arbitrage/lib/v3-core"]
 	path = packages/mangrove-arbitrage/lib/v3-core
 	url = https://github.com/Uniswap/v3-core
+[submodule "packages/mangrove-arbitrage/lib/mangrove-strats"]
+	path = packages/mangrove-arbitrage/lib/mangrove-strats
+  url = https://github.com/mangrovedao/mangrove-strats
+  branch = develop
 [submodule "packages/mangrove-arbitrage/lib/mangrove-core"]
 	path = packages/mangrove-arbitrage/lib/mangrove-core
 	url = https://github.com/mangrovedao/mangrove-core
+  branch = develop
