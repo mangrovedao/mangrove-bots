@@ -7,3 +7,12 @@ static/environmentInformation.json
 .nyc_output/
 coverage/
 tsconfig.tsbuildinfo
+
+!/broadcast
+/broadcast/*
+/broadcast/*/31337/
+
+# deploy output by deploy script
+deploy_output.txt
+mangroveJsNodeState.dump
+out

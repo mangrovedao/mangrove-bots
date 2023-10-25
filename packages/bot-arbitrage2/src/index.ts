@@ -2,11 +2,18 @@ import { logger } from "./util/logger";
 
 import { BaseProvider } from "@ethersproject/providers";
 import { Wallet } from "@ethersproject/wallet";
-import Mangrove, { enableLogging } from "@mangrovedao/mangrove.js";
+import Mangrove, { enableLogging, MgvToken } from "@mangrovedao/mangrove.js";
 
 import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
 import { ExitCode, Setup } from "@mangrovedao/bot-utils";
 import config from "./util/config";
+import {
+  getArbitragerContractAddress,
+  getMarketsConfig,
+} from "./util/configValidator";
+
+import { MgvArbitrage__factory } from "./types/typechain";
+import { MarketWithToken } from "./types";
 
 enableLogging();
 
@@ -18,6 +25,40 @@ async function botFunction(
   signer: Wallet,
   provider: BaseProvider
 ) {
+  const arbitragerContractAddress = getArbitragerContractAddress();
+  const marketsConfig = getMarketsConfig();
+
+  const marketsWithToken = await Promise.all(
+    marketsConfig.map<Promise<MarketWithToken>>(async (market) => {
+      const base = await mgv.token(market.base);
+      const quote = await mgv.token(market.quote);
+
+      return {
+        ...market,
+        base,
+        quote,
+      };
+    })
+  );
+
+  const tokenSet: Record<string, MgvToken> = {};
+
+  marketsWithToken.forEach((market) => {
+    tokenSet[market.base.address] = market.base;
+    tokenSet[market.quote.address] = market.quote;
+  });
+
+  await Promise.all(
+    Object.values(tokenSet).map((token) =>
+      token.approveIfNotInfinite(mgv.address)
+    )
+  );
+
+  const mgvArbitrageContract = MgvArbitrage__factory.connect(
+    arbitragerContractAddress,
+    signer
+  );
+
   // const task = new AsyncTask(
   //   "gas-updater bot task",
   //   async () => {

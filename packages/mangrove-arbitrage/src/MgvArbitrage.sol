@@ -31,7 +31,7 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
 
   bool isArbitraging;
 
-  mapping(address => bool) pools;
+  mapping(address => bool) public pools;
 
   /// @param _mgv The Mangrove instance to be arbitraged
   /// @param admin The admin of the contract. The only address allowed to withdraw funds.

@@ -23,6 +23,7 @@
     "test": "yarn run test:unit && yarn run test:integration",
     "test:unit": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --config test/mocha/config/unit-tests.json --exit",
     "test:integration": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/integration-tests.json --exit ",
+    "typechain": "ts-node --transpileOnly src/util/runTypechain.ts",
     "test:coverage": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/coverage-tests.json --exit ",
     "start": "node build/index.js"
   },
@@ -32,6 +33,9 @@
   "dependencies": {
     "@ethersproject/experimental": "^5.7.0",
     "@mangrovedao/bot-utils": "workspace:*",
+    "@mangrovedao/mangrove-arbitrage": "workspace:*",
+    "@mangrovedao/mangrove-strats": "^0.0.2-0",
+    "@mangrovedao/mangrove.js": "git+https://github.com/mangrovedao/mangrove.js.git#feat/ticks",
     "@types/big.js": "^6.1.6",
     "@types/finalhandler": "^1.2.0",
     "@types/serve-static": "^1.15.0",
@@ -42,9 +46,11 @@
     "ethers": "^5.7.2",
     "fast-safe-stringify": "^2.1.1",
     "finalhandler": "^1.2.0",
+    "mkdirp": "^3.0.1",
     "nyc": "^15.1.0",
     "serve-static": "^1.15.0",
-    "toad-scheduler": "^2.2.0"
+    "toad-scheduler": "^2.2.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@espendk/json-file-reporter": "^1.4.2",
@@ -54,11 +60,13 @@
     "@types/chai-as-promised": "^7.1.5",
     "@types/config": "^3.3.0",
     "@types/dotenv-flow": "^3.2.0",
+    "@types/mkdirp": "^2.0.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "^20.3.0",
     "@types/shelljs": "^0.8.11",
     "@typescript-eslint/eslint-plugin": "^5.59.9",
     "@typescript-eslint/parser": "^5.48.1",
+    "@uniswap/hardhat-v3-deploy": "^0.1.1",
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
     "cross-env": "^7.0.3",
