@@ -163,6 +163,7 @@ export class MarketCleaner {
             gasPrice,
             takerWants,
             takerGives,
+            semibook.market.tickSpacing,
             contextInfo
           ) // takerWants: outboundTkn, takerGives: inboundTkn
         );
@@ -177,6 +178,7 @@ export class MarketCleaner {
             gasPrice,
             new Big(0),
             new Big(0),
+            semibook.market.tickSpacing,
             contextInfo
           )
         );
@@ -191,13 +193,14 @@ export class MarketCleaner {
     gasPrice: BigNumber,
     takerWants: Big,
     takerGives: Big,
+    tickSpacing: BigNumber,
     contextInfo?: string
   ): Promise<void> {
     const { willOfferFail, bounty } = await this.#willOfferFail(
       offer,
       ba,
       takerWants,
-      takerGives,
+      tickSpacing,
       contextInfo
     );
     if (!willOfferFail || bounty === undefined || bounty.eq(0)) {
@@ -238,26 +241,32 @@ export class MarketCleaner {
     offer: Market.Offer,
     ba: Market.BA,
     takerWants: Big,
-    takerGives: Big,
+    tickSpacing: BigNumber,
     contextInfo?: string
   ): Promise<{ willOfferFail: boolean; bounty?: BigNumber }> {
-    const raw = await this.#market.getRawSnipeParams({
+    const raw = await this.#market.getRawCleanParams({
       ba: ba,
-      targets: this.#createCollectParams(offer, takerWants, takerGives),
-      requireOffersToFail: true,
-      fillWants: false,
+      targets: this.#createCollectParams(offer, takerWants),
     });
 
-    return this.#market.mgv.cleanerContract.callStatic
-      .collect(raw.outboundTkn, raw.inboundTkn, raw.targets, raw.fillWants)
-      .then((bounty) => {
+    return this.#market.mgv.contract.callStatic
+      .cleanByImpersonation(
+        {
+          outbound_tkn: raw.outboundTkn,
+          inbound_tkn: raw.inboundTkn,
+          tickSpacing: tickSpacing,
+        },
+        raw.targets,
+        raw.taker
+      )
+      .then(({ successes, bounty }) => {
         logger.debug("Static collect of offer succeeded", {
           base: this.#market.base.name,
           quote: this.#market.quote.name,
           ba: ba,
           offer: offer,
           contextInfo,
-          data: { bounty },
+          data: { successes, bounty },
         });
         return { willOfferFail: true, bounty: bounty };
       })
@@ -353,15 +362,14 @@ export class MarketCleaner {
 
   #createCollectParams(
     offer: Market.Offer,
-    takerWants: Big,
-    takerGives: Big
-  ): Market.SnipeParams["targets"] {
+    takerWants: Big
+  ): Market.CleanParams["targets"] {
     return [
       {
         offerId: offer.id,
-        takerWants: takerWants.toFixed(),
-        takerGives: takerGives.toFixed(),
-        gasLimit: maxGasReq,
+        takerWants: takerWants,
+        tick: offer.tick.toString(),
+        gasreq: maxGasReq,
       },
     ];
     // FIXME 2021-12-01: The below result may have been affected by wrong order of inbound/outbound tokens

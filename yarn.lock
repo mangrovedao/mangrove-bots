@@ -309,7 +309,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/abi@npm:5.7.0, @ethersproject/abi@npm:^5.0.12, @ethersproject/abi@npm:^5.7.0":
+"@ethersproject/abi@npm:5.7.0, @ethersproject/abi@npm:^5.7.0":
   version: 5.7.0
   resolution: "@ethersproject/abi@npm:5.7.0"
   dependencies:
@@ -354,7 +354,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/address@npm:5.7.0, @ethersproject/address@npm:^5.0.2, @ethersproject/address@npm:^5.7.0":
+"@ethersproject/address@npm:5.7.0, @ethersproject/address@npm:^5.7.0":
   version: 5.7.0
   resolution: "@ethersproject/address@npm:5.7.0"
   dependencies:
@@ -636,7 +636,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/solidity@npm:5.7.0, @ethersproject/solidity@npm:^5.0.9":
+"@ethersproject/solidity@npm:5.7.0":
   version: 5.7.0
   resolution: "@ethersproject/solidity@npm:5.7.0"
   dependencies:
@@ -981,60 +981,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mangrovedao/bot-arbitrage@workspace:packages/bot-arbitrage":
-  version: 0.0.0-use.local
-  resolution: "@mangrovedao/bot-arbitrage@workspace:packages/bot-arbitrage"
-  dependencies:
-    "@espendk/json-file-reporter": ^1.4.2
-    "@ethersproject/experimental": ^5.7.0
-    "@ethersproject/hardware-wallets": ^5.7.0
-    "@mangrovedao/bot-utils": "workspace:*"
-    "@mangrovedao/mangrove-arbitrage": "workspace:*"
-    "@types/big.js": ^6.1.6
-    "@types/chai": ^4.3.4
-    "@types/chai-as-promised": ^7.1.5
-    "@types/config": ^3.3.0
-    "@types/dotenv-flow": ^3.2.0
-    "@types/finalhandler": ^1.2.0
-    "@types/mocha": ^9.0.0
-    "@types/node": ^20.3.0
-    "@types/serve-static": ^1.15.0
-    "@types/shelljs": ^0.8.11
-    "@typescript-eslint/eslint-plugin": ^5.59.9
-    "@typescript-eslint/parser": ^5.48.1
-    "@uniswap/hardhat-v3-deploy": ^0.1.1
-    "@uniswap/sdk-core": ^4.0.6
-    "@uniswap/v3-core": ^1.0.1
-    "@uniswap/v3-periphery": ^1.4.3
-    "@uniswap/v3-sdk": ^3.10.0
-    big.js: ^6.2.1
-    chai: ^4.3.7
-    chai-as-promised: ^7.1.1
-    config: ^3.3.8
-    cross-env: ^7.0.3
-    dotenv-flow: ^3.2.0
-    eslint: ^8.31.0
-    eslint-config-prettier: ^8.5.0
-    ethers: ^5.7.2
-    fast-safe-stringify: ^2.1.1
-    finalhandler: ^1.2.0
-    lint-staged: ^13.0.3
-    mocha: ^10.0.0
-    mocha-multi-reporters: ^1.5.1
-    npm-run-all: ^4.1.5
-    nyc: ^15.1.0
-    prettier: 2.7.1
-    prettier-eslint: ^15.0.1
-    rimraf: ^5.0.1
-    serve-static: ^1.15.0
-    shelljs: ^0.8.5
-    toad-scheduler: ^2.2.0
-    transparent-proxy: ^1.12.1
-    ts-node: ^10.9.1
-    typescript: ^4.7.0
-  languageName: unknown
-  linkType: soft
-
 "@mangrovedao/bot-cleaning@workspace:packages/bot-cleaning":
   version: 0.0.0-use.local
   resolution: "@mangrovedao/bot-cleaning@workspace:packages/bot-cleaning"
@@ -1282,7 +1228,7 @@ __metadata:
     "@espendk/json-file-reporter": ^1.4.2
     "@ethersproject/experimental": ^5.7.0
     "@ethersproject/hardware-wallets": ^5.7.0
-    "@mangrovedao/mangrove.js": 1.4.21
+    "@mangrovedao/mangrove.js": "mangrovedao/mangrove.js#feat/addWantsAndGives"
     "@types/big.js": ^6.1.6
     "@types/chai": ^4.3.4
     "@types/chai-as-promised": ^7.1.5
@@ -1330,7 +1276,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mangrovedao/mangrove-arbitrage@workspace:*, @mangrovedao/mangrove-arbitrage@workspace:packages/mangrove-arbitrage":
+"@mangrovedao/mangrove-arbitrage@workspace:packages/mangrove-arbitrage":
   version: 0.0.0-use.local
   resolution: "@mangrovedao/mangrove-arbitrage@workspace:packages/mangrove-arbitrage"
   dependencies:
@@ -1345,19 +1291,29 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mangrovedao/mangrove-core@npm:^1.5.7":
-  version: 1.5.7
-  resolution: "@mangrovedao/mangrove-core@npm:1.5.7"
-  checksum: 24d711e29fa40f22861a2e2aa306eba0190f597469f61862d1bfbfee0b2cd069afab2d331369167ceff1490207f82abd31f7e31e4fab15f69398fa25fb663aab
+"@mangrovedao/mangrove-core@npm:^2.0.0-3, @mangrovedao/mangrove-core@npm:next":
+  version: 2.0.0-3
+  resolution: "@mangrovedao/mangrove-core@npm:2.0.0-3"
+  checksum: 7072e48bd78e9e784d4b07d50eb86ae459e63a884c3999ed6d5c0567c95ab6c00d60ba50800feb117c15641eb207026ca59076f15005c0e2ba44ef20b4bbdacb
   languageName: node
   linkType: hard
 
-"@mangrovedao/mangrove.js@npm:1.4.21":
-  version: 1.4.21
-  resolution: "@mangrovedao/mangrove.js@npm:1.4.21"
+"@mangrovedao/mangrove-strats@https://github.com/mangrovedao/mangrove-strats.git#commit=d444e6762fc9f7a5b71d8e5cfe32ef2b6877b33f":
+  version: 0.0.2-0
+  resolution: "@mangrovedao/mangrove-strats@https://github.com/mangrovedao/mangrove-strats.git#commit=d444e6762fc9f7a5b71d8e5cfe32ef2b6877b33f"
+  dependencies:
+    "@mangrovedao/mangrove-core": next
+  checksum: 9c29e5f9734c8101fd8c0a68f0e3083da1e67daa1256cfdc1c2031974ecb2271045f9adf917c0d63e66ffb2808b8b519735c178315a9e1650f1a5713013fcb3a
+  languageName: node
+  linkType: hard
+
+"@mangrovedao/mangrove.js@mangrovedao/mangrove.js#feat/addWantsAndGives":
+  version: 2.0.0-0
+  resolution: "@mangrovedao/mangrove.js@https://github.com/mangrovedao/mangrove.js.git#commit=65f2f4850d53a005ad00a5873eded9534ac080a9"
   dependencies:
     "@ethersproject/experimental": ^5.7.0
-    "@mangrovedao/mangrove-core": ^1.5.7
+    "@mangrovedao/mangrove-core": ^2.0.0-3
+    "@mangrovedao/mangrove-strats": "https://github.com/mangrovedao/mangrove-strats.git#commit=d444e6762fc9f7a5b71d8e5cfe32ef2b6877b33f"
     "@mangrovedao/reliable-event-subscriber": 1.1.29
     "@types/object-inspect": ^1.8.1
     "@types/triple-beam": ^1.3.2
@@ -1377,7 +1333,7 @@ __metadata:
     yargs: ^17.3.0
   bin:
     mgv: ./dist/nodejs/cli/mgv.js
-  checksum: 91b9569b26234507ce2a90d006cdcd6c5efcc16f98b3923e4ff06941e31260220a0a7f9d98a9b8c14e40a0a3ef3957386ce9f94c91dc85ccb4ce5589f511c2cc
+  checksum: d1ae295f82618c9f8a6da0d598d2948560c55474811af55e186d30dd878b2333fbfa182d36230af76a92dc4443e2390664c22ff7c4581209fe8f84bc0a8de4db
   languageName: node
   linkType: hard
 
@@ -1458,13 +1414,6 @@ __metadata:
     mkdirp: ^1.0.4
     rimraf: ^3.0.2
   checksum: 52dc02259d98da517fae4cb3a0a3850227bdae4939dda1980b788a7670636ca2b4a01b58df03dd5f65c1e3cb70c50fa8ce5762b582b3f499ec30ee5ce1fd9380
-  languageName: node
-  linkType: hard
-
-"@openzeppelin/contracts@npm:3.4.1-solc-0.7-2":
-  version: 3.4.1-solc-0.7-2
-  resolution: "@openzeppelin/contracts@npm:3.4.1-solc-0.7-2"
-  checksum: 3608a4065f65946117caa543ef72477ce637bd5cc4f4853303b5f5b6c26516f8b50898ea3a8486e2877689cae81453ce22c72c8624c77c363c63f019b4086ffa
   languageName: node
   linkType: hard
 
@@ -1688,13 +1637,6 @@ __metadata:
   version: 10.0.1
   resolution: "@types/mocha@npm:10.0.1"
   checksum: 224ea9fce7b1734ccdb9aa99a622d902a538ce1847bca7fd22c5fb38adcf3ed536f50f48f587085db988a4bb3c2eb68f4b98e1cd6a38bc5547bd3bbbedc54495
-  languageName: node
-  linkType: hard
-
-"@types/mocha@npm:^9.0.0":
-  version: 9.1.1
-  resolution: "@types/mocha@npm:9.1.1"
-  checksum: 516077c0acd9806dc78317f88aaac0df5aaf0bdc2f63dfdadeabdf0b0137953b6ca65472e6ff7c30bc93ce4e0ae76eae70e8d46764b9a8eae4877a928b6ef49a
   languageName: node
   linkType: hard
 
@@ -1961,19 +1903,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uniswap/hardhat-v3-deploy@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "@uniswap/hardhat-v3-deploy@npm:0.1.1"
-  dependencies:
-    "@uniswap/v3-core": 1.0.0
-    "@uniswap/v3-periphery": ^1.0.1
-    cli-table3: ^0.6.0
-  peerDependencies:
-    hardhat: ^2.0.0
-  checksum: d7cd486dbc44038ff71497f087c05277fc5877b361fb43c6fed47e0a7c76c518640bdcb7c66a2b9537b960a4249832499c9d345034c6f9cebbe0d6f812bcae9a
-  languageName: node
-  linkType: hard
-
 "@uniswap/lib@npm:^4.0.1-alpha":
   version: 4.0.1-alpha
   resolution: "@uniswap/lib@npm:4.0.1-alpha"
@@ -1981,21 +1910,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uniswap/sdk-core@npm:^4, @uniswap/sdk-core@npm:^4.0.6":
-  version: 4.0.6
-  resolution: "@uniswap/sdk-core@npm:4.0.6"
-  dependencies:
-    "@ethersproject/address": ^5.0.2
-    big.js: ^5.2.2
-    decimal.js-light: ^2.5.0
-    jsbi: ^3.1.4
-    tiny-invariant: ^1.1.0
-    toformat: ^2.0.0
-  checksum: 0dd876d117c2d359a09047fafb5e80e8312b4db2cb0078a968d0ebbdb0a294558e8a0ea13678b113a9c2026f7c394193eb56650a250fd0c52ec51680c8aed3bc
-  languageName: node
-  linkType: hard
-
-"@uniswap/swap-router-contracts@npm:^1.2.1, @uniswap/swap-router-contracts@npm:^1.3.0":
+"@uniswap/swap-router-contracts@npm:^1.3.0":
   version: 1.3.0
   resolution: "@uniswap/swap-router-contracts@npm:1.3.0"
   dependencies:
@@ -2044,7 +1959,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uniswap/v3-periphery@npm:^1.0.1, @uniswap/v3-periphery@npm:^1.1.1, @uniswap/v3-periphery@npm:^1.4.3":
+"@uniswap/v3-periphery@npm:^1.4.3":
   version: 1.4.3
   resolution: "@uniswap/v3-periphery@npm:1.4.3"
   dependencies:
@@ -2054,33 +1969,6 @@ __metadata:
     "@uniswap/v3-core": 1.0.0
     base64-sol: 1.0.1
   checksum: 50636951fc0a7737cfeef988ab38f4ddf26f6165a19df95b84294929088cc8b05fdbc7910168610ce9daebcce5d7a408fa5a02228ef9dfb73c23c695acc8b741
-  languageName: node
-  linkType: hard
-
-"@uniswap/v3-sdk@npm:^3.10.0":
-  version: 3.10.0
-  resolution: "@uniswap/v3-sdk@npm:3.10.0"
-  dependencies:
-    "@ethersproject/abi": ^5.0.12
-    "@ethersproject/solidity": ^5.0.9
-    "@uniswap/sdk-core": ^4
-    "@uniswap/swap-router-contracts": ^1.2.1
-    "@uniswap/v3-periphery": ^1.1.1
-    "@uniswap/v3-staker": 1.0.0
-    tiny-invariant: ^1.1.0
-    tiny-warning: ^1.0.3
-  checksum: 664d40550aa5c88b21bce3dc209746bc61490e4afaa5686d12d6a5839e26211ae5093d82eeff3e3ec80df5df3eb1d40f9a7510b61a389e2779a9b1e5eca9ed25
-  languageName: node
-  linkType: hard
-
-"@uniswap/v3-staker@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@uniswap/v3-staker@npm:1.0.0"
-  dependencies:
-    "@openzeppelin/contracts": 3.4.1-solc-0.7-2
-    "@uniswap/v3-core": 1.0.0
-    "@uniswap/v3-periphery": ^1.0.1
-  checksum: 5a68e59f33d4761956ad735c8ce5ea6e566076bd260ea0a0bb4b3a0db237719e39f21a22eb0a5a231141efdf0154bfe03f690612d632898f33192b4442c888b3
   languageName: node
   linkType: hard
 
@@ -2479,13 +2367,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"big.js@npm:^5.2.2":
-  version: 5.2.2
-  resolution: "big.js@npm:5.2.2"
-  checksum: b89b6e8419b097a8fb4ed2399a1931a68c612bce3cfd5ca8c214b2d017531191070f990598de2fc6f3f993d91c0f08aa82697717f6b3b8732c9731866d233c9e
-  languageName: node
-  linkType: hard
-
 "big.js@npm:^6.2.1":
   version: 6.2.1
   resolution: "big.js@npm:6.2.1"
@@ -2843,19 +2724,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cli-table3@npm:^0.6.0":
-  version: 0.6.3
-  resolution: "cli-table3@npm:0.6.3"
-  dependencies:
-    "@colors/colors": 1.5.0
-    string-width: ^4.2.0
-  dependenciesMeta:
-    "@colors/colors":
-      optional: true
-  checksum: 09897f68467973f827c04e7eaadf13b55f8aec49ecd6647cc276386ea660059322e2dd8020a8b6b84d422dbdd619597046fa89cbbbdc95b2cea149a2df7c096c
-  languageName: node
-  linkType: hard
-
 "cli-truncate@npm:^2.1.0":
   version: 2.1.0
   resolution: "cli-truncate@npm:2.1.0"
@@ -3025,7 +2893,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"config@npm:^3.3.8, config@npm:^3.3.9":
+"config@npm:^3.3.9":
   version: 3.3.9
   resolution: "config@npm:3.3.9"
   dependencies:
@@ -3170,13 +3038,6 @@ __metadata:
   version: 4.0.0
   resolution: "decamelize@npm:4.0.0"
   checksum: b7d09b82652c39eead4d6678bb578e3bebd848add894b76d0f6b395bc45b2d692fb88d977e7cfb93c4ed6c119b05a1347cef261174916c2e75c0a8ca57da1809
-  languageName: node
-  linkType: hard
-
-"decimal.js-light@npm:^2.5.0":
-  version: 2.5.1
-  resolution: "decimal.js-light@npm:2.5.1"
-  checksum: f5a2c7eac1c4541c8ab8a5c8abea64fc1761cefc7794bd5f8afd57a8a78d1b51785e0c4e4f85f4895a043eaa90ddca1edc3981d1263eb6ddce60f32bf5fe66c9
   languageName: node
   linkType: hard
 
@@ -3573,7 +3434,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:^8.5.0, eslint-config-prettier@npm:^8.8.0":
+"eslint-config-prettier@npm:^8.8.0":
   version: 8.8.0
   resolution: "eslint-config-prettier@npm:8.8.0"
   peerDependencies:
@@ -5168,13 +5029,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsbi@npm:^3.1.4":
-  version: 3.2.5
-  resolution: "jsbi@npm:3.2.5"
-  checksum: 642d1bb139ad1c1e96c4907eb159565e980a0d168487626b493d0d0b7b341da0e43001089d3b21703fe17b18a7a6c0f42c92026f71d54471ed0a0d1b3015ec0f
-  languageName: node
-  linkType: hard
-
 "jsesc@npm:^2.5.1":
   version: 2.5.2
   resolution: "jsesc@npm:2.5.2"
@@ -5257,7 +5111,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^13.0.3, lint-staged@npm:^13.2.0, lint-staged@npm:^13.2.2":
+"lint-staged@npm:^13.2.0, lint-staged@npm:^13.2.2":
   version: 13.2.2
   resolution: "lint-staged@npm:13.2.2"
   dependencies:
@@ -5787,7 +5641,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mocha@npm:^10.0.0, mocha@npm:^10.2.0":
+"mocha@npm:^10.2.0":
   version: 10.2.0
   resolution: "mocha@npm:10.2.0"
   dependencies:
@@ -7622,20 +7476,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tiny-invariant@npm:^1.1.0":
-  version: 1.3.1
-  resolution: "tiny-invariant@npm:1.3.1"
-  checksum: 872dbd1ff20a21303a2fd20ce3a15602cfa7fcf9b228bd694a52e2938224313b5385a1078cb667ed7375d1612194feaca81c4ecbe93121ca1baebe344de4f84c
-  languageName: node
-  linkType: hard
-
-"tiny-warning@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "tiny-warning@npm:1.0.3"
-  checksum: da62c4acac565902f0624b123eed6dd3509bc9a8d30c06e017104bedcf5d35810da8ff72864400ad19c5c7806fc0a8323c68baf3e326af7cb7d969f846100d71
-  languageName: node
-  linkType: hard
-
 "to-fast-properties@npm:^2.0.0":
   version: 2.0.0
   resolution: "to-fast-properties@npm:2.0.0"
@@ -7659,24 +7499,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"toformat@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "toformat@npm:2.0.0"
-  checksum: c75341911a811a85c309e2c3eb8e9c7b60f26e2c629170179fc92ed339a2faf44433ebde75d4ac6dbe6f55a2aa044e1d4cd5242dbdd5e4c047babbe6defd8387
-  languageName: node
-  linkType: hard
-
 "toidentifier@npm:1.0.1":
   version: 1.0.1
   resolution: "toidentifier@npm:1.0.1"
   checksum: 952c29e2a85d7123239b5cfdd889a0dde47ab0497f0913d70588f19c53f7e0b5327c95f4651e413c74b785147f9637b17410ac8c846d5d4a20a5a33eb6dc3a45
-  languageName: node
-  linkType: hard
-
-"transparent-proxy@npm:^1.12.1":
-  version: 1.13.1
-  resolution: "transparent-proxy@npm:1.13.1"
-  checksum: ccd58f5a13ba52eb4f65633c97e7158cbac53d0437d1188b491d9fc3ffe942b1525875f144dbf653f4e22f32a07873131d77d260643b6a667cdd9e2637302c7d
   languageName: node
   linkType: hard
 
