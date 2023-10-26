@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 
 import {Deployer} from "mgv_script/lib/Deployer.sol";
-import {MgvArbitrageDeployer} from "script/deployers/MgvArbitrageDeployer.s.sol";
+import {MgvArbitrageDeployer} from "mgv_arbitrage_script/deployers/MgvArbitrageDeployer.s.sol";
 
 contract PolygonMgvArbitrageDeployer is Deployer {
   MgvArbitrageDeployer public arbDeployer;

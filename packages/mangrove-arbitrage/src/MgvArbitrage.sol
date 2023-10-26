@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {ISwapRouter} from "@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol";
 import {IMangrove} from "mgv_src/IMangrove.sol";
 import {IERC20, OLKey} from "@mgv/src/core/MgvLib.sol";
 import {AccessControlled} from "mgv_strats_src/strategies/utils/AccessControlled.sol";
 import {TransferLib} from "mgv_lib/TransferLib.sol";
-import {IUniswapV3Pool} from "lib/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
-import {IUniswapV3SwapCallback} from "lib/v3-core/contracts/interfaces/callback/IUniswapV3SwapCallback.sol";
+import {IUniswapV3Pool} from "mgv_arbitrage_lib/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
+import {IUniswapV3SwapCallback} from
+  "mgv_arbitrage_lib/v3-core/contracts/interfaces/callback/IUniswapV3SwapCallback.sol";
 import {FullMath} from "./FullMath.sol";
 
 /// @param takerGivesToken The token the taker gives

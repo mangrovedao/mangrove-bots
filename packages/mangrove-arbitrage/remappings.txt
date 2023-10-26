@@ -22,3 +22,10 @@ forge-std/=lib/mangrove-core/lib/forge-std/src/
 @mgv-strats/lib/=lib/mangrove-strats/lib/
 @mgv-strats/test/=lib/mangrove-strats/test/
 @mgv-strats/script/=lib/mangrove-strats/script/
+
+mgv_arbitrage_src=src
+mgv_arbitrage_lib=lib
+mgv_arbitrage_test=test
+mgv_arbitrage_script=script
+
+uniswap_v3_lib=lib/v3-core

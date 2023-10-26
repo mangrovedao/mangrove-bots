@@ -2,8 +2,8 @@
 pragma solidity ^0.8.10;
 
 import {MangroveDeployer} from "mgv_script/core/deployers/MangroveDeployer.s.sol";
-import {MgvArbitrageDeployer} from "script/deployers/MgvArbitrageDeployer.s.sol";
-import {BaseMgvArbitrageDeployerTest} from "test/deployers/BaseMgvArbitrageDeployerTest.t.sol";
+import {MgvArbitrageDeployer} from "mgv_arbitrage_script/deployers/MgvArbitrageDeployer.s.sol";
+import {BaseMgvArbitrageDeployerTest} from "mgv_arbitrage_test/deployers/BaseMgvArbitrageDeployerTest.t.sol";
 
 import {Test2, Test} from "mgv_lib/Test2.sol";
 

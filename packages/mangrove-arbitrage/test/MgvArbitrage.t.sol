@@ -6,8 +6,8 @@ import {MangroveTest} from "mgv_test/lib/MangroveTest.sol";
 import {PinnedPolygonFork} from "mgv_test/lib/forks/Polygon.sol"; // have to use ar polygon fork on a newer block
 import {TestToken} from "mgv_test/lib/tokens/TestToken.sol";
 import {IERC20, OLKey} from "@mgv/src/core/MgvLib.sol";
-import {IUniswapV3Pool} from "lib/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
-import "src/MgvArbitrage.sol";
+import {IUniswapV3Pool} from "mgv_arbitrage_lib/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
+import "mgv_arbitrage_src/MgvArbitrage.sol";
 
 contract MgvArbitrageTest is MangroveTest {
   PinnedPolygonFork fork;

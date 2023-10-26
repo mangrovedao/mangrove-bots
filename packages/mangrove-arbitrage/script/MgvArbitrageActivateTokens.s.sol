@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 
 import {Deployer} from "mgv_script/lib/Deployer.sol";
-import {MgvArbitrage} from "src/MgvArbitrage.sol";
+import {MgvArbitrage} from "mgv_arbitrage_src/MgvArbitrage.sol";
 import {IMangrove} from "mgv_src/IMangrove.sol";
 import {IERC20} from "mgv_lib/IERC20.sol";
 
@@ -23,7 +23,7 @@ contract MgvArbitrageActivateTokens is Deployer {
     tokens[0] = tkn1;
     tokens[1] = tkn2;
     broadcast();
-    mgvArb.activateTokens(tokens);
+    // mgvArb.activateTokens(tokens);
     smokeTest(tkn1, tkn2, address(arbitrageContract));
   }
 
