@@ -1,6 +1,5 @@
 import bn from "bignumber.js";
 import { BigNumber, Contract, Signer } from "ethers";
-import { logger } from "../util/logger";
 import { MgvToken } from "@mangrovedao/mangrove.js";
 
 export async function initPool(params: {
@@ -34,7 +33,7 @@ export async function initPool(params: {
   const poolAddress = await params.factory
     .connect(params.actor)
     .getPool(params.token1.address, params.token2.address, params.poolFee);
-  logger.debug(
+  console.log(
     `poolAddress: ${poolAddress}, token1: ${params.token1.address}, token2: ${params.token2.address}, fee: ${params.poolFee}`
   );
 }
@@ -106,7 +105,7 @@ export function encodePriceSqrt(
       ),
     },
   };
-  logger.debug("", {
+  console.log("", {
     data: priceInfo,
   });
   return priceInfo;

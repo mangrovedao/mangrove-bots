@@ -7,7 +7,6 @@ import { Mangrove, mgvTestUtil } from "@mangrovedao/mangrove.js";
 
 import { Token } from "@uniswap/sdk-core";
 import { getPoolInfo } from "../../src/uniswap/pool";
-import { logger } from "../../src/util/logger";
 import {
   activatePool,
   activateTokens,
@@ -15,6 +14,9 @@ import {
 } from "../../src/arbitarger";
 import { MgvArbitrage } from "../../src/types/typechain/MgvArbitrage";
 import { MgvArbitrage__factory } from "../../src/types/typechain";
+import { deployMgvArbitrage } from "../utils/deployMgvArbitrage";
+import * as eth from "@mangrovedao/mangrove.js/dist/nodejs/eth";
+import { StaticJsonRpcProvider } from "@ethersproject/providers";
 
 let mgv: Mangrove;
 let mgvDeployer: Mangrove;
@@ -35,6 +37,19 @@ describe("ArbBot integration tests", () => {
       },
     });
 
+    console.log("here");
+    const LOCAL_MNEMONIC =
+      "test test test test test test test test test test test junk";
+    const mnemonic = new eth.Mnemonic(LOCAL_MNEMONIC);
+
+    console.log(this.server.url);
+    await deployMgvArbitrage({
+      mgv,
+      provider: new StaticJsonRpcProvider(this.server.url),
+      url: this.server.url,
+      mnemonic: mnemonic,
+      setToyENSCodeIfAbsent: false,
+    });
     mgvDeployer = await Mangrove.connect({
       privateKey: this.accounts.deployer.key,
       provider: mgv.provider,
@@ -47,27 +62,26 @@ describe("ArbBot integration tests", () => {
         batchSize: 5,
       },
     });
-
     mgvTestUtil.setConfig(mgv, this.accounts, mgvDeployer);
 
     //shorten polling for faster tests
     mgvTestUtil.initPollOfTransactionTracking(mgv.provider);
 
-    // const arb = mgv.getAddress("MgvArbitrage");
-    // arbitragerContract = MgvArbitrage__factory.connect(arb, mgvDeployer.signer);
-    // const weth = await mgv.token("WETH");
-    // const dai = await mgv.token("DAI");
-    // const usdc = await mgv.token("USDC");
-    // await weth.contract.mintTo(this.accounts.maker.address, weth.toUnits(100));
-    // await dai.contract.mintTo(this.accounts.maker.address, dai.toUnits(100000));
-    // await dai.contract.mintTo(arb, dai.toUnits(10000));
-    //
-    // logger.debug(
-    //   `--label ${this.accounts.maker.address}:maker --label ${this.accounts.deployer.address}:deployer --label ${arb}:arbContract --label ${weth.address}:weth --label ${dai.address}:dai --label ${mgv.address}:mangrove --label ${usdc.address}:usdc`
-    // );
-    //
-    // mgvTestUtil.setConfig(mgv, this.accounts, mgvDeployer);
-    // mgvTestUtil.initPollOfTransactionTracking(mgvDeployer.provider);
+    const arb = mgv.getAddress("MgvArbitrage");
+    arbitragerContract = MgvArbitrage__factory.connect(arb, mgvDeployer.signer);
+    const weth = await mgv.token("WETH");
+    const dai = await mgv.token("DAI");
+    const usdc = await mgv.token("USDC");
+    await weth.contract.mintTo(this.accounts.maker.address, weth.toUnits(100));
+    await dai.contract.mintTo(this.accounts.maker.address, dai.toUnits(100000));
+    await dai.contract.mintTo(arb, dai.toUnits(10000));
+
+    console.log(
+      `--label ${this.accounts.maker.address}:maker --label ${this.accounts.deployer.address}:deployer --label ${arb}:arbContract --label ${weth.address}:weth --label ${dai.address}:dai --label ${mgv.address}:mangrove --label ${usdc.address}:usdc`
+    );
+
+    mgvTestUtil.setConfig(mgv, this.accounts, mgvDeployer);
+    mgvTestUtil.initPollOfTransactionTracking(mgvDeployer.provider);
   });
 
   afterEach(async function () {

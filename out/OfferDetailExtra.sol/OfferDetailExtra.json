@@ -1,0 +1,1037 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220bfa56be9fea7181debde9ce3d20514d667815a20fd78cafb44a0a9214b53b55b64736f6c63430008140033",
+    "sourceMap": "202:343:10:-:0;;;;;;;;;;;;;;;-1:-1:-1;;;202:343:10;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220bfa56be9fea7181debde9ce3d20514d667815a20fd78cafb44a0a9214b53b55b64736f6c63430008140033",
+    "sourceMap": "202:343:10:-:0;;;;;;;;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol\":\"OfferDetailExtra\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/\",\":@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/\",\":@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/\",\":ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/\",\":mgv_arbitrage_lib/=mangrove-arbitrage/lib/\",\":mgv_arbitrage_script/=mangrove-arbitrage/script/\",\":mgv_arbitrage_src/=mangrove-arbitrage/src/\",\":mgv_arbitrage_test/=mangrove-arbitrage/test/\",\":mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":mgv_script/=node_modules/@mangrovedao/mangrove-core/script/\",\":mgv_src/=node_modules/@mangrovedao/mangrove-core/src/\",\":mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":mgv_test/=node_modules/@mangrovedao/mangrove-core/test/\",\":uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/\"]},\"sources\":{\"node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol\":{\"keccak256\":\"0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb\",\"dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol\":{\"keccak256\":\"0x335217debbf3f4cabeaea88d4dd9777dbda2f2b6ed9684e2285a4d16e1e4464c\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://eafe358531d7dc6527d36f8fbc4bc67ab12516398c35338ba5da57a03e24b9f3\",\"dweb:/ipfs/QmcKxrcr11EM7rsKNUEJq8VXFd2R1dWSTqYk3E4k8dQfzy\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol\":{\"keccak256\":\"0xbb0c9e3177017a77de68adeed5cbbf040fc9152f914adb34575eb880979fc720\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://fac448393a94f7d797f58ece51c1127a1605397b2371c9d1fe61db0037762a91\",\"dweb:/ipfs/QmUwcWdecdqa81eLGz4SekQYfiTp5pgs2mvFRYmu7T2sew\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.20+commit.a1b79de6"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/",
+        "mgv_arbitrage_lib/=mangrove-arbitrage/lib/",
+        "mgv_arbitrage_script/=mangrove-arbitrage/script/",
+        "mgv_arbitrage_src/=mangrove-arbitrage/src/",
+        "mgv_arbitrage_test/=mangrove-arbitrage/test/",
+        "mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "mgv_script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "mgv_src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "mgv_test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol": "OfferDetailExtra"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol": {
+        "keccak256": "0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87",
+        "urls": [
+          "bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb",
+          "dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol": {
+        "keccak256": "0x335217debbf3f4cabeaea88d4dd9777dbda2f2b6ed9684e2285a4d16e1e4464c",
+        "urls": [
+          "bzz-raw://eafe358531d7dc6527d36f8fbc4bc67ab12516398c35338ba5da57a03e24b9f3",
+          "dweb:/ipfs/QmcKxrcr11EM7rsKNUEJq8VXFd2R1dWSTqYk3E4k8dQfzy"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol": {
+        "keccak256": "0xbb0c9e3177017a77de68adeed5cbbf040fc9152f914adb34575eb880979fc720",
+        "urls": [
+          "bzz-raw://fac448393a94f7d797f58ece51c1127a1605397b2371c9d1fe61db0037762a91",
+          "dweb:/ipfs/QmUwcWdecdqa81eLGz4SekQYfiTp5pgs2mvFRYmu7T2sew"
+        ],
+        "license": "Unlicense"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol",
+    "id": 5131,
+    "exportedSymbols": {
+      "OfferDetail": [
+        67755
+      ],
+      "OfferDetailExtra": [
+        5096
+      ],
+      "OfferDetailUnpacked": [
+        67753
+      ],
+      "OfferDetailUnpackedExtra": [
+        5130
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "38:926:10",
+    "nodes": [
+      {
+        "id": 5056,
+        "nodeType": "PragmaDirective",
+        "src": "38:24:10",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".17"
+        ]
+      },
+      {
+        "id": 5059,
+        "nodeType": "ImportDirective",
+        "src": "64:91:10",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol",
+        "file": "@mgv/src/preprocessed/OfferDetail.post.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 5131,
+        "sourceUnit": 68530,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 5057,
+              "name": "OfferDetail",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 67755,
+              "src": "72:11:10",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          },
+          {
+            "foreign": {
+              "id": 5058,
+              "name": "OfferDetailUnpacked",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 67753,
+              "src": "84:19:10",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 5096,
+        "nodeType": "ContractDefinition",
+        "src": "202:343:10",
+        "nodes": [
+          {
+            "id": 5075,
+            "nodeType": "FunctionDefinition",
+            "src": "231:146:10",
+            "nodes": [],
+            "body": {
+              "id": 5074,
+              "nodeType": "Block",
+              "src": "308:69:10",
+              "nodes": [],
+              "statements": [
+                {
+                  "id": 5073,
+                  "nodeType": "UncheckedBlock",
+                  "src": "310:66:10",
+                  "statements": [
+                    {
+                      "expression": {
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 5071,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "arguments": [],
+                          "expression": {
+                            "argumentTypes": [],
+                            "expression": {
+                              "id": 5067,
+                              "name": "offerDetail",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 5062,
+                              "src": "333:11:10",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_userDefinedValueType$_OfferDetail_$67755",
+                                "typeString": "OfferDetail"
+                              }
+                            },
+                            "id": 5068,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "345:18:10",
+                            "memberName": "kilo_offer_gasbase",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 68259,
+                            "src": "333:30:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_pure$_t_userDefinedValueType$_OfferDetail_$67755_$returns$_t_uint256_$attached_to$_t_userDefinedValueType$_OfferDetail_$67755_$",
+                              "typeString": "function (OfferDetail) pure returns (uint256)"
+                            }
+                          },
+                          "id": 5069,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "333:32:10",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "*",
+                        "rightExpression": {
+                          "hexValue": "316533",
+                          "id": 5070,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "368:3:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_1000_by_1",
+                            "typeString": "int_const 1000"
+                          },
+                          "value": "1e3"
+                        },
+                        "src": "333:38:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "functionReturnParameters": 5066,
+                      "id": 5072,
+                      "nodeType": "Return",
+                      "src": "326:45:10"
+                    }
+                  ]
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "offer_gasbase",
+            "nameLocation": "240:13:10",
+            "parameters": {
+              "id": 5063,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5062,
+                  "mutability": "mutable",
+                  "name": "offerDetail",
+                  "nameLocation": "266:11:10",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5075,
+                  "src": "254:23:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_userDefinedValueType$_OfferDetail_$67755",
+                    "typeString": "OfferDetail"
+                  },
+                  "typeName": {
+                    "id": 5061,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5060,
+                      "name": "OfferDetail",
+                      "nameLocations": [
+                        "254:11:10"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 67755,
+                      "src": "254:11:10"
+                    },
+                    "referencedDeclaration": 67755,
+                    "src": "254:11:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_userDefinedValueType$_OfferDetail_$67755",
+                      "typeString": "OfferDetail"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "253:25:10"
+            },
+            "returnParameters": {
+              "id": 5066,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5065,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5075,
+                  "src": "302:4:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5064,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "302:4:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "301:6:10"
+            },
+            "scope": 5096,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 5095,
+            "nodeType": "FunctionDefinition",
+            "src": "380:163:10",
+            "nodes": [],
+            "body": {
+              "id": 5094,
+              "nodeType": "Block",
+              "src": "473:70:10",
+              "nodes": [],
+              "statements": [
+                {
+                  "id": 5093,
+                  "nodeType": "UncheckedBlock",
+                  "src": "475:67:10",
+                  "statements": [
+                    {
+                      "expression": {
+                        "arguments": [
+                          {
+                            "commonType": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            },
+                            "id": 5090,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "leftExpression": {
+                              "id": 5088,
+                              "name": "val",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 5080,
+                              "src": "529:3:10",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            },
+                            "nodeType": "BinaryOperation",
+                            "operator": "/",
+                            "rightExpression": {
+                              "hexValue": "316533",
+                              "id": 5089,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "kind": "number",
+                              "lValueRequested": false,
+                              "nodeType": "Literal",
+                              "src": "533:3:10",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_rational_1000_by_1",
+                                "typeString": "int_const 1000"
+                              },
+                              "value": "1e3"
+                            },
+                            "src": "529:7:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "expression": {
+                            "id": 5086,
+                            "name": "offerDetail",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5078,
+                            "src": "498:11:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_userDefinedValueType$_OfferDetail_$67755",
+                              "typeString": "OfferDetail"
+                            }
+                          },
+                          "id": 5087,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "510:18:10",
+                          "memberName": "kilo_offer_gasbase",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 68293,
+                          "src": "498:30:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_userDefinedValueType$_OfferDetail_$67755_$_t_uint256_$returns$_t_userDefinedValueType$_OfferDetail_$67755_$attached_to$_t_userDefinedValueType$_OfferDetail_$67755_$",
+                            "typeString": "function (OfferDetail,uint256) pure returns (OfferDetail)"
+                          }
+                        },
+                        "id": 5091,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "498:39:10",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_userDefinedValueType$_OfferDetail_$67755",
+                          "typeString": "OfferDetail"
+                        }
+                      },
+                      "functionReturnParameters": 5085,
+                      "id": 5092,
+                      "nodeType": "Return",
+                      "src": "491:46:10"
+                    }
+                  ]
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "offer_gasbase",
+            "nameLocation": "389:13:10",
+            "parameters": {
+              "id": 5081,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5078,
+                  "mutability": "mutable",
+                  "name": "offerDetail",
+                  "nameLocation": "415:11:10",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5095,
+                  "src": "403:23:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_userDefinedValueType$_OfferDetail_$67755",
+                    "typeString": "OfferDetail"
+                  },
+                  "typeName": {
+                    "id": 5077,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5076,
+                      "name": "OfferDetail",
+                      "nameLocations": [
+                        "403:11:10"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 67755,
+                      "src": "403:11:10"
+                    },
+                    "referencedDeclaration": 67755,
+                    "src": "403:11:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_userDefinedValueType$_OfferDetail_$67755",
+                      "typeString": "OfferDetail"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5080,
+                  "mutability": "mutable",
+                  "name": "val",
+                  "nameLocation": "432:3:10",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5095,
+                  "src": "427:8:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5079,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "427:4:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "402:34:10"
+            },
+            "returnParameters": {
+              "id": 5085,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5084,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5095,
+                  "src": "460:11:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_userDefinedValueType$_OfferDetail_$67755",
+                    "typeString": "OfferDetail"
+                  },
+                  "typeName": {
+                    "id": 5083,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5082,
+                      "name": "OfferDetail",
+                      "nameLocations": [
+                        "460:11:10"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 67755,
+                      "src": "460:11:10"
+                    },
+                    "referencedDeclaration": 67755,
+                    "src": "460:11:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_userDefinedValueType$_OfferDetail_$67755",
+                      "typeString": "OfferDetail"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "459:13:10"
+            },
+            "scope": 5096,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "OfferDetailExtra",
+        "contractDependencies": [],
+        "contractKind": "library",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          5096
+        ],
+        "name": "OfferDetailExtra",
+        "nameLocation": "210:16:10",
+        "scope": 5131,
+        "usedErrors": [],
+        "usedEvents": []
+      },
+      {
+        "id": 5130,
+        "nodeType": "ContractDefinition",
+        "src": "613:351:10",
+        "nodes": [
+          {
+            "id": 5111,
+            "nodeType": "FunctionDefinition",
+            "src": "650:159:10",
+            "nodes": [],
+            "body": {
+              "id": 5110,
+              "nodeType": "Block",
+              "src": "742:67:10",
+              "nodes": [],
+              "statements": [
+                {
+                  "id": 5109,
+                  "nodeType": "UncheckedBlock",
+                  "src": "744:64:10",
+                  "statements": [
+                    {
+                      "expression": {
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 5107,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "expression": {
+                            "id": 5104,
+                            "name": "offerDetail",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5099,
+                            "src": "767:11:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_OfferDetailUnpacked_$67753_memory_ptr",
+                              "typeString": "struct OfferDetailUnpacked memory"
+                            }
+                          },
+                          "id": 5105,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "779:18:10",
+                          "memberName": "kilo_offer_gasbase",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 67750,
+                          "src": "767:30:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "*",
+                        "rightExpression": {
+                          "hexValue": "316533",
+                          "id": 5106,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "800:3:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_1000_by_1",
+                            "typeString": "int_const 1000"
+                          },
+                          "value": "1e3"
+                        },
+                        "src": "767:36:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "functionReturnParameters": 5103,
+                      "id": 5108,
+                      "nodeType": "Return",
+                      "src": "760:43:10"
+                    }
+                  ]
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "offer_gasbase",
+            "nameLocation": "659:13:10",
+            "parameters": {
+              "id": 5100,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5099,
+                  "mutability": "mutable",
+                  "name": "offerDetail",
+                  "nameLocation": "700:11:10",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5111,
+                  "src": "673:38:10",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_OfferDetailUnpacked_$67753_memory_ptr",
+                    "typeString": "struct OfferDetailUnpacked"
+                  },
+                  "typeName": {
+                    "id": 5098,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5097,
+                      "name": "OfferDetailUnpacked",
+                      "nameLocations": [
+                        "673:19:10"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 67753,
+                      "src": "673:19:10"
+                    },
+                    "referencedDeclaration": 67753,
+                    "src": "673:19:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OfferDetailUnpacked_$67753_storage_ptr",
+                      "typeString": "struct OfferDetailUnpacked"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "672:40:10"
+            },
+            "returnParameters": {
+              "id": 5103,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5102,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5111,
+                  "src": "736:4:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5101,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "736:4:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "735:6:10"
+            },
+            "scope": 5130,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 5129,
+            "nodeType": "FunctionDefinition",
+            "src": "812:150:10",
+            "nodes": [],
+            "body": {
+              "id": 5128,
+              "nodeType": "Block",
+              "src": "898:64:10",
+              "nodes": [],
+              "statements": [
+                {
+                  "id": 5127,
+                  "nodeType": "UncheckedBlock",
+                  "src": "900:61:10",
+                  "statements": [
+                    {
+                      "expression": {
+                        "id": 5125,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftHandSide": {
+                          "expression": {
+                            "id": 5119,
+                            "name": "offerDetail",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5114,
+                            "src": "916:11:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_OfferDetailUnpacked_$67753_memory_ptr",
+                              "typeString": "struct OfferDetailUnpacked memory"
+                            }
+                          },
+                          "id": 5121,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": true,
+                          "memberLocation": "928:18:10",
+                          "memberName": "kilo_offer_gasbase",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 67750,
+                          "src": "916:30:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "Assignment",
+                        "operator": "=",
+                        "rightHandSide": {
+                          "commonType": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          "id": 5124,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "id": 5122,
+                            "name": "val",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5116,
+                            "src": "949:3:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "/",
+                          "rightExpression": {
+                            "hexValue": "316533",
+                            "id": 5123,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "953:3:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_1000_by_1",
+                              "typeString": "int_const 1000"
+                            },
+                            "value": "1e3"
+                          },
+                          "src": "949:7:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "src": "916:40:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "id": 5126,
+                      "nodeType": "ExpressionStatement",
+                      "src": "916:40:10"
+                    }
+                  ]
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "offer_gasbase",
+            "nameLocation": "821:13:10",
+            "parameters": {
+              "id": 5117,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5114,
+                  "mutability": "mutable",
+                  "name": "offerDetail",
+                  "nameLocation": "862:11:10",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5129,
+                  "src": "835:38:10",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_OfferDetailUnpacked_$67753_memory_ptr",
+                    "typeString": "struct OfferDetailUnpacked"
+                  },
+                  "typeName": {
+                    "id": 5113,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5112,
+                      "name": "OfferDetailUnpacked",
+                      "nameLocations": [
+                        "835:19:10"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 67753,
+                      "src": "835:19:10"
+                    },
+                    "referencedDeclaration": 67753,
+                    "src": "835:19:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OfferDetailUnpacked_$67753_storage_ptr",
+                      "typeString": "struct OfferDetailUnpacked"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5116,
+                  "mutability": "mutable",
+                  "name": "val",
+                  "nameLocation": "879:3:10",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5129,
+                  "src": "874:8:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5115,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "874:4:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "834:49:10"
+            },
+            "returnParameters": {
+              "id": 5118,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "898:0:10"
+            },
+            "scope": 5130,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "OfferDetailUnpackedExtra",
+        "contractDependencies": [],
+        "contractKind": "library",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          5130
+        ],
+        "name": "OfferDetailUnpackedExtra",
+        "nameLocation": "621:24:10",
+        "scope": 5131,
+        "usedErrors": [],
+        "usedEvents": []
+      }
+    ],
+    "license": "Unlicense"
+  },
+  "id": 10
+}

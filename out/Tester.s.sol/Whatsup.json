@@ -1,0 +1,1024 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "bytecode": {
+    "object": "0x6080604052348015600f57600080fd5b506003600055603f8060226000396000f3fe6080604052600080fdfea26469706673582212209bbf2aadfe4d9e6fe81159bb4c90dceb651c502b66f55039d86ec611112e6e8664736f6c63430008140033",
+    "sourceMap": "247:64:97:-:0;;;279:30;;;;;;;;;-1:-1:-1;303:1:97;299;:5;247:64;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x6080604052600080fdfea26469706673582212209bbf2aadfe4d9e6fe81159bb4c90dceb651c502b66f55039d86ec611112e6e8664736f6c63430008140033",
+    "sourceMap": "247:64:97:-:0;;;;;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/toy/Tester.s.sol\":\"Whatsup\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/\",\":@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/\",\":@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/\",\":ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/\",\":mgv_arbitrage_lib/=mangrove-arbitrage/lib/\",\":mgv_arbitrage_script/=mangrove-arbitrage/script/\",\":mgv_arbitrage_src/=mangrove-arbitrage/src/\",\":mgv_arbitrage_test/=mangrove-arbitrage/test/\",\":mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":mgv_script/=node_modules/@mangrovedao/mangrove-core/script/\",\":mgv_src/=node_modules/@mangrovedao/mangrove-core/src/\",\":mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":mgv_test/=node_modules/@mangrovedao/mangrove-core/test/\",\":uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/\"]},\"sources\":{\"node_modules/@mangrovedao/mangrove-core/lib/Debug.sol\":{\"keccak256\":\"0x0dd24cc87bd6c0656388a2304776e3d49cf83151a94e41e6fde269a4bd8b474e\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://0f904d1aab334b6dbb091f572bf266cf90ed45f867c3e5d01b3d4495cad1efc3\",\"dweb:/ipfs/QmZ5qpaqtZZ4Ho13grpqNxZ9G4TYAyjWgYhfnxyNG7fBNN\"]},\"node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol\":{\"keccak256\":\"0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49\",\"dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6\"]},\"node_modules/@mangrovedao/mangrove-core/lib/Script2.sol\":{\"keccak256\":\"0xf19aba97429d465937b47880a1f22dd87f97f6b5d57b64ae8b0c7a02fdb47cbf\",\"license\":\"AGPL-2.0\",\"urls\":[\"bzz-raw://b0ce60d67828f152ac191148afa8a5966736b9cc0e72d0e02c189034c46db8eb\",\"dweb:/ipfs/QmaKLDWDuyG3zAMDXmj8DiYWT48ia8qfaStAEWYDJQTCvQ\"]},\"node_modules/@mangrovedao/mangrove-core/lib/ToyENS.sol\":{\"keccak256\":\"0xa5bbb4003857ce3fb02d14ead815d27c18b2cdc3f9dda822aeaf3225f5b33b2e\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://9fe266af39f74137fc7db5b038f03e547bfd244529c649ee6f6bfbadba274ee6\",\"dweb:/ipfs/QmeYWmhqwZUeF1X5Myn8UyQa4MCbunh3doWD9i18vUBVVv\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/BitLib.sol\":{\"keccak256\":\"0x5a1c56d67fbd2ef6f3b830cf8dae1885da5f40a37afd11cb3a392be573993c3b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a07b895de906f49d0ce9e89a349d39220e13039709ea2e2db46ff48310bd4b3b\",\"dweb:/ipfs/QmZyiLKyTZ9EHwqNRUYukQDdg7CL54Dsu65RYabkkGF1KM\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol\":{\"keccak256\":\"0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb\",\"dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/DensityLib.sol\":{\"keccak256\":\"0xc7ee8be7f11a1bf85aa4ea0e222d4a49d77a378b201e347f9a5e4f28f207a023\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ed718e8bf3fb45bc0e7cf739662422cfe01d8d04a2c99b2fb0cfa2372629c6ad\",\"dweb:/ipfs/QmZ5QpyMSmkVxayfpZYovNcc8NGJKfVZEMKphzeKk9cVNv\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/LocalExtra.sol\":{\"keccak256\":\"0xbd3f6702242dd43ba2493eb54feb8f5d2526967512c6f156d29669b54d9c60f2\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://e389f3c78c8073bde973aa3f4770139e2adb4cc00cc1303b77eefa201189a6ff\",\"dweb:/ipfs/QmZ8vXRUUCinKtqJhV7jMXVeDVfRizhJ3NsumZLQxwSc44\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol\":{\"keccak256\":\"0x335217debbf3f4cabeaea88d4dd9777dbda2f2b6ed9684e2285a4d16e1e4464c\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://eafe358531d7dc6527d36f8fbc4bc67ab12516398c35338ba5da57a03e24b9f3\",\"dweb:/ipfs/QmcKxrcr11EM7rsKNUEJq8VXFd2R1dWSTqYk3E4k8dQfzy\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol\":{\"keccak256\":\"0x95120d52698bc60b005496036a7c9daa7b8d0b18b571e596e86fd696b36e3264\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://684d30cc9673403cfddabdf7d979417c5df050abde16712aeaa9ca6b2725d154\",\"dweb:/ipfs/QmTkeUAMhb72BNqGjAaaPBj1NHPtKE8wH1R8bpXD5RTKtC\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol\":{\"keccak256\":\"0xa4aea464925ad277aab2141885eeeb6e5f1b0963ba08d8887a1c2461c334f222\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://c7ec62c85c22d7996abe32663232861f90e855c770dbd252bf49fff4ca786e74\",\"dweb:/ipfs/QmSHBJfw9bg8QjgBquXVLTS337ZuBGHVkDJfwuAZ6X48sw\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/TickTreeLib.sol\":{\"keccak256\":\"0x196c46d6e8e2ab51462f25245f7886568df3f1f65953dcec4c02d7950b4a10cd\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://4293ed5fb3ce4d350b9bb5b38342c273e6d772ace098927e006efa7fc4498329\",\"dweb:/ipfs/QmRCtk481PHQjNdt5Dsa8GYWEX46nYwdeD8R3m92w3Xjxv\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/Base.sol\":{\"keccak256\":\"0x4ff1a785311017d1eedb1b4737956fa383067ad34eb439abfec1d989754dde1c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f553622969b9fdb930246704a4c10dfaee6b1a4468c142fa7eb9dc292a438224\",\"dweb:/ipfs/QmcxqHnqdQsMVtgsfH9VNLmZ3g7GhgNagfq7yvNCDcCHFK\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/Script.sol\":{\"keccak256\":\"0x0bded803c7e28336785fa600f03035e61d0b689bba2f014b1720e576c5ee3307\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://407f3979f460cc60bc7e4ce6fd7da4facac9f52623b4d6805052538d897eab9b\",\"dweb:/ipfs/QmSRhYNywsJhtYEYyPM1izGNsP1SBzxsXwLfcQnFF5NA9p\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/StdChains.sol\":{\"keccak256\":\"0x51e6eb138fc953fac1ac78012a39b3f16d9289ce06a222ba93bb0621768f96e6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://653c577e054cf578594148a07b286571d494f401b6d4a940d3ccabd47b29233d\",\"dweb:/ipfs/QmTWDVvR4m82MGXWYY8BCaVN89TguQJSLqRgzHzrMkFHtx\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/StdCheats.sol\":{\"keccak256\":\"0x43d853d6dd3c3f3d5a614a25f4553e2d4b719426a9eb2e8e433155306a5fdc02\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9dc16367f2391bf642f3762bfde686c643a08e8712ce56ad1026eb397247428e\",\"dweb:/ipfs/QmTpEko9tKnBbJNQw7T1oGoa4Gyfh6y28JbNdrQQXKUNAb\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/StdJson.sol\":{\"keccak256\":\"0x9e2a7521190c462a0667706385f1c52a816220a9813ca8ac520fba7ba45d660b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7d23017fe6570b28130a731b86179352b93a5fb5af32f11559837afc1186293c\",\"dweb:/ipfs/QmR3p6zG5Kmcr8gKocFCSopLHfXv1AziPJbH17nKyMxwxV\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/StdMath.sol\":{\"keccak256\":\"0xd90ad4fd8aeaeb8929964e686e769fdedd5eded3fc3815df194a0ab9f91a3fb2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7919b70f636c7b805223992f28ad1ad0145d6c1385b5931a3589aface5fe6c92\",\"dweb:/ipfs/QmY7FRaULwoGgFteF8GawjQJRfasNgpWnU2aiMsFrYpuTC\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/StdStorage.sol\":{\"keccak256\":\"0xd1517df281f973dba8b7ba52c02d3df552b60d91b8f47e4669049da648778673\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://52e43264f58a5dcfd985f3c99aa81064805aa8f1c2b4c6521fd63d45cdbba8d5\",\"dweb:/ipfs/QmUMTF6cRjt5tCQrrgQDXVRmHQLjevNsTvLFdaA1m9TBj9\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/StdStyle.sol\":{\"keccak256\":\"0x43e2a8a9b9c2574dabe74f11adf6f782df218f463540e3b5b563609fe108597d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://51363ca97404cf4128e1141428949768c31929e75e014b02c85e887fbbb4f1b8\",\"dweb:/ipfs/QmVhtbQc2fU4rRmbcfBtz34mAgG4BAZBsbna1Ca4SkoPsK\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/StdUtils.sol\":{\"keccak256\":\"0x8758c42ba9d9e46868b796e2330ac239006ede07bd438a4b36dd6f2c47d27dc1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://11f5752e0187b1e3631b875efdbe05d45929d05f1c1717105a9115d0a6628140\",\"dweb:/ipfs/QmUKkx9jfsUvjyYBw45RvrW1hTFXDXi2Jv5tbHP86mnzpi\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/Vm.sol\":{\"keccak256\":\"0xc0c32cb12acb184919a4c205ef58785b56d7247ecf92be1094af81ec2b1f9254\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6053a75463b4611a170cf0626f0c42291b8de42cd205b61c5030a5e57adc989a\",\"dweb:/ipfs/Qmb4Gy4wq3zZGTAHUgF28VPuLwcy7MWQiPczYsg4aBWgNy\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console.sol\":{\"keccak256\":\"0x91d5413c2434ca58fd278b6e1e79fd98d10c83931cc2596a6038eee4daeb34ba\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://91ccea707361e48b9b7a161fe81f496b9932bc471e9c4e4e1e9c283f2453cc70\",\"dweb:/ipfs/QmcB66sZhQ6Kz7MUHcLE78YXRUZxoZnnxZjN6yATsbB2ec\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console2.sol\":{\"keccak256\":\"0x954646445d1014c3cd85c7918f5e7adeeca5ee44b68c00bafa237e597a4e35ea\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://516fa3be52da4763147175bfba4be0aa011fadbb0c1afb01f97265bd4cee7973\",\"dweb:/ipfs/QmdixAyMJefx7qePChgdxcBH5MxhmN7vsqPuPLx3CgrVmF\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/interfaces/IMulticall3.sol\":{\"keccak256\":\"0x7aac1389150499a922d1f9ef5749c908cef127cb2075b92fa17e9cb611263d0a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d95ebb7c7c463e08ebc12dab639945752fb2480acfc6e86da32f72732a7fd0c0\",\"dweb:/ipfs/QmNXK8P8oPWwajsQHvAHw3JPyQidPLCGQN3hWu1Lk6PBL2\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/safeconsole.sol\":{\"keccak256\":\"0xbaf41fdc6c54297e7cd8250e48b0f20eaac918e342a1028cef3f9a52ac086381\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a500ad81dea226f9910e6b50f99a9ff930105e393a692cbfb2185e4cdb4424ae\",\"dweb:/ipfs/QmVbUQpXNMmMWRiy4FvBNczzq46BMGfUoBikvSHNiCxVTq\"]},\"node_modules/@mangrovedao/mangrove-core/lib/preprocessed/ToString.post.sol\":{\"keccak256\":\"0x41d4e5340bc42ef1e4a9de355c3abea452d74a60744bf929f8b9f79f47d7789f\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://6f6edbcefc408e82cfb94b7b6d6e55b9d6878785c31ce779c17184c2c19c70d6\",\"dweb:/ipfs/QmYqFXekQiVaoEY7aookGowbTnGz4JLQ4mqtyjKhreb57e\"]},\"node_modules/@mangrovedao/mangrove-core/script/core/deployers/MangroveDeployer.s.sol\":{\"keccak256\":\"0xce7f90421f16e213a7744a2c314a452b9778c4b8b791d554fd51179a507bf1de\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://b08a8ff9391ea22ee0cbb210f24e7b9e95375b1c1a419b79114a909c4d1ab22c\",\"dweb:/ipfs/QmW98vCrE8Nn1Akrqz5qbuBvPaK96xjuMLUp9bNpyLdxYd\"]},\"node_modules/@mangrovedao/mangrove-core/script/lib/Deployer.sol\":{\"keccak256\":\"0x4642f3f731e858681d43df2eca2325856f5ac4fbb0d8ef16df9263d6af873c91\",\"license\":\"AGPL-3.0\",\"urls\":[\"bzz-raw://65e8c50465456607b5e7128b4d2549bff4aa89d5eb2ca2944d17b42d9d2bea71\",\"dweb:/ipfs/QmTeB2UyAk3dvdXMyqbxnK3J8Zp3KD4JB6fdBMDa1ZWrnu\"]},\"node_modules/@mangrovedao/mangrove-core/script/periphery/deployers/MgvReaderDeployer.s.sol\":{\"keccak256\":\"0xf3bba7eb5f23be509f5f3df4299ac66394619e694bc5d27b3127721954d1e164\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://456f06cefa966f3c54b8babb41ae12fa9fb55e150e8b59188285b01563bfa9d3\",\"dweb:/ipfs/QmNpZ5zk5sPVwEj7h3B1SME6944nhanXiz8oGDHvYARrBb\"]},\"node_modules/@mangrovedao/mangrove-core/src/IMangrove.sol\":{\"keccak256\":\"0x7bb6985efa88b71ec161df4e3b6a7b27e32ccae0890c730f25a0c7f1c5e46c0b\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://4aaf49678b6cce3cb69ba3d1effe0cab9a8b37cbdd9d462c99cd6bd0679fa3ce\",\"dweb:/ipfs/QmUCby1BEr1oQtFCq4eDECiv3qrpofG7pUPTmP1GCoQc2q\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/Mangrove.sol\":{\"keccak256\":\"0xd4fe4fe8915f245d9c5ccd4f7b09df2a954572556e507fd5a8b367406a7b04af\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://f42254eb71080b322c397180462a7f902e9f75fc60a620d243efa50387b13fa6\",\"dweb:/ipfs/QmbETz3Bwr27KvADDFMKrqoQUKL9QQciVtv8GZu94HLosR\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvAppendix.sol\":{\"keccak256\":\"0x5cd196e4a990a6b1b23e1106cf1c53b797469fafc9f4e7b963787f485ccaf2b6\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://d04ca51cf2c8a34d23080c84ff5899c7c1134688805348692ede9a60c51bb43f\",\"dweb:/ipfs/QmZjD7ir2zwu9tdwW2Ahb6PPY9LUcHujsRwmszbY59wm1p\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvCommon.sol\":{\"keccak256\":\"0x58ee8211533e7f23e32d552779600606425d41afdafbd15074188c215993fd69\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://0e28a891a08cb8f2292a3ff28490aa12489073dfa3782f411cdbbe3903ff7c71\",\"dweb:/ipfs/QmXDt46FTevAHKzs3hFue3JH25w4sJCyYdBsQRrctNCMck\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvGovernable.sol\":{\"keccak256\":\"0xd6140146043d4eee36ca947dcca7003ae7853d5c635261e390eb7ce1339a53c7\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://cf62b8806176f5e49a2a89cd63f3a15dd88e6f4a0a1a7fffe402c72ba7adcbca\",\"dweb:/ipfs/QmQcg6Kv4hvLfT39ceneM59kg4DTZk1regnSmSZnHViY8N\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvHasOffers.sol\":{\"keccak256\":\"0xa842c61d28a770eb07eac3e089ffcf4a883cd20682bf3939efc482239f99deb5\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://33f393f5c0b64860ab9626ccc5fc51d9bcfcc0839f43b1614c2729da71c16563\",\"dweb:/ipfs/QmPbNMgJze8Fc3RinCedhKLeV9oC4Y3a9ftk5zgeSgpku3\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol\":{\"keccak256\":\"0xe22e3d452040625724ce932cc6f57212c8a32ba021b06f5737e4c23319792c7d\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://b3ab9e3726b49b2d526f1cb6634c562cbafdbc1163753d13a3e1c316ca29e726\",\"dweb:/ipfs/QmS9bYtEVW7i9zAWmC7aPdCDv4BCaBJbhpgrJX6VhH68st\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvOfferMaking.sol\":{\"keccak256\":\"0x3c9abef9061eae36c14bbed131498f4c8b9f6830a804dcfb8b0f040c059986e8\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://a5ec81c12464369b9a6aa9b525bec925aa083924d3dec0f49322c95874851039\",\"dweb:/ipfs/QmNiBjEgWe7HQuvWu2899uxsnGH6nHGQEXAq1Yb1jrVZmQ\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvOfferTaking.sol\":{\"keccak256\":\"0x8b83abe21aaa5493c63417096ec42b88b2e2f16f22c3a9caeee5baceb396339a\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://d8a9358f407010a5d5042c7df14d6c1a6497de2b0ae6843dffdc63d0e0c7da5a\",\"dweb:/ipfs/QmWYR3kSmggCkrNx3BhKMfLunTay52vw3VTAus4xQ1VtuL\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvOfferTakingWithPermit.sol\":{\"keccak256\":\"0x56c321cc8f53cc56dc114f4e4866db537f752fd6a7b2ca22ad40548b16c56081\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://1857710ac572419f29560489248689d47ff154cb740d069a7c7baef5a858c7fa\",\"dweb:/ipfs/QmXn8hiXft2qzdV4yD2qAKGjstqcQ7vKk6Dfr9EcQbsnCP\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvView.sol\":{\"keccak256\":\"0xea00bc69f29db56974401408305b1f0f11c2ad5635bbaaec62ef3488424df28d\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://a358a1e1abe1254d94ced0cbb554ca3217e9f6018e0dac4f4ea3df8b018b8337\",\"dweb:/ipfs/Qmf7okDXgiqsqq7ngnZ7pMhMgAENtJ5xHJc7Sv8UgF1yK9\"]},\"node_modules/@mangrovedao/mangrove-core/src/periphery/MgvOracle.sol\":{\"keccak256\":\"0xea011d94577425356be825653d726672f52948f63e6fa655840515862cf5ac4f\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://3319cf7c9933599b911efd4e49f271b2ff9b38658b9daf24a04af5d0b3f53442\",\"dweb:/ipfs/QmbMqJjmPV9kEZdn8JHDEj24ZEAjzry3WTjQTwWH1Kzd3F\"]},\"node_modules/@mangrovedao/mangrove-core/src/periphery/MgvReader.sol\":{\"keccak256\":\"0x010238e6a7e3338c48645e81e5ea75aa9b10b8eeb355555374365c44af0a8109\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://c3d910994ace7626de38858e111803d48fe02c9c9ca20f44671917941099e8fc\",\"dweb:/ipfs/QmV1Ed9nZK31WmG9NwsbCs9JCqMY3m6TkMxK2FikYpfDGH\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Global.post.sol\":{\"keccak256\":\"0xddf04a10f84edc0b165351f649cad761a429b5c1b218e482917b3e38a2019e7f\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://7695a94afb1db46a65967bd63fc344b0a9387a4a2c906fdcac0433fdfec32dff\",\"dweb:/ipfs/QmcH4k6VwPrSEjqEQVsKTRjxWtmhijoknih6s6R98dnNUM\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Local.post.sol\":{\"keccak256\":\"0x03d642742c132c37c1fc29cae87f7ce1be93f89877fe698698d5bd2309c878a5\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://6957d461c6486caeee91f5fd8be2ff0f53a8c264c03e8c9b7f7291bf7a72d9fc\",\"dweb:/ipfs/QmTRqHsnjFA1xDmWWuPqn9aPeweRiYHv1wfTz77qxCmd7k\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol\":{\"keccak256\":\"0x812a7c313108b56600f747d89d20b2daa4c4aa489ece1b30c561a353d41468f2\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://3fb1685a67020adeece9f6fbf567567d257aafafd2e115e6151f2b2a14b429aa\",\"dweb:/ipfs/QmUvk3FLDDHRXungxeLtPEfaQj3HNt3ib8nGhonzPdMW6o\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol\":{\"keccak256\":\"0xbb0c9e3177017a77de68adeed5cbbf040fc9152f914adb34575eb880979fc720\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://fac448393a94f7d797f58ece51c1127a1605397b2371c9d1fe61db0037762a91\",\"dweb:/ipfs/QmUwcWdecdqa81eLGz4SekQYfiTp5pgs2mvFRYmu7T2sew\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Structs.post.sol\":{\"keccak256\":\"0x6121b0f392dbeddf77da4f5bc5dee019878ab21538892bd22dbb9c49e9e068bb\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://336a0df7a17dd6b1ed36c4e7f19fc9ab6d4ad933f7e0b3658efba0756c7341bc\",\"dweb:/ipfs/QmZ7NQY6EJHqcE1oEho1yN9ymsTfVpUcMJABKC8Fq5GvhL\"]},\"node_modules/@mangrovedao/mangrove-core/test/lib/forks/Arbitrum.sol\":{\"keccak256\":\"0x05e2eaeff79531b129c265d2cc2c5a6894c44cf558085733c95314b1f5cd9371\",\"license\":\"AGPL-3.0\",\"urls\":[\"bzz-raw://f7f3bd9f6737a1268514448097cb1e24105659bcb6512cd7f010335e73af8fb0\",\"dweb:/ipfs/QmS4177owHEefej2GFR4Abx4QHo1t1Hp7qpiZWr5L7qPBR\"]},\"node_modules/@mangrovedao/mangrove-core/test/lib/forks/Ethereum.sol\":{\"keccak256\":\"0x154196aba3e751b254b47d622ebdae7a91d103c89f2a84855a25728cc48dd7da\",\"license\":\"AGPL-3.0\",\"urls\":[\"bzz-raw://1784fc466b4069db5e11f6c4197ffeb5b7d2f9ae071560669f58de4e048135af\",\"dweb:/ipfs/QmRDLCL4MytkhZFU7WzG6NaCDztajzxE8wTR68yngWmLCi\"]},\"node_modules/@mangrovedao/mangrove-core/test/lib/forks/Generic.sol\":{\"keccak256\":\"0xbb727fe7191191a567eb5401c6589bf049e1aa425dab669b5e5479e33cafd27f\",\"license\":\"AGPL-3.0\",\"urls\":[\"bzz-raw://077125e1852f42db1dd518df52bcb910e39bc0a9131ae1e819906e786e7ef13f\",\"dweb:/ipfs/QmRpRub7g1Fb7BkfBovaXjWWKRcf61UTXEEJ82aubK49sf\"]},\"node_modules/@mangrovedao/mangrove-core/test/lib/forks/Goerli.sol\":{\"keccak256\":\"0xd2cecca60e68588d0df210f0b447a45f0f1354eb63d32904d330198273374c72\",\"license\":\"AGPL-3.0\",\"urls\":[\"bzz-raw://737a0b80c864148c33a421b03750e4c9dc4354a2c79f01c507a96a4af84ef15c\",\"dweb:/ipfs/QmUGabrP1ix5mZLESyFNUsms62y4za45fTRTPtU11ZSfQo\"]},\"node_modules/@mangrovedao/mangrove-core/test/lib/forks/Local.sol\":{\"keccak256\":\"0x9c4cc9f4c263d7a98f4a381e1d6726b74ffc29efef62508ea50485205b4a70f7\",\"license\":\"AGPL-3.0\",\"urls\":[\"bzz-raw://b8a07887a456269140e67eca9a831d07c1ff5752cccae380d4c08cd7b7bfbbea\",\"dweb:/ipfs/QmdHjyFrKG9GX5EaCsKTTivsEv66ARE2bpxhDxPg5BYS8P\"]},\"node_modules/@mangrovedao/mangrove-core/test/lib/forks/Mumbai.sol\":{\"keccak256\":\"0x6783d5a4d8e498c2e04dade7db1d0fd1a5afe25ade89ac796bc0e2dd79f338ae\",\"license\":\"AGPL-3.0\",\"urls\":[\"bzz-raw://42cec388abdb656cc4fd700b2aa09f791d633e38e103d177729e51902b172d29\",\"dweb:/ipfs/QmcsmcnVR4LZ6zm3cccKzQC2PuJBQSVfUVPHP1G7vJZZbr\"]},\"node_modules/@mangrovedao/mangrove-core/test/lib/forks/Polygon.sol\":{\"keccak256\":\"0x97133333940edff015a5c5fc3279ba53008015dcbee9c01c3d910ff448f1a26b\",\"license\":\"AGPL-3.0\",\"urls\":[\"bzz-raw://e64cfb2eaca6766ed15ce62b426c9cff65cd81990ec560d234528e3f21389488\",\"dweb:/ipfs/QmdJE43idYnKGpzGBiN2DNasSKREatKpGVZucLCVMvmeGZ\"]},\"node_modules/@mangrovedao/mangrove-core/test/lib/forks/TestnetZkevm.sol\":{\"keccak256\":\"0xdb00d9d8334c4ae533f6a8885d0bec6f105bc3d9990d23cdbb8e32746731ae2b\",\"license\":\"AGPL-3.0\",\"urls\":[\"bzz-raw://dc9256c98a0c88fcb8bee868d627023e3af813d5903bbc99beec6566df016a06\",\"dweb:/ipfs/QmXe5K3ktRFz9xHJruZ3MvHUHZGaybem7oafvdN8GZaCnS\"]},\"node_modules/@mangrovedao/mangrove-core/test/lib/forks/Zkevm.sol\":{\"keccak256\":\"0x628b2aa9dc8324d3111fc407526ed0f34157f73b18ab87fb250f148705a572fd\",\"license\":\"AGPL-3.0\",\"urls\":[\"bzz-raw://c03beb2d4ce29050dc8e9d580f76136e6f103372424d92f0dc0092e8c317a5ce\",\"dweb:/ipfs/Qmc8gxtJB6cv6z1U5YYExB7RBVsrpD7Uh3nYDk3GWkhrMN\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/toy/Tester.s.sol\":{\"keccak256\":\"0xc84396d06c329a348866158af052cd138f69463b08bfdb379677751d9a9e27f7\",\"license\":\"AGPL-3.0\",\"urls\":[\"bzz-raw://aaace4908e6c1f1058f44f76548ae93579d4463f8b3d23a1f6d6782c09690d29\",\"dweb:/ipfs/QmUWjPYxfJkaauo4stEeCW5JH44W4p3rAqBXcVMrJKUWT4\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.20+commit.a1b79de6"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/",
+        "mgv_arbitrage_lib/=mangrove-arbitrage/lib/",
+        "mgv_arbitrage_script/=mangrove-arbitrage/script/",
+        "mgv_arbitrage_src/=mangrove-arbitrage/src/",
+        "mgv_arbitrage_test/=mangrove-arbitrage/test/",
+        "mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "mgv_script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "mgv_src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "mgv_test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/toy/Tester.s.sol": "Whatsup"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "node_modules/@mangrovedao/mangrove-core/lib/Debug.sol": {
+        "keccak256": "0x0dd24cc87bd6c0656388a2304776e3d49cf83151a94e41e6fde269a4bd8b474e",
+        "urls": [
+          "bzz-raw://0f904d1aab334b6dbb091f572bf266cf90ed45f867c3e5d01b3d4495cad1efc3",
+          "dweb:/ipfs/QmZ5qpaqtZZ4Ho13grpqNxZ9G4TYAyjWgYhfnxyNG7fBNN"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol": {
+        "keccak256": "0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240",
+        "urls": [
+          "bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49",
+          "dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/Script2.sol": {
+        "keccak256": "0xf19aba97429d465937b47880a1f22dd87f97f6b5d57b64ae8b0c7a02fdb47cbf",
+        "urls": [
+          "bzz-raw://b0ce60d67828f152ac191148afa8a5966736b9cc0e72d0e02c189034c46db8eb",
+          "dweb:/ipfs/QmaKLDWDuyG3zAMDXmj8DiYWT48ia8qfaStAEWYDJQTCvQ"
+        ],
+        "license": "AGPL-2.0"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/ToyENS.sol": {
+        "keccak256": "0xa5bbb4003857ce3fb02d14ead815d27c18b2cdc3f9dda822aeaf3225f5b33b2e",
+        "urls": [
+          "bzz-raw://9fe266af39f74137fc7db5b038f03e547bfd244529c649ee6f6bfbadba274ee6",
+          "dweb:/ipfs/QmeYWmhqwZUeF1X5Myn8UyQa4MCbunh3doWD9i18vUBVVv"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/BitLib.sol": {
+        "keccak256": "0x5a1c56d67fbd2ef6f3b830cf8dae1885da5f40a37afd11cb3a392be573993c3b",
+        "urls": [
+          "bzz-raw://a07b895de906f49d0ce9e89a349d39220e13039709ea2e2db46ff48310bd4b3b",
+          "dweb:/ipfs/QmZyiLKyTZ9EHwqNRUYukQDdg7CL54Dsu65RYabkkGF1KM"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol": {
+        "keccak256": "0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87",
+        "urls": [
+          "bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb",
+          "dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/DensityLib.sol": {
+        "keccak256": "0xc7ee8be7f11a1bf85aa4ea0e222d4a49d77a378b201e347f9a5e4f28f207a023",
+        "urls": [
+          "bzz-raw://ed718e8bf3fb45bc0e7cf739662422cfe01d8d04a2c99b2fb0cfa2372629c6ad",
+          "dweb:/ipfs/QmZ5QpyMSmkVxayfpZYovNcc8NGJKfVZEMKphzeKk9cVNv"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/LocalExtra.sol": {
+        "keccak256": "0xbd3f6702242dd43ba2493eb54feb8f5d2526967512c6f156d29669b54d9c60f2",
+        "urls": [
+          "bzz-raw://e389f3c78c8073bde973aa3f4770139e2adb4cc00cc1303b77eefa201189a6ff",
+          "dweb:/ipfs/QmZ8vXRUUCinKtqJhV7jMXVeDVfRizhJ3NsumZLQxwSc44"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol": {
+        "keccak256": "0x335217debbf3f4cabeaea88d4dd9777dbda2f2b6ed9684e2285a4d16e1e4464c",
+        "urls": [
+          "bzz-raw://eafe358531d7dc6527d36f8fbc4bc67ab12516398c35338ba5da57a03e24b9f3",
+          "dweb:/ipfs/QmcKxrcr11EM7rsKNUEJq8VXFd2R1dWSTqYk3E4k8dQfzy"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol": {
+        "keccak256": "0x95120d52698bc60b005496036a7c9daa7b8d0b18b571e596e86fd696b36e3264",
+        "urls": [
+          "bzz-raw://684d30cc9673403cfddabdf7d979417c5df050abde16712aeaa9ca6b2725d154",
+          "dweb:/ipfs/QmTkeUAMhb72BNqGjAaaPBj1NHPtKE8wH1R8bpXD5RTKtC"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol": {
+        "keccak256": "0xa4aea464925ad277aab2141885eeeb6e5f1b0963ba08d8887a1c2461c334f222",
+        "urls": [
+          "bzz-raw://c7ec62c85c22d7996abe32663232861f90e855c770dbd252bf49fff4ca786e74",
+          "dweb:/ipfs/QmSHBJfw9bg8QjgBquXVLTS337ZuBGHVkDJfwuAZ6X48sw"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/TickTreeLib.sol": {
+        "keccak256": "0x196c46d6e8e2ab51462f25245f7886568df3f1f65953dcec4c02d7950b4a10cd",
+        "urls": [
+          "bzz-raw://4293ed5fb3ce4d350b9bb5b38342c273e6d772ace098927e006efa7fc4498329",
+          "dweb:/ipfs/QmRCtk481PHQjNdt5Dsa8GYWEX46nYwdeD8R3m92w3Xjxv"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/Base.sol": {
+        "keccak256": "0x4ff1a785311017d1eedb1b4737956fa383067ad34eb439abfec1d989754dde1c",
+        "urls": [
+          "bzz-raw://f553622969b9fdb930246704a4c10dfaee6b1a4468c142fa7eb9dc292a438224",
+          "dweb:/ipfs/QmcxqHnqdQsMVtgsfH9VNLmZ3g7GhgNagfq7yvNCDcCHFK"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/Script.sol": {
+        "keccak256": "0x0bded803c7e28336785fa600f03035e61d0b689bba2f014b1720e576c5ee3307",
+        "urls": [
+          "bzz-raw://407f3979f460cc60bc7e4ce6fd7da4facac9f52623b4d6805052538d897eab9b",
+          "dweb:/ipfs/QmSRhYNywsJhtYEYyPM1izGNsP1SBzxsXwLfcQnFF5NA9p"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/StdChains.sol": {
+        "keccak256": "0x51e6eb138fc953fac1ac78012a39b3f16d9289ce06a222ba93bb0621768f96e6",
+        "urls": [
+          "bzz-raw://653c577e054cf578594148a07b286571d494f401b6d4a940d3ccabd47b29233d",
+          "dweb:/ipfs/QmTWDVvR4m82MGXWYY8BCaVN89TguQJSLqRgzHzrMkFHtx"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/StdCheats.sol": {
+        "keccak256": "0x43d853d6dd3c3f3d5a614a25f4553e2d4b719426a9eb2e8e433155306a5fdc02",
+        "urls": [
+          "bzz-raw://9dc16367f2391bf642f3762bfde686c643a08e8712ce56ad1026eb397247428e",
+          "dweb:/ipfs/QmTpEko9tKnBbJNQw7T1oGoa4Gyfh6y28JbNdrQQXKUNAb"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/StdJson.sol": {
+        "keccak256": "0x9e2a7521190c462a0667706385f1c52a816220a9813ca8ac520fba7ba45d660b",
+        "urls": [
+          "bzz-raw://7d23017fe6570b28130a731b86179352b93a5fb5af32f11559837afc1186293c",
+          "dweb:/ipfs/QmR3p6zG5Kmcr8gKocFCSopLHfXv1AziPJbH17nKyMxwxV"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/StdMath.sol": {
+        "keccak256": "0xd90ad4fd8aeaeb8929964e686e769fdedd5eded3fc3815df194a0ab9f91a3fb2",
+        "urls": [
+          "bzz-raw://7919b70f636c7b805223992f28ad1ad0145d6c1385b5931a3589aface5fe6c92",
+          "dweb:/ipfs/QmY7FRaULwoGgFteF8GawjQJRfasNgpWnU2aiMsFrYpuTC"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/StdStorage.sol": {
+        "keccak256": "0xd1517df281f973dba8b7ba52c02d3df552b60d91b8f47e4669049da648778673",
+        "urls": [
+          "bzz-raw://52e43264f58a5dcfd985f3c99aa81064805aa8f1c2b4c6521fd63d45cdbba8d5",
+          "dweb:/ipfs/QmUMTF6cRjt5tCQrrgQDXVRmHQLjevNsTvLFdaA1m9TBj9"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/StdStyle.sol": {
+        "keccak256": "0x43e2a8a9b9c2574dabe74f11adf6f782df218f463540e3b5b563609fe108597d",
+        "urls": [
+          "bzz-raw://51363ca97404cf4128e1141428949768c31929e75e014b02c85e887fbbb4f1b8",
+          "dweb:/ipfs/QmVhtbQc2fU4rRmbcfBtz34mAgG4BAZBsbna1Ca4SkoPsK"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/StdUtils.sol": {
+        "keccak256": "0x8758c42ba9d9e46868b796e2330ac239006ede07bd438a4b36dd6f2c47d27dc1",
+        "urls": [
+          "bzz-raw://11f5752e0187b1e3631b875efdbe05d45929d05f1c1717105a9115d0a6628140",
+          "dweb:/ipfs/QmUKkx9jfsUvjyYBw45RvrW1hTFXDXi2Jv5tbHP86mnzpi"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/Vm.sol": {
+        "keccak256": "0xc0c32cb12acb184919a4c205ef58785b56d7247ecf92be1094af81ec2b1f9254",
+        "urls": [
+          "bzz-raw://6053a75463b4611a170cf0626f0c42291b8de42cd205b61c5030a5e57adc989a",
+          "dweb:/ipfs/Qmb4Gy4wq3zZGTAHUgF28VPuLwcy7MWQiPczYsg4aBWgNy"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console.sol": {
+        "keccak256": "0x91d5413c2434ca58fd278b6e1e79fd98d10c83931cc2596a6038eee4daeb34ba",
+        "urls": [
+          "bzz-raw://91ccea707361e48b9b7a161fe81f496b9932bc471e9c4e4e1e9c283f2453cc70",
+          "dweb:/ipfs/QmcB66sZhQ6Kz7MUHcLE78YXRUZxoZnnxZjN6yATsbB2ec"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console2.sol": {
+        "keccak256": "0x954646445d1014c3cd85c7918f5e7adeeca5ee44b68c00bafa237e597a4e35ea",
+        "urls": [
+          "bzz-raw://516fa3be52da4763147175bfba4be0aa011fadbb0c1afb01f97265bd4cee7973",
+          "dweb:/ipfs/QmdixAyMJefx7qePChgdxcBH5MxhmN7vsqPuPLx3CgrVmF"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/interfaces/IMulticall3.sol": {
+        "keccak256": "0x7aac1389150499a922d1f9ef5749c908cef127cb2075b92fa17e9cb611263d0a",
+        "urls": [
+          "bzz-raw://d95ebb7c7c463e08ebc12dab639945752fb2480acfc6e86da32f72732a7fd0c0",
+          "dweb:/ipfs/QmNXK8P8oPWwajsQHvAHw3JPyQidPLCGQN3hWu1Lk6PBL2"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/safeconsole.sol": {
+        "keccak256": "0xbaf41fdc6c54297e7cd8250e48b0f20eaac918e342a1028cef3f9a52ac086381",
+        "urls": [
+          "bzz-raw://a500ad81dea226f9910e6b50f99a9ff930105e393a692cbfb2185e4cdb4424ae",
+          "dweb:/ipfs/QmVbUQpXNMmMWRiy4FvBNczzq46BMGfUoBikvSHNiCxVTq"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/preprocessed/ToString.post.sol": {
+        "keccak256": "0x41d4e5340bc42ef1e4a9de355c3abea452d74a60744bf929f8b9f79f47d7789f",
+        "urls": [
+          "bzz-raw://6f6edbcefc408e82cfb94b7b6d6e55b9d6878785c31ce779c17184c2c19c70d6",
+          "dweb:/ipfs/QmYqFXekQiVaoEY7aookGowbTnGz4JLQ4mqtyjKhreb57e"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/script/core/deployers/MangroveDeployer.s.sol": {
+        "keccak256": "0xce7f90421f16e213a7744a2c314a452b9778c4b8b791d554fd51179a507bf1de",
+        "urls": [
+          "bzz-raw://b08a8ff9391ea22ee0cbb210f24e7b9e95375b1c1a419b79114a909c4d1ab22c",
+          "dweb:/ipfs/QmW98vCrE8Nn1Akrqz5qbuBvPaK96xjuMLUp9bNpyLdxYd"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/script/lib/Deployer.sol": {
+        "keccak256": "0x4642f3f731e858681d43df2eca2325856f5ac4fbb0d8ef16df9263d6af873c91",
+        "urls": [
+          "bzz-raw://65e8c50465456607b5e7128b4d2549bff4aa89d5eb2ca2944d17b42d9d2bea71",
+          "dweb:/ipfs/QmTeB2UyAk3dvdXMyqbxnK3J8Zp3KD4JB6fdBMDa1ZWrnu"
+        ],
+        "license": "AGPL-3.0"
+      },
+      "node_modules/@mangrovedao/mangrove-core/script/periphery/deployers/MgvReaderDeployer.s.sol": {
+        "keccak256": "0xf3bba7eb5f23be509f5f3df4299ac66394619e694bc5d27b3127721954d1e164",
+        "urls": [
+          "bzz-raw://456f06cefa966f3c54b8babb41ae12fa9fb55e150e8b59188285b01563bfa9d3",
+          "dweb:/ipfs/QmNpZ5zk5sPVwEj7h3B1SME6944nhanXiz8oGDHvYARrBb"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/IMangrove.sol": {
+        "keccak256": "0x7bb6985efa88b71ec161df4e3b6a7b27e32ccae0890c730f25a0c7f1c5e46c0b",
+        "urls": [
+          "bzz-raw://4aaf49678b6cce3cb69ba3d1effe0cab9a8b37cbdd9d462c99cd6bd0679fa3ce",
+          "dweb:/ipfs/QmUCby1BEr1oQtFCq4eDECiv3qrpofG7pUPTmP1GCoQc2q"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/Mangrove.sol": {
+        "keccak256": "0xd4fe4fe8915f245d9c5ccd4f7b09df2a954572556e507fd5a8b367406a7b04af",
+        "urls": [
+          "bzz-raw://f42254eb71080b322c397180462a7f902e9f75fc60a620d243efa50387b13fa6",
+          "dweb:/ipfs/QmbETz3Bwr27KvADDFMKrqoQUKL9QQciVtv8GZu94HLosR"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvAppendix.sol": {
+        "keccak256": "0x5cd196e4a990a6b1b23e1106cf1c53b797469fafc9f4e7b963787f485ccaf2b6",
+        "urls": [
+          "bzz-raw://d04ca51cf2c8a34d23080c84ff5899c7c1134688805348692ede9a60c51bb43f",
+          "dweb:/ipfs/QmZjD7ir2zwu9tdwW2Ahb6PPY9LUcHujsRwmszbY59wm1p"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvCommon.sol": {
+        "keccak256": "0x58ee8211533e7f23e32d552779600606425d41afdafbd15074188c215993fd69",
+        "urls": [
+          "bzz-raw://0e28a891a08cb8f2292a3ff28490aa12489073dfa3782f411cdbbe3903ff7c71",
+          "dweb:/ipfs/QmXDt46FTevAHKzs3hFue3JH25w4sJCyYdBsQRrctNCMck"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvGovernable.sol": {
+        "keccak256": "0xd6140146043d4eee36ca947dcca7003ae7853d5c635261e390eb7ce1339a53c7",
+        "urls": [
+          "bzz-raw://cf62b8806176f5e49a2a89cd63f3a15dd88e6f4a0a1a7fffe402c72ba7adcbca",
+          "dweb:/ipfs/QmQcg6Kv4hvLfT39ceneM59kg4DTZk1regnSmSZnHViY8N"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvHasOffers.sol": {
+        "keccak256": "0xa842c61d28a770eb07eac3e089ffcf4a883cd20682bf3939efc482239f99deb5",
+        "urls": [
+          "bzz-raw://33f393f5c0b64860ab9626ccc5fc51d9bcfcc0839f43b1614c2729da71c16563",
+          "dweb:/ipfs/QmPbNMgJze8Fc3RinCedhKLeV9oC4Y3a9ftk5zgeSgpku3"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol": {
+        "keccak256": "0xe22e3d452040625724ce932cc6f57212c8a32ba021b06f5737e4c23319792c7d",
+        "urls": [
+          "bzz-raw://b3ab9e3726b49b2d526f1cb6634c562cbafdbc1163753d13a3e1c316ca29e726",
+          "dweb:/ipfs/QmS9bYtEVW7i9zAWmC7aPdCDv4BCaBJbhpgrJX6VhH68st"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvOfferMaking.sol": {
+        "keccak256": "0x3c9abef9061eae36c14bbed131498f4c8b9f6830a804dcfb8b0f040c059986e8",
+        "urls": [
+          "bzz-raw://a5ec81c12464369b9a6aa9b525bec925aa083924d3dec0f49322c95874851039",
+          "dweb:/ipfs/QmNiBjEgWe7HQuvWu2899uxsnGH6nHGQEXAq1Yb1jrVZmQ"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvOfferTaking.sol": {
+        "keccak256": "0x8b83abe21aaa5493c63417096ec42b88b2e2f16f22c3a9caeee5baceb396339a",
+        "urls": [
+          "bzz-raw://d8a9358f407010a5d5042c7df14d6c1a6497de2b0ae6843dffdc63d0e0c7da5a",
+          "dweb:/ipfs/QmWYR3kSmggCkrNx3BhKMfLunTay52vw3VTAus4xQ1VtuL"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvOfferTakingWithPermit.sol": {
+        "keccak256": "0x56c321cc8f53cc56dc114f4e4866db537f752fd6a7b2ca22ad40548b16c56081",
+        "urls": [
+          "bzz-raw://1857710ac572419f29560489248689d47ff154cb740d069a7c7baef5a858c7fa",
+          "dweb:/ipfs/QmXn8hiXft2qzdV4yD2qAKGjstqcQ7vKk6Dfr9EcQbsnCP"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvView.sol": {
+        "keccak256": "0xea00bc69f29db56974401408305b1f0f11c2ad5635bbaaec62ef3488424df28d",
+        "urls": [
+          "bzz-raw://a358a1e1abe1254d94ced0cbb554ca3217e9f6018e0dac4f4ea3df8b018b8337",
+          "dweb:/ipfs/Qmf7okDXgiqsqq7ngnZ7pMhMgAENtJ5xHJc7Sv8UgF1yK9"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/periphery/MgvOracle.sol": {
+        "keccak256": "0xea011d94577425356be825653d726672f52948f63e6fa655840515862cf5ac4f",
+        "urls": [
+          "bzz-raw://3319cf7c9933599b911efd4e49f271b2ff9b38658b9daf24a04af5d0b3f53442",
+          "dweb:/ipfs/QmbMqJjmPV9kEZdn8JHDEj24ZEAjzry3WTjQTwWH1Kzd3F"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/periphery/MgvReader.sol": {
+        "keccak256": "0x010238e6a7e3338c48645e81e5ea75aa9b10b8eeb355555374365c44af0a8109",
+        "urls": [
+          "bzz-raw://c3d910994ace7626de38858e111803d48fe02c9c9ca20f44671917941099e8fc",
+          "dweb:/ipfs/QmV1Ed9nZK31WmG9NwsbCs9JCqMY3m6TkMxK2FikYpfDGH"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Global.post.sol": {
+        "keccak256": "0xddf04a10f84edc0b165351f649cad761a429b5c1b218e482917b3e38a2019e7f",
+        "urls": [
+          "bzz-raw://7695a94afb1db46a65967bd63fc344b0a9387a4a2c906fdcac0433fdfec32dff",
+          "dweb:/ipfs/QmcH4k6VwPrSEjqEQVsKTRjxWtmhijoknih6s6R98dnNUM"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Local.post.sol": {
+        "keccak256": "0x03d642742c132c37c1fc29cae87f7ce1be93f89877fe698698d5bd2309c878a5",
+        "urls": [
+          "bzz-raw://6957d461c6486caeee91f5fd8be2ff0f53a8c264c03e8c9b7f7291bf7a72d9fc",
+          "dweb:/ipfs/QmTRqHsnjFA1xDmWWuPqn9aPeweRiYHv1wfTz77qxCmd7k"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol": {
+        "keccak256": "0x812a7c313108b56600f747d89d20b2daa4c4aa489ece1b30c561a353d41468f2",
+        "urls": [
+          "bzz-raw://3fb1685a67020adeece9f6fbf567567d257aafafd2e115e6151f2b2a14b429aa",
+          "dweb:/ipfs/QmUvk3FLDDHRXungxeLtPEfaQj3HNt3ib8nGhonzPdMW6o"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol": {
+        "keccak256": "0xbb0c9e3177017a77de68adeed5cbbf040fc9152f914adb34575eb880979fc720",
+        "urls": [
+          "bzz-raw://fac448393a94f7d797f58ece51c1127a1605397b2371c9d1fe61db0037762a91",
+          "dweb:/ipfs/QmUwcWdecdqa81eLGz4SekQYfiTp5pgs2mvFRYmu7T2sew"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Structs.post.sol": {
+        "keccak256": "0x6121b0f392dbeddf77da4f5bc5dee019878ab21538892bd22dbb9c49e9e068bb",
+        "urls": [
+          "bzz-raw://336a0df7a17dd6b1ed36c4e7f19fc9ab6d4ad933f7e0b3658efba0756c7341bc",
+          "dweb:/ipfs/QmZ7NQY6EJHqcE1oEho1yN9ymsTfVpUcMJABKC8Fq5GvhL"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/test/lib/forks/Arbitrum.sol": {
+        "keccak256": "0x05e2eaeff79531b129c265d2cc2c5a6894c44cf558085733c95314b1f5cd9371",
+        "urls": [
+          "bzz-raw://f7f3bd9f6737a1268514448097cb1e24105659bcb6512cd7f010335e73af8fb0",
+          "dweb:/ipfs/QmS4177owHEefej2GFR4Abx4QHo1t1Hp7qpiZWr5L7qPBR"
+        ],
+        "license": "AGPL-3.0"
+      },
+      "node_modules/@mangrovedao/mangrove-core/test/lib/forks/Ethereum.sol": {
+        "keccak256": "0x154196aba3e751b254b47d622ebdae7a91d103c89f2a84855a25728cc48dd7da",
+        "urls": [
+          "bzz-raw://1784fc466b4069db5e11f6c4197ffeb5b7d2f9ae071560669f58de4e048135af",
+          "dweb:/ipfs/QmRDLCL4MytkhZFU7WzG6NaCDztajzxE8wTR68yngWmLCi"
+        ],
+        "license": "AGPL-3.0"
+      },
+      "node_modules/@mangrovedao/mangrove-core/test/lib/forks/Generic.sol": {
+        "keccak256": "0xbb727fe7191191a567eb5401c6589bf049e1aa425dab669b5e5479e33cafd27f",
+        "urls": [
+          "bzz-raw://077125e1852f42db1dd518df52bcb910e39bc0a9131ae1e819906e786e7ef13f",
+          "dweb:/ipfs/QmRpRub7g1Fb7BkfBovaXjWWKRcf61UTXEEJ82aubK49sf"
+        ],
+        "license": "AGPL-3.0"
+      },
+      "node_modules/@mangrovedao/mangrove-core/test/lib/forks/Goerli.sol": {
+        "keccak256": "0xd2cecca60e68588d0df210f0b447a45f0f1354eb63d32904d330198273374c72",
+        "urls": [
+          "bzz-raw://737a0b80c864148c33a421b03750e4c9dc4354a2c79f01c507a96a4af84ef15c",
+          "dweb:/ipfs/QmUGabrP1ix5mZLESyFNUsms62y4za45fTRTPtU11ZSfQo"
+        ],
+        "license": "AGPL-3.0"
+      },
+      "node_modules/@mangrovedao/mangrove-core/test/lib/forks/Local.sol": {
+        "keccak256": "0x9c4cc9f4c263d7a98f4a381e1d6726b74ffc29efef62508ea50485205b4a70f7",
+        "urls": [
+          "bzz-raw://b8a07887a456269140e67eca9a831d07c1ff5752cccae380d4c08cd7b7bfbbea",
+          "dweb:/ipfs/QmdHjyFrKG9GX5EaCsKTTivsEv66ARE2bpxhDxPg5BYS8P"
+        ],
+        "license": "AGPL-3.0"
+      },
+      "node_modules/@mangrovedao/mangrove-core/test/lib/forks/Mumbai.sol": {
+        "keccak256": "0x6783d5a4d8e498c2e04dade7db1d0fd1a5afe25ade89ac796bc0e2dd79f338ae",
+        "urls": [
+          "bzz-raw://42cec388abdb656cc4fd700b2aa09f791d633e38e103d177729e51902b172d29",
+          "dweb:/ipfs/QmcsmcnVR4LZ6zm3cccKzQC2PuJBQSVfUVPHP1G7vJZZbr"
+        ],
+        "license": "AGPL-3.0"
+      },
+      "node_modules/@mangrovedao/mangrove-core/test/lib/forks/Polygon.sol": {
+        "keccak256": "0x97133333940edff015a5c5fc3279ba53008015dcbee9c01c3d910ff448f1a26b",
+        "urls": [
+          "bzz-raw://e64cfb2eaca6766ed15ce62b426c9cff65cd81990ec560d234528e3f21389488",
+          "dweb:/ipfs/QmdJE43idYnKGpzGBiN2DNasSKREatKpGVZucLCVMvmeGZ"
+        ],
+        "license": "AGPL-3.0"
+      },
+      "node_modules/@mangrovedao/mangrove-core/test/lib/forks/TestnetZkevm.sol": {
+        "keccak256": "0xdb00d9d8334c4ae533f6a8885d0bec6f105bc3d9990d23cdbb8e32746731ae2b",
+        "urls": [
+          "bzz-raw://dc9256c98a0c88fcb8bee868d627023e3af813d5903bbc99beec6566df016a06",
+          "dweb:/ipfs/QmXe5K3ktRFz9xHJruZ3MvHUHZGaybem7oafvdN8GZaCnS"
+        ],
+        "license": "AGPL-3.0"
+      },
+      "node_modules/@mangrovedao/mangrove-core/test/lib/forks/Zkevm.sol": {
+        "keccak256": "0x628b2aa9dc8324d3111fc407526ed0f34157f73b18ab87fb250f148705a572fd",
+        "urls": [
+          "bzz-raw://c03beb2d4ce29050dc8e9d580f76136e6f103372424d92f0dc0092e8c317a5ce",
+          "dweb:/ipfs/Qmc8gxtJB6cv6z1U5YYExB7RBVsrpD7Uh3nYDk3GWkhrMN"
+        ],
+        "license": "AGPL-3.0"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/toy/Tester.s.sol": {
+        "keccak256": "0xc84396d06c329a348866158af052cd138f69463b08bfdb379677751d9a9e27f7",
+        "urls": [
+          "bzz-raw://aaace4908e6c1f1058f44f76548ae93579d4463f8b3d23a1f6d6782c09690d29",
+          "dweb:/ipfs/QmUWjPYxfJkaauo4stEeCW5JH44W4p3rAqBXcVMrJKUWT4"
+        ],
+        "license": "AGPL-3.0"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/toy/Tester.s.sol",
+    "id": 81280,
+    "exportedSymbols": {
+      "Deployer": [
+        53294
+      ],
+      "MangroveDeployer": [
+        52352
+      ],
+      "ToyENS": [
+        4030
+      ],
+      "Whatsup": [
+        81261
+      ],
+      "WhatsupDeploy": [
+        81279
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "37:405:97",
+    "nodes": [
+      {
+        "id": 81244,
+        "nodeType": "PragmaDirective",
+        "src": "37:24:97",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".13"
+        ]
+      },
+      {
+        "id": 81246,
+        "nodeType": "ImportDirective",
+        "src": "63:43:97",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/lib/ToyENS.sol",
+        "file": "@mgv/lib/ToyENS.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 81280,
+        "sourceUnit": 4031,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 81245,
+              "name": "ToyENS",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 4030,
+              "src": "71:6:97",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 81248,
+        "nodeType": "ImportDirective",
+        "src": "107:83:97",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/script/core/deployers/MangroveDeployer.s.sol",
+        "file": "@mgv/script/core/deployers/MangroveDeployer.s.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 81280,
+        "sourceUnit": 52353,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 81247,
+              "name": "MangroveDeployer",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 52352,
+              "src": "115:16:97",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 81250,
+        "nodeType": "ImportDirective",
+        "src": "191:54:97",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/script/lib/Deployer.sol",
+        "file": "@mgv/script/lib/Deployer.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 81280,
+        "sourceUnit": 53295,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 81249,
+              "name": "Deployer",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 53294,
+              "src": "199:8:97",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 81261,
+        "nodeType": "ContractDefinition",
+        "src": "247:64:97",
+        "nodes": [
+          {
+            "id": 81252,
+            "nodeType": "VariableDeclaration",
+            "src": "268:6:97",
+            "nodes": [],
+            "constant": false,
+            "mutability": "mutable",
+            "name": "i",
+            "nameLocation": "273:1:97",
+            "scope": 81261,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 81251,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "268:4:97",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "id": 81260,
+            "nodeType": "FunctionDefinition",
+            "src": "279:30:97",
+            "nodes": [],
+            "body": {
+              "id": 81259,
+              "nodeType": "Block",
+              "src": "293:16:97",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 81257,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 81255,
+                      "name": "i",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 81252,
+                      "src": "299:1:97",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "hexValue": "33",
+                      "id": 81256,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "303:1:97",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_3_by_1",
+                        "typeString": "int_const 3"
+                      },
+                      "value": "3"
+                    },
+                    "src": "299:5:97",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 81258,
+                  "nodeType": "ExpressionStatement",
+                  "src": "299:5:97"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "parameters": {
+              "id": 81253,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "290:2:97"
+            },
+            "returnParameters": {
+              "id": 81254,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "293:0:97"
+            },
+            "scope": 81261,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "Whatsup",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          81261
+        ],
+        "name": "Whatsup",
+        "nameLocation": "256:7:97",
+        "scope": 81280,
+        "usedErrors": [],
+        "usedEvents": []
+      },
+      {
+        "id": 81279,
+        "nodeType": "ContractDefinition",
+        "src": "313:128:97",
+        "nodes": [
+          {
+            "id": 81278,
+            "nodeType": "FunctionDefinition",
+            "src": "352:87:97",
+            "nodes": [],
+            "body": {
+              "id": 81277,
+              "nodeType": "Block",
+              "src": "374:65:97",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "id": 81266,
+                      "name": "broadcast",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 52731,
+                      "src": "380:9:97",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
+                        "typeString": "function ()"
+                      }
+                    },
+                    "id": 81267,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "380:11:97",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 81268,
+                  "nodeType": "ExpressionStatement",
+                  "src": "380:11:97"
+                },
+                {
+                  "expression": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "id": 81271,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "NewExpression",
+                      "src": "397:11:97",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_Whatsup_$81261_$",
+                        "typeString": "function () returns (contract Whatsup)"
+                      },
+                      "typeName": {
+                        "id": 81270,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 81269,
+                          "name": "Whatsup",
+                          "nameLocations": [
+                            "401:7:97"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 81261,
+                          "src": "401:7:97"
+                        },
+                        "referencedDeclaration": 81261,
+                        "src": "401:7:97",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Whatsup_$81261",
+                          "typeString": "contract Whatsup"
+                        }
+                      }
+                    },
+                    "id": 81272,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "397:13:97",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Whatsup_$81261",
+                      "typeString": "contract Whatsup"
+                    }
+                  },
+                  "id": 81273,
+                  "nodeType": "ExpressionStatement",
+                  "src": "397:13:97"
+                },
+                {
+                  "expression": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "id": 81274,
+                      "name": "outputDeployment",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 53079,
+                      "src": "416:16:97",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
+                        "typeString": "function ()"
+                      }
+                    },
+                    "id": 81275,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "416:18:97",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 81276,
+                  "nodeType": "ExpressionStatement",
+                  "src": "416:18:97"
+                }
+              ]
+            },
+            "functionSelector": "c0406226",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "run",
+            "nameLocation": "361:3:97",
+            "parameters": {
+              "id": 81264,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "364:2:97"
+            },
+            "returnParameters": {
+              "id": 81265,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "374:0:97"
+            },
+            "scope": 81279,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 81262,
+              "name": "Deployer",
+              "nameLocations": [
+                "339:8:97"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 53294,
+              "src": "339:8:97"
+            },
+            "id": 81263,
+            "nodeType": "InheritanceSpecifier",
+            "src": "339:8:97"
+          }
+        ],
+        "canonicalName": "WhatsupDeploy",
+        "contractDependencies": [
+          4030,
+          75183,
+          75219,
+          76419,
+          76442,
+          76465,
+          76488,
+          76524,
+          76547,
+          81261
+        ],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "internalFunctionIDs": {
+          "29448": 1
+        },
+        "linearizedBaseContracts": [
+          81279,
+          53294,
+          3293,
+          10570,
+          10531,
+          10519,
+          19757,
+          14461,
+          12681
+        ],
+        "name": "WhatsupDeploy",
+        "nameLocation": "322:13:97",
+        "scope": 81280,
+        "usedErrors": [],
+        "usedEvents": []
+      }
+    ],
+    "license": "AGPL-3.0"
+  },
+  "id": 97
+}

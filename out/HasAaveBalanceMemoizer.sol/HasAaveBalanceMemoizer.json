@@ -1,0 +1,2607 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "addressesProvider",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "ADDRESS_PROVIDER",
+      "outputs": [
+        {
+          "internalType": "contract IPoolAddressesProvider",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "POOL",
+      "outputs": [
+        {
+          "internalType": "contract IPool",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "asset",
+          "type": "address"
+        }
+      ],
+      "name": "checkAsset",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "asset",
+          "type": "address"
+        }
+      ],
+      "name": "overlying",
+      "outputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "aToken",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x60c060405234801561001057600080fd5b5060405161059738038061059783398101604081905261002f9161011e565b80806001600160a01b031660a0816001600160a01b0316815250506000816001600160a01b031663026b1d5f6040518163ffffffff1660e01b8152600401602060405180830381865afa15801561008a573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906100ae919061011e565b90506001600160a01b03811661010a5760405162461bcd60e51b815260206004820152601360248201527f4161766556334c656e6465722f3078506f6f6c00000000000000000000000000604482015260640160405180910390fd5b6001600160a01b03166080525061014e9050565b60006020828403121561013057600080fd5b81516001600160a01b038116811461014757600080fd5b9392505050565b60805160a05161041f6101786000396000608601526000818160ad0152610114015261041f6000f3fe608060405234801561001057600080fd5b506004361061004c5760003560e01c80630efc8fd2146100515780631848effa146100815780637535d246146100a8578063d94bff13146100cf575b600080fd5b61006461005f3660046101c3565b6100f2565b6040516001600160a01b0390911681526020015b60405180910390f35b6100647f000000000000000000000000000000000000000000000000000000000000000081565b6100647f000000000000000000000000000000000000000000000000000000000000000081565b6100e26100dd3660046101c3565b61018d565b6040519015158152602001610078565b6040516335ea6a7560e01b81526001600160a01b0382811660048301526000917f0000000000000000000000000000000000000000000000000000000000000000909116906335ea6a75906024016101e060405180830381865afa15801561015e573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061018291906102c6565b610100015192915050565b600080610199836100f2565b6001600160a01b031615159392505050565b6001600160a01b03811681146101c057600080fd5b50565b6000602082840312156101d557600080fd5b81356101e0816101ab565b9392505050565b6040516101e0810167ffffffffffffffff8111828210171561021957634e487b7160e01b600052604160045260246000fd5b60405290565b60006020828403121561023157600080fd5b6040516020810181811067ffffffffffffffff8211171561026257634e487b7160e01b600052604160045260246000fd5b6040529151825250919050565b80516fffffffffffffffffffffffffffffffff8116811461028f57600080fd5b919050565b805164ffffffffff8116811461028f57600080fd5b805161ffff8116811461028f57600080fd5b805161028f816101ab565b60006101e082840312156102d957600080fd5b6102e16101e7565b6102eb848461021f565b81526102f96020840161026f565b602082015261030a6040840161026f565b604082015261031b6060840161026f565b606082015261032c6080840161026f565b608082015261033d60a0840161026f565b60a082015261034e60c08401610294565b60c082015261035f60e084016102a9565b60e08201526101006103728185016102bb565b908201526101206103848482016102bb565b908201526101406103968482016102bb565b908201526101606103a88482016102bb565b908201526101806103ba84820161026f565b908201526101a06103cc84820161026f565b908201526101c06103de84820161026f565b90820152939250505056fea2646970667358221220ffc4a90ce88cacf2783ffde3661c909b71167880d0217f5e5793ae4a1fa50ea364736f6c63430008140033",
+    "sourceMap": "394:2513:122:-:0;;;1132:73;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;1184:17;917::101;-1:-1:-1;;;;;875:60:101;;;-1:-1:-1;;;;;875:60:101;;;;;942:19;987:17;-1:-1:-1;;;;;964:49:101;;:51;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;942:73;-1:-1:-1;;;;;;1029:25:101;;1021:57;;;;-1:-1:-1;;;1021:57:101;;511:2:131;1021:57:101;;;493:21:131;550:2;530:18;;;523:30;589:21;569:18;;;562:49;628:18;;1021:57:101;;;;;;;;-1:-1:-1;;;;;1085:25:101;;;-1:-1:-1;394:2513:122;;-1:-1:-1;394:2513:122;14:290:131;84:6;137:2;125:9;116:7;112:23;108:32;105:52;;;153:1;150;143:12;105:52;179:16;;-1:-1:-1;;;;;224:31:131;;214:42;;204:70;;270:1;267;260:12;204:70;293:5;14:290;-1:-1:-1;;;14:290:131:o;309:343::-;394:2513:122;;;;;;;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x608060405234801561001057600080fd5b506004361061004c5760003560e01c80630efc8fd2146100515780631848effa146100815780637535d246146100a8578063d94bff13146100cf575b600080fd5b61006461005f3660046101c3565b6100f2565b6040516001600160a01b0390911681526020015b60405180910390f35b6100647f000000000000000000000000000000000000000000000000000000000000000081565b6100647f000000000000000000000000000000000000000000000000000000000000000081565b6100e26100dd3660046101c3565b61018d565b6040519015158152602001610078565b6040516335ea6a7560e01b81526001600160a01b0382811660048301526000917f0000000000000000000000000000000000000000000000000000000000000000909116906335ea6a75906024016101e060405180830381865afa15801561015e573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061018291906102c6565b610100015192915050565b600080610199836100f2565b6001600160a01b031615159392505050565b6001600160a01b03811681146101c057600080fd5b50565b6000602082840312156101d557600080fd5b81356101e0816101ab565b9392505050565b6040516101e0810167ffffffffffffffff8111828210171561021957634e487b7160e01b600052604160045260246000fd5b60405290565b60006020828403121561023157600080fd5b6040516020810181811067ffffffffffffffff8211171561026257634e487b7160e01b600052604160045260246000fd5b6040529151825250919050565b80516fffffffffffffffffffffffffffffffff8116811461028f57600080fd5b919050565b805164ffffffffff8116811461028f57600080fd5b805161ffff8116811461028f57600080fd5b805161028f816101ab565b60006101e082840312156102d957600080fd5b6102e16101e7565b6102eb848461021f565b81526102f96020840161026f565b602082015261030a6040840161026f565b604082015261031b6060840161026f565b606082015261032c6080840161026f565b608082015261033d60a0840161026f565b60a082015261034e60c08401610294565b60c082015261035f60e084016102a9565b60e08201526101006103728185016102bb565b908201526101206103848482016102bb565b908201526101406103968482016102bb565b908201526101606103a88482016102bb565b908201526101806103ba84820161026f565b908201526101a06103cc84820161026f565b908201526101c06103de84820161026f565b90820152939250505056fea2646970667358221220ffc4a90ce88cacf2783ffde3661c909b71167880d0217f5e5793ae4a1fa50ea364736f6c63430008140033",
+    "sourceMap": "394:2513:122:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2590:146:101;;;;;;:::i;:::-;;:::i;:::-;;;-1:-1:-1;;;;;608:32:131;;;590:51;;578:2;563:18;2590:146:101;;;;;;;;666:56;;;;;590:27;;;;;4882:146;;;;;;:::i;:::-;;:::i;:::-;;;1280:14:131;;1273:22;1255:41;;1243:2;1228:18;4882:146:101;1115:187:131;2590:146:101;2681:35;;-1:-1:-1;;;2681:35:101;;-1:-1:-1;;;;;608:32:131;;;2681:35:101;;;590:51:131;2644:13:101;;2681:4;:19;;;;;;563:18:131;;2681:35:101;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;:49;;;;2590:146;-1:-1:-1;;2590:146:101:o;4882:::-;4937:4;4949:13;4965:16;4975:5;4965:9;:16::i;:::-;-1:-1:-1;;;;;4994:29:101;;;;4882:146;-1:-1:-1;;;4882:146:101:o;14:139:131:-;-1:-1:-1;;;;;97:31:131;;87:42;;77:70;;143:1;140;133:12;77:70;14:139;:::o;158:268::-;230:6;283:2;271:9;262:7;258:23;254:32;251:52;;;299:1;296;289:12;251:52;338:9;325:23;357:39;390:5;357:39;:::i;:::-;415:5;158:268;-1:-1:-1;;;158:268:131:o;1515:344::-;1582:2;1576:9;1624:3;1612:16;;1658:18;1643:34;;1679:22;;;1640:62;1637:185;;;1744:10;1739:3;1735:20;1732:1;1725:31;1779:4;1776:1;1769:15;1807:4;1804:1;1797:15;1637:185;1838:2;1831:22;1515:344;:::o;1864:523::-;1945:5;1993:4;1981:9;1976:3;1972:19;1968:30;1965:50;;;2011:1;2008;2001:12;1965:50;2044:2;2038:9;2086:4;2078:6;2074:17;2157:6;2145:10;2142:22;2121:18;2109:10;2106:34;2103:62;2100:185;;;2207:10;2202:3;2198:20;2195:1;2188:31;2242:4;2239:1;2232:15;2270:4;2267:1;2260:15;2100:185;2301:2;2294:22;2364:16;;2349:32;;-1:-1:-1;2334:6:131;1864:523;-1:-1:-1;1864:523:131:o;2392:192::-;2471:13;;2524:34;2513:46;;2503:57;;2493:85;;2574:1;2571;2564:12;2493:85;2392:192;;;:::o;2589:169::-;2667:13;;2720:12;2709:24;;2699:35;;2689:63;;2748:1;2745;2738:12;2763:163;2841:13;;2894:6;2883:18;;2873:29;;2863:57;;2916:1;2913;2906:12;2931:146;3010:13;;3032:39;3010:13;3032:39;:::i;3082:1647::-;3182:6;3235:3;3223:9;3214:7;3210:23;3206:33;3203:53;;;3252:1;3249;3242:12;3203:53;3278:17;;:::i;:::-;3318:72;3382:7;3371:9;3318:72;:::i;:::-;3311:5;3304:87;3423:49;3468:2;3457:9;3453:18;3423:49;:::i;:::-;3418:2;3411:5;3407:14;3400:73;3505:49;3550:2;3539:9;3535:18;3505:49;:::i;:::-;3500:2;3493:5;3489:14;3482:73;3587:49;3632:2;3621:9;3617:18;3587:49;:::i;:::-;3582:2;3575:5;3571:14;3564:73;3670:50;3715:3;3704:9;3700:19;3670:50;:::i;:::-;3664:3;3657:5;3653:15;3646:75;3754:50;3799:3;3788:9;3784:19;3754:50;:::i;:::-;3748:3;3741:5;3737:15;3730:75;3838:49;3882:3;3871:9;3867:19;3838:49;:::i;:::-;3832:3;3825:5;3821:15;3814:74;3921:49;3965:3;3954:9;3950:19;3921:49;:::i;:::-;3915:3;3908:5;3904:15;3897:74;3990:3;4025:49;4070:2;4059:9;4055:18;4025:49;:::i;:::-;4009:14;;;4002:73;4094:3;4129:49;4159:18;;;4129:49;:::i;:::-;4113:14;;;4106:73;4198:3;4233:49;4263:18;;;4233:49;:::i;:::-;4217:14;;;4210:73;4302:3;4337:49;4367:18;;;4337:49;:::i;:::-;4321:14;;;4314:73;4406:3;4441:49;4471:18;;;4441:49;:::i;:::-;4425:14;;;4418:73;4510:3;4545:49;4575:18;;;4545:49;:::i;:::-;4529:14;;;4522:73;4614:3;4649:49;4679:18;;;4649:49;:::i;:::-;4633:14;;;4626:73;4637:5;3082:1647;-1:-1:-1;;;3082:1647:131:o",
+    "linkReferences": {},
+    "immutableReferences": {
+      "83098": [
+        {
+          "start": 173,
+          "length": 32
+        },
+        {
+          "start": 276,
+          "length": 32
+        }
+      ],
+      "83102": [
+        {
+          "start": 134,
+          "length": 32
+        }
+      ]
+    }
+  },
+  "methodIdentifiers": {
+    "ADDRESS_PROVIDER()": "1848effa",
+    "POOL()": "7535d246",
+    "checkAsset(address)": "d94bff13",
+    "overlying(address)": "0efc8fd2"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"addressesProvider\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"ADDRESS_PROVIDER\",\"outputs\":[{\"internalType\":\"contract IPoolAddressesProvider\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"POOL\",\"outputs\":[{\"internalType\":\"contract IPool\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"asset\",\"type\":\"address\"}],\"name\":\"checkAsset\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"asset\",\"type\":\"address\"}],\"name\":\"overlying\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"aToken\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"the memoizer works in the context of a single token and therefore should not be used across multiple tokens.\",\"kind\":\"dev\",\"methods\":{\"checkAsset(address)\":{\"params\":{\"asset\":\"the asset one wants to lend\"},\"returns\":{\"_0\":\"true if the asset can be supplied on pool\"}},\"constructor\":{\"params\":{\"addressesProvider\":\"address of AAVE's address provider\"}},\"overlying(address)\":{\"params\":{\"asset\":\"the underlying asset\"},\"returns\":{\"aToken\":\"the overlying asset\"}}},\"title\":\"Memoizes values for AAVE to reduce gas cost and simplify code flow.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"ADDRESS_PROVIDER()\":{\"notice\":\"The AAVE pool address provider.\"},\"POOL()\":{\"notice\":\"The AAVE pool retrieved from the pool provider.\"},\"checkAsset(address)\":{\"notice\":\"verifies whether an asset can be supplied on pool\"},\"constructor\":{\"notice\":\"contract's constructor\"},\"overlying(address)\":{\"notice\":\"convenience function to obtain the overlying of a given asset\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/routers/integrations/HasAaveBalanceMemoizer.sol\":\"HasAaveBalanceMemoizer\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/\",\":@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/\",\":@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/\",\":ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/\",\":mgv_arbitrage_lib/=mangrove-arbitrage/lib/\",\":mgv_arbitrage_script/=mangrove-arbitrage/script/\",\":mgv_arbitrage_src/=mangrove-arbitrage/src/\",\":mgv_arbitrage_test/=mangrove-arbitrage/test/\",\":mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":mgv_script/=node_modules/@mangrovedao/mangrove-core/script/\",\":mgv_src/=node_modules/@mangrovedao/mangrove-core/src/\",\":mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":mgv_test/=node_modules/@mangrovedao/mangrove-core/test/\",\":uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/\"]},\"sources\":{\"node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol\":{\"keccak256\":\"0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49\",\"dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6\"]},\"node_modules/@mangrovedao/mangrove-core/lib/TransferLib.sol\":{\"keccak256\":\"0x3a8b94d6cc226852fefada57b74fe8cb4f3e34bdcf0860825401a57097d7914b\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://a7293b7722734c714f12fa51520c2ebf01776ca5f837c06ca27a7c775e4bf579\",\"dweb:/ipfs/QmTFm7NaHGv32fYoXbiUiMSgpWAJ5GfHoV1LTD49ZfkCpJ\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/BitLib.sol\":{\"keccak256\":\"0x5a1c56d67fbd2ef6f3b830cf8dae1885da5f40a37afd11cb3a392be573993c3b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a07b895de906f49d0ce9e89a349d39220e13039709ea2e2db46ff48310bd4b3b\",\"dweb:/ipfs/QmZyiLKyTZ9EHwqNRUYukQDdg7CL54Dsu65RYabkkGF1KM\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol\":{\"keccak256\":\"0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb\",\"dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/DensityLib.sol\":{\"keccak256\":\"0xc7ee8be7f11a1bf85aa4ea0e222d4a49d77a378b201e347f9a5e4f28f207a023\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ed718e8bf3fb45bc0e7cf739662422cfe01d8d04a2c99b2fb0cfa2372629c6ad\",\"dweb:/ipfs/QmZ5QpyMSmkVxayfpZYovNcc8NGJKfVZEMKphzeKk9cVNv\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/LocalExtra.sol\":{\"keccak256\":\"0xbd3f6702242dd43ba2493eb54feb8f5d2526967512c6f156d29669b54d9c60f2\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://e389f3c78c8073bde973aa3f4770139e2adb4cc00cc1303b77eefa201189a6ff\",\"dweb:/ipfs/QmZ8vXRUUCinKtqJhV7jMXVeDVfRizhJ3NsumZLQxwSc44\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol\":{\"keccak256\":\"0x335217debbf3f4cabeaea88d4dd9777dbda2f2b6ed9684e2285a4d16e1e4464c\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://eafe358531d7dc6527d36f8fbc4bc67ab12516398c35338ba5da57a03e24b9f3\",\"dweb:/ipfs/QmcKxrcr11EM7rsKNUEJq8VXFd2R1dWSTqYk3E4k8dQfzy\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol\":{\"keccak256\":\"0x95120d52698bc60b005496036a7c9daa7b8d0b18b571e596e86fd696b36e3264\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://684d30cc9673403cfddabdf7d979417c5df050abde16712aeaa9ca6b2725d154\",\"dweb:/ipfs/QmTkeUAMhb72BNqGjAaaPBj1NHPtKE8wH1R8bpXD5RTKtC\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol\":{\"keccak256\":\"0xa4aea464925ad277aab2141885eeeb6e5f1b0963ba08d8887a1c2461c334f222\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://c7ec62c85c22d7996abe32663232861f90e855c770dbd252bf49fff4ca786e74\",\"dweb:/ipfs/QmSHBJfw9bg8QjgBquXVLTS337ZuBGHVkDJfwuAZ6X48sw\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/TickTreeLib.sol\":{\"keccak256\":\"0x196c46d6e8e2ab51462f25245f7886568df3f1f65953dcec4c02d7950b4a10cd\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://4293ed5fb3ce4d350b9bb5b38342c273e6d772ace098927e006efa7fc4498329\",\"dweb:/ipfs/QmRCtk481PHQjNdt5Dsa8GYWEX46nYwdeD8R3m92w3Xjxv\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console2.sol\":{\"keccak256\":\"0x954646445d1014c3cd85c7918f5e7adeeca5ee44b68c00bafa237e597a4e35ea\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://516fa3be52da4763147175bfba4be0aa011fadbb0c1afb01f97265bd4cee7973\",\"dweb:/ipfs/QmdixAyMJefx7qePChgdxcBH5MxhmN7vsqPuPLx3CgrVmF\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol\":{\"keccak256\":\"0xe22e3d452040625724ce932cc6f57212c8a32ba021b06f5737e4c23319792c7d\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://b3ab9e3726b49b2d526f1cb6634c562cbafdbc1163753d13a3e1c316ca29e726\",\"dweb:/ipfs/QmS9bYtEVW7i9zAWmC7aPdCDv4BCaBJbhpgrJX6VhH68st\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Global.post.sol\":{\"keccak256\":\"0xddf04a10f84edc0b165351f649cad761a429b5c1b218e482917b3e38a2019e7f\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://7695a94afb1db46a65967bd63fc344b0a9387a4a2c906fdcac0433fdfec32dff\",\"dweb:/ipfs/QmcH4k6VwPrSEjqEQVsKTRjxWtmhijoknih6s6R98dnNUM\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Local.post.sol\":{\"keccak256\":\"0x03d642742c132c37c1fc29cae87f7ce1be93f89877fe698698d5bd2309c878a5\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://6957d461c6486caeee91f5fd8be2ff0f53a8c264c03e8c9b7f7291bf7a72d9fc\",\"dweb:/ipfs/QmTRqHsnjFA1xDmWWuPqn9aPeweRiYHv1wfTz77qxCmd7k\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol\":{\"keccak256\":\"0x812a7c313108b56600f747d89d20b2daa4c4aa489ece1b30c561a353d41468f2\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://3fb1685a67020adeece9f6fbf567567d257aafafd2e115e6151f2b2a14b429aa\",\"dweb:/ipfs/QmUvk3FLDDHRXungxeLtPEfaQj3HNt3ib8nGhonzPdMW6o\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol\":{\"keccak256\":\"0xbb0c9e3177017a77de68adeed5cbbf040fc9152f914adb34575eb880979fc720\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://fac448393a94f7d797f58ece51c1127a1605397b2371c9d1fe61db0037762a91\",\"dweb:/ipfs/QmUwcWdecdqa81eLGz4SekQYfiTp5pgs2mvFRYmu7T2sew\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Structs.post.sol\":{\"keccak256\":\"0x6121b0f392dbeddf77da4f5bc5dee019878ab21538892bd22dbb9c49e9e068bb\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://336a0df7a17dd6b1ed36c4e7f19fc9ab6d4ad933f7e0b3658efba0756c7341bc\",\"dweb:/ipfs/QmZ7NQY6EJHqcE1oEho1yN9ymsTfVpUcMJABKC8Fq5GvhL\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/integrations/AaveV3Lender.sol\":{\"keccak256\":\"0x65c1d71a127fec7fdf05944089c5199201bc93ca1e5027ed08302984f67ab31c\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://253877f6572d8601c115f40f22bea85522d11b1fd0a62e3c441a6c82bdfa7ba1\",\"dweb:/ipfs/QmPGJb4VmwXsX24zs2m4sxpv7UYXKs95uHpJ7gYVJhZwPJ\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/routers/integrations/HasAaveBalanceMemoizer.sol\":{\"keccak256\":\"0xa4a742f5eabf48824fffe0964e492c8ca30ade52489b70ebb953a7d128d75642\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://0da6001867bd2b0439e27411a8fdf552e70da7cc9abd1d69f8113357c7bd89ab\",\"dweb:/ipfs/QmZxDy1osTChe6G4iUFUDk5XcBKEieaQ1YbKGvY5Y7uGca\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/DataTypes.sol\":{\"keccak256\":\"0x775020af3bbcf63aef55c874e3d27917f3c44da0d385d517f042a0098f18c73e\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://5b76490e8120d2c263b469225d856a7877461468ca2155e62a10440cd3e0d2e5\",\"dweb:/ipfs/QmTpuDqndYBysHtCAoN8r3Ep8ia9yPiF5r1c7DWz25THjH\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IPool.sol\":{\"keccak256\":\"0x782b82cf3ecb497600a70b8e7b116b310d1b5c2d56cf7b4148c4d58fe340aa31\",\"license\":\"AGPL-3.0\",\"urls\":[\"bzz-raw://4b1d7437c36656463add0b99c8ad81d8dff35ce09f6bbb9620ec7e5bda9ed562\",\"dweb:/ipfs/QmbWYNTHFQpUPuWswmSFvyuNgMeqeA3xcqrDBiz3woPkc7\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IPoolAddressesProvider.sol\":{\"keccak256\":\"0x8406a64ea84a30724906cc2d3753ec4de384838eadaf7b502fa459304f338fb9\",\"license\":\"AGPL-3.0\",\"urls\":[\"bzz-raw://3e4dbfdb5a653794fde64501ffbe0d28febe5b97f5b2b061ce341c4e63f235dc\",\"dweb:/ipfs/QmeoseiHXJ2uGpJKfpPfzhfq4Vpcj3YfmWRHcR9C4trpC5\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IRewardsControllerIsh.sol\":{\"keccak256\":\"0x80fa787b6bace14b44e4856939452c4bf32f7866cfcc302cf192d0576287ff55\",\"license\":\"agpl-3.0\",\"urls\":[\"bzz-raw://a65bd5a79a1757dc72ff918d544cb08c846d5d6a2a5f3e6153cd0f4874e5f960\",\"dweb:/ipfs/QmQmBnSAPAPRERisyvV6V4ATt7d4JskvEEZ35MUkx9qvFv\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.20+commit.a1b79de6"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "addressesProvider",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "ADDRESS_PROVIDER",
+          "outputs": [
+            {
+              "internalType": "contract IPoolAddressesProvider",
+              "name": "",
+              "type": "address"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "POOL",
+          "outputs": [
+            {
+              "internalType": "contract IPool",
+              "name": "",
+              "type": "address"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "contract IERC20",
+              "name": "asset",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "checkAsset",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "contract IERC20",
+              "name": "asset",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "overlying",
+          "outputs": [
+            {
+              "internalType": "contract IERC20",
+              "name": "aToken",
+              "type": "address"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "checkAsset(address)": {
+            "params": {
+              "asset": "the asset one wants to lend"
+            },
+            "returns": {
+              "_0": "true if the asset can be supplied on pool"
+            }
+          },
+          "constructor": {
+            "params": {
+              "addressesProvider": "address of AAVE's address provider"
+            }
+          },
+          "overlying(address)": {
+            "params": {
+              "asset": "the underlying asset"
+            },
+            "returns": {
+              "aToken": "the overlying asset"
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "ADDRESS_PROVIDER()": {
+            "notice": "The AAVE pool address provider."
+          },
+          "POOL()": {
+            "notice": "The AAVE pool retrieved from the pool provider."
+          },
+          "checkAsset(address)": {
+            "notice": "verifies whether an asset can be supplied on pool"
+          },
+          "constructor": {
+            "notice": "contract's constructor"
+          },
+          "overlying(address)": {
+            "notice": "convenience function to obtain the overlying of a given asset"
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/",
+        "mgv_arbitrage_lib/=mangrove-arbitrage/lib/",
+        "mgv_arbitrage_script/=mangrove-arbitrage/script/",
+        "mgv_arbitrage_src/=mangrove-arbitrage/src/",
+        "mgv_arbitrage_test/=mangrove-arbitrage/test/",
+        "mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "mgv_script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "mgv_src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "mgv_test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/routers/integrations/HasAaveBalanceMemoizer.sol": "HasAaveBalanceMemoizer"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol": {
+        "keccak256": "0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240",
+        "urls": [
+          "bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49",
+          "dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/TransferLib.sol": {
+        "keccak256": "0x3a8b94d6cc226852fefada57b74fe8cb4f3e34bdcf0860825401a57097d7914b",
+        "urls": [
+          "bzz-raw://a7293b7722734c714f12fa51520c2ebf01776ca5f837c06ca27a7c775e4bf579",
+          "dweb:/ipfs/QmTFm7NaHGv32fYoXbiUiMSgpWAJ5GfHoV1LTD49ZfkCpJ"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/BitLib.sol": {
+        "keccak256": "0x5a1c56d67fbd2ef6f3b830cf8dae1885da5f40a37afd11cb3a392be573993c3b",
+        "urls": [
+          "bzz-raw://a07b895de906f49d0ce9e89a349d39220e13039709ea2e2db46ff48310bd4b3b",
+          "dweb:/ipfs/QmZyiLKyTZ9EHwqNRUYukQDdg7CL54Dsu65RYabkkGF1KM"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol": {
+        "keccak256": "0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87",
+        "urls": [
+          "bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb",
+          "dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/DensityLib.sol": {
+        "keccak256": "0xc7ee8be7f11a1bf85aa4ea0e222d4a49d77a378b201e347f9a5e4f28f207a023",
+        "urls": [
+          "bzz-raw://ed718e8bf3fb45bc0e7cf739662422cfe01d8d04a2c99b2fb0cfa2372629c6ad",
+          "dweb:/ipfs/QmZ5QpyMSmkVxayfpZYovNcc8NGJKfVZEMKphzeKk9cVNv"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/LocalExtra.sol": {
+        "keccak256": "0xbd3f6702242dd43ba2493eb54feb8f5d2526967512c6f156d29669b54d9c60f2",
+        "urls": [
+          "bzz-raw://e389f3c78c8073bde973aa3f4770139e2adb4cc00cc1303b77eefa201189a6ff",
+          "dweb:/ipfs/QmZ8vXRUUCinKtqJhV7jMXVeDVfRizhJ3NsumZLQxwSc44"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol": {
+        "keccak256": "0x335217debbf3f4cabeaea88d4dd9777dbda2f2b6ed9684e2285a4d16e1e4464c",
+        "urls": [
+          "bzz-raw://eafe358531d7dc6527d36f8fbc4bc67ab12516398c35338ba5da57a03e24b9f3",
+          "dweb:/ipfs/QmcKxrcr11EM7rsKNUEJq8VXFd2R1dWSTqYk3E4k8dQfzy"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol": {
+        "keccak256": "0x95120d52698bc60b005496036a7c9daa7b8d0b18b571e596e86fd696b36e3264",
+        "urls": [
+          "bzz-raw://684d30cc9673403cfddabdf7d979417c5df050abde16712aeaa9ca6b2725d154",
+          "dweb:/ipfs/QmTkeUAMhb72BNqGjAaaPBj1NHPtKE8wH1R8bpXD5RTKtC"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol": {
+        "keccak256": "0xa4aea464925ad277aab2141885eeeb6e5f1b0963ba08d8887a1c2461c334f222",
+        "urls": [
+          "bzz-raw://c7ec62c85c22d7996abe32663232861f90e855c770dbd252bf49fff4ca786e74",
+          "dweb:/ipfs/QmSHBJfw9bg8QjgBquXVLTS337ZuBGHVkDJfwuAZ6X48sw"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/TickTreeLib.sol": {
+        "keccak256": "0x196c46d6e8e2ab51462f25245f7886568df3f1f65953dcec4c02d7950b4a10cd",
+        "urls": [
+          "bzz-raw://4293ed5fb3ce4d350b9bb5b38342c273e6d772ace098927e006efa7fc4498329",
+          "dweb:/ipfs/QmRCtk481PHQjNdt5Dsa8GYWEX46nYwdeD8R3m92w3Xjxv"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console2.sol": {
+        "keccak256": "0x954646445d1014c3cd85c7918f5e7adeeca5ee44b68c00bafa237e597a4e35ea",
+        "urls": [
+          "bzz-raw://516fa3be52da4763147175bfba4be0aa011fadbb0c1afb01f97265bd4cee7973",
+          "dweb:/ipfs/QmdixAyMJefx7qePChgdxcBH5MxhmN7vsqPuPLx3CgrVmF"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol": {
+        "keccak256": "0xe22e3d452040625724ce932cc6f57212c8a32ba021b06f5737e4c23319792c7d",
+        "urls": [
+          "bzz-raw://b3ab9e3726b49b2d526f1cb6634c562cbafdbc1163753d13a3e1c316ca29e726",
+          "dweb:/ipfs/QmS9bYtEVW7i9zAWmC7aPdCDv4BCaBJbhpgrJX6VhH68st"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Global.post.sol": {
+        "keccak256": "0xddf04a10f84edc0b165351f649cad761a429b5c1b218e482917b3e38a2019e7f",
+        "urls": [
+          "bzz-raw://7695a94afb1db46a65967bd63fc344b0a9387a4a2c906fdcac0433fdfec32dff",
+          "dweb:/ipfs/QmcH4k6VwPrSEjqEQVsKTRjxWtmhijoknih6s6R98dnNUM"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Local.post.sol": {
+        "keccak256": "0x03d642742c132c37c1fc29cae87f7ce1be93f89877fe698698d5bd2309c878a5",
+        "urls": [
+          "bzz-raw://6957d461c6486caeee91f5fd8be2ff0f53a8c264c03e8c9b7f7291bf7a72d9fc",
+          "dweb:/ipfs/QmTRqHsnjFA1xDmWWuPqn9aPeweRiYHv1wfTz77qxCmd7k"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol": {
+        "keccak256": "0x812a7c313108b56600f747d89d20b2daa4c4aa489ece1b30c561a353d41468f2",
+        "urls": [
+          "bzz-raw://3fb1685a67020adeece9f6fbf567567d257aafafd2e115e6151f2b2a14b429aa",
+          "dweb:/ipfs/QmUvk3FLDDHRXungxeLtPEfaQj3HNt3ib8nGhonzPdMW6o"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol": {
+        "keccak256": "0xbb0c9e3177017a77de68adeed5cbbf040fc9152f914adb34575eb880979fc720",
+        "urls": [
+          "bzz-raw://fac448393a94f7d797f58ece51c1127a1605397b2371c9d1fe61db0037762a91",
+          "dweb:/ipfs/QmUwcWdecdqa81eLGz4SekQYfiTp5pgs2mvFRYmu7T2sew"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Structs.post.sol": {
+        "keccak256": "0x6121b0f392dbeddf77da4f5bc5dee019878ab21538892bd22dbb9c49e9e068bb",
+        "urls": [
+          "bzz-raw://336a0df7a17dd6b1ed36c4e7f19fc9ab6d4ad933f7e0b3658efba0756c7341bc",
+          "dweb:/ipfs/QmZ7NQY6EJHqcE1oEho1yN9ymsTfVpUcMJABKC8Fq5GvhL"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/integrations/AaveV3Lender.sol": {
+        "keccak256": "0x65c1d71a127fec7fdf05944089c5199201bc93ca1e5027ed08302984f67ab31c",
+        "urls": [
+          "bzz-raw://253877f6572d8601c115f40f22bea85522d11b1fd0a62e3c441a6c82bdfa7ba1",
+          "dweb:/ipfs/QmPGJb4VmwXsX24zs2m4sxpv7UYXKs95uHpJ7gYVJhZwPJ"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/routers/integrations/HasAaveBalanceMemoizer.sol": {
+        "keccak256": "0xa4a742f5eabf48824fffe0964e492c8ca30ade52489b70ebb953a7d128d75642",
+        "urls": [
+          "bzz-raw://0da6001867bd2b0439e27411a8fdf552e70da7cc9abd1d69f8113357c7bd89ab",
+          "dweb:/ipfs/QmZxDy1osTChe6G4iUFUDk5XcBKEieaQ1YbKGvY5Y7uGca"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/DataTypes.sol": {
+        "keccak256": "0x775020af3bbcf63aef55c874e3d27917f3c44da0d385d517f042a0098f18c73e",
+        "urls": [
+          "bzz-raw://5b76490e8120d2c263b469225d856a7877461468ca2155e62a10440cd3e0d2e5",
+          "dweb:/ipfs/QmTpuDqndYBysHtCAoN8r3Ep8ia9yPiF5r1c7DWz25THjH"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IPool.sol": {
+        "keccak256": "0x782b82cf3ecb497600a70b8e7b116b310d1b5c2d56cf7b4148c4d58fe340aa31",
+        "urls": [
+          "bzz-raw://4b1d7437c36656463add0b99c8ad81d8dff35ce09f6bbb9620ec7e5bda9ed562",
+          "dweb:/ipfs/QmbWYNTHFQpUPuWswmSFvyuNgMeqeA3xcqrDBiz3woPkc7"
+        ],
+        "license": "AGPL-3.0"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IPoolAddressesProvider.sol": {
+        "keccak256": "0x8406a64ea84a30724906cc2d3753ec4de384838eadaf7b502fa459304f338fb9",
+        "urls": [
+          "bzz-raw://3e4dbfdb5a653794fde64501ffbe0d28febe5b97f5b2b061ce341c4e63f235dc",
+          "dweb:/ipfs/QmeoseiHXJ2uGpJKfpPfzhfq4Vpcj3YfmWRHcR9C4trpC5"
+        ],
+        "license": "AGPL-3.0"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IRewardsControllerIsh.sol": {
+        "keccak256": "0x80fa787b6bace14b44e4856939452c4bf32f7866cfcc302cf192d0576287ff55",
+        "urls": [
+          "bzz-raw://a65bd5a79a1757dc72ff918d544cb08c846d5d6a2a5f3e6153cd0f4874e5f960",
+          "dweb:/ipfs/QmQmBnSAPAPRERisyvV6V4ATt7d4JskvEEZ35MUkx9qvFv"
+        ],
+        "license": "agpl-3.0"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/routers/integrations/HasAaveBalanceMemoizer.sol",
+    "id": 89725,
+    "exportedSymbols": {
+      "AaveV3Lender": [
+        83406
+      ],
+      "HasAaveBalanceMemoizer": [
+        89724
+      ],
+      "IERC20": [
+        88
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "41:2867:122",
+    "nodes": [
+      {
+        "id": 89543,
+        "nodeType": "PragmaDirective",
+        "src": "41:24:122",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".10"
+        ]
+      },
+      {
+        "id": 89545,
+        "nodeType": "ImportDirective",
+        "src": "67:43:122",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol",
+        "file": "@mgv/lib/IERC20.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 89725,
+        "sourceUnit": 89,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 89544,
+              "name": "IERC20",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 88,
+              "src": "75:6:122",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 89547,
+        "nodeType": "ImportDirective",
+        "src": "111:86:122",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/integrations/AaveV3Lender.sol",
+        "file": "@mgv-strats/src/strategies/integrations/AaveV3Lender.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 89725,
+        "sourceUnit": 83407,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 89546,
+              "name": "AaveV3Lender",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 83406,
+              "src": "119:12:122",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 89724,
+        "nodeType": "ContractDefinition",
+        "src": "394:2513:122",
+        "nodes": [
+          {
+            "id": 89565,
+            "nodeType": "StructDefinition",
+            "src": "835:192:122",
+            "nodes": [],
+            "canonicalName": "HasAaveBalanceMemoizer.BalanceMemoizer",
+            "documentation": {
+              "id": 89551,
+              "nodeType": "StructuredDocumentation",
+              "src": "446:386:122",
+              "text": "@param balanceOf the owner's balance of the token\n@param balanceOfMemoized whether the `balanceOf` has been memoized.\n@param balanceOfOverlying the balance of the overlying.\n@param balanceOfOverlyingMemoized whether the `balanceOfOverlying` has been memoized.\n@param overlying the overlying\n@param overlyingMemoized whether the `overlying` has been memoized."
+            },
+            "members": [
+              {
+                "constant": false,
+                "id": 89553,
+                "mutability": "mutable",
+                "name": "balanceOf",
+                "nameLocation": "869:9:122",
+                "nodeType": "VariableDeclaration",
+                "scope": 89565,
+                "src": "864:14:122",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 89552,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "864:4:122",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 89555,
+                "mutability": "mutable",
+                "name": "balanceOfMemoized",
+                "nameLocation": "889:17:122",
+                "nodeType": "VariableDeclaration",
+                "scope": 89565,
+                "src": "884:22:122",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 89554,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "884:4:122",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 89557,
+                "mutability": "mutable",
+                "name": "balanceOfOverlying",
+                "nameLocation": "917:18:122",
+                "nodeType": "VariableDeclaration",
+                "scope": 89565,
+                "src": "912:23:122",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 89556,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "912:4:122",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 89559,
+                "mutability": "mutable",
+                "name": "balanceOfOverlyingMemoized",
+                "nameLocation": "946:26:122",
+                "nodeType": "VariableDeclaration",
+                "scope": 89565,
+                "src": "941:31:122",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 89558,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "941:4:122",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 89562,
+                "mutability": "mutable",
+                "name": "overlying",
+                "nameLocation": "985:9:122",
+                "nodeType": "VariableDeclaration",
+                "scope": 89565,
+                "src": "978:16:122",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_contract$_IERC20_$88",
+                  "typeString": "contract IERC20"
+                },
+                "typeName": {
+                  "id": 89561,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 89560,
+                    "name": "IERC20",
+                    "nameLocations": [
+                      "978:6:122"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 88,
+                    "src": "978:6:122"
+                  },
+                  "referencedDeclaration": 88,
+                  "src": "978:6:122",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$88",
+                    "typeString": "contract IERC20"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 89564,
+                "mutability": "mutable",
+                "name": "overlyingMemoized",
+                "nameLocation": "1005:17:122",
+                "nodeType": "VariableDeclaration",
+                "scope": 89565,
+                "src": "1000:22:122",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 89563,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1000:4:122",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "BalanceMemoizer",
+            "nameLocation": "842:15:122",
+            "scope": 89724,
+            "visibility": "public"
+          },
+          {
+            "id": 89575,
+            "nodeType": "FunctionDefinition",
+            "src": "1132:73:122",
+            "nodes": [],
+            "body": {
+              "id": 89574,
+              "nodeType": "Block",
+              "src": "1203:2:122",
+              "nodes": [],
+              "statements": []
+            },
+            "documentation": {
+              "id": 89566,
+              "nodeType": "StructuredDocumentation",
+              "src": "1031:98:122",
+              "text": "@notice contract's constructor\n@param addressesProvider address of AAVE's address provider"
+            },
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "id": 89571,
+                    "name": "addressesProvider",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 89568,
+                    "src": "1184:17:122",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  }
+                ],
+                "id": 89572,
+                "kind": "baseConstructorSpecifier",
+                "modifierName": {
+                  "id": 89570,
+                  "name": "AaveV3Lender",
+                  "nameLocations": [
+                    "1171:12:122"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 83406,
+                  "src": "1171:12:122"
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1171:31:122"
+              }
+            ],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "parameters": {
+              "id": 89569,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 89568,
+                  "mutability": "mutable",
+                  "name": "addressesProvider",
+                  "nameLocation": "1152:17:122",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 89575,
+                  "src": "1144:25:122",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 89567,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1144:7:122",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1143:27:122"
+            },
+            "returnParameters": {
+              "id": 89573,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1203:0:122"
+            },
+            "scope": 89724,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "id": 89614,
+            "nodeType": "FunctionDefinition",
+            "src": "1358:311:122",
+            "nodes": [],
+            "body": {
+              "id": 89613,
+              "nodeType": "Block",
+              "src": "1455:214:122",
+              "nodes": [],
+              "statements": [
+                {
+                  "condition": {
+                    "expression": {
+                      "id": 89588,
+                      "name": "memoizer",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 89582,
+                      "src": "1465:8:122",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                        "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                      }
+                    },
+                    "id": 89589,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1474:17:122",
+                    "memberName": "overlyingMemoized",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 89564,
+                    "src": "1465:26:122",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": {
+                    "id": 89611,
+                    "nodeType": "Block",
+                    "src": "1539:126:122",
+                    "statements": [
+                      {
+                        "expression": {
+                          "id": 89598,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "expression": {
+                              "id": 89594,
+                              "name": "memoizer",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 89582,
+                              "src": "1547:8:122",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                                "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                              }
+                            },
+                            "id": 89596,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": true,
+                            "memberLocation": "1556:17:122",
+                            "memberName": "overlyingMemoized",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 89564,
+                            "src": "1547:26:122",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "hexValue": "74727565",
+                            "id": 89597,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "bool",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1576:4:122",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            },
+                            "value": "true"
+                          },
+                          "src": "1547:33:122",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "id": 89599,
+                        "nodeType": "ExpressionStatement",
+                        "src": "1547:33:122"
+                      },
+                      {
+                        "expression": {
+                          "id": 89606,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "expression": {
+                              "id": 89600,
+                              "name": "memoizer",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 89582,
+                              "src": "1588:8:122",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                                "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                              }
+                            },
+                            "id": 89602,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": true,
+                            "memberLocation": "1597:9:122",
+                            "memberName": "overlying",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 89562,
+                            "src": "1588:18:122",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_IERC20_$88",
+                              "typeString": "contract IERC20"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "arguments": [
+                              {
+                                "id": 89604,
+                                "name": "token",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 89579,
+                                "src": "1619:5:122",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_IERC20_$88",
+                                  "typeString": "contract IERC20"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_IERC20_$88",
+                                  "typeString": "contract IERC20"
+                                }
+                              ],
+                              "id": 89603,
+                              "name": "overlying",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [
+                                89614,
+                                83236
+                              ],
+                              "referencedDeclaration": 83236,
+                              "src": "1609:9:122",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_internal_view$_t_contract$_IERC20_$88_$returns$_t_contract$_IERC20_$88_$",
+                                "typeString": "function (contract IERC20) view returns (contract IERC20)"
+                              }
+                            },
+                            "id": 89605,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "nameLocations": [],
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1609:16:122",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_IERC20_$88",
+                              "typeString": "contract IERC20"
+                            }
+                          },
+                          "src": "1588:37:122",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_IERC20_$88",
+                            "typeString": "contract IERC20"
+                          }
+                        },
+                        "id": 89607,
+                        "nodeType": "ExpressionStatement",
+                        "src": "1588:37:122"
+                      },
+                      {
+                        "expression": {
+                          "expression": {
+                            "id": 89608,
+                            "name": "memoizer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 89582,
+                            "src": "1640:8:122",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                              "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                            }
+                          },
+                          "id": 89609,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1649:9:122",
+                          "memberName": "overlying",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 89562,
+                          "src": "1640:18:122",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_IERC20_$88",
+                            "typeString": "contract IERC20"
+                          }
+                        },
+                        "functionReturnParameters": 89587,
+                        "id": 89610,
+                        "nodeType": "Return",
+                        "src": "1633:25:122"
+                      }
+                    ]
+                  },
+                  "id": 89612,
+                  "nodeType": "IfStatement",
+                  "src": "1461:204:122",
+                  "trueBody": {
+                    "id": 89593,
+                    "nodeType": "Block",
+                    "src": "1493:40:122",
+                    "statements": [
+                      {
+                        "expression": {
+                          "expression": {
+                            "id": 89590,
+                            "name": "memoizer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 89582,
+                            "src": "1508:8:122",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                              "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                            }
+                          },
+                          "id": 89591,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1517:9:122",
+                          "memberName": "overlying",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 89562,
+                          "src": "1508:18:122",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_IERC20_$88",
+                            "typeString": "contract IERC20"
+                          }
+                        },
+                        "functionReturnParameters": 89587,
+                        "id": 89592,
+                        "nodeType": "Return",
+                        "src": "1501:25:122"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "documentation": {
+              "id": 89576,
+              "nodeType": "StructuredDocumentation",
+              "src": "1209:146:122",
+              "text": "@notice Gets the overlying for the token.\n@param token the token.\n@param memoizer the memoizer.\n@return overlying for the token."
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "overlying",
+            "nameLocation": "1367:9:122",
+            "parameters": {
+              "id": 89583,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 89579,
+                  "mutability": "mutable",
+                  "name": "token",
+                  "nameLocation": "1384:5:122",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 89614,
+                  "src": "1377:12:122",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$88",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "id": 89578,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 89577,
+                      "name": "IERC20",
+                      "nameLocations": [
+                        "1377:6:122"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 88,
+                      "src": "1377:6:122"
+                    },
+                    "referencedDeclaration": 88,
+                    "src": "1377:6:122",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$88",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 89582,
+                  "mutability": "mutable",
+                  "name": "memoizer",
+                  "nameLocation": "1414:8:122",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 89614,
+                  "src": "1391:31:122",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                    "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer"
+                  },
+                  "typeName": {
+                    "id": 89581,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 89580,
+                      "name": "BalanceMemoizer",
+                      "nameLocations": [
+                        "1391:15:122"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 89565,
+                      "src": "1391:15:122"
+                    },
+                    "referencedDeclaration": 89565,
+                    "src": "1391:15:122",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_storage_ptr",
+                      "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1376:47:122"
+            },
+            "returnParameters": {
+              "id": 89587,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 89586,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 89614,
+                  "src": "1447:6:122",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$88",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "id": 89585,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 89584,
+                      "name": "IERC20",
+                      "nameLocations": [
+                        "1447:6:122"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 88,
+                      "src": "1447:6:122"
+                    },
+                    "referencedDeclaration": 88,
+                    "src": "1447:6:122",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$88",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1446:8:122"
+            },
+            "scope": 89724,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 89681,
+            "nodeType": "FunctionDefinition",
+            "src": "1900:536:122",
+            "nodes": [],
+            "body": {
+              "id": 89680,
+              "nodeType": "Block",
+              "src": "2004:432:122",
+              "nodes": [],
+              "statements": [
+                {
+                  "condition": {
+                    "expression": {
+                      "id": 89626,
+                      "name": "memoizer",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 89621,
+                      "src": "2014:8:122",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                        "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                      }
+                    },
+                    "id": 89627,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "2023:26:122",
+                    "memberName": "balanceOfOverlyingMemoized",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 89559,
+                    "src": "2014:35:122",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": {
+                    "id": 89678,
+                    "nodeType": "Block",
+                    "src": "2106:326:122",
+                    "statements": [
+                      {
+                        "expression": {
+                          "id": 89636,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "expression": {
+                              "id": 89632,
+                              "name": "memoizer",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 89621,
+                              "src": "2114:8:122",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                                "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                              }
+                            },
+                            "id": 89634,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": true,
+                            "memberLocation": "2123:26:122",
+                            "memberName": "balanceOfOverlyingMemoized",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 89559,
+                            "src": "2114:35:122",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "hexValue": "74727565",
+                            "id": 89635,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "bool",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "2152:4:122",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            },
+                            "value": "true"
+                          },
+                          "src": "2114:42:122",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "id": 89637,
+                        "nodeType": "ExpressionStatement",
+                        "src": "2114:42:122"
+                      },
+                      {
+                        "assignments": [
+                          89640
+                        ],
+                        "declarations": [
+                          {
+                            "constant": false,
+                            "id": 89640,
+                            "mutability": "mutable",
+                            "name": "aToken",
+                            "nameLocation": "2171:6:122",
+                            "nodeType": "VariableDeclaration",
+                            "scope": 89678,
+                            "src": "2164:13:122",
+                            "stateVariable": false,
+                            "storageLocation": "default",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_IERC20_$88",
+                              "typeString": "contract IERC20"
+                            },
+                            "typeName": {
+                              "id": 89639,
+                              "nodeType": "UserDefinedTypeName",
+                              "pathNode": {
+                                "id": 89638,
+                                "name": "IERC20",
+                                "nameLocations": [
+                                  "2164:6:122"
+                                ],
+                                "nodeType": "IdentifierPath",
+                                "referencedDeclaration": 88,
+                                "src": "2164:6:122"
+                              },
+                              "referencedDeclaration": 88,
+                              "src": "2164:6:122",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_IERC20_$88",
+                                "typeString": "contract IERC20"
+                              }
+                            },
+                            "visibility": "internal"
+                          }
+                        ],
+                        "id": 89645,
+                        "initialValue": {
+                          "arguments": [
+                            {
+                              "id": 89642,
+                              "name": "token",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 89618,
+                              "src": "2190:5:122",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_IERC20_$88",
+                                "typeString": "contract IERC20"
+                              }
+                            },
+                            {
+                              "id": 89643,
+                              "name": "memoizer",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 89621,
+                              "src": "2197:8:122",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                                "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_contract$_IERC20_$88",
+                                "typeString": "contract IERC20"
+                              },
+                              {
+                                "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                                "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                              }
+                            ],
+                            "id": 89641,
+                            "name": "overlying",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [
+                              89614,
+                              83236
+                            ],
+                            "referencedDeclaration": 89614,
+                            "src": "2180:9:122",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_view$_t_contract$_IERC20_$88_$_t_struct$_BalanceMemoizer_$89565_memory_ptr_$returns$_t_contract$_IERC20_$88_$",
+                              "typeString": "function (contract IERC20,struct HasAaveBalanceMemoizer.BalanceMemoizer memory) view returns (contract IERC20)"
+                            }
+                          },
+                          "id": 89644,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2180:26:122",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_IERC20_$88",
+                            "typeString": "contract IERC20"
+                          }
+                        },
+                        "nodeType": "VariableDeclarationStatement",
+                        "src": "2164:42:122"
+                      },
+                      {
+                        "condition": {
+                          "commonType": {
+                            "typeIdentifier": "t_contract$_IERC20_$88",
+                            "typeString": "contract IERC20"
+                          },
+                          "id": 89653,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "id": 89646,
+                            "name": "aToken",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 89640,
+                            "src": "2218:6:122",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_IERC20_$88",
+                              "typeString": "contract IERC20"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "==",
+                          "rightExpression": {
+                            "arguments": [
+                              {
+                                "arguments": [
+                                  {
+                                    "hexValue": "30",
+                                    "id": 89650,
+                                    "isConstant": false,
+                                    "isLValue": false,
+                                    "isPure": true,
+                                    "kind": "number",
+                                    "lValueRequested": false,
+                                    "nodeType": "Literal",
+                                    "src": "2243:1:122",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_rational_0_by_1",
+                                      "typeString": "int_const 0"
+                                    },
+                                    "value": "0"
+                                  }
+                                ],
+                                "expression": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_rational_0_by_1",
+                                      "typeString": "int_const 0"
+                                    }
+                                  ],
+                                  "id": 89649,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "nodeType": "ElementaryTypeNameExpression",
+                                  "src": "2235:7:122",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_type$_t_address_$",
+                                    "typeString": "type(address)"
+                                  },
+                                  "typeName": {
+                                    "id": 89648,
+                                    "name": "address",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "2235:7:122",
+                                    "typeDescriptions": {}
+                                  }
+                                },
+                                "id": 89651,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": true,
+                                "kind": "typeConversion",
+                                "lValueRequested": false,
+                                "nameLocations": [],
+                                "names": [],
+                                "nodeType": "FunctionCall",
+                                "src": "2235:10:122",
+                                "tryCall": false,
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              ],
+                              "id": 89647,
+                              "name": "IERC20",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 88,
+                              "src": "2228:6:122",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_contract$_IERC20_$88_$",
+                                "typeString": "type(contract IERC20)"
+                              }
+                            },
+                            "id": 89652,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "nameLocations": [],
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "2228:18:122",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_IERC20_$88",
+                              "typeString": "contract IERC20"
+                            }
+                          },
+                          "src": "2218:28:122",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "falseBody": {
+                          "id": 89673,
+                          "nodeType": "Block",
+                          "src": "2304:80:122",
+                          "statements": [
+                            {
+                              "expression": {
+                                "id": 89671,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "lValueRequested": false,
+                                "leftHandSide": {
+                                  "expression": {
+                                    "id": 89661,
+                                    "name": "memoizer",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 89621,
+                                    "src": "2314:8:122",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                                      "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                                    }
+                                  },
+                                  "id": 89663,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": true,
+                                  "memberLocation": "2323:18:122",
+                                  "memberName": "balanceOfOverlying",
+                                  "nodeType": "MemberAccess",
+                                  "referencedDeclaration": 89557,
+                                  "src": "2314:27:122",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                  }
+                                },
+                                "nodeType": "Assignment",
+                                "operator": "=",
+                                "rightHandSide": {
+                                  "arguments": [
+                                    {
+                                      "arguments": [
+                                        {
+                                          "id": 89668,
+                                          "name": "this",
+                                          "nodeType": "Identifier",
+                                          "overloadedDeclarations": [],
+                                          "referencedDeclaration": -28,
+                                          "src": "2369:4:122",
+                                          "typeDescriptions": {
+                                            "typeIdentifier": "t_contract$_HasAaveBalanceMemoizer_$89724",
+                                            "typeString": "contract HasAaveBalanceMemoizer"
+                                          }
+                                        }
+                                      ],
+                                      "expression": {
+                                        "argumentTypes": [
+                                          {
+                                            "typeIdentifier": "t_contract$_HasAaveBalanceMemoizer_$89724",
+                                            "typeString": "contract HasAaveBalanceMemoizer"
+                                          }
+                                        ],
+                                        "id": 89667,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": true,
+                                        "lValueRequested": false,
+                                        "nodeType": "ElementaryTypeNameExpression",
+                                        "src": "2361:7:122",
+                                        "typeDescriptions": {
+                                          "typeIdentifier": "t_type$_t_address_$",
+                                          "typeString": "type(address)"
+                                        },
+                                        "typeName": {
+                                          "id": 89666,
+                                          "name": "address",
+                                          "nodeType": "ElementaryTypeName",
+                                          "src": "2361:7:122",
+                                          "typeDescriptions": {}
+                                        }
+                                      },
+                                      "id": 89669,
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "kind": "typeConversion",
+                                      "lValueRequested": false,
+                                      "nameLocations": [],
+                                      "names": [],
+                                      "nodeType": "FunctionCall",
+                                      "src": "2361:13:122",
+                                      "tryCall": false,
+                                      "typeDescriptions": {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                      }
+                                    }
+                                  ],
+                                  "expression": {
+                                    "argumentTypes": [
+                                      {
+                                        "typeIdentifier": "t_address",
+                                        "typeString": "address"
+                                      }
+                                    ],
+                                    "expression": {
+                                      "id": 89664,
+                                      "name": "aToken",
+                                      "nodeType": "Identifier",
+                                      "overloadedDeclarations": [],
+                                      "referencedDeclaration": 89640,
+                                      "src": "2344:6:122",
+                                      "typeDescriptions": {
+                                        "typeIdentifier": "t_contract$_IERC20_$88",
+                                        "typeString": "contract IERC20"
+                                      }
+                                    },
+                                    "id": 89665,
+                                    "isConstant": false,
+                                    "isLValue": false,
+                                    "isPure": false,
+                                    "lValueRequested": false,
+                                    "memberLocation": "2351:9:122",
+                                    "memberName": "balanceOf",
+                                    "nodeType": "MemberAccess",
+                                    "referencedDeclaration": 18,
+                                    "src": "2344:16:122",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_uint256_$",
+                                      "typeString": "function (address) view external returns (uint256)"
+                                    }
+                                  },
+                                  "id": 89670,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "kind": "functionCall",
+                                  "lValueRequested": false,
+                                  "nameLocations": [],
+                                  "names": [],
+                                  "nodeType": "FunctionCall",
+                                  "src": "2344:31:122",
+                                  "tryCall": false,
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                  }
+                                },
+                                "src": "2314:61:122",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              },
+                              "id": 89672,
+                              "nodeType": "ExpressionStatement",
+                              "src": "2314:61:122"
+                            }
+                          ]
+                        },
+                        "id": 89674,
+                        "nodeType": "IfStatement",
+                        "src": "2214:170:122",
+                        "trueBody": {
+                          "id": 89660,
+                          "nodeType": "Block",
+                          "src": "2248:50:122",
+                          "statements": [
+                            {
+                              "expression": {
+                                "id": 89658,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "lValueRequested": false,
+                                "leftHandSide": {
+                                  "expression": {
+                                    "id": 89654,
+                                    "name": "memoizer",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 89621,
+                                    "src": "2258:8:122",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                                      "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                                    }
+                                  },
+                                  "id": 89656,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": true,
+                                  "memberLocation": "2267:18:122",
+                                  "memberName": "balanceOfOverlying",
+                                  "nodeType": "MemberAccess",
+                                  "referencedDeclaration": 89557,
+                                  "src": "2258:27:122",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                  }
+                                },
+                                "nodeType": "Assignment",
+                                "operator": "=",
+                                "rightHandSide": {
+                                  "hexValue": "30",
+                                  "id": 89657,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "kind": "number",
+                                  "lValueRequested": false,
+                                  "nodeType": "Literal",
+                                  "src": "2288:1:122",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_rational_0_by_1",
+                                    "typeString": "int_const 0"
+                                  },
+                                  "value": "0"
+                                },
+                                "src": "2258:31:122",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              },
+                              "id": 89659,
+                              "nodeType": "ExpressionStatement",
+                              "src": "2258:31:122"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "expression": {
+                          "expression": {
+                            "id": 89675,
+                            "name": "memoizer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 89621,
+                            "src": "2398:8:122",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                              "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                            }
+                          },
+                          "id": 89676,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "2407:18:122",
+                          "memberName": "balanceOfOverlying",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 89557,
+                          "src": "2398:27:122",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "functionReturnParameters": 89625,
+                        "id": 89677,
+                        "nodeType": "Return",
+                        "src": "2391:34:122"
+                      }
+                    ]
+                  },
+                  "id": 89679,
+                  "nodeType": "IfStatement",
+                  "src": "2010:422:122",
+                  "trueBody": {
+                    "id": 89631,
+                    "nodeType": "Block",
+                    "src": "2051:49:122",
+                    "statements": [
+                      {
+                        "expression": {
+                          "expression": {
+                            "id": 89628,
+                            "name": "memoizer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 89621,
+                            "src": "2066:8:122",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                              "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                            }
+                          },
+                          "id": 89629,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "2075:18:122",
+                          "memberName": "balanceOfOverlying",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 89557,
+                          "src": "2066:27:122",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "functionReturnParameters": 89625,
+                        "id": 89630,
+                        "nodeType": "Return",
+                        "src": "2059:34:122"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "documentation": {
+              "id": 89615,
+              "nodeType": "StructuredDocumentation",
+              "src": "1673:224:122",
+              "text": "@notice Gets the balance for the overlying of the token, or 0 if there is no overlying.\n@param token the token.\n@param memoizer the memoizer.\n@return balance of the overlying, or 0 if there is no overlying."
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "balanceOfOverlying",
+            "nameLocation": "1909:18:122",
+            "parameters": {
+              "id": 89622,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 89618,
+                  "mutability": "mutable",
+                  "name": "token",
+                  "nameLocation": "1935:5:122",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 89681,
+                  "src": "1928:12:122",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$88",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "id": 89617,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 89616,
+                      "name": "IERC20",
+                      "nameLocations": [
+                        "1928:6:122"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 88,
+                      "src": "1928:6:122"
+                    },
+                    "referencedDeclaration": 88,
+                    "src": "1928:6:122",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$88",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 89621,
+                  "mutability": "mutable",
+                  "name": "memoizer",
+                  "nameLocation": "1965:8:122",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 89681,
+                  "src": "1942:31:122",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                    "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer"
+                  },
+                  "typeName": {
+                    "id": 89620,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 89619,
+                      "name": "BalanceMemoizer",
+                      "nameLocations": [
+                        "1942:15:122"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 89565,
+                      "src": "1942:15:122"
+                    },
+                    "referencedDeclaration": 89565,
+                    "src": "1942:15:122",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_storage_ptr",
+                      "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1927:47:122"
+            },
+            "returnParameters": {
+              "id": 89625,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 89624,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 89681,
+                  "src": "1998:4:122",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 89623,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1998:4:122",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1997:6:122"
+            },
+            "scope": 89724,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 89723,
+            "nodeType": "FunctionDefinition",
+            "src": "2582:323:122",
+            "nodes": [],
+            "body": {
+              "id": 89722,
+              "nodeType": "Block",
+              "src": "2677:228:122",
+              "nodes": [],
+              "statements": [
+                {
+                  "condition": {
+                    "expression": {
+                      "id": 89693,
+                      "name": "memoizer",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 89688,
+                      "src": "2687:8:122",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                        "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                      }
+                    },
+                    "id": 89694,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "2696:17:122",
+                    "memberName": "balanceOfMemoized",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 89555,
+                    "src": "2687:26:122",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": {
+                    "id": 89720,
+                    "nodeType": "Block",
+                    "src": "2761:140:122",
+                    "statements": [
+                      {
+                        "expression": {
+                          "id": 89703,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "expression": {
+                              "id": 89699,
+                              "name": "memoizer",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 89688,
+                              "src": "2769:8:122",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                                "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                              }
+                            },
+                            "id": 89701,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": true,
+                            "memberLocation": "2778:17:122",
+                            "memberName": "balanceOfMemoized",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 89555,
+                            "src": "2769:26:122",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "hexValue": "74727565",
+                            "id": 89702,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "bool",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "2798:4:122",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            },
+                            "value": "true"
+                          },
+                          "src": "2769:33:122",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "id": 89704,
+                        "nodeType": "ExpressionStatement",
+                        "src": "2769:33:122"
+                      },
+                      {
+                        "expression": {
+                          "id": 89715,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "expression": {
+                              "id": 89705,
+                              "name": "memoizer",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 89688,
+                              "src": "2810:8:122",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                                "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                              }
+                            },
+                            "id": 89707,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": true,
+                            "memberLocation": "2819:9:122",
+                            "memberName": "balanceOf",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 89553,
+                            "src": "2810:18:122",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "arguments": [
+                              {
+                                "arguments": [
+                                  {
+                                    "id": 89712,
+                                    "name": "this",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": -28,
+                                    "src": "2855:4:122",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_contract$_HasAaveBalanceMemoizer_$89724",
+                                      "typeString": "contract HasAaveBalanceMemoizer"
+                                    }
+                                  }
+                                ],
+                                "expression": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_contract$_HasAaveBalanceMemoizer_$89724",
+                                      "typeString": "contract HasAaveBalanceMemoizer"
+                                    }
+                                  ],
+                                  "id": 89711,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "nodeType": "ElementaryTypeNameExpression",
+                                  "src": "2847:7:122",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_type$_t_address_$",
+                                    "typeString": "type(address)"
+                                  },
+                                  "typeName": {
+                                    "id": 89710,
+                                    "name": "address",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "2847:7:122",
+                                    "typeDescriptions": {}
+                                  }
+                                },
+                                "id": 89713,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "kind": "typeConversion",
+                                "lValueRequested": false,
+                                "nameLocations": [],
+                                "names": [],
+                                "nodeType": "FunctionCall",
+                                "src": "2847:13:122",
+                                "tryCall": false,
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              ],
+                              "expression": {
+                                "id": 89708,
+                                "name": "token",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 89685,
+                                "src": "2831:5:122",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_IERC20_$88",
+                                  "typeString": "contract IERC20"
+                                }
+                              },
+                              "id": 89709,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberLocation": "2837:9:122",
+                              "memberName": "balanceOf",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 18,
+                              "src": "2831:15:122",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_uint256_$",
+                                "typeString": "function (address) view external returns (uint256)"
+                              }
+                            },
+                            "id": 89714,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "nameLocations": [],
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "2831:30:122",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "src": "2810:51:122",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "id": 89716,
+                        "nodeType": "ExpressionStatement",
+                        "src": "2810:51:122"
+                      },
+                      {
+                        "expression": {
+                          "expression": {
+                            "id": 89717,
+                            "name": "memoizer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 89688,
+                            "src": "2876:8:122",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                              "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                            }
+                          },
+                          "id": 89718,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "2885:9:122",
+                          "memberName": "balanceOf",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 89553,
+                          "src": "2876:18:122",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "functionReturnParameters": 89692,
+                        "id": 89719,
+                        "nodeType": "Return",
+                        "src": "2869:25:122"
+                      }
+                    ]
+                  },
+                  "id": 89721,
+                  "nodeType": "IfStatement",
+                  "src": "2683:218:122",
+                  "trueBody": {
+                    "id": 89698,
+                    "nodeType": "Block",
+                    "src": "2715:40:122",
+                    "statements": [
+                      {
+                        "expression": {
+                          "expression": {
+                            "id": 89695,
+                            "name": "memoizer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 89688,
+                            "src": "2730:8:122",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                              "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer memory"
+                            }
+                          },
+                          "id": 89696,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "2739:9:122",
+                          "memberName": "balanceOf",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 89553,
+                          "src": "2730:18:122",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "functionReturnParameters": 89692,
+                        "id": 89697,
+                        "nodeType": "Return",
+                        "src": "2723:25:122"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "documentation": {
+              "id": 89682,
+              "nodeType": "StructuredDocumentation",
+              "src": "2440:139:122",
+              "text": "@notice Gets the balance of the token\n@param token the token.\n@param memoizer the memoizer.\n@return balance of the token."
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "balanceOf",
+            "nameLocation": "2591:9:122",
+            "parameters": {
+              "id": 89689,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 89685,
+                  "mutability": "mutable",
+                  "name": "token",
+                  "nameLocation": "2608:5:122",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 89723,
+                  "src": "2601:12:122",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$88",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "id": 89684,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 89683,
+                      "name": "IERC20",
+                      "nameLocations": [
+                        "2601:6:122"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 88,
+                      "src": "2601:6:122"
+                    },
+                    "referencedDeclaration": 88,
+                    "src": "2601:6:122",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$88",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 89688,
+                  "mutability": "mutable",
+                  "name": "memoizer",
+                  "nameLocation": "2638:8:122",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 89723,
+                  "src": "2615:31:122",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_memory_ptr",
+                    "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer"
+                  },
+                  "typeName": {
+                    "id": 89687,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 89686,
+                      "name": "BalanceMemoizer",
+                      "nameLocations": [
+                        "2615:15:122"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 89565,
+                      "src": "2615:15:122"
+                    },
+                    "referencedDeclaration": 89565,
+                    "src": "2615:15:122",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_BalanceMemoizer_$89565_storage_ptr",
+                      "typeString": "struct HasAaveBalanceMemoizer.BalanceMemoizer"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2600:47:122"
+            },
+            "returnParameters": {
+              "id": 89692,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 89691,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 89723,
+                  "src": "2671:4:122",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 89690,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2671:4:122",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2670:6:122"
+            },
+            "scope": 89724,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 89549,
+              "name": "AaveV3Lender",
+              "nameLocations": [
+                "429:12:122"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 83406,
+              "src": "429:12:122"
+            },
+            "id": 89550,
+            "nodeType": "InheritanceSpecifier",
+            "src": "429:12:122"
+          }
+        ],
+        "canonicalName": "HasAaveBalanceMemoizer",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 89548,
+          "nodeType": "StructuredDocumentation",
+          "src": "199:195:122",
+          "text": "@title Memoizes values for AAVE to reduce gas cost and simplify code flow.\n@dev the memoizer works in the context of a single token and therefore should not be used across multiple tokens."
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          89724,
+          83406
+        ],
+        "name": "HasAaveBalanceMemoizer",
+        "nameLocation": "403:22:122",
+        "scope": 89725,
+        "usedErrors": [],
+        "usedEvents": []
+      }
+    ],
+    "license": "BSD-2-Clause"
+  },
+  "id": 122
+}

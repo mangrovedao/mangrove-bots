@@ -1,9 +1,0 @@
-{
-  "logLevel": "debug",
-  "acceptableGasGapToOracle": 0.5,
-  "constantOracleGasPrice": 6,
-  "runEveryXHours": 0.008,
-  "maxUpdateConstraint": {
-    "constant": 10
-  }
-}

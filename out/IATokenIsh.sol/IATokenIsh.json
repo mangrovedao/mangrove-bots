@@ -1,0 +1,849 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "RESERVE_TREASURY_ADDRESS",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "UNDERLYING_ASSET_ADDRESS",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "approve",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "symbol",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "transferFrom",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "RESERVE_TREASURY_ADDRESS()": "ae167335",
+    "UNDERLYING_ASSET_ADDRESS()": "b16a19de",
+    "allowance(address,address)": "dd62ed3e",
+    "approve(address,uint256)": "095ea7b3",
+    "balanceOf(address)": "70a08231",
+    "decimals()": "313ce567",
+    "name()": "06fdde03",
+    "symbol()": "95d89b41",
+    "totalSupply()": "18160ddd",
+    "transfer(address,uint256)": "a9059cbb",
+    "transferFrom(address,address,uint256)": "23b872dd"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"RESERVE_TREASURY_ADDRESS\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"UNDERLYING_ASSET_ADDRESS\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"Aave\",\"kind\":\"dev\",\"methods\":{\"RESERVE_TREASURY_ADDRESS()\":{\"returns\":{\"_0\":\"Address of the Aave treasury\"}},\"UNDERLYING_ASSET_ADDRESS()\":{\"returns\":{\"_0\":\"The address of the underlying asset\"}}},\"title\":\"IAToken - ish\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"RESERVE_TREASURY_ADDRESS()\":{\"notice\":\"Returns the address of the Aave treasury, receiving the fees on this aToken.\"},\"UNDERLYING_ASSET_ADDRESS()\":{\"notice\":\"Returns the address of the underlying asset of this aToken (E.g. WETH for aWETH)\"}},\"notice\":\"Defines the basic interface for an AToken.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IATokenIsh.sol\":\"IATokenIsh\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/\",\":@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/\",\":@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/\",\":ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/\",\":mgv_arbitrage_lib/=mangrove-arbitrage/lib/\",\":mgv_arbitrage_script/=mangrove-arbitrage/script/\",\":mgv_arbitrage_src/=mangrove-arbitrage/src/\",\":mgv_arbitrage_test/=mangrove-arbitrage/test/\",\":mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":mgv_script/=node_modules/@mangrovedao/mangrove-core/script/\",\":mgv_src/=node_modules/@mangrovedao/mangrove-core/src/\",\":mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":mgv_test/=node_modules/@mangrovedao/mangrove-core/test/\",\":uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/\"]},\"sources\":{\"node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol\":{\"keccak256\":\"0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49\",\"dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IATokenIsh.sol\":{\"keccak256\":\"0x0a6151a8ff99ef98f78dddd4300b456789a3cf10630ed748f6843118bfedfedc\",\"license\":\"AGPL-3.0\",\"urls\":[\"bzz-raw://3cc56ed42f444540fbc5e7d636929c5c33c4b71c7538552d7275d100f52f3edd\",\"dweb:/ipfs/QmeWMFQFDCWi7nFR4CScHRoGVBxUvnLUbvUecBCW3sMfi8\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.20+commit.a1b79de6"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Approval",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Transfer",
+          "anonymous": false
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "RESERVE_TREASURY_ADDRESS",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "UNDERLYING_ASSET_ADDRESS",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "allowance",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "approve",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "balanceOf",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "decimals",
+          "outputs": [
+            {
+              "internalType": "uint8",
+              "name": "",
+              "type": "uint8"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "name",
+          "outputs": [
+            {
+              "internalType": "string",
+              "name": "",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "symbol",
+          "outputs": [
+            {
+              "internalType": "string",
+              "name": "",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "totalSupply",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "transfer",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "sender",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "transferFrom",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "RESERVE_TREASURY_ADDRESS()": {
+            "returns": {
+              "_0": "Address of the Aave treasury"
+            }
+          },
+          "UNDERLYING_ASSET_ADDRESS()": {
+            "returns": {
+              "_0": "The address of the underlying asset"
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "RESERVE_TREASURY_ADDRESS()": {
+            "notice": "Returns the address of the Aave treasury, receiving the fees on this aToken."
+          },
+          "UNDERLYING_ASSET_ADDRESS()": {
+            "notice": "Returns the address of the underlying asset of this aToken (E.g. WETH for aWETH)"
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/",
+        "mgv_arbitrage_lib/=mangrove-arbitrage/lib/",
+        "mgv_arbitrage_script/=mangrove-arbitrage/script/",
+        "mgv_arbitrage_src/=mangrove-arbitrage/src/",
+        "mgv_arbitrage_test/=mangrove-arbitrage/test/",
+        "mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "mgv_script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "mgv_src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "mgv_test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IATokenIsh.sol": "IATokenIsh"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol": {
+        "keccak256": "0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240",
+        "urls": [
+          "bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49",
+          "dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IATokenIsh.sol": {
+        "keccak256": "0x0a6151a8ff99ef98f78dddd4300b456789a3cf10630ed748f6843118bfedfedc",
+        "urls": [
+          "bzz-raw://3cc56ed42f444540fbc5e7d636929c5c33c4b71c7538552d7275d100f52f3edd",
+          "dweb:/ipfs/QmeWMFQFDCWi7nFR4CScHRoGVBxUvnLUbvUecBCW3sMfi8"
+        ],
+        "license": "AGPL-3.0"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IATokenIsh.sol",
+    "id": 90214,
+    "exportedSymbols": {
+      "IATokenIsh": [
+        90213
+      ],
+      "IERC20": [
+        88
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "37:649:125",
+    "nodes": [
+      {
+        "id": 90195,
+        "nodeType": "PragmaDirective",
+        "src": "37:23:125",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ]
+      },
+      {
+        "id": 90197,
+        "nodeType": "ImportDirective",
+        "src": "62:43:125",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol",
+        "file": "@mgv/lib/IERC20.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 90214,
+        "sourceUnit": 89,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 90196,
+              "name": "IERC20",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 88,
+              "src": "70:6:125",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 90213,
+        "nodeType": "ContractDefinition",
+        "src": "209:476:125",
+        "nodes": [
+          {
+            "id": 90206,
+            "nodeType": "FunctionDefinition",
+            "src": "399:68:125",
+            "nodes": [],
+            "documentation": {
+              "id": 90201,
+              "nodeType": "StructuredDocumentation",
+              "src": "244:152:125",
+              "text": " @notice Returns the address of the underlying asset of this aToken (E.g. WETH for aWETH)\n @return The address of the underlying asset"
+            },
+            "functionSelector": "b16a19de",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "UNDERLYING_ASSET_ADDRESS",
+            "nameLocation": "408:24:125",
+            "parameters": {
+              "id": 90202,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "432:2:125"
+            },
+            "returnParameters": {
+              "id": 90205,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 90204,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 90206,
+                  "src": "458:7:125",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 90203,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "458:7:125",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "457:9:125"
+            },
+            "scope": 90213,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 90212,
+            "nodeType": "FunctionDefinition",
+            "src": "615:68:125",
+            "nodes": [],
+            "documentation": {
+              "id": 90207,
+              "nodeType": "StructuredDocumentation",
+              "src": "471:141:125",
+              "text": " @notice Returns the address of the Aave treasury, receiving the fees on this aToken.\n @return Address of the Aave treasury"
+            },
+            "functionSelector": "ae167335",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "RESERVE_TREASURY_ADDRESS",
+            "nameLocation": "624:24:125",
+            "parameters": {
+              "id": 90208,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "648:2:125"
+            },
+            "returnParameters": {
+              "id": 90211,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 90210,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 90212,
+                  "src": "674:7:125",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 90209,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "674:7:125",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "673:9:125"
+            },
+            "scope": 90213,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 90199,
+              "name": "IERC20",
+              "nameLocations": [
+                "233:6:125"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 88,
+              "src": "233:6:125"
+            },
+            "id": 90200,
+            "nodeType": "InheritanceSpecifier",
+            "src": "233:6:125"
+          }
+        ],
+        "canonicalName": "IATokenIsh",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 90198,
+          "nodeType": "StructuredDocumentation",
+          "src": "106:101:125",
+          "text": " @title IAToken - ish\n @author Aave\n @notice Defines the basic interface for an AToken."
+        },
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          90213,
+          88
+        ],
+        "name": "IATokenIsh",
+        "nameLocation": "219:10:125",
+        "scope": 90214,
+        "usedErrors": [],
+        "usedEvents": [
+          69,
+          77
+        ]
+      }
+    ],
+    "license": "AGPL-3.0"
+  },
+  "id": 125
+}

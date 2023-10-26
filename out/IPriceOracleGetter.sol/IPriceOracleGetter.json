@@ -1,0 +1,640 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "BASE_CURRENCY",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "BASE_CURRENCY_UNIT",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "asset",
+          "type": "address"
+        }
+      ],
+      "name": "getAssetPrice",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "assets",
+          "type": "address[]"
+        }
+      ],
+      "name": "getAssetsPrices",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "prices",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "BASE_CURRENCY()": "e19f4700",
+    "BASE_CURRENCY_UNIT()": "8c89b64f",
+    "getAssetPrice(address)": "b3596f07",
+    "getAssetsPrices(address[])": "9d23d9f2"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"BASE_CURRENCY\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"BASE_CURRENCY_UNIT\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"asset\",\"type\":\"address\"}],\"name\":\"getAssetPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"assets\",\"type\":\"address[]\"}],\"name\":\"getAssetsPrices\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"prices\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"Aave\",\"kind\":\"dev\",\"methods\":{\"BASE_CURRENCY()\":{\"details\":\"Address 0x0 is reserved for USD as base currency.\",\"returns\":{\"_0\":\"Returns the base currency address.\"}},\"BASE_CURRENCY_UNIT()\":{\"details\":\"1 ether for ETH, 1e8 for USD.\",\"returns\":{\"_0\":\"Returns the base currency unit.\"}},\"getAssetPrice(address)\":{\"params\":{\"asset\":\"The address of the asset\"},\"returns\":{\"_0\":\"The price of the asset\"}},\"getAssetsPrices(address[])\":{\"params\":{\"assets\":\"The addresses of the assets\"},\"returns\":{\"prices\":\"of the asset\"}}},\"title\":\"IPriceOracleGetter\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"BASE_CURRENCY()\":{\"notice\":\"Returns the base currency address\"},\"BASE_CURRENCY_UNIT()\":{\"notice\":\"Returns the base currency unit\"},\"getAssetPrice(address)\":{\"notice\":\"Returns the asset price in the base currency\"},\"getAssetsPrices(address[])\":{\"notice\":\"mangrove edit - missing in the originial interfaceReturns the assets prices in the base currency.\"}},\"notice\":\"Interface for the Aave price oracle.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IPriceOracleGetter.sol\":\"IPriceOracleGetter\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/\",\":@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/\",\":@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/\",\":ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/\",\":mgv_arbitrage_lib/=mangrove-arbitrage/lib/\",\":mgv_arbitrage_script/=mangrove-arbitrage/script/\",\":mgv_arbitrage_src/=mangrove-arbitrage/src/\",\":mgv_arbitrage_test/=mangrove-arbitrage/test/\",\":mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":mgv_script/=node_modules/@mangrovedao/mangrove-core/script/\",\":mgv_src/=node_modules/@mangrovedao/mangrove-core/src/\",\":mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":mgv_test/=node_modules/@mangrovedao/mangrove-core/test/\",\":uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/\"]},\"sources\":{\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IPriceOracleGetter.sol\":{\"keccak256\":\"0x8a58700508c4092675821ab37e2371edd339f21183e8c981446bac64f35bd5f2\",\"license\":\"AGPL-3.0\",\"urls\":[\"bzz-raw://5cb5801c6bf08eb28b6f06d757863f87538f20603c073859d3b6b13bc035ca4c\",\"dweb:/ipfs/Qmaf12unQujKFh1u3LzhfhUTAC32yrH6Xy42fsBHpX5ddR\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.20+commit.a1b79de6"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "BASE_CURRENCY",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "BASE_CURRENCY_UNIT",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "asset",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "getAssetPrice",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "assets",
+              "type": "address[]"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "getAssetsPrices",
+          "outputs": [
+            {
+              "internalType": "uint256[]",
+              "name": "prices",
+              "type": "uint256[]"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "BASE_CURRENCY()": {
+            "details": "Address 0x0 is reserved for USD as base currency.",
+            "returns": {
+              "_0": "Returns the base currency address."
+            }
+          },
+          "BASE_CURRENCY_UNIT()": {
+            "details": "1 ether for ETH, 1e8 for USD.",
+            "returns": {
+              "_0": "Returns the base currency unit."
+            }
+          },
+          "getAssetPrice(address)": {
+            "params": {
+              "asset": "The address of the asset"
+            },
+            "returns": {
+              "_0": "The price of the asset"
+            }
+          },
+          "getAssetsPrices(address[])": {
+            "params": {
+              "assets": "The addresses of the assets"
+            },
+            "returns": {
+              "prices": "of the asset"
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "BASE_CURRENCY()": {
+            "notice": "Returns the base currency address"
+          },
+          "BASE_CURRENCY_UNIT()": {
+            "notice": "Returns the base currency unit"
+          },
+          "getAssetPrice(address)": {
+            "notice": "Returns the asset price in the base currency"
+          },
+          "getAssetsPrices(address[])": {
+            "notice": "mangrove edit - missing in the originial interfaceReturns the assets prices in the base currency."
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/",
+        "mgv_arbitrage_lib/=mangrove-arbitrage/lib/",
+        "mgv_arbitrage_script/=mangrove-arbitrage/script/",
+        "mgv_arbitrage_src/=mangrove-arbitrage/src/",
+        "mgv_arbitrage_test/=mangrove-arbitrage/test/",
+        "mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "mgv_script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "mgv_src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "mgv_test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IPriceOracleGetter.sol": "IPriceOracleGetter"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IPriceOracleGetter.sol": {
+        "keccak256": "0x8a58700508c4092675821ab37e2371edd339f21183e8c981446bac64f35bd5f2",
+        "urls": [
+          "bzz-raw://5cb5801c6bf08eb28b6f06d757863f87538f20603c073859d3b6b13bc035ca4c",
+          "dweb:/ipfs/Qmaf12unQujKFh1u3LzhfhUTAC32yrH6Xy42fsBHpX5ddR"
+        ],
+        "license": "AGPL-3.0"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IPriceOracleGetter.sol",
+    "id": 91094,
+    "exportedSymbols": {
+      "IPriceOracleGetter": [
+        91093
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "37:1144:128",
+    "nodes": [
+      {
+        "id": 91061,
+        "nodeType": "PragmaDirective",
+        "src": "37:24:128",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".10"
+        ]
+      },
+      {
+        "id": 91093,
+        "nodeType": "ContractDefinition",
+        "src": "167:1013:128",
+        "nodes": [
+          {
+            "id": 91068,
+            "nodeType": "FunctionDefinition",
+            "src": "372:57:128",
+            "nodes": [],
+            "documentation": {
+              "id": 91063,
+              "nodeType": "StructuredDocumentation",
+              "src": "200:169:128",
+              "text": " @notice Returns the base currency address\n @dev Address 0x0 is reserved for USD as base currency.\n @return Returns the base currency address."
+            },
+            "functionSelector": "e19f4700",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "BASE_CURRENCY",
+            "nameLocation": "381:13:128",
+            "parameters": {
+              "id": 91064,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "394:2:128"
+            },
+            "returnParameters": {
+              "id": 91067,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91066,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91068,
+                  "src": "420:7:128",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 91065,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "420:7:128",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "419:9:128"
+            },
+            "scope": 91093,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 91074,
+            "nodeType": "FunctionDefinition",
+            "src": "579:59:128",
+            "nodes": [],
+            "documentation": {
+              "id": 91069,
+              "nodeType": "StructuredDocumentation",
+              "src": "433:143:128",
+              "text": " @notice Returns the base currency unit\n @dev 1 ether for ETH, 1e8 for USD.\n @return Returns the base currency unit."
+            },
+            "functionSelector": "8c89b64f",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "BASE_CURRENCY_UNIT",
+            "nameLocation": "588:18:128",
+            "parameters": {
+              "id": 91070,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "606:2:128"
+            },
+            "returnParameters": {
+              "id": 91073,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91072,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91074,
+                  "src": "632:4:128",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 91071,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "632:4:128",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "631:6:128"
+            },
+            "scope": 91093,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 91082,
+            "nodeType": "FunctionDefinition",
+            "src": "796:67:128",
+            "nodes": [],
+            "documentation": {
+              "id": 91075,
+              "nodeType": "StructuredDocumentation",
+              "src": "642:151:128",
+              "text": " @notice Returns the asset price in the base currency\n @param asset The address of the asset\n @return The price of the asset"
+            },
+            "functionSelector": "b3596f07",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getAssetPrice",
+            "nameLocation": "805:13:128",
+            "parameters": {
+              "id": 91078,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91077,
+                  "mutability": "mutable",
+                  "name": "asset",
+                  "nameLocation": "827:5:128",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91082,
+                  "src": "819:13:128",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 91076,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "819:7:128",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "818:15:128"
+            },
+            "returnParameters": {
+              "id": 91081,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91080,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91082,
+                  "src": "857:4:128",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 91079,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "857:4:128",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "856:6:128"
+            },
+            "scope": 91093,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 91092,
+            "nodeType": "FunctionDefinition",
+            "src": "1081:97:128",
+            "nodes": [],
+            "documentation": {
+              "id": 91083,
+              "nodeType": "StructuredDocumentation",
+              "src": "867:211:128",
+              "text": " mangrove edit - missing in the originial interface\n @notice Returns the assets prices in the base currency.\n @param assets The addresses of the assets\n @return prices of the asset"
+            },
+            "functionSelector": "9d23d9f2",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getAssetsPrices",
+            "nameLocation": "1090:15:128",
+            "parameters": {
+              "id": 91087,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91086,
+                  "mutability": "mutable",
+                  "name": "assets",
+                  "nameLocation": "1125:6:128",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91092,
+                  "src": "1106:25:128",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 91084,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1106:7:128",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 91085,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1106:9:128",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1105:27:128"
+            },
+            "returnParameters": {
+              "id": 91091,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91090,
+                  "mutability": "mutable",
+                  "name": "prices",
+                  "nameLocation": "1170:6:128",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91092,
+                  "src": "1156:20:128",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 91088,
+                      "name": "uint",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1156:4:128",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 91089,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1156:6:128",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1155:22:128"
+            },
+            "scope": 91093,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IPriceOracleGetter",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 91062,
+          "nodeType": "StructuredDocumentation",
+          "src": "63:103:128",
+          "text": " @title IPriceOracleGetter\n @author Aave\n @notice Interface for the Aave price oracle."
+        },
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          91093
+        ],
+        "name": "IPriceOracleGetter",
+        "nameLocation": "177:18:128",
+        "scope": 91094,
+        "usedErrors": [],
+        "usedEvents": []
+      }
+    ],
+    "license": "AGPL-3.0"
+  },
+  "id": 128
+}

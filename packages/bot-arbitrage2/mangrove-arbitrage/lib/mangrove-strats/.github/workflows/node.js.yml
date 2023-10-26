@@ -1,0 +1,132 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: 
+      - master
+      - develop
+      - 'run-ci/**'
+  pull_request:
+    branches: [ master, develop, test-pr ]
+    types: [opened, synchronize, reopened, labeled]
+
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+env:
+  NODE_ENV: test
+jobs:
+  file-guard:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - uses: dorny/paths-filter@v2
+      id: changes
+      with:
+        filters: |
+          addresses:
+            - 'addresses/deployed/*.json'
+
+    - name: Fail if addresses changed unless PR has 'update address' label
+      if: >
+          (    github.event_name == 'pull_request'
+           &&  !contains(github.event.pull_request.labels.*.name,'update address') 
+           &&  steps.changes.outputs.addresses == 'true')
+      uses: actions/github-script@v6
+      with:
+        script: core.setFailed('You have changed an address in mangrove-strats (deployed/*.json). PR must be marked \'update address\' for CI to run')
+
+  # ==== Job: Build and test mangrove-strats
+  mangrove-strats:
+    runs-on: ubuntu-22.0-4core
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Yarn setup (caching yarn dependencies)
+      uses: actions/setup-node@v3
+      with:
+        cache: 'yarn'
+        
+    - name: Foundry Setup
+      uses: mangrovedao/.github/.github/actions/foundry-setup@master
+    
+    - run: yarn install --immutable
+
+    - name: Solidity Compile
+      run: yarn run build
+
+    # Pinned forks are used in tests and utilize secrets. For PRs from forks these are not available
+    # Let the tests attempt to run with demo endpoints which are more unstable.
+    - name: Mangrove Solidity Tests
+      run: yarn run test
+      env:
+        POLYGON_NODE_URL: ${{ secrets.POLYGON_NODE_URL || 'https://polygon.llamarpc.com' }}
+        MUMBAI_NODE_URL: ${{ secrets.MUMBAI_NODE_URL || 'unused' }}
+
+    # For push runs we also create a coverage report
+    - name: Create coverage report for mangrove-solidity
+      if: github.event_name != 'pull_request' 
+      run: forge coverage --report lcov
+      env:
+        POLYGON_NODE_URL: ${{ secrets.POLYGON_NODE_URL }}
+        MUMBAI_NODE_URL: ${{ secrets.MUMBAI_NODE_URL }}
+
+     # == Send coverage report to Coveralls == 
+     # Coverallsapp by default uses GITHUB_SHA but that does not necessarily correspond
+     # to HEAD because a branch is checked out. We here find the actual SHA for HEAD.
+    - name: Set Coveralls vars
+      id: coveralls_vars
+      if: github.event_name != 'pull_request' 
+      run: echo "::set-output name=sha_for_head::$(git rev-parse HEAD)"
+
+    - name: Upload to Coveralls for mangrove-solidity
+      uses: coverallsapp/github-action@master
+      if: github.event_name != 'pull_request' 
+      with:
+        git-commit: ${{ steps.coveralls_vars.outputs.sha_for_head }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: lcov.info
+        base-path	: .
+        flag-name: solidity
+
+    # NOTE: uncomment once you can manage forge test 
+    # outputs in gh actions
+    # - name: Mangrove Solidity Test Report
+    #   uses: dorny/test-reporter@v1
+    #   if: ${{ env.mangrove_built && (success() || failure()) }}
+    #   with:
+    #     name: Solidity Tests                  # Name of the check run which will be created
+    #     path: ./solidity-mocha-test-report.json # Path to test results
+    #     reporter: mocha-json                  # Format of test results
+
+
+    # == check precommit works ==
+    - run: yarn run precommit
+
+  # ==== final "check" job, using alls-green to have one single job to check for green workflow ====
+  # see https://github.com/re-actors/alls-green
+
+  check:
+    if: always()
+
+    needs:
+    - file-guard
+    - mangrove-strats
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Decide whether the needed jobs succeeded or failed
+      uses: re-actors/alls-green@release/v1
+      with:
+        allowed-skips: file-guard, mangrove-strats
+        jobs: ${{ toJSON(needs) }}

@@ -1,0 +1,328 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove-core/lib/Debug.sol",
+    "id": 5,
+    "exportedSymbols": {
+      "Bin": [
+        6855
+      ],
+      "BitLib": [
+        4329
+      ],
+      "Density": [
+        4458
+      ],
+      "DensityLib": [
+        4847
+      ],
+      "DirtyField": [
+        8083
+      ],
+      "DirtyFieldLib": [
+        8164
+      ],
+      "DirtyLeaf": [
+        8016
+      ],
+      "DirtyLeafLib": [
+        8081
+      ],
+      "Field": [
+        7296
+      ],
+      "FieldLib": [
+        8014
+      ],
+      "Global": [
+        63500
+      ],
+      "GlobalLib": [
+        64895
+      ],
+      "GlobalUnpacked": [
+        63498
+      ],
+      "HasMgvEvents": [
+        56193
+      ],
+      "IERC20": [
+        88
+      ],
+      "IMaker": [
+        56211
+      ],
+      "IMgvMonitor": [
+        56239
+      ],
+      "INITIAL_MAX_GASREQ_FOR_FAILING_OFFERS_MULTIPLIER": [
+        4442
+      ],
+      "INITIAL_MAX_RECURSION_DEPTH": [
+        4439
+      ],
+      "LEAF_SIZE": [
+        4368
+      ],
+      "LEAF_SIZE_BITS": [
+        4359
+      ],
+      "LEAF_SIZE_MASK": [
+        4377
+      ],
+      "LEVEL_SIZE": [
+        4371
+      ],
+      "LEVEL_SIZE_BITS": [
+        4362
+      ],
+      "LEVEL_SIZE_MASK": [
+        4380
+      ],
+      "LOG_BP_2X235": [
+        4448
+      ],
+      "LOG_BP_SHIFT": [
+        4445
+      ],
+      "Leaf": [
+        6414
+      ],
+      "LeafLib": [
+        6853
+      ],
+      "Local": [
+        64937
+      ],
+      "LocalLib": [
+        66925
+      ],
+      "LocalUnpacked": [
+        64935
+      ],
+      "MANTISSA_BITS": [
+        4430
+      ],
+      "MANTISSA_BITS_MINUS_ONE": [
+        4433
+      ],
+      "MAX_BIN": [
+        4408
+      ],
+      "MAX_FIELD_SIZE": [
+        4356
+      ],
+      "MAX_RATIO_EXP": [
+        4427
+      ],
+      "MAX_RATIO_MANTISSA": [
+        4424
+      ],
+      "MAX_SAFE_VOLUME": [
+        4436
+      ],
+      "MAX_TICK": [
+        4415
+      ],
+      "MIN_BIN": [
+        4405
+      ],
+      "MIN_RATIO_EXP": [
+        4421
+      ],
+      "MIN_RATIO_MANTISSA": [
+        4418
+      ],
+      "MIN_TICK": [
+        4412
+      ],
+      "MgvLib": [
+        55985
+      ],
+      "NOT_TOPBIT": [
+        4347
+      ],
+      "NUM_BINS": [
+        4401
+      ],
+      "NUM_LEAFS": [
+        4398
+      ],
+      "NUM_LEVEL1": [
+        4389
+      ],
+      "NUM_LEVEL2": [
+        4392
+      ],
+      "NUM_LEVEL3": [
+        4395
+      ],
+      "OFFER_BITS": [
+        4353
+      ],
+      "OFFER_MASK": [
+        4386
+      ],
+      "OLKey": [
+        55875
+      ],
+      "OLLib": [
+        55947
+      ],
+      "ONE": [
+        4334
+      ],
+      "ONES": [
+        4341
+      ],
+      "Offer": [
+        66949
+      ],
+      "OfferDetail": [
+        67755
+      ],
+      "OfferDetailLib": [
+        68529
+      ],
+      "OfferDetailUnpacked": [
+        67753
+      ],
+      "OfferLib": [
+        67732
+      ],
+      "OfferUnpacked": [
+        66947
+      ],
+      "ROOT_SIZE": [
+        4374
+      ],
+      "ROOT_SIZE_BITS": [
+        4365
+      ],
+      "ROOT_SIZE_MASK": [
+        4383
+      ],
+      "TICK_BITS": [
+        4350
+      ],
+      "TOPBIT": [
+        4344
+      ],
+      "Tick": [
+        5280
+      ],
+      "TickLib": [
+        6401
+      ],
+      "TickTreeLib": [
+        7294
+      ],
+      "VM_ADDRESS": [
+        50773
+      ],
+      "Vm": [
+        21330
+      ],
+      "binBranchToString": [
+        51179
+      ],
+      "console": [
+        37519
+      ],
+      "csf": [
+        37519
+      ],
+      "toFixed": [
+        51532,
+        51680
+      ],
+      "toString": [
+        50805,
+        50847,
+        50865,
+        50908,
+        50926,
+        50997,
+        51015,
+        51102,
+        51243,
+        51297,
+        51347,
+        51375,
+        51453,
+        51481,
+        51516,
+        51782
+      ],
+      "vm": [
+        50781
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "39:141:0",
+    "nodes": [
+      {
+        "id": 1,
+        "nodeType": "PragmaDirective",
+        "src": "39:24:0",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".13"
+        ]
+      },
+      {
+        "id": 3,
+        "nodeType": "ImportDirective",
+        "src": "65:64:0",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console2.sol",
+        "file": "@mgv/forge-std/console2.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 5,
+        "sourceUnit": 37520,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 2,
+              "name": "console2",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 37519,
+              "src": "73:8:0",
+              "typeDescriptions": {}
+            },
+            "local": "console",
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 4,
+        "nodeType": "ImportDirective",
+        "src": "130:49:0",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/lib/preprocessed/ToString.post.sol",
+        "file": "@mgv/lib/preprocessed/ToString.post.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 5,
+        "sourceUnit": 51783,
+        "symbolAliases": [],
+        "unitAlias": ""
+      }
+    ],
+    "license": "Unlicense"
+  },
+  "id": 0
+}

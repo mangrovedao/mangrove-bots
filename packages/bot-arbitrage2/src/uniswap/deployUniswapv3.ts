@@ -1,7 +1,6 @@
 import { Signer, Contract, ContractFactory, BigNumber } from "ethers";
 import WETH9 from "@uniswap/hardhat-v3-deploy/src/util/WETH9.json";
 import { linkLibraries } from "./linkLibraries";
-import { logger } from "../util/logger";
 
 type ContractJson = { abi: any; bytecode: string };
 const artifacts: { [name: string]: ContractJson } = {
@@ -28,29 +27,29 @@ export class UniswapV3Deployer {
     const deployer = new UniswapV3Deployer(actor);
 
     try {
-      // logger.debug("starting deploy");
+      console.log("starting deploy");
       const weth9 = await deployer.deployWETH9();
-      logger.debug("deployed weth9");
+      console.log("deployed weth9");
       const factory = await deployer.deployFactory();
-      logger.debug("deployed factory");
+      console.log("deployed factory");
       const router = await deployer.deployRouter(
         factory.address,
         weth9.address
       );
-      logger.debug("deployed router");
+      console.log("deployed router");
       const nftDescriptorLibrary = await deployer.deployNFTDescriptorLibrary();
-      logger.debug("deployed nftDescriptorLibrary");
+      console.log("deployed nftDescriptorLibrary");
       const positionDescriptor = await deployer.deployPositionDescriptor(
         nftDescriptorLibrary.address,
         weth9.address
       );
-      logger.debug("deployed positionDescriptor");
+      console.log("deployed positionDescriptor");
       const positionManager = await deployer.deployNonfungiblePositionManager(
         factory.address,
         weth9.address,
         positionDescriptor.address
       );
-      logger.debug("deployed positionManager");
+      console.log("deployed positionManager");
 
       return {
         weth9,
@@ -161,11 +160,11 @@ export class UniswapV3Deployer {
     deployParams: Array<any>,
     actor: Signer
   ) {
-    logger.debug(deployParams);
+    console.log(deployParams);
     const factory = new ContractFactory(abi, bytecode, actor);
     const deployment = await factory.deploy(...deployParams);
     const contract = await deployment.deployed();
-    logger.debug("deployed contract", contract.address);
+    console.log("deployed contract", contract.address);
     return contract;
   }
 }

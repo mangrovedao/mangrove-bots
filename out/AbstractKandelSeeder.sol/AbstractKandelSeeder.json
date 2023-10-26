@@ -1,0 +1,1815 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "KANDEL_GASREQ",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MGV",
+      "outputs": [
+        {
+          "internalType": "contract IMangrove",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKeyBaseQuote",
+          "type": "tuple"
+        },
+        {
+          "internalType": "bool",
+          "name": "liquiditySharing",
+          "type": "bool"
+        }
+      ],
+      "name": "sow",
+      "outputs": [
+        {
+          "internalType": "contract GeometricKandel",
+          "name": "kandel",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "KANDEL_GASREQ()": "3b49aadd",
+    "MGV()": "99fa5e2d",
+    "sow((address,address,uint256),bool)": "e170fa6a"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"KANDEL_GASREQ\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MGV\",\"outputs\":[{\"internalType\":\"contract IMangrove\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKeyBaseQuote\",\"type\":\"tuple\"},{\"internalType\":\"bool\",\"name\":\"liquiditySharing\",\"type\":\"bool\"}],\"name\":\"sow\",\"outputs\":[{\"internalType\":\"contract GeometricKandel\",\"name\":\"kandel\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"deployer of this contract will gain aave manager power on the AAVE router (power to claim rewards and enter/exit markets)when deployer is a contract one must therefore make sure it is able to call the corresponding functions on the router\",\"kind\":\"dev\",\"methods\":{\"constructor\":{\"params\":{\"kandelGasreq\":\"the gasreq to use for offers\",\"mgv\":\"The Mangrove deployment.\"}},\"sow((address,address,uint256),bool)\":{\"params\":{\"liquiditySharing\":\"if true, `msg.sender` will be used to identify the shares of the deployed Kandel strat. If msg.sender deploys several instances, reserve of the strats will be shared, but this will require a transfer from router to maker contract for each taken offer, since we cannot transfer the full amount to the first maker contract hit in a market order in case later maker contracts need the funds. Still, only a single AAVE redeem will take place.\",\"olKeyBaseQuote\":\"The OLKey for the outbound_tkn base and inbound_tkn quote offer list Kandel will act on, the flipped OLKey is used for the opposite offer list.\"},\"returns\":{\"kandel\":\"the Kandel contract.\"}}},\"title\":\"Abstract Kandel strat deployer.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"KANDEL_GASREQ()\":{\"notice\":\"the gasreq to use for offers.\"},\"MGV()\":{\"notice\":\"The Mangrove deployment.\"},\"constructor\":{\"notice\":\"constructor for `AbstractKandelSeeder`.\"},\"sow((address,address,uint256),bool)\":{\"notice\":\"deploys a new Kandel contract for the given seed parameters.\"}},\"notice\":\"This seeder deploys Kandel strats on demand and binds them to an AAVE router if needed.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/AbstractKandelSeeder.sol\":\"AbstractKandelSeeder\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/\",\":@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/\",\":@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/\",\":ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/\",\":mgv_arbitrage_lib/=mangrove-arbitrage/lib/\",\":mgv_arbitrage_script/=mangrove-arbitrage/script/\",\":mgv_arbitrage_src/=mangrove-arbitrage/src/\",\":mgv_arbitrage_test/=mangrove-arbitrage/test/\",\":mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":mgv_script/=node_modules/@mangrovedao/mangrove-core/script/\",\":mgv_src/=node_modules/@mangrovedao/mangrove-core/src/\",\":mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":mgv_test/=node_modules/@mangrovedao/mangrove-core/test/\",\":uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/\"]},\"sources\":{\"node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol\":{\"keccak256\":\"0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49\",\"dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6\"]},\"node_modules/@mangrovedao/mangrove-core/lib/TransferLib.sol\":{\"keccak256\":\"0x3a8b94d6cc226852fefada57b74fe8cb4f3e34bdcf0860825401a57097d7914b\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://a7293b7722734c714f12fa51520c2ebf01776ca5f837c06ca27a7c775e4bf579\",\"dweb:/ipfs/QmTFm7NaHGv32fYoXbiUiMSgpWAJ5GfHoV1LTD49ZfkCpJ\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/BitLib.sol\":{\"keccak256\":\"0x5a1c56d67fbd2ef6f3b830cf8dae1885da5f40a37afd11cb3a392be573993c3b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a07b895de906f49d0ce9e89a349d39220e13039709ea2e2db46ff48310bd4b3b\",\"dweb:/ipfs/QmZyiLKyTZ9EHwqNRUYukQDdg7CL54Dsu65RYabkkGF1KM\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol\":{\"keccak256\":\"0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb\",\"dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/DensityLib.sol\":{\"keccak256\":\"0xc7ee8be7f11a1bf85aa4ea0e222d4a49d77a378b201e347f9a5e4f28f207a023\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ed718e8bf3fb45bc0e7cf739662422cfe01d8d04a2c99b2fb0cfa2372629c6ad\",\"dweb:/ipfs/QmZ5QpyMSmkVxayfpZYovNcc8NGJKfVZEMKphzeKk9cVNv\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/LocalExtra.sol\":{\"keccak256\":\"0xbd3f6702242dd43ba2493eb54feb8f5d2526967512c6f156d29669b54d9c60f2\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://e389f3c78c8073bde973aa3f4770139e2adb4cc00cc1303b77eefa201189a6ff\",\"dweb:/ipfs/QmZ8vXRUUCinKtqJhV7jMXVeDVfRizhJ3NsumZLQxwSc44\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol\":{\"keccak256\":\"0x335217debbf3f4cabeaea88d4dd9777dbda2f2b6ed9684e2285a4d16e1e4464c\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://eafe358531d7dc6527d36f8fbc4bc67ab12516398c35338ba5da57a03e24b9f3\",\"dweb:/ipfs/QmcKxrcr11EM7rsKNUEJq8VXFd2R1dWSTqYk3E4k8dQfzy\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol\":{\"keccak256\":\"0x95120d52698bc60b005496036a7c9daa7b8d0b18b571e596e86fd696b36e3264\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://684d30cc9673403cfddabdf7d979417c5df050abde16712aeaa9ca6b2725d154\",\"dweb:/ipfs/QmTkeUAMhb72BNqGjAaaPBj1NHPtKE8wH1R8bpXD5RTKtC\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol\":{\"keccak256\":\"0xa4aea464925ad277aab2141885eeeb6e5f1b0963ba08d8887a1c2461c334f222\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://c7ec62c85c22d7996abe32663232861f90e855c770dbd252bf49fff4ca786e74\",\"dweb:/ipfs/QmSHBJfw9bg8QjgBquXVLTS337ZuBGHVkDJfwuAZ6X48sw\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/TickTreeLib.sol\":{\"keccak256\":\"0x196c46d6e8e2ab51462f25245f7886568df3f1f65953dcec4c02d7950b4a10cd\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://4293ed5fb3ce4d350b9bb5b38342c273e6d772ace098927e006efa7fc4498329\",\"dweb:/ipfs/QmRCtk481PHQjNdt5Dsa8GYWEX46nYwdeD8R3m92w3Xjxv\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console2.sol\":{\"keccak256\":\"0x954646445d1014c3cd85c7918f5e7adeeca5ee44b68c00bafa237e597a4e35ea\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://516fa3be52da4763147175bfba4be0aa011fadbb0c1afb01f97265bd4cee7973\",\"dweb:/ipfs/QmdixAyMJefx7qePChgdxcBH5MxhmN7vsqPuPLx3CgrVmF\"]},\"node_modules/@mangrovedao/mangrove-core/src/IMangrove.sol\":{\"keccak256\":\"0x7bb6985efa88b71ec161df4e3b6a7b27e32ccae0890c730f25a0c7f1c5e46c0b\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://4aaf49678b6cce3cb69ba3d1effe0cab9a8b37cbdd9d462c99cd6bd0679fa3ce\",\"dweb:/ipfs/QmUCby1BEr1oQtFCq4eDECiv3qrpofG7pUPTmP1GCoQc2q\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol\":{\"keccak256\":\"0xe22e3d452040625724ce932cc6f57212c8a32ba021b06f5737e4c23319792c7d\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://b3ab9e3726b49b2d526f1cb6634c562cbafdbc1163753d13a3e1c316ca29e726\",\"dweb:/ipfs/QmS9bYtEVW7i9zAWmC7aPdCDv4BCaBJbhpgrJX6VhH68st\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Global.post.sol\":{\"keccak256\":\"0xddf04a10f84edc0b165351f649cad761a429b5c1b218e482917b3e38a2019e7f\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://7695a94afb1db46a65967bd63fc344b0a9387a4a2c906fdcac0433fdfec32dff\",\"dweb:/ipfs/QmcH4k6VwPrSEjqEQVsKTRjxWtmhijoknih6s6R98dnNUM\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Local.post.sol\":{\"keccak256\":\"0x03d642742c132c37c1fc29cae87f7ce1be93f89877fe698698d5bd2309c878a5\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://6957d461c6486caeee91f5fd8be2ff0f53a8c264c03e8c9b7f7291bf7a72d9fc\",\"dweb:/ipfs/QmTRqHsnjFA1xDmWWuPqn9aPeweRiYHv1wfTz77qxCmd7k\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol\":{\"keccak256\":\"0x812a7c313108b56600f747d89d20b2daa4c4aa489ece1b30c561a353d41468f2\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://3fb1685a67020adeece9f6fbf567567d257aafafd2e115e6151f2b2a14b429aa\",\"dweb:/ipfs/QmUvk3FLDDHRXungxeLtPEfaQj3HNt3ib8nGhonzPdMW6o\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol\":{\"keccak256\":\"0xbb0c9e3177017a77de68adeed5cbbf040fc9152f914adb34575eb880979fc720\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://fac448393a94f7d797f58ece51c1127a1605397b2371c9d1fe61db0037762a91\",\"dweb:/ipfs/QmUwcWdecdqa81eLGz4SekQYfiTp5pgs2mvFRYmu7T2sew\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Structs.post.sol\":{\"keccak256\":\"0x6121b0f392dbeddf77da4f5bc5dee019878ab21538892bd22dbb9c49e9e068bb\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://336a0df7a17dd6b1ed36c4e7f19fc9ab6d4ad933f7e0b3658efba0756c7341bc\",\"dweb:/ipfs/QmZ7NQY6EJHqcE1oEho1yN9ymsTfVpUcMJABKC8Fq5GvhL\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/MangroveOffer.sol\":{\"keccak256\":\"0x789a104578f14acad6b783c9d2a154f9a8749fde35706af5d69361cd14a9e6be\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://5c00fbc42821d1c0c293286c5571d6c32ff64104ab49789f95a59d20e9f6aba8\",\"dweb:/ipfs/QmR3LEBX5UJzxKM3DH8T3uVRVRgmDHkE7B9e2MMDjgokbA\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/interfaces/IOfferLogic.sol\":{\"keccak256\":\"0xe768d5ae2ad8cebe4aa8919230ff0bda5e306b876a4a9f50a0710c02656a3809\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://e4230bc3c1d39f243f1e6546b1f715d89887f2572a0aec73eda11c3f2a18bdd1\",\"dweb:/ipfs/QmbUaWNuY6R93ku6tiTkSUw5p9riZT2vQiMLmcb3xSRYBh\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/abstract/Direct.sol\":{\"keccak256\":\"0xe925cb9996d0896123ea908cfe1d494a3ee1d24b4db19fc43c29975801568cc2\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://a1f168082fcfc7672d9cce557440efe97b2bf95bc8f792d1754da963583bd672\",\"dweb:/ipfs/QmPuuAY4CDMcQEWKbJezNCazfX2g748Q3hX3ejCWYh4YVC\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/AbstractKandelSeeder.sol\":{\"keccak256\":\"0x255752b23d1973184bb7e879854403c171ba96f04a42b8e1ffdbe3b463d68ba6\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://63b9b57065324c653fe9bb5011d6561a8f20bd8ea032bb32509f5147cad1e077\",\"dweb:/ipfs/QmUaocYe2wXdBrL8occZmUjrYcsGfPnhP8kt4VzFJatTxW\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/CoreKandel.sol\":{\"keccak256\":\"0x95a35ccefbafb8a79832f312b8fea6d3b84933521391c1396eb410a852e6bffd\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://52c938e85d2d3227845345776977dbc6cd53fc27023f0decc08c66acab6d1518\",\"dweb:/ipfs/QmcSu24Udjh8nTy7VwzTjoLKmAUXfJXAv1jKbaD7PGvZiY\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/DirectWithBidsAndAsksDistribution.sol\":{\"keccak256\":\"0x6e424c8168ba612e53100f47ed27d73d2702d11a8ebee291944b6508f87df3c1\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://6d71dc3b59c99071a5240764290f866a32f7114bf1c57a3d36c5ccc46f24544f\",\"dweb:/ipfs/QmRfe1i9751BfLiyWE9JpHJP6pxXzPvUWQMhiEj1qhbait\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/GeometricKandel.sol\":{\"keccak256\":\"0x49bf32ef326950c199d8dc7aad069779696d2aa54a6aeb65924c68fe2c93956b\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://450bf42af8faa7f56d8102436f778ef2c3c9b91d80f21f742de78bf3de7b842b\",\"dweb:/ipfs/QmfFguoZ5wFcptVY7fXj7XHG68Eu7XNMum9GxMogz4Fo75\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/HasIndexedBidsAndAsks.sol\":{\"keccak256\":\"0xfb0f5e7bb82b3f7c32b05f404deeb56dcad54d61952b8b0126af006456228c09\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://a83d4d9d0ffa6334e8ebaf2e8f3fadc4666348fe5e0da2b825630456c3316510\",\"dweb:/ipfs/QmTPYLRvhf6PTBDbFfBrjSxekvz9fPcfzaK8sKgZCazKb3\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/KandelLib.sol\":{\"keccak256\":\"0x58ff44666d4294134a998683f3ab26d5af8d722e299f794d5b928c8cf0fe134c\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://7e5d9eb5c0ce7ed0e80f628289c785d81c16bdfe33d0c17aef333798820bac7b\",\"dweb:/ipfs/QmQ5VpGVx4XhpxZocQs7wFZMhV3SFoCf4xBCN7z86qiEGA\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/TradesBaseQuotePair.sol\":{\"keccak256\":\"0x2891ec6af9a40dffeff023e5baed8f3be28b88a4a8c1bb8c6296ead493398eaa\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://6e2b1f6a8411d23b7414866915dfe37f29aad66a9ffabae066d0d03ae0213bcd\",\"dweb:/ipfs/QmVYfbQfHqhzZnge33o92LTRPHpkGTxkv26GiMsJb3wd5N\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/routers/abstract/AbstractRouter.sol\":{\"keccak256\":\"0xee7f240b669dbba8d3d90af4a0e910346a9f6ce2787400fcbad800b978cabecb\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://762dec2ea258c2132e10012a95d8724802fb7eb67227dfc6e11da703035cd449\",\"dweb:/ipfs/QmaKxQacNfT7obLdoW9EkT1XeN5d7p1YdfcnD8fruDhBF8\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/utils/AccessControlled.sol\":{\"keccak256\":\"0x05d5cdef0cd8133ac3d451c81ec8e4d8253eed5f1313d2c2b60385a7cefc845a\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://7ef36b8d3f38b47a6062aa04667320aee663630fbd3626569d1928abc2e63f07\",\"dweb:/ipfs/QmUJKfJeswYvHCujVARh3axWZEAsknNoyxNndgv2cj1EXt\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.20+commit.a1b79de6"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "KANDEL_GASREQ",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "MGV",
+          "outputs": [
+            {
+              "internalType": "contract IMangrove",
+              "name": "",
+              "type": "address"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKeyBaseQuote",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            },
+            {
+              "internalType": "bool",
+              "name": "liquiditySharing",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "sow",
+          "outputs": [
+            {
+              "internalType": "contract GeometricKandel",
+              "name": "kandel",
+              "type": "address"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "constructor": {
+            "params": {
+              "kandelGasreq": "the gasreq to use for offers",
+              "mgv": "The Mangrove deployment."
+            }
+          },
+          "sow((address,address,uint256),bool)": {
+            "params": {
+              "liquiditySharing": "if true, `msg.sender` will be used to identify the shares of the deployed Kandel strat. If msg.sender deploys several instances, reserve of the strats will be shared, but this will require a transfer from router to maker contract for each taken offer, since we cannot transfer the full amount to the first maker contract hit in a market order in case later maker contracts need the funds. Still, only a single AAVE redeem will take place.",
+              "olKeyBaseQuote": "The OLKey for the outbound_tkn base and inbound_tkn quote offer list Kandel will act on, the flipped OLKey is used for the opposite offer list."
+            },
+            "returns": {
+              "kandel": "the Kandel contract."
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "KANDEL_GASREQ()": {
+            "notice": "the gasreq to use for offers."
+          },
+          "MGV()": {
+            "notice": "The Mangrove deployment."
+          },
+          "constructor": {
+            "notice": "constructor for `AbstractKandelSeeder`."
+          },
+          "sow((address,address,uint256),bool)": {
+            "notice": "deploys a new Kandel contract for the given seed parameters."
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/",
+        "mgv_arbitrage_lib/=mangrove-arbitrage/lib/",
+        "mgv_arbitrage_script/=mangrove-arbitrage/script/",
+        "mgv_arbitrage_src/=mangrove-arbitrage/src/",
+        "mgv_arbitrage_test/=mangrove-arbitrage/test/",
+        "mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "mgv_script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "mgv_src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "mgv_test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/AbstractKandelSeeder.sol": "AbstractKandelSeeder"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol": {
+        "keccak256": "0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240",
+        "urls": [
+          "bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49",
+          "dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/TransferLib.sol": {
+        "keccak256": "0x3a8b94d6cc226852fefada57b74fe8cb4f3e34bdcf0860825401a57097d7914b",
+        "urls": [
+          "bzz-raw://a7293b7722734c714f12fa51520c2ebf01776ca5f837c06ca27a7c775e4bf579",
+          "dweb:/ipfs/QmTFm7NaHGv32fYoXbiUiMSgpWAJ5GfHoV1LTD49ZfkCpJ"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/BitLib.sol": {
+        "keccak256": "0x5a1c56d67fbd2ef6f3b830cf8dae1885da5f40a37afd11cb3a392be573993c3b",
+        "urls": [
+          "bzz-raw://a07b895de906f49d0ce9e89a349d39220e13039709ea2e2db46ff48310bd4b3b",
+          "dweb:/ipfs/QmZyiLKyTZ9EHwqNRUYukQDdg7CL54Dsu65RYabkkGF1KM"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol": {
+        "keccak256": "0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87",
+        "urls": [
+          "bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb",
+          "dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/DensityLib.sol": {
+        "keccak256": "0xc7ee8be7f11a1bf85aa4ea0e222d4a49d77a378b201e347f9a5e4f28f207a023",
+        "urls": [
+          "bzz-raw://ed718e8bf3fb45bc0e7cf739662422cfe01d8d04a2c99b2fb0cfa2372629c6ad",
+          "dweb:/ipfs/QmZ5QpyMSmkVxayfpZYovNcc8NGJKfVZEMKphzeKk9cVNv"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/LocalExtra.sol": {
+        "keccak256": "0xbd3f6702242dd43ba2493eb54feb8f5d2526967512c6f156d29669b54d9c60f2",
+        "urls": [
+          "bzz-raw://e389f3c78c8073bde973aa3f4770139e2adb4cc00cc1303b77eefa201189a6ff",
+          "dweb:/ipfs/QmZ8vXRUUCinKtqJhV7jMXVeDVfRizhJ3NsumZLQxwSc44"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol": {
+        "keccak256": "0x335217debbf3f4cabeaea88d4dd9777dbda2f2b6ed9684e2285a4d16e1e4464c",
+        "urls": [
+          "bzz-raw://eafe358531d7dc6527d36f8fbc4bc67ab12516398c35338ba5da57a03e24b9f3",
+          "dweb:/ipfs/QmcKxrcr11EM7rsKNUEJq8VXFd2R1dWSTqYk3E4k8dQfzy"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol": {
+        "keccak256": "0x95120d52698bc60b005496036a7c9daa7b8d0b18b571e596e86fd696b36e3264",
+        "urls": [
+          "bzz-raw://684d30cc9673403cfddabdf7d979417c5df050abde16712aeaa9ca6b2725d154",
+          "dweb:/ipfs/QmTkeUAMhb72BNqGjAaaPBj1NHPtKE8wH1R8bpXD5RTKtC"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol": {
+        "keccak256": "0xa4aea464925ad277aab2141885eeeb6e5f1b0963ba08d8887a1c2461c334f222",
+        "urls": [
+          "bzz-raw://c7ec62c85c22d7996abe32663232861f90e855c770dbd252bf49fff4ca786e74",
+          "dweb:/ipfs/QmSHBJfw9bg8QjgBquXVLTS337ZuBGHVkDJfwuAZ6X48sw"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/TickTreeLib.sol": {
+        "keccak256": "0x196c46d6e8e2ab51462f25245f7886568df3f1f65953dcec4c02d7950b4a10cd",
+        "urls": [
+          "bzz-raw://4293ed5fb3ce4d350b9bb5b38342c273e6d772ace098927e006efa7fc4498329",
+          "dweb:/ipfs/QmRCtk481PHQjNdt5Dsa8GYWEX46nYwdeD8R3m92w3Xjxv"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console2.sol": {
+        "keccak256": "0x954646445d1014c3cd85c7918f5e7adeeca5ee44b68c00bafa237e597a4e35ea",
+        "urls": [
+          "bzz-raw://516fa3be52da4763147175bfba4be0aa011fadbb0c1afb01f97265bd4cee7973",
+          "dweb:/ipfs/QmdixAyMJefx7qePChgdxcBH5MxhmN7vsqPuPLx3CgrVmF"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/IMangrove.sol": {
+        "keccak256": "0x7bb6985efa88b71ec161df4e3b6a7b27e32ccae0890c730f25a0c7f1c5e46c0b",
+        "urls": [
+          "bzz-raw://4aaf49678b6cce3cb69ba3d1effe0cab9a8b37cbdd9d462c99cd6bd0679fa3ce",
+          "dweb:/ipfs/QmUCby1BEr1oQtFCq4eDECiv3qrpofG7pUPTmP1GCoQc2q"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol": {
+        "keccak256": "0xe22e3d452040625724ce932cc6f57212c8a32ba021b06f5737e4c23319792c7d",
+        "urls": [
+          "bzz-raw://b3ab9e3726b49b2d526f1cb6634c562cbafdbc1163753d13a3e1c316ca29e726",
+          "dweb:/ipfs/QmS9bYtEVW7i9zAWmC7aPdCDv4BCaBJbhpgrJX6VhH68st"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Global.post.sol": {
+        "keccak256": "0xddf04a10f84edc0b165351f649cad761a429b5c1b218e482917b3e38a2019e7f",
+        "urls": [
+          "bzz-raw://7695a94afb1db46a65967bd63fc344b0a9387a4a2c906fdcac0433fdfec32dff",
+          "dweb:/ipfs/QmcH4k6VwPrSEjqEQVsKTRjxWtmhijoknih6s6R98dnNUM"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Local.post.sol": {
+        "keccak256": "0x03d642742c132c37c1fc29cae87f7ce1be93f89877fe698698d5bd2309c878a5",
+        "urls": [
+          "bzz-raw://6957d461c6486caeee91f5fd8be2ff0f53a8c264c03e8c9b7f7291bf7a72d9fc",
+          "dweb:/ipfs/QmTRqHsnjFA1xDmWWuPqn9aPeweRiYHv1wfTz77qxCmd7k"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol": {
+        "keccak256": "0x812a7c313108b56600f747d89d20b2daa4c4aa489ece1b30c561a353d41468f2",
+        "urls": [
+          "bzz-raw://3fb1685a67020adeece9f6fbf567567d257aafafd2e115e6151f2b2a14b429aa",
+          "dweb:/ipfs/QmUvk3FLDDHRXungxeLtPEfaQj3HNt3ib8nGhonzPdMW6o"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol": {
+        "keccak256": "0xbb0c9e3177017a77de68adeed5cbbf040fc9152f914adb34575eb880979fc720",
+        "urls": [
+          "bzz-raw://fac448393a94f7d797f58ece51c1127a1605397b2371c9d1fe61db0037762a91",
+          "dweb:/ipfs/QmUwcWdecdqa81eLGz4SekQYfiTp5pgs2mvFRYmu7T2sew"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Structs.post.sol": {
+        "keccak256": "0x6121b0f392dbeddf77da4f5bc5dee019878ab21538892bd22dbb9c49e9e068bb",
+        "urls": [
+          "bzz-raw://336a0df7a17dd6b1ed36c4e7f19fc9ab6d4ad933f7e0b3658efba0756c7341bc",
+          "dweb:/ipfs/QmZ7NQY6EJHqcE1oEho1yN9ymsTfVpUcMJABKC8Fq5GvhL"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/MangroveOffer.sol": {
+        "keccak256": "0x789a104578f14acad6b783c9d2a154f9a8749fde35706af5d69361cd14a9e6be",
+        "urls": [
+          "bzz-raw://5c00fbc42821d1c0c293286c5571d6c32ff64104ab49789f95a59d20e9f6aba8",
+          "dweb:/ipfs/QmR3LEBX5UJzxKM3DH8T3uVRVRgmDHkE7B9e2MMDjgokbA"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/interfaces/IOfferLogic.sol": {
+        "keccak256": "0xe768d5ae2ad8cebe4aa8919230ff0bda5e306b876a4a9f50a0710c02656a3809",
+        "urls": [
+          "bzz-raw://e4230bc3c1d39f243f1e6546b1f715d89887f2572a0aec73eda11c3f2a18bdd1",
+          "dweb:/ipfs/QmbUaWNuY6R93ku6tiTkSUw5p9riZT2vQiMLmcb3xSRYBh"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/abstract/Direct.sol": {
+        "keccak256": "0xe925cb9996d0896123ea908cfe1d494a3ee1d24b4db19fc43c29975801568cc2",
+        "urls": [
+          "bzz-raw://a1f168082fcfc7672d9cce557440efe97b2bf95bc8f792d1754da963583bd672",
+          "dweb:/ipfs/QmPuuAY4CDMcQEWKbJezNCazfX2g748Q3hX3ejCWYh4YVC"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/AbstractKandelSeeder.sol": {
+        "keccak256": "0x255752b23d1973184bb7e879854403c171ba96f04a42b8e1ffdbe3b463d68ba6",
+        "urls": [
+          "bzz-raw://63b9b57065324c653fe9bb5011d6561a8f20bd8ea032bb32509f5147cad1e077",
+          "dweb:/ipfs/QmUaocYe2wXdBrL8occZmUjrYcsGfPnhP8kt4VzFJatTxW"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/CoreKandel.sol": {
+        "keccak256": "0x95a35ccefbafb8a79832f312b8fea6d3b84933521391c1396eb410a852e6bffd",
+        "urls": [
+          "bzz-raw://52c938e85d2d3227845345776977dbc6cd53fc27023f0decc08c66acab6d1518",
+          "dweb:/ipfs/QmcSu24Udjh8nTy7VwzTjoLKmAUXfJXAv1jKbaD7PGvZiY"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/DirectWithBidsAndAsksDistribution.sol": {
+        "keccak256": "0x6e424c8168ba612e53100f47ed27d73d2702d11a8ebee291944b6508f87df3c1",
+        "urls": [
+          "bzz-raw://6d71dc3b59c99071a5240764290f866a32f7114bf1c57a3d36c5ccc46f24544f",
+          "dweb:/ipfs/QmRfe1i9751BfLiyWE9JpHJP6pxXzPvUWQMhiEj1qhbait"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/GeometricKandel.sol": {
+        "keccak256": "0x49bf32ef326950c199d8dc7aad069779696d2aa54a6aeb65924c68fe2c93956b",
+        "urls": [
+          "bzz-raw://450bf42af8faa7f56d8102436f778ef2c3c9b91d80f21f742de78bf3de7b842b",
+          "dweb:/ipfs/QmfFguoZ5wFcptVY7fXj7XHG68Eu7XNMum9GxMogz4Fo75"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/HasIndexedBidsAndAsks.sol": {
+        "keccak256": "0xfb0f5e7bb82b3f7c32b05f404deeb56dcad54d61952b8b0126af006456228c09",
+        "urls": [
+          "bzz-raw://a83d4d9d0ffa6334e8ebaf2e8f3fadc4666348fe5e0da2b825630456c3316510",
+          "dweb:/ipfs/QmTPYLRvhf6PTBDbFfBrjSxekvz9fPcfzaK8sKgZCazKb3"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/KandelLib.sol": {
+        "keccak256": "0x58ff44666d4294134a998683f3ab26d5af8d722e299f794d5b928c8cf0fe134c",
+        "urls": [
+          "bzz-raw://7e5d9eb5c0ce7ed0e80f628289c785d81c16bdfe33d0c17aef333798820bac7b",
+          "dweb:/ipfs/QmQ5VpGVx4XhpxZocQs7wFZMhV3SFoCf4xBCN7z86qiEGA"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/TradesBaseQuotePair.sol": {
+        "keccak256": "0x2891ec6af9a40dffeff023e5baed8f3be28b88a4a8c1bb8c6296ead493398eaa",
+        "urls": [
+          "bzz-raw://6e2b1f6a8411d23b7414866915dfe37f29aad66a9ffabae066d0d03ae0213bcd",
+          "dweb:/ipfs/QmVYfbQfHqhzZnge33o92LTRPHpkGTxkv26GiMsJb3wd5N"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/routers/abstract/AbstractRouter.sol": {
+        "keccak256": "0xee7f240b669dbba8d3d90af4a0e910346a9f6ce2787400fcbad800b978cabecb",
+        "urls": [
+          "bzz-raw://762dec2ea258c2132e10012a95d8724802fb7eb67227dfc6e11da703035cd449",
+          "dweb:/ipfs/QmaKxQacNfT7obLdoW9EkT1XeN5d7p1YdfcnD8fruDhBF8"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/utils/AccessControlled.sol": {
+        "keccak256": "0x05d5cdef0cd8133ac3d451c81ec8e4d8253eed5f1313d2c2b60385a7cefc845a",
+        "urls": [
+          "bzz-raw://7ef36b8d3f38b47a6062aa04667320aee663630fbd3626569d1928abc2e63f07",
+          "dweb:/ipfs/QmUJKfJeswYvHCujVARh3axWZEAsknNoyxNndgv2cj1EXt"
+        ],
+        "license": "BSD-2-Clause"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/AbstractKandelSeeder.sol",
+    "id": 85786,
+    "exportedSymbols": {
+      "AbstractKandelSeeder": [
+        85785
+      ],
+      "GeometricKandel": [
+        87283
+      ],
+      "IMangrove": [
+        54127
+      ],
+      "Local": [
+        64937
+      ],
+      "OLKey": [
+        55875
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "41:3482:111",
+    "nodes": [
+      {
+        "id": 85683,
+        "nodeType": "PragmaDirective",
+        "src": "41:24:111",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".10"
+        ]
+      },
+      {
+        "id": 85685,
+        "nodeType": "ImportDirective",
+        "src": "67:54:111",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/GeometricKandel.sol",
+        "file": "./GeometricKandel.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 85786,
+        "sourceUnit": 87284,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 85684,
+              "name": "GeometricKandel",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 87283,
+              "src": "75:15:111",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 85687,
+        "nodeType": "ImportDirective",
+        "src": "122:49:111",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/src/IMangrove.sol",
+        "file": "@mgv/src/IMangrove.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 85786,
+        "sourceUnit": 54128,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 85686,
+              "name": "IMangrove",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 54127,
+              "src": "130:9:111",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 85690,
+        "nodeType": "ImportDirective",
+        "src": "172:54:111",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol",
+        "file": "@mgv/src/core/MgvLib.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 85786,
+        "sourceUnit": 56240,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 85688,
+              "name": "OLKey",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 55875,
+              "src": "180:5:111",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          },
+          {
+            "foreign": {
+              "id": 85689,
+              "name": "Local",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 64937,
+              "src": "187:5:111",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 85785,
+        "nodeType": "ContractDefinition",
+        "src": "625:2897:111",
+        "nodes": [
+          {
+            "id": 85695,
+            "nodeType": "VariableDeclaration",
+            "src": "706:30:111",
+            "nodes": [],
+            "constant": false,
+            "documentation": {
+              "id": 85692,
+              "nodeType": "StructuredDocumentation",
+              "src": "668:35:111",
+              "text": "@notice The Mangrove deployment."
+            },
+            "functionSelector": "99fa5e2d",
+            "mutability": "immutable",
+            "name": "MGV",
+            "nameLocation": "733:3:111",
+            "scope": 85785,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IMangrove_$54127",
+              "typeString": "contract IMangrove"
+            },
+            "typeName": {
+              "id": 85694,
+              "nodeType": "UserDefinedTypeName",
+              "pathNode": {
+                "id": 85693,
+                "name": "IMangrove",
+                "nameLocations": [
+                  "706:9:111"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 54127,
+                "src": "706:9:111"
+              },
+              "referencedDeclaration": 54127,
+              "src": "706:9:111",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IMangrove_$54127",
+                "typeString": "contract IMangrove"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "id": 85698,
+            "nodeType": "VariableDeclaration",
+            "src": "783:35:111",
+            "nodes": [],
+            "constant": false,
+            "documentation": {
+              "id": 85696,
+              "nodeType": "StructuredDocumentation",
+              "src": "740:40:111",
+              "text": "@notice the gasreq to use for offers."
+            },
+            "functionSelector": "3b49aadd",
+            "mutability": "immutable",
+            "name": "KANDEL_GASREQ",
+            "nameLocation": "805:13:111",
+            "scope": 85785,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 85697,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "783:4:111",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "id": 85716,
+            "nodeType": "FunctionDefinition",
+            "src": "971:100:111",
+            "nodes": [],
+            "body": {
+              "id": 85715,
+              "nodeType": "Block",
+              "src": "1017:54:111",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 85709,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 85707,
+                      "name": "MGV",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 85695,
+                      "src": "1023:3:111",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IMangrove_$54127",
+                        "typeString": "contract IMangrove"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 85708,
+                      "name": "mgv",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 85702,
+                      "src": "1029:3:111",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IMangrove_$54127",
+                        "typeString": "contract IMangrove"
+                      }
+                    },
+                    "src": "1023:9:111",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IMangrove_$54127",
+                      "typeString": "contract IMangrove"
+                    }
+                  },
+                  "id": 85710,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1023:9:111"
+                },
+                {
+                  "expression": {
+                    "id": 85713,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 85711,
+                      "name": "KANDEL_GASREQ",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 85698,
+                      "src": "1038:13:111",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 85712,
+                      "name": "kandelGasreq",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 85704,
+                      "src": "1054:12:111",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "1038:28:111",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 85714,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1038:28:111"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 85699,
+              "nodeType": "StructuredDocumentation",
+              "src": "823:145:111",
+              "text": "@notice constructor for `AbstractKandelSeeder`.\n@param mgv The Mangrove deployment.\n@param kandelGasreq the gasreq to use for offers"
+            },
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "parameters": {
+              "id": 85705,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 85702,
+                  "mutability": "mutable",
+                  "name": "mgv",
+                  "nameLocation": "993:3:111",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 85716,
+                  "src": "983:13:111",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IMangrove_$54127",
+                    "typeString": "contract IMangrove"
+                  },
+                  "typeName": {
+                    "id": 85701,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 85700,
+                      "name": "IMangrove",
+                      "nameLocations": [
+                        "983:9:111"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 54127,
+                      "src": "983:9:111"
+                    },
+                    "referencedDeclaration": 54127,
+                    "src": "983:9:111",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IMangrove_$54127",
+                      "typeString": "contract IMangrove"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 85704,
+                  "mutability": "mutable",
+                  "name": "kandelGasreq",
+                  "nameLocation": "1003:12:111",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 85716,
+                  "src": "998:17:111",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 85703,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "998:4:111",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "982:34:111"
+            },
+            "returnParameters": {
+              "id": 85706,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1017:0:111"
+            },
+            "scope": 85785,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 85772,
+            "nodeType": "FunctionDefinition",
+            "src": "1829:796:111",
+            "nodes": [],
+            "body": {
+              "id": 85771,
+              "nodeType": "Block",
+              "src": "1936:689:111",
+              "nodes": [],
+              "statements": [
+                {
+                  "assignments": [
+                    null,
+                    85730
+                  ],
+                  "declarations": [
+                    null,
+                    {
+                      "constant": false,
+                      "id": 85730,
+                      "mutability": "mutable",
+                      "name": "local",
+                      "nameLocation": "2348:5:111",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 85771,
+                      "src": "2342:11:111",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_userDefinedValueType$_Local_$64937",
+                        "typeString": "Local"
+                      },
+                      "typeName": {
+                        "id": 85729,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 85728,
+                          "name": "Local",
+                          "nameLocations": [
+                            "2342:5:111"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 64937,
+                          "src": "2342:5:111"
+                        },
+                        "referencedDeclaration": 64937,
+                        "src": "2342:5:111",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_userDefinedValueType$_Local_$64937",
+                          "typeString": "Local"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 85735,
+                  "initialValue": {
+                    "arguments": [
+                      {
+                        "id": 85733,
+                        "name": "olKeyBaseQuote",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 85720,
+                        "src": "2368:14:111",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                          "typeString": "struct OLKey memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                          "typeString": "struct OLKey memory"
+                        }
+                      ],
+                      "expression": {
+                        "id": 85731,
+                        "name": "MGV",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 85695,
+                        "src": "2357:3:111",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IMangrove_$54127",
+                          "typeString": "contract IMangrove"
+                        }
+                      },
+                      "id": 85732,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "2361:6:111",
+                      "memberName": "config",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 53848,
+                      "src": "2357:10:111",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$_t_struct$_OLKey_$55875_memory_ptr_$returns$_t_userDefinedValueType$_Global_$63500_$_t_userDefinedValueType$_Local_$64937_$",
+                        "typeString": "function (struct OLKey memory) view external returns (Global,Local)"
+                      }
+                    },
+                    "id": 85734,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2357:26:111",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$_t_userDefinedValueType$_Global_$63500_$_t_userDefinedValueType$_Local_$64937_$",
+                      "typeString": "tuple(Global,Local)"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2339:44:111"
+                },
+                {
+                  "assignments": [
+                    null,
+                    85738
+                  ],
+                  "declarations": [
+                    null,
+                    {
+                      "constant": false,
+                      "id": 85738,
+                      "mutability": "mutable",
+                      "name": "local_",
+                      "nameLocation": "2398:6:111",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 85771,
+                      "src": "2392:12:111",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_userDefinedValueType$_Local_$64937",
+                        "typeString": "Local"
+                      },
+                      "typeName": {
+                        "id": 85737,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 85736,
+                          "name": "Local",
+                          "nameLocations": [
+                            "2392:5:111"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 64937,
+                          "src": "2392:5:111"
+                        },
+                        "referencedDeclaration": 64937,
+                        "src": "2392:5:111",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_userDefinedValueType$_Local_$64937",
+                          "typeString": "Local"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 85745,
+                  "initialValue": {
+                    "arguments": [
+                      {
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "expression": {
+                            "id": 85741,
+                            "name": "olKeyBaseQuote",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 85720,
+                            "src": "2419:14:111",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                              "typeString": "struct OLKey memory"
+                            }
+                          },
+                          "id": 85742,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "2434:7:111",
+                          "memberName": "flipped",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 55908,
+                          "src": "2419:22:111",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_struct$_OLKey_$55875_memory_ptr_$returns$_t_struct$_OLKey_$55875_memory_ptr_$attached_to$_t_struct$_OLKey_$55875_memory_ptr_$",
+                            "typeString": "function (struct OLKey memory) pure returns (struct OLKey memory)"
+                          }
+                        },
+                        "id": 85743,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2419:24:111",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                          "typeString": "struct OLKey memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                          "typeString": "struct OLKey memory"
+                        }
+                      ],
+                      "expression": {
+                        "id": 85739,
+                        "name": "MGV",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 85695,
+                        "src": "2408:3:111",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IMangrove_$54127",
+                          "typeString": "contract IMangrove"
+                        }
+                      },
+                      "id": 85740,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "2412:6:111",
+                      "memberName": "config",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 53848,
+                      "src": "2408:10:111",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$_t_struct$_OLKey_$55875_memory_ptr_$returns$_t_userDefinedValueType$_Global_$63500_$_t_userDefinedValueType$_Local_$64937_$",
+                        "typeString": "function (struct OLKey memory) view external returns (Global,Local)"
+                      }
+                    },
+                    "id": 85744,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2408:36:111",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$_t_userDefinedValueType$_Global_$63500_$_t_userDefinedValueType$_Local_$64937_$",
+                      "typeString": "tuple(Global,Local)"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "2389:55:111"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "id": 85753,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "arguments": [],
+                          "expression": {
+                            "argumentTypes": [],
+                            "expression": {
+                              "id": 85747,
+                              "name": "local",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 85730,
+                              "src": "2459:5:111",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_userDefinedValueType$_Local_$64937",
+                                "typeString": "Local"
+                              }
+                            },
+                            "id": 85748,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "2465:6:111",
+                            "memberName": "active",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 65811,
+                            "src": "2459:12:111",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_pure$_t_userDefinedValueType$_Local_$64937_$returns$_t_bool_$attached_to$_t_userDefinedValueType$_Local_$64937_$",
+                              "typeString": "function (Local) pure returns (bool)"
+                            }
+                          },
+                          "id": 85749,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2459:14:111",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "&&",
+                        "rightExpression": {
+                          "arguments": [],
+                          "expression": {
+                            "argumentTypes": [],
+                            "expression": {
+                              "id": 85750,
+                              "name": "local_",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 85738,
+                              "src": "2477:6:111",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_userDefinedValueType$_Local_$64937",
+                                "typeString": "Local"
+                              }
+                            },
+                            "id": 85751,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "2484:6:111",
+                            "memberName": "active",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 65811,
+                            "src": "2477:13:111",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_pure$_t_userDefinedValueType$_Local_$64937_$returns$_t_bool_$attached_to$_t_userDefinedValueType$_Local_$64937_$",
+                              "typeString": "function (Local) pure returns (bool)"
+                            }
+                          },
+                          "id": 85752,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2477:15:111",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "src": "2459:33:111",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "4b616e64656c5365656465722f696e6163746976654d61726b6574",
+                        "id": 85754,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "2494:29:111",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_da56238e333301d814dbff3fa6de87f470948cb970c72c04fe48c69c74324718",
+                          "typeString": "literal_string \"KandelSeeder/inactiveMarket\""
+                        },
+                        "value": "KandelSeeder/inactiveMarket"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_da56238e333301d814dbff3fa6de87f470948cb970c72c04fe48c69c74324718",
+                          "typeString": "literal_string \"KandelSeeder/inactiveMarket\""
+                        }
+                      ],
+                      "id": 85746,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "2451:7:111",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 85755,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2451:73:111",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 85756,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2451:73:111"
+                },
+                {
+                  "expression": {
+                    "id": 85762,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 85757,
+                      "name": "kandel",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 85726,
+                      "src": "2531:6:111",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_GeometricKandel_$87283",
+                        "typeString": "contract GeometricKandel"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "arguments": [
+                        {
+                          "id": 85759,
+                          "name": "olKeyBaseQuote",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 85720,
+                          "src": "2554:14:111",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                            "typeString": "struct OLKey memory"
+                          }
+                        },
+                        {
+                          "id": 85760,
+                          "name": "liquiditySharing",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 85722,
+                          "src": "2570:16:111",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                            "typeString": "struct OLKey memory"
+                          },
+                          {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        ],
+                        "id": 85758,
+                        "name": "_deployKandel",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 85784,
+                        "src": "2540:13:111",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_internal_nonpayable$_t_struct$_OLKey_$55875_memory_ptr_$_t_bool_$returns$_t_contract$_GeometricKandel_$87283_$",
+                          "typeString": "function (struct OLKey memory,bool) returns (contract GeometricKandel)"
+                        }
+                      },
+                      "id": 85761,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "2540:47:111",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_GeometricKandel_$87283",
+                        "typeString": "contract GeometricKandel"
+                      }
+                    },
+                    "src": "2531:56:111",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_GeometricKandel_$87283",
+                      "typeString": "contract GeometricKandel"
+                    }
+                  },
+                  "id": 85763,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2531:56:111"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "expression": {
+                          "id": 85767,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -15,
+                          "src": "2609:3:111",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 85768,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "2613:6:111",
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "src": "2609:10:111",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "id": 85764,
+                        "name": "kandel",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 85726,
+                        "src": "2593:6:111",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_GeometricKandel_$87283",
+                          "typeString": "contract GeometricKandel"
+                        }
+                      },
+                      "id": 85766,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "2600:8:111",
+                      "memberName": "setAdmin",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 89840,
+                      "src": "2593:15:111",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address) external"
+                      }
+                    },
+                    "id": 85769,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2593:27:111",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 85770,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2593:27:111"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 85717,
+              "nodeType": "StructuredDocumentation",
+              "src": "1075:751:111",
+              "text": "@notice deploys a new Kandel contract for the given seed parameters.\n@param olKeyBaseQuote The OLKey for the outbound_tkn base and inbound_tkn quote offer list Kandel will act on, the flipped OLKey is used for the opposite offer list.\n@param liquiditySharing if true, `msg.sender` will be used to identify the shares of the deployed Kandel strat. If msg.sender deploys several instances, reserve of the strats will be shared, but this will require a transfer from router to maker contract for each taken offer, since we cannot transfer the full amount to the first maker contract hit in a market order in case later maker contracts need the funds. Still, only a single AAVE redeem will take place.\n@return kandel the Kandel contract."
+            },
+            "functionSelector": "e170fa6a",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "sow",
+            "nameLocation": "1838:3:111",
+            "parameters": {
+              "id": 85723,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 85720,
+                  "mutability": "mutable",
+                  "name": "olKeyBaseQuote",
+                  "nameLocation": "1855:14:111",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 85772,
+                  "src": "1842:27:111",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                    "typeString": "struct OLKey"
+                  },
+                  "typeName": {
+                    "id": 85719,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 85718,
+                      "name": "OLKey",
+                      "nameLocations": [
+                        "1842:5:111"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 55875,
+                      "src": "1842:5:111"
+                    },
+                    "referencedDeclaration": 55875,
+                    "src": "1842:5:111",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OLKey_$55875_storage_ptr",
+                      "typeString": "struct OLKey"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 85722,
+                  "mutability": "mutable",
+                  "name": "liquiditySharing",
+                  "nameLocation": "1876:16:111",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 85772,
+                  "src": "1871:21:111",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 85721,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1871:4:111",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1841:52:111"
+            },
+            "returnParameters": {
+              "id": 85727,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 85726,
+                  "mutability": "mutable",
+                  "name": "kandel",
+                  "nameLocation": "1928:6:111",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 85772,
+                  "src": "1912:22:111",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_GeometricKandel_$87283",
+                    "typeString": "contract GeometricKandel"
+                  },
+                  "typeName": {
+                    "id": 85725,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 85724,
+                      "name": "GeometricKandel",
+                      "nameLocations": [
+                        "1912:15:111"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 87283,
+                      "src": "1912:15:111"
+                    },
+                    "referencedDeclaration": 87283,
+                    "src": "1912:15:111",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_GeometricKandel_$87283",
+                      "typeString": "contract GeometricKandel"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1911:24:111"
+            },
+            "scope": 85785,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 85784,
+            "nodeType": "FunctionDefinition",
+            "src": "3383:137:111",
+            "nodes": [],
+            "documentation": {
+              "id": 85773,
+              "nodeType": "StructuredDocumentation",
+              "src": "2629:751:111",
+              "text": "@notice deploys a new Kandel contract for the given seed parameters.\n@param olKeyBaseQuote The OLKey for the outbound_tkn base and inbound_tkn quote offer list Kandel will act on, the flipped OLKey is used for the opposite offer list.\n@param liquiditySharing if true, `msg.sender` will be used to identify the shares of the deployed Kandel strat. If msg.sender deploys several instances, reserve of the strats will be shared, but this will require a transfer from router to maker contract for each taken offer, since we cannot transfer the full amount to the first maker contract hit in a market order in case later maker contracts need the funds. Still, only a single AAVE redeem will take place.\n@return kandel the Kandel contract."
+            },
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_deployKandel",
+            "nameLocation": "3392:13:111",
+            "parameters": {
+              "id": 85779,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 85776,
+                  "mutability": "mutable",
+                  "name": "olKeyBaseQuote",
+                  "nameLocation": "3419:14:111",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 85784,
+                  "src": "3406:27:111",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                    "typeString": "struct OLKey"
+                  },
+                  "typeName": {
+                    "id": 85775,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 85774,
+                      "name": "OLKey",
+                      "nameLocations": [
+                        "3406:5:111"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 55875,
+                      "src": "3406:5:111"
+                    },
+                    "referencedDeclaration": 55875,
+                    "src": "3406:5:111",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OLKey_$55875_storage_ptr",
+                      "typeString": "struct OLKey"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 85778,
+                  "mutability": "mutable",
+                  "name": "liquiditySharing",
+                  "nameLocation": "3440:16:111",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 85784,
+                  "src": "3435:21:111",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 85777,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3435:4:111",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3405:52:111"
+            },
+            "returnParameters": {
+              "id": 85783,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 85782,
+                  "mutability": "mutable",
+                  "name": "kandel",
+                  "nameLocation": "3512:6:111",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 85784,
+                  "src": "3496:22:111",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_GeometricKandel_$87283",
+                    "typeString": "contract GeometricKandel"
+                  },
+                  "typeName": {
+                    "id": 85781,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 85780,
+                      "name": "GeometricKandel",
+                      "nameLocations": [
+                        "3496:15:111"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 87283,
+                      "src": "3496:15:111"
+                    },
+                    "referencedDeclaration": 87283,
+                    "src": "3496:15:111",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_GeometricKandel_$87283",
+                      "typeString": "contract GeometricKandel"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3495:24:111"
+            },
+            "scope": 85785,
+            "stateMutability": "nonpayable",
+            "virtual": true,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": true,
+        "baseContracts": [],
+        "canonicalName": "AbstractKandelSeeder",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 85691,
+          "nodeType": "StructuredDocumentation",
+          "src": "228:397:111",
+          "text": "@title Abstract Kandel strat deployer.\n@notice This seeder deploys Kandel strats on demand and binds them to an AAVE router if needed.\n@dev deployer of this contract will gain aave manager power on the AAVE router (power to claim rewards and enter/exit markets)\n@dev when deployer is a contract one must therefore make sure it is able to call the corresponding functions on the router"
+        },
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          85785
+        ],
+        "name": "AbstractKandelSeeder",
+        "nameLocation": "643:20:111",
+        "scope": 85786,
+        "usedErrors": [],
+        "usedEvents": []
+      }
+    ],
+    "license": "BSD-2-Clause"
+  },
+  "id": 111
+}

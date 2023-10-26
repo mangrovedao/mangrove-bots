@@ -7,11 +7,23 @@ test='test'
 out='out'
 libs=['lib']
 cache_path='cache'
-fs_permissions = [{ access = "read-write", path = "./addresses/"}, { access = "read", path = "./out/" }, {access = "read", path = "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-core/"}, {access = "read", path = "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/"}, { access = "read", path = "./mgvConfig.json" }]
+fs_permissions = [{ access = "read-write", path = "./addresses/"}, { access = "read", path = "./out/" }, {access = "read", path = "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/"},{ access = "read", path = "./mgvConfig.json" }]
 solc_version="0.8.20"
 ffi=true
-# optimizer=true
-# optimizer_runs=20000
+
+[profile.arbitrage]
+src='src'
+broadcast='broadcast'
+script='./mangrove-arbitrage/script'
+test='test'
+out='out'
+libs=['lib']
+cache_path='cache'
+fs_permissions = [{ access = "read-write", path = "./addresses/"}, { access = "read", path = "./mgvConfig.json" }, { access = "read", path = "../mangrove-arbitrage/" }]
+solc_version="0.8.20"
+ffi=true
+optimizer=true
+optimizer_runs=20000
 
 # Private keys are expected to be of the form <NETWORK>_PRIVATE_KEY
 # The relevant code is in Deployer.sol

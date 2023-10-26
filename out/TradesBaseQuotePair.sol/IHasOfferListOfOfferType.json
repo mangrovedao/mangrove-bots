@@ -1,0 +1,2670 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"Interface contract for strats needing offer type to offer list mapping.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/TradesBaseQuotePair.sol\":\"IHasOfferListOfOfferType\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/\",\":@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/\",\":@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/\",\":ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/\",\":mgv_arbitrage_lib/=mangrove-arbitrage/lib/\",\":mgv_arbitrage_script/=mangrove-arbitrage/script/\",\":mgv_arbitrage_src/=mangrove-arbitrage/src/\",\":mgv_arbitrage_test/=mangrove-arbitrage/test/\",\":mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":mgv_script/=node_modules/@mangrovedao/mangrove-core/script/\",\":mgv_src/=node_modules/@mangrovedao/mangrove-core/src/\",\":mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":mgv_test/=node_modules/@mangrovedao/mangrove-core/test/\",\":uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/\"]},\"sources\":{\"node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol\":{\"keccak256\":\"0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49\",\"dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/BitLib.sol\":{\"keccak256\":\"0x5a1c56d67fbd2ef6f3b830cf8dae1885da5f40a37afd11cb3a392be573993c3b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a07b895de906f49d0ce9e89a349d39220e13039709ea2e2db46ff48310bd4b3b\",\"dweb:/ipfs/QmZyiLKyTZ9EHwqNRUYukQDdg7CL54Dsu65RYabkkGF1KM\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol\":{\"keccak256\":\"0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb\",\"dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/DensityLib.sol\":{\"keccak256\":\"0xc7ee8be7f11a1bf85aa4ea0e222d4a49d77a378b201e347f9a5e4f28f207a023\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ed718e8bf3fb45bc0e7cf739662422cfe01d8d04a2c99b2fb0cfa2372629c6ad\",\"dweb:/ipfs/QmZ5QpyMSmkVxayfpZYovNcc8NGJKfVZEMKphzeKk9cVNv\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/LocalExtra.sol\":{\"keccak256\":\"0xbd3f6702242dd43ba2493eb54feb8f5d2526967512c6f156d29669b54d9c60f2\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://e389f3c78c8073bde973aa3f4770139e2adb4cc00cc1303b77eefa201189a6ff\",\"dweb:/ipfs/QmZ8vXRUUCinKtqJhV7jMXVeDVfRizhJ3NsumZLQxwSc44\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol\":{\"keccak256\":\"0x335217debbf3f4cabeaea88d4dd9777dbda2f2b6ed9684e2285a4d16e1e4464c\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://eafe358531d7dc6527d36f8fbc4bc67ab12516398c35338ba5da57a03e24b9f3\",\"dweb:/ipfs/QmcKxrcr11EM7rsKNUEJq8VXFd2R1dWSTqYk3E4k8dQfzy\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol\":{\"keccak256\":\"0x95120d52698bc60b005496036a7c9daa7b8d0b18b571e596e86fd696b36e3264\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://684d30cc9673403cfddabdf7d979417c5df050abde16712aeaa9ca6b2725d154\",\"dweb:/ipfs/QmTkeUAMhb72BNqGjAaaPBj1NHPtKE8wH1R8bpXD5RTKtC\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol\":{\"keccak256\":\"0xa4aea464925ad277aab2141885eeeb6e5f1b0963ba08d8887a1c2461c334f222\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://c7ec62c85c22d7996abe32663232861f90e855c770dbd252bf49fff4ca786e74\",\"dweb:/ipfs/QmSHBJfw9bg8QjgBquXVLTS337ZuBGHVkDJfwuAZ6X48sw\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/TickTreeLib.sol\":{\"keccak256\":\"0x196c46d6e8e2ab51462f25245f7886568df3f1f65953dcec4c02d7950b4a10cd\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://4293ed5fb3ce4d350b9bb5b38342c273e6d772ace098927e006efa7fc4498329\",\"dweb:/ipfs/QmRCtk481PHQjNdt5Dsa8GYWEX46nYwdeD8R3m92w3Xjxv\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console2.sol\":{\"keccak256\":\"0x954646445d1014c3cd85c7918f5e7adeeca5ee44b68c00bafa237e597a4e35ea\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://516fa3be52da4763147175bfba4be0aa011fadbb0c1afb01f97265bd4cee7973\",\"dweb:/ipfs/QmdixAyMJefx7qePChgdxcBH5MxhmN7vsqPuPLx3CgrVmF\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol\":{\"keccak256\":\"0xe22e3d452040625724ce932cc6f57212c8a32ba021b06f5737e4c23319792c7d\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://b3ab9e3726b49b2d526f1cb6634c562cbafdbc1163753d13a3e1c316ca29e726\",\"dweb:/ipfs/QmS9bYtEVW7i9zAWmC7aPdCDv4BCaBJbhpgrJX6VhH68st\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Global.post.sol\":{\"keccak256\":\"0xddf04a10f84edc0b165351f649cad761a429b5c1b218e482917b3e38a2019e7f\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://7695a94afb1db46a65967bd63fc344b0a9387a4a2c906fdcac0433fdfec32dff\",\"dweb:/ipfs/QmcH4k6VwPrSEjqEQVsKTRjxWtmhijoknih6s6R98dnNUM\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Local.post.sol\":{\"keccak256\":\"0x03d642742c132c37c1fc29cae87f7ce1be93f89877fe698698d5bd2309c878a5\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://6957d461c6486caeee91f5fd8be2ff0f53a8c264c03e8c9b7f7291bf7a72d9fc\",\"dweb:/ipfs/QmTRqHsnjFA1xDmWWuPqn9aPeweRiYHv1wfTz77qxCmd7k\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol\":{\"keccak256\":\"0x812a7c313108b56600f747d89d20b2daa4c4aa489ece1b30c561a353d41468f2\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://3fb1685a67020adeece9f6fbf567567d257aafafd2e115e6151f2b2a14b429aa\",\"dweb:/ipfs/QmUvk3FLDDHRXungxeLtPEfaQj3HNt3ib8nGhonzPdMW6o\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol\":{\"keccak256\":\"0xbb0c9e3177017a77de68adeed5cbbf040fc9152f914adb34575eb880979fc720\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://fac448393a94f7d797f58ece51c1127a1605397b2371c9d1fe61db0037762a91\",\"dweb:/ipfs/QmUwcWdecdqa81eLGz4SekQYfiTp5pgs2mvFRYmu7T2sew\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Structs.post.sol\":{\"keccak256\":\"0x6121b0f392dbeddf77da4f5bc5dee019878ab21538892bd22dbb9c49e9e068bb\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://336a0df7a17dd6b1ed36c4e7f19fc9ab6d4ad933f7e0b3658efba0756c7341bc\",\"dweb:/ipfs/QmZ7NQY6EJHqcE1oEho1yN9ymsTfVpUcMJABKC8Fq5GvhL\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/TradesBaseQuotePair.sol\":{\"keccak256\":\"0x2891ec6af9a40dffeff023e5baed8f3be28b88a4a8c1bb8c6296ead493398eaa\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://6e2b1f6a8411d23b7414866915dfe37f29aad66a9ffabae066d0d03ae0213bcd\",\"dweb:/ipfs/QmVYfbQfHqhzZnge33o92LTRPHpkGTxkv26GiMsJb3wd5N\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.20+commit.a1b79de6"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/",
+        "mgv_arbitrage_lib/=mangrove-arbitrage/lib/",
+        "mgv_arbitrage_script/=mangrove-arbitrage/script/",
+        "mgv_arbitrage_src/=mangrove-arbitrage/src/",
+        "mgv_arbitrage_test/=mangrove-arbitrage/test/",
+        "mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "mgv_script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "mgv_src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "mgv_test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/TradesBaseQuotePair.sol": "IHasOfferListOfOfferType"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol": {
+        "keccak256": "0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240",
+        "urls": [
+          "bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49",
+          "dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/BitLib.sol": {
+        "keccak256": "0x5a1c56d67fbd2ef6f3b830cf8dae1885da5f40a37afd11cb3a392be573993c3b",
+        "urls": [
+          "bzz-raw://a07b895de906f49d0ce9e89a349d39220e13039709ea2e2db46ff48310bd4b3b",
+          "dweb:/ipfs/QmZyiLKyTZ9EHwqNRUYukQDdg7CL54Dsu65RYabkkGF1KM"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol": {
+        "keccak256": "0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87",
+        "urls": [
+          "bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb",
+          "dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/DensityLib.sol": {
+        "keccak256": "0xc7ee8be7f11a1bf85aa4ea0e222d4a49d77a378b201e347f9a5e4f28f207a023",
+        "urls": [
+          "bzz-raw://ed718e8bf3fb45bc0e7cf739662422cfe01d8d04a2c99b2fb0cfa2372629c6ad",
+          "dweb:/ipfs/QmZ5QpyMSmkVxayfpZYovNcc8NGJKfVZEMKphzeKk9cVNv"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/LocalExtra.sol": {
+        "keccak256": "0xbd3f6702242dd43ba2493eb54feb8f5d2526967512c6f156d29669b54d9c60f2",
+        "urls": [
+          "bzz-raw://e389f3c78c8073bde973aa3f4770139e2adb4cc00cc1303b77eefa201189a6ff",
+          "dweb:/ipfs/QmZ8vXRUUCinKtqJhV7jMXVeDVfRizhJ3NsumZLQxwSc44"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol": {
+        "keccak256": "0x335217debbf3f4cabeaea88d4dd9777dbda2f2b6ed9684e2285a4d16e1e4464c",
+        "urls": [
+          "bzz-raw://eafe358531d7dc6527d36f8fbc4bc67ab12516398c35338ba5da57a03e24b9f3",
+          "dweb:/ipfs/QmcKxrcr11EM7rsKNUEJq8VXFd2R1dWSTqYk3E4k8dQfzy"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol": {
+        "keccak256": "0x95120d52698bc60b005496036a7c9daa7b8d0b18b571e596e86fd696b36e3264",
+        "urls": [
+          "bzz-raw://684d30cc9673403cfddabdf7d979417c5df050abde16712aeaa9ca6b2725d154",
+          "dweb:/ipfs/QmTkeUAMhb72BNqGjAaaPBj1NHPtKE8wH1R8bpXD5RTKtC"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol": {
+        "keccak256": "0xa4aea464925ad277aab2141885eeeb6e5f1b0963ba08d8887a1c2461c334f222",
+        "urls": [
+          "bzz-raw://c7ec62c85c22d7996abe32663232861f90e855c770dbd252bf49fff4ca786e74",
+          "dweb:/ipfs/QmSHBJfw9bg8QjgBquXVLTS337ZuBGHVkDJfwuAZ6X48sw"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/TickTreeLib.sol": {
+        "keccak256": "0x196c46d6e8e2ab51462f25245f7886568df3f1f65953dcec4c02d7950b4a10cd",
+        "urls": [
+          "bzz-raw://4293ed5fb3ce4d350b9bb5b38342c273e6d772ace098927e006efa7fc4498329",
+          "dweb:/ipfs/QmRCtk481PHQjNdt5Dsa8GYWEX46nYwdeD8R3m92w3Xjxv"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console2.sol": {
+        "keccak256": "0x954646445d1014c3cd85c7918f5e7adeeca5ee44b68c00bafa237e597a4e35ea",
+        "urls": [
+          "bzz-raw://516fa3be52da4763147175bfba4be0aa011fadbb0c1afb01f97265bd4cee7973",
+          "dweb:/ipfs/QmdixAyMJefx7qePChgdxcBH5MxhmN7vsqPuPLx3CgrVmF"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol": {
+        "keccak256": "0xe22e3d452040625724ce932cc6f57212c8a32ba021b06f5737e4c23319792c7d",
+        "urls": [
+          "bzz-raw://b3ab9e3726b49b2d526f1cb6634c562cbafdbc1163753d13a3e1c316ca29e726",
+          "dweb:/ipfs/QmS9bYtEVW7i9zAWmC7aPdCDv4BCaBJbhpgrJX6VhH68st"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Global.post.sol": {
+        "keccak256": "0xddf04a10f84edc0b165351f649cad761a429b5c1b218e482917b3e38a2019e7f",
+        "urls": [
+          "bzz-raw://7695a94afb1db46a65967bd63fc344b0a9387a4a2c906fdcac0433fdfec32dff",
+          "dweb:/ipfs/QmcH4k6VwPrSEjqEQVsKTRjxWtmhijoknih6s6R98dnNUM"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Local.post.sol": {
+        "keccak256": "0x03d642742c132c37c1fc29cae87f7ce1be93f89877fe698698d5bd2309c878a5",
+        "urls": [
+          "bzz-raw://6957d461c6486caeee91f5fd8be2ff0f53a8c264c03e8c9b7f7291bf7a72d9fc",
+          "dweb:/ipfs/QmTRqHsnjFA1xDmWWuPqn9aPeweRiYHv1wfTz77qxCmd7k"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol": {
+        "keccak256": "0x812a7c313108b56600f747d89d20b2daa4c4aa489ece1b30c561a353d41468f2",
+        "urls": [
+          "bzz-raw://3fb1685a67020adeece9f6fbf567567d257aafafd2e115e6151f2b2a14b429aa",
+          "dweb:/ipfs/QmUvk3FLDDHRXungxeLtPEfaQj3HNt3ib8nGhonzPdMW6o"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol": {
+        "keccak256": "0xbb0c9e3177017a77de68adeed5cbbf040fc9152f914adb34575eb880979fc720",
+        "urls": [
+          "bzz-raw://fac448393a94f7d797f58ece51c1127a1605397b2371c9d1fe61db0037762a91",
+          "dweb:/ipfs/QmUwcWdecdqa81eLGz4SekQYfiTp5pgs2mvFRYmu7T2sew"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Structs.post.sol": {
+        "keccak256": "0x6121b0f392dbeddf77da4f5bc5dee019878ab21538892bd22dbb9c49e9e068bb",
+        "urls": [
+          "bzz-raw://336a0df7a17dd6b1ed36c4e7f19fc9ab6d4ad933f7e0b3658efba0756c7341bc",
+          "dweb:/ipfs/QmZ7NQY6EJHqcE1oEho1yN9ymsTfVpUcMJABKC8Fq5GvhL"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/TradesBaseQuotePair.sol": {
+        "keccak256": "0x2891ec6af9a40dffeff023e5baed8f3be28b88a4a8c1bb8c6296ead493398eaa",
+        "urls": [
+          "bzz-raw://6e2b1f6a8411d23b7414866915dfe37f29aad66a9ffabae066d0d03ae0213bcd",
+          "dweb:/ipfs/QmVYfbQfHqhzZnge33o92LTRPHpkGTxkv26GiMsJb3wd5N"
+        ],
+        "license": "BSD-2-Clause"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/TradesBaseQuotePair.sol",
+    "id": 88102,
+    "exportedSymbols": {
+      "IERC20": [
+        88
+      ],
+      "IHasOfferListOfOfferType": [
+        87942
+      ],
+      "OLKey": [
+        55875
+      ],
+      "OfferType": [
+        87910
+      ],
+      "TradesBaseQuotePair": [
+        88101
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "41:3442:117",
+    "nodes": [
+      {
+        "id": 87902,
+        "nodeType": "PragmaDirective",
+        "src": "41:24:117",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".10"
+        ]
+      },
+      {
+        "id": 87904,
+        "nodeType": "ImportDirective",
+        "src": "67:47:117",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol",
+        "file": "@mgv/src/core/MgvLib.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 88102,
+        "sourceUnit": 56240,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 87903,
+              "name": "OLKey",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 55875,
+              "src": "75:5:117",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 87906,
+        "nodeType": "ImportDirective",
+        "src": "115:43:117",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol",
+        "file": "@mgv/lib/IERC20.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 88102,
+        "sourceUnit": 89,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 87905,
+              "name": "IERC20",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 88,
+              "src": "123:6:117",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 87910,
+        "nodeType": "EnumDefinition",
+        "src": "187:31:117",
+        "nodes": [],
+        "canonicalName": "OfferType",
+        "documentation": {
+          "id": 87907,
+          "nodeType": "StructuredDocumentation",
+          "src": "160:27:117",
+          "text": "@title a bid or an ask."
+        },
+        "members": [
+          {
+            "id": 87908,
+            "name": "Bid",
+            "nameLocation": "206:3:117",
+            "nodeType": "EnumValue",
+            "src": "206:3:117"
+          },
+          {
+            "id": 87909,
+            "name": "Ask",
+            "nameLocation": "213:3:117",
+            "nodeType": "EnumValue",
+            "src": "213:3:117"
+          }
+        ],
+        "name": "OfferType",
+        "nameLocation": "192:9:117"
+      },
+      {
+        "id": 87942,
+        "nodeType": "ContractDefinition",
+        "src": "302:896:117",
+        "nodes": [
+          {
+            "id": 87921,
+            "nodeType": "FunctionDefinition",
+            "src": "607:95:117",
+            "nodes": [],
+            "documentation": {
+              "id": 87912,
+              "nodeType": "StructuredDocumentation",
+              "src": "349:255:117",
+              "text": "@notice turns an offer type into an (outbound_tkn, inbound_tkn, tickSpacing) pair identifying an offer list.\n@param ba whether one wishes to access the offer lists where asks or bids are posted.\n@return olKey the olKey defining the token pair"
+            },
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "offerListOfOfferType",
+            "nameLocation": "616:20:117",
+            "parameters": {
+              "id": 87916,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 87915,
+                  "mutability": "mutable",
+                  "name": "ba",
+                  "nameLocation": "647:2:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87921,
+                  "src": "637:12:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_OfferType_$87910",
+                    "typeString": "enum OfferType"
+                  },
+                  "typeName": {
+                    "id": 87914,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 87913,
+                      "name": "OfferType",
+                      "nameLocations": [
+                        "637:9:117"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 87910,
+                      "src": "637:9:117"
+                    },
+                    "referencedDeclaration": 87910,
+                    "src": "637:9:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_OfferType_$87910",
+                      "typeString": "enum OfferType"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "636:14:117"
+            },
+            "returnParameters": {
+              "id": 87920,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 87919,
+                  "mutability": "mutable",
+                  "name": "olKey",
+                  "nameLocation": "695:5:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87921,
+                  "src": "682:18:117",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                    "typeString": "struct OLKey"
+                  },
+                  "typeName": {
+                    "id": 87918,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 87917,
+                      "name": "OLKey",
+                      "nameLocations": [
+                        "682:5:117"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 55875,
+                      "src": "682:5:117"
+                    },
+                    "referencedDeclaration": 55875,
+                    "src": "682:5:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OLKey_$55875_storage_ptr",
+                      "typeString": "struct OLKey"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "681:20:117"
+            },
+            "scope": 87942,
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "internal"
+          },
+          {
+            "id": 87931,
+            "nodeType": "FunctionDefinition",
+            "src": "882:95:117",
+            "nodes": [],
+            "documentation": {
+              "id": 87922,
+              "nodeType": "StructuredDocumentation",
+              "src": "706:173:117",
+              "text": "@notice returns the offer type of the offer list whose outbound token is given in the argument.\n@param outbound_tkn the outbound token\n@return ba the offer type"
+            },
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "offerTypeOfOutbound",
+            "nameLocation": "891:19:117",
+            "parameters": {
+              "id": 87926,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 87925,
+                  "mutability": "mutable",
+                  "name": "outbound_tkn",
+                  "nameLocation": "918:12:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87931,
+                  "src": "911:19:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$88",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "id": 87924,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 87923,
+                      "name": "IERC20",
+                      "nameLocations": [
+                        "911:6:117"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 88,
+                      "src": "911:6:117"
+                    },
+                    "referencedDeclaration": 88,
+                    "src": "911:6:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$88",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "910:21:117"
+            },
+            "returnParameters": {
+              "id": 87930,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 87929,
+                  "mutability": "mutable",
+                  "name": "ba",
+                  "nameLocation": "973:2:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87931,
+                  "src": "963:12:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_OfferType_$87910",
+                    "typeString": "enum OfferType"
+                  },
+                  "typeName": {
+                    "id": 87928,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 87927,
+                      "name": "OfferType",
+                      "nameLocations": [
+                        "963:9:117"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 87910,
+                      "src": "963:9:117"
+                    },
+                    "referencedDeclaration": 87910,
+                    "src": "963:9:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_OfferType_$87910",
+                      "typeString": "enum OfferType"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "962:14:117"
+            },
+            "scope": 87942,
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "internal"
+          },
+          {
+            "id": 87941,
+            "nodeType": "FunctionDefinition",
+            "src": "1108:88:117",
+            "nodes": [],
+            "documentation": {
+              "id": 87932,
+              "nodeType": "StructuredDocumentation",
+              "src": "981:124:117",
+              "text": "@notice returns the outbound token for the offer type\n@param ba the offer type\n@return token the outbound token"
+            },
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "outboundOfOfferType",
+            "nameLocation": "1117:19:117",
+            "parameters": {
+              "id": 87936,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 87935,
+                  "mutability": "mutable",
+                  "name": "ba",
+                  "nameLocation": "1147:2:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87941,
+                  "src": "1137:12:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_OfferType_$87910",
+                    "typeString": "enum OfferType"
+                  },
+                  "typeName": {
+                    "id": 87934,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 87933,
+                      "name": "OfferType",
+                      "nameLocations": [
+                        "1137:9:117"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 87910,
+                      "src": "1137:9:117"
+                    },
+                    "referencedDeclaration": 87910,
+                    "src": "1137:9:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_OfferType_$87910",
+                      "typeString": "enum OfferType"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1136:14:117"
+            },
+            "returnParameters": {
+              "id": 87940,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 87939,
+                  "mutability": "mutable",
+                  "name": "token",
+                  "nameLocation": "1189:5:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87941,
+                  "src": "1182:12:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$88",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "id": 87938,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 87937,
+                      "name": "IERC20",
+                      "nameLocations": [
+                        "1182:6:117"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 88,
+                      "src": "1182:6:117"
+                    },
+                    "referencedDeclaration": 88,
+                    "src": "1182:6:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$88",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1181:14:117"
+            },
+            "scope": 87942,
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": true,
+        "baseContracts": [],
+        "canonicalName": "IHasOfferListOfOfferType",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 87911,
+          "nodeType": "StructuredDocumentation",
+          "src": "220:82:117",
+          "text": "@title Interface contract for strats needing offer type to offer list mapping."
+        },
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          87942
+        ],
+        "name": "IHasOfferListOfOfferType",
+        "nameLocation": "320:24:117",
+        "scope": 88102,
+        "usedErrors": [],
+        "usedEvents": []
+      },
+      {
+        "id": 88101,
+        "nodeType": "ContractDefinition",
+        "src": "1405:2077:117",
+        "nodes": [
+          {
+            "id": 87949,
+            "nodeType": "VariableDeclaration",
+            "src": "1524:28:117",
+            "nodes": [],
+            "constant": false,
+            "documentation": {
+              "id": 87946,
+              "nodeType": "StructuredDocumentation",
+              "src": "1475:46:117",
+              "text": "@notice base of the market Kandel is making"
+            },
+            "functionSelector": "ec342ad0",
+            "mutability": "immutable",
+            "name": "BASE",
+            "nameLocation": "1548:4:117",
+            "scope": 88101,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IERC20_$88",
+              "typeString": "contract IERC20"
+            },
+            "typeName": {
+              "id": 87948,
+              "nodeType": "UserDefinedTypeName",
+              "pathNode": {
+                "id": 87947,
+                "name": "IERC20",
+                "nameLocations": [
+                  "1524:6:117"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 88,
+                "src": "1524:6:117"
+              },
+              "referencedDeclaration": 88,
+              "src": "1524:6:117",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IERC20_$88",
+                "typeString": "contract IERC20"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "id": 87953,
+            "nodeType": "VariableDeclaration",
+            "src": "1606:29:117",
+            "nodes": [],
+            "constant": false,
+            "documentation": {
+              "id": 87950,
+              "nodeType": "StructuredDocumentation",
+              "src": "1556:47:117",
+              "text": "@notice quote of the market Kandel is making"
+            },
+            "functionSelector": "9c579839",
+            "mutability": "immutable",
+            "name": "QUOTE",
+            "nameLocation": "1630:5:117",
+            "scope": 88101,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IERC20_$88",
+              "typeString": "contract IERC20"
+            },
+            "typeName": {
+              "id": 87952,
+              "nodeType": "UserDefinedTypeName",
+              "pathNode": {
+                "id": 87951,
+                "name": "IERC20",
+                "nameLocations": [
+                  "1606:6:117"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 88,
+                "src": "1606:6:117"
+              },
+              "referencedDeclaration": 88,
+              "src": "1606:6:117",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IERC20_$88",
+                "typeString": "contract IERC20"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "id": 87956,
+            "nodeType": "VariableDeclaration",
+            "src": "1695:34:117",
+            "nodes": [],
+            "constant": false,
+            "documentation": {
+              "id": 87954,
+              "nodeType": "StructuredDocumentation",
+              "src": "1639:53:117",
+              "text": "@notice tickSpacing of the market Kandel is making"
+            },
+            "functionSelector": "46ca626b",
+            "mutability": "immutable",
+            "name": "TICK_SPACING",
+            "nameLocation": "1717:12:117",
+            "scope": 88101,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 87955,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "1695:4:117",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "id": 87961,
+            "nodeType": "EventDefinition",
+            "src": "2028:38:117",
+            "nodes": [],
+            "anonymous": false,
+            "documentation": {
+              "id": 87957,
+              "nodeType": "StructuredDocumentation",
+              "src": "1734:291:117",
+              "text": "@notice The traded offer list\n@param olKeyHash of the market Kandel is making\n@notice we only emit this, so that the events for a Kandel is self contained. If one uses the KandelSeeder to deploy, then this information is already available from NewKandel or NewAaveKandel events."
+            },
+            "eventSelector": "a1824a64387381916c722ef6d39d525cb7c1dcbdfc58fc2dcd8cf57c061fc4e9",
+            "name": "OfferListKey",
+            "nameLocation": "2034:12:117",
+            "parameters": {
+              "id": 87960,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 87959,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "olKeyHash",
+                  "nameLocation": "2055:9:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87961,
+                  "src": "2047:17:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 87958,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2047:7:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2046:19:117"
+            }
+          },
+          {
+            "id": 87994,
+            "nodeType": "FunctionDefinition",
+            "src": "2266:235:117",
+            "nodes": [],
+            "body": {
+              "id": 87993,
+              "nodeType": "Block",
+              "src": "2307:194:117",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 87973,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 87968,
+                      "name": "BASE",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 87949,
+                      "src": "2313:4:117",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IERC20_$88",
+                        "typeString": "contract IERC20"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "arguments": [
+                        {
+                          "expression": {
+                            "id": 87970,
+                            "name": "olKeyBaseQuote",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 87965,
+                            "src": "2327:14:117",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                              "typeString": "struct OLKey memory"
+                            }
+                          },
+                          "id": 87971,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "2342:12:117",
+                          "memberName": "outbound_tkn",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 55870,
+                          "src": "2327:27:117",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 87969,
+                        "name": "IERC20",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 88,
+                        "src": "2320:6:117",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_IERC20_$88_$",
+                          "typeString": "type(contract IERC20)"
+                        }
+                      },
+                      "id": 87972,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "2320:35:117",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IERC20_$88",
+                        "typeString": "contract IERC20"
+                      }
+                    },
+                    "src": "2313:42:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$88",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "id": 87974,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2313:42:117"
+                },
+                {
+                  "expression": {
+                    "id": 87980,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 87975,
+                      "name": "QUOTE",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 87953,
+                      "src": "2361:5:117",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IERC20_$88",
+                        "typeString": "contract IERC20"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "arguments": [
+                        {
+                          "expression": {
+                            "id": 87977,
+                            "name": "olKeyBaseQuote",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 87965,
+                            "src": "2376:14:117",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                              "typeString": "struct OLKey memory"
+                            }
+                          },
+                          "id": 87978,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "2391:11:117",
+                          "memberName": "inbound_tkn",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 55872,
+                          "src": "2376:26:117",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 87976,
+                        "name": "IERC20",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 88,
+                        "src": "2369:6:117",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_IERC20_$88_$",
+                          "typeString": "type(contract IERC20)"
+                        }
+                      },
+                      "id": 87979,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "2369:34:117",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IERC20_$88",
+                        "typeString": "contract IERC20"
+                      }
+                    },
+                    "src": "2361:42:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$88",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "id": 87981,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2361:42:117"
+                },
+                {
+                  "expression": {
+                    "id": 87985,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 87982,
+                      "name": "TICK_SPACING",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 87956,
+                      "src": "2409:12:117",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "expression": {
+                        "id": 87983,
+                        "name": "olKeyBaseQuote",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87965,
+                        "src": "2424:14:117",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                          "typeString": "struct OLKey memory"
+                        }
+                      },
+                      "id": 87984,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "2439:11:117",
+                      "memberName": "tickSpacing",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 55874,
+                      "src": "2424:26:117",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "2409:41:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 87986,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2409:41:117"
+                },
+                {
+                  "eventCall": {
+                    "arguments": [
+                      {
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "expression": {
+                            "id": 87988,
+                            "name": "olKeyBaseQuote",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 87965,
+                            "src": "2474:14:117",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                              "typeString": "struct OLKey memory"
+                            }
+                          },
+                          "id": 87989,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "2489:4:117",
+                          "memberName": "hash",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 55889,
+                          "src": "2474:19:117",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_struct$_OLKey_$55875_memory_ptr_$returns$_t_bytes32_$attached_to$_t_struct$_OLKey_$55875_memory_ptr_$",
+                            "typeString": "function (struct OLKey memory) pure returns (bytes32)"
+                          }
+                        },
+                        "id": 87990,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "2474:21:117",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "id": 87987,
+                      "name": "OfferListKey",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 87961,
+                      "src": "2461:12:117",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_bytes32_$returns$__$",
+                        "typeString": "function (bytes32)"
+                      }
+                    },
+                    "id": 87991,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2461:35:117",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 87992,
+                  "nodeType": "EmitStatement",
+                  "src": "2456:40:117"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 87962,
+              "nodeType": "StructuredDocumentation",
+              "src": "2070:193:117",
+              "text": "@notice Constructor\n@param olKeyBaseQuote The OLKey for the outbound_tkn base and inbound_tkn quote offer list Kandel will act on, the flipped OLKey is used for the opposite offer list."
+            },
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "parameters": {
+              "id": 87966,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 87965,
+                  "mutability": "mutable",
+                  "name": "olKeyBaseQuote",
+                  "nameLocation": "2291:14:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87994,
+                  "src": "2278:27:117",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                    "typeString": "struct OLKey"
+                  },
+                  "typeName": {
+                    "id": 87964,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 87963,
+                      "name": "OLKey",
+                      "nameLocations": [
+                        "2278:5:117"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 55875,
+                      "src": "2278:5:117"
+                    },
+                    "referencedDeclaration": 55875,
+                    "src": "2278:5:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OLKey_$55875_storage_ptr",
+                      "typeString": "struct OLKey"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2277:29:117"
+            },
+            "returnParameters": {
+              "id": 87967,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2307:0:117"
+            },
+            "scope": 88101,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 88034,
+            "nodeType": "FunctionDefinition",
+            "src": "2547:251:117",
+            "nodes": [],
+            "body": {
+              "id": 88033,
+              "nodeType": "Block",
+              "src": "2643:155:117",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "condition": {
+                      "commonType": {
+                        "typeIdentifier": "t_enum$_OfferType_$87910",
+                        "typeString": "enum OfferType"
+                      },
+                      "id": 88008,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "id": 88005,
+                        "name": "ba",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87998,
+                        "src": "2656:2:117",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_enum$_OfferType_$87910",
+                          "typeString": "enum OfferType"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "==",
+                      "rightExpression": {
+                        "expression": {
+                          "id": 88006,
+                          "name": "OfferType",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 87910,
+                          "src": "2662:9:117",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_enum$_OfferType_$87910_$",
+                            "typeString": "type(enum OfferType)"
+                          }
+                        },
+                        "id": 88007,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "memberLocation": "2672:3:117",
+                        "memberName": "Bid",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 87908,
+                        "src": "2662:13:117",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_enum$_OfferType_$87910",
+                          "typeString": "enum OfferType"
+                        }
+                      },
+                      "src": "2656:19:117",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "falseExpression": {
+                      "arguments": [
+                        {
+                          "arguments": [
+                            {
+                              "id": 88023,
+                              "name": "BASE",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 87949,
+                              "src": "2757:4:117",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_IERC20_$88",
+                                "typeString": "contract IERC20"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_contract$_IERC20_$88",
+                                "typeString": "contract IERC20"
+                              }
+                            ],
+                            "id": 88022,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "2749:7:117",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": {
+                              "id": 88021,
+                              "name": "address",
+                              "nodeType": "ElementaryTypeName",
+                              "src": "2749:7:117",
+                              "typeDescriptions": {}
+                            }
+                          },
+                          "id": 88024,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2749:13:117",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        {
+                          "arguments": [
+                            {
+                              "id": 88027,
+                              "name": "QUOTE",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 87953,
+                              "src": "2772:5:117",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_IERC20_$88",
+                                "typeString": "contract IERC20"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_contract$_IERC20_$88",
+                                "typeString": "contract IERC20"
+                              }
+                            ],
+                            "id": 88026,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "2764:7:117",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": {
+                              "id": 88025,
+                              "name": "address",
+                              "nodeType": "ElementaryTypeName",
+                              "src": "2764:7:117",
+                              "typeDescriptions": {}
+                            }
+                          },
+                          "id": 88028,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2764:14:117",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        {
+                          "id": 88029,
+                          "name": "TICK_SPACING",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 87956,
+                          "src": "2780:12:117",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        ],
+                        "id": 88020,
+                        "name": "OLKey",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 55875,
+                        "src": "2743:5:117",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_OLKey_$55875_storage_ptr_$",
+                          "typeString": "type(struct OLKey storage pointer)"
+                        }
+                      },
+                      "id": 88030,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "2743:50:117",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                        "typeString": "struct OLKey memory"
+                      }
+                    },
+                    "id": 88031,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "Conditional",
+                    "src": "2656:137:117",
+                    "trueExpression": {
+                      "arguments": [
+                        {
+                          "arguments": [
+                            {
+                              "id": 88012,
+                              "name": "QUOTE",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 87953,
+                              "src": "2698:5:117",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_IERC20_$88",
+                                "typeString": "contract IERC20"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_contract$_IERC20_$88",
+                                "typeString": "contract IERC20"
+                              }
+                            ],
+                            "id": 88011,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "2690:7:117",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": {
+                              "id": 88010,
+                              "name": "address",
+                              "nodeType": "ElementaryTypeName",
+                              "src": "2690:7:117",
+                              "typeDescriptions": {}
+                            }
+                          },
+                          "id": 88013,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2690:14:117",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        {
+                          "arguments": [
+                            {
+                              "id": 88016,
+                              "name": "BASE",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 87949,
+                              "src": "2714:4:117",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_IERC20_$88",
+                                "typeString": "contract IERC20"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_contract$_IERC20_$88",
+                                "typeString": "contract IERC20"
+                              }
+                            ],
+                            "id": 88015,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "2706:7:117",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": {
+                              "id": 88014,
+                              "name": "address",
+                              "nodeType": "ElementaryTypeName",
+                              "src": "2706:7:117",
+                              "typeDescriptions": {}
+                            }
+                          },
+                          "id": 88017,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2706:13:117",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        {
+                          "id": 88018,
+                          "name": "TICK_SPACING",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 87956,
+                          "src": "2721:12:117",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        ],
+                        "id": 88009,
+                        "name": "OLKey",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 55875,
+                        "src": "2684:5:117",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_OLKey_$55875_storage_ptr_$",
+                          "typeString": "type(struct OLKey storage pointer)"
+                        }
+                      },
+                      "id": 88019,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "2684:50:117",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                        "typeString": "struct OLKey memory"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                      "typeString": "struct OLKey memory"
+                    }
+                  },
+                  "functionReturnParameters": 88004,
+                  "id": 88032,
+                  "nodeType": "Return",
+                  "src": "2649:144:117"
+                }
+              ]
+            },
+            "baseFunctions": [
+              87921
+            ],
+            "documentation": {
+              "id": 87995,
+              "nodeType": "StructuredDocumentation",
+              "src": "2505:39:117",
+              "text": "@inheritdoc IHasOfferListOfOfferType"
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "offerListOfOfferType",
+            "nameLocation": "2556:20:117",
+            "overrides": {
+              "id": 88000,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "2605:8:117"
+            },
+            "parameters": {
+              "id": 87999,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 87998,
+                  "mutability": "mutable",
+                  "name": "ba",
+                  "nameLocation": "2587:2:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 88034,
+                  "src": "2577:12:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_OfferType_$87910",
+                    "typeString": "enum OfferType"
+                  },
+                  "typeName": {
+                    "id": 87997,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 87996,
+                      "name": "OfferType",
+                      "nameLocations": [
+                        "2577:9:117"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 87910,
+                      "src": "2577:9:117"
+                    },
+                    "referencedDeclaration": 87910,
+                    "src": "2577:9:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_OfferType_$87910",
+                      "typeString": "enum OfferType"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2576:14:117"
+            },
+            "returnParameters": {
+              "id": 88004,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 88003,
+                  "mutability": "mutable",
+                  "name": "olKey",
+                  "nameLocation": "2636:5:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 88034,
+                  "src": "2623:18:117",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_OLKey_$55875_memory_ptr",
+                    "typeString": "struct OLKey"
+                  },
+                  "typeName": {
+                    "id": 88002,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 88001,
+                      "name": "OLKey",
+                      "nameLocations": [
+                        "2623:5:117"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 55875,
+                      "src": "2623:5:117"
+                    },
+                    "referencedDeclaration": 55875,
+                    "src": "2623:5:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OLKey_$55875_storage_ptr",
+                      "typeString": "struct OLKey"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2622:20:117"
+            },
+            "scope": 88101,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 88055,
+            "nodeType": "FunctionDefinition",
+            "src": "2844:163:117",
+            "nodes": [],
+            "body": {
+              "id": 88054,
+              "nodeType": "Block",
+              "src": "2937:70:117",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "condition": {
+                      "commonType": {
+                        "typeIdentifier": "t_contract$_IERC20_$88",
+                        "typeString": "contract IERC20"
+                      },
+                      "id": 88047,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "id": 88045,
+                        "name": "outbound_tkn",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 88038,
+                        "src": "2950:12:117",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IERC20_$88",
+                          "typeString": "contract IERC20"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "==",
+                      "rightExpression": {
+                        "id": 88046,
+                        "name": "BASE",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87949,
+                        "src": "2966:4:117",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IERC20_$88",
+                          "typeString": "contract IERC20"
+                        }
+                      },
+                      "src": "2950:20:117",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "falseExpression": {
+                      "expression": {
+                        "id": 88050,
+                        "name": "OfferType",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87910,
+                        "src": "2989:9:117",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_enum$_OfferType_$87910_$",
+                          "typeString": "type(enum OfferType)"
+                        }
+                      },
+                      "id": 88051,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberLocation": "2999:3:117",
+                      "memberName": "Bid",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 87908,
+                      "src": "2989:13:117",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_enum$_OfferType_$87910",
+                        "typeString": "enum OfferType"
+                      }
+                    },
+                    "id": 88052,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "Conditional",
+                    "src": "2950:52:117",
+                    "trueExpression": {
+                      "expression": {
+                        "id": 88048,
+                        "name": "OfferType",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87910,
+                        "src": "2973:9:117",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_enum$_OfferType_$87910_$",
+                          "typeString": "type(enum OfferType)"
+                        }
+                      },
+                      "id": 88049,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberLocation": "2983:3:117",
+                      "memberName": "Ask",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 87909,
+                      "src": "2973:13:117",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_enum$_OfferType_$87910",
+                        "typeString": "enum OfferType"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_OfferType_$87910",
+                      "typeString": "enum OfferType"
+                    }
+                  },
+                  "functionReturnParameters": 88044,
+                  "id": 88053,
+                  "nodeType": "Return",
+                  "src": "2943:59:117"
+                }
+              ]
+            },
+            "baseFunctions": [
+              87931
+            ],
+            "documentation": {
+              "id": 88035,
+              "nodeType": "StructuredDocumentation",
+              "src": "2802:39:117",
+              "text": "@inheritdoc IHasOfferListOfOfferType"
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "offerTypeOfOutbound",
+            "nameLocation": "2853:19:117",
+            "overrides": {
+              "id": 88040,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "2908:8:117"
+            },
+            "parameters": {
+              "id": 88039,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 88038,
+                  "mutability": "mutable",
+                  "name": "outbound_tkn",
+                  "nameLocation": "2880:12:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 88055,
+                  "src": "2873:19:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$88",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "id": 88037,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 88036,
+                      "name": "IERC20",
+                      "nameLocations": [
+                        "2873:6:117"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 88,
+                      "src": "2873:6:117"
+                    },
+                    "referencedDeclaration": 88,
+                    "src": "2873:6:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$88",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2872:21:117"
+            },
+            "returnParameters": {
+              "id": 88044,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 88043,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 88055,
+                  "src": "2926:9:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_OfferType_$87910",
+                    "typeString": "enum OfferType"
+                  },
+                  "typeName": {
+                    "id": 88042,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 88041,
+                      "name": "OfferType",
+                      "nameLocations": [
+                        "2926:9:117"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 87910,
+                      "src": "2926:9:117"
+                    },
+                    "referencedDeclaration": 87910,
+                    "src": "2926:9:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_OfferType_$87910",
+                      "typeString": "enum OfferType"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2925:11:117"
+            },
+            "scope": 88101,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 88077,
+            "nodeType": "FunctionDefinition",
+            "src": "3053:142:117",
+            "nodes": [],
+            "body": {
+              "id": 88076,
+              "nodeType": "Block",
+              "src": "3142:53:117",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 88074,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 88066,
+                      "name": "token",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 88064,
+                      "src": "3148:5:117",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IERC20_$88",
+                        "typeString": "contract IERC20"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "condition": {
+                        "commonType": {
+                          "typeIdentifier": "t_enum$_OfferType_$87910",
+                          "typeString": "enum OfferType"
+                        },
+                        "id": 88070,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "id": 88067,
+                          "name": "ba",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 88059,
+                          "src": "3156:2:117",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_OfferType_$87910",
+                            "typeString": "enum OfferType"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "expression": {
+                            "id": 88068,
+                            "name": "OfferType",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 87910,
+                            "src": "3162:9:117",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_enum$_OfferType_$87910_$",
+                              "typeString": "type(enum OfferType)"
+                            }
+                          },
+                          "id": 88069,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberLocation": "3172:3:117",
+                          "memberName": "Ask",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 87909,
+                          "src": "3162:13:117",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_OfferType_$87910",
+                            "typeString": "enum OfferType"
+                          }
+                        },
+                        "src": "3156:19:117",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      "falseExpression": {
+                        "id": 88072,
+                        "name": "QUOTE",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87953,
+                        "src": "3185:5:117",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IERC20_$88",
+                          "typeString": "contract IERC20"
+                        }
+                      },
+                      "id": 88073,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "Conditional",
+                      "src": "3156:34:117",
+                      "trueExpression": {
+                        "id": 88071,
+                        "name": "BASE",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87949,
+                        "src": "3178:4:117",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_IERC20_$88",
+                          "typeString": "contract IERC20"
+                        }
+                      },
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IERC20_$88",
+                        "typeString": "contract IERC20"
+                      }
+                    },
+                    "src": "3148:42:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$88",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "id": 88075,
+                  "nodeType": "ExpressionStatement",
+                  "src": "3148:42:117"
+                }
+              ]
+            },
+            "baseFunctions": [
+              87941
+            ],
+            "documentation": {
+              "id": 88056,
+              "nodeType": "StructuredDocumentation",
+              "src": "3011:39:117",
+              "text": "@inheritdoc IHasOfferListOfOfferType"
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "outboundOfOfferType",
+            "nameLocation": "3062:19:117",
+            "overrides": {
+              "id": 88061,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "3110:8:117"
+            },
+            "parameters": {
+              "id": 88060,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 88059,
+                  "mutability": "mutable",
+                  "name": "ba",
+                  "nameLocation": "3092:2:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 88077,
+                  "src": "3082:12:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_OfferType_$87910",
+                    "typeString": "enum OfferType"
+                  },
+                  "typeName": {
+                    "id": 88058,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 88057,
+                      "name": "OfferType",
+                      "nameLocations": [
+                        "3082:9:117"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 87910,
+                      "src": "3082:9:117"
+                    },
+                    "referencedDeclaration": 87910,
+                    "src": "3082:9:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_OfferType_$87910",
+                      "typeString": "enum OfferType"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3081:14:117"
+            },
+            "returnParameters": {
+              "id": 88065,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 88064,
+                  "mutability": "mutable",
+                  "name": "token",
+                  "nameLocation": "3135:5:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 88077,
+                  "src": "3128:12:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$88",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "id": 88063,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 88062,
+                      "name": "IERC20",
+                      "nameLocations": [
+                        "3128:6:117"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 88,
+                      "src": "3128:6:117"
+                    },
+                    "referencedDeclaration": 88,
+                    "src": "3128:6:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$88",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3127:14:117"
+            },
+            "scope": 88101,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 88100,
+            "nodeType": "FunctionDefinition",
+            "src": "3364:116:117",
+            "nodes": [],
+            "body": {
+              "id": 88099,
+              "nodeType": "Block",
+              "src": "3433:47:117",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 88096,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "components": [
+                            {
+                              "commonType": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              },
+                              "id": 88093,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "leftExpression": {
+                                "arguments": [
+                                  {
+                                    "id": 88090,
+                                    "name": "ba",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 88081,
+                                    "src": "3462:2:117",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_enum$_OfferType_$87910",
+                                      "typeString": "enum OfferType"
+                                    }
+                                  }
+                                ],
+                                "expression": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_enum$_OfferType_$87910",
+                                      "typeString": "enum OfferType"
+                                    }
+                                  ],
+                                  "id": 88089,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "nodeType": "ElementaryTypeNameExpression",
+                                  "src": "3457:4:117",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_type$_t_uint256_$",
+                                    "typeString": "type(uint256)"
+                                  },
+                                  "typeName": {
+                                    "id": 88088,
+                                    "name": "uint",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "3457:4:117",
+                                    "typeDescriptions": {}
+                                  }
+                                },
+                                "id": 88091,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "kind": "typeConversion",
+                                "lValueRequested": false,
+                                "nameLocations": [],
+                                "names": [],
+                                "nodeType": "FunctionCall",
+                                "src": "3457:8:117",
+                                "tryCall": false,
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              },
+                              "nodeType": "BinaryOperation",
+                              "operator": "+",
+                              "rightExpression": {
+                                "hexValue": "31",
+                                "id": 88092,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": true,
+                                "kind": "number",
+                                "lValueRequested": false,
+                                "nodeType": "Literal",
+                                "src": "3468:1:117",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_rational_1_by_1",
+                                  "typeString": "int_const 1"
+                                },
+                                "value": "1"
+                              },
+                              "src": "3457:12:117",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            }
+                          ],
+                          "id": 88094,
+                          "isConstant": false,
+                          "isInlineArray": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "TupleExpression",
+                          "src": "3456:14:117",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "%",
+                        "rightExpression": {
+                          "hexValue": "32",
+                          "id": 88095,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "3473:1:117",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_2_by_1",
+                            "typeString": "int_const 2"
+                          },
+                          "value": "2"
+                        },
+                        "src": "3456:18:117",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 88087,
+                      "name": "OfferType",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 87910,
+                      "src": "3446:9:117",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_enum$_OfferType_$87910_$",
+                        "typeString": "type(enum OfferType)"
+                      }
+                    },
+                    "id": 88097,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "3446:29:117",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_OfferType_$87910",
+                      "typeString": "enum OfferType"
+                    }
+                  },
+                  "functionReturnParameters": 88086,
+                  "id": 88098,
+                  "nodeType": "Return",
+                  "src": "3439:36:117"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 88078,
+              "nodeType": "StructuredDocumentation",
+              "src": "3199:162:117",
+              "text": "@notice returns the dual offer type\n@param ba whether the offer is an ask or a bid\n@return baDual is the dual offer type (ask for bid and conversely)"
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "dual",
+            "nameLocation": "3373:4:117",
+            "parameters": {
+              "id": 88082,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 88081,
+                  "mutability": "mutable",
+                  "name": "ba",
+                  "nameLocation": "3388:2:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 88100,
+                  "src": "3378:12:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_OfferType_$87910",
+                    "typeString": "enum OfferType"
+                  },
+                  "typeName": {
+                    "id": 88080,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 88079,
+                      "name": "OfferType",
+                      "nameLocations": [
+                        "3378:9:117"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 87910,
+                      "src": "3378:9:117"
+                    },
+                    "referencedDeclaration": 87910,
+                    "src": "3378:9:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_OfferType_$87910",
+                      "typeString": "enum OfferType"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3377:14:117"
+            },
+            "returnParameters": {
+              "id": 88086,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 88085,
+                  "mutability": "mutable",
+                  "name": "baDual",
+                  "nameLocation": "3425:6:117",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 88100,
+                  "src": "3415:16:117",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_OfferType_$87910",
+                    "typeString": "enum OfferType"
+                  },
+                  "typeName": {
+                    "id": 88084,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 88083,
+                      "name": "OfferType",
+                      "nameLocations": [
+                        "3415:9:117"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 87910,
+                      "src": "3415:9:117"
+                    },
+                    "referencedDeclaration": 87910,
+                    "src": "3415:9:117",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_OfferType_$87910",
+                      "typeString": "enum OfferType"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3414:18:117"
+            },
+            "scope": 88101,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 87944,
+              "name": "IHasOfferListOfOfferType",
+              "nameLocations": [
+                "1446:24:117"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 87942,
+              "src": "1446:24:117"
+            },
+            "id": 87945,
+            "nodeType": "InheritanceSpecifier",
+            "src": "1446:24:117"
+          }
+        ],
+        "canonicalName": "TradesBaseQuotePair",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 87943,
+          "nodeType": "StructuredDocumentation",
+          "src": "1200:205:117",
+          "text": "@title Adds basic base/quote trading pair for bids and asks and couples it to Mangrove's gives, wants, outbound, inbound terminology.\n@dev Implements the IHasOfferListOfOfferType interface contract."
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          88101,
+          87942
+        ],
+        "name": "TradesBaseQuotePair",
+        "nameLocation": "1423:19:117",
+        "scope": 88102,
+        "usedErrors": [],
+        "usedEvents": [
+          87961
+        ]
+      }
+    ],
+    "license": "BSD-2-Clause"
+  },
+  "id": 117
+}

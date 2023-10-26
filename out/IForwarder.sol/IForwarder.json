@@ -1,0 +1,681 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "offerId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "NewOwnedOffer",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "offerIds",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "offerOwners",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "offer_owners",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "offerId",
+          "type": "uint256"
+        }
+      ],
+      "name": "ownerOf",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "offerOwners(bytes32,uint256[])": "ceba7360",
+    "ownerOf(bytes32,uint256)": "3a9dfae2"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"offerId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"NewOwnedOffer\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256[]\",\"name\":\"offerIds\",\"type\":\"uint256[]\"}],\"name\":\"offerOwners\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"offer_owners\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"offerId\",\"type\":\"uint256\"}],\"name\":\"ownerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"events\":{\"NewOwnedOffer(bytes32,uint256,address)\":{\"params\":{\"offerId\":\"the Mangrove offer id. This is indexed to allow RPC calls to filter on it.\",\"olKeyHash\":\"the hash of the offer list key. This is indexed to allow RPC calls to filter on it.\",\"owner\":\"the offer maker that can manage the offer. It is indexed to allow RPC calls to filter on it.\"}}},\"kind\":\"dev\",\"methods\":{\"offerOwners(bytes32,uint256[])\":{\"details\":\"if `offerIds[i]==address(0)` if and only if this offer has no owner.\",\"params\":{\"offerIds\":\"an array of offer identifiers on the offer list.\",\"olKeyHash\":\"the hash of the offer list key.\"},\"returns\":{\"offer_owners\":\"an array of the same length where the address at position i is the owner of `offerIds[i]`\"}},\"ownerOf(bytes32,uint256)\":{\"details\":\"`ownerOf(in,out,id)` is equivalent to `offerOwners(in, out, [id])` but more gas efficient.\",\"params\":{\"offerId\":\"the offer identifier on the offer list.\",\"olKeyHash\":\"the hash of the offer list key.\"},\"returns\":{\"owner\":\"the offer maker that can manage the offer.\"}}},\"title\":\"IForwarder\",\"version\":1},\"userdoc\":{\"events\":{\"NewOwnedOffer(bytes32,uint256,address)\":{\"notice\":\"Logging new offer ownerBy emitting this data, an indexer will be able to keep track of the real owner of an offer\"}},\"kind\":\"user\",\"methods\":{\"offerOwners(bytes32,uint256[])\":{\"notice\":\"view on offer owners.\"},\"ownerOf(bytes32,uint256)\":{\"notice\":\"view on an offer owner.\"}},\"notice\":\"Interface for contracts that manage liquidity on Mangrove on behalf of multiple offer makers\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/interfaces/IForwarder.sol\":\"IForwarder\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/\",\":@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/\",\":@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/\",\":ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/\",\":mgv_arbitrage_lib/=mangrove-arbitrage/lib/\",\":mgv_arbitrage_script/=mangrove-arbitrage/script/\",\":mgv_arbitrage_src/=mangrove-arbitrage/src/\",\":mgv_arbitrage_test/=mangrove-arbitrage/test/\",\":mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":mgv_script/=node_modules/@mangrovedao/mangrove-core/script/\",\":mgv_src/=node_modules/@mangrovedao/mangrove-core/src/\",\":mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":mgv_test/=node_modules/@mangrovedao/mangrove-core/test/\",\":uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/\"]},\"sources\":{\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/interfaces/IForwarder.sol\":{\"keccak256\":\"0x022a3c4560a822ef2fa1173adab039daacc8b96e0ffa93f35fbbcb4894cbe2a7\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://60d13359ffdd8e2b8acfa808906bd531da3743e728ecc572ce23f68f2705e743\",\"dweb:/ipfs/QmR9qx7We2j8FJzGXK3GA5RPnDpK6gfs6G2i3ZyYFiKFrm\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.20+commit.a1b79de6"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "offerId",
+              "type": "uint256",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address",
+              "indexed": true
+            }
+          ],
+          "type": "event",
+          "name": "NewOwnedOffer",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "offerIds",
+              "type": "uint256[]"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "offerOwners",
+          "outputs": [
+            {
+              "internalType": "address[]",
+              "name": "offer_owners",
+              "type": "address[]"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "offerId",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "ownerOf",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "offerOwners(bytes32,uint256[])": {
+            "details": "if `offerIds[i]==address(0)` if and only if this offer has no owner.",
+            "params": {
+              "offerIds": "an array of offer identifiers on the offer list.",
+              "olKeyHash": "the hash of the offer list key."
+            },
+            "returns": {
+              "offer_owners": "an array of the same length where the address at position i is the owner of `offerIds[i]`"
+            }
+          },
+          "ownerOf(bytes32,uint256)": {
+            "details": "`ownerOf(in,out,id)` is equivalent to `offerOwners(in, out, [id])` but more gas efficient.",
+            "params": {
+              "offerId": "the offer identifier on the offer list.",
+              "olKeyHash": "the hash of the offer list key."
+            },
+            "returns": {
+              "owner": "the offer maker that can manage the offer."
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "offerOwners(bytes32,uint256[])": {
+            "notice": "view on offer owners."
+          },
+          "ownerOf(bytes32,uint256)": {
+            "notice": "view on an offer owner."
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/",
+        "mgv_arbitrage_lib/=mangrove-arbitrage/lib/",
+        "mgv_arbitrage_script/=mangrove-arbitrage/script/",
+        "mgv_arbitrage_src/=mangrove-arbitrage/src/",
+        "mgv_arbitrage_test/=mangrove-arbitrage/test/",
+        "mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "mgv_script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "mgv_src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "mgv_test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/interfaces/IForwarder.sol": "IForwarder"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/interfaces/IForwarder.sol": {
+        "keccak256": "0x022a3c4560a822ef2fa1173adab039daacc8b96e0ffa93f35fbbcb4894cbe2a7",
+        "urls": [
+          "bzz-raw://60d13359ffdd8e2b8acfa808906bd531da3743e728ecc572ce23f68f2705e743",
+          "dweb:/ipfs/QmR9qx7We2j8FJzGXK3GA5RPnDpK6gfs6G2i3ZyYFiKFrm"
+        ],
+        "license": "BSD-2-Clause"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/interfaces/IForwarder.sol",
+    "id": 83442,
+    "exportedSymbols": {
+      "IForwarder": [
+        83441
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "41:1631:102",
+    "nodes": [
+      {
+        "id": 83408,
+        "nodeType": "PragmaDirective",
+        "src": "41:25:102",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          ">=",
+          "0.8",
+          ".10"
+        ]
+      },
+      {
+        "id": 83441,
+        "nodeType": "ContractDefinition",
+        "src": "193:1478:102",
+        "nodes": [
+          {
+            "id": 83418,
+            "nodeType": "EventDefinition",
+            "src": "671:92:102",
+            "nodes": [],
+            "anonymous": false,
+            "documentation": {
+              "id": 83410,
+              "nodeType": "StructuredDocumentation",
+              "src": "218:450:102",
+              "text": "@notice Logging new offer owner\n@param olKeyHash the hash of the offer list key. This is indexed to allow RPC calls to filter on it.\n@param offerId the Mangrove offer id. This is indexed to allow RPC calls to filter on it.\n@param owner the offer maker that can manage the offer. It is indexed to allow RPC calls to filter on it.\n@notice By emitting this data, an indexer will be able to keep track of the real owner of an offer"
+            },
+            "eventSelector": "bcee40f594b2f79b90531f446b9f530e5e45cd6c586f31ae8a16c3aff2086560",
+            "name": "NewOwnedOffer",
+            "nameLocation": "677:13:102",
+            "parameters": {
+              "id": 83417,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 83412,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "olKeyHash",
+                  "nameLocation": "707:9:102",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83418,
+                  "src": "691:25:102",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 83411,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "691:7:102",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 83414,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "offerId",
+                  "nameLocation": "731:7:102",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83418,
+                  "src": "718:20:102",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 83413,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "718:4:102",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 83416,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "owner",
+                  "nameLocation": "756:5:102",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83418,
+                  "src": "740:21:102",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 83415,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "740:7:102",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "690:72:102"
+            }
+          },
+          {
+            "id": 83430,
+            "nodeType": "FunctionDefinition",
+            "src": "1126:132:102",
+            "nodes": [],
+            "documentation": {
+              "id": 83419,
+              "nodeType": "StructuredDocumentation",
+              "src": "767:356:102",
+              "text": "@notice view on offer owners.\n @param olKeyHash the hash of the offer list key.\n @param offerIds an array of offer identifiers on the offer list.\n @return offer_owners an array of the same length where the address at position i is the owner of `offerIds[i]`\n @dev if `offerIds[i]==address(0)` if and only if this offer has no owner."
+            },
+            "functionSelector": "ceba7360",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "offerOwners",
+            "nameLocation": "1135:11:102",
+            "parameters": {
+              "id": 83425,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 83421,
+                  "mutability": "mutable",
+                  "name": "olKeyHash",
+                  "nameLocation": "1155:9:102",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83430,
+                  "src": "1147:17:102",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 83420,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1147:7:102",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 83424,
+                  "mutability": "mutable",
+                  "name": "offerIds",
+                  "nameLocation": "1182:8:102",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83430,
+                  "src": "1166:24:102",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_calldata_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 83422,
+                      "name": "uint",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1166:4:102",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 83423,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1166:6:102",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1146:45:102"
+            },
+            "returnParameters": {
+              "id": 83429,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 83428,
+                  "mutability": "mutable",
+                  "name": "offer_owners",
+                  "nameLocation": "1244:12:102",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83430,
+                  "src": "1227:29:102",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 83426,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1227:7:102",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 83427,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1227:9:102",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1226:31:102"
+            },
+            "scope": 83441,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 83440,
+            "nodeType": "FunctionDefinition",
+            "src": "1581:88:102",
+            "nodes": [],
+            "documentation": {
+              "id": 83431,
+              "nodeType": "StructuredDocumentation",
+              "src": "1262:316:102",
+              "text": "@notice view on an offer owner.\n @param olKeyHash the hash of the offer list key.\n @param offerId the offer identifier on the offer list.\n @return owner the offer maker that can manage the offer.\n @dev `ownerOf(in,out,id)` is equivalent to `offerOwners(in, out, [id])` but more gas efficient."
+            },
+            "functionSelector": "3a9dfae2",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "ownerOf",
+            "nameLocation": "1590:7:102",
+            "parameters": {
+              "id": 83436,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 83433,
+                  "mutability": "mutable",
+                  "name": "olKeyHash",
+                  "nameLocation": "1606:9:102",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83440,
+                  "src": "1598:17:102",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 83432,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1598:7:102",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 83435,
+                  "mutability": "mutable",
+                  "name": "offerId",
+                  "nameLocation": "1622:7:102",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83440,
+                  "src": "1617:12:102",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 83434,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1617:4:102",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1597:33:102"
+            },
+            "returnParameters": {
+              "id": 83439,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 83438,
+                  "mutability": "mutable",
+                  "name": "owner",
+                  "nameLocation": "1662:5:102",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83440,
+                  "src": "1654:13:102",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 83437,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1654:7:102",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1653:15:102"
+            },
+            "scope": 83441,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IForwarder",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 83409,
+          "nodeType": "StructuredDocumentation",
+          "src": "68:125:102",
+          "text": "@title IForwarder\n@notice Interface for contracts that manage liquidity on Mangrove on behalf of multiple offer makers"
+        },
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          83441
+        ],
+        "name": "IForwarder",
+        "nameLocation": "203:10:102",
+        "scope": 83442,
+        "usedErrors": [],
+        "usedEvents": [
+          83418
+        ]
+      }
+    ],
+    "license": "BSD-2-Clause"
+  },
+  "id": 102
+}

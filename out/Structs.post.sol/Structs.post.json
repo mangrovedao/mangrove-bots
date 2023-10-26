@@ -1,0 +1,271 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "linkReferences": {}
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Structs.post.sol",
+    "id": 68548,
+    "exportedSymbols": {
+      "Global": [
+        63500
+      ],
+      "GlobalLib": [
+        64895
+      ],
+      "GlobalUnpacked": [
+        63498
+      ],
+      "Local": [
+        64937
+      ],
+      "LocalLib": [
+        66925
+      ],
+      "LocalUnpacked": [
+        64935
+      ],
+      "Offer": [
+        66949
+      ],
+      "OfferDetail": [
+        67755
+      ],
+      "OfferDetailLib": [
+        68529
+      ],
+      "OfferDetailUnpacked": [
+        67753
+      ],
+      "OfferLib": [
+        67732
+      ],
+      "OfferUnpacked": [
+        66947
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "39:476:58",
+    "nodes": [
+      {
+        "id": 68531,
+        "nodeType": "PragmaDirective",
+        "src": "39:24:58",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".13"
+        ]
+      },
+      {
+        "id": 68535,
+        "nodeType": "ImportDirective",
+        "src": "221:65:58",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol",
+        "file": "./Offer.post.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 68548,
+        "sourceUnit": 67733,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 68532,
+              "name": "Offer",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 66949,
+              "src": "229:5:58",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          },
+          {
+            "foreign": {
+              "id": 68533,
+              "name": "OfferUnpacked",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 66947,
+              "src": "236:13:58",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          },
+          {
+            "foreign": {
+              "id": 68534,
+              "name": "OfferLib",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 67732,
+              "src": "251:8:58",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 68539,
+        "nodeType": "ImportDirective",
+        "src": "288:89:58",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol",
+        "file": "./OfferDetail.post.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 68548,
+        "sourceUnit": 68530,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 68536,
+              "name": "OfferDetail",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 67755,
+              "src": "296:11:58",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          },
+          {
+            "foreign": {
+              "id": 68537,
+              "name": "OfferDetailUnpacked",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 67753,
+              "src": "309:19:58",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          },
+          {
+            "foreign": {
+              "id": 68538,
+              "name": "OfferDetailLib",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 68529,
+              "src": "330:14:58",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 68543,
+        "nodeType": "ImportDirective",
+        "src": "379:69:58",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Global.post.sol",
+        "file": "./Global.post.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 68548,
+        "sourceUnit": 64896,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 68540,
+              "name": "Global",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 63500,
+              "src": "387:6:58",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          },
+          {
+            "foreign": {
+              "id": 68541,
+              "name": "GlobalUnpacked",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 63498,
+              "src": "395:14:58",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          },
+          {
+            "foreign": {
+              "id": 68542,
+              "name": "GlobalLib",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 64895,
+              "src": "411:9:58",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 68547,
+        "nodeType": "ImportDirective",
+        "src": "450:65:58",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Local.post.sol",
+        "file": "./Local.post.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 68548,
+        "sourceUnit": 66926,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 68544,
+              "name": "Local",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 64937,
+              "src": "458:5:58",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          },
+          {
+            "foreign": {
+              "id": 68545,
+              "name": "LocalUnpacked",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 64935,
+              "src": "465:13:58",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          },
+          {
+            "foreign": {
+              "id": 68546,
+              "name": "LocalLib",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 66925,
+              "src": "480:8:58",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      }
+    ],
+    "license": "Unlicense"
+  },
+  "id": 58
+}

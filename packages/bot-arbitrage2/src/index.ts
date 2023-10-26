@@ -1,8 +1,11 @@
 import { logger } from "./util/logger";
 
 import { BaseProvider } from "@ethersproject/providers";
-import { Wallet } from "@ethersproject/wallet";
-import Mangrove, { enableLogging, MgvToken } from "@mangrovedao/mangrove.js";
+import Mangrove, {
+  enableLogging,
+  MgvToken,
+  ethers,
+} from "@mangrovedao/mangrove.js";
 
 import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
 import { ExitCode, Setup } from "@mangrovedao/bot-utils";
@@ -22,7 +25,7 @@ const setup = new Setup(config);
 
 async function botFunction(
   mgv: Mangrove,
-  signer: Wallet,
+  signer: ethers.Wallet,
   provider: BaseProvider
 ) {
   const arbitragerContractAddress = getArbitragerContractAddress();

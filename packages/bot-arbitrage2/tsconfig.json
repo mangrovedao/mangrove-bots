@@ -5,7 +5,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "target": "es2020",
-    "strict": true,
+    "strict": false,
     "noImplicitAny": true,
     "noErrorTruncation": true,
     "moduleResolution": "node",
@@ -21,7 +21,7 @@
   "include": ["src/**/*.ts"],
   "references": [
     {
-      "path": "../../node_modules/@mangrovedao/mangrove.js"
+      "path": "node_modules/@mangrovedao/mangrove.js"
     },
     {
       "path": "../bot-utils"

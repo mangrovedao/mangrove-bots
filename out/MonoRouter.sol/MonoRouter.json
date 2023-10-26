@@ -1,0 +1,1279 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "maker",
+          "type": "address"
+        }
+      ],
+      "name": "MakerBind",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "maker",
+          "type": "address"
+        }
+      ],
+      "name": "MakerUnbind",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "admin",
+          "type": "address"
+        }
+      ],
+      "name": "SetAdmin",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "ROUTER_GASREQ",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "token",
+          "type": "address"
+        }
+      ],
+      "name": "activate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "admin",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "current",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "reserveId",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOfReserve",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "makerContract",
+          "type": "address"
+        }
+      ],
+      "name": "bind",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "reserveId",
+          "type": "address"
+        }
+      ],
+      "name": "checkList",
+      "outputs": [],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IERC20[]",
+          "name": "tokens",
+          "type": "address[]"
+        },
+        {
+          "internalType": "address",
+          "name": "reserveId",
+          "type": "address"
+        }
+      ],
+      "name": "flush",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "mkr",
+          "type": "address"
+        }
+      ],
+      "name": "isBound",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "reserveId",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "strict",
+          "type": "bool"
+        }
+      ],
+      "name": "pull",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "pulled",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "reserveId",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "push",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "pushed",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "reserveId",
+          "type": "address"
+        }
+      ],
+      "name": "routerGasreq",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "overhead",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "admin_",
+          "type": "address"
+        }
+      ],
+      "name": "setAdmin",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "unbind",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "makerContract",
+          "type": "address"
+        }
+      ],
+      "name": "unbind",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "ROUTER_GASREQ()": "3871cb3f",
+    "activate(address)": "1c5a9d9c",
+    "admin()": "f851a440",
+    "balanceOfReserve(address,address)": "fe380db5",
+    "bind(address)": "81bac14f",
+    "checkList(address,address)": "a01dccd8",
+    "flush(address[],address)": "f850a81c",
+    "isBound(address)": "2f37b624",
+    "pull(address,address,uint256,bool)": "333dbb0d",
+    "push(address,address,uint256)": "26e8eda2",
+    "routerGasreq(address,address)": "2876fb4e",
+    "setAdmin(address)": "704b6c02",
+    "unbind()": "b6b25742",
+    "unbind(address)": "cf5e7bd3"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"maker\",\"type\":\"address\"}],\"name\":\"MakerBind\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"maker\",\"type\":\"address\"}],\"name\":\"MakerUnbind\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"admin\",\"type\":\"address\"}],\"name\":\"SetAdmin\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"ROUTER_GASREQ\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"}],\"name\":\"activate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"admin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"current\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"reserveId\",\"type\":\"address\"}],\"name\":\"balanceOfReserve\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"makerContract\",\"type\":\"address\"}],\"name\":\"bind\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"reserveId\",\"type\":\"address\"}],\"name\":\"checkList\",\"outputs\":[],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IERC20[]\",\"name\":\"tokens\",\"type\":\"address[]\"},{\"internalType\":\"address\",\"name\":\"reserveId\",\"type\":\"address\"}],\"name\":\"flush\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"mkr\",\"type\":\"address\"}],\"name\":\"isBound\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"reserveId\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"strict\",\"type\":\"bool\"}],\"name\":\"pull\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"pulled\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"reserveId\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"push\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"pushed\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"reserveId\",\"type\":\"address\"}],\"name\":\"routerGasreq\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"overhead\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"admin_\",\"type\":\"address\"}],\"name\":\"setAdmin\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unbind\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"makerContract\",\"type\":\"address\"}],\"name\":\"unbind\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"`routerGasreq(address reserveId)` is thus a constant function.\",\"events\":{\"MakerBind(address)\":{\"params\":{\"maker\":\"the maker address. This is indexed, so that RPC calls can filter on it.\"}},\"MakerUnbind(address)\":{\"params\":{\"maker\":\"the maker address. This is indexed, so that RPC calls can filter on it.\"}},\"SetAdmin(address)\":{\"params\":{\"admin\":\"The new admin.\"}}},\"kind\":\"dev\",\"methods\":{\"activate(address)\":{\"params\":{\"token\":\"the asset one wishes to use the router for\"}},\"admin()\":{\"returns\":{\"current\":\"admin.\"}},\"balanceOfReserve(address,address)\":{\"params\":{\"reserveId\":\"the identifier of the reserve\",\"token\":\"the asset one wishes to know the balance of\"},\"returns\":{\"_0\":\"the balance of the reserve\"}},\"bind(address)\":{\"details\":\"this function is callable by router's admin to bootstrap, but later on an allowed maker contract can add another address\",\"params\":{\"makerContract\":\"the maker contract address\"}},\"checkList(address,address)\":{\"details\":\"`checkList` returns normally if all needed approval are strictly positive. It reverts otherwise with a reason.\",\"params\":{\"reserveId\":\"of the tokens that are being pulled\",\"token\":\"is the asset (and possibly its overlyings) whose approval must be checked\"}},\"constructor\":{\"params\":{\"routerGasreq_\":\"the router specific gas requirement\"}},\"flush(address[],address)\":{\"params\":{\"reserveId\":\"determines the location of the reserve (router implementation dependent).\",\"tokens\":\"to flush\"}},\"isBound(address)\":{\"params\":{\"mkr\":\"the address of a maker contract\"},\"returns\":{\"_0\":\"true if `mkr` is authorized to call this router.\"}},\"pull(address,address,uint256,bool)\":{\"params\":{\"amount\":\"of `token` the maker contract wishes to pull from its reserve\",\"reserveId\":\"identifies the fund owner (router implementation dependent).\",\"strict\":\"when the calling maker contract accepts to receive more funds from reserve than required (this may happen for gas optimization)\",\"token\":\"is the ERC20 managing the pulled asset\"},\"returns\":{\"pulled\":\"the amount that was successfully pulled.\"}},\"push(address,address,uint256)\":{\"params\":{\"amount\":\"is the amount of asset that should be transferred from the calling maker contract\",\"reserveId\":\"determines the location of the reserve (router implementation dependent).\",\"token\":\"is the asset the maker is pushing\"},\"returns\":{\"pushed\":\"fraction of `amount` that was successfully pushed to reserve.\"}},\"routerGasreq(address,address)\":{\"params\":{\"reserveId\":\"that should be considered if a reserve specific route is defined.\",\"token\":\"that should be considered if a token specific route is defined.\"},\"returns\":{\"overhead\":\"the added (overapproximated) gas cost of `push` and `pull` for the routing strategy.\"}},\"setAdmin(address)\":{\"params\":{\"admin_\":\"The new admin. Cannot be `address(0)`.\"}},\"unbind(address)\":{\"params\":{\"makerContract\":\"the maker contract address\"}}},\"title\":\"`MonoRouter` instances have a sourcing strategy which is reserveId and caller independent.\",\"version\":1},\"userdoc\":{\"events\":{\"MakerBind(address)\":{\"notice\":\"logging bound maker contractby emitting this data, an indexer will be able to keep track of what maker contracts are allowed to call this router.\"},\"MakerUnbind(address)\":{\"notice\":\"logging unbound maker contractby emitting this data, an indexer will be able to keep track of what maker contracts are allowed to call this router.\"},\"SetAdmin(address)\":{\"notice\":\"logs new `admin` of `this`By emitting this data, an indexer will be able to keep track of what address is the admin of this contract.\"}},\"kind\":\"user\",\"methods\":{\"ROUTER_GASREQ()\":{\"notice\":\"the router specific gas requirement\"},\"activate(address)\":{\"notice\":\"performs necessary approval to activate router function on a particular asset\"},\"admin()\":{\"notice\":\"Retrieves the current admin.\"},\"balanceOfReserve(address,address)\":{\"notice\":\"Balance of a reserve\"},\"bind(address)\":{\"notice\":\"adds a maker contract address to the allowed makers of this router\"},\"checkList(address,address)\":{\"notice\":\"allows a makerContract to verify it is ready to use `this` router for a particular reserve\"},\"constructor\":{\"notice\":\"Constructor\"},\"flush(address[],address)\":{\"notice\":\"iterative `push` for the whole balance in a single call\"},\"isBound(address)\":{\"notice\":\"getter for the `makers: addr => bool` mapping\"},\"pull(address,address,uint256,bool)\":{\"notice\":\"pulls liquidity from the reserve and sends it to the calling maker contract.\"},\"push(address,address,uint256)\":{\"notice\":\"pushes assets from calling's maker contract to a reserve\"},\"routerGasreq(address,address)\":{\"notice\":\"view for gas overhead of this router.\"},\"setAdmin(address)\":{\"notice\":\"This sets the admin. Only the current admin can change the admin.\"},\"unbind()\":{\"notice\":\"removes `msg.sender` from the allowed makers of this router\"},\"unbind(address)\":{\"notice\":\"removes a makerContract from the allowed makers of this router\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/routers/abstract/MonoRouter.sol\":\"MonoRouter\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/\",\":@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/\",\":@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/\",\":ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/\",\":mgv_arbitrage_lib/=mangrove-arbitrage/lib/\",\":mgv_arbitrage_script/=mangrove-arbitrage/script/\",\":mgv_arbitrage_src/=mangrove-arbitrage/src/\",\":mgv_arbitrage_test/=mangrove-arbitrage/test/\",\":mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":mgv_script/=node_modules/@mangrovedao/mangrove-core/script/\",\":mgv_src/=node_modules/@mangrovedao/mangrove-core/src/\",\":mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":mgv_test/=node_modules/@mangrovedao/mangrove-core/test/\",\":uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/\"]},\"sources\":{\"node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol\":{\"keccak256\":\"0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49\",\"dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/routers/abstract/AbstractRouter.sol\":{\"keccak256\":\"0xee7f240b669dbba8d3d90af4a0e910346a9f6ce2787400fcbad800b978cabecb\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://762dec2ea258c2132e10012a95d8724802fb7eb67227dfc6e11da703035cd449\",\"dweb:/ipfs/QmaKxQacNfT7obLdoW9EkT1XeN5d7p1YdfcnD8fruDhBF8\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/routers/abstract/MonoRouter.sol\":{\"keccak256\":\"0xf4c1c9df359a1470a0832896b60809bcbf2cbe7185d7a0c439d54e6aba8715e5\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://0857fdf4b30299cf836ee17aca0b5652ec27539aa1cccb8912f2587689a72066\",\"dweb:/ipfs/QmZYz8xr4pf1BetF4UztsYXNjsSJwpCJPqjfTSNNdMgYS5\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/utils/AccessControlled.sol\":{\"keccak256\":\"0x05d5cdef0cd8133ac3d451c81ec8e4d8253eed5f1313d2c2b60385a7cefc845a\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://7ef36b8d3f38b47a6062aa04667320aee663630fbd3626569d1928abc2e63f07\",\"dweb:/ipfs/QmUJKfJeswYvHCujVARh3axWZEAsknNoyxNndgv2cj1EXt\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.20+commit.a1b79de6"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "maker",
+              "type": "address",
+              "indexed": true
+            }
+          ],
+          "type": "event",
+          "name": "MakerBind",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "maker",
+              "type": "address",
+              "indexed": true
+            }
+          ],
+          "type": "event",
+          "name": "MakerUnbind",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "admin",
+              "type": "address",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "SetAdmin",
+          "anonymous": false
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "ROUTER_GASREQ",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "contract IERC20",
+              "name": "token",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "activate"
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "admin",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "current",
+              "type": "address"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "contract IERC20",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "reserveId",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "balanceOfReserve",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "makerContract",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "bind"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "contract IERC20",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "reserveId",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "checkList"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "contract IERC20[]",
+              "name": "tokens",
+              "type": "address[]"
+            },
+            {
+              "internalType": "address",
+              "name": "reserveId",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "flush"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "mkr",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "isBound",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "contract IERC20",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "reserveId",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "strict",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "pull",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "pulled",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "contract IERC20",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "reserveId",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "push",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "pushed",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "contract IERC20",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "reserveId",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "routerGasreq",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "overhead",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "admin_",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setAdmin"
+        },
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "unbind"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "makerContract",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "unbind"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "activate(address)": {
+            "params": {
+              "token": "the asset one wishes to use the router for"
+            }
+          },
+          "admin()": {
+            "returns": {
+              "current": "admin."
+            }
+          },
+          "balanceOfReserve(address,address)": {
+            "params": {
+              "reserveId": "the identifier of the reserve",
+              "token": "the asset one wishes to know the balance of"
+            },
+            "returns": {
+              "_0": "the balance of the reserve"
+            }
+          },
+          "bind(address)": {
+            "details": "this function is callable by router's admin to bootstrap, but later on an allowed maker contract can add another address",
+            "params": {
+              "makerContract": "the maker contract address"
+            }
+          },
+          "checkList(address,address)": {
+            "details": "`checkList` returns normally if all needed approval are strictly positive. It reverts otherwise with a reason.",
+            "params": {
+              "reserveId": "of the tokens that are being pulled",
+              "token": "is the asset (and possibly its overlyings) whose approval must be checked"
+            }
+          },
+          "constructor": {
+            "params": {
+              "routerGasreq_": "the router specific gas requirement"
+            }
+          },
+          "flush(address[],address)": {
+            "params": {
+              "reserveId": "determines the location of the reserve (router implementation dependent).",
+              "tokens": "to flush"
+            }
+          },
+          "isBound(address)": {
+            "params": {
+              "mkr": "the address of a maker contract"
+            },
+            "returns": {
+              "_0": "true if `mkr` is authorized to call this router."
+            }
+          },
+          "pull(address,address,uint256,bool)": {
+            "params": {
+              "amount": "of `token` the maker contract wishes to pull from its reserve",
+              "reserveId": "identifies the fund owner (router implementation dependent).",
+              "strict": "when the calling maker contract accepts to receive more funds from reserve than required (this may happen for gas optimization)",
+              "token": "is the ERC20 managing the pulled asset"
+            },
+            "returns": {
+              "pulled": "the amount that was successfully pulled."
+            }
+          },
+          "push(address,address,uint256)": {
+            "params": {
+              "amount": "is the amount of asset that should be transferred from the calling maker contract",
+              "reserveId": "determines the location of the reserve (router implementation dependent).",
+              "token": "is the asset the maker is pushing"
+            },
+            "returns": {
+              "pushed": "fraction of `amount` that was successfully pushed to reserve."
+            }
+          },
+          "routerGasreq(address,address)": {
+            "params": {
+              "reserveId": "that should be considered if a reserve specific route is defined.",
+              "token": "that should be considered if a token specific route is defined."
+            },
+            "returns": {
+              "overhead": "the added (overapproximated) gas cost of `push` and `pull` for the routing strategy."
+            }
+          },
+          "setAdmin(address)": {
+            "params": {
+              "admin_": "The new admin. Cannot be `address(0)`."
+            }
+          },
+          "unbind(address)": {
+            "params": {
+              "makerContract": "the maker contract address"
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "ROUTER_GASREQ()": {
+            "notice": "the router specific gas requirement"
+          },
+          "activate(address)": {
+            "notice": "performs necessary approval to activate router function on a particular asset"
+          },
+          "admin()": {
+            "notice": "Retrieves the current admin."
+          },
+          "balanceOfReserve(address,address)": {
+            "notice": "Balance of a reserve"
+          },
+          "bind(address)": {
+            "notice": "adds a maker contract address to the allowed makers of this router"
+          },
+          "checkList(address,address)": {
+            "notice": "allows a makerContract to verify it is ready to use `this` router for a particular reserve"
+          },
+          "constructor": {
+            "notice": "Constructor"
+          },
+          "flush(address[],address)": {
+            "notice": "iterative `push` for the whole balance in a single call"
+          },
+          "isBound(address)": {
+            "notice": "getter for the `makers: addr => bool` mapping"
+          },
+          "pull(address,address,uint256,bool)": {
+            "notice": "pulls liquidity from the reserve and sends it to the calling maker contract."
+          },
+          "push(address,address,uint256)": {
+            "notice": "pushes assets from calling's maker contract to a reserve"
+          },
+          "routerGasreq(address,address)": {
+            "notice": "view for gas overhead of this router."
+          },
+          "setAdmin(address)": {
+            "notice": "This sets the admin. Only the current admin can change the admin."
+          },
+          "unbind()": {
+            "notice": "removes `msg.sender` from the allowed makers of this router"
+          },
+          "unbind(address)": {
+            "notice": "removes a makerContract from the allowed makers of this router"
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/",
+        "mgv_arbitrage_lib/=mangrove-arbitrage/lib/",
+        "mgv_arbitrage_script/=mangrove-arbitrage/script/",
+        "mgv_arbitrage_src/=mangrove-arbitrage/src/",
+        "mgv_arbitrage_test/=mangrove-arbitrage/test/",
+        "mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "mgv_script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "mgv_src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "mgv_test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/routers/abstract/MonoRouter.sol": "MonoRouter"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol": {
+        "keccak256": "0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240",
+        "urls": [
+          "bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49",
+          "dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/routers/abstract/AbstractRouter.sol": {
+        "keccak256": "0xee7f240b669dbba8d3d90af4a0e910346a9f6ce2787400fcbad800b978cabecb",
+        "urls": [
+          "bzz-raw://762dec2ea258c2132e10012a95d8724802fb7eb67227dfc6e11da703035cd449",
+          "dweb:/ipfs/QmaKxQacNfT7obLdoW9EkT1XeN5d7p1YdfcnD8fruDhBF8"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/routers/abstract/MonoRouter.sol": {
+        "keccak256": "0xf4c1c9df359a1470a0832896b60809bcbf2cbe7185d7a0c439d54e6aba8715e5",
+        "urls": [
+          "bzz-raw://0857fdf4b30299cf836ee17aca0b5652ec27539aa1cccb8912f2587689a72066",
+          "dweb:/ipfs/QmZYz8xr4pf1BetF4UztsYXNjsSJwpCJPqjfTSNNdMgYS5"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/utils/AccessControlled.sol": {
+        "keccak256": "0x05d5cdef0cd8133ac3d451c81ec8e4d8253eed5f1313d2c2b60385a7cefc845a",
+        "urls": [
+          "bzz-raw://7ef36b8d3f38b47a6062aa04667320aee663630fbd3626569d1928abc2e63f07",
+          "dweb:/ipfs/QmUJKfJeswYvHCujVARh3axWZEAsknNoyxNndgv2cj1EXt"
+        ],
+        "license": "BSD-2-Clause"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/routers/abstract/MonoRouter.sol",
+    "id": 88663,
+    "exportedSymbols": {
+      "AbstractRouter": [
+        88623
+      ],
+      "IERC20": [
+        88
+      ],
+      "MonoRouter": [
+        88662
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "41:746:120",
+    "nodes": [
+      {
+        "id": 88625,
+        "nodeType": "PragmaDirective",
+        "src": "41:24:120",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".10"
+        ]
+      },
+      {
+        "id": 88627,
+        "nodeType": "ImportDirective",
+        "src": "67:43:120",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol",
+        "file": "@mgv/lib/IERC20.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 88663,
+        "sourceUnit": 89,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 88626,
+              "name": "IERC20",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 88,
+              "src": "75:6:120",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 88629,
+        "nodeType": "ImportDirective",
+        "src": "111:52:120",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/routers/abstract/AbstractRouter.sol",
+        "file": "./AbstractRouter.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 88663,
+        "sourceUnit": 88624,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 88628,
+              "name": "AbstractRouter",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 88623,
+              "src": "119:14:120",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 88662,
+        "nodeType": "ContractDefinition",
+        "src": "337:449:120",
+        "nodes": [
+          {
+            "id": 88635,
+            "nodeType": "VariableDeclaration",
+            "src": "437:35:120",
+            "nodes": [],
+            "constant": false,
+            "documentation": {
+              "id": 88633,
+              "nodeType": "StructuredDocumentation",
+              "src": "388:46:120",
+              "text": "@notice the router specific gas requirement"
+            },
+            "functionSelector": "3871cb3f",
+            "mutability": "immutable",
+            "name": "ROUTER_GASREQ",
+            "nameLocation": "459:13:120",
+            "scope": 88662,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 88634,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "437:4:120",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "id": 88646,
+            "nodeType": "FunctionDefinition",
+            "src": "564:72:120",
+            "nodes": [],
+            "body": {
+              "id": 88645,
+              "nodeType": "Block",
+              "src": "596:40:120",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 88643,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 88641,
+                      "name": "ROUTER_GASREQ",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 88635,
+                      "src": "602:13:120",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 88642,
+                      "name": "routerGasreq_",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 88638,
+                      "src": "618:13:120",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "602:29:120",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 88644,
+                  "nodeType": "ExpressionStatement",
+                  "src": "602:29:120"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 88636,
+              "nodeType": "StructuredDocumentation",
+              "src": "477:84:120",
+              "text": "@notice Constructor\n@param routerGasreq_ the router specific gas requirement"
+            },
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "parameters": {
+              "id": 88639,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 88638,
+                  "mutability": "mutable",
+                  "name": "routerGasreq_",
+                  "nameLocation": "581:13:120",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 88646,
+                  "src": "576:18:120",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 88637,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "576:4:120",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "575:20:120"
+            },
+            "returnParameters": {
+              "id": 88640,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "596:0:120"
+            },
+            "scope": 88662,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 88661,
+            "nodeType": "FunctionDefinition",
+            "src": "672:112:120",
+            "nodes": [],
+            "body": {
+              "id": 88660,
+              "nodeType": "Block",
+              "src": "753:31:120",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 88658,
+                    "name": "ROUTER_GASREQ",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 88635,
+                    "src": "766:13:120",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 88657,
+                  "id": 88659,
+                  "nodeType": "Return",
+                  "src": "759:20:120"
+                }
+              ]
+            },
+            "baseFunctions": [
+              88330
+            ],
+            "documentation": {
+              "id": 88647,
+              "nodeType": "StructuredDocumentation",
+              "src": "640:29:120",
+              "text": "@inheritdoc AbstractRouter"
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "__routerGasreq__",
+            "nameLocation": "681:16:120",
+            "overrides": {
+              "id": 88654,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "729:8:120"
+            },
+            "parameters": {
+              "id": 88653,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 88650,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 88661,
+                  "src": "698:6:120",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC20_$88",
+                    "typeString": "contract IERC20"
+                  },
+                  "typeName": {
+                    "id": 88649,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 88648,
+                      "name": "IERC20",
+                      "nameLocations": [
+                        "698:6:120"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 88,
+                      "src": "698:6:120"
+                    },
+                    "referencedDeclaration": 88,
+                    "src": "698:6:120",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC20_$88",
+                      "typeString": "contract IERC20"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 88652,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 88661,
+                  "src": "706:7:120",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 88651,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "706:7:120",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "697:17:120"
+            },
+            "returnParameters": {
+              "id": 88657,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 88656,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 88661,
+                  "src": "747:4:120",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 88655,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "747:4:120",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "746:6:120"
+            },
+            "scope": 88662,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 88631,
+              "name": "AbstractRouter",
+              "nameLocations": [
+                "369:14:120"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 88623,
+              "src": "369:14:120"
+            },
+            "id": 88632,
+            "nodeType": "InheritanceSpecifier",
+            "src": "369:14:120"
+          }
+        ],
+        "canonicalName": "MonoRouter",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 88630,
+          "nodeType": "StructuredDocumentation",
+          "src": "165:172:120",
+          "text": "@title `MonoRouter` instances have a sourcing strategy which is reserveId and caller independent.\n@dev `routerGasreq(address reserveId)` is thus a constant function."
+        },
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          88662,
+          88623,
+          89841
+        ],
+        "name": "MonoRouter",
+        "nameLocation": "355:10:120",
+        "scope": 88663,
+        "usedErrors": [],
+        "usedEvents": [
+          88284,
+          88289,
+          89732
+        ]
+      }
+    ],
+    "license": "BSD-2-Clause"
+  },
+  "id": 120
+}

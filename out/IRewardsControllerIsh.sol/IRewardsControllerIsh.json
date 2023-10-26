@@ -1,0 +1,1666 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "assets",
+          "type": "address[]"
+        },
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        }
+      ],
+      "name": "claimAllRewards",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "rewardsList",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "claimedAmounts",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "assets",
+          "type": "address[]"
+        },
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        }
+      ],
+      "name": "claimAllRewardsOnBehalf",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "rewardsList",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "claimedAmounts",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "assets",
+          "type": "address[]"
+        }
+      ],
+      "name": "claimAllRewardsToSelf",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "rewardsList",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "claimedAmounts",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "assets",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "reward",
+          "type": "address"
+        }
+      ],
+      "name": "claimRewards",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "assets",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "reward",
+          "type": "address"
+        }
+      ],
+      "name": "claimRewardsOnBehalf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "assets",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "reward",
+          "type": "address"
+        }
+      ],
+      "name": "claimRewardsToSelf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "claimAllRewards(address[],address)": "bb492bf5",
+    "claimAllRewardsOnBehalf(address[],address,address)": "9ff55db9",
+    "claimAllRewardsToSelf(address[])": "bf90f63a",
+    "claimRewards(address[],uint256,address,address)": "236300dc",
+    "claimRewardsOnBehalf(address[],uint256,address,address,address)": "33028b99",
+    "claimRewardsToSelf(address[],uint256,address)": "57b89883"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"assets\",\"type\":\"address[]\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"claimAllRewards\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"rewardsList\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"claimedAmounts\",\"type\":\"uint256[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"assets\",\"type\":\"address[]\"},{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"claimAllRewardsOnBehalf\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"rewardsList\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"claimedAmounts\",\"type\":\"uint256[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"assets\",\"type\":\"address[]\"}],\"name\":\"claimAllRewardsToSelf\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"rewardsList\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"claimedAmounts\",\"type\":\"uint256[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"assets\",\"type\":\"address[]\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"reward\",\"type\":\"address\"}],\"name\":\"claimRewards\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"assets\",\"type\":\"address[]\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"reward\",\"type\":\"address\"}],\"name\":\"claimRewardsOnBehalf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"assets\",\"type\":\"address[]\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"reward\",\"type\":\"address\"}],\"name\":\"claimRewardsToSelf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"Aave\",\"kind\":\"dev\",\"methods\":{\"claimAllRewards(address[],address)\":{\"details\":\"Claims all rewards for a user to the desired address, on all the assets of the pool, accumulating the pending rewards\",\"params\":{\"assets\":\"The list of assets to check eligible distributions before claiming rewards\",\"to\":\"The address that will be receiving the rewards\"},\"returns\":{\"claimedAmounts\":\"List that contains the claimed amount per reward, following same order as \\\"rewardList\\\"*\",\"rewardsList\":\"List of addresses of the reward tokens\"}},\"claimAllRewardsOnBehalf(address[],address,address)\":{\"details\":\"Claims all rewards for a user on behalf, on all the assets of the pool, accumulating the pending rewards. The caller must be whitelisted via \\\"allowClaimOnBehalf\\\" function by the RewardsAdmin role manager\",\"params\":{\"assets\":\"The list of assets to check eligible distributions before claiming rewards\",\"to\":\"The address that will be receiving the rewards\",\"user\":\"The address to check and claim rewards\"},\"returns\":{\"claimedAmounts\":\"List that contains the claimed amount per reward, following same order as \\\"rewardsList\\\"*\",\"rewardsList\":\"List of addresses of the reward tokens\"}},\"claimAllRewardsToSelf(address[])\":{\"details\":\"Claims all reward for msg.sender, on all the assets of the pool, accumulating the pending rewards\",\"params\":{\"assets\":\"The list of assets to check eligible distributions before claiming rewards\"},\"returns\":{\"claimedAmounts\":\"List that contains the claimed amount per reward, following same order as \\\"rewardsList\\\"*\",\"rewardsList\":\"List of addresses of the reward tokens\"}},\"claimRewards(address[],uint256,address,address)\":{\"details\":\"Claims reward for a user to the desired address, on all the assets of the pool, accumulating the pending rewards\",\"params\":{\"amount\":\"The amount of rewards to claim\",\"assets\":\"List of assets to check eligible distributions before claiming rewards\",\"reward\":\"The address of the reward token\",\"to\":\"The address that will be receiving the rewards\"},\"returns\":{\"_0\":\"The amount of rewards claimed*\"}},\"claimRewardsOnBehalf(address[],uint256,address,address,address)\":{\"details\":\"Claims reward for a user on behalf, on all the assets of the pool, accumulating the pending rewards. The caller must be whitelisted via \\\"allowClaimOnBehalf\\\" function by the RewardsAdmin role manager\",\"params\":{\"amount\":\"The amount of rewards to claim\",\"assets\":\"The list of assets to check eligible distributions before claiming rewards\",\"reward\":\"The address of the reward token\",\"to\":\"The address that will be receiving the rewards\",\"user\":\"The address to check and claim rewards\"},\"returns\":{\"_0\":\"The amount of rewards claimed*\"}},\"claimRewardsToSelf(address[],uint256,address)\":{\"details\":\"Claims reward for msg.sender, on all the assets of the pool, accumulating the pending rewards\",\"params\":{\"amount\":\"The amount of rewards to claim\",\"assets\":\"The list of assets to check eligible distributions before claiming rewards\",\"reward\":\"The address of the reward token\"},\"returns\":{\"_0\":\"The amount of rewards claimed*\"}}},\"title\":\"adapted from IRewardsController (AAVE V3 periphery contracts)\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"notice\":\"Defines the basic interface for a Rewards Controller.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IRewardsControllerIsh.sol\":\"IRewardsControllerIsh\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/\",\":@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/\",\":@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/\",\":ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/\",\":mgv_arbitrage_lib/=mangrove-arbitrage/lib/\",\":mgv_arbitrage_script/=mangrove-arbitrage/script/\",\":mgv_arbitrage_src/=mangrove-arbitrage/src/\",\":mgv_arbitrage_test/=mangrove-arbitrage/test/\",\":mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":mgv_script/=node_modules/@mangrovedao/mangrove-core/script/\",\":mgv_src/=node_modules/@mangrovedao/mangrove-core/src/\",\":mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":mgv_test/=node_modules/@mangrovedao/mangrove-core/test/\",\":uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/\"]},\"sources\":{\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IRewardsControllerIsh.sol\":{\"keccak256\":\"0x80fa787b6bace14b44e4856939452c4bf32f7866cfcc302cf192d0576287ff55\",\"license\":\"agpl-3.0\",\"urls\":[\"bzz-raw://a65bd5a79a1757dc72ff918d544cb08c846d5d6a2a5f3e6153cd0f4874e5f960\",\"dweb:/ipfs/QmQmBnSAPAPRERisyvV6V4ATt7d4JskvEEZ35MUkx9qvFv\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.20+commit.a1b79de6"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "assets",
+              "type": "address[]"
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "claimAllRewards",
+          "outputs": [
+            {
+              "internalType": "address[]",
+              "name": "rewardsList",
+              "type": "address[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "claimedAmounts",
+              "type": "uint256[]"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "assets",
+              "type": "address[]"
+            },
+            {
+              "internalType": "address",
+              "name": "user",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "claimAllRewardsOnBehalf",
+          "outputs": [
+            {
+              "internalType": "address[]",
+              "name": "rewardsList",
+              "type": "address[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "claimedAmounts",
+              "type": "uint256[]"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "assets",
+              "type": "address[]"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "claimAllRewardsToSelf",
+          "outputs": [
+            {
+              "internalType": "address[]",
+              "name": "rewardsList",
+              "type": "address[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "claimedAmounts",
+              "type": "uint256[]"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "assets",
+              "type": "address[]"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "reward",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "claimRewards",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "assets",
+              "type": "address[]"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "user",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "reward",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "claimRewardsOnBehalf",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "assets",
+              "type": "address[]"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "reward",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "claimRewardsToSelf",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "claimAllRewards(address[],address)": {
+            "details": "Claims all rewards for a user to the desired address, on all the assets of the pool, accumulating the pending rewards",
+            "params": {
+              "assets": "The list of assets to check eligible distributions before claiming rewards",
+              "to": "The address that will be receiving the rewards"
+            },
+            "returns": {
+              "claimedAmounts": "List that contains the claimed amount per reward, following same order as \"rewardList\"*",
+              "rewardsList": "List of addresses of the reward tokens"
+            }
+          },
+          "claimAllRewardsOnBehalf(address[],address,address)": {
+            "details": "Claims all rewards for a user on behalf, on all the assets of the pool, accumulating the pending rewards. The caller must be whitelisted via \"allowClaimOnBehalf\" function by the RewardsAdmin role manager",
+            "params": {
+              "assets": "The list of assets to check eligible distributions before claiming rewards",
+              "to": "The address that will be receiving the rewards",
+              "user": "The address to check and claim rewards"
+            },
+            "returns": {
+              "claimedAmounts": "List that contains the claimed amount per reward, following same order as \"rewardsList\"*",
+              "rewardsList": "List of addresses of the reward tokens"
+            }
+          },
+          "claimAllRewardsToSelf(address[])": {
+            "details": "Claims all reward for msg.sender, on all the assets of the pool, accumulating the pending rewards",
+            "params": {
+              "assets": "The list of assets to check eligible distributions before claiming rewards"
+            },
+            "returns": {
+              "claimedAmounts": "List that contains the claimed amount per reward, following same order as \"rewardsList\"*",
+              "rewardsList": "List of addresses of the reward tokens"
+            }
+          },
+          "claimRewards(address[],uint256,address,address)": {
+            "details": "Claims reward for a user to the desired address, on all the assets of the pool, accumulating the pending rewards",
+            "params": {
+              "amount": "The amount of rewards to claim",
+              "assets": "List of assets to check eligible distributions before claiming rewards",
+              "reward": "The address of the reward token",
+              "to": "The address that will be receiving the rewards"
+            },
+            "returns": {
+              "_0": "The amount of rewards claimed*"
+            }
+          },
+          "claimRewardsOnBehalf(address[],uint256,address,address,address)": {
+            "details": "Claims reward for a user on behalf, on all the assets of the pool, accumulating the pending rewards. The caller must be whitelisted via \"allowClaimOnBehalf\" function by the RewardsAdmin role manager",
+            "params": {
+              "amount": "The amount of rewards to claim",
+              "assets": "The list of assets to check eligible distributions before claiming rewards",
+              "reward": "The address of the reward token",
+              "to": "The address that will be receiving the rewards",
+              "user": "The address to check and claim rewards"
+            },
+            "returns": {
+              "_0": "The amount of rewards claimed*"
+            }
+          },
+          "claimRewardsToSelf(address[],uint256,address)": {
+            "details": "Claims reward for msg.sender, on all the assets of the pool, accumulating the pending rewards",
+            "params": {
+              "amount": "The amount of rewards to claim",
+              "assets": "The list of assets to check eligible distributions before claiming rewards",
+              "reward": "The address of the reward token"
+            },
+            "returns": {
+              "_0": "The amount of rewards claimed*"
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/",
+        "mgv_arbitrage_lib/=mangrove-arbitrage/lib/",
+        "mgv_arbitrage_script/=mangrove-arbitrage/script/",
+        "mgv_arbitrage_src/=mangrove-arbitrage/src/",
+        "mgv_arbitrage_test/=mangrove-arbitrage/test/",
+        "mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "mgv_script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "mgv_src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "mgv_test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IRewardsControllerIsh.sol": "IRewardsControllerIsh"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IRewardsControllerIsh.sol": {
+        "keccak256": "0x80fa787b6bace14b44e4856939452c4bf32f7866cfcc302cf192d0576287ff55",
+        "urls": [
+          "bzz-raw://a65bd5a79a1757dc72ff918d544cb08c846d5d6a2a5f3e6153cd0f4874e5f960",
+          "dweb:/ipfs/QmQmBnSAPAPRERisyvV6V4ATt7d4JskvEEZ35MUkx9qvFv"
+        ],
+        "license": "agpl-3.0"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/vendor/aave/v3/IRewardsControllerIsh.sol",
+    "id": 91188,
+    "exportedSymbols": {
+      "IRewardsControllerIsh": [
+        91187
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "37:4011:129",
+    "nodes": [
+      {
+        "id": 91095,
+        "nodeType": "PragmaDirective",
+        "src": "37:24:129",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".10"
+        ]
+      },
+      {
+        "id": 91187,
+        "nodeType": "ContractDefinition",
+        "src": "224:3823:129",
+        "nodes": [
+          {
+            "id": 91111,
+            "nodeType": "FunctionDefinition",
+            "src": "692:134:129",
+            "nodes": [],
+            "documentation": {
+              "id": 91097,
+              "nodeType": "StructuredDocumentation",
+              "src": "260:429:129",
+              "text": " @dev Claims reward for a user to the desired address, on all the assets of the pool, accumulating the pending rewards\n @param assets List of assets to check eligible distributions before claiming rewards\n @param amount The amount of rewards to claim\n @param to The address that will be receiving the rewards\n @param reward The address of the reward token\n @return The amount of rewards claimed*"
+            },
+            "functionSelector": "236300dc",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "claimRewards",
+            "nameLocation": "701:12:129",
+            "parameters": {
+              "id": 91107,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91100,
+                  "mutability": "mutable",
+                  "name": "assets",
+                  "nameLocation": "738:6:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91111,
+                  "src": "719:25:129",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 91098,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "719:7:129",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 91099,
+                    "nodeType": "ArrayTypeName",
+                    "src": "719:9:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 91102,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "755:6:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91111,
+                  "src": "750:11:129",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 91101,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "750:4:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 91104,
+                  "mutability": "mutable",
+                  "name": "to",
+                  "nameLocation": "775:2:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91111,
+                  "src": "767:10:129",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 91103,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "767:7:129",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 91106,
+                  "mutability": "mutable",
+                  "name": "reward",
+                  "nameLocation": "791:6:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91111,
+                  "src": "783:14:129",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 91105,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "783:7:129",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "713:88:129"
+            },
+            "returnParameters": {
+              "id": 91110,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91109,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91111,
+                  "src": "820:4:129",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 91108,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "820:4:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "819:6:129"
+            },
+            "scope": 91187,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 91128,
+            "nodeType": "FunctionDefinition",
+            "src": "1413:160:129",
+            "nodes": [],
+            "documentation": {
+              "id": 91112,
+              "nodeType": "StructuredDocumentation",
+              "src": "830:580:129",
+              "text": " @dev Claims reward for a user on behalf, on all the assets of the pool, accumulating the pending rewards. The\n caller must be whitelisted via \"allowClaimOnBehalf\" function by the RewardsAdmin role manager\n @param assets The list of assets to check eligible distributions before claiming rewards\n @param amount The amount of rewards to claim\n @param user The address to check and claim rewards\n @param to The address that will be receiving the rewards\n @param reward The address of the reward token\n @return The amount of rewards claimed*"
+            },
+            "functionSelector": "33028b99",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "claimRewardsOnBehalf",
+            "nameLocation": "1422:20:129",
+            "parameters": {
+              "id": 91124,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91115,
+                  "mutability": "mutable",
+                  "name": "assets",
+                  "nameLocation": "1467:6:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91128,
+                  "src": "1448:25:129",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 91113,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1448:7:129",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 91114,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1448:9:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 91117,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "1484:6:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91128,
+                  "src": "1479:11:129",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 91116,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1479:4:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 91119,
+                  "mutability": "mutable",
+                  "name": "user",
+                  "nameLocation": "1504:4:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91128,
+                  "src": "1496:12:129",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 91118,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1496:7:129",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 91121,
+                  "mutability": "mutable",
+                  "name": "to",
+                  "nameLocation": "1522:2:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91128,
+                  "src": "1514:10:129",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 91120,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1514:7:129",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 91123,
+                  "mutability": "mutable",
+                  "name": "reward",
+                  "nameLocation": "1538:6:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91128,
+                  "src": "1530:14:129",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 91122,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1530:7:129",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1442:106:129"
+            },
+            "returnParameters": {
+              "id": 91127,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91126,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91128,
+                  "src": "1567:4:129",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 91125,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1567:4:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1566:6:129"
+            },
+            "scope": 91187,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 91141,
+            "nodeType": "FunctionDefinition",
+            "src": "1932:124:129",
+            "nodes": [],
+            "documentation": {
+              "id": 91129,
+              "nodeType": "StructuredDocumentation",
+              "src": "1577:352:129",
+              "text": " @dev Claims reward for msg.sender, on all the assets of the pool, accumulating the pending rewards\n @param assets The list of assets to check eligible distributions before claiming rewards\n @param amount The amount of rewards to claim\n @param reward The address of the reward token\n @return The amount of rewards claimed*"
+            },
+            "functionSelector": "57b89883",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "claimRewardsToSelf",
+            "nameLocation": "1941:18:129",
+            "parameters": {
+              "id": 91137,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91132,
+                  "mutability": "mutable",
+                  "name": "assets",
+                  "nameLocation": "1984:6:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91141,
+                  "src": "1965:25:129",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 91130,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1965:7:129",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 91131,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1965:9:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 91134,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "2001:6:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91141,
+                  "src": "1996:11:129",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 91133,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1996:4:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 91136,
+                  "mutability": "mutable",
+                  "name": "reward",
+                  "nameLocation": "2021:6:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91141,
+                  "src": "2013:14:129",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 91135,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2013:7:129",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1959:72:129"
+            },
+            "returnParameters": {
+              "id": 91140,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91139,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91141,
+                  "src": "2050:4:129",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 91138,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2050:4:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2049:6:129"
+            },
+            "scope": 91187,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 91156,
+            "nodeType": "FunctionDefinition",
+            "src": "2536:150:129",
+            "nodes": [],
+            "documentation": {
+              "id": 91142,
+              "nodeType": "StructuredDocumentation",
+              "src": "2060:473:129",
+              "text": " @dev Claims all rewards for a user to the desired address, on all the assets of the pool, accumulating the pending rewards\n @param assets The list of assets to check eligible distributions before claiming rewards\n @param to The address that will be receiving the rewards\n @return rewardsList List of addresses of the reward tokens\n @return claimedAmounts List that contains the claimed amount per reward, following same order as \"rewardList\"*"
+            },
+            "functionSelector": "bb492bf5",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "claimAllRewards",
+            "nameLocation": "2545:15:129",
+            "parameters": {
+              "id": 91148,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91145,
+                  "mutability": "mutable",
+                  "name": "assets",
+                  "nameLocation": "2580:6:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91156,
+                  "src": "2561:25:129",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 91143,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "2561:7:129",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 91144,
+                    "nodeType": "ArrayTypeName",
+                    "src": "2561:9:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 91147,
+                  "mutability": "mutable",
+                  "name": "to",
+                  "nameLocation": "2596:2:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91156,
+                  "src": "2588:10:129",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 91146,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2588:7:129",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2560:39:129"
+            },
+            "returnParameters": {
+              "id": 91155,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91151,
+                  "mutability": "mutable",
+                  "name": "rewardsList",
+                  "nameLocation": "2643:11:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91156,
+                  "src": "2626:28:129",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 91149,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "2626:7:129",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 91150,
+                    "nodeType": "ArrayTypeName",
+                    "src": "2626:9:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 91154,
+                  "mutability": "mutable",
+                  "name": "claimedAmounts",
+                  "nameLocation": "2670:14:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91156,
+                  "src": "2656:28:129",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 91152,
+                      "name": "uint",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "2656:4:129",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 91153,
+                    "nodeType": "ArrayTypeName",
+                    "src": "2656:6:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2625:60:129"
+            },
+            "scope": 91187,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 91173,
+            "nodeType": "FunctionDefinition",
+            "src": "3314:188:129",
+            "nodes": [],
+            "documentation": {
+              "id": 91157,
+              "nodeType": "StructuredDocumentation",
+              "src": "2690:621:129",
+              "text": " @dev Claims all rewards for a user on behalf, on all the assets of the pool, accumulating the pending rewards. The caller must\n be whitelisted via \"allowClaimOnBehalf\" function by the RewardsAdmin role manager\n @param assets The list of assets to check eligible distributions before claiming rewards\n @param user The address to check and claim rewards\n @param to The address that will be receiving the rewards\n @return rewardsList List of addresses of the reward tokens\n @return claimedAmounts List that contains the claimed amount per reward, following same order as \"rewardsList\"*"
+            },
+            "functionSelector": "9ff55db9",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "claimAllRewardsOnBehalf",
+            "nameLocation": "3323:23:129",
+            "parameters": {
+              "id": 91165,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91160,
+                  "mutability": "mutable",
+                  "name": "assets",
+                  "nameLocation": "3371:6:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91173,
+                  "src": "3352:25:129",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 91158,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "3352:7:129",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 91159,
+                    "nodeType": "ArrayTypeName",
+                    "src": "3352:9:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 91162,
+                  "mutability": "mutable",
+                  "name": "user",
+                  "nameLocation": "3391:4:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91173,
+                  "src": "3383:12:129",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 91161,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3383:7:129",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 91164,
+                  "mutability": "mutable",
+                  "name": "to",
+                  "nameLocation": "3409:2:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91173,
+                  "src": "3401:10:129",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 91163,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3401:7:129",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3346:69:129"
+            },
+            "returnParameters": {
+              "id": 91172,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91168,
+                  "mutability": "mutable",
+                  "name": "rewardsList",
+                  "nameLocation": "3459:11:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91173,
+                  "src": "3442:28:129",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 91166,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "3442:7:129",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 91167,
+                    "nodeType": "ArrayTypeName",
+                    "src": "3442:9:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 91171,
+                  "mutability": "mutable",
+                  "name": "claimedAmounts",
+                  "nameLocation": "3486:14:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91173,
+                  "src": "3472:28:129",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 91169,
+                      "name": "uint",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "3472:4:129",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 91170,
+                    "nodeType": "ArrayTypeName",
+                    "src": "3472:6:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3441:60:129"
+            },
+            "scope": 91187,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 91186,
+            "nodeType": "FunctionDefinition",
+            "src": "3901:144:129",
+            "nodes": [],
+            "documentation": {
+              "id": 91174,
+              "nodeType": "StructuredDocumentation",
+              "src": "3506:392:129",
+              "text": " @dev Claims all reward for msg.sender, on all the assets of the pool, accumulating the pending rewards\n @param assets The list of assets to check eligible distributions before claiming rewards\n @return rewardsList List of addresses of the reward tokens\n @return claimedAmounts List that contains the claimed amount per reward, following same order as \"rewardsList\"*"
+            },
+            "functionSelector": "bf90f63a",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "claimAllRewardsToSelf",
+            "nameLocation": "3910:21:129",
+            "parameters": {
+              "id": 91178,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91177,
+                  "mutability": "mutable",
+                  "name": "assets",
+                  "nameLocation": "3951:6:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91186,
+                  "src": "3932:25:129",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 91175,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "3932:7:129",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 91176,
+                    "nodeType": "ArrayTypeName",
+                    "src": "3932:9:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3931:27:129"
+            },
+            "returnParameters": {
+              "id": 91185,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 91181,
+                  "mutability": "mutable",
+                  "name": "rewardsList",
+                  "nameLocation": "4002:11:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91186,
+                  "src": "3985:28:129",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                    "typeString": "address[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 91179,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "3985:7:129",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "id": 91180,
+                    "nodeType": "ArrayTypeName",
+                    "src": "3985:9:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                      "typeString": "address[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 91184,
+                  "mutability": "mutable",
+                  "name": "claimedAmounts",
+                  "nameLocation": "4029:14:129",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 91186,
+                  "src": "4015:28:129",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 91182,
+                      "name": "uint",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "4015:4:129",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 91183,
+                    "nodeType": "ArrayTypeName",
+                    "src": "4015:6:129",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3984:60:129"
+            },
+            "scope": 91187,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IRewardsControllerIsh",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 91096,
+          "nodeType": "StructuredDocumentation",
+          "src": "63:160:129",
+          "text": " @title adapted from IRewardsController (AAVE V3 periphery contracts)\n @author Aave\n @notice Defines the basic interface for a Rewards Controller."
+        },
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          91187
+        ],
+        "name": "IRewardsControllerIsh",
+        "nameLocation": "234:21:129",
+        "scope": 91188,
+        "usedErrors": [],
+        "usedEvents": []
+      }
+    ],
+    "license": "agpl-3.0"
+  },
+  "id": 129
+}

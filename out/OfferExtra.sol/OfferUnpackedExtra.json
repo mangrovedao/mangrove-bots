@@ -1,0 +1,2279 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x60566037600b82828239805160001a607314602a57634e487b7160e01b600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212202a4e67f157ffa7238b05f49a0b518bab17093cb3adb3ef8a41fc63f8e9b1f15564736f6c63430008140033",
+    "sourceMap": "1489:753:11:-:0;;;;;;;;;;;;;;;-1:-1:-1;;;1489:753:11;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212202a4e67f157ffa7238b05f49a0b518bab17093cb3adb3ef8a41fc63f8e9b1f15564736f6c63430008140033",
+    "sourceMap": "1489:753:11:-:0;;;;;;;;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol\":\"OfferUnpackedExtra\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/\",\":@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/\",\":@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/\",\":ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/\",\":mgv_arbitrage_lib/=mangrove-arbitrage/lib/\",\":mgv_arbitrage_script/=mangrove-arbitrage/script/\",\":mgv_arbitrage_src/=mangrove-arbitrage/src/\",\":mgv_arbitrage_test/=mangrove-arbitrage/test/\",\":mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":mgv_script/=node_modules/@mangrovedao/mangrove-core/script/\",\":mgv_src/=node_modules/@mangrovedao/mangrove-core/src/\",\":mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":mgv_test/=node_modules/@mangrovedao/mangrove-core/test/\",\":uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/\"]},\"sources\":{\"node_modules/@mangrovedao/mangrove-core/lib/core/BitLib.sol\":{\"keccak256\":\"0x5a1c56d67fbd2ef6f3b830cf8dae1885da5f40a37afd11cb3a392be573993c3b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a07b895de906f49d0ce9e89a349d39220e13039709ea2e2db46ff48310bd4b3b\",\"dweb:/ipfs/QmZyiLKyTZ9EHwqNRUYukQDdg7CL54Dsu65RYabkkGF1KM\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol\":{\"keccak256\":\"0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb\",\"dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/DensityLib.sol\":{\"keccak256\":\"0xc7ee8be7f11a1bf85aa4ea0e222d4a49d77a378b201e347f9a5e4f28f207a023\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ed718e8bf3fb45bc0e7cf739662422cfe01d8d04a2c99b2fb0cfa2372629c6ad\",\"dweb:/ipfs/QmZ5QpyMSmkVxayfpZYovNcc8NGJKfVZEMKphzeKk9cVNv\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/LocalExtra.sol\":{\"keccak256\":\"0xbd3f6702242dd43ba2493eb54feb8f5d2526967512c6f156d29669b54d9c60f2\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://e389f3c78c8073bde973aa3f4770139e2adb4cc00cc1303b77eefa201189a6ff\",\"dweb:/ipfs/QmZ8vXRUUCinKtqJhV7jMXVeDVfRizhJ3NsumZLQxwSc44\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol\":{\"keccak256\":\"0x95120d52698bc60b005496036a7c9daa7b8d0b18b571e596e86fd696b36e3264\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://684d30cc9673403cfddabdf7d979417c5df050abde16712aeaa9ca6b2725d154\",\"dweb:/ipfs/QmTkeUAMhb72BNqGjAaaPBj1NHPtKE8wH1R8bpXD5RTKtC\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol\":{\"keccak256\":\"0xa4aea464925ad277aab2141885eeeb6e5f1b0963ba08d8887a1c2461c334f222\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://c7ec62c85c22d7996abe32663232861f90e855c770dbd252bf49fff4ca786e74\",\"dweb:/ipfs/QmSHBJfw9bg8QjgBquXVLTS337ZuBGHVkDJfwuAZ6X48sw\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/TickTreeLib.sol\":{\"keccak256\":\"0x196c46d6e8e2ab51462f25245f7886568df3f1f65953dcec4c02d7950b4a10cd\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://4293ed5fb3ce4d350b9bb5b38342c273e6d772ace098927e006efa7fc4498329\",\"dweb:/ipfs/QmRCtk481PHQjNdt5Dsa8GYWEX46nYwdeD8R3m92w3Xjxv\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console2.sol\":{\"keccak256\":\"0x954646445d1014c3cd85c7918f5e7adeeca5ee44b68c00bafa237e597a4e35ea\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://516fa3be52da4763147175bfba4be0aa011fadbb0c1afb01f97265bd4cee7973\",\"dweb:/ipfs/QmdixAyMJefx7qePChgdxcBH5MxhmN7vsqPuPLx3CgrVmF\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Local.post.sol\":{\"keccak256\":\"0x03d642742c132c37c1fc29cae87f7ce1be93f89877fe698698d5bd2309c878a5\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://6957d461c6486caeee91f5fd8be2ff0f53a8c264c03e8c9b7f7291bf7a72d9fc\",\"dweb:/ipfs/QmTRqHsnjFA1xDmWWuPqn9aPeweRiYHv1wfTz77qxCmd7k\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol\":{\"keccak256\":\"0x812a7c313108b56600f747d89d20b2daa4c4aa489ece1b30c561a353d41468f2\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://3fb1685a67020adeece9f6fbf567567d257aafafd2e115e6151f2b2a14b429aa\",\"dweb:/ipfs/QmUvk3FLDDHRXungxeLtPEfaQj3HNt3ib8nGhonzPdMW6o\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.20+commit.a1b79de6"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/",
+        "mgv_arbitrage_lib/=mangrove-arbitrage/lib/",
+        "mgv_arbitrage_script/=mangrove-arbitrage/script/",
+        "mgv_arbitrage_src/=mangrove-arbitrage/src/",
+        "mgv_arbitrage_test/=mangrove-arbitrage/test/",
+        "mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "mgv_script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "mgv_src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "mgv_test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol": "OfferUnpackedExtra"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "node_modules/@mangrovedao/mangrove-core/lib/core/BitLib.sol": {
+        "keccak256": "0x5a1c56d67fbd2ef6f3b830cf8dae1885da5f40a37afd11cb3a392be573993c3b",
+        "urls": [
+          "bzz-raw://a07b895de906f49d0ce9e89a349d39220e13039709ea2e2db46ff48310bd4b3b",
+          "dweb:/ipfs/QmZyiLKyTZ9EHwqNRUYukQDdg7CL54Dsu65RYabkkGF1KM"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol": {
+        "keccak256": "0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87",
+        "urls": [
+          "bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb",
+          "dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/DensityLib.sol": {
+        "keccak256": "0xc7ee8be7f11a1bf85aa4ea0e222d4a49d77a378b201e347f9a5e4f28f207a023",
+        "urls": [
+          "bzz-raw://ed718e8bf3fb45bc0e7cf739662422cfe01d8d04a2c99b2fb0cfa2372629c6ad",
+          "dweb:/ipfs/QmZ5QpyMSmkVxayfpZYovNcc8NGJKfVZEMKphzeKk9cVNv"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/LocalExtra.sol": {
+        "keccak256": "0xbd3f6702242dd43ba2493eb54feb8f5d2526967512c6f156d29669b54d9c60f2",
+        "urls": [
+          "bzz-raw://e389f3c78c8073bde973aa3f4770139e2adb4cc00cc1303b77eefa201189a6ff",
+          "dweb:/ipfs/QmZ8vXRUUCinKtqJhV7jMXVeDVfRizhJ3NsumZLQxwSc44"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol": {
+        "keccak256": "0x95120d52698bc60b005496036a7c9daa7b8d0b18b571e596e86fd696b36e3264",
+        "urls": [
+          "bzz-raw://684d30cc9673403cfddabdf7d979417c5df050abde16712aeaa9ca6b2725d154",
+          "dweb:/ipfs/QmTkeUAMhb72BNqGjAaaPBj1NHPtKE8wH1R8bpXD5RTKtC"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol": {
+        "keccak256": "0xa4aea464925ad277aab2141885eeeb6e5f1b0963ba08d8887a1c2461c334f222",
+        "urls": [
+          "bzz-raw://c7ec62c85c22d7996abe32663232861f90e855c770dbd252bf49fff4ca786e74",
+          "dweb:/ipfs/QmSHBJfw9bg8QjgBquXVLTS337ZuBGHVkDJfwuAZ6X48sw"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/TickTreeLib.sol": {
+        "keccak256": "0x196c46d6e8e2ab51462f25245f7886568df3f1f65953dcec4c02d7950b4a10cd",
+        "urls": [
+          "bzz-raw://4293ed5fb3ce4d350b9bb5b38342c273e6d772ace098927e006efa7fc4498329",
+          "dweb:/ipfs/QmRCtk481PHQjNdt5Dsa8GYWEX46nYwdeD8R3m92w3Xjxv"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console2.sol": {
+        "keccak256": "0x954646445d1014c3cd85c7918f5e7adeeca5ee44b68c00bafa237e597a4e35ea",
+        "urls": [
+          "bzz-raw://516fa3be52da4763147175bfba4be0aa011fadbb0c1afb01f97265bd4cee7973",
+          "dweb:/ipfs/QmdixAyMJefx7qePChgdxcBH5MxhmN7vsqPuPLx3CgrVmF"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Local.post.sol": {
+        "keccak256": "0x03d642742c132c37c1fc29cae87f7ce1be93f89877fe698698d5bd2309c878a5",
+        "urls": [
+          "bzz-raw://6957d461c6486caeee91f5fd8be2ff0f53a8c264c03e8c9b7f7291bf7a72d9fc",
+          "dweb:/ipfs/QmTRqHsnjFA1xDmWWuPqn9aPeweRiYHv1wfTz77qxCmd7k"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol": {
+        "keccak256": "0x812a7c313108b56600f747d89d20b2daa4c4aa489ece1b30c561a353d41468f2",
+        "urls": [
+          "bzz-raw://3fb1685a67020adeece9f6fbf567567d257aafafd2e115e6151f2b2a14b429aa",
+          "dweb:/ipfs/QmUvk3FLDDHRXungxeLtPEfaQj3HNt3ib8nGhonzPdMW6o"
+        ],
+        "license": "Unlicense"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol",
+    "id": 5273,
+    "exportedSymbols": {
+      "Bin": [
+        6855
+      ],
+      "BitLib": [
+        4329
+      ],
+      "DirtyField": [
+        8083
+      ],
+      "DirtyFieldLib": [
+        8164
+      ],
+      "DirtyLeaf": [
+        8016
+      ],
+      "DirtyLeafLib": [
+        8081
+      ],
+      "Field": [
+        7296
+      ],
+      "FieldLib": [
+        8014
+      ],
+      "HIDE_FIELDS_FROM_MAKER_MASK": [
+        5147
+      ],
+      "INITIAL_MAX_GASREQ_FOR_FAILING_OFFERS_MULTIPLIER": [
+        4442
+      ],
+      "INITIAL_MAX_RECURSION_DEPTH": [
+        4439
+      ],
+      "LEAF_SIZE": [
+        4368
+      ],
+      "LEAF_SIZE_BITS": [
+        4359
+      ],
+      "LEAF_SIZE_MASK": [
+        4377
+      ],
+      "LEVEL_SIZE": [
+        4371
+      ],
+      "LEVEL_SIZE_BITS": [
+        4362
+      ],
+      "LEVEL_SIZE_MASK": [
+        4380
+      ],
+      "LOG_BP_2X235": [
+        4448
+      ],
+      "LOG_BP_SHIFT": [
+        4445
+      ],
+      "Leaf": [
+        6414
+      ],
+      "LeafLib": [
+        6853
+      ],
+      "Local": [
+        64937
+      ],
+      "MANTISSA_BITS": [
+        4430
+      ],
+      "MANTISSA_BITS_MINUS_ONE": [
+        4433
+      ],
+      "MAX_BIN": [
+        4408
+      ],
+      "MAX_FIELD_SIZE": [
+        4356
+      ],
+      "MAX_RATIO_EXP": [
+        4427
+      ],
+      "MAX_RATIO_MANTISSA": [
+        4424
+      ],
+      "MAX_SAFE_VOLUME": [
+        4436
+      ],
+      "MAX_TICK": [
+        4415
+      ],
+      "MIN_BIN": [
+        4405
+      ],
+      "MIN_RATIO_EXP": [
+        4421
+      ],
+      "MIN_RATIO_MANTISSA": [
+        4418
+      ],
+      "MIN_TICK": [
+        4412
+      ],
+      "NOT_TOPBIT": [
+        4347
+      ],
+      "NUM_BINS": [
+        4401
+      ],
+      "NUM_LEAFS": [
+        4398
+      ],
+      "NUM_LEVEL1": [
+        4389
+      ],
+      "NUM_LEVEL2": [
+        4392
+      ],
+      "NUM_LEVEL3": [
+        4395
+      ],
+      "OFFER_BITS": [
+        4353
+      ],
+      "OFFER_MASK": [
+        4386
+      ],
+      "ONE": [
+        4334
+      ],
+      "ONES": [
+        4341
+      ],
+      "Offer": [
+        66949
+      ],
+      "OfferExtra": [
+        5222
+      ],
+      "OfferLib": [
+        67732
+      ],
+      "OfferUnpacked": [
+        66947
+      ],
+      "OfferUnpackedExtra": [
+        5272
+      ],
+      "ROOT_SIZE": [
+        4374
+      ],
+      "ROOT_SIZE_BITS": [
+        4365
+      ],
+      "ROOT_SIZE_MASK": [
+        4383
+      ],
+      "TICK_BITS": [
+        4350
+      ],
+      "TOPBIT": [
+        4344
+      ],
+      "Tick": [
+        5280
+      ],
+      "TickLib": [
+        6401
+      ],
+      "TickTreeLib": [
+        7294
+      ],
+      "csf": [
+        37519
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "38:2204:11",
+    "nodes": [
+      {
+        "id": 5132,
+        "nodeType": "PragmaDirective",
+        "src": "38:24:11",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".17"
+        ]
+      },
+      {
+        "id": 5133,
+        "nodeType": "ImportDirective",
+        "src": "64:39:11",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/lib/core/TickTreeLib.sol",
+        "file": "@mgv/lib/core/TickTreeLib.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 5273,
+        "sourceUnit": 8165,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 5134,
+        "nodeType": "ImportDirective",
+        "src": "104:35:11",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol",
+        "file": "@mgv/lib/core/TickLib.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 5273,
+        "sourceUnit": 6402,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 5138,
+        "nodeType": "ImportDirective",
+        "src": "140:82:11",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol",
+        "file": "@mgv/src/preprocessed/Offer.post.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 5273,
+        "sourceUnit": 67733,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 5135,
+              "name": "Offer",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 66949,
+              "src": "148:5:11",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          },
+          {
+            "foreign": {
+              "id": 5136,
+              "name": "OfferUnpacked",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 66947,
+              "src": "154:13:11",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          },
+          {
+            "foreign": {
+              "id": 5137,
+              "name": "OfferLib",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 67732,
+              "src": "168:8:11",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 5147,
+        "nodeType": "VariableDeclaration",
+        "src": "303:94:11",
+        "nodes": [],
+        "constant": true,
+        "mutability": "constant",
+        "name": "HIDE_FIELDS_FROM_MAKER_MASK",
+        "nameLocation": "317:27:11",
+        "scope": 5273,
+        "stateVariable": false,
+        "storageLocation": "default",
+        "typeDescriptions": {
+          "typeIdentifier": "t_uint256",
+          "typeString": "uint256"
+        },
+        "typeName": {
+          "id": 5139,
+          "name": "uint",
+          "nodeType": "ElementaryTypeName",
+          "src": "303:4:11",
+          "typeDescriptions": {
+            "typeIdentifier": "t_uint256",
+            "typeString": "uint256"
+          }
+        },
+        "value": {
+          "id": 5146,
+          "isConstant": false,
+          "isLValue": false,
+          "isPure": true,
+          "lValueRequested": false,
+          "nodeType": "UnaryOperation",
+          "operator": "~",
+          "prefix": true,
+          "src": "347:50:11",
+          "subExpression": {
+            "components": [
+              {
+                "commonType": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "id": 5144,
+                "isConstant": false,
+                "isLValue": false,
+                "isPure": true,
+                "lValueRequested": false,
+                "leftExpression": {
+                  "expression": {
+                    "id": 5140,
+                    "name": "OfferLib",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 67732,
+                    "src": "349:8:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_type$_t_contract$_OfferLib_$67732_$",
+                      "typeString": "type(library OfferLib)"
+                    }
+                  },
+                  "id": 5141,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "lValueRequested": false,
+                  "memberLocation": "358:13:11",
+                  "memberName": "prev_mask_inv",
+                  "nodeType": "MemberAccess",
+                  "referencedDeclaration": 67010,
+                  "src": "349:22:11",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "nodeType": "BinaryOperation",
+                "operator": "|",
+                "rightExpression": {
+                  "expression": {
+                    "id": 5142,
+                    "name": "OfferLib",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 67732,
+                    "src": "374:8:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_type$_t_contract$_OfferLib_$67732_$",
+                      "typeString": "type(library OfferLib)"
+                    }
+                  },
+                  "id": 5143,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "lValueRequested": false,
+                  "memberLocation": "383:13:11",
+                  "memberName": "next_mask_inv",
+                  "nodeType": "MemberAccess",
+                  "referencedDeclaration": 67020,
+                  "src": "374:22:11",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "src": "349:47:11",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              }
+            ],
+            "id": 5145,
+            "isConstant": false,
+            "isInlineArray": false,
+            "isLValue": false,
+            "isPure": true,
+            "lValueRequested": false,
+            "nodeType": "TupleExpression",
+            "src": "348:49:11",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            }
+          },
+          "typeDescriptions": {
+            "typeIdentifier": "t_uint256",
+            "typeString": "uint256"
+          }
+        },
+        "visibility": "internal"
+      },
+      {
+        "id": 5222,
+        "nodeType": "ContractDefinition",
+        "src": "436:993:11",
+        "nodes": [
+          {
+            "id": 5165,
+            "nodeType": "FunctionDefinition",
+            "src": "501:124:11",
+            "nodes": [],
+            "body": {
+              "id": 5164,
+              "nodeType": "Block",
+              "src": "558:67:11",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "expression": {
+                            "id": 5159,
+                            "name": "offer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5150,
+                            "src": "606:5:11",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_userDefinedValueType$_Offer_$66949",
+                              "typeString": "Offer"
+                            }
+                          },
+                          "id": 5160,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "612:5:11",
+                          "memberName": "gives",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 67519,
+                          "src": "606:11:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_userDefinedValueType$_Offer_$66949_$returns$_t_uint256_$attached_to$_t_userDefinedValueType$_Offer_$66949_$",
+                            "typeString": "function (Offer) pure returns (uint256)"
+                          }
+                        },
+                        "id": 5161,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "606:13:11",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "expression": {
+                            "id": 5155,
+                            "name": "offer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5150,
+                            "src": "571:5:11",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_userDefinedValueType$_Offer_$66949",
+                              "typeString": "Offer"
+                            }
+                          },
+                          "id": 5156,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "577:4:11",
+                          "memberName": "tick",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 67453,
+                          "src": "571:10:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_userDefinedValueType$_Offer_$66949_$returns$_t_userDefinedValueType$_Tick_$5280_$attached_to$_t_userDefinedValueType$_Offer_$66949_$",
+                            "typeString": "function (Offer) pure returns (Tick)"
+                          }
+                        },
+                        "id": 5157,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "571:12:11",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_userDefinedValueType$_Tick_$5280",
+                          "typeString": "Tick"
+                        }
+                      },
+                      "id": 5158,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "584:21:11",
+                      "memberName": "inboundFromOutboundUp",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 5397,
+                      "src": "571:34:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_userDefinedValueType$_Tick_$5280_$_t_uint256_$returns$_t_uint256_$attached_to$_t_userDefinedValueType$_Tick_$5280_$",
+                        "typeString": "function (Tick,uint256) pure returns (uint256)"
+                      }
+                    },
+                    "id": 5162,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "571:49:11",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 5154,
+                  "id": 5163,
+                  "nodeType": "Return",
+                  "src": "564:56:11"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "wants",
+            "nameLocation": "510:5:11",
+            "parameters": {
+              "id": 5151,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5150,
+                  "mutability": "mutable",
+                  "name": "offer",
+                  "nameLocation": "522:5:11",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5165,
+                  "src": "516:11:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_userDefinedValueType$_Offer_$66949",
+                    "typeString": "Offer"
+                  },
+                  "typeName": {
+                    "id": 5149,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5148,
+                      "name": "Offer",
+                      "nameLocations": [
+                        "516:5:11"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 66949,
+                      "src": "516:5:11"
+                    },
+                    "referencedDeclaration": 66949,
+                    "src": "516:5:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_userDefinedValueType$_Offer_$66949",
+                      "typeString": "Offer"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "515:13:11"
+            },
+            "returnParameters": {
+              "id": 5154,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5153,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5165,
+                  "src": "552:4:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5152,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "552:4:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "551:6:11"
+            },
+            "scope": 5222,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 5181,
+            "nodeType": "FunctionDefinition",
+            "src": "666:173:11",
+            "nodes": [],
+            "body": {
+              "id": 5180,
+              "nodeType": "Block",
+              "src": "729:110:11",
+              "nodes": [],
+              "statements": [
+                {
+                  "assignments": [
+                    5174
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 5174,
+                      "mutability": "mutable",
+                      "name": "gives",
+                      "nameLocation": "740:5:11",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 5180,
+                      "src": "735:10:11",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 5173,
+                        "name": "uint",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "735:4:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 5178,
+                  "initialValue": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "id": 5175,
+                        "name": "offer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5168,
+                        "src": "748:5:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_userDefinedValueType$_Offer_$66949",
+                          "typeString": "Offer"
+                        }
+                      },
+                      "id": 5176,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "754:5:11",
+                      "memberName": "gives",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 67519,
+                      "src": "748:11:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_userDefinedValueType$_Offer_$66949_$returns$_t_uint256_$attached_to$_t_userDefinedValueType$_Offer_$66949_$",
+                        "typeString": "function (Offer) pure returns (uint256)"
+                      }
+                    },
+                    "id": 5177,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "748:13:11",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "735:26:11"
+                },
+                {
+                  "AST": {
+                    "nodeType": "YulBlock",
+                    "src": "792:43:11",
+                    "statements": [
+                      {
+                        "nodeType": "YulAssignment",
+                        "src": "800:29:11",
+                        "value": {
+                          "arguments": [
+                            {
+                              "arguments": [
+                                {
+                                  "name": "gives",
+                                  "nodeType": "YulIdentifier",
+                                  "src": "822:5:11"
+                                }
+                              ],
+                              "functionName": {
+                                "name": "iszero",
+                                "nodeType": "YulIdentifier",
+                                "src": "815:6:11"
+                              },
+                              "nodeType": "YulFunctionCall",
+                              "src": "815:13:11"
+                            }
+                          ],
+                          "functionName": {
+                            "name": "iszero",
+                            "nodeType": "YulIdentifier",
+                            "src": "808:6:11"
+                          },
+                          "nodeType": "YulFunctionCall",
+                          "src": "808:21:11"
+                        },
+                        "variableNames": [
+                          {
+                            "name": "resp",
+                            "nodeType": "YulIdentifier",
+                            "src": "800:4:11"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "evmVersion": "paris",
+                  "externalReferences": [
+                    {
+                      "declaration": 5174,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "822:5:11",
+                      "valueSize": 1
+                    },
+                    {
+                      "declaration": 5171,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "800:4:11",
+                      "valueSize": 1
+                    }
+                  ],
+                  "flags": [
+                    "memory-safe"
+                  ],
+                  "id": 5179,
+                  "nodeType": "InlineAssembly",
+                  "src": "767:68:11"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isLive",
+            "nameLocation": "675:6:11",
+            "parameters": {
+              "id": 5169,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5168,
+                  "mutability": "mutable",
+                  "name": "offer",
+                  "nameLocation": "688:5:11",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5181,
+                  "src": "682:11:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_userDefinedValueType$_Offer_$66949",
+                    "typeString": "Offer"
+                  },
+                  "typeName": {
+                    "id": 5167,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5166,
+                      "name": "Offer",
+                      "nameLocations": [
+                        "682:5:11"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 66949,
+                      "src": "682:5:11"
+                    },
+                    "referencedDeclaration": 66949,
+                    "src": "682:5:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_userDefinedValueType$_Offer_$66949",
+                      "typeString": "Offer"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "681:13:11"
+            },
+            "returnParameters": {
+              "id": 5172,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5171,
+                  "mutability": "mutable",
+                  "name": "resp",
+                  "nameLocation": "723:4:11",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5181,
+                  "src": "718:9:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 5170,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "718:4:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "717:11:11"
+            },
+            "scope": 5222,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 5200,
+            "nodeType": "FunctionDefinition",
+            "src": "932:126:11",
+            "nodes": [],
+            "body": {
+              "id": 5199,
+              "nodeType": "Block",
+              "src": "1004:54:11",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 5196,
+                        "name": "tickSpacing",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5186,
+                        "src": "1041:11:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "expression": {
+                            "id": 5192,
+                            "name": "offer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5184,
+                            "src": "1017:5:11",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_userDefinedValueType$_Offer_$66949",
+                              "typeString": "Offer"
+                            }
+                          },
+                          "id": 5193,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1023:4:11",
+                          "memberName": "tick",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 67453,
+                          "src": "1017:10:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_userDefinedValueType$_Offer_$66949_$returns$_t_userDefinedValueType$_Tick_$5280_$attached_to$_t_userDefinedValueType$_Offer_$66949_$",
+                            "typeString": "function (Offer) pure returns (Tick)"
+                          }
+                        },
+                        "id": 5194,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1017:12:11",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_userDefinedValueType$_Tick_$5280",
+                          "typeString": "Tick"
+                        }
+                      },
+                      "id": 5195,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1030:10:11",
+                      "memberName": "nearestBin",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 5344,
+                      "src": "1017:23:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_userDefinedValueType$_Tick_$5280_$_t_uint256_$returns$_t_userDefinedValueType$_Bin_$6855_$attached_to$_t_userDefinedValueType$_Tick_$5280_$",
+                        "typeString": "function (Tick,uint256) pure returns (Bin)"
+                      }
+                    },
+                    "id": 5197,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1017:36:11",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_userDefinedValueType$_Bin_$6855",
+                      "typeString": "Bin"
+                    }
+                  },
+                  "functionReturnParameters": 5191,
+                  "id": 5198,
+                  "nodeType": "Return",
+                  "src": "1010:43:11"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "bin",
+            "nameLocation": "941:3:11",
+            "parameters": {
+              "id": 5187,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5184,
+                  "mutability": "mutable",
+                  "name": "offer",
+                  "nameLocation": "951:5:11",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5200,
+                  "src": "945:11:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_userDefinedValueType$_Offer_$66949",
+                    "typeString": "Offer"
+                  },
+                  "typeName": {
+                    "id": 5183,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5182,
+                      "name": "Offer",
+                      "nameLocations": [
+                        "945:5:11"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 66949,
+                      "src": "945:5:11"
+                    },
+                    "referencedDeclaration": 66949,
+                    "src": "945:5:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_userDefinedValueType$_Offer_$66949",
+                      "typeString": "Offer"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5186,
+                  "mutability": "mutable",
+                  "name": "tickSpacing",
+                  "nameLocation": "963:11:11",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5200,
+                  "src": "958:16:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5185,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "958:4:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "944:31:11"
+            },
+            "returnParameters": {
+              "id": 5191,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5190,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5200,
+                  "src": "999:3:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_userDefinedValueType$_Bin_$6855",
+                    "typeString": "Bin"
+                  },
+                  "typeName": {
+                    "id": 5189,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5188,
+                      "name": "Bin",
+                      "nameLocations": [
+                        "999:3:11"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 6855,
+                      "src": "999:3:11"
+                    },
+                    "referencedDeclaration": 6855,
+                    "src": "999:3:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_userDefinedValueType$_Bin_$6855",
+                      "typeString": "Bin"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "998:5:11"
+            },
+            "scope": 5222,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 5221,
+            "nodeType": "FunctionDefinition",
+            "src": "1235:192:11",
+            "nodes": [],
+            "body": {
+              "id": 5220,
+              "nodeType": "Block",
+              "src": "1307:120:11",
+              "nodes": [],
+              "statements": [
+                {
+                  "id": 5219,
+                  "nodeType": "UncheckedBlock",
+                  "src": "1313:110:11",
+                  "statements": [
+                    {
+                      "expression": {
+                        "arguments": [
+                          {
+                            "commonType": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            },
+                            "id": 5216,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "leftExpression": {
+                              "arguments": [
+                                {
+                                  "id": 5213,
+                                  "name": "offer",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 5203,
+                                  "src": "1371:5:11",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_userDefinedValueType$_Offer_$66949",
+                                    "typeString": "Offer"
+                                  }
+                                }
+                              ],
+                              "expression": {
+                                "argumentTypes": [
+                                  {
+                                    "typeIdentifier": "t_userDefinedValueType$_Offer_$66949",
+                                    "typeString": "Offer"
+                                  }
+                                ],
+                                "expression": {
+                                  "id": 5211,
+                                  "name": "Offer",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 66949,
+                                  "src": "1358:5:11",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_type$_t_userDefinedValueType$_Offer_$66949_$",
+                                    "typeString": "type(Offer)"
+                                  }
+                                },
+                                "id": 5212,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": true,
+                                "lValueRequested": false,
+                                "memberLocation": "1364:6:11",
+                                "memberName": "unwrap",
+                                "nodeType": "MemberAccess",
+                                "src": "1358:12:11",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_function_unwrap_pure$_t_userDefinedValueType$_Offer_$66949_$returns$_t_uint256_$",
+                                  "typeString": "function (Offer) pure returns (uint256)"
+                                }
+                              },
+                              "id": 5214,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "kind": "functionCall",
+                              "lValueRequested": false,
+                              "nameLocations": [],
+                              "names": [],
+                              "nodeType": "FunctionCall",
+                              "src": "1358:19:11",
+                              "tryCall": false,
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            },
+                            "nodeType": "BinaryOperation",
+                            "operator": "&",
+                            "rightExpression": {
+                              "id": 5215,
+                              "name": "HIDE_FIELDS_FROM_MAKER_MASK",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 5147,
+                              "src": "1388:27:11",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            },
+                            "src": "1358:57:11",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "expression": {
+                            "id": 5209,
+                            "name": "Offer",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 66949,
+                            "src": "1338:5:11",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_userDefinedValueType$_Offer_$66949_$",
+                              "typeString": "type(Offer)"
+                            }
+                          },
+                          "id": 5210,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberLocation": "1344:4:11",
+                          "memberName": "wrap",
+                          "nodeType": "MemberAccess",
+                          "src": "1338:10:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_wrap_pure$_t_uint256_$returns$_t_userDefinedValueType$_Offer_$66949_$",
+                            "typeString": "function (uint256) pure returns (Offer)"
+                          }
+                        },
+                        "id": 5217,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1338:78:11",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_userDefinedValueType$_Offer_$66949",
+                          "typeString": "Offer"
+                        }
+                      },
+                      "functionReturnParameters": 5208,
+                      "id": 5218,
+                      "nodeType": "Return",
+                      "src": "1331:85:11"
+                    }
+                  ]
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "clearFieldsForMaker",
+            "nameLocation": "1244:19:11",
+            "parameters": {
+              "id": 5204,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5203,
+                  "mutability": "mutable",
+                  "name": "offer",
+                  "nameLocation": "1270:5:11",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5221,
+                  "src": "1264:11:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_userDefinedValueType$_Offer_$66949",
+                    "typeString": "Offer"
+                  },
+                  "typeName": {
+                    "id": 5202,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5201,
+                      "name": "Offer",
+                      "nameLocations": [
+                        "1264:5:11"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 66949,
+                      "src": "1264:5:11"
+                    },
+                    "referencedDeclaration": 66949,
+                    "src": "1264:5:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_userDefinedValueType$_Offer_$66949",
+                      "typeString": "Offer"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1263:13:11"
+            },
+            "returnParameters": {
+              "id": 5208,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5207,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5221,
+                  "src": "1300:5:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_userDefinedValueType$_Offer_$66949",
+                    "typeString": "Offer"
+                  },
+                  "typeName": {
+                    "id": 5206,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5205,
+                      "name": "Offer",
+                      "nameLocations": [
+                        "1300:5:11"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 66949,
+                      "src": "1300:5:11"
+                    },
+                    "referencedDeclaration": 66949,
+                    "src": "1300:5:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_userDefinedValueType$_Offer_$66949",
+                      "typeString": "Offer"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1299:7:11"
+            },
+            "scope": 5222,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "OfferExtra",
+        "contractDependencies": [],
+        "contractKind": "library",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          5222
+        ],
+        "name": "OfferExtra",
+        "nameLocation": "444:10:11",
+        "scope": 5273,
+        "usedErrors": [],
+        "usedEvents": []
+      },
+      {
+        "id": 5272,
+        "nodeType": "ContractDefinition",
+        "src": "1489:753:11",
+        "nodes": [
+          {
+            "id": 5238,
+            "nodeType": "FunctionDefinition",
+            "src": "1562:135:11",
+            "nodes": [],
+            "body": {
+              "id": 5237,
+              "nodeType": "Block",
+              "src": "1634:63:11",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "expression": {
+                          "id": 5233,
+                          "name": "offer",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 5225,
+                          "src": "1680:5:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_OfferUnpacked_$66947_memory_ptr",
+                            "typeString": "struct OfferUnpacked memory"
+                          }
+                        },
+                        "id": 5234,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "1686:5:11",
+                        "memberName": "gives",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 66946,
+                        "src": "1680:11:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "expression": {
+                          "id": 5230,
+                          "name": "offer",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 5225,
+                          "src": "1647:5:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_OfferUnpacked_$66947_memory_ptr",
+                            "typeString": "struct OfferUnpacked memory"
+                          }
+                        },
+                        "id": 5231,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "1653:4:11",
+                        "memberName": "tick",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 66944,
+                        "src": "1647:10:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_userDefinedValueType$_Tick_$5280",
+                          "typeString": "Tick"
+                        }
+                      },
+                      "id": 5232,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1658:21:11",
+                      "memberName": "inboundFromOutboundUp",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 5397,
+                      "src": "1647:32:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_userDefinedValueType$_Tick_$5280_$_t_uint256_$returns$_t_uint256_$attached_to$_t_userDefinedValueType$_Tick_$5280_$",
+                        "typeString": "function (Tick,uint256) pure returns (uint256)"
+                      }
+                    },
+                    "id": 5235,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1647:45:11",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 5229,
+                  "id": 5236,
+                  "nodeType": "Return",
+                  "src": "1640:52:11"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "wants",
+            "nameLocation": "1571:5:11",
+            "parameters": {
+              "id": 5226,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5225,
+                  "mutability": "mutable",
+                  "name": "offer",
+                  "nameLocation": "1598:5:11",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5238,
+                  "src": "1577:26:11",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_OfferUnpacked_$66947_memory_ptr",
+                    "typeString": "struct OfferUnpacked"
+                  },
+                  "typeName": {
+                    "id": 5224,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5223,
+                      "name": "OfferUnpacked",
+                      "nameLocations": [
+                        "1577:13:11"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 66947,
+                      "src": "1577:13:11"
+                    },
+                    "referencedDeclaration": 66947,
+                    "src": "1577:13:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OfferUnpacked_$66947_storage_ptr",
+                      "typeString": "struct OfferUnpacked"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1576:28:11"
+            },
+            "returnParameters": {
+              "id": 5229,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5228,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5238,
+                  "src": "1628:4:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5227,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1628:4:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1627:6:11"
+            },
+            "scope": 5272,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 5253,
+            "nodeType": "FunctionDefinition",
+            "src": "1738:186:11",
+            "nodes": [],
+            "body": {
+              "id": 5252,
+              "nodeType": "Block",
+              "src": "1816:108:11",
+              "nodes": [],
+              "statements": [
+                {
+                  "assignments": [
+                    5247
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 5247,
+                      "mutability": "mutable",
+                      "name": "gives",
+                      "nameLocation": "1827:5:11",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 5252,
+                      "src": "1822:10:11",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 5246,
+                        "name": "uint",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1822:4:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 5250,
+                  "initialValue": {
+                    "expression": {
+                      "id": 5248,
+                      "name": "offer",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5241,
+                      "src": "1835:5:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_OfferUnpacked_$66947_memory_ptr",
+                        "typeString": "struct OfferUnpacked memory"
+                      }
+                    },
+                    "id": 5249,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1841:5:11",
+                    "memberName": "gives",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 66946,
+                    "src": "1835:11:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1822:24:11"
+                },
+                {
+                  "AST": {
+                    "nodeType": "YulBlock",
+                    "src": "1877:43:11",
+                    "statements": [
+                      {
+                        "nodeType": "YulAssignment",
+                        "src": "1885:29:11",
+                        "value": {
+                          "arguments": [
+                            {
+                              "arguments": [
+                                {
+                                  "name": "gives",
+                                  "nodeType": "YulIdentifier",
+                                  "src": "1907:5:11"
+                                }
+                              ],
+                              "functionName": {
+                                "name": "iszero",
+                                "nodeType": "YulIdentifier",
+                                "src": "1900:6:11"
+                              },
+                              "nodeType": "YulFunctionCall",
+                              "src": "1900:13:11"
+                            }
+                          ],
+                          "functionName": {
+                            "name": "iszero",
+                            "nodeType": "YulIdentifier",
+                            "src": "1893:6:11"
+                          },
+                          "nodeType": "YulFunctionCall",
+                          "src": "1893:21:11"
+                        },
+                        "variableNames": [
+                          {
+                            "name": "resp",
+                            "nodeType": "YulIdentifier",
+                            "src": "1885:4:11"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "evmVersion": "paris",
+                  "externalReferences": [
+                    {
+                      "declaration": 5247,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "1907:5:11",
+                      "valueSize": 1
+                    },
+                    {
+                      "declaration": 5244,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "1885:4:11",
+                      "valueSize": 1
+                    }
+                  ],
+                  "flags": [
+                    "memory-safe"
+                  ],
+                  "id": 5251,
+                  "nodeType": "InlineAssembly",
+                  "src": "1852:68:11"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isLive",
+            "nameLocation": "1747:6:11",
+            "parameters": {
+              "id": 5242,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5241,
+                  "mutability": "mutable",
+                  "name": "offer",
+                  "nameLocation": "1775:5:11",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5253,
+                  "src": "1754:26:11",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_OfferUnpacked_$66947_memory_ptr",
+                    "typeString": "struct OfferUnpacked"
+                  },
+                  "typeName": {
+                    "id": 5240,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5239,
+                      "name": "OfferUnpacked",
+                      "nameLocations": [
+                        "1754:13:11"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 66947,
+                      "src": "1754:13:11"
+                    },
+                    "referencedDeclaration": 66947,
+                    "src": "1754:13:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OfferUnpacked_$66947_storage_ptr",
+                      "typeString": "struct OfferUnpacked"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1753:28:11"
+            },
+            "returnParameters": {
+              "id": 5245,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5244,
+                  "mutability": "mutable",
+                  "name": "resp",
+                  "nameLocation": "1810:4:11",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5253,
+                  "src": "1805:9:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 5243,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1805:4:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1804:11:11"
+            },
+            "scope": 5272,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 5271,
+            "nodeType": "FunctionDefinition",
+            "src": "2100:139:11",
+            "nodes": [],
+            "body": {
+              "id": 5270,
+              "nodeType": "Block",
+              "src": "2187:52:11",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 5267,
+                        "name": "tickSpacing",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5258,
+                        "src": "2222:11:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "expression": {
+                          "id": 5264,
+                          "name": "offer",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 5256,
+                          "src": "2200:5:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_OfferUnpacked_$66947_memory_ptr",
+                            "typeString": "struct OfferUnpacked memory"
+                          }
+                        },
+                        "id": 5265,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "2206:4:11",
+                        "memberName": "tick",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 66944,
+                        "src": "2200:10:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_userDefinedValueType$_Tick_$5280",
+                          "typeString": "Tick"
+                        }
+                      },
+                      "id": 5266,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "2211:10:11",
+                      "memberName": "nearestBin",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 5344,
+                      "src": "2200:21:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_userDefinedValueType$_Tick_$5280_$_t_uint256_$returns$_t_userDefinedValueType$_Bin_$6855_$attached_to$_t_userDefinedValueType$_Tick_$5280_$",
+                        "typeString": "function (Tick,uint256) pure returns (Bin)"
+                      }
+                    },
+                    "id": 5268,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2200:34:11",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_userDefinedValueType$_Bin_$6855",
+                      "typeString": "Bin"
+                    }
+                  },
+                  "functionReturnParameters": 5263,
+                  "id": 5269,
+                  "nodeType": "Return",
+                  "src": "2193:41:11"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "bin",
+            "nameLocation": "2109:3:11",
+            "parameters": {
+              "id": 5259,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5256,
+                  "mutability": "mutable",
+                  "name": "offer",
+                  "nameLocation": "2134:5:11",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5271,
+                  "src": "2113:26:11",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_OfferUnpacked_$66947_memory_ptr",
+                    "typeString": "struct OfferUnpacked"
+                  },
+                  "typeName": {
+                    "id": 5255,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5254,
+                      "name": "OfferUnpacked",
+                      "nameLocations": [
+                        "2113:13:11"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 66947,
+                      "src": "2113:13:11"
+                    },
+                    "referencedDeclaration": 66947,
+                    "src": "2113:13:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_OfferUnpacked_$66947_storage_ptr",
+                      "typeString": "struct OfferUnpacked"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5258,
+                  "mutability": "mutable",
+                  "name": "tickSpacing",
+                  "nameLocation": "2146:11:11",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5271,
+                  "src": "2141:16:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5257,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2141:4:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2112:46:11"
+            },
+            "returnParameters": {
+              "id": 5263,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5262,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5271,
+                  "src": "2182:3:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_userDefinedValueType$_Bin_$6855",
+                    "typeString": "Bin"
+                  },
+                  "typeName": {
+                    "id": 5261,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 5260,
+                      "name": "Bin",
+                      "nameLocations": [
+                        "2182:3:11"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 6855,
+                      "src": "2182:3:11"
+                    },
+                    "referencedDeclaration": 6855,
+                    "src": "2182:3:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_userDefinedValueType$_Bin_$6855",
+                      "typeString": "Bin"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2181:5:11"
+            },
+            "scope": 5272,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "OfferUnpackedExtra",
+        "contractDependencies": [],
+        "contractKind": "library",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          5272
+        ],
+        "name": "OfferUnpackedExtra",
+        "nameLocation": "1497:18:11",
+        "scope": 5273,
+        "usedErrors": [],
+        "usedEvents": []
+      }
+    ],
+    "license": "Unlicense"
+  },
+  "id": 11
+}

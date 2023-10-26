@@ -1,0 +1,403 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "refuseNative",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "receive"
+    }
+  ],
+  "bytecode": {
+    "object": "0x60806040526000805460ff1916600117905534801561001d57600080fd5b5060d08061002c6000396000f3fe60806040526004361060205760003560e01c80633609055b14608057600080fd5b36607b5760005460ff1660795760405162461bcd60e51b815260206004820152601860248201527f5465737453656e6465722f726566757365734e61746976650000000000000000604482015260640160405180910390fd5b005b600080fd5b348015608b57600080fd5b5060796000805460ff1916905556fea2646970667358221220c450cfe657890e3b5dcdb70df26d1b5eb063d8fb3c4ff41d4a32268e21d772cd64736f6c63430008140033",
+    "sourceMap": "170:210:66:-:0;;;194:24;;;-1:-1:-1;;194:24:66;214:4;194:24;;;170:210;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x60806040526004361060205760003560e01c80633609055b14608057600080fd5b36607b5760005460ff1660795760405162461bcd60e51b815260206004820152601860248201527f5465737453656e6465722f726566757365734e61746976650000000000000000604482015260640160405180910390fd5b005b600080fd5b348015608b57600080fd5b5060796000805460ff1916905556fea2646970667358221220c450cfe657890e3b5dcdb70df26d1b5eb063d8fb3c4ff41d4a32268e21d772cd64736f6c63430008140033",
+    "sourceMap": "170:210:66:-:0;;;;;;;;;;;;;;;;;;;;;;;;264:12;;;;256:49;;;;-1:-1:-1;;;256:49:66;;216:2:131;256:49:66;;;198:21:131;255:2;235:18;;;228:30;294:26;274:18;;;267:54;338:18;;256:49:66;;;;;;;;170:210;;;;;314:64;;;;;;;;;;;;368:5;353:20;;-1:-1:-1;;353:20:66;;;314:64",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "refuseNative()": "3609055b"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"refuseNative\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"notice\":\"Replaces EOA in tests (use prank to approve tokens) Allows testing of native token transfer fail\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"node_modules/@mangrovedao/mangrove-core/test/lib/agents/TestSender.sol\":\"TestSender\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/\",\":@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/\",\":@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/\",\":ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/\",\":mgv_arbitrage_lib/=mangrove-arbitrage/lib/\",\":mgv_arbitrage_script/=mangrove-arbitrage/script/\",\":mgv_arbitrage_src/=mangrove-arbitrage/src/\",\":mgv_arbitrage_test/=mangrove-arbitrage/test/\",\":mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":mgv_script/=node_modules/@mangrovedao/mangrove-core/script/\",\":mgv_src/=node_modules/@mangrovedao/mangrove-core/src/\",\":mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":mgv_test/=node_modules/@mangrovedao/mangrove-core/test/\",\":uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/\"]},\"sources\":{\"node_modules/@mangrovedao/mangrove-core/test/lib/agents/TestSender.sol\":{\"keccak256\":\"0x5790f6709bfc2dc5ddb839d53ef2f1bcbd636f43285060ec42a6289a07de62b3\",\"license\":\"AGPL-3.0\",\"urls\":[\"bzz-raw://c4edbbd79711a4d221100350555675288b9450f6699f471ff4bc4b676354aa80\",\"dweb:/ipfs/QmY6MX4CHDqi7b2nsy6hBakaPx4PvWwaS735L1nijtqTy4\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.20+commit.a1b79de6"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "refuseNative"
+        },
+        {
+          "inputs": [],
+          "stateMutability": "payable",
+          "type": "receive"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/",
+        "mgv_arbitrage_lib/=mangrove-arbitrage/lib/",
+        "mgv_arbitrage_script/=mangrove-arbitrage/script/",
+        "mgv_arbitrage_src/=mangrove-arbitrage/src/",
+        "mgv_arbitrage_test/=mangrove-arbitrage/test/",
+        "mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "mgv_script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "mgv_src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "mgv_test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "node_modules/@mangrovedao/mangrove-core/test/lib/agents/TestSender.sol": "TestSender"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "node_modules/@mangrovedao/mangrove-core/test/lib/agents/TestSender.sol": {
+        "keccak256": "0x5790f6709bfc2dc5ddb839d53ef2f1bcbd636f43285060ec42a6289a07de62b3",
+        "urls": [
+          "bzz-raw://c4edbbd79711a4d221100350555675288b9450f6699f471ff4bc4b676354aa80",
+          "dweb:/ipfs/QmY6MX4CHDqi7b2nsy6hBakaPx4PvWwaS735L1nijtqTy4"
+        ],
+        "license": "AGPL-3.0"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove-core/test/lib/agents/TestSender.sol",
+    "id": 74686,
+    "exportedSymbols": {
+      "TestSender": [
+        74685
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "38:343:66",
+    "nodes": [
+      {
+        "id": 74663,
+        "nodeType": "PragmaDirective",
+        "src": "38:24:66",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".10"
+        ]
+      },
+      {
+        "id": 74685,
+        "nodeType": "ContractDefinition",
+        "src": "170:210:66",
+        "nodes": [
+          {
+            "id": 74667,
+            "nodeType": "VariableDeclaration",
+            "src": "194:24:66",
+            "nodes": [],
+            "constant": false,
+            "mutability": "mutable",
+            "name": "acceptNative",
+            "nameLocation": "199:12:66",
+            "scope": 74685,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 74665,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "194:4:66",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "value": {
+              "hexValue": "74727565",
+              "id": 74666,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "bool",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "214:4:66",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              },
+              "value": "true"
+            },
+            "visibility": "internal"
+          },
+          {
+            "id": 74676,
+            "nodeType": "FunctionDefinition",
+            "src": "223:87:66",
+            "nodes": [],
+            "body": {
+              "id": 74675,
+              "nodeType": "Block",
+              "src": "250:60:66",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 74671,
+                        "name": "acceptNative",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 74667,
+                        "src": "264:12:66",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "5465737453656e6465722f726566757365734e6174697665",
+                        "id": 74672,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "278:26:66",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_91a158c933ef456b056ba626bce161a6a8a6cfcf6c93263166c60b2abcb347b4",
+                          "typeString": "literal_string \"TestSender/refusesNative\""
+                        },
+                        "value": "TestSender/refusesNative"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_91a158c933ef456b056ba626bce161a6a8a6cfcf6c93263166c60b2abcb347b4",
+                          "typeString": "literal_string \"TestSender/refusesNative\""
+                        }
+                      ],
+                      "id": 74670,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "256:7:66",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 74673,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "256:49:66",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 74674,
+                  "nodeType": "ExpressionStatement",
+                  "src": "256:49:66"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "receive",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "parameters": {
+              "id": 74668,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "230:2:66"
+            },
+            "returnParameters": {
+              "id": 74669,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "250:0:66"
+            },
+            "scope": 74685,
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 74684,
+            "nodeType": "FunctionDefinition",
+            "src": "314:64:66",
+            "nodes": [],
+            "body": {
+              "id": 74683,
+              "nodeType": "Block",
+              "src": "347:31:66",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 74681,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 74679,
+                      "name": "acceptNative",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 74667,
+                      "src": "353:12:66",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "hexValue": "66616c7365",
+                      "id": 74680,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "bool",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "368:5:66",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "value": "false"
+                    },
+                    "src": "353:20:66",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 74682,
+                  "nodeType": "ExpressionStatement",
+                  "src": "353:20:66"
+                }
+              ]
+            },
+            "functionSelector": "3609055b",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "refuseNative",
+            "nameLocation": "323:12:66",
+            "parameters": {
+              "id": 74677,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "335:2:66"
+            },
+            "returnParameters": {
+              "id": 74678,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "347:0:66"
+            },
+            "scope": 74685,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "TestSender",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 74664,
+          "nodeType": "StructuredDocumentation",
+          "src": "64:105:66",
+          "text": "Replaces EOA in tests (use prank to approve tokens)\n Allows testing of native token transfer fail"
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          74685
+        ],
+        "name": "TestSender",
+        "nameLocation": "179:10:66",
+        "scope": 74686,
+        "usedErrors": [],
+        "usedEvents": []
+      }
+    ],
+    "license": "AGPL-3.0"
+  },
+  "id": 66
+}

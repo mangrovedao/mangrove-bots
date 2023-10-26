@@ -1,0 +1,2021 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "MangroveOrderComplete",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "taker",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "fillOrKill",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "Tick",
+          "name": "tick",
+          "type": "int256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "fillVolume",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "fillWants",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "restingOrder",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "offerId",
+          "type": "uint256"
+        }
+      ],
+      "name": "MangroveOrderStart",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "offerId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "date",
+          "type": "uint256"
+        }
+      ],
+      "name": "SetExpiry",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "offerId",
+          "type": "uint256"
+        }
+      ],
+      "name": "expiring",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "offerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "date",
+          "type": "uint256"
+        }
+      ],
+      "name": "setExpiry",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ],
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple"
+            },
+            {
+              "internalType": "bool",
+              "name": "fillOrKill",
+              "type": "bool"
+            },
+            {
+              "internalType": "Tick",
+              "name": "tick",
+              "type": "int256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "fillVolume",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "fillWants",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "restingOrder",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "expiryDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "offerId",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IOrderLogic.TakerOrder",
+          "name": "tko",
+          "type": "tuple"
+        }
+      ],
+      "name": "take",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "takerGot",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "takerGave",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "bounty",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "fee",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "offerId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "offerWriteData",
+              "type": "bytes32"
+            }
+          ],
+          "internalType": "struct IOrderLogic.TakerOrderResult",
+          "name": "res",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "expiring(bytes32,uint256)": "0479ab93",
+    "setExpiry(bytes32,uint256,uint256)": "535f55ca",
+    "take(((address,address,uint256),bool,int256,uint256,bool,bool,uint256,uint256))": "126490ee"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[],\"name\":\"MangroveOrderComplete\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"taker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"fillOrKill\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"Tick\",\"name\":\"tick\",\"type\":\"int256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fillVolume\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"fillWants\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"restingOrder\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"offerId\",\"type\":\"uint256\"}],\"name\":\"MangroveOrderStart\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"offerId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"date\",\"type\":\"uint256\"}],\"name\":\"SetExpiry\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"offerId\",\"type\":\"uint256\"}],\"name\":\"expiring\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"offerId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"date\",\"type\":\"uint256\"}],\"name\":\"setExpiry\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"},{\"internalType\":\"bool\",\"name\":\"fillOrKill\",\"type\":\"bool\"},{\"internalType\":\"Tick\",\"name\":\"tick\",\"type\":\"int256\"},{\"internalType\":\"uint256\",\"name\":\"fillVolume\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"fillWants\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"restingOrder\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"expiryDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"offerId\",\"type\":\"uint256\"}],\"internalType\":\"struct IOrderLogic.TakerOrder\",\"name\":\"tko\",\"type\":\"tuple\"}],\"name\":\"take\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"takerGot\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"takerGave\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"bounty\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"offerId\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"offerWriteData\",\"type\":\"bytes32\"}],\"internalType\":\"struct IOrderLogic.TakerOrderResult\",\"name\":\"res\",\"type\":\"tuple\"}],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"events\":{\"MangroveOrderStart(bytes32,address,bool,int256,uint256,bool,bool,uint256)\":{\"params\":{\"fillOrKill\":\"The fillOrKill that take was called with\",\"fillVolume\":\"the volume to fill. This is not needed for an indexer, as it can get it from the OrderStart event. It is only emitted for RPC calls.\",\"fillWants\":\"if true (buying), the market order stops when `fillVolume` units of `olKey.outbound_tkn` have been obtained (fee included); otherwise (selling), the market order stops when `fillVolume` units of `olKey.inbound_tkn` have been sold.\",\"offerId\":\"The optional offerId take was called with, 0 if not passed. This is not needed for an indexer. It is only emitted for RPC calls.\",\"olKeyHash\":\"the hash of the offer list key. This could be found by the OrderStart event, but is needed for RPC call. This is indexed so that RPC calls can filter on it.\",\"restingOrder\":\"The restingOrder boolean take was called with.\",\"taker\":\"The address of the taker. This could be found by the OrderStart event, but is needed for RPC call. This is indexed so that RPC calls can filter on it.\",\"tick\":\"The tick of the order. This is not needed for an indexer, as it can get it from the OrderStart event. It is only emitted for RPC calls.\"}},\"SetExpiry(bytes32,uint256,uint256)\":{\"params\":{\"date\":\"in seconds since unix epoch\",\"offerId\":\"the Mangrove offer id.\",\"olKeyHash\":\"the hash of the offer list key. It is indexed so RPC call can filter on it.\"}}},\"kind\":\"dev\",\"methods\":{\"expiring(bytes32,uint256)\":{\"params\":{\"offerId\":\"The id of the offer to query for expiry for.\",\"olKeyHash\":\"the hash of the offer list key.\"},\"returns\":{\"_0\":\"res The timestamp beyond which `offerId` on the `olKey` offer list should renege on trade. 0 means no expiry.\"}},\"setExpiry(bytes32,uint256,uint256)\":{\"details\":\"If new date is in the past of the current block's timestamp, offer will renege on trade.\",\"params\":{\"date\":\"in seconds since unix epoch\",\"offerId\":\"The offer id whose expiry date is to be set.\",\"olKeyHash\":\"the hash of the offer list key.\"}},\"take(((address,address,uint256),bool,int256,uint256,bool,bool,uint256,uint256))\":{\"params\":{\"tko\":\"the arguments in memory of the taker order\"},\"returns\":{\"res\":\"the result of the taker order. If `offerId==0`, no resting order was posted on `msg.sender`'s behalf.\"}}},\"title\":\"Interface for resting orders functionality.\",\"version\":1},\"userdoc\":{\"events\":{\"MangroveOrderComplete()\":{\"notice\":\"Indicates that the MangroveOrder has been completed.We only emit this, so that an indexer can know that the order is completed and can thereby keep a correct context\"},\"MangroveOrderStart(bytes32,address,bool,int256,uint256,bool,bool,uint256)\":{\"notice\":\"Information about the order.By emitting this data, an indexer will be able to tell that we are in the context of an mangroveOrder and keep track of what parameters was use to start the order.\"},\"SetExpiry(bytes32,uint256,uint256)\":{\"notice\":\"The expiry of the offer has been setBy emitting this data, an indexer will be able to keep track of the expiry date of an offer.\"}},\"kind\":\"user\",\"methods\":{\"expiring(bytes32,uint256)\":{\"notice\":\"Timestamp beyond which the given `offerId` should renege on trade.\"},\"setExpiry(bytes32,uint256,uint256)\":{\"notice\":\"Updates the expiry date for a specific offer.\"},\"take(((address,address,uint256),bool,int256,uint256,bool,bool,uint256,uint256))\":{\"notice\":\"Implements \\\"Fill or kill\\\" or \\\"Good till cancelled\\\" orders on a given offer list.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/interfaces/IOrderLogic.sol\":\"IOrderLogic\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/\",\":@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/\",\":@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/\",\":ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/\",\":mgv_arbitrage_lib/=mangrove-arbitrage/lib/\",\":mgv_arbitrage_script/=mangrove-arbitrage/script/\",\":mgv_arbitrage_src/=mangrove-arbitrage/src/\",\":mgv_arbitrage_test/=mangrove-arbitrage/test/\",\":mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":mgv_script/=node_modules/@mangrovedao/mangrove-core/script/\",\":mgv_src/=node_modules/@mangrovedao/mangrove-core/src/\",\":mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":mgv_test/=node_modules/@mangrovedao/mangrove-core/test/\",\":uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/\"]},\"sources\":{\"node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol\":{\"keccak256\":\"0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49\",\"dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/BitLib.sol\":{\"keccak256\":\"0x5a1c56d67fbd2ef6f3b830cf8dae1885da5f40a37afd11cb3a392be573993c3b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a07b895de906f49d0ce9e89a349d39220e13039709ea2e2db46ff48310bd4b3b\",\"dweb:/ipfs/QmZyiLKyTZ9EHwqNRUYukQDdg7CL54Dsu65RYabkkGF1KM\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol\":{\"keccak256\":\"0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb\",\"dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/DensityLib.sol\":{\"keccak256\":\"0xc7ee8be7f11a1bf85aa4ea0e222d4a49d77a378b201e347f9a5e4f28f207a023\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ed718e8bf3fb45bc0e7cf739662422cfe01d8d04a2c99b2fb0cfa2372629c6ad\",\"dweb:/ipfs/QmZ5QpyMSmkVxayfpZYovNcc8NGJKfVZEMKphzeKk9cVNv\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/LocalExtra.sol\":{\"keccak256\":\"0xbd3f6702242dd43ba2493eb54feb8f5d2526967512c6f156d29669b54d9c60f2\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://e389f3c78c8073bde973aa3f4770139e2adb4cc00cc1303b77eefa201189a6ff\",\"dweb:/ipfs/QmZ8vXRUUCinKtqJhV7jMXVeDVfRizhJ3NsumZLQxwSc44\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol\":{\"keccak256\":\"0x335217debbf3f4cabeaea88d4dd9777dbda2f2b6ed9684e2285a4d16e1e4464c\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://eafe358531d7dc6527d36f8fbc4bc67ab12516398c35338ba5da57a03e24b9f3\",\"dweb:/ipfs/QmcKxrcr11EM7rsKNUEJq8VXFd2R1dWSTqYk3E4k8dQfzy\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol\":{\"keccak256\":\"0x95120d52698bc60b005496036a7c9daa7b8d0b18b571e596e86fd696b36e3264\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://684d30cc9673403cfddabdf7d979417c5df050abde16712aeaa9ca6b2725d154\",\"dweb:/ipfs/QmTkeUAMhb72BNqGjAaaPBj1NHPtKE8wH1R8bpXD5RTKtC\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol\":{\"keccak256\":\"0xa4aea464925ad277aab2141885eeeb6e5f1b0963ba08d8887a1c2461c334f222\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://c7ec62c85c22d7996abe32663232861f90e855c770dbd252bf49fff4ca786e74\",\"dweb:/ipfs/QmSHBJfw9bg8QjgBquXVLTS337ZuBGHVkDJfwuAZ6X48sw\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/TickTreeLib.sol\":{\"keccak256\":\"0x196c46d6e8e2ab51462f25245f7886568df3f1f65953dcec4c02d7950b4a10cd\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://4293ed5fb3ce4d350b9bb5b38342c273e6d772ace098927e006efa7fc4498329\",\"dweb:/ipfs/QmRCtk481PHQjNdt5Dsa8GYWEX46nYwdeD8R3m92w3Xjxv\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console2.sol\":{\"keccak256\":\"0x954646445d1014c3cd85c7918f5e7adeeca5ee44b68c00bafa237e597a4e35ea\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://516fa3be52da4763147175bfba4be0aa011fadbb0c1afb01f97265bd4cee7973\",\"dweb:/ipfs/QmdixAyMJefx7qePChgdxcBH5MxhmN7vsqPuPLx3CgrVmF\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol\":{\"keccak256\":\"0xe22e3d452040625724ce932cc6f57212c8a32ba021b06f5737e4c23319792c7d\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://b3ab9e3726b49b2d526f1cb6634c562cbafdbc1163753d13a3e1c316ca29e726\",\"dweb:/ipfs/QmS9bYtEVW7i9zAWmC7aPdCDv4BCaBJbhpgrJX6VhH68st\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Global.post.sol\":{\"keccak256\":\"0xddf04a10f84edc0b165351f649cad761a429b5c1b218e482917b3e38a2019e7f\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://7695a94afb1db46a65967bd63fc344b0a9387a4a2c906fdcac0433fdfec32dff\",\"dweb:/ipfs/QmcH4k6VwPrSEjqEQVsKTRjxWtmhijoknih6s6R98dnNUM\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Local.post.sol\":{\"keccak256\":\"0x03d642742c132c37c1fc29cae87f7ce1be93f89877fe698698d5bd2309c878a5\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://6957d461c6486caeee91f5fd8be2ff0f53a8c264c03e8c9b7f7291bf7a72d9fc\",\"dweb:/ipfs/QmTRqHsnjFA1xDmWWuPqn9aPeweRiYHv1wfTz77qxCmd7k\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol\":{\"keccak256\":\"0x812a7c313108b56600f747d89d20b2daa4c4aa489ece1b30c561a353d41468f2\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://3fb1685a67020adeece9f6fbf567567d257aafafd2e115e6151f2b2a14b429aa\",\"dweb:/ipfs/QmUvk3FLDDHRXungxeLtPEfaQj3HNt3ib8nGhonzPdMW6o\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol\":{\"keccak256\":\"0xbb0c9e3177017a77de68adeed5cbbf040fc9152f914adb34575eb880979fc720\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://fac448393a94f7d797f58ece51c1127a1605397b2371c9d1fe61db0037762a91\",\"dweb:/ipfs/QmUwcWdecdqa81eLGz4SekQYfiTp5pgs2mvFRYmu7T2sew\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Structs.post.sol\":{\"keccak256\":\"0x6121b0f392dbeddf77da4f5bc5dee019878ab21538892bd22dbb9c49e9e068bb\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://336a0df7a17dd6b1ed36c4e7f19fc9ab6d4ad933f7e0b3658efba0756c7341bc\",\"dweb:/ipfs/QmZ7NQY6EJHqcE1oEho1yN9ymsTfVpUcMJABKC8Fq5GvhL\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/interfaces/IOrderLogic.sol\":{\"keccak256\":\"0xe686dbe5d597dc5b40ca3f66a3666f76cafaa86e0bcde3f4ce2b418f881d98e9\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://d6da59d63e70c0cf018ddcf9e76cdff3785133905458f5ee56798eb58818a218\",\"dweb:/ipfs/QmVGwZUaNZ5aJb7rgWhdCxfCNBcXcyRst5KdJcVn8cfbFp\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.20+commit.a1b79de6"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "type": "event",
+          "name": "MangroveOrderComplete",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "taker",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "bool",
+              "name": "fillOrKill",
+              "type": "bool",
+              "indexed": false
+            },
+            {
+              "internalType": "Tick",
+              "name": "tick",
+              "type": "int256",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "fillVolume",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "bool",
+              "name": "fillWants",
+              "type": "bool",
+              "indexed": false
+            },
+            {
+              "internalType": "bool",
+              "name": "restingOrder",
+              "type": "bool",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "offerId",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "MangroveOrderStart",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "offerId",
+              "type": "uint256",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "date",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "SetExpiry",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "offerId",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "expiring",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "offerId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "date",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setExpiry"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct IOrderLogic.TakerOrder",
+              "name": "tko",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "struct OLKey",
+                  "name": "olKey",
+                  "type": "tuple",
+                  "components": [
+                    {
+                      "internalType": "address",
+                      "name": "outbound_tkn",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "address",
+                      "name": "inbound_tkn",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "uint256",
+                      "name": "tickSpacing",
+                      "type": "uint256"
+                    }
+                  ]
+                },
+                {
+                  "internalType": "bool",
+                  "name": "fillOrKill",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "Tick",
+                  "name": "tick",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "fillVolume",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "fillWants",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "restingOrder",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "expiryDate",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "offerId",
+                  "type": "uint256"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "payable",
+          "type": "function",
+          "name": "take",
+          "outputs": [
+            {
+              "internalType": "struct IOrderLogic.TakerOrderResult",
+              "name": "res",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "takerGot",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "takerGave",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "bounty",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "fee",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "offerId",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "offerWriteData",
+                  "type": "bytes32"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "expiring(bytes32,uint256)": {
+            "params": {
+              "offerId": "The id of the offer to query for expiry for.",
+              "olKeyHash": "the hash of the offer list key."
+            },
+            "returns": {
+              "_0": "res The timestamp beyond which `offerId` on the `olKey` offer list should renege on trade. 0 means no expiry."
+            }
+          },
+          "setExpiry(bytes32,uint256,uint256)": {
+            "details": "If new date is in the past of the current block's timestamp, offer will renege on trade.",
+            "params": {
+              "date": "in seconds since unix epoch",
+              "offerId": "The offer id whose expiry date is to be set.",
+              "olKeyHash": "the hash of the offer list key."
+            }
+          },
+          "take(((address,address,uint256),bool,int256,uint256,bool,bool,uint256,uint256))": {
+            "params": {
+              "tko": "the arguments in memory of the taker order"
+            },
+            "returns": {
+              "res": "the result of the taker order. If `offerId==0`, no resting order was posted on `msg.sender`'s behalf."
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "expiring(bytes32,uint256)": {
+            "notice": "Timestamp beyond which the given `offerId` should renege on trade."
+          },
+          "setExpiry(bytes32,uint256,uint256)": {
+            "notice": "Updates the expiry date for a specific offer."
+          },
+          "take(((address,address,uint256),bool,int256,uint256,bool,bool,uint256,uint256))": {
+            "notice": "Implements \"Fill or kill\" or \"Good till cancelled\" orders on a given offer list."
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/",
+        "mgv_arbitrage_lib/=mangrove-arbitrage/lib/",
+        "mgv_arbitrage_script/=mangrove-arbitrage/script/",
+        "mgv_arbitrage_src/=mangrove-arbitrage/src/",
+        "mgv_arbitrage_test/=mangrove-arbitrage/test/",
+        "mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "mgv_script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "mgv_src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "mgv_test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/interfaces/IOrderLogic.sol": "IOrderLogic"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol": {
+        "keccak256": "0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240",
+        "urls": [
+          "bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49",
+          "dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/BitLib.sol": {
+        "keccak256": "0x5a1c56d67fbd2ef6f3b830cf8dae1885da5f40a37afd11cb3a392be573993c3b",
+        "urls": [
+          "bzz-raw://a07b895de906f49d0ce9e89a349d39220e13039709ea2e2db46ff48310bd4b3b",
+          "dweb:/ipfs/QmZyiLKyTZ9EHwqNRUYukQDdg7CL54Dsu65RYabkkGF1KM"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol": {
+        "keccak256": "0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87",
+        "urls": [
+          "bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb",
+          "dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/DensityLib.sol": {
+        "keccak256": "0xc7ee8be7f11a1bf85aa4ea0e222d4a49d77a378b201e347f9a5e4f28f207a023",
+        "urls": [
+          "bzz-raw://ed718e8bf3fb45bc0e7cf739662422cfe01d8d04a2c99b2fb0cfa2372629c6ad",
+          "dweb:/ipfs/QmZ5QpyMSmkVxayfpZYovNcc8NGJKfVZEMKphzeKk9cVNv"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/LocalExtra.sol": {
+        "keccak256": "0xbd3f6702242dd43ba2493eb54feb8f5d2526967512c6f156d29669b54d9c60f2",
+        "urls": [
+          "bzz-raw://e389f3c78c8073bde973aa3f4770139e2adb4cc00cc1303b77eefa201189a6ff",
+          "dweb:/ipfs/QmZ8vXRUUCinKtqJhV7jMXVeDVfRizhJ3NsumZLQxwSc44"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol": {
+        "keccak256": "0x335217debbf3f4cabeaea88d4dd9777dbda2f2b6ed9684e2285a4d16e1e4464c",
+        "urls": [
+          "bzz-raw://eafe358531d7dc6527d36f8fbc4bc67ab12516398c35338ba5da57a03e24b9f3",
+          "dweb:/ipfs/QmcKxrcr11EM7rsKNUEJq8VXFd2R1dWSTqYk3E4k8dQfzy"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol": {
+        "keccak256": "0x95120d52698bc60b005496036a7c9daa7b8d0b18b571e596e86fd696b36e3264",
+        "urls": [
+          "bzz-raw://684d30cc9673403cfddabdf7d979417c5df050abde16712aeaa9ca6b2725d154",
+          "dweb:/ipfs/QmTkeUAMhb72BNqGjAaaPBj1NHPtKE8wH1R8bpXD5RTKtC"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol": {
+        "keccak256": "0xa4aea464925ad277aab2141885eeeb6e5f1b0963ba08d8887a1c2461c334f222",
+        "urls": [
+          "bzz-raw://c7ec62c85c22d7996abe32663232861f90e855c770dbd252bf49fff4ca786e74",
+          "dweb:/ipfs/QmSHBJfw9bg8QjgBquXVLTS337ZuBGHVkDJfwuAZ6X48sw"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/TickTreeLib.sol": {
+        "keccak256": "0x196c46d6e8e2ab51462f25245f7886568df3f1f65953dcec4c02d7950b4a10cd",
+        "urls": [
+          "bzz-raw://4293ed5fb3ce4d350b9bb5b38342c273e6d772ace098927e006efa7fc4498329",
+          "dweb:/ipfs/QmRCtk481PHQjNdt5Dsa8GYWEX46nYwdeD8R3m92w3Xjxv"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console2.sol": {
+        "keccak256": "0x954646445d1014c3cd85c7918f5e7adeeca5ee44b68c00bafa237e597a4e35ea",
+        "urls": [
+          "bzz-raw://516fa3be52da4763147175bfba4be0aa011fadbb0c1afb01f97265bd4cee7973",
+          "dweb:/ipfs/QmdixAyMJefx7qePChgdxcBH5MxhmN7vsqPuPLx3CgrVmF"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol": {
+        "keccak256": "0xe22e3d452040625724ce932cc6f57212c8a32ba021b06f5737e4c23319792c7d",
+        "urls": [
+          "bzz-raw://b3ab9e3726b49b2d526f1cb6634c562cbafdbc1163753d13a3e1c316ca29e726",
+          "dweb:/ipfs/QmS9bYtEVW7i9zAWmC7aPdCDv4BCaBJbhpgrJX6VhH68st"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Global.post.sol": {
+        "keccak256": "0xddf04a10f84edc0b165351f649cad761a429b5c1b218e482917b3e38a2019e7f",
+        "urls": [
+          "bzz-raw://7695a94afb1db46a65967bd63fc344b0a9387a4a2c906fdcac0433fdfec32dff",
+          "dweb:/ipfs/QmcH4k6VwPrSEjqEQVsKTRjxWtmhijoknih6s6R98dnNUM"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Local.post.sol": {
+        "keccak256": "0x03d642742c132c37c1fc29cae87f7ce1be93f89877fe698698d5bd2309c878a5",
+        "urls": [
+          "bzz-raw://6957d461c6486caeee91f5fd8be2ff0f53a8c264c03e8c9b7f7291bf7a72d9fc",
+          "dweb:/ipfs/QmTRqHsnjFA1xDmWWuPqn9aPeweRiYHv1wfTz77qxCmd7k"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol": {
+        "keccak256": "0x812a7c313108b56600f747d89d20b2daa4c4aa489ece1b30c561a353d41468f2",
+        "urls": [
+          "bzz-raw://3fb1685a67020adeece9f6fbf567567d257aafafd2e115e6151f2b2a14b429aa",
+          "dweb:/ipfs/QmUvk3FLDDHRXungxeLtPEfaQj3HNt3ib8nGhonzPdMW6o"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol": {
+        "keccak256": "0xbb0c9e3177017a77de68adeed5cbbf040fc9152f914adb34575eb880979fc720",
+        "urls": [
+          "bzz-raw://fac448393a94f7d797f58ece51c1127a1605397b2371c9d1fe61db0037762a91",
+          "dweb:/ipfs/QmUwcWdecdqa81eLGz4SekQYfiTp5pgs2mvFRYmu7T2sew"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Structs.post.sol": {
+        "keccak256": "0x6121b0f392dbeddf77da4f5bc5dee019878ab21538892bd22dbb9c49e9e068bb",
+        "urls": [
+          "bzz-raw://336a0df7a17dd6b1ed36c4e7f19fc9ab6d4ad933f7e0b3658efba0756c7341bc",
+          "dweb:/ipfs/QmZ7NQY6EJHqcE1oEho1yN9ymsTfVpUcMJABKC8Fq5GvhL"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/interfaces/IOrderLogic.sol": {
+        "keccak256": "0xe686dbe5d597dc5b40ca3f66a3666f76cafaa86e0bcde3f4ce2b418f881d98e9",
+        "urls": [
+          "bzz-raw://d6da59d63e70c0cf018ddcf9e76cdff3785133905458f5ee56798eb58818a218",
+          "dweb:/ipfs/QmVGwZUaNZ5aJb7rgWhdCxfCNBcXcyRst5KdJcVn8cfbFp"
+        ],
+        "license": "BSD-2-Clause"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/interfaces/IOrderLogic.sol",
+    "id": 83683,
+    "exportedSymbols": {
+      "IOrderLogic": [
+        83682
+      ],
+      "OLKey": [
+        55875
+      ],
+      "Tick": [
+        5280
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "41:5273:104",
+    "nodes": [
+      {
+        "id": 83580,
+        "nodeType": "PragmaDirective",
+        "src": "41:25:104",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          ">=",
+          "0.8",
+          ".10"
+        ]
+      },
+      {
+        "id": 83582,
+        "nodeType": "ImportDirective",
+        "src": "68:47:104",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol",
+        "file": "@mgv/src/core/MgvLib.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 83683,
+        "sourceUnit": 56240,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 83581,
+              "name": "OLKey",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 55875,
+              "src": "76:5:104",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 83584,
+        "nodeType": "ImportDirective",
+        "src": "116:47:104",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol",
+        "file": "@mgv/lib/core/TickLib.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 83683,
+        "sourceUnit": 6402,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 83583,
+              "name": "Tick",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 5280,
+              "src": "124:4:104",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 83682,
+        "nodeType": "ContractDefinition",
+        "src": "219:5094:104",
+        "nodes": [
+          {
+            "id": 83605,
+            "nodeType": "StructDefinition",
+            "src": "1245:179:104",
+            "nodes": [],
+            "canonicalName": "IOrderLogic.TakerOrder",
+            "documentation": {
+              "id": 83586,
+              "nodeType": "StructuredDocumentation",
+              "src": "245:997:104",
+              "text": "@notice Information for creating a market order with a GTC or FOK semantics.\n@param olKey the offer list key.\n@param fillOrKill true to revert if market order cannot be filled and resting order failed or is not enabled; otherwise, false\n@param tick the tick\n@param fillVolume the volume to fill\n@param fillWants if true (usually when `TakerOrder` implements a \"buy\" on a market), the market order stops when `fillVolume` units of `olKey.outbound_tkn` have been obtained (fee included); otherwise (selling), the market order stops when `fillVolume` units of `olKey.inbound_tkn` have been sold.\n@param restingOrder whether the complement of the partial fill (if any) should be posted as a resting limit order.\n@param expiryDate timestamp (expressed in seconds since unix epoch) beyond which the order is no longer valid, 0 means forever\n@param offerId the id of an existing, dead offer owned by the taker to re-use for the resting order, 0 means no re-use."
+            },
+            "members": [
+              {
+                "constant": false,
+                "id": 83589,
+                "mutability": "mutable",
+                "name": "olKey",
+                "nameLocation": "1275:5:104",
+                "nodeType": "VariableDeclaration",
+                "scope": 83605,
+                "src": "1269:11:104",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_OLKey_$55875_storage_ptr",
+                  "typeString": "struct OLKey"
+                },
+                "typeName": {
+                  "id": 83588,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 83587,
+                    "name": "OLKey",
+                    "nameLocations": [
+                      "1269:5:104"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 55875,
+                    "src": "1269:5:104"
+                  },
+                  "referencedDeclaration": 55875,
+                  "src": "1269:5:104",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_OLKey_$55875_storage_ptr",
+                    "typeString": "struct OLKey"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 83591,
+                "mutability": "mutable",
+                "name": "fillOrKill",
+                "nameLocation": "1291:10:104",
+                "nodeType": "VariableDeclaration",
+                "scope": 83605,
+                "src": "1286:15:104",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 83590,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1286:4:104",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 83594,
+                "mutability": "mutable",
+                "name": "tick",
+                "nameLocation": "1312:4:104",
+                "nodeType": "VariableDeclaration",
+                "scope": 83605,
+                "src": "1307:9:104",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_userDefinedValueType$_Tick_$5280",
+                  "typeString": "Tick"
+                },
+                "typeName": {
+                  "id": 83593,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 83592,
+                    "name": "Tick",
+                    "nameLocations": [
+                      "1307:4:104"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 5280,
+                    "src": "1307:4:104"
+                  },
+                  "referencedDeclaration": 5280,
+                  "src": "1307:4:104",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_userDefinedValueType$_Tick_$5280",
+                    "typeString": "Tick"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 83596,
+                "mutability": "mutable",
+                "name": "fillVolume",
+                "nameLocation": "1327:10:104",
+                "nodeType": "VariableDeclaration",
+                "scope": 83605,
+                "src": "1322:15:104",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 83595,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1322:4:104",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 83598,
+                "mutability": "mutable",
+                "name": "fillWants",
+                "nameLocation": "1348:9:104",
+                "nodeType": "VariableDeclaration",
+                "scope": 83605,
+                "src": "1343:14:104",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 83597,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1343:4:104",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 83600,
+                "mutability": "mutable",
+                "name": "restingOrder",
+                "nameLocation": "1368:12:104",
+                "nodeType": "VariableDeclaration",
+                "scope": 83605,
+                "src": "1363:17:104",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 83599,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1363:4:104",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 83602,
+                "mutability": "mutable",
+                "name": "expiryDate",
+                "nameLocation": "1391:10:104",
+                "nodeType": "VariableDeclaration",
+                "scope": 83605,
+                "src": "1386:15:104",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 83601,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1386:4:104",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 83604,
+                "mutability": "mutable",
+                "name": "offerId",
+                "nameLocation": "1412:7:104",
+                "nodeType": "VariableDeclaration",
+                "scope": 83605,
+                "src": "1407:12:104",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 83603,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1407:4:104",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "TakerOrder",
+            "nameLocation": "1252:10:104",
+            "scope": 83682,
+            "visibility": "public"
+          },
+          {
+            "id": 83619,
+            "nodeType": "StructDefinition",
+            "src": "1727:145:104",
+            "nodes": [],
+            "canonicalName": "IOrderLogic.TakerOrderResult",
+            "documentation": {
+              "id": 83606,
+              "nodeType": "StructuredDocumentation",
+              "src": "1428:296:104",
+              "text": "@notice Result of an order from the takers side.\n@param takerGot How much the taker got\n@param takerGave How much the taker gave\n@param bounty How much bounty was givin to the taker\n@param fee The fee paid by the taker\n@param offerId The id of the offer that was taken"
+            },
+            "members": [
+              {
+                "constant": false,
+                "id": 83608,
+                "mutability": "mutable",
+                "name": "takerGot",
+                "nameLocation": "1762:8:104",
+                "nodeType": "VariableDeclaration",
+                "scope": 83619,
+                "src": "1757:13:104",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 83607,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1757:4:104",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 83610,
+                "mutability": "mutable",
+                "name": "takerGave",
+                "nameLocation": "1781:9:104",
+                "nodeType": "VariableDeclaration",
+                "scope": 83619,
+                "src": "1776:14:104",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 83609,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1776:4:104",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 83612,
+                "mutability": "mutable",
+                "name": "bounty",
+                "nameLocation": "1801:6:104",
+                "nodeType": "VariableDeclaration",
+                "scope": 83619,
+                "src": "1796:11:104",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 83611,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1796:4:104",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 83614,
+                "mutability": "mutable",
+                "name": "fee",
+                "nameLocation": "1818:3:104",
+                "nodeType": "VariableDeclaration",
+                "scope": 83619,
+                "src": "1813:8:104",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 83613,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1813:4:104",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 83616,
+                "mutability": "mutable",
+                "name": "offerId",
+                "nameLocation": "1832:7:104",
+                "nodeType": "VariableDeclaration",
+                "scope": 83619,
+                "src": "1827:12:104",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 83615,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1827:4:104",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 83618,
+                "mutability": "mutable",
+                "name": "offerWriteData",
+                "nameLocation": "1853:14:104",
+                "nodeType": "VariableDeclaration",
+                "scope": 83619,
+                "src": "1845:22:104",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 83617,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1845:7:104",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "TakerOrderResult",
+            "nameLocation": "1734:16:104",
+            "scope": 83682,
+            "visibility": "public"
+          },
+          {
+            "id": 83639,
+            "nodeType": "EventDefinition",
+            "src": "3290:205:104",
+            "nodes": [],
+            "anonymous": false,
+            "documentation": {
+              "id": 83620,
+              "nodeType": "StructuredDocumentation",
+              "src": "1876:1411:104",
+              "text": "@notice Information about the order.\n@param olKeyHash the hash of the offer list key. This could be found by the OrderStart event, but is needed for RPC call. This is indexed so that RPC calls can filter on it.\n@param taker The address of the taker. This could be found by the OrderStart event, but is needed for RPC call. This is indexed so that RPC calls can filter on it.\n@param fillOrKill The fillOrKill that take was called with\n@param tick The tick of the order. This is not needed for an indexer, as it can get it from the OrderStart event. It is only emitted for RPC calls.\n@param fillVolume the volume to fill. This is not needed for an indexer, as it can get it from the OrderStart event. It is only emitted for RPC calls.\n@param fillWants if true (buying), the market order stops when `fillVolume` units of `olKey.outbound_tkn` have been obtained (fee included); otherwise (selling), the market order stops when `fillVolume` units of `olKey.inbound_tkn` have been sold.\n@param restingOrder The restingOrder boolean take was called with.\n@param offerId The optional offerId take was called with, 0 if not passed. This is not needed for an indexer. It is only emitted for RPC calls.\n@notice By emitting this data, an indexer will be able to tell that we are in the context of an mangroveOrder and keep track of what parameters was use to start the order."
+            },
+            "eventSelector": "c4e60059977c6a198b374650f86f380c8bf5b3f4aead390a5823d463616a3b87",
+            "name": "MangroveOrderStart",
+            "nameLocation": "3296:18:104",
+            "parameters": {
+              "id": 83638,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 83622,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "olKeyHash",
+                  "nameLocation": "3336:9:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83639,
+                  "src": "3320:25:104",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 83621,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3320:7:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 83624,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "taker",
+                  "nameLocation": "3367:5:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83639,
+                  "src": "3351:21:104",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 83623,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3351:7:104",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 83626,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "fillOrKill",
+                  "nameLocation": "3383:10:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83639,
+                  "src": "3378:15:104",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 83625,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3378:4:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 83629,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "tick",
+                  "nameLocation": "3404:4:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83639,
+                  "src": "3399:9:104",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_userDefinedValueType$_Tick_$5280",
+                    "typeString": "Tick"
+                  },
+                  "typeName": {
+                    "id": 83628,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 83627,
+                      "name": "Tick",
+                      "nameLocations": [
+                        "3399:4:104"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 5280,
+                      "src": "3399:4:104"
+                    },
+                    "referencedDeclaration": 5280,
+                    "src": "3399:4:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_userDefinedValueType$_Tick_$5280",
+                      "typeString": "Tick"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 83631,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "fillVolume",
+                  "nameLocation": "3419:10:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83639,
+                  "src": "3414:15:104",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 83630,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3414:4:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 83633,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "fillWants",
+                  "nameLocation": "3440:9:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83639,
+                  "src": "3435:14:104",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 83632,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3435:4:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 83635,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "restingOrder",
+                  "nameLocation": "3460:12:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83639,
+                  "src": "3455:17:104",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 83634,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3455:4:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 83637,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "offerId",
+                  "nameLocation": "3483:7:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83639,
+                  "src": "3478:12:104",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 83636,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3478:4:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3314:180:104"
+            }
+          },
+          {
+            "id": 83642,
+            "nodeType": "EventDefinition",
+            "src": "3692:30:104",
+            "nodes": [],
+            "anonymous": false,
+            "documentation": {
+              "id": 83640,
+              "nodeType": "StructuredDocumentation",
+              "src": "3499:190:104",
+              "text": "@notice Indicates that the MangroveOrder has been completed.\n@notice We only emit this, so that an indexer can know that the order is completed and can thereby keep a correct context"
+            },
+            "eventSelector": "e5581490ac6db4ceba3be5a2a4af71b3a09f180284199da3ff36d62711bb1b6d",
+            "name": "MangroveOrderComplete",
+            "nameLocation": "3698:21:104",
+            "parameters": {
+              "id": 83641,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "3719:2:104"
+            }
+          },
+          {
+            "id": 83651,
+            "nodeType": "EventDefinition",
+            "src": "4068:76:104",
+            "nodes": [],
+            "anonymous": false,
+            "documentation": {
+              "id": 83643,
+              "nodeType": "StructuredDocumentation",
+              "src": "3726:339:104",
+              "text": "@notice The expiry of the offer has been set\n@param olKeyHash the hash of the offer list key. It is indexed so RPC call can filter on it.\n@param offerId the Mangrove offer id.\n@param date in seconds since unix epoch\n@notice By emitting this data, an indexer will be able to keep track of the expiry date of an offer."
+            },
+            "eventSelector": "0c72c6233a690301ad287cb9d2547d931bea06b00eb5f73bf6a369610d909822",
+            "name": "SetExpiry",
+            "nameLocation": "4074:9:104",
+            "parameters": {
+              "id": 83650,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 83645,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "olKeyHash",
+                  "nameLocation": "4100:9:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83651,
+                  "src": "4084:25:104",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 83644,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4084:7:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 83647,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "offerId",
+                  "nameLocation": "4124:7:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83651,
+                  "src": "4111:20:104",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 83646,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4111:4:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 83649,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "date",
+                  "nameLocation": "4138:4:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83651,
+                  "src": "4133:9:104",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 83648,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4133:4:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4083:60:104"
+            }
+          },
+          {
+            "id": 83661,
+            "nodeType": "FunctionDefinition",
+            "src": "4470:75:104",
+            "nodes": [],
+            "documentation": {
+              "id": 83652,
+              "nodeType": "StructuredDocumentation",
+              "src": "4148:319:104",
+              "text": "@notice Timestamp beyond which the given `offerId` should renege on trade.\n@param olKeyHash the hash of the offer list key.\n@param offerId The id of the offer to query for expiry for.\n@return res The timestamp beyond which `offerId` on the `olKey` offer list should renege on trade. 0 means no expiry."
+            },
+            "functionSelector": "0479ab93",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "expiring",
+            "nameLocation": "4479:8:104",
+            "parameters": {
+              "id": 83657,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 83654,
+                  "mutability": "mutable",
+                  "name": "olKeyHash",
+                  "nameLocation": "4496:9:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83661,
+                  "src": "4488:17:104",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 83653,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4488:7:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 83656,
+                  "mutability": "mutable",
+                  "name": "offerId",
+                  "nameLocation": "4512:7:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83661,
+                  "src": "4507:12:104",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 83655,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4507:4:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4487:33:104"
+            },
+            "returnParameters": {
+              "id": 83660,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 83659,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83661,
+                  "src": "4539:4:104",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 83658,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4539:4:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4538:6:104"
+            },
+            "scope": 83682,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 83671,
+            "nodeType": "FunctionDefinition",
+            "src": "4871:72:104",
+            "nodes": [],
+            "documentation": {
+              "id": 83662,
+              "nodeType": "StructuredDocumentation",
+              "src": "4549:319:104",
+              "text": "@notice Updates the expiry date for a specific offer.\n@param olKeyHash the hash of the offer list key.\n@param offerId The offer id whose expiry date is to be set.\n@param date in seconds since unix epoch\n@dev If new date is in the past of the current block's timestamp, offer will renege on trade."
+            },
+            "functionSelector": "535f55ca",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setExpiry",
+            "nameLocation": "4880:9:104",
+            "parameters": {
+              "id": 83669,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 83664,
+                  "mutability": "mutable",
+                  "name": "olKeyHash",
+                  "nameLocation": "4898:9:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83671,
+                  "src": "4890:17:104",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 83663,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4890:7:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 83666,
+                  "mutability": "mutable",
+                  "name": "offerId",
+                  "nameLocation": "4914:7:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83671,
+                  "src": "4909:12:104",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 83665,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4909:4:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 83668,
+                  "mutability": "mutable",
+                  "name": "date",
+                  "nameLocation": "4928:4:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83671,
+                  "src": "4923:9:104",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 83667,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4923:4:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "4889:44:104"
+            },
+            "returnParameters": {
+              "id": 83670,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "4942:0:104"
+            },
+            "scope": 83682,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 83681,
+            "nodeType": "FunctionDefinition",
+            "src": "5219:92:104",
+            "nodes": [],
+            "documentation": {
+              "id": 83672,
+              "nodeType": "StructuredDocumentation",
+              "src": "4947:269:104",
+              "text": "@notice Implements \"Fill or kill\" or \"Good till cancelled\" orders on a given offer list.\n@param tko the arguments in memory of the taker order\n@return res the result of the taker order. If `offerId==0`, no resting order was posted on `msg.sender`'s behalf."
+            },
+            "functionSelector": "126490ee",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "take",
+            "nameLocation": "5228:4:104",
+            "parameters": {
+              "id": 83676,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 83675,
+                  "mutability": "mutable",
+                  "name": "tko",
+                  "nameLocation": "5251:3:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83681,
+                  "src": "5233:21:104",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_TakerOrder_$83605_memory_ptr",
+                    "typeString": "struct IOrderLogic.TakerOrder"
+                  },
+                  "typeName": {
+                    "id": 83674,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 83673,
+                      "name": "TakerOrder",
+                      "nameLocations": [
+                        "5233:10:104"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 83605,
+                      "src": "5233:10:104"
+                    },
+                    "referencedDeclaration": 83605,
+                    "src": "5233:10:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_TakerOrder_$83605_storage_ptr",
+                      "typeString": "struct IOrderLogic.TakerOrder"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "5232:23:104"
+            },
+            "returnParameters": {
+              "id": 83680,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 83679,
+                  "mutability": "mutable",
+                  "name": "res",
+                  "nameLocation": "5306:3:104",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 83681,
+                  "src": "5282:27:104",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_TakerOrderResult_$83619_memory_ptr",
+                    "typeString": "struct IOrderLogic.TakerOrderResult"
+                  },
+                  "typeName": {
+                    "id": 83678,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 83677,
+                      "name": "TakerOrderResult",
+                      "nameLocations": [
+                        "5282:16:104"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 83619,
+                      "src": "5282:16:104"
+                    },
+                    "referencedDeclaration": 83619,
+                    "src": "5282:16:104",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_TakerOrderResult_$83619_storage_ptr",
+                      "typeString": "struct IOrderLogic.TakerOrderResult"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "5281:29:104"
+            },
+            "scope": 83682,
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IOrderLogic",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 83585,
+          "nodeType": "StructuredDocumentation",
+          "src": "165:54:104",
+          "text": "@title Interface for resting orders functionality."
+        },
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          83682
+        ],
+        "name": "IOrderLogic",
+        "nameLocation": "229:11:104",
+        "scope": 83683,
+        "usedErrors": [],
+        "usedEvents": [
+          83639,
+          83642,
+          83651
+        ]
+      }
+    ],
+    "license": "BSD-2-Clause"
+  },
+  "id": 104
+}

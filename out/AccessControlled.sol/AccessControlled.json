@@ -1,0 +1,1660 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "admin_",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "admin",
+          "type": "address"
+        }
+      ],
+      "name": "SetAdmin",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "admin",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "current",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "admin_",
+          "type": "address"
+        }
+      ],
+      "name": "setAdmin",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x608060405234801561001057600080fd5b506040516102cb3803806102cb83398101604081905261002f916100ae565b6001600160a01b0381166100895760405162461bcd60e51b815260206004820152601860248201527f416363657373436f6e74726f6c6c65642f307841646d696e0000000000000000604482015260640160405180910390fd5b600080546001600160a01b0319166001600160a01b03929092169190911790556100de565b6000602082840312156100c057600080fd5b81516001600160a01b03811681146100d757600080fd5b9392505050565b6101de806100ed6000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c8063704b6c021461003b578063f851a44014610050575b600080fd5b61004e610049366004610178565b61006f565b005b600054604080516001600160a01b039092168252519081900360200190f35b6000546001600160a01b031633146100ce5760405162461bcd60e51b815260206004820152601860248201527f416363657373436f6e74726f6c6c65642f496e76616c6964000000000000000060448201526064015b60405180910390fd5b6001600160a01b0381166101245760405162461bcd60e51b815260206004820152601860248201527f416363657373436f6e74726f6c6c65642f307841646d696e000000000000000060448201526064016100c5565b600080546001600160a01b0319166001600160a01b0383169081179091556040519081527f5a272403b402d892977df56625f4164ccaf70ca3863991c43ecfe76a6905b0a19060200160405180910390a150565b60006020828403121561018a57600080fd5b81356001600160a01b03811681146101a157600080fd5b939250505056fea2646970667358221220575ac7a37a58a9befc6ae92c737ce510a5586b99c408f435a6a37d7697d2ad9564736f6c63430008140033",
+    "sourceMap": "400:1990:123:-:0;;;943:117;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;-1:-1:-1;;;;;985:20:123;;977:57;;;;-1:-1:-1;;;977:57:123;;511:2:131;977:57:123;;;493:21:131;550:2;530:18;;;523:30;589:26;569:18;;;562:54;633:18;;977:57:123;;;;;;;;1040:6;:15;;-1:-1:-1;;;;;;1040:15:123;-1:-1:-1;;;;;1040:15:123;;;;;;;;;;400:1990;;14:290:131;84:6;137:2;125:9;116:7;112:23;108:32;105:52;;;153:1;150;143:12;105:52;179:16;;-1:-1:-1;;;;;224:31:131;;214:42;;204:70;;270:1;267;260:12;204:70;293:5;14:290;-1:-1:-1;;;14:290:131:o;309:348::-;400:1990:123;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c8063704b6c021461003b578063f851a44014610050575b600080fd5b61004e610049366004610178565b61006f565b005b600054604080516001600160a01b039092168252519081900360200190f35b6000546001600160a01b031633146100ce5760405162461bcd60e51b815260206004820152601860248201527f416363657373436f6e74726f6c6c65642f496e76616c6964000000000000000060448201526064015b60405180910390fd5b6001600160a01b0381166101245760405162461bcd60e51b815260206004820152601860248201527f416363657373436f6e74726f6c6c65642f307841646d696e000000000000000060448201526064016100c5565b600080546001600160a01b0319166001600160a01b0383169081179091556040519081527f5a272403b402d892977df56625f4164ccaf70ca3863991c43ecfe76a6905b0a19060200160405180910390a150565b60006020828403121561018a57600080fd5b81356001600160a01b03811681146101a157600080fd5b939250505056fea2646970667358221220575ac7a37a58a9befc6ae92c737ce510a5586b99c408f435a6a37d7697d2ad9564736f6c63430008140033",
+    "sourceMap": "400:1990:123:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2221:167;;;;;;:::i;:::-;;:::i;:::-;;1989:79;2027:15;2057:6;1989:79;;;-1:-1:-1;;;;;2057:6:123;;;451:51:131;;1989:79:123;;;;;439:2:131;1989:79:123;;;2221:167;1193:6;;-1:-1:-1;;;;;1193:6:123;1179:10;:20;1171:57;;;;-1:-1:-1;;;1171:57:123;;715:2:131;1171:57:123;;;697:21:131;754:2;734:18;;;727:30;793:26;773:18;;;766:54;837:18;;1171:57:123;;;;;;;;;-1:-1:-1;;;;;2286:20:123;::::1;2278:57;;;::::0;-1:-1:-1;;;2278:57:123;;1068:2:131;2278:57:123::1;::::0;::::1;1050:21:131::0;1107:2;1087:18;;;1080:30;1146:26;1126:18;;;1119:54;1190:18;;2278:57:123::1;866:348:131::0;2278:57:123::1;2341:6;:15:::0;;-1:-1:-1;;;;;;2341:15:123::1;-1:-1:-1::0;;;;;2341:15:123;::::1;::::0;;::::1;::::0;;;2367:16:::1;::::0;451:51:131;;;2367:16:123::1;::::0;439:2:131;424:18;2367:16:123::1;;;;;;;2221:167:::0;:::o;14:286:131:-;73:6;126:2;114:9;105:7;101:23;97:32;94:52;;;142:1;139;132:12;94:52;168:23;;-1:-1:-1;;;;;220:31:131;;210:42;;200:70;;266:1;263;256:12;200:70;289:5;14:286;-1:-1:-1;;;14:286:131:o",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "admin()": "f851a440",
+    "setAdmin(address)": "704b6c02"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"admin_\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"admin\",\"type\":\"address\"}],\"name\":\"SetAdmin\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"admin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"current\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"admin_\",\"type\":\"address\"}],\"name\":\"setAdmin\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"events\":{\"SetAdmin(address)\":{\"params\":{\"admin\":\"The new admin.\"}}},\"kind\":\"dev\",\"methods\":{\"admin()\":{\"returns\":{\"current\":\"admin.\"}},\"constructor\":{\"params\":{\"admin_\":\"The address of the admin that can access privileged functions and also allowed to change the admin. Cannot be `address(0)`.\"}},\"setAdmin(address)\":{\"params\":{\"admin_\":\"The new admin. Cannot be `address(0)`.\"}}},\"title\":\"This contract is used to restrict access to privileged functions of inheriting contracts through modifiers.\",\"version\":1},\"userdoc\":{\"events\":{\"SetAdmin(address)\":{\"notice\":\"logs new `admin` of `this`By emitting this data, an indexer will be able to keep track of what address is the admin of this contract.\"}},\"kind\":\"user\",\"methods\":{\"admin()\":{\"notice\":\"Retrieves the current admin.\"},\"constructor\":{\"notice\":\"`AccessControlled`'s constructor\"},\"setAdmin(address)\":{\"notice\":\"This sets the admin. Only the current admin can change the admin.\"}},\"notice\":\"The contract stores an admin address which is checked against `msg.sender` in the `onlyAdmin` modifier.Additionally, a specific `msg.sender` can be verified with the `onlyCaller` modifier.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/utils/AccessControlled.sol\":\"AccessControlled\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/\",\":@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/\",\":@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/\",\":ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/\",\":mgv_arbitrage_lib/=mangrove-arbitrage/lib/\",\":mgv_arbitrage_script/=mangrove-arbitrage/script/\",\":mgv_arbitrage_src/=mangrove-arbitrage/src/\",\":mgv_arbitrage_test/=mangrove-arbitrage/test/\",\":mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":mgv_script/=node_modules/@mangrovedao/mangrove-core/script/\",\":mgv_src/=node_modules/@mangrovedao/mangrove-core/src/\",\":mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":mgv_test/=node_modules/@mangrovedao/mangrove-core/test/\",\":uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/\"]},\"sources\":{\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/utils/AccessControlled.sol\":{\"keccak256\":\"0x05d5cdef0cd8133ac3d451c81ec8e4d8253eed5f1313d2c2b60385a7cefc845a\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://7ef36b8d3f38b47a6062aa04667320aee663630fbd3626569d1928abc2e63f07\",\"dweb:/ipfs/QmUJKfJeswYvHCujVARh3axWZEAsknNoyxNndgv2cj1EXt\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.20+commit.a1b79de6"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "admin_",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "admin",
+              "type": "address",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "SetAdmin",
+          "anonymous": false
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "admin",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "current",
+              "type": "address"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "admin_",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setAdmin"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "admin()": {
+            "returns": {
+              "current": "admin."
+            }
+          },
+          "constructor": {
+            "params": {
+              "admin_": "The address of the admin that can access privileged functions and also allowed to change the admin. Cannot be `address(0)`."
+            }
+          },
+          "setAdmin(address)": {
+            "params": {
+              "admin_": "The new admin. Cannot be `address(0)`."
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "admin()": {
+            "notice": "Retrieves the current admin."
+          },
+          "constructor": {
+            "notice": "`AccessControlled`'s constructor"
+          },
+          "setAdmin(address)": {
+            "notice": "This sets the admin. Only the current admin can change the admin."
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/",
+        "mgv_arbitrage_lib/=mangrove-arbitrage/lib/",
+        "mgv_arbitrage_script/=mangrove-arbitrage/script/",
+        "mgv_arbitrage_src/=mangrove-arbitrage/src/",
+        "mgv_arbitrage_test/=mangrove-arbitrage/test/",
+        "mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "mgv_script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "mgv_src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "mgv_test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/utils/AccessControlled.sol": "AccessControlled"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/utils/AccessControlled.sol": {
+        "keccak256": "0x05d5cdef0cd8133ac3d451c81ec8e4d8253eed5f1313d2c2b60385a7cefc845a",
+        "urls": [
+          "bzz-raw://7ef36b8d3f38b47a6062aa04667320aee663630fbd3626569d1928abc2e63f07",
+          "dweb:/ipfs/QmUJKfJeswYvHCujVARh3axWZEAsknNoyxNndgv2cj1EXt"
+        ],
+        "license": "BSD-2-Clause"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/utils/AccessControlled.sol",
+    "id": 89842,
+    "exportedSymbols": {
+      "AccessControlled": [
+        89841
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "41:2350:123",
+    "nodes": [
+      {
+        "id": 89726,
+        "nodeType": "PragmaDirective",
+        "src": "41:24:123",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".10"
+        ]
+      },
+      {
+        "id": 89841,
+        "nodeType": "ContractDefinition",
+        "src": "400:1990:123",
+        "nodes": [
+          {
+            "id": 89732,
+            "nodeType": "EventDefinition",
+            "src": "636:30:123",
+            "nodes": [],
+            "anonymous": false,
+            "documentation": {
+              "id": 89728,
+              "nodeType": "StructuredDocumentation",
+              "src": "430:203:123",
+              "text": " @notice logs new `admin` of `this`\n @param admin The new admin.\n @notice By emitting this data, an indexer will be able to keep track of what address is the admin of this contract."
+            },
+            "eventSelector": "5a272403b402d892977df56625f4164ccaf70ca3863991c43ecfe76a6905b0a1",
+            "name": "SetAdmin",
+            "nameLocation": "642:8:123",
+            "parameters": {
+              "id": 89731,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 89730,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "admin",
+                  "nameLocation": "659:5:123",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 89732,
+                  "src": "651:13:123",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 89729,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "651:7:123",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "650:15:123"
+            }
+          },
+          {
+            "id": 89735,
+            "nodeType": "VariableDeclaration",
+            "src": "714:23:123",
+            "nodes": [],
+            "constant": false,
+            "documentation": {
+              "id": 89733,
+              "nodeType": "StructuredDocumentation",
+              "src": "669:41:123",
+              "text": " @notice The admin address."
+            },
+            "mutability": "mutable",
+            "name": "_admin",
+            "nameLocation": "731:6:123",
+            "scope": 89841,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 89734,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "714:7:123",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "id": 89756,
+            "nodeType": "FunctionDefinition",
+            "src": "943:117:123",
+            "nodes": [],
+            "body": {
+              "id": 89755,
+              "nodeType": "Block",
+              "src": "971:89:123",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 89747,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "id": 89742,
+                          "name": "admin_",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 89738,
+                          "src": "985:6:123",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "!=",
+                        "rightExpression": {
+                          "arguments": [
+                            {
+                              "hexValue": "30",
+                              "id": 89745,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "kind": "number",
+                              "lValueRequested": false,
+                              "nodeType": "Literal",
+                              "src": "1003:1:123",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              },
+                              "value": "0"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              }
+                            ],
+                            "id": 89744,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "995:7:123",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": {
+                              "id": 89743,
+                              "name": "address",
+                              "nodeType": "ElementaryTypeName",
+                              "src": "995:7:123",
+                              "typeDescriptions": {}
+                            }
+                          },
+                          "id": 89746,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "995:10:123",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "985:20:123",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "416363657373436f6e74726f6c6c65642f307841646d696e",
+                        "id": 89748,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1007:26:123",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_a0dafc368526cf2052702adb8aad445dc1b73c99eabe472c9b26296b4cfbd211",
+                          "typeString": "literal_string \"AccessControlled/0xAdmin\""
+                        },
+                        "value": "AccessControlled/0xAdmin"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_a0dafc368526cf2052702adb8aad445dc1b73c99eabe472c9b26296b4cfbd211",
+                          "typeString": "literal_string \"AccessControlled/0xAdmin\""
+                        }
+                      ],
+                      "id": 89741,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "977:7:123",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 89749,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "977:57:123",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 89750,
+                  "nodeType": "ExpressionStatement",
+                  "src": "977:57:123"
+                },
+                {
+                  "expression": {
+                    "id": 89753,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 89751,
+                      "name": "_admin",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 89735,
+                      "src": "1040:6:123",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 89752,
+                      "name": "admin_",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 89738,
+                      "src": "1049:6:123",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "1040:15:123",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 89754,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1040:15:123"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 89736,
+              "nodeType": "StructuredDocumentation",
+              "src": "742:198:123",
+              "text": " @notice `AccessControlled`'s constructor\n @param admin_ The address of the admin that can access privileged functions and also allowed to change the admin. Cannot be `address(0)`."
+            },
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "parameters": {
+              "id": 89739,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 89738,
+                  "mutability": "mutable",
+                  "name": "admin_",
+                  "nameLocation": "963:6:123",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 89756,
+                  "src": "955:14:123",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 89737,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "955:7:123",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "954:16:123"
+            },
+            "returnParameters": {
+              "id": 89740,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "971:0:123"
+            },
+            "scope": 89841,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "id": 89769,
+            "nodeType": "ModifierDefinition",
+            "src": "1144:96:123",
+            "nodes": [],
+            "body": {
+              "id": 89768,
+              "nodeType": "Block",
+              "src": "1165:75:123",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 89763,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "expression": {
+                            "id": 89760,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": -15,
+                            "src": "1179:3:123",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 89761,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1183:6:123",
+                          "memberName": "sender",
+                          "nodeType": "MemberAccess",
+                          "src": "1179:10:123",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "id": 89762,
+                          "name": "_admin",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 89735,
+                          "src": "1193:6:123",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "1179:20:123",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "416363657373436f6e74726f6c6c65642f496e76616c6964",
+                        "id": 89764,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1201:26:123",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_63073ee3929ee3a1a8c4877cbb6cbd924fa33b9f8107ef8fe7e9715fb347e396",
+                          "typeString": "literal_string \"AccessControlled/Invalid\""
+                        },
+                        "value": "AccessControlled/Invalid"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_63073ee3929ee3a1a8c4877cbb6cbd924fa33b9f8107ef8fe7e9715fb347e396",
+                          "typeString": "literal_string \"AccessControlled/Invalid\""
+                        }
+                      ],
+                      "id": 89759,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "1171:7:123",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 89765,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1171:57:123",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 89766,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1171:57:123"
+                },
+                {
+                  "id": 89767,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "1234:1:123"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 89757,
+              "nodeType": "StructuredDocumentation",
+              "src": "1064:77:123",
+              "text": " @notice This modifier verifies that `msg.sender` is the admin."
+            },
+            "name": "onlyAdmin",
+            "nameLocation": "1153:9:123",
+            "parameters": {
+              "id": 89758,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1162:2:123"
+            },
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 89784,
+            "nodeType": "ModifierDefinition",
+            "src": "1409:111:123",
+            "nodes": [],
+            "body": {
+              "id": 89783,
+              "nodeType": "Block",
+              "src": "1445:75:123",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 89778,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "expression": {
+                            "id": 89775,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": -15,
+                            "src": "1459:3:123",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 89776,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1463:6:123",
+                          "memberName": "sender",
+                          "nodeType": "MemberAccess",
+                          "src": "1459:10:123",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "id": 89777,
+                          "name": "caller",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 89772,
+                          "src": "1473:6:123",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "1459:20:123",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "416363657373436f6e74726f6c6c65642f496e76616c6964",
+                        "id": 89779,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1481:26:123",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_63073ee3929ee3a1a8c4877cbb6cbd924fa33b9f8107ef8fe7e9715fb347e396",
+                          "typeString": "literal_string \"AccessControlled/Invalid\""
+                        },
+                        "value": "AccessControlled/Invalid"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_63073ee3929ee3a1a8c4877cbb6cbd924fa33b9f8107ef8fe7e9715fb347e396",
+                          "typeString": "literal_string \"AccessControlled/Invalid\""
+                        }
+                      ],
+                      "id": 89774,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "1451:7:123",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 89780,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1451:57:123",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 89781,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1451:57:123"
+                },
+                {
+                  "id": 89782,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "1514:1:123"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 89770,
+              "nodeType": "StructuredDocumentation",
+              "src": "1244:162:123",
+              "text": " @notice This modifier verifies that `msg.sender` is the caller.\n @param caller The address of the caller that can access the modified function."
+            },
+            "name": "onlyCaller",
+            "nameLocation": "1418:10:123",
+            "parameters": {
+              "id": 89773,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 89772,
+                  "mutability": "mutable",
+                  "name": "caller",
+                  "nameLocation": "1437:6:123",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 89784,
+                  "src": "1429:14:123",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 89771,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1429:7:123",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1428:16:123"
+            },
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 89804,
+            "nodeType": "ModifierDefinition",
+            "src": "1702:201:123",
+            "nodes": [],
+            "body": {
+              "id": 89803,
+              "nodeType": "Block",
+              "src": "1741:162:123",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "id": 89798,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "commonType": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          "id": 89793,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "expression": {
+                              "id": 89790,
+                              "name": "msg",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": -15,
+                              "src": "1818:3:123",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_magic_message",
+                                "typeString": "msg"
+                              }
+                            },
+                            "id": 89791,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "1822:6:123",
+                            "memberName": "sender",
+                            "nodeType": "MemberAccess",
+                            "src": "1818:10:123",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "==",
+                          "rightExpression": {
+                            "id": 89792,
+                            "name": "caller",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 89787,
+                            "src": "1832:6:123",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "src": "1818:20:123",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "||",
+                        "rightExpression": {
+                          "commonType": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          "id": 89797,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "expression": {
+                              "id": 89794,
+                              "name": "msg",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": -15,
+                              "src": "1842:3:123",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_magic_message",
+                                "typeString": "msg"
+                              }
+                            },
+                            "id": 89795,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "1846:6:123",
+                            "memberName": "sender",
+                            "nodeType": "MemberAccess",
+                            "src": "1842:10:123",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "==",
+                          "rightExpression": {
+                            "id": 89796,
+                            "name": "_admin",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 89735,
+                            "src": "1856:6:123",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          "src": "1842:20:123",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "src": "1818:44:123",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "416363657373436f6e74726f6c6c65642f496e76616c6964",
+                        "id": 89799,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1864:26:123",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_63073ee3929ee3a1a8c4877cbb6cbd924fa33b9f8107ef8fe7e9715fb347e396",
+                          "typeString": "literal_string \"AccessControlled/Invalid\""
+                        },
+                        "value": "AccessControlled/Invalid"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_63073ee3929ee3a1a8c4877cbb6cbd924fa33b9f8107ef8fe7e9715fb347e396",
+                          "typeString": "literal_string \"AccessControlled/Invalid\""
+                        }
+                      ],
+                      "id": 89789,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "1810:7:123",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 89800,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1810:81:123",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 89801,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1810:81:123"
+                },
+                {
+                  "id": 89802,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "1897:1:123"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 89785,
+              "nodeType": "StructuredDocumentation",
+              "src": "1524:175:123",
+              "text": " @notice This modifier verifies that `msg.sender` is either caller or the admin\n @param caller The address of a caller that can access the modified function."
+            },
+            "name": "adminOrCaller",
+            "nameLocation": "1711:13:123",
+            "parameters": {
+              "id": 89788,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 89787,
+                  "mutability": "mutable",
+                  "name": "caller",
+                  "nameLocation": "1733:6:123",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 89804,
+                  "src": "1725:14:123",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 89786,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1725:7:123",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1724:16:123"
+            },
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 89813,
+            "nodeType": "FunctionDefinition",
+            "src": "1989:79:123",
+            "nodes": [],
+            "body": {
+              "id": 89812,
+              "nodeType": "Block",
+              "src": "2044:24:123",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 89810,
+                    "name": "_admin",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 89735,
+                    "src": "2057:6:123",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "functionReturnParameters": 89809,
+                  "id": 89811,
+                  "nodeType": "Return",
+                  "src": "2050:13:123"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 89805,
+              "nodeType": "StructuredDocumentation",
+              "src": "1907:79:123",
+              "text": " @notice Retrieves the current admin.\n @return current admin."
+            },
+            "functionSelector": "f851a440",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "admin",
+            "nameLocation": "1998:5:123",
+            "parameters": {
+              "id": 89806,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2003:2:123"
+            },
+            "returnParameters": {
+              "id": 89809,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 89808,
+                  "mutability": "mutable",
+                  "name": "current",
+                  "nameLocation": "2035:7:123",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 89813,
+                  "src": "2027:15:123",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 89807,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2027:7:123",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2026:17:123"
+            },
+            "scope": 89841,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "id": 89840,
+            "nodeType": "FunctionDefinition",
+            "src": "2221:167:123",
+            "nodes": [],
+            "body": {
+              "id": 89839,
+              "nodeType": "Block",
+              "src": "2272:116:123",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 89827,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "id": 89822,
+                          "name": "admin_",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 89816,
+                          "src": "2286:6:123",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "!=",
+                        "rightExpression": {
+                          "arguments": [
+                            {
+                              "hexValue": "30",
+                              "id": 89825,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "kind": "number",
+                              "lValueRequested": false,
+                              "nodeType": "Literal",
+                              "src": "2304:1:123",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              },
+                              "value": "0"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              }
+                            ],
+                            "id": 89824,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "2296:7:123",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": {
+                              "id": 89823,
+                              "name": "address",
+                              "nodeType": "ElementaryTypeName",
+                              "src": "2296:7:123",
+                              "typeDescriptions": {}
+                            }
+                          },
+                          "id": 89826,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "2296:10:123",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "2286:20:123",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "416363657373436f6e74726f6c6c65642f307841646d696e",
+                        "id": 89828,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "2308:26:123",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_a0dafc368526cf2052702adb8aad445dc1b73c99eabe472c9b26296b4cfbd211",
+                          "typeString": "literal_string \"AccessControlled/0xAdmin\""
+                        },
+                        "value": "AccessControlled/0xAdmin"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_a0dafc368526cf2052702adb8aad445dc1b73c99eabe472c9b26296b4cfbd211",
+                          "typeString": "literal_string \"AccessControlled/0xAdmin\""
+                        }
+                      ],
+                      "id": 89821,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "2278:7:123",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 89829,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2278:57:123",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 89830,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2278:57:123"
+                },
+                {
+                  "expression": {
+                    "id": 89833,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 89831,
+                      "name": "_admin",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 89735,
+                      "src": "2341:6:123",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 89832,
+                      "name": "admin_",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 89816,
+                      "src": "2350:6:123",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "2341:15:123",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 89834,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2341:15:123"
+                },
+                {
+                  "eventCall": {
+                    "arguments": [
+                      {
+                        "id": 89836,
+                        "name": "admin_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 89816,
+                        "src": "2376:6:123",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 89835,
+                      "name": "SetAdmin",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 89732,
+                      "src": "2367:8:123",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address)"
+                      }
+                    },
+                    "id": 89837,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2367:16:123",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 89838,
+                  "nodeType": "EmitStatement",
+                  "src": "2362:21:123"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 89814,
+              "nodeType": "StructuredDocumentation",
+              "src": "2072:146:123",
+              "text": " @notice This sets the admin. Only the current admin can change the admin.\n @param admin_ The new admin. Cannot be `address(0)`."
+            },
+            "functionSelector": "704b6c02",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "id": 89819,
+                "kind": "modifierInvocation",
+                "modifierName": {
+                  "id": 89818,
+                  "name": "onlyAdmin",
+                  "nameLocations": [
+                    "2262:9:123"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 89769,
+                  "src": "2262:9:123"
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "2262:9:123"
+              }
+            ],
+            "name": "setAdmin",
+            "nameLocation": "2230:8:123",
+            "parameters": {
+              "id": 89817,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 89816,
+                  "mutability": "mutable",
+                  "name": "admin_",
+                  "nameLocation": "2247:6:123",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 89840,
+                  "src": "2239:14:123",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 89815,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2239:7:123",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2238:16:123"
+            },
+            "returnParameters": {
+              "id": 89820,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2272:0:123"
+            },
+            "scope": 89841,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "AccessControlled",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 89727,
+          "nodeType": "StructuredDocumentation",
+          "src": "67:333:123",
+          "text": "@title This contract is used to restrict access to privileged functions of inheriting contracts through modifiers.\n @notice The contract stores an admin address which is checked against `msg.sender` in the `onlyAdmin` modifier.\n @notice Additionally, a specific `msg.sender` can be verified with the `onlyCaller` modifier."
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          89841
+        ],
+        "name": "AccessControlled",
+        "nameLocation": "409:16:123",
+        "scope": 89842,
+        "usedErrors": [],
+        "usedEvents": [
+          89732
+        ]
+      }
+    ],
+    "license": "BSD-2-Clause"
+  },
+  "id": 123
+}

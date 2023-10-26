@@ -1,0 +1,3805 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "outbound_tkn",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "inbound_tkn",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "CleanComplete",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "taker",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "offersToBeCleaned",
+          "type": "uint256"
+        }
+      ],
+      "name": "CleanStart",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "maker",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Credit",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "maker",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Debit",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "Kill",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "NewMgv",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "taker",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "takerWants",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "takerGives",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "penalty",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "mgvData",
+          "type": "bytes32"
+        }
+      ],
+      "name": "OfferFail",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "taker",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "takerWants",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "takerGives",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "penalty",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "mgvData",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "posthookData",
+          "type": "bytes32"
+        }
+      ],
+      "name": "OfferFailWithPosthookData",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "maker",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "deprovision",
+          "type": "bool"
+        }
+      ],
+      "name": "OfferRetract",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "taker",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "takerWants",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "takerGives",
+          "type": "uint256"
+        }
+      ],
+      "name": "OfferSuccess",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "taker",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "takerWants",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "takerGives",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "posthookData",
+          "type": "bytes32"
+        }
+      ],
+      "name": "OfferSuccessWithPosthookData",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "maker",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "int256",
+          "name": "tick",
+          "type": "int256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "gives",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "gasprice",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "gasreq",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "OfferWrite",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "taker",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "fee",
+          "type": "uint256"
+        }
+      ],
+      "name": "OrderComplete",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "taker",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "Tick",
+          "name": "maxTick",
+          "type": "int256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "fillVolume",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "fillWants",
+          "type": "bool"
+        }
+      ],
+      "name": "OrderStart",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "outbound_tkn",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "inbound_tkn",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "tickSpacing",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "value",
+          "type": "bool"
+        }
+      ],
+      "name": "SetActive",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "SetDensity96X32",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "SetFee",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "offer_gasbase",
+          "type": "uint256"
+        }
+      ],
+      "name": "SetGasbase",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "SetGasmax",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "SetGasprice",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "value",
+          "type": "address"
+        }
+      ],
+      "name": "SetGovernance",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "SetMaxGasreqForFailingOffers",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "SetMaxRecursionDepth",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "value",
+          "type": "address"
+        }
+      ],
+      "name": "SetMonitor",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "value",
+          "type": "bool"
+        }
+      ],
+      "name": "SetNotify",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "value",
+          "type": "bool"
+        }
+      ],
+      "name": "SetUseOracle",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "PERMIT_TYPEHASH",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256",
+          "name": "fee",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "density96X32",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "offer_gasbase",
+          "type": "uint256"
+        }
+      ],
+      "name": "activate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "outbound_tkn",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "inbound_tkn",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "maker",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "balance",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        }
+      ],
+      "name": "best",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "offerId",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        }
+      ],
+      "name": "config",
+      "outputs": [
+        {
+          "internalType": "Global",
+          "name": "_global",
+          "type": "uint256"
+        },
+        {
+          "internalType": "Local",
+          "name": "_local",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        }
+      ],
+      "name": "deactivate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "global",
+      "outputs": [
+        {
+          "internalType": "Global",
+          "name": "_global",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "governance",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "kill",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        },
+        {
+          "internalType": "int256",
+          "name": "index",
+          "type": "int256"
+        }
+      ],
+      "name": "leafs",
+      "outputs": [
+        {
+          "internalType": "Leaf",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        },
+        {
+          "internalType": "int256",
+          "name": "index",
+          "type": "int256"
+        }
+      ],
+      "name": "level1s",
+      "outputs": [
+        {
+          "internalType": "Field",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        },
+        {
+          "internalType": "int256",
+          "name": "index",
+          "type": "int256"
+        }
+      ],
+      "name": "level2s",
+      "outputs": [
+        {
+          "internalType": "Field",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        },
+        {
+          "internalType": "int256",
+          "name": "index",
+          "type": "int256"
+        }
+      ],
+      "name": "level3s",
+      "outputs": [
+        {
+          "internalType": "Field",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        }
+      ],
+      "name": "local",
+      "outputs": [
+        {
+          "internalType": "Local",
+          "name": "_local",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        }
+      ],
+      "name": "locked",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "nonces",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "nonce",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256",
+          "name": "offerId",
+          "type": "uint256"
+        }
+      ],
+      "name": "offerData",
+      "outputs": [
+        {
+          "internalType": "Offer",
+          "name": "offer",
+          "type": "uint256"
+        },
+        {
+          "internalType": "OfferDetail",
+          "name": "offerDetail",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256",
+          "name": "offerId",
+          "type": "uint256"
+        }
+      ],
+      "name": "offerDetails",
+      "outputs": [
+        {
+          "internalType": "OfferDetail",
+          "name": "offerDetail",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256",
+          "name": "offerId",
+          "type": "uint256"
+        }
+      ],
+      "name": "offers",
+      "outputs": [
+        {
+          "internalType": "Offer",
+          "name": "offer",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "olKeyHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "olKeys",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        }
+      ],
+      "name": "root",
+      "outputs": [
+        {
+          "internalType": "Field",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256",
+          "name": "density96X32",
+          "type": "uint256"
+        }
+      ],
+      "name": "setDensity96X32",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256",
+          "name": "fee",
+          "type": "uint256"
+        }
+      ],
+      "name": "setFee",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct OLKey",
+          "name": "olKey",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256",
+          "name": "offer_gasbase",
+          "type": "uint256"
+        }
+      ],
+      "name": "setGasbase",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "gasmax",
+          "type": "uint256"
+        }
+      ],
+      "name": "setGasmax",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "gasprice",
+          "type": "uint256"
+        }
+      ],
+      "name": "setGasprice",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "governanceAddress",
+          "type": "address"
+        }
+      ],
+      "name": "setGovernance",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "maxGasreqForFailingOffers",
+          "type": "uint256"
+        }
+      ],
+      "name": "setMaxGasreqForFailingOffers",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "maxRecursionDepth",
+          "type": "uint256"
+        }
+      ],
+      "name": "setMaxRecursionDepth",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "monitor",
+          "type": "address"
+        }
+      ],
+      "name": "setMonitor",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "notify",
+          "type": "bool"
+        }
+      ],
+      "name": "setNotify",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "useOracle",
+          "type": "bool"
+        }
+      ],
+      "name": "setUseOracle",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "tokenAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdrawERC20",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x608060405234801561001057600080fd5b50611aef806100206000396000f3fe608060405234801561001057600080fd5b50600436106102065760003560e01c806374bfac331161011a578063c7b06e87116100ad578063e982fb8d1161007c578063e982fb8d1461056a578063eeba33681461057d578063f514244414610590578063fcaa7e2e146105a3578063fec777b4146105b657600080fd5b8063c7b06e87146104e3578063cd6a7ca7146104f6578063ce5bbece14610544578063e37de38b1461055757600080fd5b806396b4c30f116100e957806396b4c30f146104a2578063a05f9906146104b5578063a1db9782146104bd578063ab033ea9146104d057600080fd5b806374bfac33146104405780637ecebe0014610453578063902455301461047c57806395999ee31461048f57600080fd5b80635275b2121161019d5780635cd823901161016c5780635cd82390146103495780635d49dc111461035c5780636804f613146103f15780636c6fda561461040457806370a082311461041757600080fd5b80635275b212146102d05780635a611f4e146102f85780635aa6e6751461030b5780635b2752961461033657600080fd5b806330adf81f116101d957806330adf81f1461027a57806341b12acf146102a057806341c0e1b5146102b3578063443759fb146102bd57600080fd5b80630469bb661461020b57806304a7a1b4146102335780630adf51a9146102545780631c04321514610267575b600080fd5b61021e610219366004611837565b6105c9565b60405190151581526020015b60405180910390f35b610246610241366004611853565b610601565b60405190815260200161022a565b610246610262366004611853565b610646565b610246610275366004611837565b6106c6565b7ff0ea0a7146fb6eedb561d97b593d57d9b7df3c94d689372dc01302e5780248f4610246565b6102466102ae366004611837565b6106e4565b6102bb610725565b005b6102bb6102cb366004611853565b61076f565b6102e36102de366004611837565b61084a565b6040805192835260208301919091520161022a565b6102bb61030636600461188c565b61086a565b60005461031e906001600160a01b031681565b6040516001600160a01b03909116815260200161022a565b6102bb610344366004611837565b6108c4565b6102bb6103573660046118a9565b610967565b6103c161036a3660046118c4565b60408051606080820183526000808352602080840182905292840181905293845260038252928290208251938401835280546001600160a01b03908116855260018201541691840191909152600201549082015290565b6040805182516001600160a01b03908116825260208085015190911690820152918101519082015260600161022a565b6102bb6103ff36600461188c565b6109d1565b610246610412366004611853565b610a24565b6102466104253660046118a9565b6001600160a01b031660009081526004602052604090205490565b6102bb61044e3660046118c4565b610a9f565b6102466104613660046118a9565b6001600160a01b031660009081526006602052604090205490565b61024661048a366004611837565b610b33565b6102bb61049d3660046118c4565b610b9d565b6102bb6104b03660046118dd565b610c52565b610246610d69565b6102bb6104cb366004611917565b610d96565b6102bb6104de3660046118a9565b610dfe565b6102e36104f1366004611853565b610ea0565b610246610504366004611941565b6001600160a01b03938416600090815260056020908152604080832095871683529481528482209386168252928352838120919094168452905290205490565b610246610552366004611853565b610ef1565b6102bb6105653660046118c4565b610f3b565b610246610578366004611853565b610fce565b6102bb61058b366004611853565b611016565b6102bb61059e366004611853565b6110cd565b6102bb6105b13660046118c4565b611191565b6102466105c4366004611853565b611243565b60006105fb600260006105dd856060902090565b81526020019081526020016000206000015464010000000016151590565b92915050565b60008060026000610613866060902090565b8152602001908152602001600020905061063081600001546112be565b6000928352600501602052506040902054919050565b60008060026000610658866060902090565b815260208101919091526040016000208054909150610676816112be565b836106896106838361130d565b600e1d90565b036106a757606c81901c67ffffffffffffffff165b925050506105fb565b60008481526002830160205260409020546001600160ff1b031661069e565b60006106d182611318565b5091506106df9050816112be565b919050565b600080600260006106f6856060902090565b815260208101919091526040016000208054909150610714816112be565b602a81901c6003165b949350505050565b61072d611441565b60015465080000000000191665080000000000176001556040517fbe26733c2bf6ff3ea5ba8cfe744422bd49052ff9ed5685c9e81e6f9321dbaddd90600090a1565b610777611441565b6040805180820190915260148152736d67762f636f6e6669672f6665652f386269747360601b602082015260ff821682146107ce5760405162461bcd60e51b81526004016107c591906119b9565b60405180910390fd5b506000600260006107e0856060902090565b815260208101919091526040016000208054909150600161010160f71b031660ff60f71b60f784901b16178155606083206040518381527f139d6f58e9a127229667c8e3b36e88890a66cfc8ab1024ddc513e189e125b75b906020015b60405180910390a2505050565b60008061085683611318565b509092509050610865816112be565b915091565b610872611441565b6001546001605e1b1916605e82901b6001605e1b161760015560405181151581527f9b84fe4d9ffc14a6f7ec50c18884ee0d4bb8165aa718a28558df12ab4bd32b14906020015b60405180910390a150565b6108cc611441565b6000600260006108dd846060902090565b81526020019081526020016000209050610905600082600001546114ae90919063ffffffff16565b8155602082015182516001600160a01b039182169116610926846060902090565b6040808601518151908152600060208201527fae754ab4fca7273731e24a2db3350b4f89e22d7eff0819e2e3ab99aadca96de2910160405180910390a45050565b61096f611441565b6001546bffffffffffffffffffffffff166bffffffffffffffffffffffff19606083901b16176001556040516001600160a01b03821681527ff592e42c32883b35bebfbf9d9b801570a25d5ccbba452310746ad2cfd20d548f906020016108b9565b6109d9611441565b6001546001605f1b1916605f82901b6001605f1b161760015560405181151581527fbf39fbfab835c119637f4dbc4fb0f428c559c210200405d1ec25ddb50a93f9d4906020016108b9565b60008060026000610a36866060902090565b815260208101919091526040016000208054909150610a54816112be565b83610a67610a618361130d565b60141d90565b03610a8057602c81901c67ffffffffffffffff1661069e565b60008481526001830160205260409020546001600160ff1b031661069e565b610aa7611441565b63ffffffff811681146040518060600160405280602b8152602001611a8f602b913990610ae75760405162461bcd60e51b81526004016107c591906119b9565b506001546407fffffff819166407fffffff8600383901b16176001556040518181527fd03e2a424e8f5cf53988a496e7a6a3b7e11e7c082a349bdfdb61f4623863bc01906020016108b9565b60008060026000610b45856060902090565b815260208101919091526040016000208054909150610b63816112be565b61071d610b98836004016000610b81610b7b8661130d565b60021d90565b815260200190815260200160002054600181141890565b6114c1565b610ba5611441565b60408051808201909152601881527f6d67762f636f6e6669672f6761736d61782f3234626974730000000000000000602082015262ffffff82168214610bfe5760405162461bcd60e51b81526004016107c591906119b9565b50600154680ffffff000000000001916680ffffff00000000000602c83901b16176001556040518181527f8cdff0cd5ed2543bcdf7eb93d8ec1c23626e579925f4531beeef15d84cf78d18906020016108b9565b610c5a611441565b606084206000818152600360209081526040808320885181546001600160a01b03199081166001600160a01b03928316178355848b0151600184018054909216921691909117905581890151600291820155909152902080546001600160ff1b0316600160ff1b178155602086015186516001600160a01b039182169116610ce3886060902090565b6040808a01518151908152600160208201527fae754ab4fca7273731e24a2db3350b4f89e22d7eff0819e2e3ab99aadca96de2910160405180910390a4610d2a868661076f565b610d3486856110cd565b610d3e8684611016565b600019600090815260019091016020526040808220600160ff1b908190558280529120555050505050565b60408051606081018252600080825260208201819052918101829052610d8e90611318565b509092915050565b610d9e611441565b600054610db69083906001600160a01b0316836114f7565b610dfa5760405162461bcd60e51b81526020600482015260156024820152741b59dd8bddda5d1a191c985dd15490cc8c11985a5b605a1b60448201526064016107c5565b5050565b610e06611441565b6001600160a01b038116610e525760405162461bcd60e51b815260206004820152601360248201527206d67762f636f6e6669672f676f762f6e6f743606c1b60448201526064016107c5565b600080546001600160a01b0319166001600160a01b0383169081179091556040519081527f24a8c4807b324a269a51827c3446b8ac1cc13810d7d0c0ca1efafabddd7b6219906020016108b9565b600080600060026000610eb4876060902090565b81526020019081526020016000209050610ed181600001546112be565b600093845260050160205250506040902080546001909101549092909150565b60008060026000610f03866060902090565b81526020019081526020016000209050610f2081600001546112be565b60009283526004016020525060409020546001811418919050565b610f43611441565b60ff81168114604051806060016040528060228152602001611a4a6022913990610f805760405162461bcd60e51b81526004016107c591906119b9565b506001546507f80000000019166507f800000000602383901b16176001556040518181527ff9212b044703fa96962c8e40c32a62753a62752f2508fc05be2648e74dd24d85906020016108b9565b60008060026000610fe0866060902090565b81526020019081526020016000209050610ffd81600001546112be565b6000928352600501602052506040902060010154919050565b61101e611441565b61102f6103e882046101ff81161490565b604051806060016040528060238152602001611a6c60239139906110665760405162461bcd60e51b81526004016107c591906119b9565b50600060026000611078856060902090565b81526020810191909152604001600020805490915061109790836115cc565b8155606083206040518381527f4e29e260c5052737cbcd072416e6066a3db8a95f90ed5a03d4b424fc04c54b839060200161083d565b6110d5611441565b6000600260006110e6856060902090565b8152602001908152602001600020905061110382600160801b1190565b61114f5760405162461bcd60e51b815260206004820152601d60248201527f6d67762f636f6e6669672f64656e7369747939365833322f77726f6e6700000060448201526064016107c5565b805461115b90836115f1565b8155606083206040518381527f0bd5b439c78e74e0095d271b67b573d223bc701828c7e2f0bb943a44c5eaa4fe9060200161083d565b611199611441565b60408051808201909152601a81527f6d67762f636f6e6669672f67617370726963652f32366269747300000000000060208201526303ffffff821682146111f35760405162461bcd60e51b81526004016107c591906119b9565b506001546303ffffff60441b19166303ffffff60441b604483901b16176001556040518181527fdbebd814ae648f654dcc50c734aa76e55a32e96b7d85303a08e2ddf11874a0dd906020016108b9565b60008060026000611255866060902090565b815260208101919091526040016000208054909150611273816112be565b836112866112808361130d565b60081d90565b0361129f5760ac81901c67ffffffffffffffff1661069e565b60008481526003830160205260409020546001600160ff1b031661069e565b64010000000081161561130a5760405162461bcd60e51b81526020600482015260146024820152731b59dd8bdc99595b9d1c985b98de531bd8dad95960621b60448201526064016107c5565b50565b60006105fb82611606565b60008060006002600061132c866060902090565b81526020019081526020016000209050600154925080600001549150611357836001605f1b16151590565b1561143a576000806113698560601c90565b6040805163361d8a6b60e21b815288516001600160a01b03908116600483015260208a01518116602483015291890151604482015291169063d87629ac906064016040805180830381865afa1580156113c6573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906113ea91906119ec565b915091506113fd826303ffffff81161490565b1561141f576303ffffff60441b1985166303ffffff60441b604484901b161794505b6101ff81168103611437576114348482611682565b93505b50505b9193909250565b6000546001600160a01b031633148061145957503330145b8061146d57506000546001600160a01b0316155b6114ac5760405162461bcd60e51b815260206004820152601060248201526f1b59dd8bdd5b985d5d1a1bdc9a5e995960821b60448201526064016107c5565b565b60ff1b6001600160ff1b03919091161790565b60006105fb8267ffffffffffffffff6001600160801b038211600781901b83901c9190911115901560011b176040021b60e01c90565b604080516001600160a01b038481166024830152604480830185905283518084039091018152606490920183526020820180516001600160e01b031663a9059cbb60e01b179052915160009283918291881690611555908590611a10565b6000604051808303816000865af19150503d8060008114611592576040519150601f19603f3d011682016040523d82523d6000602084013e611597565b606091505b50915091508180156115c15750805115806115c15750808060200190518101906115c19190611a2c565b979650505050505050565b60006503fe000000001983166503fe000000006103e8840460211b16175b9392505050565b60006115ea6115ff8361169b565b8490611682565b60008060026006808060016116216003602a8a901c1661174e565b03901b61163b602c88901c67ffffffffffffffff1661174e565b17901b611655606c87901c67ffffffffffffffff1661174e565b17901b61166f60ac86901c67ffffffffffffffff1661174e565b17901b60ec84901c600316179392505050565b60ee1b6101ff60ee1b166101ff60ee1b19919091161790565b6000600382116116a9575090565b6000611736837e09010a0d15021d0b0e10121619031e080c141c0f111807131b17061a05041f6307c4acdd60e01b6001600160801b03831160071b8315600890811b9190911784811c67ffffffffffffffff1060061b1784811c63ffffffff1060051b1793841c600181901c17600281901c17600481901c179081901c17601081901c170260fb1c1a1790565b90506003600119820184901c16600282901b176115ea565b7e011c021d0e18031e16140f191104081f1b0d17151310071a0c12060b050a0967ffffffffffffffff82811680196001019093161663ffffffff811160051b921560061b9290921791821c63077cb53160e01b0260fb1c1a1790565b80356001600160a01b03811681146106df57600080fd5b6000606082840312156117d357600080fd5b6040516060810181811067ffffffffffffffff8211171561180457634e487b7160e01b600052604160045260246000fd5b604052905080611813836117aa565b8152611821602084016117aa565b6020820152604083013560408201525092915050565b60006060828403121561184957600080fd5b6115ea83836117c1565b6000806080838503121561186657600080fd5b61187084846117c1565b946060939093013593505050565b801515811461130a57600080fd5b60006020828403121561189e57600080fd5b81356115ea8161187e565b6000602082840312156118bb57600080fd5b6115ea826117aa565b6000602082840312156118d657600080fd5b5035919050565b60008060008060c085870312156118f357600080fd5b6118fd86866117c1565b966060860135965060808601359560a00135945092505050565b6000806040838503121561192a57600080fd5b611933836117aa565b946020939093013593505050565b6000806000806080858703121561195757600080fd5b611960856117aa565b935061196e602086016117aa565b925061197c604086016117aa565b915061198a606086016117aa565b905092959194509250565b60005b838110156119b0578181015183820152602001611998565b50506000910152565b60208152600082518060208401526119d8816040850160208701611995565b601f01601f19169190910160400192915050565b600080604083850312156119ff57600080fd5b505080516020909101519092909150565b60008251611a22818460208701611995565b9190910192915050565b600060208284031215611a3e57600080fd5b81516115ea8161187e56fe6d67762f636f6e6669672f6d6178526563757273696f6e44657074682f38626974736d67762f636f6e6669672f6b696c6f5f6f666665725f676173626173652f39626974736d67762f636f6e6669672f6d6178476173726571466f724661696c696e674f66666572732f333262697473a2646970667358221220654134cbb6ea0a65086ae9ee9b8ce79546c407e2c386f7faf3a7f1b97230f04564736f6c63430008140033",
+    "sourceMap": "705:49:43:-:0;;;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x608060405234801561001057600080fd5b50600436106102065760003560e01c806374bfac331161011a578063c7b06e87116100ad578063e982fb8d1161007c578063e982fb8d1461056a578063eeba33681461057d578063f514244414610590578063fcaa7e2e146105a3578063fec777b4146105b657600080fd5b8063c7b06e87146104e3578063cd6a7ca7146104f6578063ce5bbece14610544578063e37de38b1461055757600080fd5b806396b4c30f116100e957806396b4c30f146104a2578063a05f9906146104b5578063a1db9782146104bd578063ab033ea9146104d057600080fd5b806374bfac33146104405780637ecebe0014610453578063902455301461047c57806395999ee31461048f57600080fd5b80635275b2121161019d5780635cd823901161016c5780635cd82390146103495780635d49dc111461035c5780636804f613146103f15780636c6fda561461040457806370a082311461041757600080fd5b80635275b212146102d05780635a611f4e146102f85780635aa6e6751461030b5780635b2752961461033657600080fd5b806330adf81f116101d957806330adf81f1461027a57806341b12acf146102a057806341c0e1b5146102b3578063443759fb146102bd57600080fd5b80630469bb661461020b57806304a7a1b4146102335780630adf51a9146102545780631c04321514610267575b600080fd5b61021e610219366004611837565b6105c9565b60405190151581526020015b60405180910390f35b610246610241366004611853565b610601565b60405190815260200161022a565b610246610262366004611853565b610646565b610246610275366004611837565b6106c6565b7ff0ea0a7146fb6eedb561d97b593d57d9b7df3c94d689372dc01302e5780248f4610246565b6102466102ae366004611837565b6106e4565b6102bb610725565b005b6102bb6102cb366004611853565b61076f565b6102e36102de366004611837565b61084a565b6040805192835260208301919091520161022a565b6102bb61030636600461188c565b61086a565b60005461031e906001600160a01b031681565b6040516001600160a01b03909116815260200161022a565b6102bb610344366004611837565b6108c4565b6102bb6103573660046118a9565b610967565b6103c161036a3660046118c4565b60408051606080820183526000808352602080840182905292840181905293845260038252928290208251938401835280546001600160a01b03908116855260018201541691840191909152600201549082015290565b6040805182516001600160a01b03908116825260208085015190911690820152918101519082015260600161022a565b6102bb6103ff36600461188c565b6109d1565b610246610412366004611853565b610a24565b6102466104253660046118a9565b6001600160a01b031660009081526004602052604090205490565b6102bb61044e3660046118c4565b610a9f565b6102466104613660046118a9565b6001600160a01b031660009081526006602052604090205490565b61024661048a366004611837565b610b33565b6102bb61049d3660046118c4565b610b9d565b6102bb6104b03660046118dd565b610c52565b610246610d69565b6102bb6104cb366004611917565b610d96565b6102bb6104de3660046118a9565b610dfe565b6102e36104f1366004611853565b610ea0565b610246610504366004611941565b6001600160a01b03938416600090815260056020908152604080832095871683529481528482209386168252928352838120919094168452905290205490565b610246610552366004611853565b610ef1565b6102bb6105653660046118c4565b610f3b565b610246610578366004611853565b610fce565b6102bb61058b366004611853565b611016565b6102bb61059e366004611853565b6110cd565b6102bb6105b13660046118c4565b611191565b6102466105c4366004611853565b611243565b60006105fb600260006105dd856060902090565b81526020019081526020016000206000015464010000000016151590565b92915050565b60008060026000610613866060902090565b8152602001908152602001600020905061063081600001546112be565b6000928352600501602052506040902054919050565b60008060026000610658866060902090565b815260208101919091526040016000208054909150610676816112be565b836106896106838361130d565b600e1d90565b036106a757606c81901c67ffffffffffffffff165b925050506105fb565b60008481526002830160205260409020546001600160ff1b031661069e565b60006106d182611318565b5091506106df9050816112be565b919050565b600080600260006106f6856060902090565b815260208101919091526040016000208054909150610714816112be565b602a81901c6003165b949350505050565b61072d611441565b60015465080000000000191665080000000000176001556040517fbe26733c2bf6ff3ea5ba8cfe744422bd49052ff9ed5685c9e81e6f9321dbaddd90600090a1565b610777611441565b6040805180820190915260148152736d67762f636f6e6669672f6665652f386269747360601b602082015260ff821682146107ce5760405162461bcd60e51b81526004016107c591906119b9565b60405180910390fd5b506000600260006107e0856060902090565b815260208101919091526040016000208054909150600161010160f71b031660ff60f71b60f784901b16178155606083206040518381527f139d6f58e9a127229667c8e3b36e88890a66cfc8ab1024ddc513e189e125b75b906020015b60405180910390a2505050565b60008061085683611318565b509092509050610865816112be565b915091565b610872611441565b6001546001605e1b1916605e82901b6001605e1b161760015560405181151581527f9b84fe4d9ffc14a6f7ec50c18884ee0d4bb8165aa718a28558df12ab4bd32b14906020015b60405180910390a150565b6108cc611441565b6000600260006108dd846060902090565b81526020019081526020016000209050610905600082600001546114ae90919063ffffffff16565b8155602082015182516001600160a01b039182169116610926846060902090565b6040808601518151908152600060208201527fae754ab4fca7273731e24a2db3350b4f89e22d7eff0819e2e3ab99aadca96de2910160405180910390a45050565b61096f611441565b6001546bffffffffffffffffffffffff166bffffffffffffffffffffffff19606083901b16176001556040516001600160a01b03821681527ff592e42c32883b35bebfbf9d9b801570a25d5ccbba452310746ad2cfd20d548f906020016108b9565b6109d9611441565b6001546001605f1b1916605f82901b6001605f1b161760015560405181151581527fbf39fbfab835c119637f4dbc4fb0f428c559c210200405d1ec25ddb50a93f9d4906020016108b9565b60008060026000610a36866060902090565b815260208101919091526040016000208054909150610a54816112be565b83610a67610a618361130d565b60141d90565b03610a8057602c81901c67ffffffffffffffff1661069e565b60008481526001830160205260409020546001600160ff1b031661069e565b610aa7611441565b63ffffffff811681146040518060600160405280602b8152602001611a8f602b913990610ae75760405162461bcd60e51b81526004016107c591906119b9565b506001546407fffffff819166407fffffff8600383901b16176001556040518181527fd03e2a424e8f5cf53988a496e7a6a3b7e11e7c082a349bdfdb61f4623863bc01906020016108b9565b60008060026000610b45856060902090565b815260208101919091526040016000208054909150610b63816112be565b61071d610b98836004016000610b81610b7b8661130d565b60021d90565b815260200190815260200160002054600181141890565b6114c1565b610ba5611441565b60408051808201909152601881527f6d67762f636f6e6669672f6761736d61782f3234626974730000000000000000602082015262ffffff82168214610bfe5760405162461bcd60e51b81526004016107c591906119b9565b50600154680ffffff000000000001916680ffffff00000000000602c83901b16176001556040518181527f8cdff0cd5ed2543bcdf7eb93d8ec1c23626e579925f4531beeef15d84cf78d18906020016108b9565b610c5a611441565b606084206000818152600360209081526040808320885181546001600160a01b03199081166001600160a01b03928316178355848b0151600184018054909216921691909117905581890151600291820155909152902080546001600160ff1b0316600160ff1b178155602086015186516001600160a01b039182169116610ce3886060902090565b6040808a01518151908152600160208201527fae754ab4fca7273731e24a2db3350b4f89e22d7eff0819e2e3ab99aadca96de2910160405180910390a4610d2a868661076f565b610d3486856110cd565b610d3e8684611016565b600019600090815260019091016020526040808220600160ff1b908190558280529120555050505050565b60408051606081018252600080825260208201819052918101829052610d8e90611318565b509092915050565b610d9e611441565b600054610db69083906001600160a01b0316836114f7565b610dfa5760405162461bcd60e51b81526020600482015260156024820152741b59dd8bddda5d1a191c985dd15490cc8c11985a5b605a1b60448201526064016107c5565b5050565b610e06611441565b6001600160a01b038116610e525760405162461bcd60e51b815260206004820152601360248201527206d67762f636f6e6669672f676f762f6e6f743606c1b60448201526064016107c5565b600080546001600160a01b0319166001600160a01b0383169081179091556040519081527f24a8c4807b324a269a51827c3446b8ac1cc13810d7d0c0ca1efafabddd7b6219906020016108b9565b600080600060026000610eb4876060902090565b81526020019081526020016000209050610ed181600001546112be565b600093845260050160205250506040902080546001909101549092909150565b60008060026000610f03866060902090565b81526020019081526020016000209050610f2081600001546112be565b60009283526004016020525060409020546001811418919050565b610f43611441565b60ff81168114604051806060016040528060228152602001611a4a6022913990610f805760405162461bcd60e51b81526004016107c591906119b9565b506001546507f80000000019166507f800000000602383901b16176001556040518181527ff9212b044703fa96962c8e40c32a62753a62752f2508fc05be2648e74dd24d85906020016108b9565b60008060026000610fe0866060902090565b81526020019081526020016000209050610ffd81600001546112be565b6000928352600501602052506040902060010154919050565b61101e611441565b61102f6103e882046101ff81161490565b604051806060016040528060238152602001611a6c60239139906110665760405162461bcd60e51b81526004016107c591906119b9565b50600060026000611078856060902090565b81526020810191909152604001600020805490915061109790836115cc565b8155606083206040518381527f4e29e260c5052737cbcd072416e6066a3db8a95f90ed5a03d4b424fc04c54b839060200161083d565b6110d5611441565b6000600260006110e6856060902090565b8152602001908152602001600020905061110382600160801b1190565b61114f5760405162461bcd60e51b815260206004820152601d60248201527f6d67762f636f6e6669672f64656e7369747939365833322f77726f6e6700000060448201526064016107c5565b805461115b90836115f1565b8155606083206040518381527f0bd5b439c78e74e0095d271b67b573d223bc701828c7e2f0bb943a44c5eaa4fe9060200161083d565b611199611441565b60408051808201909152601a81527f6d67762f636f6e6669672f67617370726963652f32366269747300000000000060208201526303ffffff821682146111f35760405162461bcd60e51b81526004016107c591906119b9565b506001546303ffffff60441b19166303ffffff60441b604483901b16176001556040518181527fdbebd814ae648f654dcc50c734aa76e55a32e96b7d85303a08e2ddf11874a0dd906020016108b9565b60008060026000611255866060902090565b815260208101919091526040016000208054909150611273816112be565b836112866112808361130d565b60081d90565b0361129f5760ac81901c67ffffffffffffffff1661069e565b60008481526003830160205260409020546001600160ff1b031661069e565b64010000000081161561130a5760405162461bcd60e51b81526020600482015260146024820152731b59dd8bdc99595b9d1c985b98de531bd8dad95960621b60448201526064016107c5565b50565b60006105fb82611606565b60008060006002600061132c866060902090565b81526020019081526020016000209050600154925080600001549150611357836001605f1b16151590565b1561143a576000806113698560601c90565b6040805163361d8a6b60e21b815288516001600160a01b03908116600483015260208a01518116602483015291890151604482015291169063d87629ac906064016040805180830381865afa1580156113c6573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906113ea91906119ec565b915091506113fd826303ffffff81161490565b1561141f576303ffffff60441b1985166303ffffff60441b604484901b161794505b6101ff81168103611437576114348482611682565b93505b50505b9193909250565b6000546001600160a01b031633148061145957503330145b8061146d57506000546001600160a01b0316155b6114ac5760405162461bcd60e51b815260206004820152601060248201526f1b59dd8bdd5b985d5d1a1bdc9a5e995960821b60448201526064016107c5565b565b60ff1b6001600160ff1b03919091161790565b60006105fb8267ffffffffffffffff6001600160801b038211600781901b83901c9190911115901560011b176040021b60e01c90565b604080516001600160a01b038481166024830152604480830185905283518084039091018152606490920183526020820180516001600160e01b031663a9059cbb60e01b179052915160009283918291881690611555908590611a10565b6000604051808303816000865af19150503d8060008114611592576040519150601f19603f3d011682016040523d82523d6000602084013e611597565b606091505b50915091508180156115c15750805115806115c15750808060200190518101906115c19190611a2c565b979650505050505050565b60006503fe000000001983166503fe000000006103e8840460211b16175b9392505050565b60006115ea6115ff8361169b565b8490611682565b60008060026006808060016116216003602a8a901c1661174e565b03901b61163b602c88901c67ffffffffffffffff1661174e565b17901b611655606c87901c67ffffffffffffffff1661174e565b17901b61166f60ac86901c67ffffffffffffffff1661174e565b17901b60ec84901c600316179392505050565b60ee1b6101ff60ee1b166101ff60ee1b19919091161790565b6000600382116116a9575090565b6000611736837e09010a0d15021d0b0e10121619031e080c141c0f111807131b17061a05041f6307c4acdd60e01b6001600160801b03831160071b8315600890811b9190911784811c67ffffffffffffffff1060061b1784811c63ffffffff1060051b1793841c600181901c17600281901c17600481901c179081901c17601081901c170260fb1c1a1790565b90506003600119820184901c16600282901b176115ea565b7e011c021d0e18031e16140f191104081f1b0d17151310071a0c12060b050a0967ffffffffffffffff82811680196001019093161663ffffffff811160051b921560061b9290921791821c63077cb53160e01b0260fb1c1a1790565b80356001600160a01b03811681146106df57600080fd5b6000606082840312156117d357600080fd5b6040516060810181811067ffffffffffffffff8211171561180457634e487b7160e01b600052604160045260246000fd5b604052905080611813836117aa565b8152611821602084016117aa565b6020820152604083013560408201525092915050565b60006060828403121561184957600080fd5b6115ea83836117c1565b6000806080838503121561186657600080fd5b61187084846117c1565b946060939093013593505050565b801515811461130a57600080fd5b60006020828403121561189e57600080fd5b81356115ea8161187e565b6000602082840312156118bb57600080fd5b6115ea826117aa565b6000602082840312156118d657600080fd5b5035919050565b60008060008060c085870312156118f357600080fd5b6118fd86866117c1565b966060860135965060808601359560a00135945092505050565b6000806040838503121561192a57600080fd5b611933836117aa565b946020939093013593505050565b6000806000806080858703121561195757600080fd5b611960856117aa565b935061196e602086016117aa565b925061197c604086016117aa565b915061198a606086016117aa565b905092959194509250565b60005b838110156119b0578181015183820152602001611998565b50506000910152565b60208152600082518060208401526119d8816040850160208701611995565b601f01601f19169190910160400192915050565b600080604083850312156119ff57600080fd5b505080516020909101519092909150565b60008251611a22818460208701611995565b9190910192915050565b600060208284031215611a3e57600080fd5b81516115ea8161187e56fe6d67762f636f6e6669672f6d6178526563757273696f6e44657074682f38626974736d67762f636f6e6669672f6b696c6f5f6f666665725f676173626173652f39626974736d67762f636f6e6669672f6d6178476173726571466f724661696c696e674f66666572732f333262697473a2646970667358221220654134cbb6ea0a65086ae9ee9b8ce79546c407e2c386f7faf3a7f1b97230f04564736f6c63430008140033",
+    "sourceMap": "705:49:43:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;3273:144:51;;;;;;:::i;:::-;;:::i;:::-;;;1236:14:131;;1229:22;1211:41;;1199:2;1184:18;3273:144:51;;;;;;;;4137:270;;;;;;:::i;:::-;;:::i;:::-;;;1734:25:131;;;1722:2;1707:18;4137:270:51;1561:204:131;2008:400:51;;;;;;:::i;:::-;;:::i;736:172::-;;;;;;:::i;:::-;;:::i;5680:117::-;9082:66:44;5680:117:51;;2816:256;;;;;;:::i;:::-;;:::i;4114:139:45:-;;;:::i;:::-;;2160:382;;;;;;:::i;:::-;;:::i;492:196:51:-;;;;;;:::i;:::-;;:::i;:::-;;;;2895:25:131;;;2951:2;2936:18;;2929:34;;;;2868:18;492:196:51;2666:303:131;6634:170:45;;;;;;:::i;:::-;;:::i;1085:25:44:-;;;;;-1:-1:-1;;;;;1085:25:44;;;;;;-1:-1:-1;;;;;3507:32:131;;;3489:51;;3477:2;3462:18;1085:25:44;3343:203:131;1858:280:45;;;;;;:::i;:::-;;:::i;6214:179::-;;;;;;:::i;:::-;;:::i;3924:139:51:-;;;;;;:::i;:::-;-1:-1:-1;;;;;;;;;;;;;;;;;;;;;;;;;;4034:18:51;;;:7;:18;;;;;;4026:26;;;;;;;;;-1:-1:-1;;;;;4026:26:51;;;;;;;;;;;;;;;;;;;;;;;;;3924:139;;;;;4181:13:131;;-1:-1:-1;;;;;4177:22:131;;;4159:41;;4260:4;4248:17;;;4242:24;4238:33;;;4216:20;;;4209:63;4316:17;;;4310:24;4288:20;;;4281:54;4109:2;4094:18;3924:139:51;3927:414:131;6421:188:45;;;;;;:::i;:::-;;:::i;2412:400:51:-;;;;;;:::i;:::-;;:::i;1172:133::-;;;;;;:::i;:::-;-1:-1:-1;;;;;1277:17:51;1229:12;1277:17;;;:10;:17;;;;;;;1172:133;5462:441:45;;;;;;:::i;:::-;;:::i;:123:51:-;;;;;;:::i;:::-;-1:-1:-1;;;;;5560:14:51;5516:10;5560:14;;;:7;:14;;;;;;;5462:123;3491:317;;;;;;:::i;:::-;;:::i;4633:404:45:-;;;;;;:::i;:::-;;:::i;1126:728::-;;;;;;:::i;:::-;;:::i;1021:147:51:-;;;:::i;862:173:45:-;;;;;;:::i;:::-;;:::i;5932:256::-;;;;;;:::i;:::-;;:::i;4806:368:51:-;;;;;;:::i;:::-;;:::i;5217:241::-;;;;;;:::i;:::-;-1:-1:-1;;;;;5394:24:51;;;5346:11;5394:24;;;:10;:24;;;;;;;;:37;;;;;;;;;;;:44;;;;;;;;;;;:53;;;;;;;;;;;;5217:241;1345:255;;;;;;:::i;:::-;;:::i;5073:345:45:-;;;;;;:::i;:::-;;:::i;4456:289:51:-;;;;;;:::i;:::-;;:::i;3387:685:45:-;;;;;;:::i;:::-;;:::i;2834:527::-;;;;;;:::i;:::-;;:::i;4326:282::-;;;;;;:::i;:::-;;:::i;1604:400:51:-;;;;;;:::i;:::-;;:::i;3273:144::-;3332:4;3369:37;:10;:24;3380:12;:5;1552:2:47;1535:20;;;1419:146;3380:12:51;3369:24;;;;;;;;;;;:30;;;3749:40:55;12968:38;12967:44;;;12883:135;3369:37:51;3362:44;3273:144;-1:-1:-1;;3273:144:51:o;4137:270::-;4210:11;4247:27;4277:10;:24;4288:12;:5;1552:2:47;1535:20;;;1419:146;4288:12:51;4277:24;;;;;;;;;;;4247:54;;4309:38;4331:9;:15;;;4309:21;:38::i;:::-;4362:28;;;;:19;;:28;;-1:-1:-1;4362:28:51;;;:34;;4137:270;-1:-1:-1;4137:270:51:o;2008:400::-;2079:5;2110:27;2140:10;:24;2151:12;:5;1552:2:47;1535:20;;;1419:146;2151:12:51;2140:24;;;;;;;;;;;-1:-1:-1;2140:24:51;2187:15;;2140:24;;-1:-1:-1;2210:29:51;2187:15;2210:21;:29::i;:::-;2286:5;2252:30;:16;:6;:14;:16::i;:::-;10100:35:13;10080:56;;9991:156;2252:30:51;:39;2248:150;;11302:68:55;;;;;;2310:15:51;2303:22;;;;;;2248:150;2357:24;;;;:17;;;:24;;;;;;-1:-1:-1;;;;;21950:21:13;2357:32:51;21819:221:13;736:172:51;794:12;846:14;854:5;846:7;:14::i;:::-;-1:-1:-1;832:28:51;-1:-1:-1;868:29:51;;-1:-1:-1;832:28:51;868:21;:29::i;:::-;736:172;;;:::o;2816:256::-;2873:5;2904:27;2934:10;:24;2945:12;:5;1552:2:47;1535:20;;;1419:146;2945:12:51;2934:24;;;;;;;;;;;-1:-1:-1;2934:24:51;2981:15;;2934:24;;-1:-1:-1;3004:29:51;2981:15;3004:21;:29::i;:::-;12118:64:55;;;;;;3048:13:51;3041:20;2816:256;-1:-1:-1;;;;2816:256:51:o;4114:139:45:-;4161:10;:8;:10::i;:::-;4218:4;4197:15;-1:-1:-1;;9766:35:54;9805:55;9765:95;4179:15:45;:44;4236:6;;;;;;;4114:139::o;2160:382::-;2237:10;:8;:10::i;:::-;2357:23;;;;;;;;;;;;-1:-1:-1;;;2357:23:45;;;;4774:19:55;15392:21;;15391:32;;2324:57:45;;;;-1:-1:-1;;;2324:57:45;;;;;;;;:::i;:::-;;;;;;;;;;2389:27;2419:10;:24;2430:12;:5;1552:2:47;1535:20;;;1419:146;2430:12:45;2419:24;;;;;;;;;;;-1:-1:-1;2419:24:45;2469:15;;2419:24;;-1:-1:-1;;;;;;9860:33:55;-1:-1:-1;;;9897:39:55;;;;;9859:77;2451:42:45;;1552:2:47;1535:20;;2506:25:45;;1734::131;;;2506::45;;1722:2:131;1707:18;2506:25:45;;;;;;;;2219:319;2160:382;;:::o;492:196:51:-;551:14;567:12;626:14;634:5;626:7;:14::i;:::-;-1:-1:-1;605:35:51;;-1:-1:-1;605:35:51;-1:-1:-1;648:29:51;605:35;648:21;:29::i;:::-;492:196;;;:::o;6634:170:45:-;6697:10;:8;:10::i;:::-;6733:15;;-1:-1:-1;;;;8603:37:54;8644:59;;;;-1:-1:-1;;;8644:59:54;8602:101;6715:15:45;:48;6776:17;;1236:14:131;;1229:22;1211:41;;6776:17:45;;1199:2:131;1184:18;6776:17:45;;;;;;;;6634:170;:::o;1858:280::-;1911:10;:8;:10::i;:::-;1927:27;1957:10;:24;1968:12;:5;1552:2:47;1535:20;;;1419:146;1968:12:45;1957:24;;;;;;;;;;;1927:54;;2005:29;2028:5;2005:9;:15;;;:22;;:29;;;;:::i;:::-;1987:47;;2089:17;;;;2069:18;;-1:-1:-1;;;;;2045:88:45;;;;;2055:12;2089:5;1552:2:47;1535:20;;;1419:146;2055:12:45;2108:17;;;;;2045:88;;7591:25:131;;;2127:5:45;7647:2:131;7632:18;;7625:50;2045:88:45;;7564:18:131;2045:88:45;;;;;;;1905:233;1858:280;:::o;6214:179::-;6282:10;:8;:10::i;:::-;6318:15;;3171:17:54;7819:38;-1:-1:-1;;7885:18:54;7862:42;;;;7818:105;6300:15:45;:50;6363:19;;-1:-1:-1;;;;;3507:32:131;;3489:51;;6363:19:45;;3477:2:131;3462:18;6363:19:45;3343:203:131;6421:188:45;6490:10;:8;:10::i;:::-;6526:15;;-1:-1:-1;;;;8213:40:54;8257:65;;;;-1:-1:-1;;;8257:65:54;8212:110;6508:15:45;:54;6575:23;;1236:14:131;;1229:22;1211:41;;6575:23:45;;1199:2:131;1184:18;6575:23:45;1071:187:131;2412:400:51;2483:5;2514:27;2544:10;:24;2555:12;:5;1552:2:47;1535:20;;;1419:146;2555:12:51;2544:24;;;;;;;;;;;-1:-1:-1;2544:24:51;2591:15;;2544:24;;-1:-1:-1;2614:29:51;2591:15;2614:21;:29::i;:::-;2690:5;2656:30;:16;:6;:14;:16::i;:::-;10515:36:13;10495:57;;10406:157;2656:30:51;:39;2652:150;;11711:68:55;;;;;;2714:15:51;11614:172:55;2652:150:51;2761:24;;;;:17;;;:24;;;;;;-1:-1:-1;;;;;21950:21:13;2761:32:51;21819:221:13;5462:441:45;5563:10;:8;:10::i;:::-;4359:41:54;13482:65;;13481:98;;5676:46:45;;;;;;;;;;;;;;;;;5581:149;;;;;-1:-1:-1;;;5581:149:45;;;;;;;;:::i;:::-;-1:-1:-1;5756:15:45;;-1:-1:-1;;10701:56:54;10761:83;;;;;;10700:144;5738:15:45;:86;5837:55;;1734:25:131;;;5837:55:45;;1722:2:131;1707:18;5837:55:45;1561:204:131;3491:317:51;3548:12;3586:27;3616:10;:24;3627:12;:5;1552:2:47;1535:20;;;1419:146;3627:12:51;3616:24;;;;;;;;;;;-1:-1:-1;3616:24:51;3663:15;;3616:24;;-1:-1:-1;3686:29:51;3663:15;3686:21;:29::i;:::-;3730:67;:53;:9;:15;;:45;3746:28;:16;:6;:14;:16::i;:::-;1168:1:7;9299:33:13;;9212:131;3746:28:51;3730:45;;;;;;;;;;;;20894:3:13;20886:12;;20882:22;;20755:215;3730:53:51;:65;:67::i;4633:404:45:-;4696:10;:8;:10::i;:::-;4896:27;;;;;;;;;;;;;;;;;4116:22:54;12948:27;;12947:41;;4856:68:45;;;;-1:-1:-1;;;4856:68:45;;;;;;;;:::i;:::-;-1:-1:-1;4966:15:45;;-1:-1:-1;;9405:37:54;9446:45;;;;;;9404:87;4948:15:45;:48;5009:17;;1734:25:131;;;5009:17:45;;1722:2:131;1707:18;5009:17:45;1561:204:131;1126:728:45;1244:10;:8;:10::i;:::-;1552:2:47;1535:20;;-1:-1:-1;1334:18:45;;;:7;-1:-1:-1;1334:18:45;;;-1:-1:-1;1334:18:45;;;:26;;;;-1:-1:-1;;;;;;1334:26:45;;;-1:-1:-1;;;;;1334:26:45;;;;;;1535:20:47;;;1334:26:45;-1:-1:-1;1334:26:45;;;;;;;;;;;;;;;1535:20:47;;;1334:26:45;;;;;;1398:21;;;;;1470:15;;-1:-1:-1;;;;;9477:36:55;-1:-1:-1;;;9476:100:55;1452:46:45;;1555:17;;;;1535:18;;-1:-1:-1;;;;;1511:87:45;;;;;1521:12;1555:5;1552:2:47;1535:20;;;1419:146;1521:12:45;1574:17;;;;;1511:87;;7591:25:131;;;1593:4:45;7647:2:131;7632:18;;7625:50;1511:87:45;;7564:18:131;1511:87:45;;;;;;;1606:18;1613:5;1620:3;1606:6;:18::i;:::-;1632:36;1648:5;1655:12;1632:15;:36::i;:::-;1676:32;1687:5;1694:13;1676:10;:32::i;:::-;-1:-1:-1;;1738:21:45;;;;:17;;;;:21;;;;;;-1:-1:-1;;;1738:49:45;;;;1795:20;;;;;:48;-1:-1:-1;;;;;1126:728:45:o;1021:147:51:-;1124:32;;;;;;;;1062:14;1124:32;;;;;;;;;;;;;;;1116:41;;:7;:41::i;:::-;-1:-1:-1;1102:55:51;;1021:147;-1:-1:-1;;1021:147:51:o;862:173:45:-;934:10;:8;:10::i;:::-;986;;958:46;;972:12;;-1:-1:-1;;;;;986:10:45;998:5;958:13;:46::i;:::-;950:80;;;;-1:-1:-1;;;950:80:45;;7888:2:131;950:80:45;;;7870:21:131;7927:2;7907:18;;;7900:30;-1:-1:-1;;;7946:18:131;;;7939:51;8007:18;;950:80:45;7686:345:131;950:80:45;862:173;;:::o;5932:256::-;6013:10;:8;:10::i;:::-;-1:-1:-1;;;;;6039:31:45;;6031:63;;;;-1:-1:-1;;;6031:63:45;;8238:2:131;6031:63:45;;;8220:21:131;8277:2;8257:18;;;8250:30;-1:-1:-1;;;8296:18:131;;;8289:49;8355:18;;6031:63:45;8036:343:131;6031:63:45;6102:10;:30;;-1:-1:-1;;;;;;6102:30:45;-1:-1:-1;;;;;6102:30:45;;;;;;;;6145:32;;3489:51:131;;;6145:32:45;;3477:2:131;3462:18;6145:32:45;3343:203:131;4806:368:51;4882:11;4895:23;4944:27;4974:10;:24;4985:12;:5;1552:2:47;1535:20;;;1419:146;4985:12:51;4974:24;;;;;;;;;;;4944:54;;5006:38;5028:9;:15;;;5006:21;:38::i;:::-;5052:28;5083;;;:19;;:28;;-1:-1:-1;;5083:28:51;;;5127:16;;5145:17;;;;;5127:16;;5145:17;;-1:-1:-1;4806:368:51:o;1345:255::-;1414:4;1444:27;1474:10;:24;1485:12;:5;1552:2:47;1535:20;;;1419:146;1485:12:51;1474:24;;;;;;;;;;;1444:54;;1506:38;1528:9;:15;;;1506:21;:38::i;:::-;1559:22;;;;:15;;:22;;-1:-1:-1;1559:22:51;;;;20894:3:13;20886:12;;20882:22;;1552:37:51;-1:-1:-1;1345:255:51:o;5073:345:45:-;5158:10;:8;:10::i;:::-;4774:19:55;15392:21;;15391:32;;5238:38:45;;;;;;;;;;;;;;;;;5176:101;;;;;-1:-1:-1;;;5176:101:45;;;;;;;;:::i;:::-;-1:-1:-1;5303:15:45;;-1:-1:-1;;10205:48:54;10257:67;;;;;;10204:120;5285:15:45;:70;5368:39;;1734:25:131;;;5368:39:45;;1722:2:131;1707:18;5368:39:45;1561:204:131;4456:289:51;4535:23;4584:27;4614:10;:24;4625:12;:5;1552:2:47;1535:20;;;1419:146;4625:12:51;4614:24;;;;;;;;;;;4584:54;;4646:38;4668:9;:15;;;4646:21;:38::i;:::-;4699:28;;;;:19;;:28;;-1:-1:-1;4699:28:51;;;:35;;;;4456:289;-1:-1:-1;4456:289:51:o;3387:685:45:-;3478:10;:8;:10::i;:::-;3673:54;3723:3;3707:13;:19;5273:34:55;16570:51;;16569:77;;16454:198;3673:54:45;3729:38;;;;;;;;;;;;;;;;;3665:103;;;;;-1:-1:-1;;;3665:103:45;;;;;;;;:::i;:::-;;3885:27;3915:10;:24;3926:12;:5;1552:2:47;1535:20;;;1419:146;3926:12:45;3915:24;;;;;;;;;;;-1:-1:-1;3915:24:45;3965:15;;3915:24;;-1:-1:-1;3965:44:45;;3995:13;3965:29;:44::i;:::-;3947:62;;1552:2:47;1535:20;;4022:39:45;;1734:25:131;;;4022:39:45;;1722:2:131;1707:18;4022:39:45;1561:204:131;2834:527:45;2929:10;:8;:10::i;:::-;2964:27;2994:10;:24;3005:12;:5;1552:2:47;1535:20;;;1419:146;3005:12:45;2994:24;;;;;;;;;;;2964:54;;3145:42;3174:12;-1:-1:-1;;;;2505:27:8;2405:133;3145:42:45;3137:84;;;;-1:-1:-1;;;3137:84:45;;8718:2:131;3137:84:45;;;8700:21:131;8757:2;8737:18;;;8730:30;8796:31;8776:18;;;8769:59;8845:18;;3137:84:45;8516:353:131;3137:84:45;3248:15;;:46;;3281:12;3248:32;:46::i;:::-;3230:64;;1552:2:47;1535:20;;3307:43:45;;1734:25:131;;;3307:43:45;;1722:2:131;1707:18;3307:43:45;1561:204:131;4326:282:45;4393:10;:8;:10::i;:::-;4455:29;;;;;;;;;;;;;;;;;4036:24:54;12801:31;;12800:47;;4411:74:45;;;;-1:-1:-1;;;4411:74:45;;;;;;;;:::i;:::-;-1:-1:-1;4529:15:45;;-1:-1:-1;;;;9012:39:54;-1:-1:-1;;;9055:49:54;;;;;9011:93;4511:15:45;:52;4576:21;;1734:25:131;;;4576:21:45;;1722:2:131;1707:18;4576:21:45;1561:204:131;1604:400:51;1675:5;1706:27;1736:10;:24;1747:12;:5;1552:2:47;1535:20;;;1419:146;1747:12:51;1736:24;;;;;;;;;;;-1:-1:-1;1736:24:51;1783:15;;1736:24;;-1:-1:-1;1806:29:51;1783:15;1806:21;:29::i;:::-;1882:5;1848:30;:16;:6;:14;:16::i;:::-;9692:32:13;9672:53;;9583:153;1848:30:51;:39;1844:150;;10893:68:55;;;;;;1906:15:51;10796:172:55;1844:150:51;1953:24;;;;:17;;;:24;;;;;;-1:-1:-1;;;;;21950:21:13;1953:32:51;21819:221:13;4692:115:44;3749:40:55;12968:38;;12967:44;4756:46:44;;;;-1:-1:-1;;;4756:46:44;;9076:2:131;4756:46:44;;;9058:21:131;9115:2;9095:18;;;9088:30;-1:-1:-1;;;9134:18:131;;;9127:50;9194:18;;4756:46:44;8874:344:131;4756:46:44;4692:115;:::o;1398:124:9:-;1451:3;1481:35;1510:5;1481:28;:35::i;5889:956:44:-;5961:14;5977:12;5991:27;6058:10;:24;6069:12;:5;1552:2:47;1535:20;;;1419:146;6069:12:44;6058:24;;;;;;;;;;;6046:36;;6100:15;;6090:25;;6132:9;:15;;;6123:24;;6159:19;:7;-1:-1:-1;;;8027:44:54;8026:50;;;7936:147;6159:19:44;6155:680;;;6191:13;6206:15;6237:17;:7;7661:18:54;7609:71;;7503:185;6237:17:44;6225:42;;;-1:-1:-1;;;6225:42:44;;4181:13:131;;-1:-1:-1;;;;;4177:22:131;;;6225:42:44;;;4159:41:131;4260:4;4248:17;;4242:24;4238:33;;4216:20;;;4209:63;4316:17;;;4310:24;4288:20;;;4281:54;6225:35:44;;;;;4094:18:131;;6225:42:44;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;6190:77;;;;6395:34;6420:8;4036:24:54;12801:31;;12800:47;;12705:148;6395:34:44;6391:99;;;-1:-1:-1;;;;9012:39:54;;-1:-1:-1;;;9055:49:54;;;;;9011:93;6443:36:44;;6391:99;5273:34:55;16570:51;;16569:77;;6735:92:44;;6793:23;:6;6808:7;6793:14;:23::i;:::-;6784:32;;6735:92;6180:655;;6155:680;5889:956;;;;;:::o;355:181:45:-;435:10;;-1:-1:-1;;;;;435:10:45;421;:24;;:55;;-1:-1:-1;449:10:45;471:4;449:27;421:55;:83;;;-1:-1:-1;502:1:45;480:10;-1:-1:-1;;;;;480:10:45;:24;421:83;413:112;;;;-1:-1:-1;;;413:112:45;;9703:2:131;413:112:45;;;9685:21:131;9742:2;9722:18;;;9715:30;-1:-1:-1;;;9761:18:131;;;9754:46;9817:18;;413:112:45;9501:340:131;413:112:45;355:181::o;9370:213:55:-;9540:17;9518:40;-1:-1:-1;;;;;9477:36:55;;;;9476:100;;9370:213::o;6539:152:13:-;6594:12;6639:41;6650:4;6418:18;-1:-1:-1;;;;;6308:43:13;;6405:1;6401:10;;;6397:20;;;6394:43;;;;6387:51;6374:11;;6372:1;6368:18;6365:74;5354:20;;5346:29;5380:16;5346:51;;5204:205;7625:346:44;7760:59;;;-1:-1:-1;;;;;10038:32:131;;;7760:59:44;;;10020:51:131;10087:18;;;;10080:34;;;7760:59:44;;;;;;;;;;9993:18:131;;;;7760:59:44;;;;;;;-1:-1:-1;;;;;7760:59:44;-1:-1:-1;;;7760:59:44;;;7864:21;;-1:-1:-1;;;;;;7864:17:44;;;:21;;7760:59;;7864:21;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;7827:58;;;;7901:8;:58;;;;-1:-1:-1;7914:11:44;;:16;;:44;;;7945:4;7934:24;;;;;;;;;;;;:::i;:::-;7893:67;7625:346;-1:-1:-1;;;;;;;7625:346:44:o;1176:139:9:-;1244:5;-1:-1:-1;;12749:48:55;;12801:69;1305:3:9;1301:7;;12801:69:55;;;12748:122;1276:33:9;1269:40;1176:139;-1:-1:-1;;;1176:139:9:o;753:168::-;834:5;866:49;880:34;901:12;880:20;:34::i;:::-;866:5;;:13;:49::i;8601:552:13:-;8663:3;;1168:1:7;1204;;;8979:11:13;8937:40;12118:64:55;;;;;;8937:12:13;:40::i;:::-;8933:57;8932:78;;8851:42;11711:68:55;;;;;;8937:12:13;:40::i;8851:42::-;:160;8850:196;;8793:42;11302:68:55;;;;;;8937:12:13;:40::i;8793:42::-;:253;8792:286;;8737:42;10893:68:55;;;;;;8937:12:13;:40::i;8737:42::-;:341;8736:371;;10464:80:55;;;;;;8704:404:13;;8601:552;-1:-1:-1;;;8601:552:13:o;10145:222:55:-;10297:63;;-1:-1:-1;;;10297:63:55;-1:-1:-1;;;;10256:37:55;;;;10255:105;;10145:222::o;2796:315:8:-;2857:7;2033:24;2888:29;;2884:83;;-1:-1:-1;2947:12:8;2796:315::o;2884:83::-;3012:8;3023:24;3034:12;1891:66:6;-1:-1:-1;;;;;;;;1330:41:6;-1:-1:-1;1327:1:6;1323:49;1288:9;;1285:1;1281:17;;;1317:56;;;;1427:9;;;1407:18;1404:33;1401:1;1397:41;1391:48;1485:9;;;1473:10;1470:25;1467:1;1463:33;1457:40;1582:9;;;1619:1;1615:9;;;1609:16;1653:1;1649:9;;;1643:16;1687:1;1683:9;;;1677:16;1717:9;;;;1711:16;1755:2;1751:10;;;1745:17;1844:28;1839:3;1835:38;1830:128;1824:135;;1169:806;3023:24:8;3012:35;-1:-1:-1;2033:24:8;-1:-1:-1;;3082:17:8;;3065:35;;;4211:25;1934:1;4180:26;;;4179:58;3060:45;4063:181;219:536:6;669:66;362:18;356:25;;;479:6;;487:1;475:14;468:22;;;;539:10;536:17;-1:-1:-1;533:1:6;529:25;420:9;;418:1;414:16;524:31;;;;621:9;;;-1:-1:-1;;;617:36:6;612:3;608:46;603:133;597:140;;219:536::o;14:173:131:-;82:20;;-1:-1:-1;;;;;131:31:131;;121:42;;111:70;;177:1;174;167:12;192:645;244:5;292:4;280:9;275:3;271:19;267:30;264:50;;;310:1;307;300:12;264:50;343:2;337:9;385:4;377:6;373:17;456:6;444:10;441:22;420:18;408:10;405:34;402:62;399:185;;;506:10;501:3;497:20;494:1;487:31;541:4;538:1;531:15;569:4;566:1;559:15;399:185;600:2;593:22;633:6;-1:-1:-1;633:6:131;663:29;682:9;663:29;:::i;:::-;655:6;648:45;726:38;760:2;749:9;745:18;726:38;:::i;:::-;721:2;713:6;709:15;702:63;826:2;815:9;811:18;798:32;793:2;785:6;781:15;774:57;;192:645;;;;:::o;842:224::-;925:6;978:2;966:9;957:7;953:23;949:32;946:52;;;994:1;991;984:12;946:52;1017:43;1052:7;1041:9;1017:43;:::i;1263:293::-;1355:6;1363;1416:3;1404:9;1395:7;1391:23;1387:33;1384:53;;;1433:1;1430;1423:12;1384:53;1456:43;1491:7;1480:9;1456:43;:::i;:::-;1446:53;1546:2;1531:18;;;;1518:32;;-1:-1:-1;;;1263:293:131:o;2974:118::-;3060:5;3053:13;3046:21;3039:5;3036:32;3026:60;;3082:1;3079;3072:12;3097:241;3153:6;3206:2;3194:9;3185:7;3181:23;3177:32;3174:52;;;3222:1;3219;3212:12;3174:52;3261:9;3248:23;3280:28;3302:5;3280:28;:::i;3551:186::-;3610:6;3663:2;3651:9;3642:7;3638:23;3634:32;3631:52;;;3679:1;3676;3669:12;3631:52;3702:29;3721:9;3702:29;:::i;3742:180::-;3801:6;3854:2;3842:9;3833:7;3829:23;3825:32;3822:52;;;3870:1;3867;3860:12;3822:52;-1:-1:-1;3893:23:131;;3742:180;-1:-1:-1;3742:180:131:o;4713:431::-;4823:6;4831;4839;4847;4900:3;4888:9;4879:7;4875:23;4871:33;4868:53;;;4917:1;4914;4907:12;4868:53;4940:43;4975:7;4964:9;4940:43;:::i;:::-;4930:53;5030:2;5015:18;;5002:32;;-1:-1:-1;5081:3:131;5066:19;;5053:33;;5133:3;5118:19;5105:33;;-1:-1:-1;4713:431:131;-1:-1:-1;;;4713:431:131:o;5359:254::-;5427:6;5435;5488:2;5476:9;5467:7;5463:23;5459:32;5456:52;;;5504:1;5501;5494:12;5456:52;5527:29;5546:9;5527:29;:::i;:::-;5517:39;5603:2;5588:18;;;;5575:32;;-1:-1:-1;;;5359:254:131:o;5931:409::-;6017:6;6025;6033;6041;6094:3;6082:9;6073:7;6069:23;6065:33;6062:53;;;6111:1;6108;6101:12;6062:53;6134:29;6153:9;6134:29;:::i;:::-;6124:39;;6182:38;6216:2;6205:9;6201:18;6182:38;:::i;:::-;6172:48;;6239:38;6273:2;6262:9;6258:18;6239:38;:::i;:::-;6229:48;;6296:38;6330:2;6319:9;6315:18;6296:38;:::i;:::-;6286:48;;5931:409;;;;;;;:::o;6767:250::-;6852:1;6862:113;6876:6;6873:1;6870:13;6862:113;;;6952:11;;;6946:18;6933:11;;;6926:39;6898:2;6891:10;6862:113;;;-1:-1:-1;;7009:1:131;6991:16;;6984:27;6767:250::o;7022:396::-;7171:2;7160:9;7153:21;7134:4;7203:6;7197:13;7246:6;7241:2;7230:9;7226:18;7219:34;7262:79;7334:6;7329:2;7318:9;7314:18;7309:2;7301:6;7297:15;7262:79;:::i;:::-;7402:2;7381:15;-1:-1:-1;;7377:29:131;7362:45;;;;7409:2;7358:54;;7022:396;-1:-1:-1;;7022:396:131:o;9223:273::-;9330:6;9338;9391:2;9379:9;9370:7;9366:23;9362:32;9359:52;;;9407:1;9404;9397:12;9359:52;-1:-1:-1;;9430:16:131;;9486:2;9471:18;;;9465:25;9430:16;;9465:25;;-1:-1:-1;9223:273:131:o;10125:287::-;10254:3;10292:6;10286:13;10308:66;10367:6;10362:3;10355:4;10347:6;10343:17;10308:66;:::i;:::-;10390:16;;;;;10125:287;-1:-1:-1;;10125:287:131:o;10417:245::-;10484:6;10537:2;10525:9;10516:7;10512:23;10508:32;10505:52;;;10553:1;10550;10543:12;10505:52;10585:9;10579:16;10604:28;10626:5;10604:28;:::i",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "PERMIT_TYPEHASH()": "30adf81f",
+    "activate((address,address,uint256),uint256,uint256,uint256)": "96b4c30f",
+    "allowance(address,address,address,address)": "cd6a7ca7",
+    "balanceOf(address)": "70a08231",
+    "best((address,address,uint256))": "90245530",
+    "config((address,address,uint256))": "5275b212",
+    "deactivate((address,address,uint256))": "5b275296",
+    "global()": "a05f9906",
+    "governance()": "5aa6e675",
+    "kill()": "41c0e1b5",
+    "leafs((address,address,uint256),int256)": "ce5bbece",
+    "level1s((address,address,uint256),int256)": "6c6fda56",
+    "level2s((address,address,uint256),int256)": "0adf51a9",
+    "level3s((address,address,uint256),int256)": "fec777b4",
+    "local((address,address,uint256))": "1c043215",
+    "locked((address,address,uint256))": "0469bb66",
+    "nonces(address)": "7ecebe00",
+    "offerData((address,address,uint256),uint256)": "c7b06e87",
+    "offerDetails((address,address,uint256),uint256)": "e982fb8d",
+    "offers((address,address,uint256),uint256)": "04a7a1b4",
+    "olKeys(bytes32)": "5d49dc11",
+    "root((address,address,uint256))": "41b12acf",
+    "setDensity96X32((address,address,uint256),uint256)": "f5142444",
+    "setFee((address,address,uint256),uint256)": "443759fb",
+    "setGasbase((address,address,uint256),uint256)": "eeba3368",
+    "setGasmax(uint256)": "95999ee3",
+    "setGasprice(uint256)": "fcaa7e2e",
+    "setGovernance(address)": "ab033ea9",
+    "setMaxGasreqForFailingOffers(uint256)": "74bfac33",
+    "setMaxRecursionDepth(uint256)": "e37de38b",
+    "setMonitor(address)": "5cd82390",
+    "setNotify(bool)": "5a611f4e",
+    "setUseOracle(bool)": "6804f613",
+    "withdrawERC20(address,uint256)": "a1db9782"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"CleanComplete\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"taker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"offersToBeCleaned\",\"type\":\"uint256\"}],\"name\":\"CleanStart\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"maker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Credit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"maker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Debit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"Kill\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"NewMgv\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"taker\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"takerWants\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"takerGives\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"penalty\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"mgvData\",\"type\":\"bytes32\"}],\"name\":\"OfferFail\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"taker\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"takerWants\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"takerGives\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"penalty\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"mgvData\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"posthookData\",\"type\":\"bytes32\"}],\"name\":\"OfferFailWithPosthookData\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"maker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"deprovision\",\"type\":\"bool\"}],\"name\":\"OfferRetract\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"taker\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"takerWants\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"takerGives\",\"type\":\"uint256\"}],\"name\":\"OfferSuccess\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"taker\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"takerWants\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"takerGives\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"posthookData\",\"type\":\"bytes32\"}],\"name\":\"OfferSuccessWithPosthookData\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"maker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"int256\",\"name\":\"tick\",\"type\":\"int256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"gives\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"gasprice\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"gasreq\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"OfferWrite\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"taker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"OrderComplete\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"taker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"Tick\",\"name\":\"maxTick\",\"type\":\"int256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fillVolume\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"fillWants\",\"type\":\"bool\"}],\"name\":\"OrderStart\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"value\",\"type\":\"bool\"}],\"name\":\"SetActive\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"SetDensity96X32\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"SetFee\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"offer_gasbase\",\"type\":\"uint256\"}],\"name\":\"SetGasbase\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"SetGasmax\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"SetGasprice\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"value\",\"type\":\"address\"}],\"name\":\"SetGovernance\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"SetMaxGasreqForFailingOffers\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"SetMaxRecursionDepth\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"value\",\"type\":\"address\"}],\"name\":\"SetMonitor\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"value\",\"type\":\"bool\"}],\"name\":\"SetNotify\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"value\",\"type\":\"bool\"}],\"name\":\"SetUseOracle\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"PERMIT_TYPEHASH\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"density96X32\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"offer_gasbase\",\"type\":\"uint256\"}],\"name\":\"activate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"maker\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"balance\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"}],\"name\":\"best\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"offerId\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"}],\"name\":\"config\",\"outputs\":[{\"internalType\":\"Global\",\"name\":\"_global\",\"type\":\"uint256\"},{\"internalType\":\"Local\",\"name\":\"_local\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"}],\"name\":\"deactivate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"global\",\"outputs\":[{\"internalType\":\"Global\",\"name\":\"_global\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"governance\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"kill\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"},{\"internalType\":\"int256\",\"name\":\"index\",\"type\":\"int256\"}],\"name\":\"leafs\",\"outputs\":[{\"internalType\":\"Leaf\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"},{\"internalType\":\"int256\",\"name\":\"index\",\"type\":\"int256\"}],\"name\":\"level1s\",\"outputs\":[{\"internalType\":\"Field\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"},{\"internalType\":\"int256\",\"name\":\"index\",\"type\":\"int256\"}],\"name\":\"level2s\",\"outputs\":[{\"internalType\":\"Field\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"},{\"internalType\":\"int256\",\"name\":\"index\",\"type\":\"int256\"}],\"name\":\"level3s\",\"outputs\":[{\"internalType\":\"Field\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"}],\"name\":\"local\",\"outputs\":[{\"internalType\":\"Local\",\"name\":\"_local\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"}],\"name\":\"locked\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"nonces\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"},{\"internalType\":\"uint256\",\"name\":\"offerId\",\"type\":\"uint256\"}],\"name\":\"offerData\",\"outputs\":[{\"internalType\":\"Offer\",\"name\":\"offer\",\"type\":\"uint256\"},{\"internalType\":\"OfferDetail\",\"name\":\"offerDetail\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"},{\"internalType\":\"uint256\",\"name\":\"offerId\",\"type\":\"uint256\"}],\"name\":\"offerDetails\",\"outputs\":[{\"internalType\":\"OfferDetail\",\"name\":\"offerDetail\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"},{\"internalType\":\"uint256\",\"name\":\"offerId\",\"type\":\"uint256\"}],\"name\":\"offers\",\"outputs\":[{\"internalType\":\"Offer\",\"name\":\"offer\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"olKeyHash\",\"type\":\"bytes32\"}],\"name\":\"olKeys\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"}],\"name\":\"root\",\"outputs\":[{\"internalType\":\"Field\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"},{\"internalType\":\"uint256\",\"name\":\"density96X32\",\"type\":\"uint256\"}],\"name\":\"setDensity96X32\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"setFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"outbound_tkn\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"inbound_tkn\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tickSpacing\",\"type\":\"uint256\"}],\"internalType\":\"struct OLKey\",\"name\":\"olKey\",\"type\":\"tuple\"},{\"internalType\":\"uint256\",\"name\":\"offer_gasbase\",\"type\":\"uint256\"}],\"name\":\"setGasbase\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"gasmax\",\"type\":\"uint256\"}],\"name\":\"setGasmax\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"gasprice\",\"type\":\"uint256\"}],\"name\":\"setGasprice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"governanceAddress\",\"type\":\"address\"}],\"name\":\"setGovernance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"maxGasreqForFailingOffers\",\"type\":\"uint256\"}],\"name\":\"setMaxGasreqForFailingOffers\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"maxRecursionDepth\",\"type\":\"uint256\"}],\"name\":\"setMaxRecursionDepth\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"monitor\",\"type\":\"address\"}],\"name\":\"setMonitor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"notify\",\"type\":\"bool\"}],\"name\":\"setNotify\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"useOracle\",\"type\":\"bool\"}],\"name\":\"setUseOracle\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"withdrawERC20\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"node_modules/@mangrovedao/mangrove-core/src/core/MgvAppendix.sol\":\"MgvAppendix\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/\",\":@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/\",\":@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/\",\":ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/\",\":mgv_arbitrage_lib/=mangrove-arbitrage/lib/\",\":mgv_arbitrage_script/=mangrove-arbitrage/script/\",\":mgv_arbitrage_src/=mangrove-arbitrage/src/\",\":mgv_arbitrage_test/=mangrove-arbitrage/test/\",\":mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":mgv_script/=node_modules/@mangrovedao/mangrove-core/script/\",\":mgv_src/=node_modules/@mangrovedao/mangrove-core/src/\",\":mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":mgv_test/=node_modules/@mangrovedao/mangrove-core/test/\",\":uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/\"]},\"sources\":{\"node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol\":{\"keccak256\":\"0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49\",\"dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/BitLib.sol\":{\"keccak256\":\"0x5a1c56d67fbd2ef6f3b830cf8dae1885da5f40a37afd11cb3a392be573993c3b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a07b895de906f49d0ce9e89a349d39220e13039709ea2e2db46ff48310bd4b3b\",\"dweb:/ipfs/QmZyiLKyTZ9EHwqNRUYukQDdg7CL54Dsu65RYabkkGF1KM\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol\":{\"keccak256\":\"0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb\",\"dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/DensityLib.sol\":{\"keccak256\":\"0xc7ee8be7f11a1bf85aa4ea0e222d4a49d77a378b201e347f9a5e4f28f207a023\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ed718e8bf3fb45bc0e7cf739662422cfe01d8d04a2c99b2fb0cfa2372629c6ad\",\"dweb:/ipfs/QmZ5QpyMSmkVxayfpZYovNcc8NGJKfVZEMKphzeKk9cVNv\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/LocalExtra.sol\":{\"keccak256\":\"0xbd3f6702242dd43ba2493eb54feb8f5d2526967512c6f156d29669b54d9c60f2\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://e389f3c78c8073bde973aa3f4770139e2adb4cc00cc1303b77eefa201189a6ff\",\"dweb:/ipfs/QmZ8vXRUUCinKtqJhV7jMXVeDVfRizhJ3NsumZLQxwSc44\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol\":{\"keccak256\":\"0x335217debbf3f4cabeaea88d4dd9777dbda2f2b6ed9684e2285a4d16e1e4464c\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://eafe358531d7dc6527d36f8fbc4bc67ab12516398c35338ba5da57a03e24b9f3\",\"dweb:/ipfs/QmcKxrcr11EM7rsKNUEJq8VXFd2R1dWSTqYk3E4k8dQfzy\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol\":{\"keccak256\":\"0x95120d52698bc60b005496036a7c9daa7b8d0b18b571e596e86fd696b36e3264\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://684d30cc9673403cfddabdf7d979417c5df050abde16712aeaa9ca6b2725d154\",\"dweb:/ipfs/QmTkeUAMhb72BNqGjAaaPBj1NHPtKE8wH1R8bpXD5RTKtC\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol\":{\"keccak256\":\"0xa4aea464925ad277aab2141885eeeb6e5f1b0963ba08d8887a1c2461c334f222\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://c7ec62c85c22d7996abe32663232861f90e855c770dbd252bf49fff4ca786e74\",\"dweb:/ipfs/QmSHBJfw9bg8QjgBquXVLTS337ZuBGHVkDJfwuAZ6X48sw\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/TickTreeLib.sol\":{\"keccak256\":\"0x196c46d6e8e2ab51462f25245f7886568df3f1f65953dcec4c02d7950b4a10cd\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://4293ed5fb3ce4d350b9bb5b38342c273e6d772ace098927e006efa7fc4498329\",\"dweb:/ipfs/QmRCtk481PHQjNdt5Dsa8GYWEX46nYwdeD8R3m92w3Xjxv\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console2.sol\":{\"keccak256\":\"0x954646445d1014c3cd85c7918f5e7adeeca5ee44b68c00bafa237e597a4e35ea\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://516fa3be52da4763147175bfba4be0aa011fadbb0c1afb01f97265bd4cee7973\",\"dweb:/ipfs/QmdixAyMJefx7qePChgdxcBH5MxhmN7vsqPuPLx3CgrVmF\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvAppendix.sol\":{\"keccak256\":\"0x5cd196e4a990a6b1b23e1106cf1c53b797469fafc9f4e7b963787f485ccaf2b6\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://d04ca51cf2c8a34d23080c84ff5899c7c1134688805348692ede9a60c51bb43f\",\"dweb:/ipfs/QmZjD7ir2zwu9tdwW2Ahb6PPY9LUcHujsRwmszbY59wm1p\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvCommon.sol\":{\"keccak256\":\"0x58ee8211533e7f23e32d552779600606425d41afdafbd15074188c215993fd69\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://0e28a891a08cb8f2292a3ff28490aa12489073dfa3782f411cdbbe3903ff7c71\",\"dweb:/ipfs/QmXDt46FTevAHKzs3hFue3JH25w4sJCyYdBsQRrctNCMck\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvGovernable.sol\":{\"keccak256\":\"0xd6140146043d4eee36ca947dcca7003ae7853d5c635261e390eb7ce1339a53c7\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://cf62b8806176f5e49a2a89cd63f3a15dd88e6f4a0a1a7fffe402c72ba7adcbca\",\"dweb:/ipfs/QmQcg6Kv4hvLfT39ceneM59kg4DTZk1regnSmSZnHViY8N\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol\":{\"keccak256\":\"0xe22e3d452040625724ce932cc6f57212c8a32ba021b06f5737e4c23319792c7d\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://b3ab9e3726b49b2d526f1cb6634c562cbafdbc1163753d13a3e1c316ca29e726\",\"dweb:/ipfs/QmS9bYtEVW7i9zAWmC7aPdCDv4BCaBJbhpgrJX6VhH68st\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvView.sol\":{\"keccak256\":\"0xea00bc69f29db56974401408305b1f0f11c2ad5635bbaaec62ef3488424df28d\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://a358a1e1abe1254d94ced0cbb554ca3217e9f6018e0dac4f4ea3df8b018b8337\",\"dweb:/ipfs/Qmf7okDXgiqsqq7ngnZ7pMhMgAENtJ5xHJc7Sv8UgF1yK9\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Global.post.sol\":{\"keccak256\":\"0xddf04a10f84edc0b165351f649cad761a429b5c1b218e482917b3e38a2019e7f\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://7695a94afb1db46a65967bd63fc344b0a9387a4a2c906fdcac0433fdfec32dff\",\"dweb:/ipfs/QmcH4k6VwPrSEjqEQVsKTRjxWtmhijoknih6s6R98dnNUM\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Local.post.sol\":{\"keccak256\":\"0x03d642742c132c37c1fc29cae87f7ce1be93f89877fe698698d5bd2309c878a5\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://6957d461c6486caeee91f5fd8be2ff0f53a8c264c03e8c9b7f7291bf7a72d9fc\",\"dweb:/ipfs/QmTRqHsnjFA1xDmWWuPqn9aPeweRiYHv1wfTz77qxCmd7k\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol\":{\"keccak256\":\"0x812a7c313108b56600f747d89d20b2daa4c4aa489ece1b30c561a353d41468f2\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://3fb1685a67020adeece9f6fbf567567d257aafafd2e115e6151f2b2a14b429aa\",\"dweb:/ipfs/QmUvk3FLDDHRXungxeLtPEfaQj3HNt3ib8nGhonzPdMW6o\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol\":{\"keccak256\":\"0xbb0c9e3177017a77de68adeed5cbbf040fc9152f914adb34575eb880979fc720\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://fac448393a94f7d797f58ece51c1127a1605397b2371c9d1fe61db0037762a91\",\"dweb:/ipfs/QmUwcWdecdqa81eLGz4SekQYfiTp5pgs2mvFRYmu7T2sew\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Structs.post.sol\":{\"keccak256\":\"0x6121b0f392dbeddf77da4f5bc5dee019878ab21538892bd22dbb9c49e9e068bb\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://336a0df7a17dd6b1ed36c4e7f19fc9ab6d4ad933f7e0b3658efba0756c7341bc\",\"dweb:/ipfs/QmZ7NQY6EJHqcE1oEho1yN9ymsTfVpUcMJABKC8Fq5GvhL\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.20+commit.a1b79de6"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Approval",
+          "anonymous": false
+        },
+        {
+          "inputs": [],
+          "type": "event",
+          "name": "CleanComplete",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "taker",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "offersToBeCleaned",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "CleanStart",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "maker",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Credit",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "maker",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Debit",
+          "anonymous": false
+        },
+        {
+          "inputs": [],
+          "type": "event",
+          "name": "Kill",
+          "anonymous": false
+        },
+        {
+          "inputs": [],
+          "type": "event",
+          "name": "NewMgv",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "taker",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "takerWants",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "takerGives",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "penalty",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "bytes32",
+              "name": "mgvData",
+              "type": "bytes32",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "OfferFail",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "taker",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "takerWants",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "takerGives",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "penalty",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "bytes32",
+              "name": "mgvData",
+              "type": "bytes32",
+              "indexed": false
+            },
+            {
+              "internalType": "bytes32",
+              "name": "posthookData",
+              "type": "bytes32",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "OfferFailWithPosthookData",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "maker",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "bool",
+              "name": "deprovision",
+              "type": "bool",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "OfferRetract",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "taker",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "takerWants",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "takerGives",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "OfferSuccess",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "taker",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "takerWants",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "takerGives",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "bytes32",
+              "name": "posthookData",
+              "type": "bytes32",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "OfferSuccessWithPosthookData",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "maker",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "int256",
+              "name": "tick",
+              "type": "int256",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "gives",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "gasprice",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "gasreq",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "OfferWrite",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "taker",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "fee",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "OrderComplete",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "taker",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "Tick",
+              "name": "maxTick",
+              "type": "int256",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "fillVolume",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "bool",
+              "name": "fillWants",
+              "type": "bool",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "OrderStart",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "tickSpacing",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "bool",
+              "name": "value",
+              "type": "bool",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "SetActive",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "SetDensity96X32",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "SetFee",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "offer_gasbase",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "SetGasbase",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "SetGasmax",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "SetGasprice",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "value",
+              "type": "address",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "SetGovernance",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "SetMaxGasreqForFailingOffers",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "SetMaxRecursionDepth",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "value",
+              "type": "address",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "SetMonitor",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bool",
+              "name": "value",
+              "type": "bool",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "SetNotify",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bool",
+              "name": "value",
+              "type": "bool",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "SetUseOracle",
+          "anonymous": false
+        },
+        {
+          "inputs": [],
+          "stateMutability": "pure",
+          "type": "function",
+          "name": "PERMIT_TYPEHASH",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            },
+            {
+              "internalType": "uint256",
+              "name": "fee",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "density96X32",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "offer_gasbase",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "activate"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "outbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "inbound_tkn",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "allowance",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "maker",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "balanceOf",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "balance",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "best",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "offerId",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "config",
+          "outputs": [
+            {
+              "internalType": "Global",
+              "name": "_global",
+              "type": "uint256"
+            },
+            {
+              "internalType": "Local",
+              "name": "_local",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "deactivate"
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "global",
+          "outputs": [
+            {
+              "internalType": "Global",
+              "name": "_global",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "governance",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "kill"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            },
+            {
+              "internalType": "int256",
+              "name": "index",
+              "type": "int256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "leafs",
+          "outputs": [
+            {
+              "internalType": "Leaf",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            },
+            {
+              "internalType": "int256",
+              "name": "index",
+              "type": "int256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "level1s",
+          "outputs": [
+            {
+              "internalType": "Field",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            },
+            {
+              "internalType": "int256",
+              "name": "index",
+              "type": "int256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "level2s",
+          "outputs": [
+            {
+              "internalType": "Field",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            },
+            {
+              "internalType": "int256",
+              "name": "index",
+              "type": "int256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "level3s",
+          "outputs": [
+            {
+              "internalType": "Field",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "local",
+          "outputs": [
+            {
+              "internalType": "Local",
+              "name": "_local",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "locked",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "nonces",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "nonce",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            },
+            {
+              "internalType": "uint256",
+              "name": "offerId",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "offerData",
+          "outputs": [
+            {
+              "internalType": "Offer",
+              "name": "offer",
+              "type": "uint256"
+            },
+            {
+              "internalType": "OfferDetail",
+              "name": "offerDetail",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            },
+            {
+              "internalType": "uint256",
+              "name": "offerId",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "offerDetails",
+          "outputs": [
+            {
+              "internalType": "OfferDetail",
+              "name": "offerDetail",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            },
+            {
+              "internalType": "uint256",
+              "name": "offerId",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "offers",
+          "outputs": [
+            {
+              "internalType": "Offer",
+              "name": "offer",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "olKeyHash",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "olKeys",
+          "outputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "root",
+          "outputs": [
+            {
+              "internalType": "Field",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            },
+            {
+              "internalType": "uint256",
+              "name": "density96X32",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setDensity96X32"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            },
+            {
+              "internalType": "uint256",
+              "name": "fee",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setFee"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct OLKey",
+              "name": "olKey",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "outbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "inbound_tkn",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "tickSpacing",
+                  "type": "uint256"
+                }
+              ]
+            },
+            {
+              "internalType": "uint256",
+              "name": "offer_gasbase",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setGasbase"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "gasmax",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setGasmax"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "gasprice",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setGasprice"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "governanceAddress",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setGovernance"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "maxGasreqForFailingOffers",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setMaxGasreqForFailingOffers"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "maxRecursionDepth",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setMaxRecursionDepth"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "monitor",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setMonitor"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bool",
+              "name": "notify",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setNotify"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bool",
+              "name": "useOracle",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setUseOracle"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "tokenAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "withdrawERC20"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/",
+        "mgv_arbitrage_lib/=mangrove-arbitrage/lib/",
+        "mgv_arbitrage_script/=mangrove-arbitrage/script/",
+        "mgv_arbitrage_src/=mangrove-arbitrage/src/",
+        "mgv_arbitrage_test/=mangrove-arbitrage/test/",
+        "mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "mgv_script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "mgv_src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "mgv_test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "node_modules/@mangrovedao/mangrove-core/src/core/MgvAppendix.sol": "MgvAppendix"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol": {
+        "keccak256": "0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240",
+        "urls": [
+          "bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49",
+          "dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/BitLib.sol": {
+        "keccak256": "0x5a1c56d67fbd2ef6f3b830cf8dae1885da5f40a37afd11cb3a392be573993c3b",
+        "urls": [
+          "bzz-raw://a07b895de906f49d0ce9e89a349d39220e13039709ea2e2db46ff48310bd4b3b",
+          "dweb:/ipfs/QmZyiLKyTZ9EHwqNRUYukQDdg7CL54Dsu65RYabkkGF1KM"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol": {
+        "keccak256": "0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87",
+        "urls": [
+          "bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb",
+          "dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/DensityLib.sol": {
+        "keccak256": "0xc7ee8be7f11a1bf85aa4ea0e222d4a49d77a378b201e347f9a5e4f28f207a023",
+        "urls": [
+          "bzz-raw://ed718e8bf3fb45bc0e7cf739662422cfe01d8d04a2c99b2fb0cfa2372629c6ad",
+          "dweb:/ipfs/QmZ5QpyMSmkVxayfpZYovNcc8NGJKfVZEMKphzeKk9cVNv"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/LocalExtra.sol": {
+        "keccak256": "0xbd3f6702242dd43ba2493eb54feb8f5d2526967512c6f156d29669b54d9c60f2",
+        "urls": [
+          "bzz-raw://e389f3c78c8073bde973aa3f4770139e2adb4cc00cc1303b77eefa201189a6ff",
+          "dweb:/ipfs/QmZ8vXRUUCinKtqJhV7jMXVeDVfRizhJ3NsumZLQxwSc44"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol": {
+        "keccak256": "0x335217debbf3f4cabeaea88d4dd9777dbda2f2b6ed9684e2285a4d16e1e4464c",
+        "urls": [
+          "bzz-raw://eafe358531d7dc6527d36f8fbc4bc67ab12516398c35338ba5da57a03e24b9f3",
+          "dweb:/ipfs/QmcKxrcr11EM7rsKNUEJq8VXFd2R1dWSTqYk3E4k8dQfzy"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol": {
+        "keccak256": "0x95120d52698bc60b005496036a7c9daa7b8d0b18b571e596e86fd696b36e3264",
+        "urls": [
+          "bzz-raw://684d30cc9673403cfddabdf7d979417c5df050abde16712aeaa9ca6b2725d154",
+          "dweb:/ipfs/QmTkeUAMhb72BNqGjAaaPBj1NHPtKE8wH1R8bpXD5RTKtC"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol": {
+        "keccak256": "0xa4aea464925ad277aab2141885eeeb6e5f1b0963ba08d8887a1c2461c334f222",
+        "urls": [
+          "bzz-raw://c7ec62c85c22d7996abe32663232861f90e855c770dbd252bf49fff4ca786e74",
+          "dweb:/ipfs/QmSHBJfw9bg8QjgBquXVLTS337ZuBGHVkDJfwuAZ6X48sw"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/TickTreeLib.sol": {
+        "keccak256": "0x196c46d6e8e2ab51462f25245f7886568df3f1f65953dcec4c02d7950b4a10cd",
+        "urls": [
+          "bzz-raw://4293ed5fb3ce4d350b9bb5b38342c273e6d772ace098927e006efa7fc4498329",
+          "dweb:/ipfs/QmRCtk481PHQjNdt5Dsa8GYWEX46nYwdeD8R3m92w3Xjxv"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console2.sol": {
+        "keccak256": "0x954646445d1014c3cd85c7918f5e7adeeca5ee44b68c00bafa237e597a4e35ea",
+        "urls": [
+          "bzz-raw://516fa3be52da4763147175bfba4be0aa011fadbb0c1afb01f97265bd4cee7973",
+          "dweb:/ipfs/QmdixAyMJefx7qePChgdxcBH5MxhmN7vsqPuPLx3CgrVmF"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvAppendix.sol": {
+        "keccak256": "0x5cd196e4a990a6b1b23e1106cf1c53b797469fafc9f4e7b963787f485ccaf2b6",
+        "urls": [
+          "bzz-raw://d04ca51cf2c8a34d23080c84ff5899c7c1134688805348692ede9a60c51bb43f",
+          "dweb:/ipfs/QmZjD7ir2zwu9tdwW2Ahb6PPY9LUcHujsRwmszbY59wm1p"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvCommon.sol": {
+        "keccak256": "0x58ee8211533e7f23e32d552779600606425d41afdafbd15074188c215993fd69",
+        "urls": [
+          "bzz-raw://0e28a891a08cb8f2292a3ff28490aa12489073dfa3782f411cdbbe3903ff7c71",
+          "dweb:/ipfs/QmXDt46FTevAHKzs3hFue3JH25w4sJCyYdBsQRrctNCMck"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvGovernable.sol": {
+        "keccak256": "0xd6140146043d4eee36ca947dcca7003ae7853d5c635261e390eb7ce1339a53c7",
+        "urls": [
+          "bzz-raw://cf62b8806176f5e49a2a89cd63f3a15dd88e6f4a0a1a7fffe402c72ba7adcbca",
+          "dweb:/ipfs/QmQcg6Kv4hvLfT39ceneM59kg4DTZk1regnSmSZnHViY8N"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol": {
+        "keccak256": "0xe22e3d452040625724ce932cc6f57212c8a32ba021b06f5737e4c23319792c7d",
+        "urls": [
+          "bzz-raw://b3ab9e3726b49b2d526f1cb6634c562cbafdbc1163753d13a3e1c316ca29e726",
+          "dweb:/ipfs/QmS9bYtEVW7i9zAWmC7aPdCDv4BCaBJbhpgrJX6VhH68st"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvView.sol": {
+        "keccak256": "0xea00bc69f29db56974401408305b1f0f11c2ad5635bbaaec62ef3488424df28d",
+        "urls": [
+          "bzz-raw://a358a1e1abe1254d94ced0cbb554ca3217e9f6018e0dac4f4ea3df8b018b8337",
+          "dweb:/ipfs/Qmf7okDXgiqsqq7ngnZ7pMhMgAENtJ5xHJc7Sv8UgF1yK9"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Global.post.sol": {
+        "keccak256": "0xddf04a10f84edc0b165351f649cad761a429b5c1b218e482917b3e38a2019e7f",
+        "urls": [
+          "bzz-raw://7695a94afb1db46a65967bd63fc344b0a9387a4a2c906fdcac0433fdfec32dff",
+          "dweb:/ipfs/QmcH4k6VwPrSEjqEQVsKTRjxWtmhijoknih6s6R98dnNUM"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Local.post.sol": {
+        "keccak256": "0x03d642742c132c37c1fc29cae87f7ce1be93f89877fe698698d5bd2309c878a5",
+        "urls": [
+          "bzz-raw://6957d461c6486caeee91f5fd8be2ff0f53a8c264c03e8c9b7f7291bf7a72d9fc",
+          "dweb:/ipfs/QmTRqHsnjFA1xDmWWuPqn9aPeweRiYHv1wfTz77qxCmd7k"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol": {
+        "keccak256": "0x812a7c313108b56600f747d89d20b2daa4c4aa489ece1b30c561a353d41468f2",
+        "urls": [
+          "bzz-raw://3fb1685a67020adeece9f6fbf567567d257aafafd2e115e6151f2b2a14b429aa",
+          "dweb:/ipfs/QmUvk3FLDDHRXungxeLtPEfaQj3HNt3ib8nGhonzPdMW6o"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol": {
+        "keccak256": "0xbb0c9e3177017a77de68adeed5cbbf040fc9152f914adb34575eb880979fc720",
+        "urls": [
+          "bzz-raw://fac448393a94f7d797f58ece51c1127a1605397b2371c9d1fe61db0037762a91",
+          "dweb:/ipfs/QmUwcWdecdqa81eLGz4SekQYfiTp5pgs2mvFRYmu7T2sew"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Structs.post.sol": {
+        "keccak256": "0x6121b0f392dbeddf77da4f5bc5dee019878ab21538892bd22dbb9c49e9e068bb",
+        "urls": [
+          "bzz-raw://336a0df7a17dd6b1ed36c4e7f19fc9ab6d4ad933f7e0b3658efba0756c7341bc",
+          "dweb:/ipfs/QmZ7NQY6EJHqcE1oEho1yN9ymsTfVpUcMJABKC8Fq5GvhL"
+        ],
+        "license": "Unlicense"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove-core/src/core/MgvAppendix.sol",
+    "id": 54309,
+    "exportedSymbols": {
+      "Bin": [
+        6855
+      ],
+      "BitLib": [
+        4329
+      ],
+      "Density": [
+        4458
+      ],
+      "DensityLib": [
+        4847
+      ],
+      "DirtyField": [
+        8083
+      ],
+      "DirtyFieldLib": [
+        8164
+      ],
+      "DirtyLeaf": [
+        8016
+      ],
+      "DirtyLeafLib": [
+        8081
+      ],
+      "Field": [
+        7296
+      ],
+      "FieldLib": [
+        8014
+      ],
+      "Global": [
+        63500
+      ],
+      "GlobalLib": [
+        64895
+      ],
+      "GlobalUnpacked": [
+        63498
+      ],
+      "HasMgvEvents": [
+        56193
+      ],
+      "IERC20": [
+        88
+      ],
+      "IMaker": [
+        56211
+      ],
+      "IMgvMonitor": [
+        56239
+      ],
+      "INITIAL_MAX_GASREQ_FOR_FAILING_OFFERS_MULTIPLIER": [
+        4442
+      ],
+      "INITIAL_MAX_RECURSION_DEPTH": [
+        4439
+      ],
+      "LEAF_SIZE": [
+        4368
+      ],
+      "LEAF_SIZE_BITS": [
+        4359
+      ],
+      "LEAF_SIZE_MASK": [
+        4377
+      ],
+      "LEVEL_SIZE": [
+        4371
+      ],
+      "LEVEL_SIZE_BITS": [
+        4362
+      ],
+      "LEVEL_SIZE_MASK": [
+        4380
+      ],
+      "LOG_BP_2X235": [
+        4448
+      ],
+      "LOG_BP_SHIFT": [
+        4445
+      ],
+      "Leaf": [
+        6414
+      ],
+      "LeafLib": [
+        6853
+      ],
+      "Local": [
+        64937
+      ],
+      "LocalLib": [
+        66925
+      ],
+      "LocalUnpacked": [
+        64935
+      ],
+      "MANTISSA_BITS": [
+        4430
+      ],
+      "MANTISSA_BITS_MINUS_ONE": [
+        4433
+      ],
+      "MAX_BIN": [
+        4408
+      ],
+      "MAX_FIELD_SIZE": [
+        4356
+      ],
+      "MAX_RATIO_EXP": [
+        4427
+      ],
+      "MAX_RATIO_MANTISSA": [
+        4424
+      ],
+      "MAX_SAFE_VOLUME": [
+        4436
+      ],
+      "MAX_TICK": [
+        4415
+      ],
+      "MIN_BIN": [
+        4405
+      ],
+      "MIN_RATIO_EXP": [
+        4421
+      ],
+      "MIN_RATIO_MANTISSA": [
+        4418
+      ],
+      "MIN_TICK": [
+        4412
+      ],
+      "MgvAppendix": [
+        54308
+      ],
+      "MgvGovernable": [
+        55192
+      ],
+      "MgvLib": [
+        55985
+      ],
+      "MgvView": [
+        60987
+      ],
+      "NOT_TOPBIT": [
+        4347
+      ],
+      "NUM_BINS": [
+        4401
+      ],
+      "NUM_LEAFS": [
+        4398
+      ],
+      "NUM_LEVEL1": [
+        4389
+      ],
+      "NUM_LEVEL2": [
+        4392
+      ],
+      "NUM_LEVEL3": [
+        4395
+      ],
+      "OFFER_BITS": [
+        4353
+      ],
+      "OFFER_MASK": [
+        4386
+      ],
+      "OLKey": [
+        55875
+      ],
+      "OLLib": [
+        55947
+      ],
+      "ONE": [
+        4334
+      ],
+      "ONES": [
+        4341
+      ],
+      "Offer": [
+        66949
+      ],
+      "OfferDetail": [
+        67755
+      ],
+      "OfferDetailLib": [
+        68529
+      ],
+      "OfferDetailUnpacked": [
+        67753
+      ],
+      "OfferLib": [
+        67732
+      ],
+      "OfferUnpacked": [
+        66947
+      ],
+      "ROOT_SIZE": [
+        4374
+      ],
+      "ROOT_SIZE_BITS": [
+        4365
+      ],
+      "ROOT_SIZE_MASK": [
+        4383
+      ],
+      "TICK_BITS": [
+        4350
+      ],
+      "TOPBIT": [
+        4344
+      ],
+      "Tick": [
+        5280
+      ],
+      "TickLib": [
+        6401
+      ],
+      "TickTreeLib": [
+        7294
+      ],
+      "csf": [
+        37519
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "37:718:43",
+    "nodes": [
+      {
+        "id": 54298,
+        "nodeType": "PragmaDirective",
+        "src": "37:24:43",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".10"
+        ]
+      },
+      {
+        "id": 54299,
+        "nodeType": "ImportDirective",
+        "src": "63:34:43",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol",
+        "file": "@mgv/src/core/MgvLib.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 54309,
+        "sourceUnit": 56240,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 54301,
+        "nodeType": "ImportDirective",
+        "src": "98:50:43",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/src/core/MgvView.sol",
+        "file": "@mgv/src/core/MgvView.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 54309,
+        "sourceUnit": 60988,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 54300,
+              "name": "MgvView",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 60987,
+              "src": "106:7:43",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 54303,
+        "nodeType": "ImportDirective",
+        "src": "149:62:43",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove-core/src/core/MgvGovernable.sol",
+        "file": "@mgv/src/core/MgvGovernable.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 54309,
+        "sourceUnit": 55193,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 54302,
+              "name": "MgvGovernable",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 55192,
+              "src": "157:13:43",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 54308,
+        "nodeType": "ContractDefinition",
+        "src": "705:49:43",
+        "nodes": [],
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 54304,
+              "name": "MgvView",
+              "nameLocations": [
+                "729:7:43"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 60987,
+              "src": "729:7:43"
+            },
+            "id": 54305,
+            "nodeType": "InheritanceSpecifier",
+            "src": "729:7:43"
+          },
+          {
+            "baseName": {
+              "id": 54306,
+              "name": "MgvGovernable",
+              "nameLocations": [
+                "738:13:43"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 55192,
+              "src": "738:13:43"
+            },
+            "id": 54307,
+            "nodeType": "InheritanceSpecifier",
+            "src": "738:13:43"
+          }
+        ],
+        "canonicalName": "MgvAppendix",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          54308,
+          55192,
+          60987,
+          54619,
+          56193
+        ],
+        "name": "MgvAppendix",
+        "nameLocation": "714:11:43",
+        "scope": 54309,
+        "usedErrors": [],
+        "usedEvents": [
+          55987,
+          55993,
+          55999,
+          56011,
+          56017,
+          56023,
+          56027,
+          56031,
+          56035,
+          56039,
+          56043,
+          56049,
+          56053,
+          56057,
+          56061,
+          56069,
+          56071,
+          56084,
+          56092,
+          56104,
+          56118,
+          56134,
+          56152,
+          56164,
+          56166,
+          56182,
+          56192
+        ]
+      }
+    ],
+    "license": "BUSL-1.1"
+  },
+  "id": 43
+}

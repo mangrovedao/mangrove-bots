@@ -1,0 +1,2277 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "enum OfferType",
+          "name": "ba",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "offerId",
+          "type": "uint256"
+        }
+      ],
+      "name": "SetIndexMapping",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "SetLength",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum OfferType",
+          "name": "ba",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "offerId",
+          "type": "uint256"
+        }
+      ],
+      "name": "indexOfOfferId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "enum OfferType",
+          "name": "ba",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "offerIdOfIndex",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "offerId",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "indexOfOfferId(uint8,uint256)": "ea0f394d",
+    "offerIdOfIndex(uint8,uint256)": "bfc353f9"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"enum OfferType\",\"name\":\"ba\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"offerId\",\"type\":\"uint256\"}],\"name\":\"SetIndexMapping\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"SetLength\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"enum OfferType\",\"name\":\"ba\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"offerId\",\"type\":\"uint256\"}],\"name\":\"indexOfOfferId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"enum OfferType\",\"name\":\"ba\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"offerIdOfIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"offerId\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"utilizes the `IHasOfferListOfOfferType` contract.\",\"events\":{\"SetIndexMapping(uint8,uint256,uint256)\":{\"params\":{\"ba\":\"the offer type\",\"index\":\"the index\",\"offerId\":\"the Mangrove offer id.\"}},\"SetLength(uint256)\":{\"params\":{\"value\":\"the length.\"}}},\"kind\":\"dev\",\"methods\":{\"indexOfOfferId(uint8,uint256)\":{\"params\":{\"ba\":\"the offer type\",\"offerId\":\"the Mangrove offer id.\"},\"returns\":{\"index\":\"the index.\"}},\"offerIdOfIndex(uint8,uint256)\":{\"params\":{\"ba\":\"the offer type\",\"index\":\"the index\"},\"returns\":{\"offerId\":\"the Mangrove offer id.\"}}},\"title\":\"Adds a [0..length] index <--> offerId map to a strat.\",\"version\":1},\"userdoc\":{\"events\":{\"SetIndexMapping(uint8,uint256,uint256)\":{\"notice\":\"a new offer of type `ba` with `offerId` was created at price `index`By emitting this data, an indexer will be able to keep track of what offer has what index.\"},\"SetLength(uint256)\":{\"notice\":\"the length of the index has been set.By emitting this data, an indexer will be able to keep track of what length is used.\"}},\"kind\":\"user\",\"methods\":{\"indexOfOfferId(uint8,uint256)\":{\"notice\":\"Maps an offer type and Mangrove offer id to index.\"},\"offerIdOfIndex(uint8,uint256)\":{\"notice\":\"maps index of offers to offer id on Mangrove.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/HasIndexedBidsAndAsks.sol\":\"HasIndexedBidsAndAsks\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/\",\":@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/\",\":@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/\",\":ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/\",\":mgv_arbitrage_lib/=mangrove-arbitrage/lib/\",\":mgv_arbitrage_script/=mangrove-arbitrage/script/\",\":mgv_arbitrage_src/=mangrove-arbitrage/src/\",\":mgv_arbitrage_test/=mangrove-arbitrage/test/\",\":mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/\",\":mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/\",\":mgv_script/=node_modules/@mangrovedao/mangrove-core/script/\",\":mgv_src/=node_modules/@mangrovedao/mangrove-core/src/\",\":mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/\",\":mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/\",\":mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/\",\":mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/\",\":mgv_test/=node_modules/@mangrovedao/mangrove-core/test/\",\":uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/\"]},\"sources\":{\"node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol\":{\"keccak256\":\"0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49\",\"dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/BitLib.sol\":{\"keccak256\":\"0x5a1c56d67fbd2ef6f3b830cf8dae1885da5f40a37afd11cb3a392be573993c3b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a07b895de906f49d0ce9e89a349d39220e13039709ea2e2db46ff48310bd4b3b\",\"dweb:/ipfs/QmZyiLKyTZ9EHwqNRUYukQDdg7CL54Dsu65RYabkkGF1KM\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol\":{\"keccak256\":\"0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb\",\"dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/DensityLib.sol\":{\"keccak256\":\"0xc7ee8be7f11a1bf85aa4ea0e222d4a49d77a378b201e347f9a5e4f28f207a023\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ed718e8bf3fb45bc0e7cf739662422cfe01d8d04a2c99b2fb0cfa2372629c6ad\",\"dweb:/ipfs/QmZ5QpyMSmkVxayfpZYovNcc8NGJKfVZEMKphzeKk9cVNv\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/LocalExtra.sol\":{\"keccak256\":\"0xbd3f6702242dd43ba2493eb54feb8f5d2526967512c6f156d29669b54d9c60f2\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://e389f3c78c8073bde973aa3f4770139e2adb4cc00cc1303b77eefa201189a6ff\",\"dweb:/ipfs/QmZ8vXRUUCinKtqJhV7jMXVeDVfRizhJ3NsumZLQxwSc44\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol\":{\"keccak256\":\"0x335217debbf3f4cabeaea88d4dd9777dbda2f2b6ed9684e2285a4d16e1e4464c\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://eafe358531d7dc6527d36f8fbc4bc67ab12516398c35338ba5da57a03e24b9f3\",\"dweb:/ipfs/QmcKxrcr11EM7rsKNUEJq8VXFd2R1dWSTqYk3E4k8dQfzy\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol\":{\"keccak256\":\"0x95120d52698bc60b005496036a7c9daa7b8d0b18b571e596e86fd696b36e3264\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://684d30cc9673403cfddabdf7d979417c5df050abde16712aeaa9ca6b2725d154\",\"dweb:/ipfs/QmTkeUAMhb72BNqGjAaaPBj1NHPtKE8wH1R8bpXD5RTKtC\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol\":{\"keccak256\":\"0xa4aea464925ad277aab2141885eeeb6e5f1b0963ba08d8887a1c2461c334f222\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://c7ec62c85c22d7996abe32663232861f90e855c770dbd252bf49fff4ca786e74\",\"dweb:/ipfs/QmSHBJfw9bg8QjgBquXVLTS337ZuBGHVkDJfwuAZ6X48sw\"]},\"node_modules/@mangrovedao/mangrove-core/lib/core/TickTreeLib.sol\":{\"keccak256\":\"0x196c46d6e8e2ab51462f25245f7886568df3f1f65953dcec4c02d7950b4a10cd\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://4293ed5fb3ce4d350b9bb5b38342c273e6d772ace098927e006efa7fc4498329\",\"dweb:/ipfs/QmRCtk481PHQjNdt5Dsa8GYWEX46nYwdeD8R3m92w3Xjxv\"]},\"node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console2.sol\":{\"keccak256\":\"0x954646445d1014c3cd85c7918f5e7adeeca5ee44b68c00bafa237e597a4e35ea\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://516fa3be52da4763147175bfba4be0aa011fadbb0c1afb01f97265bd4cee7973\",\"dweb:/ipfs/QmdixAyMJefx7qePChgdxcBH5MxhmN7vsqPuPLx3CgrVmF\"]},\"node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol\":{\"keccak256\":\"0xe22e3d452040625724ce932cc6f57212c8a32ba021b06f5737e4c23319792c7d\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://b3ab9e3726b49b2d526f1cb6634c562cbafdbc1163753d13a3e1c316ca29e726\",\"dweb:/ipfs/QmS9bYtEVW7i9zAWmC7aPdCDv4BCaBJbhpgrJX6VhH68st\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Global.post.sol\":{\"keccak256\":\"0xddf04a10f84edc0b165351f649cad761a429b5c1b218e482917b3e38a2019e7f\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://7695a94afb1db46a65967bd63fc344b0a9387a4a2c906fdcac0433fdfec32dff\",\"dweb:/ipfs/QmcH4k6VwPrSEjqEQVsKTRjxWtmhijoknih6s6R98dnNUM\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Local.post.sol\":{\"keccak256\":\"0x03d642742c132c37c1fc29cae87f7ce1be93f89877fe698698d5bd2309c878a5\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://6957d461c6486caeee91f5fd8be2ff0f53a8c264c03e8c9b7f7291bf7a72d9fc\",\"dweb:/ipfs/QmTRqHsnjFA1xDmWWuPqn9aPeweRiYHv1wfTz77qxCmd7k\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol\":{\"keccak256\":\"0x812a7c313108b56600f747d89d20b2daa4c4aa489ece1b30c561a353d41468f2\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://3fb1685a67020adeece9f6fbf567567d257aafafd2e115e6151f2b2a14b429aa\",\"dweb:/ipfs/QmUvk3FLDDHRXungxeLtPEfaQj3HNt3ib8nGhonzPdMW6o\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol\":{\"keccak256\":\"0xbb0c9e3177017a77de68adeed5cbbf040fc9152f914adb34575eb880979fc720\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://fac448393a94f7d797f58ece51c1127a1605397b2371c9d1fe61db0037762a91\",\"dweb:/ipfs/QmUwcWdecdqa81eLGz4SekQYfiTp5pgs2mvFRYmu7T2sew\"]},\"node_modules/@mangrovedao/mangrove-core/src/preprocessed/Structs.post.sol\":{\"keccak256\":\"0x6121b0f392dbeddf77da4f5bc5dee019878ab21538892bd22dbb9c49e9e068bb\",\"license\":\"Unlicense\",\"urls\":[\"bzz-raw://336a0df7a17dd6b1ed36c4e7f19fc9ab6d4ad933f7e0b3658efba0756c7341bc\",\"dweb:/ipfs/QmZ7NQY6EJHqcE1oEho1yN9ymsTfVpUcMJABKC8Fq5GvhL\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/HasIndexedBidsAndAsks.sol\":{\"keccak256\":\"0xfb0f5e7bb82b3f7c32b05f404deeb56dcad54d61952b8b0126af006456228c09\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://a83d4d9d0ffa6334e8ebaf2e8f3fadc4666348fe5e0da2b825630456c3316510\",\"dweb:/ipfs/QmTPYLRvhf6PTBDbFfBrjSxekvz9fPcfzaK8sKgZCazKb3\"]},\"node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/TradesBaseQuotePair.sol\":{\"keccak256\":\"0x2891ec6af9a40dffeff023e5baed8f3be28b88a4a8c1bb8c6296ead493398eaa\",\"license\":\"BSD-2-Clause\",\"urls\":[\"bzz-raw://6e2b1f6a8411d23b7414866915dfe37f29aad66a9ffabae066d0d03ae0213bcd\",\"dweb:/ipfs/QmVYfbQfHqhzZnge33o92LTRPHpkGTxkv26GiMsJb3wd5N\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.20+commit.a1b79de6"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "enum OfferType",
+              "name": "ba",
+              "type": "uint8",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "index",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "offerId",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "SetIndexMapping",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "SetLength",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "enum OfferType",
+              "name": "ba",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256",
+              "name": "offerId",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "indexOfOfferId",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "index",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "enum OfferType",
+              "name": "ba",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256",
+              "name": "index",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "offerIdOfIndex",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "offerId",
+              "type": "uint256"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "indexOfOfferId(uint8,uint256)": {
+            "params": {
+              "ba": "the offer type",
+              "offerId": "the Mangrove offer id."
+            },
+            "returns": {
+              "index": "the index."
+            }
+          },
+          "offerIdOfIndex(uint8,uint256)": {
+            "params": {
+              "ba": "the offer type",
+              "index": "the index"
+            },
+            "returns": {
+              "offerId": "the Mangrove offer id."
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "indexOfOfferId(uint8,uint256)": {
+            "notice": "Maps an offer type and Mangrove offer id to index."
+          },
+          "offerIdOfIndex(uint8,uint256)": {
+            "notice": "maps index of offers to offer id on Mangrove."
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@mgv-strats/lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "@mgv-strats/script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "@mgv-strats/src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "@mgv-strats/test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "@mgv/forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "@mgv/lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "@mgv/script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "@mgv/src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "@mgv/test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "ds-test/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/",
+        "mgv_arbitrage_lib/=mangrove-arbitrage/lib/",
+        "mgv_arbitrage_script/=mangrove-arbitrage/script/",
+        "mgv_arbitrage_src/=mangrove-arbitrage/src/",
+        "mgv_arbitrage_test/=mangrove-arbitrage/test/",
+        "mgv_forge-std/=node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/",
+        "mgv_lib/=node_modules/@mangrovedao/mangrove-core/lib/",
+        "mgv_script/=node_modules/@mangrovedao/mangrove-core/script/",
+        "mgv_src/=node_modules/@mangrovedao/mangrove-core/src/",
+        "mgv_strats_lib/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/lib/",
+        "mgv_strats_script/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/script/",
+        "mgv_strats_src/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/",
+        "mgv_strats_test/=node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/test/",
+        "mgv_test/=node_modules/@mangrovedao/mangrove-core/test/",
+        "uniswap_v3_lib/=mangrove-arbitrage/lib/v3-core/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/HasIndexedBidsAndAsks.sol": "HasIndexedBidsAndAsks"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "node_modules/@mangrovedao/mangrove-core/lib/IERC20.sol": {
+        "keccak256": "0xe39ef15ad326909ca8b85ee0a6d571798c4155b1d83591ab127badb082628240",
+        "urls": [
+          "bzz-raw://1cb5cd93f7152410db9b23c18e515e984c65f047d586b901c1031e38507ffe49",
+          "dweb:/ipfs/QmYRNEH8XHRq1zSbpXa8NpYKBVJZWVTj211Viz7FbMRrU6"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/BitLib.sol": {
+        "keccak256": "0x5a1c56d67fbd2ef6f3b830cf8dae1885da5f40a37afd11cb3a392be573993c3b",
+        "urls": [
+          "bzz-raw://a07b895de906f49d0ce9e89a349d39220e13039709ea2e2db46ff48310bd4b3b",
+          "dweb:/ipfs/QmZyiLKyTZ9EHwqNRUYukQDdg7CL54Dsu65RYabkkGF1KM"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/Constants.sol": {
+        "keccak256": "0xc379ed5c15639ff1f4461872ff53bacaf01372264937032854c4c549056b0b87",
+        "urls": [
+          "bzz-raw://6b3ef408068d112fb1a70a880d8be678414415c76d50c675349c7c09186b3deb",
+          "dweb:/ipfs/QmUhfhByzQMLFSL6ZvkggetVtRaYpLRpzs3KZJDmNhT22f"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/DensityLib.sol": {
+        "keccak256": "0xc7ee8be7f11a1bf85aa4ea0e222d4a49d77a378b201e347f9a5e4f28f207a023",
+        "urls": [
+          "bzz-raw://ed718e8bf3fb45bc0e7cf739662422cfe01d8d04a2c99b2fb0cfa2372629c6ad",
+          "dweb:/ipfs/QmZ5QpyMSmkVxayfpZYovNcc8NGJKfVZEMKphzeKk9cVNv"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/LocalExtra.sol": {
+        "keccak256": "0xbd3f6702242dd43ba2493eb54feb8f5d2526967512c6f156d29669b54d9c60f2",
+        "urls": [
+          "bzz-raw://e389f3c78c8073bde973aa3f4770139e2adb4cc00cc1303b77eefa201189a6ff",
+          "dweb:/ipfs/QmZ8vXRUUCinKtqJhV7jMXVeDVfRizhJ3NsumZLQxwSc44"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/OfferDetailExtra.sol": {
+        "keccak256": "0x335217debbf3f4cabeaea88d4dd9777dbda2f2b6ed9684e2285a4d16e1e4464c",
+        "urls": [
+          "bzz-raw://eafe358531d7dc6527d36f8fbc4bc67ab12516398c35338ba5da57a03e24b9f3",
+          "dweb:/ipfs/QmcKxrcr11EM7rsKNUEJq8VXFd2R1dWSTqYk3E4k8dQfzy"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/OfferExtra.sol": {
+        "keccak256": "0x95120d52698bc60b005496036a7c9daa7b8d0b18b571e596e86fd696b36e3264",
+        "urls": [
+          "bzz-raw://684d30cc9673403cfddabdf7d979417c5df050abde16712aeaa9ca6b2725d154",
+          "dweb:/ipfs/QmTkeUAMhb72BNqGjAaaPBj1NHPtKE8wH1R8bpXD5RTKtC"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/TickLib.sol": {
+        "keccak256": "0xa4aea464925ad277aab2141885eeeb6e5f1b0963ba08d8887a1c2461c334f222",
+        "urls": [
+          "bzz-raw://c7ec62c85c22d7996abe32663232861f90e855c770dbd252bf49fff4ca786e74",
+          "dweb:/ipfs/QmSHBJfw9bg8QjgBquXVLTS337ZuBGHVkDJfwuAZ6X48sw"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/core/TickTreeLib.sol": {
+        "keccak256": "0x196c46d6e8e2ab51462f25245f7886568df3f1f65953dcec4c02d7950b4a10cd",
+        "urls": [
+          "bzz-raw://4293ed5fb3ce4d350b9bb5b38342c273e6d772ace098927e006efa7fc4498329",
+          "dweb:/ipfs/QmRCtk481PHQjNdt5Dsa8GYWEX46nYwdeD8R3m92w3Xjxv"
+        ],
+        "license": "BUSL-1.1"
+      },
+      "node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/console2.sol": {
+        "keccak256": "0x954646445d1014c3cd85c7918f5e7adeeca5ee44b68c00bafa237e597a4e35ea",
+        "urls": [
+          "bzz-raw://516fa3be52da4763147175bfba4be0aa011fadbb0c1afb01f97265bd4cee7973",
+          "dweb:/ipfs/QmdixAyMJefx7qePChgdxcBH5MxhmN7vsqPuPLx3CgrVmF"
+        ],
+        "license": "MIT"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/core/MgvLib.sol": {
+        "keccak256": "0xe22e3d452040625724ce932cc6f57212c8a32ba021b06f5737e4c23319792c7d",
+        "urls": [
+          "bzz-raw://b3ab9e3726b49b2d526f1cb6634c562cbafdbc1163753d13a3e1c316ca29e726",
+          "dweb:/ipfs/QmS9bYtEVW7i9zAWmC7aPdCDv4BCaBJbhpgrJX6VhH68st"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Global.post.sol": {
+        "keccak256": "0xddf04a10f84edc0b165351f649cad761a429b5c1b218e482917b3e38a2019e7f",
+        "urls": [
+          "bzz-raw://7695a94afb1db46a65967bd63fc344b0a9387a4a2c906fdcac0433fdfec32dff",
+          "dweb:/ipfs/QmcH4k6VwPrSEjqEQVsKTRjxWtmhijoknih6s6R98dnNUM"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Local.post.sol": {
+        "keccak256": "0x03d642742c132c37c1fc29cae87f7ce1be93f89877fe698698d5bd2309c878a5",
+        "urls": [
+          "bzz-raw://6957d461c6486caeee91f5fd8be2ff0f53a8c264c03e8c9b7f7291bf7a72d9fc",
+          "dweb:/ipfs/QmTRqHsnjFA1xDmWWuPqn9aPeweRiYHv1wfTz77qxCmd7k"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Offer.post.sol": {
+        "keccak256": "0x812a7c313108b56600f747d89d20b2daa4c4aa489ece1b30c561a353d41468f2",
+        "urls": [
+          "bzz-raw://3fb1685a67020adeece9f6fbf567567d257aafafd2e115e6151f2b2a14b429aa",
+          "dweb:/ipfs/QmUvk3FLDDHRXungxeLtPEfaQj3HNt3ib8nGhonzPdMW6o"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/OfferDetail.post.sol": {
+        "keccak256": "0xbb0c9e3177017a77de68adeed5cbbf040fc9152f914adb34575eb880979fc720",
+        "urls": [
+          "bzz-raw://fac448393a94f7d797f58ece51c1127a1605397b2371c9d1fe61db0037762a91",
+          "dweb:/ipfs/QmUwcWdecdqa81eLGz4SekQYfiTp5pgs2mvFRYmu7T2sew"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove-core/src/preprocessed/Structs.post.sol": {
+        "keccak256": "0x6121b0f392dbeddf77da4f5bc5dee019878ab21538892bd22dbb9c49e9e068bb",
+        "urls": [
+          "bzz-raw://336a0df7a17dd6b1ed36c4e7f19fc9ab6d4ad933f7e0b3658efba0756c7341bc",
+          "dweb:/ipfs/QmZ7NQY6EJHqcE1oEho1yN9ymsTfVpUcMJABKC8Fq5GvhL"
+        ],
+        "license": "Unlicense"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/HasIndexedBidsAndAsks.sol": {
+        "keccak256": "0xfb0f5e7bb82b3f7c32b05f404deeb56dcad54d61952b8b0126af006456228c09",
+        "urls": [
+          "bzz-raw://a83d4d9d0ffa6334e8ebaf2e8f3fadc4666348fe5e0da2b825630456c3316510",
+          "dweb:/ipfs/QmTPYLRvhf6PTBDbFfBrjSxekvz9fPcfzaK8sKgZCazKb3"
+        ],
+        "license": "BSD-2-Clause"
+      },
+      "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/TradesBaseQuotePair.sol": {
+        "keccak256": "0x2891ec6af9a40dffeff023e5baed8f3be28b88a4a8c1bb8c6296ead493398eaa",
+        "urls": [
+          "bzz-raw://6e2b1f6a8411d23b7414866915dfe37f29aad66a9ffabae066d0d03ae0213bcd",
+          "dweb:/ipfs/QmVYfbQfHqhzZnge33o92LTRPHpkGTxkv26GiMsJb3wd5N"
+        ],
+        "license": "BSD-2-Clause"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/HasIndexedBidsAndAsks.sol",
+    "id": 87443,
+    "exportedSymbols": {
+      "HasIndexedBidsAndAsks": [
+        87442
+      ],
+      "IHasOfferListOfOfferType": [
+        87942
+      ],
+      "OfferType": [
+        87910
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "41:2971:115",
+    "nodes": [
+      {
+        "id": 87285,
+        "nodeType": "PragmaDirective",
+        "src": "41:24:115",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".10"
+        ]
+      },
+      {
+        "id": 87288,
+        "nodeType": "ImportDirective",
+        "src": "67:78:115",
+        "nodes": [],
+        "absolutePath": "node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/src/strategies/offer_maker/market_making/kandel/abstract/TradesBaseQuotePair.sol",
+        "file": "./TradesBaseQuotePair.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 87443,
+        "sourceUnit": 88102,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 87286,
+              "name": "IHasOfferListOfOfferType",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 87942,
+              "src": "75:24:115",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          },
+          {
+            "foreign": {
+              "id": 87287,
+              "name": "OfferType",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 87910,
+              "src": "101:9:115",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 87442,
+        "nodeType": "ContractDefinition",
+        "src": "269:2742:115",
+        "nodes": [
+          {
+            "id": 87296,
+            "nodeType": "EventDefinition",
+            "src": "520:28:115",
+            "nodes": [],
+            "anonymous": false,
+            "documentation": {
+              "id": 87292,
+              "nodeType": "StructuredDocumentation",
+              "src": "341:176:115",
+              "text": "@notice the length of the index has been set.\n@param value the length.\n@notice By emitting this data, an indexer will be able to keep track of what length is used."
+            },
+            "eventSelector": "26003f10937c9ed98d59e0d595a28bc7d35537a044aeaad037fedaab24d17998",
+            "name": "SetLength",
+            "nameLocation": "526:9:115",
+            "parameters": {
+              "id": 87295,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 87294,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "value",
+                  "nameLocation": "541:5:115",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87296,
+                  "src": "536:10:115",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 87293,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "536:4:115",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "535:12:115"
+            }
+          },
+          {
+            "id": 87306,
+            "nodeType": "EventDefinition",
+            "src": "839:70:115",
+            "nodes": [],
+            "anonymous": false,
+            "documentation": {
+              "id": 87297,
+              "nodeType": "StructuredDocumentation",
+              "src": "552:284:115",
+              "text": "@notice a new offer of type `ba` with `offerId` was created at price `index`\n@param ba the offer type\n@param index the index\n@param offerId the Mangrove offer id.\n@notice By emitting this data, an indexer will be able to keep track of what offer has what index."
+            },
+            "eventSelector": "4414bf83296b9500de34e173e9e5b7ca010ff6de3f093002103e680a3a105127",
+            "name": "SetIndexMapping",
+            "nameLocation": "845:15:115",
+            "parameters": {
+              "id": 87305,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 87300,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "ba",
+                  "nameLocation": "879:2:115",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87306,
+                  "src": "861:20:115",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_OfferType_$87910",
+                    "typeString": "enum OfferType"
+                  },
+                  "typeName": {
+                    "id": 87299,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 87298,
+                      "name": "OfferType",
+                      "nameLocations": [
+                        "861:9:115"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 87910,
+                      "src": "861:9:115"
+                    },
+                    "referencedDeclaration": 87910,
+                    "src": "861:9:115",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_OfferType_$87910",
+                      "typeString": "enum OfferType"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 87302,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "index",
+                  "nameLocation": "888:5:115",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87306,
+                  "src": "883:10:115",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 87301,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "883:4:115",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 87304,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "offerId",
+                  "nameLocation": "900:7:115",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87306,
+                  "src": "895:12:115",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 87303,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "895:4:115",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "860:48:115"
+            }
+          },
+          {
+            "id": 87309,
+            "nodeType": "VariableDeclaration",
+            "src": "949:20:115",
+            "nodes": [],
+            "constant": false,
+            "documentation": {
+              "id": 87307,
+              "nodeType": "StructuredDocumentation",
+              "src": "913:33:115",
+              "text": "@notice the length of the map."
+            },
+            "mutability": "mutable",
+            "name": "length",
+            "nameLocation": "963:6:115",
+            "scope": 87442,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 87308,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "949:4:115",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "id": 87314,
+            "nodeType": "VariableDeclaration",
+            "src": "1035:47:115",
+            "nodes": [],
+            "constant": false,
+            "documentation": {
+              "id": 87310,
+              "nodeType": "StructuredDocumentation",
+              "src": "974:58:115",
+              "text": "@notice Mangrove's offer id of an ask at a given index."
+            },
+            "mutability": "mutable",
+            "name": "askOfferIdOfIndex",
+            "nameLocation": "1065:17:115",
+            "scope": 87442,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+              "typeString": "mapping(uint256 => uint256)"
+            },
+            "typeName": {
+              "id": 87313,
+              "keyName": "",
+              "keyNameLocation": "-1:-1:-1",
+              "keyType": {
+                "id": 87311,
+                "name": "uint",
+                "nodeType": "ElementaryTypeName",
+                "src": "1043:4:115",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "1035:21:115",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+                "typeString": "mapping(uint256 => uint256)"
+              },
+              "valueName": "",
+              "valueNameLocation": "-1:-1:-1",
+              "valueType": {
+                "id": 87312,
+                "name": "uint",
+                "nodeType": "ElementaryTypeName",
+                "src": "1051:4:115",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              }
+            },
+            "visibility": "private"
+          },
+          {
+            "id": 87319,
+            "nodeType": "VariableDeclaration",
+            "src": "1146:47:115",
+            "nodes": [],
+            "constant": false,
+            "documentation": {
+              "id": 87315,
+              "nodeType": "StructuredDocumentation",
+              "src": "1086:57:115",
+              "text": "@notice Mangrove's offer id of a bid at a given index."
+            },
+            "mutability": "mutable",
+            "name": "bidOfferIdOfIndex",
+            "nameLocation": "1176:17:115",
+            "scope": 87442,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+              "typeString": "mapping(uint256 => uint256)"
+            },
+            "typeName": {
+              "id": 87318,
+              "keyName": "",
+              "keyNameLocation": "-1:-1:-1",
+              "keyType": {
+                "id": 87316,
+                "name": "uint",
+                "nodeType": "ElementaryTypeName",
+                "src": "1154:4:115",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "1146:21:115",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+                "typeString": "mapping(uint256 => uint256)"
+              },
+              "valueName": "",
+              "valueNameLocation": "-1:-1:-1",
+              "valueType": {
+                "id": 87317,
+                "name": "uint",
+                "nodeType": "ElementaryTypeName",
+                "src": "1162:4:115",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              }
+            },
+            "visibility": "private"
+          },
+          {
+            "id": 87324,
+            "nodeType": "VariableDeclaration",
+            "src": "1360:47:115",
+            "nodes": [],
+            "constant": false,
+            "documentation": {
+              "id": 87320,
+              "nodeType": "StructuredDocumentation",
+              "src": "1198:159:115",
+              "text": "@notice An inverse mapping of askOfferIdOfIndex. E.g., indexOfAskOfferId[42] is the index in askOfferIdOfIndex at which ask of id #42 on Mangrove is stored."
+            },
+            "mutability": "mutable",
+            "name": "indexOfAskOfferId",
+            "nameLocation": "1390:17:115",
+            "scope": 87442,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+              "typeString": "mapping(uint256 => uint256)"
+            },
+            "typeName": {
+              "id": 87323,
+              "keyName": "",
+              "keyNameLocation": "-1:-1:-1",
+              "keyType": {
+                "id": 87321,
+                "name": "uint",
+                "nodeType": "ElementaryTypeName",
+                "src": "1368:4:115",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "1360:21:115",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+                "typeString": "mapping(uint256 => uint256)"
+              },
+              "valueName": "",
+              "valueNameLocation": "-1:-1:-1",
+              "valueType": {
+                "id": 87322,
+                "name": "uint",
+                "nodeType": "ElementaryTypeName",
+                "src": "1376:4:115",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              }
+            },
+            "visibility": "private"
+          },
+          {
+            "id": 87329,
+            "nodeType": "VariableDeclaration",
+            "src": "1573:47:115",
+            "nodes": [],
+            "constant": false,
+            "documentation": {
+              "id": 87325,
+              "nodeType": "StructuredDocumentation",
+              "src": "1411:159:115",
+              "text": "@notice An inverse mapping of bidOfferIdOfIndex. E.g., indexOfBidOfferId[42] is the index in bidOfferIdOfIndex at which bid of id #42 on Mangrove is stored."
+            },
+            "mutability": "mutable",
+            "name": "indexOfBidOfferId",
+            "nameLocation": "1603:17:115",
+            "scope": 87442,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+              "typeString": "mapping(uint256 => uint256)"
+            },
+            "typeName": {
+              "id": 87328,
+              "keyName": "",
+              "keyNameLocation": "-1:-1:-1",
+              "keyType": {
+                "id": 87326,
+                "name": "uint",
+                "nodeType": "ElementaryTypeName",
+                "src": "1581:4:115",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "1573:21:115",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+                "typeString": "mapping(uint256 => uint256)"
+              },
+              "valueName": "",
+              "valueNameLocation": "-1:-1:-1",
+              "valueType": {
+                "id": 87327,
+                "name": "uint",
+                "nodeType": "ElementaryTypeName",
+                "src": "1589:4:115",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              }
+            },
+            "visibility": "private"
+          },
+          {
+            "id": 87353,
+            "nodeType": "FunctionDefinition",
+            "src": "1786:176:115",
+            "nodes": [],
+            "body": {
+              "id": 87352,
+              "nodeType": "Block",
+              "src": "1871:91:115",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "condition": {
+                      "commonType": {
+                        "typeIdentifier": "t_enum$_OfferType_$87910",
+                        "typeString": "enum OfferType"
+                      },
+                      "id": 87343,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "id": 87340,
+                        "name": "ba",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87333,
+                        "src": "1884:2:115",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_enum$_OfferType_$87910",
+                          "typeString": "enum OfferType"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "==",
+                      "rightExpression": {
+                        "expression": {
+                          "id": 87341,
+                          "name": "OfferType",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 87910,
+                          "src": "1890:9:115",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_enum$_OfferType_$87910_$",
+                            "typeString": "type(enum OfferType)"
+                          }
+                        },
+                        "id": 87342,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "memberLocation": "1900:3:115",
+                        "memberName": "Ask",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 87909,
+                        "src": "1890:13:115",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_enum$_OfferType_$87910",
+                          "typeString": "enum OfferType"
+                        }
+                      },
+                      "src": "1884:19:115",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "falseExpression": {
+                      "baseExpression": {
+                        "id": 87347,
+                        "name": "bidOfferIdOfIndex",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87319,
+                        "src": "1933:17:115",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+                          "typeString": "mapping(uint256 => uint256)"
+                        }
+                      },
+                      "id": 87349,
+                      "indexExpression": {
+                        "id": 87348,
+                        "name": "index",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87335,
+                        "src": "1951:5:115",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "1933:24:115",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 87350,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "Conditional",
+                    "src": "1884:73:115",
+                    "trueExpression": {
+                      "baseExpression": {
+                        "id": 87344,
+                        "name": "askOfferIdOfIndex",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87314,
+                        "src": "1906:17:115",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+                          "typeString": "mapping(uint256 => uint256)"
+                        }
+                      },
+                      "id": 87346,
+                      "indexExpression": {
+                        "id": 87345,
+                        "name": "index",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87335,
+                        "src": "1924:5:115",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "1906:24:115",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 87339,
+                  "id": 87351,
+                  "nodeType": "Return",
+                  "src": "1877:80:115"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 87330,
+              "nodeType": "StructuredDocumentation",
+              "src": "1625:158:115",
+              "text": "@notice maps index of offers to offer id on Mangrove.\n@param ba the offer type\n@param index the index\n@return offerId the Mangrove offer id."
+            },
+            "functionSelector": "bfc353f9",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "offerIdOfIndex",
+            "nameLocation": "1795:14:115",
+            "parameters": {
+              "id": 87336,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 87333,
+                  "mutability": "mutable",
+                  "name": "ba",
+                  "nameLocation": "1820:2:115",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87353,
+                  "src": "1810:12:115",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_OfferType_$87910",
+                    "typeString": "enum OfferType"
+                  },
+                  "typeName": {
+                    "id": 87332,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 87331,
+                      "name": "OfferType",
+                      "nameLocations": [
+                        "1810:9:115"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 87910,
+                      "src": "1810:9:115"
+                    },
+                    "referencedDeclaration": 87910,
+                    "src": "1810:9:115",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_OfferType_$87910",
+                      "typeString": "enum OfferType"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 87335,
+                  "mutability": "mutable",
+                  "name": "index",
+                  "nameLocation": "1829:5:115",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87353,
+                  "src": "1824:10:115",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 87334,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1824:4:115",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1809:26:115"
+            },
+            "returnParameters": {
+              "id": 87339,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 87338,
+                  "mutability": "mutable",
+                  "name": "offerId",
+                  "nameLocation": "1862:7:115",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87353,
+                  "src": "1857:12:115",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 87337,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1857:4:115",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1856:14:115"
+            },
+            "scope": 87442,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "id": 87377,
+            "nodeType": "FunctionDefinition",
+            "src": "2133:180:115",
+            "nodes": [],
+            "body": {
+              "id": 87376,
+              "nodeType": "Block",
+              "src": "2218:95:115",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "condition": {
+                      "commonType": {
+                        "typeIdentifier": "t_enum$_OfferType_$87910",
+                        "typeString": "enum OfferType"
+                      },
+                      "id": 87367,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "id": 87364,
+                        "name": "ba",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87357,
+                        "src": "2231:2:115",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_enum$_OfferType_$87910",
+                          "typeString": "enum OfferType"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "==",
+                      "rightExpression": {
+                        "expression": {
+                          "id": 87365,
+                          "name": "OfferType",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 87910,
+                          "src": "2237:9:115",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_enum$_OfferType_$87910_$",
+                            "typeString": "type(enum OfferType)"
+                          }
+                        },
+                        "id": 87366,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "memberLocation": "2247:3:115",
+                        "memberName": "Ask",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 87909,
+                        "src": "2237:13:115",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_enum$_OfferType_$87910",
+                          "typeString": "enum OfferType"
+                        }
+                      },
+                      "src": "2231:19:115",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "falseExpression": {
+                      "baseExpression": {
+                        "id": 87371,
+                        "name": "indexOfBidOfferId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87329,
+                        "src": "2282:17:115",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+                          "typeString": "mapping(uint256 => uint256)"
+                        }
+                      },
+                      "id": 87373,
+                      "indexExpression": {
+                        "id": 87372,
+                        "name": "offerId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87359,
+                        "src": "2300:7:115",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "2282:26:115",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 87374,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "Conditional",
+                    "src": "2231:77:115",
+                    "trueExpression": {
+                      "baseExpression": {
+                        "id": 87368,
+                        "name": "indexOfAskOfferId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87324,
+                        "src": "2253:17:115",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+                          "typeString": "mapping(uint256 => uint256)"
+                        }
+                      },
+                      "id": 87370,
+                      "indexExpression": {
+                        "id": 87369,
+                        "name": "offerId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87359,
+                        "src": "2271:7:115",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "2253:26:115",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 87363,
+                  "id": 87375,
+                  "nodeType": "Return",
+                  "src": "2224:84:115"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 87354,
+              "nodeType": "StructuredDocumentation",
+              "src": "1966:164:115",
+              "text": "@notice Maps an offer type and Mangrove offer id to index.\n@param ba the offer type\n@param offerId the Mangrove offer id.\n@return index the index."
+            },
+            "functionSelector": "ea0f394d",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "indexOfOfferId",
+            "nameLocation": "2142:14:115",
+            "parameters": {
+              "id": 87360,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 87357,
+                  "mutability": "mutable",
+                  "name": "ba",
+                  "nameLocation": "2167:2:115",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87377,
+                  "src": "2157:12:115",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_OfferType_$87910",
+                    "typeString": "enum OfferType"
+                  },
+                  "typeName": {
+                    "id": 87356,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 87355,
+                      "name": "OfferType",
+                      "nameLocations": [
+                        "2157:9:115"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 87910,
+                      "src": "2157:9:115"
+                    },
+                    "referencedDeclaration": 87910,
+                    "src": "2157:9:115",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_OfferType_$87910",
+                      "typeString": "enum OfferType"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 87359,
+                  "mutability": "mutable",
+                  "name": "offerId",
+                  "nameLocation": "2176:7:115",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87377,
+                  "src": "2171:12:115",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 87358,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2171:4:115",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2156:28:115"
+            },
+            "returnParameters": {
+              "id": 87363,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 87362,
+                  "mutability": "mutable",
+                  "name": "index",
+                  "nameLocation": "2211:5:115",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87377,
+                  "src": "2206:10:115",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 87361,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2206:4:115",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2205:12:115"
+            },
+            "scope": 87442,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "id": 87426,
+            "nodeType": "FunctionDefinition",
+            "src": "2487:343:115",
+            "nodes": [],
+            "body": {
+              "id": 87425,
+              "nodeType": "Block",
+              "src": "2561:269:115",
+              "nodes": [],
+              "statements": [
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_enum$_OfferType_$87910",
+                      "typeString": "enum OfferType"
+                    },
+                    "id": 87391,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "id": 87388,
+                      "name": "ba",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 87381,
+                      "src": "2571:2:115",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_enum$_OfferType_$87910",
+                        "typeString": "enum OfferType"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "==",
+                    "rightExpression": {
+                      "expression": {
+                        "id": 87389,
+                        "name": "OfferType",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87910,
+                        "src": "2577:9:115",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_enum$_OfferType_$87910_$",
+                          "typeString": "type(enum OfferType)"
+                        }
+                      },
+                      "id": 87390,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberLocation": "2587:3:115",
+                      "memberName": "Ask",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 87909,
+                      "src": "2577:13:115",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_enum$_OfferType_$87910",
+                        "typeString": "enum OfferType"
+                      }
+                    },
+                    "src": "2571:19:115",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": {
+                    "id": 87417,
+                    "nodeType": "Block",
+                    "src": "2689:91:115",
+                    "statements": [
+                      {
+                        "expression": {
+                          "id": 87409,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "baseExpression": {
+                              "id": 87405,
+                              "name": "indexOfBidOfferId",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 87329,
+                              "src": "2697:17:115",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+                                "typeString": "mapping(uint256 => uint256)"
+                              }
+                            },
+                            "id": 87407,
+                            "indexExpression": {
+                              "id": 87406,
+                              "name": "offerId",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 87385,
+                              "src": "2715:7:115",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": true,
+                            "nodeType": "IndexAccess",
+                            "src": "2697:26:115",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "id": 87408,
+                            "name": "index",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 87383,
+                            "src": "2726:5:115",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "src": "2697:34:115",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "id": 87410,
+                        "nodeType": "ExpressionStatement",
+                        "src": "2697:34:115"
+                      },
+                      {
+                        "expression": {
+                          "id": 87415,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "baseExpression": {
+                              "id": 87411,
+                              "name": "bidOfferIdOfIndex",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 87319,
+                              "src": "2739:17:115",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+                                "typeString": "mapping(uint256 => uint256)"
+                              }
+                            },
+                            "id": 87413,
+                            "indexExpression": {
+                              "id": 87412,
+                              "name": "index",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 87383,
+                              "src": "2757:5:115",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": true,
+                            "nodeType": "IndexAccess",
+                            "src": "2739:24:115",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "id": 87414,
+                            "name": "offerId",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 87385,
+                            "src": "2766:7:115",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "src": "2739:34:115",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "id": 87416,
+                        "nodeType": "ExpressionStatement",
+                        "src": "2739:34:115"
+                      }
+                    ]
+                  },
+                  "id": 87418,
+                  "nodeType": "IfStatement",
+                  "src": "2567:213:115",
+                  "trueBody": {
+                    "id": 87404,
+                    "nodeType": "Block",
+                    "src": "2592:91:115",
+                    "statements": [
+                      {
+                        "expression": {
+                          "id": 87396,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "baseExpression": {
+                              "id": 87392,
+                              "name": "indexOfAskOfferId",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 87324,
+                              "src": "2600:17:115",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+                                "typeString": "mapping(uint256 => uint256)"
+                              }
+                            },
+                            "id": 87394,
+                            "indexExpression": {
+                              "id": 87393,
+                              "name": "offerId",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 87385,
+                              "src": "2618:7:115",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": true,
+                            "nodeType": "IndexAccess",
+                            "src": "2600:26:115",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "id": 87395,
+                            "name": "index",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 87383,
+                            "src": "2629:5:115",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "src": "2600:34:115",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "id": 87397,
+                        "nodeType": "ExpressionStatement",
+                        "src": "2600:34:115"
+                      },
+                      {
+                        "expression": {
+                          "id": 87402,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "baseExpression": {
+                              "id": 87398,
+                              "name": "askOfferIdOfIndex",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 87314,
+                              "src": "2642:17:115",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_uint256_$_t_uint256_$",
+                                "typeString": "mapping(uint256 => uint256)"
+                              }
+                            },
+                            "id": 87400,
+                            "indexExpression": {
+                              "id": 87399,
+                              "name": "index",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 87383,
+                              "src": "2660:5:115",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": true,
+                            "nodeType": "IndexAccess",
+                            "src": "2642:24:115",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "id": 87401,
+                            "name": "offerId",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 87385,
+                            "src": "2669:7:115",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "src": "2642:34:115",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "id": 87403,
+                        "nodeType": "ExpressionStatement",
+                        "src": "2642:34:115"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "eventCall": {
+                    "arguments": [
+                      {
+                        "id": 87420,
+                        "name": "ba",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87381,
+                        "src": "2806:2:115",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_enum$_OfferType_$87910",
+                          "typeString": "enum OfferType"
+                        }
+                      },
+                      {
+                        "id": 87421,
+                        "name": "index",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87383,
+                        "src": "2810:5:115",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "id": 87422,
+                        "name": "offerId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87385,
+                        "src": "2817:7:115",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_enum$_OfferType_$87910",
+                          "typeString": "enum OfferType"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 87419,
+                      "name": "SetIndexMapping",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 87306,
+                      "src": "2790:15:115",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_enum$_OfferType_$87910_$_t_uint256_$_t_uint256_$returns$__$",
+                        "typeString": "function (enum OfferType,uint256,uint256)"
+                      }
+                    },
+                    "id": 87423,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2790:35:115",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 87424,
+                  "nodeType": "EmitStatement",
+                  "src": "2785:40:115"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 87378,
+              "nodeType": "StructuredDocumentation",
+              "src": "2317:167:115",
+              "text": "@notice Sets the Mangrove offer id for an index and vice versa.\n@param ba the offer type\n@param index the index\n@param offerId the Mangrove offer id."
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setIndexMapping",
+            "nameLocation": "2496:15:115",
+            "parameters": {
+              "id": 87386,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 87381,
+                  "mutability": "mutable",
+                  "name": "ba",
+                  "nameLocation": "2522:2:115",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87426,
+                  "src": "2512:12:115",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_OfferType_$87910",
+                    "typeString": "enum OfferType"
+                  },
+                  "typeName": {
+                    "id": 87380,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 87379,
+                      "name": "OfferType",
+                      "nameLocations": [
+                        "2512:9:115"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 87910,
+                      "src": "2512:9:115"
+                    },
+                    "referencedDeclaration": 87910,
+                    "src": "2512:9:115",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_OfferType_$87910",
+                      "typeString": "enum OfferType"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 87383,
+                  "mutability": "mutable",
+                  "name": "index",
+                  "nameLocation": "2531:5:115",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87426,
+                  "src": "2526:10:115",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 87382,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2526:4:115",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 87385,
+                  "mutability": "mutable",
+                  "name": "offerId",
+                  "nameLocation": "2543:7:115",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87426,
+                  "src": "2538:12:115",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 87384,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2538:4:115",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2511:40:115"
+            },
+            "returnParameters": {
+              "id": 87387,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2561:0:115"
+            },
+            "scope": 87442,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 87441,
+            "nodeType": "FunctionDefinition",
+            "src": "2911:98:115",
+            "nodes": [],
+            "body": {
+              "id": 87440,
+              "nodeType": "Block",
+              "src": "2953:56:115",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 87434,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 87432,
+                      "name": "length",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 87309,
+                      "src": "2959:6:115",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 87433,
+                      "name": "length_",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 87429,
+                      "src": "2968:7:115",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "2959:16:115",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 87435,
+                  "nodeType": "ExpressionStatement",
+                  "src": "2959:16:115"
+                },
+                {
+                  "eventCall": {
+                    "arguments": [
+                      {
+                        "id": 87437,
+                        "name": "length_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 87429,
+                        "src": "2996:7:115",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 87436,
+                      "name": "SetLength",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 87296,
+                      "src": "2986:9:115",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256)"
+                      }
+                    },
+                    "id": 87438,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "2986:18:115",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 87439,
+                  "nodeType": "EmitStatement",
+                  "src": "2981:23:115"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 87427,
+              "nodeType": "StructuredDocumentation",
+              "src": "2834:74:115",
+              "text": "@notice sets the length of the map.\n@param length_ the new length."
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setLength",
+            "nameLocation": "2920:9:115",
+            "parameters": {
+              "id": 87430,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 87429,
+                  "mutability": "mutable",
+                  "name": "length_",
+                  "nameLocation": "2935:7:115",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 87441,
+                  "src": "2930:12:115",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 87428,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2930:4:115",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2929:14:115"
+            },
+            "returnParameters": {
+              "id": 87431,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2953:0:115"
+            },
+            "scope": 87442,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 87290,
+              "name": "IHasOfferListOfOfferType",
+              "nameLocations": [
+                "312:24:115"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 87942,
+              "src": "312:24:115"
+            },
+            "id": 87291,
+            "nodeType": "InheritanceSpecifier",
+            "src": "312:24:115"
+          }
+        ],
+        "canonicalName": "HasIndexedBidsAndAsks",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 87289,
+          "nodeType": "StructuredDocumentation",
+          "src": "147:122:115",
+          "text": "@title Adds a [0..length] index <--> offerId map to a strat.\n@dev utilizes the `IHasOfferListOfOfferType` contract."
+        },
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          87442,
+          87942
+        ],
+        "name": "HasIndexedBidsAndAsks",
+        "nameLocation": "287:21:115",
+        "scope": 87443,
+        "usedErrors": [],
+        "usedEvents": [
+          87296,
+          87306
+        ]
+      }
+    ],
+    "license": "BSD-2-Clause"
+  },
+  "id": 115
+}
