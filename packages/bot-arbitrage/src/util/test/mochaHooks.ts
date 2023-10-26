@@ -85,15 +85,11 @@ export const sleep = (ms: number): Promise<void> => {
 };
 async function deployMgvArbitrage(
   provider: ethers.providers.JsonRpcProvider,
-  univ3Router: string,
-  serverUrl: string,
-  arbitrager: string
+  serverUrl: string
 ) {
   await deploy.deployMgvArbitrage({
     provider,
     url: serverUrl,
-    univ3Router: univ3Router,
-    arbitrager: arbitrager,
     mnemonic: mnemonic,
     coreDir: CORE_DIR,
     setToyENSCodeIfAbsent: false,
@@ -150,12 +146,7 @@ async function deployUniswapAndMgvArbitrage(
     token2Value: "1",
     poolFee: 3000,
   });
-  await deployMgvArbitrage(
-    provider,
-    uniContracts.router.address,
-    serverUrl,
-    arbitrager
-  );
+  await deployMgvArbitrage(provider, serverUrl);
   thisMgv.setAddress("UniswapV3Router", uniContracts.router.address);
   thisMgv.setAddress("UniswapV3Factory", uniContracts.factory.address);
   thisMgv.setAddress(
