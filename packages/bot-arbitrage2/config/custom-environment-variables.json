@@ -1,8 +1,0 @@
-{
-  "logLevel": "LOG_LEVEL",
-  "markets": {
-    "__name": "MARKETS",
-    "__type": "json"
-  },
-  "arbitragerContractAddress": "ARBITRAGER_CONTRACT_ADDRESS"
-}
