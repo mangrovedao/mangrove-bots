@@ -22,6 +22,7 @@ export async function deployMgvArbitrage(params: {
   }
   const env = {
     ...process.env,
+    FOUNDRY_PROFILE: "arbitrage",
   };
 
   await runScript({
@@ -30,7 +31,6 @@ export async function deployMgvArbitrage(params: {
     env,
     script: "MgvArbitrageDeployer",
     mnemonic: params.mnemonic,
-    coreDir: params.coreDir,
     pipe: false,
     stateCache: false,
     stateCacheFile: "",

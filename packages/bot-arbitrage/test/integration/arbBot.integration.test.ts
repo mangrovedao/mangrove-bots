@@ -16,6 +16,7 @@ import {
 import { logger } from "../../src/util/logger";
 import { MgvArbitrage } from "../../src/types/typechain/MgvArbitrage";
 import { MgvArbitrage__factory } from "../../src/types/typechain/";
+import { sleep } from "@mangrovedao/bot-utils";
 
 let mgv: Mangrove;
 let mgvDeployer: Mangrove;
@@ -56,16 +57,19 @@ describe("ArbBot integration tests", () => {
     const usdc = await mgv.token("USDC");
     await weth.contract.mintTo(this.accounts.maker.address, weth.toUnits(100));
     await dai.contract.mintTo(this.accounts.maker.address, dai.toUnits(100000));
-    await dai.contract.mintTo(arb, dai.toUnits(10000));
 
-    logger.debug(
+    arbitragerContract = MgvArbitrage__factory.connect(arb, mgvDeployer.signer);
+    /* arbitrager */
+    await dai.contract.mintTo(arb, dai.toUnits(10000));
+    await weth.contract.mintTo(arb, weth.toUnits(100));
+    await usdc.contract.mintTo(arb, usdc.toUnits(10000));
+
+    console.log(
       `--label ${this.accounts.maker.address}:maker --label ${this.accounts.deployer.address}:deployer --label ${arb}:arbContract --label ${weth.address}:weth --label ${dai.address}:dai --label ${mgv.address}:mangrove --label ${usdc.address}:usdc`
     );
 
     mgvTestUtil.setConfig(mgv, this.accounts, mgvDeployer);
     mgvTestUtil.initPollOfTransactionTracking(mgvDeployer.provider);
-
-    arbitragerContract = MgvArbitrage__factory.connect(arb, mgvDeployer.signer);
   });
 
   afterEach(async function () {
@@ -79,7 +83,11 @@ describe("ArbBot integration tests", () => {
     it.only(`should find arb and do arb, ask`, async function () {
       const mgvArbAddress = mgv.getAddress("MgvArbitrage");
 
-      const market = await mgv.market({ base: "WETH", quote: "DAI" });
+      const market = await mgv.market({
+        base: "WETH",
+        quote: "DAI",
+        tickSpacing: 1,
+      });
 
       const lp = await mgv.liquidityProvider(market);
       const provision = await lp.computeAskProvision();
@@ -100,6 +108,7 @@ describe("ArbBot integration tests", () => {
         mgv.provider
       );
 
+      market.consoleAsks();
       const txActivate = await activateTokens(
         mgv,
         [market.base, market.quote],
@@ -116,16 +125,9 @@ describe("ArbBot integration tests", () => {
         await mgvTestUtil.waitForBlock(mgvDeployer, txActivatePool.blockNumber);
       }
 
-      const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
       const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
-      // const txs = await arbBot.run(market, ["WETH", "DAI", 3000], {
-      //   holdingTokens: ["DAI"],
-      //   tokenForExchange: "DAI",
-      //   exchangeConfig: {
-      //     exchange: "Uniswap",
-      //     fee: () => 3000,
-      //   },
-      // });
+      const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
+
       const profitableArbs = await checkProfitableArbitrage(
         mgvDeployer,
         arbitragerContract,
@@ -143,6 +145,8 @@ describe("ArbBot integration tests", () => {
       const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
       // const receipt = await mgvTestUtil.waitForTransaction(txs.askTransaction);
       console.log(profitableArbs);
+
+      await sleep(10000000);
       // await mgvTestUtil.waitForBlock(mgv, receipt.blockNumber);
       assert.ok(!(await market.isLive("asks", offer.id)));
       assert.deepStrictEqual(

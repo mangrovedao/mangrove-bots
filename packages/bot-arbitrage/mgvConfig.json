@@ -1,0 +1,8 @@
+{
+  "addresses_paths": [
+    "mangrove-src/core/",
+    "mangrove-src/strats/",
+    "node_modules/@mangrovedao/mangrove-strats/addresses/"
+  ],
+  "deployment_addresses_path": "addresses/"
+}

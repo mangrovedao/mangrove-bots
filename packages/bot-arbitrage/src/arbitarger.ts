@@ -34,6 +34,7 @@ export const activatePool = async (
   const isPoolActivated = await arbitragerContract.pools(uniswapPoolAddress);
   if (!isPoolActivated) {
     const tx = await arbitragerContract.setPool(uniswapPoolAddress, true);
+
     return tx.wait();
   }
 };
@@ -79,6 +80,15 @@ export const checkProfitableArbitrage = async (
           ),
           arbStruct: struct,
         });
+
+        acc.push({
+          target: arbitragerContract.address,
+          callData: arbitragerContract.interface.encodeFunctionData(
+            "doArbitrageFirstUniwapThenMangrove",
+            [struct]
+          ),
+          arbStruct: struct,
+        });
       });
 
       return acc;
@@ -90,6 +100,12 @@ export const checkProfitableArbitrage = async (
     false,
     arbitrageCalls
   );
+
+  const bo = await mgv.multicallContract.tryAggregate(false, arbitrageCalls);
+
+  const res = await bo.wait();
+
+  console.log(bo, res);
 
   return callResults
     .map((result, index) => ({ ...result, index }))

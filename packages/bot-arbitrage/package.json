@@ -22,7 +22,7 @@
     "clean": "yarn workspaces foreach -vpiR --topological-dev --from $npm_package_name run clean-this-package",
     "test-with-dependencies": "yarn workspaces foreach -vpiR --topological-dev --from $npm_package_name run test",
     "test": "yarn test:unit && yarn test:integration",
-    "test:integration": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/integration-tests.json --exit ",
+    "test:integration": "node copyMangroveCoreAndStratsAndArbitrage.js && cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/integration-tests.json --exit ",
     "test:unit": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/unit-tests.json --exit ",
     "test:coverage": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/coverage-tests.json --exit ",
     "typechain": "ts-node --transpileOnly src/util/runTypechain.ts",
@@ -51,6 +51,7 @@
     "ethers": "^5.7.2",
     "fast-safe-stringify": "^2.1.1",
     "finalhandler": "^1.2.0",
+    "fs-extra": "^11.1.1",
     "nyc": "^15.1.0",
     "serve-static": "^1.15.0",
     "toad-scheduler": "^2.2.0"
