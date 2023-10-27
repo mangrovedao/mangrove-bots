@@ -1012,6 +1012,7 @@ __metadata:
     ethers: ^5.7.2
     fast-safe-stringify: ^2.1.1
     finalhandler: ^1.2.0
+    fs-extra: ^11.1.1
     lint-staged: ^13.2.0
     mocha: ^10.2.0
     mocha-multi-reporters: ^1.5.1
@@ -1228,7 +1229,7 @@ __metadata:
     "@espendk/json-file-reporter": ^1.4.2
     "@ethersproject/experimental": ^5.7.0
     "@ethersproject/hardware-wallets": ^5.7.0
-    "@mangrovedao/mangrove.js": "mangrovedao/mangrove.js#feat/addWantsAndGives"
+    "@mangrovedao/mangrove.js": "mangrovedao/mangrove.js#feat/ticks"
     "@types/big.js": ^6.1.6
     "@types/chai": ^4.3.4
     "@types/chai-as-promised": ^7.1.5
@@ -1269,25 +1270,11 @@ __metadata:
     rimraf: ^5.0.1
     serve-static: ^1.15.0
     shelljs: ^0.8.5
+    transparent-proxy: ^1.12.1
     triple-beam: ^1.3.0
     ts-mockito: ^2.6.1
     ts-node: ^10.9.1
     typescript: ^4.7.0
-  languageName: unknown
-  linkType: soft
-
-"@mangrovedao/mangrove-arbitrage@workspace:packages/mangrove-arbitrage":
-  version: 0.0.0-use.local
-  resolution: "@mangrovedao/mangrove-arbitrage@workspace:packages/mangrove-arbitrage"
-  dependencies:
-    "@uniswap/swap-router-contracts": ^1.3.0
-    "@uniswap/v3-core": ^1.0.1
-    "@uniswap/v3-periphery": ^1.4.3
-    dotenv: ^16.0.3
-    lint-staged: ^13.2.2
-    prettier: ^2.8.7
-    shelljs: ^0.8.5
-    yargs: ^17.7.2
   languageName: unknown
   linkType: soft
 
@@ -1298,22 +1285,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mangrovedao/mangrove-strats@https://github.com/mangrovedao/mangrove-strats.git#commit=d444e6762fc9f7a5b71d8e5cfe32ef2b6877b33f":
+"@mangrovedao/mangrove-strats@https://github.com/mangrovedao/mangrove-strats.git#commit=01a783f5591f1dd0fcc17f6d0370e1752a02af67":
   version: 0.0.2-0
-  resolution: "@mangrovedao/mangrove-strats@https://github.com/mangrovedao/mangrove-strats.git#commit=d444e6762fc9f7a5b71d8e5cfe32ef2b6877b33f"
+  resolution: "@mangrovedao/mangrove-strats@https://github.com/mangrovedao/mangrove-strats.git#commit=01a783f5591f1dd0fcc17f6d0370e1752a02af67"
   dependencies:
     "@mangrovedao/mangrove-core": next
-  checksum: 9c29e5f9734c8101fd8c0a68f0e3083da1e67daa1256cfdc1c2031974ecb2271045f9adf917c0d63e66ffb2808b8b519735c178315a9e1650f1a5713013fcb3a
+  checksum: 33d84827f37742d85215b7a55947579d24efc3cc845ef0d45adc80bc8dba7b5ea952772dfcfbd37443a2814ad09f1c29ad52b711091b5fcb57f946e0f1e97f81
   languageName: node
   linkType: hard
 
-"@mangrovedao/mangrove.js@mangrovedao/mangrove.js#feat/addWantsAndGives":
+"@mangrovedao/mangrove.js@mangrovedao/mangrove.js#feat/ticks":
   version: 2.0.0-0
-  resolution: "@mangrovedao/mangrove.js@https://github.com/mangrovedao/mangrove.js.git#commit=65f2f4850d53a005ad00a5873eded9534ac080a9"
+  resolution: "@mangrovedao/mangrove.js@https://github.com/mangrovedao/mangrove.js.git#commit=f827bfd5d743a0fb466ee86178cf9fa36036b804"
   dependencies:
     "@ethersproject/experimental": ^5.7.0
     "@mangrovedao/mangrove-core": ^2.0.0-3
-    "@mangrovedao/mangrove-strats": "https://github.com/mangrovedao/mangrove-strats.git#commit=d444e6762fc9f7a5b71d8e5cfe32ef2b6877b33f"
+    "@mangrovedao/mangrove-strats": "https://github.com/mangrovedao/mangrove-strats.git#commit=01a783f5591f1dd0fcc17f6d0370e1752a02af67"
     "@mangrovedao/reliable-event-subscriber": 1.1.29
     "@types/object-inspect": ^1.8.1
     "@types/triple-beam": ^1.3.2
@@ -1333,7 +1320,7 @@ __metadata:
     yargs: ^17.3.0
   bin:
     mgv: ./dist/nodejs/cli/mgv.js
-  checksum: d1ae295f82618c9f8a6da0d598d2948560c55474811af55e186d30dd878b2333fbfa182d36230af76a92dc4443e2390664c22ff7c4581209fe8f84bc0a8de4db
+  checksum: 9e4d76867e56fc26763eb577046bf3bfa147dd15765147cc27d8556bfb4c0c1b3ffec75787f84efd90b8563b873e6c087872911a81380f05a4feb2236e2e5dc2
   languageName: node
   linkType: hard
 
@@ -1414,13 +1401,6 @@ __metadata:
     mkdirp: ^1.0.4
     rimraf: ^3.0.2
   checksum: 52dc02259d98da517fae4cb3a0a3850227bdae4939dda1980b788a7670636ca2b4a01b58df03dd5f65c1e3cb70c50fa8ce5762b582b3f499ec30ee5ce1fd9380
-  languageName: node
-  linkType: hard
-
-"@openzeppelin/contracts@npm:3.4.2-solc-0.7":
-  version: 3.4.2-solc-0.7
-  resolution: "@openzeppelin/contracts@npm:3.4.2-solc-0.7"
-  checksum: 1a6048f31ed560c34429a05e534102c51124ecaf113aca7ebeb7897cfaaf61007cdd7952374c282adaeb79b04ee86ee80b16eed28b62fc6d60e3ffcd7a696895
   languageName: node
   linkType: hard
 
@@ -1903,75 +1883,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uniswap/lib@npm:^4.0.1-alpha":
-  version: 4.0.1-alpha
-  resolution: "@uniswap/lib@npm:4.0.1-alpha"
-  checksum: d7bbacccef40966af16c7e215ab085f575686d316b2802c9e1cfd03f7ad351970e547535670a28b2279c3cfcc4fb02888614c46f94efe2987af2309f3ec86127
-  languageName: node
-  linkType: hard
-
-"@uniswap/swap-router-contracts@npm:^1.3.0":
-  version: 1.3.0
-  resolution: "@uniswap/swap-router-contracts@npm:1.3.0"
-  dependencies:
-    "@openzeppelin/contracts": 3.4.2-solc-0.7
-    "@uniswap/v2-core": 1.0.1
-    "@uniswap/v3-core": 1.0.0
-    "@uniswap/v3-periphery": 1.4.1
-    dotenv: ^14.2.0
-    hardhat-watcher: ^2.1.1
-  checksum: 66f853a4f04742bdfb4eb3fd6035aa7e3238cafec99609fcfb87b640953a6575152687bd6d0d14fe35440b339b7e3cc70dde237fb70703b3f49684c630a2d648
-  languageName: node
-  linkType: hard
-
-"@uniswap/v2-core@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@uniswap/v2-core@npm:1.0.1"
-  checksum: eaa118fe45eac2e80b7468547ce2cde12bd3c8157555d2e40e0462a788c9506c6295247b511382da85e44a89ad92aff7bb3433b23bfbd2eeea23942ecd46e979
-  languageName: node
-  linkType: hard
-
-"@uniswap/v3-core@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@uniswap/v3-core@npm:1.0.0"
-  checksum: 0e7654cfbf9885f1ca94446c3b220aeddb039af7892bc4ae94669512570ceefdf1ce6c2b0703396927d5a203d7c6c5ccaf8bd61426e52372aafb6ada64141055
-  languageName: node
-  linkType: hard
-
-"@uniswap/v3-core@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@uniswap/v3-core@npm:1.0.1"
-  checksum: 4bfd8b218391a3d9efde44e0f984cfec3bc25889cd4d1386766828521006e71b210a3583ee32b52f3c81d384af9e8c39f471f2229e9af4d50da6801446ecb3e4
-  languageName: node
-  linkType: hard
-
-"@uniswap/v3-periphery@npm:1.4.1":
-  version: 1.4.1
-  resolution: "@uniswap/v3-periphery@npm:1.4.1"
-  dependencies:
-    "@openzeppelin/contracts": 3.4.2-solc-0.7
-    "@uniswap/lib": ^4.0.1-alpha
-    "@uniswap/v2-core": 1.0.1
-    "@uniswap/v3-core": 1.0.0
-    base64-sol: 1.0.1
-    hardhat-watcher: ^2.1.1
-  checksum: a171332f1f1b89cde24d9962bdfc9742d9e6b102ea16815fa6997e0c812aa93a120752a6f497a5d5ab709f5c91ec7f18c2957fa5a8b9af57db3ff202ac8b7dc7
-  languageName: node
-  linkType: hard
-
-"@uniswap/v3-periphery@npm:^1.4.3":
-  version: 1.4.3
-  resolution: "@uniswap/v3-periphery@npm:1.4.3"
-  dependencies:
-    "@openzeppelin/contracts": 3.4.2-solc-0.7
-    "@uniswap/lib": ^4.0.1-alpha
-    "@uniswap/v2-core": 1.0.1
-    "@uniswap/v3-core": 1.0.0
-    base64-sol: 1.0.1
-  checksum: 50636951fc0a7737cfeef988ab38f4ddf26f6165a19df95b84294929088cc8b05fdbc7910168610ce9daebcce5d7a408fa5a02228ef9dfb73c23c695acc8b741
-  languageName: node
-  linkType: hard
-
 "abbrev@npm:^1.0.0":
   version: 1.1.1
   resolution: "abbrev@npm:1.1.1"
@@ -2353,13 +2264,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"base64-sol@npm:1.0.1":
-  version: 1.0.1
-  resolution: "base64-sol@npm:1.0.1"
-  checksum: be0f9e8cf3c744256913223fbae8187773f530cc096e98a77f49ef0bd6cedeb294d15a784e439419f7cb99f07bf85b08999169feafafa1a9e29c3affc0bc6d0a
-  languageName: node
-  linkType: hard
-
 "bech32@npm:1.1.4":
   version: 1.1.4
   resolution: "bech32@npm:1.1.4"
@@ -2675,7 +2579,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:3.5.3, chokidar@npm:^3.5.3":
+"chokidar@npm:3.5.3":
   version: 3.5.3
   resolution: "chokidar@npm:3.5.3"
   dependencies:
@@ -3181,13 +3085,6 @@ __metadata:
   dependencies:
     dotenv: ^8.0.0
   checksum: 8e34ea8f5cb216acb0f9cc602752dceef6e1c0b52c39045d6b92fadbefcbfecaf0cc868d3e115c9764860293d62d0bb31d46cfa41d29cb9fc7039797e20de03e
-  languageName: node
-  linkType: hard
-
-"dotenv@npm:^14.2.0":
-  version: 14.3.2
-  resolution: "dotenv@npm:14.3.2"
-  checksum: 86c06758915d6facc35275f4a7fafc16705b6f3b44befaa8abca91367991efc8ff8db5437d3cc14778231d19fb97610fe82d60f8a53ba723cdb69fe4171439aa
   languageName: node
   linkType: hard
 
@@ -3953,6 +3850,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fs-extra@npm:^11.1.1":
+  version: 11.1.1
+  resolution: "fs-extra@npm:11.1.1"
+  dependencies:
+    graceful-fs: ^4.2.0
+    jsonfile: ^6.0.1
+    universalify: ^2.0.0
+  checksum: fb883c68245b2d777fbc1f2082c9efb084eaa2bbf9fddaa366130d196c03608eebef7fb490541276429ee1ca99f317e2d73e96f5ca0999eefedf5a624ae1edfd
+  languageName: node
+  linkType: hard
+
 "fs-extra@npm:^7.0.0":
   version: 7.0.1
   resolution: "fs-extra@npm:7.0.1"
@@ -4257,7 +4165,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graceful-fs@npm:^4.1.15, graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.2.6":
+"graceful-fs@npm:^4.1.15, graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.2.0, graceful-fs@npm:^4.2.6":
   version: 4.2.11
   resolution: "graceful-fs@npm:4.2.11"
   checksum: ac85f94da92d8eb6b7f5a8b20ce65e43d66761c55ce85ac96df6865308390da45a8d3f0296dd3a663de65d30ba497bd46c696cc1e248c72b13d6d567138a4fc7
@@ -4275,17 +4183,6 @@ __metadata:
   version: 1.4.0
   resolution: "graphemer@npm:1.4.0"
   checksum: bab8f0be9b568857c7bec9fda95a89f87b783546d02951c40c33f84d05bb7da3fd10f863a9beb901463669b6583173a8c8cc6d6b306ea2b9b9d5d3d943c3a673
-  languageName: node
-  linkType: hard
-
-"hardhat-watcher@npm:^2.1.1":
-  version: 2.5.0
-  resolution: "hardhat-watcher@npm:2.5.0"
-  dependencies:
-    chokidar: ^3.5.3
-  peerDependencies:
-    hardhat: ^2.0.0
-  checksum: e6c0d52865529653733b3fed6887b41a676fc5185eb835909b360e8cc24223a2fc4c398e3874b234fa918ec59be9de86d7fe92963022139c05cf07f027377cbb
   languageName: node
   linkType: hard
 
@@ -5087,6 +4984,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jsonfile@npm:^6.0.1":
+  version: 6.1.0
+  resolution: "jsonfile@npm:6.1.0"
+  dependencies:
+    graceful-fs: ^4.1.6
+    universalify: ^2.0.0
+  dependenciesMeta:
+    graceful-fs:
+      optional: true
+  checksum: 7af3b8e1ac8fe7f1eccc6263c6ca14e1966fcbc74b618d3c78a0a2075579487547b94f72b7a1114e844a1e15bb00d440e5d1720bfc4612d790a6f285d5ea8354
+  languageName: node
+  linkType: hard
+
 "just-clone@npm:^6.2.0":
   version: 6.2.0
   resolution: "just-clone@npm:6.2.0"
@@ -5111,7 +5021,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:^13.2.0, lint-staged@npm:^13.2.2":
+"lint-staged@npm:^13.2.0":
   version: 13.2.2
   resolution: "lint-staged@npm:13.2.2"
   dependencies:
@@ -6416,7 +6326,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.3.1, prettier@npm:^2.5.1, prettier@npm:^2.8.7":
+"prettier@npm:^2.3.1, prettier@npm:^2.5.1":
   version: 2.8.8
   resolution: "prettier@npm:2.8.8"
   bin:
@@ -7506,6 +7416,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"transparent-proxy@npm:^1.12.1":
+  version: 1.15.0
+  resolution: "transparent-proxy@npm:1.15.0"
+  checksum: ea6a7a1dc351768937aedba8fa3c0c939d5b0db015b34246dd69d666fe9c69602507df666be9d4f8636d13db230fe34bd0850a0c118bedd0bf16e31097fbca3c
+  languageName: node
+  linkType: hard
+
 "triple-beam@npm:^1.3.0":
   version: 1.3.0
   resolution: "triple-beam@npm:1.3.0"
@@ -7796,6 +7713,13 @@ __metadata:
   version: 0.1.2
   resolution: "universalify@npm:0.1.2"
   checksum: 40cdc60f6e61070fe658ca36016a8f4ec216b29bf04a55dce14e3710cc84c7448538ef4dad3728d0bfe29975ccd7bfb5f414c45e7b78883567fb31b246f02dff
+  languageName: node
+  linkType: hard
+
+"universalify@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "universalify@npm:2.0.0"
+  checksum: 2406a4edf4a8830aa6813278bab1f953a8e40f2f63a37873ffa9a3bc8f9745d06cc8e88f3572cb899b7e509013f7f6fcc3e37e8a6d914167a5381d8440518c44
   languageName: node
   linkType: hard
 
@@ -8247,7 +8171,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs@npm:^17.3.0, yargs@npm:^17.7.2":
+"yargs@npm:^17.3.0":
   version: 17.7.2
   resolution: "yargs@npm:17.7.2"
   dependencies:

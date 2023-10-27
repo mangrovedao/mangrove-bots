@@ -9,4 +9,5 @@ export type MarketConfig = {
   quoteToken: string;
   quoteTokenSymbolForPriceLookup?: string; // Same as baseTokenSymbolForPriceLookup
   takerConfig: TakerConfig;
+  tickSpacing: number;
 };

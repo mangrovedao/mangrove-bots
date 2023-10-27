@@ -55,7 +55,7 @@ export class ConfigUtils {
   // FIXME test that the validations are working
   public getAndValidateConfig(): BotConfig {
     let runEveryXMinutes = -1;
-    let markets: [string, string][] = [];
+    let markets: [string, string, number][] = [];
     const configErrors: string[] = [];
 
     if (this.#config.has("runEveryXMinutes")) {
@@ -72,18 +72,21 @@ export class ConfigUtils {
     if (!this.#config.has("markets")) {
       configErrors.push("'markets' missing");
     } else {
-      markets = this.#config.get<Array<[string, string]>>("markets");
+      markets = this.#config.get<Array<[string, string, number]>>("markets");
       if (!Array.isArray(markets)) {
         configErrors.push("'markets' must be an array of pairs");
       } else {
         for (const market of markets) {
           if (
             !Array.isArray(market) ||
-            market.length != 2 ||
+            market.length != 3 ||
             typeof market[0] !== "string" ||
-            typeof market[1] !== "string"
+            typeof market[1] !== "string" ||
+            typeof market[2] !== "number"
           ) {
-            configErrors.push("'markets' elements must be arrays of 2 strings");
+            configErrors.push(
+              "'markets' elements must be arrays of 2 strings and a number"
+            );
             break;
           }
         }

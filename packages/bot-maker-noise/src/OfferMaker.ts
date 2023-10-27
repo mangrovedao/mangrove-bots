@@ -218,10 +218,11 @@ export class OfferMaker {
     offerList: Market.Offer[]
   ): Promise<void> {
     if (offerList.length === 0) return;
+
     const [totalLiquidityPublished, myWorstOffer] = offerList
       .filter((o) => o.maker === this.#makerAddress)
       .reduce<[Big, Market.Offer]>(
-        ([t], o) => [t.add(o.volume), o],
+        ([t], o) => [Market.getWantsForPrice(ba, o.gives, o.price), o],
         [Big(0), offerList[0]]
       );
 
@@ -242,19 +243,20 @@ export class OfferMaker {
       );
       // FIXME: Retract should be implemented in market.ts
       const { outbound_tkn, inbound_tkn } = this.#market.getOutboundInbound(ba);
+      const olKey = {
+        outbound_tkn: outbound_tkn.address,
+        inbound_tkn: inbound_tkn.address,
+        tickSpacing: this.#market.tickSpacing,
+      };
       await this.#market.mgv.contract
-        .retractOffer(
-          outbound_tkn.address,
-          inbound_tkn.address,
-          myWorstOffer.id,
-          false
-        )
+        .retractOffer(olKey, myWorstOffer.id, false)
         .then((tx) => tx.wait())
         .then((txReceipt) => {
           logger.info("Succesfully retracted offer", {
             contextInfo: "maker",
             base: this.#market.base.name,
             quote: this.#market.quote.name,
+            tickSpacing: this.#market.tickSpacing,
             ba: ba,
             data: {
               myWorstOffer,
@@ -270,6 +272,7 @@ export class OfferMaker {
             contextInfo: "maker",
             base: this.#market.base.name,
             quote: this.#market.quote.name,
+            tickSpacing: this.#market.tickSpacing,
             ba: ba,
             data: {
               reason: e,
@@ -341,14 +344,16 @@ export class OfferMaker {
     });
 
     await this.#market.mgv.contract
-      .newOffer(
-        outbound_tkn.address,
-        inbound_tkn.address,
+      .newOfferByVolume(
+        {
+          outbound_tkn: outbound_tkn.address,
+          inbound_tkn: inbound_tkn.address,
+          tickSpacing: this.#market.tickSpacing,
+        },
         wantsInUnits,
         givesInUnits,
         gasReq,
-        gasPrice,
-        0
+        gasPrice
       )
       .then((tx) => tx.wait())
       .then((txReceipt) => {

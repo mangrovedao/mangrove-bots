@@ -9,5 +9,6 @@ export type MakerConfig = {
 export type MarketConfig = {
   baseToken: string;
   quoteToken: string;
+  tickSpacing: number;
   makerConfig: MakerConfig;
 };

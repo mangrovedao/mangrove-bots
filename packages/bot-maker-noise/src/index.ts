@@ -42,10 +42,12 @@ async function startMakersForMarkets(
     const tokenPair = {
       token1: marketConfig.baseToken,
       token2: marketConfig.quoteToken,
+      tickSpacing: marketConfig.tickSpacing,
     };
     const market = await mgv.market({
       base: tokenPair.token1,
       quote: tokenPair.token2,
+      tickSpacing: tokenPair.tickSpacing,
     });
 
     const offerMaker = new OfferMaker(

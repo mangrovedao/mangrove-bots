@@ -146,41 +146,22 @@ export class MarketCleaner {
         this.#whitelistedDustCleaningMaker &&
         this.#whitelistedDustCleaningMaker.has(offer.maker.toLowerCase())
       ) {
-        const inboundTkn =
-          ba == "bids" ? semibook.market.base : semibook.market.quote;
         const outboundTkn =
           ba == "bids" ? semibook.market.quote : semibook.market.base;
 
         const takerWants = new Big(1).div(
           new Big(10).pow(outboundTkn.decimals)
         );
-        const takerGives = new Big(1).div(new Big(10).pow(inboundTkn.decimals));
 
         cleaningPromises.push(
-          this.#cleanOffer(
-            offer,
-            ba,
-            gasPrice,
-            takerWants,
-            takerGives,
-            semibook.market.tickSpacing,
-            contextInfo
-          ) // takerWants: outboundTkn, takerGives: inboundTkn
+          this.#cleanOffer(offer, ba, gasPrice, takerWants, contextInfo) // takerWants: outboundTkn, takerGives: inboundTkn
         );
       } else {
         if (shouldOnlyCleanWhitelisted) {
           continue;
         }
         cleaningPromises.push(
-          this.#cleanOffer(
-            offer,
-            ba,
-            gasPrice,
-            new Big(0),
-            new Big(0),
-            semibook.market.tickSpacing,
-            contextInfo
-          )
+          this.#cleanOffer(offer, ba, gasPrice, new Big(0), contextInfo)
         );
       }
     }
@@ -192,15 +173,12 @@ export class MarketCleaner {
     ba: Market.BA,
     gasPrice: BigNumber,
     takerWants: Big,
-    takerGives: Big,
-    tickSpacing: BigNumber,
     contextInfo?: string
   ): Promise<void> {
     const { willOfferFail, bounty } = await this.#willOfferFail(
       offer,
       ba,
       takerWants,
-      tickSpacing,
       contextInfo
     );
     if (!willOfferFail || bounty === undefined || bounty.eq(0)) {
@@ -212,8 +190,7 @@ export class MarketCleaner {
       ba,
       bounty,
       gasPrice,
-      takerWants,
-      takerGives
+      takerWants
     );
     if (estimates.netResult.gt(0)) {
       logger.info("Identified offer that is profitable to clean", {
@@ -224,7 +201,7 @@ export class MarketCleaner {
         data: { estimates },
       });
       // TODO Do we have the liquidity to do the snipe?
-      await this.#collectOffer(offer, ba, takerWants, takerGives, contextInfo);
+      await this.#collectOffer(offer, ba, takerWants, contextInfo);
     } else {
       logger.debug("Offer is not profitable to clean", {
         base: this.#market.base.name,
@@ -241,7 +218,6 @@ export class MarketCleaner {
     offer: Market.Offer,
     ba: Market.BA,
     takerWants: Big,
-    tickSpacing: BigNumber,
     contextInfo?: string
   ): Promise<{ willOfferFail: boolean; bounty?: BigNumber }> {
     const raw = await this.#market.getRawCleanParams({
@@ -254,7 +230,7 @@ export class MarketCleaner {
         {
           outbound_tkn: raw.outboundTkn,
           inbound_tkn: raw.inboundTkn,
-          tickSpacing: tickSpacing,
+          tickSpacing: this.#market.tickSpacing,
         },
         raw.targets,
         raw.taker
@@ -287,7 +263,6 @@ export class MarketCleaner {
     offer: Market.Offer,
     ba: Market.BA,
     takerWants: Big,
-    takerGives: Big,
     contextInfo?: string
   ): Promise<void> {
     logger.debug("Cleaning offer", {
@@ -314,16 +289,15 @@ export class MarketCleaner {
       });
     }
 
-    const snipePromises = await this.#market.snipe(
+    const cleanPromises = await this.#market.clean(
       {
         ba: ba,
-        targets: this.#createCollectParams(offer, takerWants, takerGives),
-        requireOffersToFail: true,
+        targets: this.#createCollectParams(offer, takerWants),
       },
       txOverrides
     );
 
-    return snipePromises.result
+    return cleanPromises.result
       .then((result) => {
         logger.info("Successfully cleaned offer", {
           base: this.#market.base.name,
@@ -416,10 +390,9 @@ export class MarketCleaner {
     ba: Market.BA,
     bounty: BigNumber,
     gasPrice: BigNumber,
-    takerWants: Big,
-    takerGives: Big
+    takerWants: Big
   ): Promise<OfferCleaningEstimates> {
-    const gas = await this.#estimateGas(offer, ba, takerWants, takerGives);
+    const gas = await this.#estimateGas(offer, ba, takerWants);
     const totalCost = gas.mul(gasPrice);
     const netResult = bounty.sub(totalCost);
     return {
@@ -440,21 +413,21 @@ export class MarketCleaner {
   async #estimateGas(
     offer: Market.Offer,
     ba: Market.BA,
-    takerWants: Big,
-    takerGives: Big
+    takerWants: Big
   ): Promise<BigNumber> {
-    const raw = await this.#market.getRawSnipeParams({
+    const raw = await this.#market.getRawCleanParams({
       ba: ba,
-      targets: this.#createCollectParams(offer, takerWants, takerGives),
-      requireOffersToFail: true,
+      targets: this.#createCollectParams(offer, takerWants),
     });
-
     const gasEstimate =
-      await this.#market.mgv.cleanerContract.estimateGas.collect(
-        raw.outboundTkn,
-        raw.inboundTkn,
+      await this.#market.mgv.contract.estimateGas.cleanByImpersonation(
+        {
+          outbound_tkn: raw.outboundTkn,
+          inbound_tkn: raw.inboundTkn,
+          tickSpacing: this.#market.tickSpacing,
+        },
         raw.targets,
-        raw.fillWants
+        raw.taker
       );
     return gasEstimate;
   }

@@ -59,7 +59,11 @@ describe("MarketCleaner integration tests", () => {
     mgv = await Mangrove.connect({
       signer: cleaner.signer,
     });
-    market = await mgv.market({ base: "TokenA", quote: "TokenB" });
+    market = await mgv.market({
+      base: "TokenA",
+      quote: "TokenB",
+      tickSpacing: 1,
+    });
 
     cleanerProvider = mgv.provider;
 

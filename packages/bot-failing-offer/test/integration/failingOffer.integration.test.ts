@@ -72,10 +72,12 @@ describe("Failing offer integration tests", () => {
     makerMarket = await makerMangrove.market({
       base: "TokenA",
       quote: "TokenB",
+      tickSpacing: 1,
     });
     cleanerMarket = await cleanerMangrove.market({
       base: "TokenA",
       quote: "TokenB",
+      tickSpacing: 1,
     });
 
     // Turn up the Mangrove gasprice to increase the bounty
@@ -125,7 +127,7 @@ describe("Failing offer integration tests", () => {
     const buyPromises = await cleanerMarket.buy(
       {
         wants: offer.gives,
-        gives: offer.wants,
+        gives: Market.getWantsForPrice("asks", offer.gives, offer.price),
       },
       { gasLimit: 6500000 }
     );

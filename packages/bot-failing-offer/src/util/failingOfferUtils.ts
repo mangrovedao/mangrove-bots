@@ -18,6 +18,7 @@ export type MakerConfig = {
 export type MarketConfig = {
   baseToken: string;
   quoteToken: string;
+  tickSpacing: number;
   makerConfig: MakerConfig;
 };
 
@@ -31,13 +32,15 @@ export async function startFailingOffersForMarkets(
   const marketConfigs = configUtil.getMarketConfigsOrThrow<MarketConfig>();
   const failingOfferMap = new Map<TokenPair, FailingOffer>();
   for (const marketConfig of marketConfigs) {
-    const tokenPair = {
+    const olKey = {
       token1: marketConfig.baseToken,
       token2: marketConfig.quoteToken,
+      tickSpacing: marketConfig.tickSpacing,
     };
     const market = await mgv.market({
-      base: tokenPair.token1,
-      quote: tokenPair.token2,
+      base: olKey.token1,
+      quote: olKey.token2,
+      tickSpacing: olKey.tickSpacing,
     });
 
     const failingOffer = new FailingOffer(
@@ -45,7 +48,7 @@ export async function startFailingOffersForMarkets(
       address,
       marketConfig.makerConfig
     );
-    failingOfferMap.set(tokenPair, failingOffer);
+    failingOfferMap.set(olKey, failingOffer);
     failingOffer.start();
   }
   return failingOfferMap;
