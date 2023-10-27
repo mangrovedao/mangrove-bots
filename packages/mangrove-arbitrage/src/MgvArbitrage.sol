@@ -234,9 +234,9 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
   /// @notice This approves all the necessary tokens on Mangrove and the Uniswap router
   /// It is only the admin that can call this function
   /// @param tokens The tokens to approve
-  function activateTokens(IERC20[] calldata tokens) external onlyAdmin {
+  function activateTokens(IERC20[] calldata tokens, uint amount) external onlyAdmin {
     for (uint i = 0; i < tokens.length; ++i) {
-      TransferLib.approveToken(tokens[i], address(mgv), type(uint).max);
+      TransferLib.approveToken(tokens[i], address(mgv), amount);
     }
   }
 }

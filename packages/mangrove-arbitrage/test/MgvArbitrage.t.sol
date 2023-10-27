@@ -93,7 +93,7 @@ contract MgvArbitrageTest is MangroveTest {
    */
   function test_isProfitableFirstMangroveThenUniswapWETHUSDC() public {
     vm.startPrank(admin);
-    arbStrat.activateTokens(tokens);
+    arbStrat.activateTokens(tokens, type(uint).max);
     arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
     vm.stopPrank();
 
@@ -131,7 +131,7 @@ contract MgvArbitrageTest is MangroveTest {
 
   function test_isNotProfitableBecauseGainToLowFirstMangroveThenUniswapWETHUSDC() public {
     vm.startPrank(admin);
-    arbStrat.activateTokens(tokens);
+    arbStrat.activateTokens(tokens, type(uint).max);
     arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
     vm.stopPrank();
 
@@ -164,7 +164,7 @@ contract MgvArbitrageTest is MangroveTest {
 
   function test_isNotProfitableFirstMangroveThenUniswapWETHUSDC() public {
     vm.startPrank(admin);
-    arbStrat.activateTokens(tokens);
+    arbStrat.activateTokens(tokens, type(uint).max);
     arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
     vm.stopPrank();
 
@@ -197,7 +197,7 @@ contract MgvArbitrageTest is MangroveTest {
 
   function test_isProfitablePriceUniswapFirstThenMangroveWETHUSDC() public {
     vm.startPrank(admin);
-    arbStrat.activateTokens(tokens);
+    arbStrat.activateTokens(tokens, type(uint).max);
     arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
     vm.stopPrank();
 
@@ -236,7 +236,7 @@ contract MgvArbitrageTest is MangroveTest {
 
   function test_isProfitablePriceUniswapFirstThenMangroveWETHUSDCPartialFill() public {
     vm.startPrank(admin);
-    arbStrat.activateTokens(tokens);
+    arbStrat.activateTokens(tokens, type(uint).max);
     arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
     vm.stopPrank();
 
@@ -275,7 +275,7 @@ contract MgvArbitrageTest is MangroveTest {
 
   function test_isNotProfitableGainToLowPriceUniswapFirstThenMangroveWETHUSDC() public {
     vm.startPrank(admin);
-    arbStrat.activateTokens(tokens);
+    arbStrat.activateTokens(tokens, type(uint).max);
     arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
     vm.stopPrank();
 
@@ -307,7 +307,7 @@ contract MgvArbitrageTest is MangroveTest {
 
   function test_isNotProfitablePriceUniswapFirstThenMangroveWETHUSDC() public {
     vm.startPrank(admin);
-    arbStrat.activateTokens(tokens);
+    arbStrat.activateTokens(tokens, type(uint).max);
     arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
     vm.stopPrank();
 
@@ -343,7 +343,7 @@ contract MgvArbitrageTest is MangroveTest {
 
   function test_isProfitableFirstMangroveThenUniswapUSDCWETH() public {
     vm.startPrank(admin);
-    arbStrat.activateTokens(tokens);
+    arbStrat.activateTokens(tokens, type(uint).max);
     arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
     vm.stopPrank();
 
@@ -380,7 +380,7 @@ contract MgvArbitrageTest is MangroveTest {
 
   function test_isNotProfitableFirstMangroveThenUniswapUSDCWETH() public {
     vm.startPrank(admin);
-    arbStrat.activateTokens(tokens);
+    arbStrat.activateTokens(tokens, type(uint).max);
     arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
     vm.stopPrank();
 
@@ -412,7 +412,7 @@ contract MgvArbitrageTest is MangroveTest {
 
   function test_isProfitablePriceUniswapFirstThenMangroveUSDCWETH() public {
     vm.startPrank(admin);
-    arbStrat.activateTokens(tokens);
+    arbStrat.activateTokens(tokens, type(uint).max);
     arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
     vm.stopPrank();
 
@@ -451,7 +451,7 @@ contract MgvArbitrageTest is MangroveTest {
 
   function test_isProfitablePriceUniswapFirstThenMangroveUSDCWETHPartialFill() public {
     vm.startPrank(admin);
-    arbStrat.activateTokens(tokens);
+    arbStrat.activateTokens(tokens, type(uint).max);
     arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
     vm.stopPrank();
 
@@ -490,7 +490,7 @@ contract MgvArbitrageTest is MangroveTest {
 
   function test_isNotProfitablePriceUniswapFirstThenMangroveUSDCWETH() public {
     vm.startPrank(admin);
-    arbStrat.activateTokens(tokens);
+    arbStrat.activateTokens(tokens, type(uint).max);
     arbStrat.setPool(address(uniswapV3PoolWETHUSDC3000), true);
     vm.stopPrank();
 
@@ -536,10 +536,10 @@ contract MgvArbitrageTest is MangroveTest {
   function test_onlyAdminCanActivateTokens() public {
     vm.prank(seller);
     vm.expectRevert("AccessControlled/Invalid");
-    arbStrat.activateTokens(tokens);
+    arbStrat.activateTokens(tokens, type(uint).max);
 
     vm.prank(admin);
-    arbStrat.activateTokens(tokens);
+    arbStrat.activateTokens(tokens, type(uint).max);
   }
 
   function test_onlyAdminCanSetAdmin() public {
