@@ -120,7 +120,6 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
   /// @param params An `ArbParams` struct containing the necessary information for the arbitrage operation.
   function doArbitrageFirstMangroveThenUniswap(ArbParams calldata params) public {
     uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
-    uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
 
     OLKey memory olKey = OLKey(address(params.takerWantsToken), address(params.takerGivesToken), params.tickSpacing);
     uint bestOfferWants = mangroveGetBestOfferWants(olKey);
@@ -129,11 +128,10 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
       mgv.marketOrderByVolume(olKey, 0, bestOfferWants > givesTokenBalance ? givesTokenBalance : bestOfferWants, false);
 
     isArbitraging = true;
-    (uint deltaTakerWants, uint deltaTakerGives) =
+    (, uint deltaTakerGives) =
       lowLevelUniswapSwap(address(params.takerWantsToken), address(params.takerGivesToken), int(totalGot), params.pool);
 
     require(params.minimumGain + totalGave <= deltaTakerGives, "MgvArbitrage/notProfitable");
-    require(wantsTokenBalance + deltaTakerWants <= totalGot, "MgvArbitrage/notProfitable");
   }
 
   /// @notice This function performs an arbitrage by first exchanging `takerGivesToken` for `takerWantsToken` using Uniswap, and then it swaps the received `takerWantsToken` back to `takerGivesToken` using Uniswap.
@@ -160,8 +158,6 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
 
     uint maxAmount = estimateHowMuchUniswapV3CanGive(params.pool, params.takerGivesToken, givesTokenBalance);
 
-    uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
-
     OLKey memory olKey = OLKey(address(params.takerGivesToken), address(params.takerWantsToken), params.tickSpacing);
     uint bestOfferWants = mangroveGetBestOfferWants(olKey);
 
@@ -175,10 +171,9 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
       params.pool
     );
 
-    (uint totalGot, uint totalGave,,) = mgv.marketOrderByVolume(olKey, 0, deltaWants, false);
+    (uint totalGot,,,) = mgv.marketOrderByVolume(olKey, 0, deltaWants, false);
 
     require(params.minimumGain + deltaGives <= totalGot, "MgvArbitrage/notProfitable");
-    require(wantsTokenBalance + totalGave <= wantsTokenBalance + deltaWants, "MgvArbitrage/notProfitable");
   }
 
   ///@notice Retrieves wants from the best mangrove offer for a given market pair of outbound token and inbound token on Mangrove.
