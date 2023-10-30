@@ -246,34 +246,39 @@ describe("ArbBot integration tests", () => {
         "Should have the same amount of quote"
       );
     });
-    //
-    // it(`should be profitable, exchange on Uniswap first`, async function () {
-    //   const mgvArbAddress = mgv.getAddress("MgvArbitrage");
-    //   const market = await mgv.market({ base: "WETH", quote: "USDC", tickSpacing });
-    //   const lp = await mgv.liquidityProvider(market);
-    //   const provision = await lp.computeAskProvision();
-    //   const offer = await lp.newAsk({ wants: 1, gives: 1, fund: provision });
-    //
-    //   const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
-    //   const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
-    //
-    //   await testArbitrage(mgv, market, arbitragerContract, 1);
-    //
-    //   const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
-    //   const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
-    //
-    //   assert.ok(!(await market.isLive("asks", offer.id)));
-    //   assert.deepStrictEqual(
-    //     baseAfterBalance.minus(baseBeforeBalance).lte(1),
-    //     true,
-    //     `Base Should have the same amount of base as before (less then 1, because of rounding): ${baseBeforeBalance.toString()}  after:${baseAfterBalance.toString()}`
-    //   );
-    //   assert.deepStrictEqual(
-    //     quoteBeforeBalance,
-    //     quoteAfterBalance,
-    //     "Quote Should have the same amount of base"
-    //   );
-    // });
+    it(`should be profitable, exchange on Uniswap first`, async function () {
+      const mgvArbAddress = mgv.getAddress("MgvArbitrage");
+      const market = await mgv.market({
+        base: "WETH",
+        quote: "USDC",
+        tickSpacing,
+      });
+      const lp = await mgv.liquidityProvider(market);
+      const provision = await lp.computeAskProvision();
+      const offer = await lp.newAsk({ wants: 1, gives: 1, fund: provision });
+
+      const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
+      const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
+
+      await testArbitrage(mgv, market, arbitragerContract, 1, [
+        "doArbitrageFirstUniwapThenMangrove",
+      ]);
+
+      const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
+      const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
+
+      assert.ok(!(await market.isLive("asks", offer.id)));
+      assert.deepStrictEqual(
+        baseAfterBalance.minus(baseBeforeBalance).lte(1),
+        true,
+        `Base Should have the same amount of base as before (less then 1, because of rounding): ${baseBeforeBalance.toString()}  after:${baseAfterBalance.toString()}`
+      );
+      assert.deepStrictEqual(
+        quoteBeforeBalance,
+        quoteAfterBalance,
+        "Quote Should have the same amount of base"
+      );
+    });
 
     //TODO: Test configs
   });
