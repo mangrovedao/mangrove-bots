@@ -1,4 +1,4 @@
-import { MarketWithToken } from "./types";
+import { ArbParams, MarketWithToken } from "./types";
 import { ArbParamsStruct, MgvArbitrage } from "./types/typechain/MgvArbitrage";
 import { Mangrove, typechain, MgvToken } from "@mangrovedao/mangrove.js";
 
@@ -21,9 +21,17 @@ export const activateTokens = async (
     .filter((value) => value.value.eq(0))
     .map((value) => tokens[value.index]);
 
-  const tx = await arbitragerContract.activateTokens(
+  const gasEstimate = await arbitragerContract.estimateGas.activateTokens(
     tokenToActivate.map((token) => token.address)
   );
+
+  const tx = await arbitragerContract.activateTokens(
+    tokenToActivate.map((token) => token.address),
+    {
+      gasLimit: gasEstimate.mul(10),
+    }
+  );
+
   return tx.wait();
 };
 
@@ -59,7 +67,7 @@ const getArbStructs = (
 ];
 
 type CallStructWithArbStruct = typechain.Multicall2.CallStruct & {
-  arbStruct: ArbParamsStruct;
+  arbStruct: ArbParams;
 };
 
 export const checkProfitableArbitrage = async (
@@ -78,17 +86,20 @@ export const checkProfitableArbitrage = async (
             "doArbitrageFirstMangroveThenUniswap",
             [struct]
           ),
-          arbStruct: struct,
+          arbStruct: {
+            ...struct,
+            method: "doArbitrageFirstMangroveThenUniswap",
+          },
         });
-
-        acc.push({
-          target: arbitragerContract.address,
-          callData: arbitragerContract.interface.encodeFunctionData(
-            "doArbitrageFirstUniwapThenMangrove",
-            [struct]
-          ),
-          arbStruct: struct,
-        });
+        //
+        // acc.push({
+        //   target: arbitragerContract.address,
+        //   callData: arbitragerContract.interface.encodeFunctionData(
+        //     "doArbitrageFirstUniwapThenMangrove",
+        //     [struct]
+        //   ),
+        //   arbStruct: struct,
+        // });
       });
 
       return acc;
@@ -101,14 +112,23 @@ export const checkProfitableArbitrage = async (
     arbitrageCalls
   );
 
-  const bo = await mgv.multicallContract.tryAggregate(false, arbitrageCalls);
-
-  const res = await bo.wait();
-
-  console.log(bo, res);
-
   return callResults
     .map((result, index) => ({ ...result, index }))
     .filter((result) => result.success)
     .map((result) => arbitrageCalls[result.index].arbStruct);
+};
+
+export const doArbitrage = async (
+  arbitragerContract: MgvArbitrage,
+  arbParams: ArbParams
+) => {
+  const gasEstimate = await arbitragerContract.estimateGas[arbParams.method](
+    arbParams
+  );
+
+  const tx = await arbitragerContract[arbParams.method](arbParams, {
+    gasLimit: gasEstimate,
+  });
+
+  return tx.wait();
 };

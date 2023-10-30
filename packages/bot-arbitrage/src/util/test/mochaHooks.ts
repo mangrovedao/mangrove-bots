@@ -35,8 +35,8 @@ export const mochaHooks = {
     args: inputServerParamsType,
     hook: hookInfo & { node: nodeType }
   ) {
-    hook.node = await node(args);
-    hook.server = await hook.node.connect();
+    await mgvMochaHooks.beforeAllImpl(args, hook);
+
     hook.accounts = {
       deployer: hook.server.accounts[0],
       maker: hook.server.accounts[1],

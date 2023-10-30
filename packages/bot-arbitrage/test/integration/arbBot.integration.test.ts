@@ -12,6 +12,7 @@ import {
   activateTokens,
   checkProfitableArbitrage,
   activatePool,
+  doArbitrage,
 } from "../../src/arbitarger";
 import { logger } from "../../src/util/logger";
 import { MgvArbitrage } from "../../src/types/typechain/MgvArbitrage";
@@ -20,7 +21,6 @@ import { sleep } from "@mangrovedao/bot-utils";
 
 let mgv: Mangrove;
 let mgvDeployer: Mangrove;
-let mgvArbitrager: Mangrove;
 let arbitragerContract: MgvArbitrage;
 
 describe("ArbBot integration tests", () => {
@@ -76,7 +76,6 @@ describe("ArbBot integration tests", () => {
     mgvTestUtil.stopPollOfTransactionTracking();
     mgvDeployer.disconnect();
     mgv.disconnect();
-    mgvArbitrager.disconnect();
   });
 
   describe("test arb bot", () => {
@@ -141,13 +140,15 @@ describe("ArbBot integration tests", () => {
         ]
       );
 
+      assert.equal(profitableArbs.length, 1);
+
+      const tx = await doArbitrage(arbitragerContract, profitableArbs[0]);
+
+      await mgvTestUtil.waitForBlock(mgv, tx.blockNumber);
+
       const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
       const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
-      // const receipt = await mgvTestUtil.waitForTransaction(txs.askTransaction);
-      console.log(profitableArbs);
 
-      await sleep(10000000);
-      // await mgvTestUtil.waitForBlock(mgv, receipt.blockNumber);
       assert.ok(!(await market.isLive("asks", offer.id)));
       assert.deepStrictEqual(
         baseBeforeBalance,
