@@ -13,8 +13,10 @@ export type MarketWithToken = Omit<Market, "base" | "quote"> & {
   quote: MgvToken;
 };
 
+export type Method =
+  | "doArbitrageFirstMangroveThenUniswap"
+  | "doArbitrageFirstUniwapThenMangrove";
+
 export type ArbParams = ArbParamsStruct & {
-  method:
-    | "doArbitrageFirstMangroveThenUniswap"
-    | "doArbitrageFirstUniwapThenMangrove";
+  method: Method;
 };

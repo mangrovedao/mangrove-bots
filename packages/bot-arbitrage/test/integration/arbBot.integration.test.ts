@@ -3,7 +3,7 @@
  */
 import { afterEach, beforeEach, describe, it } from "mocha";
 
-import { Mangrove, mgvTestUtil } from "@mangrovedao/mangrove.js";
+import { Mangrove, Market, mgvTestUtil } from "@mangrovedao/mangrove.js";
 
 import { Token } from "@uniswap/sdk-core";
 import assert from "assert";
@@ -14,14 +14,76 @@ import {
   activatePool,
   doArbitrage,
 } from "../../src/arbitarger";
-import { logger } from "../../src/util/logger";
 import { MgvArbitrage } from "../../src/types/typechain/MgvArbitrage";
 import { MgvArbitrage__factory } from "../../src/types/typechain/";
-import { sleep } from "@mangrovedao/bot-utils";
+import { Method } from "../../src/types";
 
 let mgv: Mangrove;
 let mgvDeployer: Mangrove;
 let arbitragerContract: MgvArbitrage;
+
+const tickSpacing = 1;
+
+export const testArbitrage = async (
+  mgv: Mangrove,
+  market: Market,
+  arbContract: MgvArbitrage,
+  arbitrageCount: number,
+  methods: Method[]
+) => {
+  await mgvTestUtil.waitForTransaction(
+    await market.base.approve(mgv.address, 1)
+  );
+  await mgvTestUtil.waitForTransaction(
+    await market.quote.approve(mgv.address, 1)
+  );
+  const factoryAddress = mgv.getAddress("UniswapV3Factory");
+  const poolInfo = await getPoolInfo(
+    factoryAddress,
+    new Token(mgv.network.id!, market.base.address, market.base.decimals),
+    new Token(mgv.network.id!, market.quote.address, market.quote.decimals),
+    3000,
+    mgv.provider
+  );
+
+  const txActivate = await activateTokens(
+    mgv,
+    [market.base, market.quote],
+    arbContract
+  );
+  await mgvTestUtil.waitForBlock(mgvDeployer, txActivate.blockNumber);
+
+  const txActivatePool = await activatePool(
+    arbContract,
+    poolInfo.poolContract.address
+  );
+
+  if (txActivatePool) {
+    await mgvTestUtil.waitForBlock(mgvDeployer, txActivatePool.blockNumber);
+  }
+  const profitableArbs = await checkProfitableArbitrage(
+    mgvDeployer,
+    arbContract,
+    [
+      {
+        base: market.base,
+        quote: market.quote,
+        tickSpacing: "1",
+        uniswapPoolAddress: poolInfo.poolContract.address,
+      },
+    ],
+    methods
+  );
+
+  assert.equal(profitableArbs.length, arbitrageCount);
+  if (arbitrageCount < 1) {
+    return;
+  }
+
+  const tx = await doArbitrage(arbContract, profitableArbs[0]);
+
+  await mgvTestUtil.waitForBlock(mgv, tx.blockNumber);
+};
 
 describe("ArbBot integration tests", () => {
   beforeEach(async function () {
@@ -79,72 +141,68 @@ describe("ArbBot integration tests", () => {
   });
 
   describe("test arb bot", () => {
-    it.only(`should find arb and do arb, ask`, async function () {
+    it(`should find arb and do arb, ask`, async function () {
       const mgvArbAddress = mgv.getAddress("MgvArbitrage");
 
       const market = await mgv.market({
         base: "WETH",
         quote: "DAI",
-        tickSpacing: 1,
+        tickSpacing,
       });
 
       const lp = await mgv.liquidityProvider(market);
       const provision = await lp.computeAskProvision();
       const offer = await lp.newAsk({ wants: 1, gives: 1, fund: provision });
 
-      await mgvTestUtil.waitForTransaction(
-        await market.base.approve(mgv.address, 1)
-      );
-      await mgvTestUtil.waitForTransaction(
-        await market.quote.approve(mgv.address, 1)
-      );
-      const factoryAddress = mgv.getAddress("UniswapV3Factory");
-      const poolInfo = await getPoolInfo(
-        factoryAddress,
-        new Token(mgv.network.id!, market.base.address, market.base.decimals),
-        new Token(mgv.network.id!, market.quote.address, market.quote.decimals),
-        3000,
-        mgv.provider
-      );
-
-      market.consoleAsks();
-      const txActivate = await activateTokens(
-        mgv,
-        [market.base, market.quote],
-        arbitragerContract
-      );
-      await mgvTestUtil.waitForBlock(mgvDeployer, txActivate.blockNumber);
-
-      const txActivatePool = await activatePool(
-        arbitragerContract,
-        poolInfo.poolContract.address
-      );
-
-      if (txActivatePool) {
-        await mgvTestUtil.waitForBlock(mgvDeployer, txActivatePool.blockNumber);
-      }
-
       const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
       const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
 
-      const profitableArbs = await checkProfitableArbitrage(
-        mgvDeployer,
-        arbitragerContract,
-        [
-          {
-            base: market.base,
-            quote: market.quote,
-            tickSpacing: "1",
-            uniswapPoolAddress: poolInfo.poolContract.address,
-          },
-        ]
+      await testArbitrage(mgv, market, arbitragerContract, 1, [
+        "doArbitrageFirstMangroveThenUniswap",
+      ]);
+
+      const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
+      const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
+
+      console.log(baseBeforeBalance.toFixed());
+      console.log(baseAfterBalance.toFixed());
+
+      console.log(quoteBeforeBalance.toFixed());
+      console.log(quoteAfterBalance.toFixed());
+
+      assert.ok(!(await market.isLive("asks", offer.id)));
+      assert.deepStrictEqual(
+        baseBeforeBalance,
+        baseAfterBalance,
+        "Should have the same amount of base"
       );
+      assert.ok(
+        quoteBeforeBalance < quoteAfterBalance,
+        "Should have gained quote"
+      );
+    });
 
-      assert.equal(profitableArbs.length, 1);
+    it(`should find arb and do arb, bid`, async function () {
+      const market = await mgv.market({
+        base: "WETH",
+        quote: "DAI",
+        tickSpacing,
+      });
+      const mgvArbAddress = mgv.getAddress("MgvArbitrage");
 
-      const tx = await doArbitrage(arbitragerContract, profitableArbs[0]);
+      const lp = await mgv.liquidityProvider(market);
+      const provision = await lp.computeBidProvision();
+      const offer = await lp.newBid({
+        wants: "1",
+        gives: "10000",
+        fund: provision,
+      });
+      const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
+      const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
 
-      await mgvTestUtil.waitForBlock(mgv, tx.blockNumber);
+      await testArbitrage(mgv, market, arbitragerContract, 1, [
+        "doArbitrageFirstMangroveThenUniswap",
+      ]);
 
       const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
       const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
@@ -160,5 +218,65 @@ describe("ArbBot integration tests", () => {
         "Should have gained quote"
       );
     });
+
+    // it(`should not be profitable, don't do arb`, async function () {
+    //   const mgvArbAddress = mgv.getAddress("MgvArbitrage");
+    //
+    //   const market = await mgv.market({ base: "WETH", quote: "DAI", tickSpacing});
+    //   const lp = await mgv.liquidityProvider(market);
+    //   const provision = await lp.computeAskProvision();
+    //   const offer = await lp.newAsk({ wants: 2000, gives: 1, fund: provision });
+    //
+    //   const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
+    //   const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
+    //
+    //   await testArbitrage(mgv, market, arbitragerContract, 0);
+    //
+    //   // try and get revert reason
+    //   const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
+    //   const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
+    //
+    //   assert.ok(await market.isLive("asks", offer.id));
+    //   assert.deepStrictEqual(
+    //     baseBeforeBalance,
+    //     baseAfterBalance,
+    //     "Should have the same amount of base"
+    //   );
+    //   assert.deepStrictEqual(
+    //     quoteBeforeBalance,
+    //     quoteAfterBalance,
+    //     "Should have the same amount of quote"
+    //   );
+    // });
+    //
+    // it(`should be profitable, exchange on Uniswap first`, async function () {
+    //   const mgvArbAddress = mgv.getAddress("MgvArbitrage");
+    //   const market = await mgv.market({ base: "WETH", quote: "USDC", tickSpacing });
+    //   const lp = await mgv.liquidityProvider(market);
+    //   const provision = await lp.computeAskProvision();
+    //   const offer = await lp.newAsk({ wants: 1, gives: 1, fund: provision });
+    //
+    //   const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
+    //   const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
+    //
+    //   await testArbitrage(mgv, market, arbitragerContract, 1);
+    //
+    //   const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
+    //   const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
+    //
+    //   assert.ok(!(await market.isLive("asks", offer.id)));
+    //   assert.deepStrictEqual(
+    //     baseAfterBalance.minus(baseBeforeBalance).lte(1),
+    //     true,
+    //     `Base Should have the same amount of base as before (less then 1, because of rounding): ${baseBeforeBalance.toString()}  after:${baseAfterBalance.toString()}`
+    //   );
+    //   assert.deepStrictEqual(
+    //     quoteBeforeBalance,
+    //     quoteAfterBalance,
+    //     "Quote Should have the same amount of base"
+    //   );
+    // });
+
+    //TODO: Test configs
   });
 });

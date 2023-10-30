@@ -1,4 +1,4 @@
-import { ArbParams, MarketWithToken } from "./types";
+import { ArbParams, MarketWithToken, Method } from "./types";
 import { ArbParamsStruct, MgvArbitrage } from "./types/typechain/MgvArbitrage";
 import { Mangrove, typechain, MgvToken } from "@mangrovedao/mangrove.js";
 
@@ -73,33 +73,29 @@ type CallStructWithArbStruct = typechain.Multicall2.CallStruct & {
 export const checkProfitableArbitrage = async (
   mgv: Mangrove,
   arbitragerContract: MgvArbitrage,
-  markets: MarketWithToken[]
+  markets: MarketWithToken[],
+  methods: Method[]
 ) => {
   const arbitrageCalls = markets.reduce<CallStructWithArbStruct[]>(
     (acc, market) => {
       const structs = getArbStructs(market);
 
       structs.forEach((struct) => {
-        acc.push({
-          target: arbitragerContract.address,
-          callData: arbitragerContract.interface.encodeFunctionData(
-            "doArbitrageFirstMangroveThenUniswap",
-            [struct]
-          ),
-          arbStruct: {
-            ...struct,
-            method: "doArbitrageFirstMangroveThenUniswap",
-          },
+        methods.forEach((method) => {
+          acc.push({
+            target: arbitragerContract.address,
+            callData: arbitragerContract.interface.encodeFunctionData(
+              `${method}` as
+                | "doArbitrageFirstUniwapThenMangrove"
+                | "doArbitrageFirstUniwapThenMangrove",
+              [struct]
+            ),
+            arbStruct: {
+              ...struct,
+              method: method,
+            },
+          });
         });
-        //
-        // acc.push({
-        //   target: arbitragerContract.address,
-        //   callData: arbitragerContract.interface.encodeFunctionData(
-        //     "doArbitrageFirstUniwapThenMangrove",
-        //     [struct]
-        //   ),
-        //   arbStruct: struct,
-        // });
       });
 
       return acc;
