@@ -31,12 +31,9 @@ export const testArbitrage = async (
   arbitrageCount: number,
   methods: Method[]
 ) => {
-  await mgvTestUtil.waitForTransaction(
-    await market.base.approve(mgv.address, 1)
-  );
-  await mgvTestUtil.waitForTransaction(
-    await market.quote.approve(mgv.address, 1)
-  );
+  await market.base.approveIfNotInfinite(mgv.address);
+  await market.quote.approveIfNotInfinite(mgv.address);
+
   const factoryAddress = mgv.getAddress("UniswapV3Factory");
   const poolInfo = await getPoolInfo(
     factoryAddress,
@@ -164,12 +161,6 @@ describe("ArbBot integration tests", () => {
       const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
       const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
 
-      console.log(baseBeforeBalance.toFixed());
-      console.log(baseAfterBalance.toFixed());
-
-      console.log(quoteBeforeBalance.toFixed());
-      console.log(quoteAfterBalance.toFixed());
-
       assert.ok(!(await market.isLive("asks", offer.id)));
       assert.deepStrictEqual(
         baseBeforeBalance,
@@ -197,8 +188,8 @@ describe("ArbBot integration tests", () => {
         gives: "10000",
         fund: provision,
       });
-      const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
       const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
+      const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
 
       await testArbitrage(mgv, market, arbitragerContract, 1, [
         "doArbitrageFirstMangroveThenUniswap",
@@ -207,47 +198,54 @@ describe("ArbBot integration tests", () => {
       const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
       const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
 
-      assert.ok(!(await market.isLive("asks", offer.id)));
+      assert.ok(!(await market.isLive("bids", offer.id)));
+
+      assert.ok(
+        baseBeforeBalance.lt(baseAfterBalance),
+        "Should have gained base"
+      );
+      assert.deepStrictEqual(
+        quoteBeforeBalance.toFixed(),
+        quoteAfterBalance.toFixed(),
+        "Should have the same amount of quote"
+      );
+    });
+
+    it(`should not be profitable, don't do arb`, async function () {
+      const mgvArbAddress = mgv.getAddress("MgvArbitrage");
+
+      const market = await mgv.market({
+        base: "WETH",
+        quote: "DAI",
+        tickSpacing,
+      });
+      const lp = await mgv.liquidityProvider(market);
+      const provision = await lp.computeAskProvision();
+      const offer = await lp.newAsk({ wants: 2000, gives: 1, fund: provision });
+
+      const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
+      const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
+
+      await testArbitrage(mgv, market, arbitragerContract, 0, [
+        "doArbitrageFirstMangroveThenUniswap",
+      ]);
+
+      // try and get revert reason
+      const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
+      const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
+
+      assert.ok(await market.isLive("asks", offer.id));
       assert.deepStrictEqual(
         baseBeforeBalance,
         baseAfterBalance,
         "Should have the same amount of base"
       );
-      assert.ok(
-        quoteBeforeBalance < quoteAfterBalance,
-        "Should have gained quote"
+      assert.deepStrictEqual(
+        quoteBeforeBalance,
+        quoteAfterBalance,
+        "Should have the same amount of quote"
       );
     });
-
-    // it(`should not be profitable, don't do arb`, async function () {
-    //   const mgvArbAddress = mgv.getAddress("MgvArbitrage");
-    //
-    //   const market = await mgv.market({ base: "WETH", quote: "DAI", tickSpacing});
-    //   const lp = await mgv.liquidityProvider(market);
-    //   const provision = await lp.computeAskProvision();
-    //   const offer = await lp.newAsk({ wants: 2000, gives: 1, fund: provision });
-    //
-    //   const quoteBeforeBalance = await market.quote.balanceOf(mgvArbAddress);
-    //   const baseBeforeBalance = await market.base.balanceOf(mgvArbAddress);
-    //
-    //   await testArbitrage(mgv, market, arbitragerContract, 0);
-    //
-    //   // try and get revert reason
-    //   const quoteAfterBalance = await market.quote.balanceOf(mgvArbAddress);
-    //   const baseAfterBalance = await market.base.balanceOf(mgvArbAddress);
-    //
-    //   assert.ok(await market.isLive("asks", offer.id));
-    //   assert.deepStrictEqual(
-    //     baseBeforeBalance,
-    //     baseAfterBalance,
-    //     "Should have the same amount of base"
-    //   );
-    //   assert.deepStrictEqual(
-    //     quoteBeforeBalance,
-    //     quoteAfterBalance,
-    //     "Should have the same amount of quote"
-    //   );
-    // });
     //
     // it(`should be profitable, exchange on Uniswap first`, async function () {
     //   const mgvArbAddress = mgv.getAddress("MgvArbitrage");
