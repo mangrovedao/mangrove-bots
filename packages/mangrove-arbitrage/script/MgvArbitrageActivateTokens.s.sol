@@ -23,7 +23,7 @@ contract MgvArbitrageActivateTokens is Deployer {
     tokens[0] = tkn1;
     tokens[1] = tkn2;
     broadcast();
-    // mgvArb.activateTokens(tokens);
+    mgvArb.activateTokens(tokens);
     smokeTest(tkn1, tkn2, address(arbitrageContract));
   }
 
