@@ -8,12 +8,7 @@ import { Mangrove, Market, mgvTestUtil } from "@mangrovedao/mangrove.js";
 import { Token } from "@uniswap/sdk-core";
 import assert from "assert";
 import { getPoolInfo } from "../../src/uniswap/pool";
-import {
-  activateTokens,
-  checkProfitableArbitrage,
-  activatePool,
-  doArbitrage,
-} from "../../src/arbitarger";
+import { activateTokens, activatePool, arbitrage } from "../../src/arbitarger";
 import { MgvArbitrage } from "../../src/types/typechain/MgvArbitrage";
 import { MgvArbitrage__factory } from "../../src/types/typechain/";
 import { Method } from "../../src/types";
@@ -51,35 +46,36 @@ export const testArbitrage = async (
   await mgvTestUtil.waitForBlock(mgvDeployer, txActivate.blockNumber);
 
   const txActivatePool = await activatePool(
-    arbContract,
-    poolInfo.poolContract.address
+    poolInfo.poolContract.address,
+    arbContract
   );
 
   if (txActivatePool) {
     await mgvTestUtil.waitForBlock(mgvDeployer, txActivatePool.blockNumber);
   }
-  const profitableArbs = await checkProfitableArbitrage(
-    mgvDeployer,
-    arbContract,
+
+  const arbitrageTxs = await arbitrage(
+    mgv,
+    arbitragerContract,
     [
       {
         base: market.base,
         quote: market.quote,
-        tickSpacing: "1",
+        fee: 3000,
+        tickSpacing,
         uniswapPoolAddress: poolInfo.poolContract.address,
       },
     ],
     methods
   );
 
-  assert.equal(profitableArbs.length, arbitrageCount);
-  if (arbitrageCount < 1) {
-    return;
-  }
+  assert.equal(arbitrageTxs.length, arbitrageCount);
 
-  const tx = await doArbitrage(arbContract, profitableArbs[0]);
-
-  await mgvTestUtil.waitForBlock(mgv, tx.blockNumber);
+  await Promise.all(
+    arbitrageTxs.map(async (tx) => {
+      await mgvTestUtil.waitForBlock(mgv, tx.blockNumber);
+    })
+  );
 };
 
 describe("ArbBot integration tests", () => {

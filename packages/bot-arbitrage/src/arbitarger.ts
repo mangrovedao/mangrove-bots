@@ -1,4 +1,4 @@
-import { ArbParams, MarketWithToken, Method } from "./types";
+import { ArbParams, Market, MarketWithToken, Method } from "./types";
 import { ArbParamsStruct, MgvArbitrage } from "./types/typechain/MgvArbitrage";
 import { Mangrove, typechain, MgvToken } from "@mangrovedao/mangrove.js";
 
@@ -36,8 +36,8 @@ export const activateTokens = async (
 };
 
 export const activatePool = async (
-  arbitragerContract: MgvArbitrage,
-  uniswapPoolAddress: string
+  uniswapPoolAddress: string,
+  arbitragerContract: MgvArbitrage
 ) => {
   const isPoolActivated = await arbitragerContract.pools(uniswapPoolAddress);
   if (!isPoolActivated) {
@@ -127,4 +127,22 @@ export const doArbitrage = async (
   });
 
   return tx.wait();
+};
+
+export const arbitrage = async (
+  mgv: Mangrove,
+  arbitragerContract: MgvArbitrage,
+  markets: MarketWithToken[],
+  methods: Method[]
+) => {
+  const profitableArbs = await checkProfitableArbitrage(
+    mgv,
+    arbitragerContract,
+    markets,
+    methods
+  );
+
+  return await Promise.all(
+    profitableArbs.map((arb) => doArbitrage(arbitragerContract, arb))
+  );
 };

@@ -15,7 +15,7 @@ export const marketValidator = z.array(
     base: z.string(),
     quote: z.string(),
     tickSpacing: z.string(),
-    uniswapPoolAddress: ethAddressSchema,
+    fee: z.number(),
   })
 );
 
@@ -34,4 +34,20 @@ export const getArbitragerContractAddress = (): string => {
   ethAddressSchema.parse(arbitragerContractAddress);
 
   return arbitragerContractAddress;
+};
+
+export const getFactoryAddress = (): string => {
+  const factoryAddress = config.get<string>("factoryAddress");
+
+  ethAddressSchema.parse(factoryAddress);
+
+  return factoryAddress;
+};
+
+export const getEveryXMinutes = (): number => {
+  const everyXMinutes = config.get<number>("everyXMinutes");
+
+  z.number().parse(everyXMinutes);
+
+  return everyXMinutes;
 };

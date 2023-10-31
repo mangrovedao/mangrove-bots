@@ -1,24 +1,30 @@
-import Mangrove, { ethers } from "@mangrovedao/mangrove.js";
-import { MgvArbitrage__factory } from "./../types/typechain";
-import { logger } from "../../src/util/logger";
+import Mangrove from "@mangrovedao/mangrove.js";
 
-export async function activateTokensWithMgv(tokens: string[], mgv: Mangrove) {
-  const arbAddress = mgv.getAddress("MgvArbitrage");
-  return await activateTokensWithSigner(tokens, arbAddress, mgv.signer);
-}
+import { Token } from "@uniswap/sdk-core";
+import { getPoolInfo } from "../uniswap/pool";
+import { Market, MarketWithToken } from "../types";
 
-export async function activateTokensWithSigner(
-  tokens: string[],
-  arbitrageContract: string,
-  signer: ethers.Signer
-) {
-  try {
-    const arbContract = MgvArbitrage__factory.connect(
-      arbitrageContract,
-      signer
-    );
-    return await arbContract.activateTokens(tokens, { gasLimit: 1000000 });
-  } catch (e) {
-    logger.debug(e);
-  }
-}
+export const getMarketWithUniswapPool = async (
+  mgv: Mangrove,
+  factoryAddress: string,
+  market: Market
+): Promise<MarketWithToken> => {
+  const base = await mgv.token(market.base);
+  const quote = await mgv.token(market.quote);
+
+  const poolInfo = await getPoolInfo(
+    factoryAddress,
+    new Token(mgv.network.id!, base.address, base.decimals),
+    new Token(mgv.network.id!, quote.address, quote.decimals),
+    market.fee,
+    mgv.provider
+  );
+
+  return {
+    base: base,
+    quote: quote,
+    tickSpacing: market.tickSpacing,
+    fee: market.fee,
+    uniswapPoolAddress: poolInfo.poolContract.address,
+  };
+};

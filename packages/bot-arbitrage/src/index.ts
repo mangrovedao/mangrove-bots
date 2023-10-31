@@ -9,11 +9,15 @@ import { ExitCode, Setup } from "@mangrovedao/bot-utils";
 import config from "./util/config";
 import {
   getArbitragerContractAddress,
+  getEveryXMinutes,
+  getFactoryAddress,
   getMarketsConfig,
 } from "./util/configValidator";
 
 import { MgvArbitrage__factory } from "./types/typechain";
 import { MarketWithToken } from "./types";
+import { getMarketWithUniswapPool } from "./util/ArbBotUtils";
+import { activatePool, activateTokens, arbitrage } from "./arbitarger";
 
 enableLogging();
 
@@ -25,20 +29,15 @@ async function botFunction(
   signer: Wallet,
   provider: BaseProvider
 ) {
+  const factoryAddress = getFactoryAddress();
   const arbitragerContractAddress = getArbitragerContractAddress();
   const marketsConfig = getMarketsConfig();
+  const everyXMinutes = getEveryXMinutes();
 
   const marketsWithToken = await Promise.all(
-    marketsConfig.map<Promise<MarketWithToken>>(async (market) => {
-      const base = await mgv.token(market.base);
-      const quote = await mgv.token(market.quote);
-
-      return {
-        ...market,
-        base,
-        quote,
-      };
-    })
+    marketsConfig.map<Promise<MarketWithToken>>(async (market) =>
+      getMarketWithUniswapPool(mgv, factoryAddress, market)
+    )
   );
 
   const tokenSet: Record<string, MgvToken> = {};
@@ -54,30 +53,42 @@ async function botFunction(
     )
   );
 
-  const mgvArbitrageContract = MgvArbitrage__factory.connect(
+  const arbitragerContract = MgvArbitrage__factory.connect(
     arbitragerContractAddress,
     signer
   );
 
-  // const task = new AsyncTask(
-  //   "gas-updater bot task",
-  //   async () => {
-  //   },
-  //   (err: Error) => {
-  //     logger.error(err);
-  //     setup.stopAndExit(ExitCode.ErrorInAsyncTask, scheduler);
-  //   }
-  // );
-  //
-  // const job = new SimpleIntervalJob(
-  //   {
-  //     hours: oracleConfig.runEveryXHours,
-  //     runImmediately: true,
-  //   },
-  //   task
-  // );
-  //
-  // scheduler.addSimpleIntervalJob(job);
+  await activateTokens(mgv, Object.values(tokenSet), arbitragerContract);
+
+  await Promise.all(
+    marketsWithToken.map((market) =>
+      activatePool(market.uniswapPoolAddress, arbitragerContract)
+    )
+  );
+
+  const task = new AsyncTask(
+    "gas-updater bot task",
+    async () => {
+      await arbitrage(mgv, arbitragerContract, marketsWithToken, [
+        "doArbitrageFirstMangroveThenUniswap",
+        "doArbitrageFirstUniwapThenMangrove",
+      ]);
+    },
+    (err: Error) => {
+      logger.error(err);
+      setup.stopAndExit(ExitCode.ErrorInAsyncTask, scheduler);
+    }
+  );
+
+  const job = new SimpleIntervalJob(
+    {
+      hours: everyXMinutes,
+      runImmediately: true,
+    },
+    task
+  );
+
+  scheduler.addSimpleIntervalJob(job);
 }
 
 const main = async () => {
