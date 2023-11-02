@@ -219,7 +219,7 @@ export class MarketCleaner {
     ba: Market.BA,
     takerWants: Big,
     contextInfo?: string
-  ): Promise<{ willOfferFail: boolean; bounty?: BigNumber }> {
+  ): Promise<{ willOfferFail: boolean; bounty: BigNumber }> {
     const raw = await this.#market.getRawCleanParams({
       ba: ba,
       targets: this.#createCollectParams(offer, takerWants),
@@ -235,7 +235,7 @@ export class MarketCleaner {
         raw.targets,
         raw.taker
       )
-      .then(({ successes, bounty }) => {
+      .then(async ({ successes, bounty }) => {
         logger.debug("Static collect of offer succeeded", {
           base: this.#market.base.name,
           quote: this.#market.quote.name,
@@ -244,7 +244,7 @@ export class MarketCleaner {
           contextInfo,
           data: { successes, bounty },
         });
-        return { willOfferFail: true, bounty: bounty };
+        return { willOfferFail: successes.gt(0), bounty };
       })
       .catch((e) => {
         logger.debug("Static collect of offer failed", {
@@ -255,7 +255,7 @@ export class MarketCleaner {
           contextInfo,
           data: e,
         });
-        return { willOfferFail: false };
+        return { willOfferFail: false, bounty: BigNumber.from(0) };
       });
   }
 
@@ -288,6 +288,39 @@ export class MarketCleaner {
         },
       });
     }
+
+    const raw = await this.#market.getRawCleanParams({
+      ba: ba,
+      targets: this.#createCollectParams(offer, takerWants),
+    });
+
+    const gasEstimate =
+      await this.#market.mgv.contract.estimateGas.cleanByImpersonation(
+        {
+          outbound_tkn: raw.outboundTkn,
+          inbound_tkn: raw.inboundTkn,
+          tickSpacing: this.#market.tickSpacing,
+        },
+        raw.targets,
+        raw.taker
+      );
+
+    const gasEstimateWithBuffer = gasEstimate.mul(10);
+    txOverrides = {
+      ...txOverrides,
+      gasLimit: gasEstimateWithBuffer,
+    };
+
+    // const cleanPromises = await this.#market.mgv.contract.cleanByImpersonation(
+    //   {
+    //     outbound_tkn: raw.outboundTkn,
+    //     inbound_tkn: raw.inboundTkn,
+    //     tickSpacing: this.#market.tickSpacing,
+    //   },
+    //   raw.targets,
+    //   raw.taker,
+    //   txOverrides
+    // );
 
     const cleanPromises = await this.#market.clean(
       {

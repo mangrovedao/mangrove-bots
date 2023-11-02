@@ -1294,9 +1294,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mangrovedao/mangrove.js@mangrovedao/mangrove.js#feat/ticks":
-  version: 2.0.0-0
-  resolution: "@mangrovedao/mangrove.js@https://github.com/mangrovedao/mangrove.js.git#commit=f827bfd5d743a0fb466ee86178cf9fa36036b804"
+"@mangrovedao/mangrove.js@portal:/Users/maxenceraballand/Documents/mangrove/mangrove.js::locator=mangrove-bots%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@mangrovedao/mangrove.js@portal:/Users/maxenceraballand/Documents/mangrove/mangrove.js::locator=mangrove-bots%40workspace%3A."
   dependencies:
     "@ethersproject/experimental": ^5.7.0
     "@mangrovedao/mangrove-core": ^2.0.0-3
@@ -1320,9 +1320,8 @@ __metadata:
     yargs: ^17.3.0
   bin:
     mgv: ./dist/nodejs/cli/mgv.js
-  checksum: 9e4d76867e56fc26763eb577046bf3bfa147dd15765147cc27d8556bfb4c0c1b3ffec75787f84efd90b8563b873e6c087872911a81380f05a4feb2236e2e5dc2
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@mangrovedao/reliable-event-subscriber@npm:1.1.29":
   version: 1.1.29

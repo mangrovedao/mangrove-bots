@@ -68,7 +68,7 @@ describe("MarketCleaner integration tests", () => {
     cleanerProvider = mgv.provider;
 
     // Turn up the Mangrove gasprice to increase the bounty
-    await mgvTestUtil.setMgvGasPrice(50);
+    await mgvTestUtil.setMgvGasPrice(2000);
 
     balancesBefore = await mgvTestUtil.getBalances(accounts, testProvider);
     mgvTestUtil.initPollOfTransactionTracking(mgv.provider);
@@ -88,6 +88,16 @@ describe("MarketCleaner integration tests", () => {
     it(`should clean offer failing to trade 0 wants on the '${ba}' offer list`, async function () {
       // Arrange
       const tx = await mgvTestUtil.postNewRevertingOffer(market, ba, maker);
+      // const tx = await mgvTestUtil.postNewOffer({
+      //   market,
+      //   ba,
+      //   maker,
+      //   tick: 1,
+      //   gives: mgvTestUtil.rawMinGivesBase,
+      //   shouldRevert: true,
+      //   gasreq: 2e5
+      // })
+
       await mgvTestUtil.waitForBlock(market.mgv, tx.blockNumber);
 
       const marketCleaner = new MarketCleaner(market, cleanerProvider, {
