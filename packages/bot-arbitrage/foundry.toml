@@ -28,16 +28,6 @@ optimizer_runs=20000
 # optimizer=true
 # optimizer_runs=20000
 
-# Private keys are expected to be of the form <NETWORK>_PRIVATE_KEY
-# The relevant code is in Deployer.sol
-[rpc_endpoints]
-polygon="${POLYGON_NODE_URL}"
-mumbai="${MUMBAI_NODE_URL}"
-ethereum="${ETHEREUM_NODE_URL}"
-testnet_zkevm="https://rpc.public.zkevm-test.net"
-zkevm="https://zkevm-rpc.com"
-goerli="${GOERLI_NODE_URL}"
-
 # The remappings are in remappings.txt so vscode solidity ext. can read them
 # The first lines are the manual remappings
 # The other lines are a copy/paste of the inferred mappings shown by `forge config` (inferred from imported libs)

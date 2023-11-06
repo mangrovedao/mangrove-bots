@@ -18,9 +18,9 @@ const srcDirs = [
 // To copy a folder or file, select overwrite accordingly
 try {
   for (dir of srcDirs) {
+    fse.removeSync(dir.dest);
     fse.copySync(dir.src, dir.dest, {
       overwrite: true,
-      filter: (src, dest) => !src.includes("node_modules"),
     });
   }
   console.log("success!");
