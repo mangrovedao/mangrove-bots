@@ -24,7 +24,7 @@
     "test": "yarn test:unit && yarn test:integration",
     "test:integration": "node copyMangroveCoreAndStratsAndArbitrage.js && cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/integration-tests.json --exit ",
     "test:unit": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/unit-tests.json --exit ",
-    "test:coverage": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/coverage-tests.json --exit ",
+    "test:coverage": "node copyMangroveCoreAndStratsAndArbitrage.js && cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/coverage-tests.json --exit ",
     "typechain": "ts-node --transpileOnly src/util/runTypechain.ts",
     "demo": "ts-node --transpileOnly scripts/demoScript.ts",
     "logMarket": "ts-node --transpileOnly scripts/logMarket.ts",
