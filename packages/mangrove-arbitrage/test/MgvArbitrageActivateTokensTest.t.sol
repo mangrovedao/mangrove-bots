@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: BSD-2-Clause
 pragma solidity ^0.8.10;
 
-import {Deployer} from "mgv_script/lib/Deployer.sol";
-import {MgvArbitrageActivateTokens} from "script/MgvArbitrageActivateTokens.s.sol";
-import {MgvArbitrageDeployer} from "script/deployers/MgvArbitrageDeployer.s.sol";
-import {IERC20} from "mgv_lib/IERC20.sol";
-import "mgv_test/lib/forks/Polygon.sol";
-import {MangroveJsDeploy} from "mgv_strats_script/toy/MangroveJs.s.sol";
-import "mgv_test/lib/MangroveTest.sol";
+import {Deployer} from "@mgv/script/lib/Deployer.sol";
+import {MgvArbitrageActivateTokens} from "@mgv/arbitrage/script/MgvArbitrageActivateTokens.s.sol";
+import {MgvArbitrageDeployer} from "@mgv/arbitrage/script/deployers/MgvArbitrageDeployer.s.sol";
+import {IERC20} from "@mgv/lib/IERC20.sol";
+import "@mgv/test/lib/forks/Polygon.sol";
+import {MangroveJsDeploy} from "@mgv-strats/script/toy/MangroveJs.s.sol";
+import "@mgv/test/lib/MangroveTest.sol";
 
 contract MgvArbitrageActivateTokensTest is Deployer, Test2 {
   MgvArbitrageActivateTokens mgvArbActivateTokens;
@@ -25,7 +25,7 @@ contract MgvArbitrageActivateTokensTest is Deployer, Test2 {
     tokenA = IERC20(fork.get("TokenA"));
     tokenB = IERC20(fork.get("TokenB"));
     mgvArbDeployer = new MgvArbitrageDeployer();
-    mgvArbDeployer.innerRun({admin: admin, mgv: mgv, arbitrager: freshAddress("arbitrager")});
+    mgvArbDeployer.innerRun({admin: admin, mgv: mgv});
     mgvArbActivateTokens = new MgvArbitrageActivateTokens();
   }
 

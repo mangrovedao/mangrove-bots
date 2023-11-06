@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {ISwapRouter} from "@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol";
-import {IMangrove} from "mgv_src/IMangrove.sol";
+import {IMangrove} from "@mgv/src/IMangrove.sol";
 import {IERC20, OLKey} from "@mgv/src/core/MgvLib.sol";
-import {AccessControlled} from "mgv_strats_src/strategies/utils/AccessControlled.sol";
-import {TransferLib} from "mgv_lib/TransferLib.sol";
-import {IUniswapV3Pool} from "lib/v3-core/contracts/interfaces/IUniswapV3Pool.sol";
-import {IUniswapV3SwapCallback} from "lib/v3-core/contracts/interfaces/callback/IUniswapV3SwapCallback.sol";
+import {AccessControlled} from "@mgv-strats/src/strategies/utils/AccessControlled.sol";
+import {TransferLib} from "@mgv/lib/TransferLib.sol";
+import {IUniswapV3Pool} from "@uniswap/v3/lib/contracts/interfaces/IUniswapV3Pool.sol";
+import {IUniswapV3SwapCallback} from "@uniswap/v3/lib/contracts/interfaces/callback/IUniswapV3SwapCallback.sol";
 import {FullMath} from "./FullMath.sol";
 
 /// @param takerGivesToken The token the taker gives
@@ -28,26 +27,18 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
   uint160 internal constant MAX_SQRT_RATIO = 1461446703485210103287273052203988822378723970342;
 
   IMangrove public mgv;
-  address public arbitrager;
 
   bool isArbitraging;
 
-  mapping(address => bool) pools;
+  mapping(address => bool) public pools;
 
   /// @param _mgv The Mangrove instance to be arbitraged
   /// @param admin The admin of the contract. The only address allowed to withdraw funds.
-  constructor(IMangrove _mgv, address admin, address _arbitrager) AccessControlled(admin) {
+  constructor(IMangrove _mgv, address admin) AccessControlled(admin) {
     mgv = _mgv;
-    arbitrager = _arbitrager;
   }
 
   receive() external payable virtual {}
-
-  /// @notice This modifier verifies that the `msg.sender` is the arbitrager
-  modifier onlyArbitrager() {
-    require(msg.sender == arbitrager, "Only arbitrager can call this function");
-    _;
-  }
 
   /// copied from there: https://ethereum.stackexchange.com/a/136961
   function getPrice(IUniswapV3Pool pool, uint token0Decimals) internal view returns (uint price) {
@@ -126,9 +117,8 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
   /// This function calculates the minimum between `z` and `y`, and then performs a `marketOrder` with `fillWants` set to `false` and `takerGives` set to the minimum value between `z` and `y`. The `marketOrder` returns `totalGot` (in `takerWantsToken`) and `totalGave` (in `takerGivesToken`). It then swaps `totalGot` tokens using Uniswap, which returns `deltaTakerWants` (in `takerWantsToken`) and `deltaTakerGives` (in `takerGivesToken).
   /// After these operations, the function checks that the balances of `takerGivesToken` and `takerWantsToken` have increased. If the balances have not increased, the transaction reverts, indicating that the arbitrage was not profitable.
   /// @param params An `ArbParams` struct containing the necessary information for the arbitrage operation.
-  function doArbitrageFirstMangroveThenUniswap(ArbParams calldata params) public onlyArbitrager {
+  function doArbitrageFirstMangroveThenUniswap(ArbParams calldata params) public {
     uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
-    uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
 
     OLKey memory olKey = OLKey(address(params.takerWantsToken), address(params.takerGivesToken), params.tickSpacing);
     uint bestOfferWants = mangroveGetBestOfferWants(olKey);
@@ -137,11 +127,10 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
       mgv.marketOrderByVolume(olKey, 0, bestOfferWants > givesTokenBalance ? givesTokenBalance : bestOfferWants, false);
 
     isArbitraging = true;
-    (uint deltaTakerWants, uint deltaTakerGives) =
+    (, uint deltaTakerGives) =
       lowLevelUniswapSwap(address(params.takerWantsToken), address(params.takerGivesToken), int(totalGot), params.pool);
 
     require(params.minimumGain + totalGave <= deltaTakerGives, "MgvArbitrage/notProfitable");
-    require(wantsTokenBalance + deltaTakerWants <= totalGot, "MgvArbitrage/notProfitable");
   }
 
   /// @notice This function performs an arbitrage by first exchanging `takerGivesToken` for `takerWantsToken` using Uniswap, and then it swaps the received `takerWantsToken` back to `takerGivesToken` using Uniswap.
@@ -163,12 +152,10 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
   /// After these operations, the function checks that the balances of `takerGivesToken` and `takerWantsToken` have increased. If the balances have not increased, the transaction reverts, indicating that the arbitrage was not profitable.
   ///
   /// @param params An `ArbParams` struct containing the necessary information for the arbitrage operation.
-  function doArbitrageFirstUniwapThenMangrove(ArbParams calldata params) public onlyArbitrager {
+  function doArbitrageFirstUniwapThenMangrove(ArbParams calldata params) public {
     uint givesTokenBalance = params.takerGivesToken.balanceOf(address(this));
 
     uint maxAmount = estimateHowMuchUniswapV3CanGive(params.pool, params.takerGivesToken, givesTokenBalance);
-
-    uint wantsTokenBalance = params.takerWantsToken.balanceOf(address(this));
 
     OLKey memory olKey = OLKey(address(params.takerGivesToken), address(params.takerWantsToken), params.tickSpacing);
     uint bestOfferWants = mangroveGetBestOfferWants(olKey);
@@ -183,10 +170,9 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
       params.pool
     );
 
-    (uint totalGot, uint totalGave,,) = mgv.marketOrderByVolume(olKey, 0, deltaWants, false);
+    (uint totalGot,,,) = mgv.marketOrderByVolume(olKey, 0, deltaWants, false);
 
     require(params.minimumGain + deltaGives <= totalGot, "MgvArbitrage/notProfitable");
-    require(wantsTokenBalance + totalGave <= wantsTokenBalance + deltaWants, "MgvArbitrage/notProfitable");
   }
 
   ///@notice Retrieves wants from the best mangrove offer for a given market pair of outbound token and inbound token on Mangrove.

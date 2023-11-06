@@ -1,153 +1,88 @@
-import dotenvFlow from "dotenv-flow";
-dotenvFlow.config();
-import { BaseProvider } from "@ethersproject/providers";
-import {
-  BalanceUtils,
-  ExitCode,
-  LatestMarketActivity,
-  Setup,
-} from "@mangrovedao/bot-utils";
-import Mangrove, { Market, enableLogging } from "@mangrovedao/mangrove.js";
-import { Wallet } from "ethers";
-import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
-import { ArbBot } from "./ArbBot";
-import config from "./util/config";
-import { ConfigUtils } from "./util/configUtils";
 import { logger } from "./util/logger";
-import { getPoolInfo } from "./uniswap/pool";
-import { Token } from "@uniswap/sdk-core";
+
+import { BaseProvider } from "@ethersproject/providers";
+import { Wallet } from "@ethersproject/wallet";
+import Mangrove, { enableLogging, MgvToken } from "@mangrovedao/mangrove.js";
+
+import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
+import { ExitCode, Setup } from "@mangrovedao/bot-utils";
+import config from "./util/config";
+import {
+  getArbitragerContractAddress,
+  getEveryXMinutes,
+  getFactoryAddress,
+  getMarketsConfig,
+} from "./util/configValidator";
+
+import { MgvArbitrage__factory } from "./types/typechain";
+import { MarketWithToken } from "./types";
+import { getMarketWithUniswapPool } from "./util/ArbBotUtils";
+import { activatePool, activateTokens, arbitrage } from "./arbitarger";
 
 enableLogging();
 
-type TokenConfig = {
-  name: string;
-};
-
-const balanceUtils = new BalanceUtils(config);
-const setup = new Setup(config);
 const scheduler = new ToadScheduler();
-export type MarketPairAndFee = { base: string; quote: string; fee: number };
-const configUtil = new ConfigUtils(config);
+const setup = new Setup(config);
 
-function createAsyncArbTaker(
+async function botFunction(
   mgv: Mangrove,
-  arbBotMap: { arbBot: ArbBot; market: Market; fee: number }[],
-  scheduler: ToadScheduler
+  signer: Wallet,
+  provider: BaseProvider
 ) {
-  return new AsyncTask(
-    "arb bot task",
+  const factoryAddress = getFactoryAddress();
+  const arbitragerContractAddress = getArbitragerContractAddress();
+  const marketsConfig = getMarketsConfig();
+  const everyXMinutes = getEveryXMinutes();
+
+  const marketsWithToken = await Promise.all(
+    marketsConfig.map<Promise<MarketWithToken>>(async (market) =>
+      getMarketWithUniswapPool(mgv, factoryAddress, market)
+    )
+  );
+
+  const tokenSet: Record<string, MgvToken> = {};
+
+  marketsWithToken.forEach((market) => {
+    tokenSet[market.base.address] = market.base;
+    tokenSet[market.quote.address] = market.quote;
+  });
+
+  await Promise.all(
+    Object.values(tokenSet).map((token) =>
+      token.approveIfNotInfinite(mgv.address)
+    )
+  );
+
+  const arbitragerContract = MgvArbitrage__factory.connect(
+    arbitragerContractAddress,
+    signer
+  );
+
+  await activateTokens(mgv, Object.values(tokenSet), arbitragerContract);
+
+  await Promise.all(
+    marketsWithToken.map((market) =>
+      activatePool(market.uniswapPoolAddress, arbitragerContract)
+    )
+  );
+
+  const task = new AsyncTask(
+    "gas-updater bot task",
     async () => {
-      const block = mgv.reliableProvider.blockManager.getLastBlock();
-      const contextInfo = `block#=${block.number}`;
-
-      setup.latestActivity.latestBlock = block;
-      setup.latestActivity.lastActive = new Date().toISOString();
-
-      logger.trace("Scheduled bot task running...", { contextInfo });
-      await setup.exitIfMangroveIsKilled(mgv, contextInfo, scheduler);
-
-      const arbPromises = [];
-      for (const arbBotValues of arbBotMap.values()) {
-        arbPromises.push(
-          arbBotValues.arbBot.run(
-            arbBotValues.market,
-            [
-              arbBotValues.market.base.name,
-              arbBotValues.market.quote.name,
-              arbBotValues.fee,
-            ],
-            configUtil.buildArbConfig(
-              arbBotValues.market.base.name,
-              arbBotValues.market.quote.name
-            ),
-            contextInfo
-          )
-        );
-      }
-      await Promise.allSettled(arbPromises);
+      await arbitrage(mgv, arbitragerContract, marketsWithToken, [
+        "doArbitrageFirstMangroveThenUniswap",
+        "doArbitrageFirstUniwapThenMangrove",
+      ]);
     },
     (err: Error) => {
       logger.error(err);
       setup.stopAndExit(ExitCode.ErrorInAsyncTask, scheduler);
     }
   );
-}
-
-export async function botFunction(
-  mgv: Mangrove,
-  signer: Wallet,
-  provider: BaseProvider
-) {
-  const botConfig = configUtil.getAndValidateArbConfig();
-
-  const latestMarketActivities: LatestMarketActivity[] = [];
-  setup.latestActivity.markets = latestMarketActivities;
-
-  const marketConfigs = botConfig.markets;
-  const arbBotMarketMap = new Set<MarketPairAndFee>();
-  const tokens: TokenConfig[] = [];
-  for (const marketConfig of marketConfigs) {
-    const [base, quote] = marketConfig;
-    arbBotMarketMap.add({
-      base,
-      quote,
-      fee: marketConfig[2],
-    });
-    tokens.push({ name: base }, { name: quote });
-  }
-  const holdingTokens: TokenConfig[] = configUtil
-    .getHoldingTokenConfig()
-    .map((token) => ({ name: token }));
-  await balanceUtils.logTokenBalances(
-    mgv,
-    Mangrove.getAddress("MgvArbitrage", mgv.network.name),
-    tokens.concat(holdingTokens),
-    "init"
-  );
-
-  // create and schedule task
-  logger.info(`Running bot every ${botConfig.runEveryXMinutes} minutes.`, {
-    data: { runEveryXMinutes: botConfig.runEveryXMinutes },
-  });
-  const arbBotMap: { arbBot: ArbBot; market: Market; fee: number }[] = [];
-  for (const arbBotValues of arbBotMarketMap.values()) {
-    const base = await mgv.token(arbBotValues.base);
-    const quote = await mgv.token(arbBotValues.quote);
-    const factoryAddress = mgv.getAddress("UniswapV3Factory");
-    const poolInfo = await getPoolInfo(
-      factoryAddress,
-      new Token(mgv.network.id, base.address, base.decimals),
-      new Token(mgv.network.id, quote.address, quote.decimals),
-      arbBotValues.fee,
-      mgv.provider
-    );
-    const market = await mgv.market({
-      base: arbBotValues.base,
-      quote: arbBotValues.quote,
-    });
-
-    // Create object for tracking latest activity
-    const latestMarketActivity = {
-      base: market.base.name,
-      quote: market.quote.name,
-      latestBlock: undefined,
-      lastActive: undefined,
-    };
-    latestMarketActivities.push(latestMarketActivity);
-
-    logger.info(`Starting bot for ${arbBotValues.base}/${arbBotValues.quote}`);
-    arbBotMap.push({
-      arbBot: new ArbBot(mgv, poolInfo.poolContract, latestMarketActivity),
-      market: market,
-      fee: arbBotValues.fee,
-    });
-  }
-
-  const task = createAsyncArbTaker(mgv, arbBotMap, scheduler);
 
   const job = new SimpleIntervalJob(
     {
-      minutes: botConfig.runEveryXMinutes,
+      hours: everyXMinutes,
       runImmediately: true,
     },
     task
@@ -157,7 +92,7 @@ export async function botFunction(
 }
 
 const main = async () => {
-  await setup.startBot("ARB bot", botFunction, scheduler);
+  await setup.startBot("update gas bot", botFunction, scheduler, true);
 };
 
 main().catch((e) => {
