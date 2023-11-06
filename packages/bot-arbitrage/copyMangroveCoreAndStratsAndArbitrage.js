@@ -2,11 +2,11 @@ const fse = require("fs-extra");
 
 const srcDirs = [
   {
-    src: "../../node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-core/",
+    src: "../../node_modules/@mangrovedao/mangrove-core/",
     dest: "./mangrove-src/core",
   },
   {
-    src: "../../node_modules/@mangrovedao/mangrove.js/node_modules/@mangrovedao/mangrove-strats/",
+    src: "../../node_modules/@mangrovedao/mangrove-strats/",
     dest: "./mangrove-src/strats",
   },
   {
@@ -18,7 +18,10 @@ const srcDirs = [
 // To copy a folder or file, select overwrite accordingly
 try {
   for (dir of srcDirs) {
-    fse.copySync(dir.src, dir.dest, { overwrite: true });
+    fse.copySync(dir.src, dir.dest, {
+      overwrite: true,
+      filter: (src, dest) => !src.includes("node_modules"),
+    });
   }
   console.log("success!");
 } catch (err) {
