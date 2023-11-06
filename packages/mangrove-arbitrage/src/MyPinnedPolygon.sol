@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: BSD-2-Clause
 pragma solidity ^0.8.10;
 
-import {GenericFork} from "mgv_test/lib/forks/Generic.sol";
+import {GenericFork} from "@mgv/test/lib/forks/Generic.sol";
 
 contract PolygonFork is GenericFork {
   constructor() {

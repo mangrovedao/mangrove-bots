@@ -1,16 +1,5 @@
-mgv_src/=lib/mangrove-core/src/
-mgv_strats_src/=lib/mangrove-strats/src/
-mgv_lib/=lib/mangrove-core/lib/
-mgv_strats_lib/=lib/mangrove-strats/lib/
-mgv_test/=lib/mangrove-core/test/
-mgv_strats_test/=lib/mangrove-strats/test/
-mgv_script/=lib/mangrove-core/script/
-mgv_strats_script/=lib/mangrove-strats/script/
-
-
 ds-test/=lib/mangrove-core/lib/forge-std/lib/ds-test/src/
 forge-std/=lib/mangrove-core/lib/forge-std/src/
-
 
 @mgv/src/=lib/mangrove-core/src/
 @mgv/lib/=lib/mangrove-core/lib/
@@ -23,9 +12,9 @@ forge-std/=lib/mangrove-core/lib/forge-std/src/
 @mgv-strats/test/=lib/mangrove-strats/test/
 @mgv-strats/script/=lib/mangrove-strats/script/
 
-mgv_arbitrage_src=src
-mgv_arbitrage_lib=lib
-mgv_arbitrage_test=test
-mgv_arbitrage_script=script
+@mgv/arbitrage/src=src
+@mgv/arbitrage/lib=lib
+@mgv/arbitrage/test=test
+@mgv/arbitrage/script=script
 
-uniswap_v3_lib=lib/v3-core
+@uniswap/v3/lib=lib/v3-core

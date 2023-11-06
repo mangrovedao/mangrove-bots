@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.13;
 
-import {Deployer} from "mgv_script/lib/Deployer.sol";
-import {MgvArbitrage} from "mgv_arbitrage_src/MgvArbitrage.sol";
-import {IMangrove} from "mgv_src/IMangrove.sol";
-import {IERC20} from "mgv_lib/IERC20.sol";
+import {Deployer} from "@mgv/script/lib/Deployer.sol";
+import {MgvArbitrage} from "@mgv/arbitrage/src/MgvArbitrage.sol";
+import {IMangrove} from "@mgv/src/IMangrove.sol";
+import {IERC20} from "@mgv/lib/IERC20.sol";
 
 contract MgvArbitrageActivateTokens is Deployer {
   MgvArbitrage public mgvArb;

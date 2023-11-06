@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: BSD-2-Clause
 pragma solidity ^0.8.10;
 
-import {Deployer} from "mgv_script/lib/Deployer.sol";
-import {MangroveDeployer} from "mgv_script/core/deployers/MangroveDeployer.s.sol";
-import {MgvArbitrageDeployer} from "mgv_arbitrage_script/deployers/MgvArbitrageDeployer.s.sol";
+import {Deployer} from "@mgv/script/lib/Deployer.sol";
+import {MangroveDeployer} from "@mgv/script/core/deployers/MangroveDeployer.s.sol";
+import {MgvArbitrageDeployer} from "@mgv/arbitrage/script/deployers/MgvArbitrageDeployer.s.sol";
 
-import {Test2, Test} from "mgv_lib/Test2.sol";
+import {Test2, Test} from "@mgv/lib/Test2.sol";
 
 abstract contract BaseMgvArbitrageDeployerTest is Deployer, Test2 {
   MgvArbitrageDeployer mgvArbDeployer;
