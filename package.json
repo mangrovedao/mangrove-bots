@@ -19,7 +19,6 @@
         "husky": "^7.0.2"
     },
     "dependencies": {
-        "@mangrovedao/mangrove.js": "next",
         "pinst": "^3.0.0"
     },
     "packageManager": "yarn@3.1.0"
