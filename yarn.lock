@@ -1229,7 +1229,7 @@ __metadata:
     "@espendk/json-file-reporter": ^1.4.2
     "@ethersproject/experimental": ^5.7.0
     "@ethersproject/hardware-wallets": ^5.7.0
-    "@mangrovedao/mangrove.js": "mangrovedao/mangrove.js#feat/ticks"
+    "@mangrovedao/mangrove.js": next
     "@types/big.js": ^6.1.6
     "@types/chai": ^4.3.4
     "@types/chai-as-promised": ^7.1.5
@@ -1285,22 +1285,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mangrovedao/mangrove-strats@https://github.com/mangrovedao/mangrove-strats.git#commit=01a783f5591f1dd0fcc17f6d0370e1752a02af67":
-  version: 0.0.2-0
-  resolution: "@mangrovedao/mangrove-strats@https://github.com/mangrovedao/mangrove-strats.git#commit=01a783f5591f1dd0fcc17f6d0370e1752a02af67"
+"@mangrovedao/mangrove-strats@npm:next":
+  version: 0.0.2-3
+  resolution: "@mangrovedao/mangrove-strats@npm:0.0.2-3"
   dependencies:
     "@mangrovedao/mangrove-core": next
-  checksum: 33d84827f37742d85215b7a55947579d24efc3cc845ef0d45adc80bc8dba7b5ea952772dfcfbd37443a2814ad09f1c29ad52b711091b5fcb57f946e0f1e97f81
+  checksum: 32abe70d58d8fc649004ab56c5e717384f091865af2e148f3e1d702604839be45cbf2b203c6dffada006eb8c1df17abb52fbcaf894a9ff76fca2e7087b06b116
   languageName: node
   linkType: hard
 
-"@mangrovedao/mangrove.js@portal:/Users/maxenceraballand/Documents/mangrove/mangrove.js::locator=mangrove-bots%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@mangrovedao/mangrove.js@portal:/Users/maxenceraballand/Documents/mangrove/mangrove.js::locator=mangrove-bots%40workspace%3A."
+"@mangrovedao/mangrove.js@npm:next":
+  version: 2.0.0-1
+  resolution: "@mangrovedao/mangrove.js@npm:2.0.0-1"
   dependencies:
     "@ethersproject/experimental": ^5.7.0
     "@mangrovedao/mangrove-core": ^2.0.0-3
-    "@mangrovedao/mangrove-strats": "https://github.com/mangrovedao/mangrove-strats.git#commit=01a783f5591f1dd0fcc17f6d0370e1752a02af67"
+    "@mangrovedao/mangrove-strats": next
     "@mangrovedao/reliable-event-subscriber": 1.1.29
     "@types/object-inspect": ^1.8.1
     "@types/triple-beam": ^1.3.2
@@ -1320,8 +1320,9 @@ __metadata:
     yargs: ^17.3.0
   bin:
     mgv: ./dist/nodejs/cli/mgv.js
+  checksum: af8c56ad5e3e284d686ead802278322dc2d66e6fdf63157897fa3550d1dc45ed6e7b945c350ca8c49743b608976882c5213a506a1a3bf8c9fe566a2c4030d892
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "@mangrovedao/reliable-event-subscriber@npm:1.1.29":
   version: 1.1.29
@@ -7416,9 +7417,9 @@ __metadata:
   linkType: hard
 
 "transparent-proxy@npm:^1.12.1":
-  version: 1.15.0
-  resolution: "transparent-proxy@npm:1.15.0"
-  checksum: ea6a7a1dc351768937aedba8fa3c0c939d5b0db015b34246dd69d666fe9c69602507df666be9d4f8636d13db230fe34bd0850a0c118bedd0bf16e31097fbca3c
+  version: 1.13.1
+  resolution: "transparent-proxy@npm:1.13.1"
+  checksum: ccd58f5a13ba52eb4f65633c97e7158cbac53d0437d1188b491d9fc3ffe942b1525875f144dbf653f4e22f32a07873131d77d260643b6a667cdd9e2637302c7d
   languageName: node
   linkType: hard
 
