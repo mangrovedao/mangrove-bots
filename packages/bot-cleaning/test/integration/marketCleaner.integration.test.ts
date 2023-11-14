@@ -88,15 +88,6 @@ describe("MarketCleaner integration tests", () => {
     it(`should clean offer failing to trade 0 wants on the '${ba}' offer list`, async function () {
       // Arrange
       const tx = await mgvTestUtil.postNewRevertingOffer(market, ba, maker);
-      // const tx = await mgvTestUtil.postNewOffer({
-      //   market,
-      //   ba,
-      //   maker,
-      //   tick: 1,
-      //   gives: mgvTestUtil.rawMinGivesBase,
-      //   shouldRevert: true,
-      //   gasreq: 2e5
-      // })
 
       await mgvTestUtil.waitForBlock(market.mgv, tx.blockNumber);
 
