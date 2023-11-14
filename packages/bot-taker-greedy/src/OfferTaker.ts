@@ -216,7 +216,7 @@ export class OfferTaker {
     const semibook = this.#market.getSemibook(ba);
 
     // If there is no immediately better offer, then we do not have to query the list
-    // TODO: check if there is a way to know all offers witha better price on the book without querying
+    // TODO: check if there is a way to know all offers with a better price on the book without querying
     const offers = await semibook.requestOfferListPrefix({
       desiredPrice: externalPrice,
     });
