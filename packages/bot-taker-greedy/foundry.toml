@@ -7,7 +7,7 @@ test='test'
 out='out'
 libs=['lib']
 cache_path='cache'
-fs_permissions = [{ access = "read-write", path = "./addresses/"}, { access = "read", path = "./out/" }, {access = "read", path = "./mangrove-src/core/"}, {access = "read", path = "./mangrove-src/strats/"}, { access = "read", path = "./mgvConfig.json" }]
+fs_permissions = [{ access = "read-write", path = "./addresses/"}, { access = "read", path = "./out/" }, {access = "read", path = "./mangrove-src/"}, { access = "read", path = "./mgvConfig.json" }]
 solc_version="0.8.20"
 ffi=true
 
