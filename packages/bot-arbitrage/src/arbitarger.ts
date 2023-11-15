@@ -28,7 +28,7 @@ export const activateTokens = async (
   const tx = await arbitragerContract.activateTokens(
     tokenToActivate.map((token) => token.address),
     {
-      gasLimit: gasEstimate.mul(10),
+      gasLimit: gasEstimate.mul(2),
     }
   );
 
