@@ -29,6 +29,7 @@ export class MarketCleaner {
   #isCleaning: boolean;
   #txUtils: TxUtils;
   #latestMarketActivity: LatestMarketActivity;
+  #allowedLostPercentage: number;
   #whitelistedDustCleaningMaker?: Set<String>;
   #takerToImpersonate?: string;
 
@@ -42,12 +43,14 @@ export class MarketCleaner {
     market: Market,
     provider: Provider,
     latestMarketActivity: LatestMarketActivity,
+    allowedLostPercentage: number,
     whitelistedDustCleaningMaker?: Set<String>,
     takerToImpersonate?: string
   ) {
     this.#market = market;
     this.#provider = provider;
     this.#latestMarketActivity = latestMarketActivity;
+    this.#allowedLostPercentage = allowedLostPercentage;
     this.#whitelistedDustCleaningMaker = whitelistedDustCleaningMaker;
     this.#takerToImpersonate = takerToImpersonate;
 
@@ -448,7 +451,8 @@ export class MarketCleaner {
     takerGives: Big
   ): Promise<OfferCleaningEstimates> {
     const gas = await this.#estimateGas(offer, ba, takerWants, takerGives);
-    const totalCost = gas.mul(gasPrice);
+
+    const totalCost = gas.mul(gasPrice).mul(1 - this.#allowedLostPercentage);
     const netResult = bounty.sub(totalCost);
     return {
       bounty,

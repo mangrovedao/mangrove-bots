@@ -81,6 +81,8 @@ async function botFunction(
     throw new Error("whitelistedRunEveryXMinutes is missing");
   }
 
+  const allowedLostPercentage = config.get<number>("allowedLostPercentage");
+
   const latestMarketActivities: LatestMarketActivity[] = [];
   setup.latestActivity.markets = latestMarketActivities;
 
@@ -109,6 +111,7 @@ async function botFunction(
         market,
         provider,
         latestMarketActivity,
+        allowedLostPercentage,
         new Set(whitelistedAddreses.map((addr) => addr.toLowerCase())),
         takerToImpersonate
       )
