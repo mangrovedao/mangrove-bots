@@ -4,6 +4,10 @@
     "__name": "MARKETS",
     "__format": "json"
   },
+  "allowedLostPercentage": {
+    "__name": "ALLOWED_LOST_PERCENTAGE",
+    "__format": "number"
+  },
   "runEveryXMinutes": {
     "__name": "RUN_EVERY_X_MINUTES",
     "__format": "number"

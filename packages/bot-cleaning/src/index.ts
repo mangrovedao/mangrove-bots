@@ -7,7 +7,6 @@
 import { BaseProvider } from "@ethersproject/providers";
 import { Wallet } from "@ethersproject/wallet";
 import {
-  configUtils,
   ConfigUtils,
   ExitCode,
   LatestMarketActivity,
@@ -82,13 +81,15 @@ async function botFunction(
     throw new Error("whitelistedRunEveryXMinutes is missing");
   }
 
+  const allowedLostPercentage = config.get<number>("allowedLostPercentage");
+
   const latestMarketActivities: LatestMarketActivity[] = [];
   setup.latestActivity.markets = latestMarketActivities;
 
   const marketConfigs = botConfig.markets;
   const marketCleanerMap = new Map<MarketPair, MarketCleaner>();
   for (const marketConfig of marketConfigs) {
-    const [base, quote] = marketConfig;
+    const [base, quote, takerToImpersonate] = marketConfig;
     const market = await mgv.market({
       base: base,
       quote: quote,
@@ -110,7 +111,9 @@ async function botFunction(
         market,
         provider,
         latestMarketActivity,
-        new Set(whitelistedAddreses.map((addr) => addr.toLowerCase()))
+        allowedLostPercentage,
+        new Set(whitelistedAddreses.map((addr) => addr.toLowerCase())),
+        takerToImpersonate
       )
     );
   }

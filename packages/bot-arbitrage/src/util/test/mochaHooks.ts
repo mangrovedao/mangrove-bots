@@ -158,6 +158,7 @@ async function deployUniswapAndMgvArbitrage(
   );
   thisMgv.setAddress("UniswapV3Router", uniContracts.router.address);
   thisMgv.setAddress("UniswapV3Factory", uniContracts.factory.address);
+  thisMgv.setAddress("UniswapV3Quoter", uniContracts.quoter.address);
   thisMgv.setAddress(
     "UniswapV3PositionManager",
     uniContracts.positionManager.address

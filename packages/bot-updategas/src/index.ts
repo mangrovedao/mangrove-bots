@@ -41,11 +41,8 @@ async function botFunction(
   const task = new AsyncTask(
     "gas-updater bot task",
     async () => {
-      const block = mgv.reliableProvider.blockManager.getLastBlock();
-      const contextInfo = `block#=${block.number}`;
-
-      setup.latestActivity.latestBlock = block;
       setup.latestActivity.lastActive = new Date().toISOString();
+      const contextInfo = `${setup.latestActivity.lastActive}`;
 
       logger.debug("Scheduled bot task running...", { contextInfo });
       await setup.exitIfMangroveIsKilled(mgv, contextInfo, scheduler);

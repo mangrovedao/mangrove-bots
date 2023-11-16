@@ -34,7 +34,7 @@ export enum ExitCode {
 }
 
 export type BotConfig = {
-  markets: [string, string][];
+  markets: string[];
   runEveryXMinutes: number;
 };
 

@@ -7,5 +7,6 @@
   ],
   "runEveryXMinutes": 10,
   "whitelistedRunEveryXMinutes": 10,
-  "addressesWithDustCleaningWhitelist": []
+  "addressesWithDustCleaningWhitelist": [],
+  "allowedLostPercentage": 0
 }

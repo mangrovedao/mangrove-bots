@@ -4,5 +4,6 @@
   "MangroveJs": {
     "logLevel": "info"
   },
-  "addressesWithDustCleaningWhitelist": []
+  "addressesWithDustCleaningWhitelist": [],
+  "allowedLostPercentage": 0
 }
