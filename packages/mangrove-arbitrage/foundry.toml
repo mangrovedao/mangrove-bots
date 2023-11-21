@@ -1,0 +1,36 @@
+[profile.default]
+src = 'src'
+out = 'out'
+# libs = ["/Users/kejlberg/Mangrove/mangrove-bots-deploy/node_modules", "lib"]
+libs = ["../../node_modules", "lib"]
+remappings = ['@uniswap/=../../node_modules/@uniswap/', '@openzeppelin/=../../node_modules/@openzeppelin/']
+fs_permissions = [{ access = "read-write", path = "./addresses/"}, { access = "read", path = "./out/" }, {access = "read", path = "./node_modules/@mangrovedao/mangrove-core/"}]
+solc_version="0.8.17"
+auto_detect_remappings = false
+# See more config options https://github.com/foundry-rs/foundry/tree/master/config
+
+[rpc_endpoints]
+polygon="${POLYGON_NODE_URL}"
+mumbai="${MUMBAI_NODE_URL}"
+
+[etherscan]
+goerli={key="${GOERLI_API_KEY}"}
+mumbai={key="${POLYGON_API_KEY}"}
+polygon={key="${POLYGON_API_KEY}"}
+testnet_zkevm={key="${ZKEVM_API_KEY}",chain=1442,url="https://api-testnet-zkevm.polygonscan.com/api"}
+zkevm={key="${ZKEVM_API_KEY}",chain=1101,url="https://api-zkevm.polygonscan.com/api"}
+
+[fmt]
+tab_width=2
+int_types="short"
+number_underscores="thousands"
+
+# If you use scripts from this repo but don't want to set/use config fields that
+# depend on environment variables, set FOUNDRY_PROFILE=no_env_vars. It's not
+# necessary to reset the [rpc_endpoints] section since it's lazily loaded.
+[profile.no_env_vars.etherscan]
+mumbai={key=""}
+polygon={key=""}
+goerli={key=""}
+testnet_zkevm={key="",chain=1442,url="https://api-testnet-zkevm.polygonscan.com/api"}
+zkevm={key="",chain=1101,url="https://api-zkevm.polygonscan.com/api"}
