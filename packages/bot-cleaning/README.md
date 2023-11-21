@@ -47,10 +47,32 @@ $ yarn start
 
 # Configuration
 
-Two aspects of the bot can be configured:
+The bot has a number of configurable settings (which are currently read and used at startup, so bot needs to be restarted to change configuration).
 
-1. The log level
-2. The Mangrove markets to clean.
+Here's an example configuration file with instances of all possible configuration values:
+
+```json
+{
+  "logLevel": "info",
+  "markets": [
+    ["WETH", "USDC", "0x0000a"],
+    ["USDC", "USDT"]
+  ],
+  "runEveryXMinutes": 10,
+  "whitelistedRunEveryXMinutes": 2,
+  "allowedLostPercentage": 0,
+  "addressesWithDustCleaningWhitelist": ["0xaaaa"]
+}
+```
+
+- `logLevel`: Sets the logging level - the bot employs @mangrovedao/bot-utils, and it's default log-levels.
+- `markets`: An array of array string, Each market is represented of an array of at least two elements. Two first elements are the market tokens and the third element is the address that will be impersonated for cleaning.
+- `runEveryXMinutes`: Schedule bot to run with an interval of this many minutes.
+- `whitelistedRunEveryXMinutes`: Schedule whitelisted feature bot to run with an interval of this many minutes.
+- `allowedLostPercentage`: Allowed native token lost as a percentage.
+- `addressesWithDustCleaningWhitelist`: An array of all maker addresses that the bot should tried to clean eveyr whitelistedRunEveryXMinutes.
+
+It is possible to override parts of the configuration with environment variables. This is controlled by [./config/custom-environment-variables.json](./config/custom-environment-variables.json). The structure of this file mirrors the configuration structure but with names of environment variables in the places where these can override a part of the configuration.
 
 These are configured in configuration files, stored in the `src/config` folder. The file [default.json](src/config/default.json) contains all supported configuration options and their defaults. The file [test.json](src/config/test.json) contains the configuration overrides used in tests.
 

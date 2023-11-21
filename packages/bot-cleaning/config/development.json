@@ -3,5 +3,6 @@
   "markets": [["WETH", "DAI"]],
   "runEveryXMinutes": 0.5,
   "whitelistedRunEveryXMinutes": 10,
-  "addressesWithDustCleaningWhitelist": []
+  "addressesWithDustCleaningWhitelist": [],
+  "allowedLostPercentage": 0
 }

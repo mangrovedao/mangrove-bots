@@ -2,17 +2,7 @@ import { Token } from "@uniswap/sdk-core";
 import IUniswapV3PoolABI from "@uniswap/v3-core/artifacts/contracts/interfaces/IUniswapV3Pool.sol/IUniswapV3Pool.json";
 import { computePoolAddress } from "@uniswap/v3-sdk";
 import { ethers } from "ethers";
-
-interface PoolInfo {
-  token0: string;
-  token1: string;
-  fee: number;
-  tickSpacing: number;
-  sqrtPriceX96: ethers.BigNumber;
-  liquidity: ethers.BigNumber;
-  tick: number;
-  poolContract: ethers.Contract;
-}
+import { PoolInfo } from "./types";
 
 export async function getPoolInfo(
   poolFactoryAddress: string,

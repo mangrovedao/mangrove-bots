@@ -1,4 +1,4 @@
-[![CI](https://github.com/mangrovedao/mangrove-bots/actions/workflows/node.js.yml/badge.svg)](https://github.com/mangrovedao/mangrove-bots/actions/workflows/node.js.yml)
+[![CI](https://github.com/mangrovedao/mangrove-bots/actions/workflows/ci.yml/badge.svg)](https://github.com/mangrovedao/mangrove-bots/actions/workflows/ci.yml)
 
 This repo contains a number of bots for the Mangrove ecosystem - each provided as a separate package. 
 

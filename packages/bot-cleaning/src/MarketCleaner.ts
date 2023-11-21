@@ -5,6 +5,7 @@ import { BigNumber } from "ethers";
 import { LatestMarketActivity, TxUtils } from "@mangrovedao/bot-utils";
 import { maxGasReq } from "./constants";
 import Big from "big.js";
+import { cleanUsingMinimalAmountOfFunds } from "./strategies";
 
 type OfferCleaningEstimates = {
   bounty: BigNumber; // wei
@@ -28,7 +29,9 @@ export class MarketCleaner {
   #isCleaning: boolean;
   #txUtils: TxUtils;
   #latestMarketActivity: LatestMarketActivity;
+  #allowedLostPercentage: number;
   #whitelistedDustCleaningMaker?: Set<String>;
+  #takerToImpersonate?: string;
 
   /**
    * Constructs a cleaner for the given Mangrove market which will use the given provider for queries and transactions.
@@ -40,12 +43,16 @@ export class MarketCleaner {
     market: Market,
     provider: Provider,
     latestMarketActivity: LatestMarketActivity,
-    whitelistedDustCleaningMaker?: Set<String>
+    allowedLostPercentage: number,
+    whitelistedDustCleaningMaker?: Set<String>,
+    takerToImpersonate?: string
   ) {
     this.#market = market;
     this.#provider = provider;
     this.#latestMarketActivity = latestMarketActivity;
+    this.#allowedLostPercentage = allowedLostPercentage;
     this.#whitelistedDustCleaningMaker = whitelistedDustCleaningMaker;
+    this.#takerToImpersonate = takerToImpersonate;
 
     this.#isCleaning = false;
     this.#txUtils = new TxUtils(provider, logger);
@@ -53,6 +60,9 @@ export class MarketCleaner {
     logger.info("Initialized market cleaner", {
       base: this.#market.base.name,
       quote: this.#market.quote.name,
+      takerToImpersonate: takerToImpersonate
+        ? takerToImpersonate
+        : "no impersonation, the bot account will be used for cleaning",
       contextInfo: "init",
     });
   }
@@ -146,15 +156,20 @@ export class MarketCleaner {
         this.#whitelistedDustCleaningMaker &&
         this.#whitelistedDustCleaningMaker.has(offer.maker.toLowerCase())
       ) {
-        const outboundTkn =
-          ba == "bids" ? semibook.market.quote : semibook.market.base;
-
-        const takerWants = new Big(1).div(
-          new Big(10).pow(outboundTkn.decimals)
+        const cleaningParams = cleanUsingMinimalAmountOfFunds(
+          semibook.market,
+          ba,
+          offer
         );
 
         cleaningPromises.push(
-          this.#cleanOffer(offer, ba, gasPrice, takerWants, contextInfo) // takerWants: outboundTkn, takerGives: inboundTkn
+          this.#cleanOffer(
+            offer,
+            ba,
+            gasPrice,
+            cleaningParams.takerWants,
+            contextInfo
+          ) // takerWants: outboundTkn, takerGives: inboundTkn
         );
       } else {
         if (shouldOnlyCleanWhitelisted) {
@@ -181,6 +196,7 @@ export class MarketCleaner {
       takerWants,
       contextInfo
     );
+
     if (!willOfferFail || bounty === undefined || bounty.eq(0)) {
       return;
     }
@@ -192,10 +208,12 @@ export class MarketCleaner {
       gasPrice,
       takerWants
     );
+
     if (estimates.netResult.gt(0)) {
       logger.info("Identified offer that is profitable to clean", {
         base: this.#market.base.name,
         quote: this.#market.quote.name,
+        takerToImpersonate: this.#takerToImpersonate,
         ba: ba,
         offer: offer,
         data: { estimates },
@@ -206,6 +224,7 @@ export class MarketCleaner {
       logger.debug("Offer is not profitable to clean", {
         base: this.#market.base.name,
         quote: this.#market.quote.name,
+        takerToImpersonate: this.#takerToImpersonate,
         ba: ba,
         offer: offer,
         contextInfo,
@@ -223,6 +242,7 @@ export class MarketCleaner {
     const raw = await this.#market.getRawCleanParams({
       ba: ba,
       targets: this.#createCollectParams(offer, takerWants),
+      taker: this.#takerToImpersonate,
     });
 
     return this.#market.mgv.contract.callStatic
@@ -292,6 +312,7 @@ export class MarketCleaner {
     const raw = await this.#market.getRawCleanParams({
       ba: ba,
       targets: this.#createCollectParams(offer, takerWants),
+      taker: this.#takerToImpersonate,
     });
 
     const gasEstimate =
@@ -311,26 +332,15 @@ export class MarketCleaner {
       gasLimit: gasEstimateWithBuffer,
     };
 
-    // const cleanPromises = await this.#market.mgv.contract.cleanByImpersonation(
-    //   {
-    //     outbound_tkn: raw.outboundTkn,
-    //     inbound_tkn: raw.inboundTkn,
-    //     tickSpacing: this.#market.tickSpacing,
-    //   },
-    //   raw.targets,
-    //   raw.taker,
-    //   txOverrides
-    // );
-
-    const cleanPromises = await this.#market.clean(
-      {
-        ba: ba,
-        targets: this.#createCollectParams(offer, takerWants),
-      },
-      txOverrides
-    );
-
-    return cleanPromises.result
+    return this.#market
+      .clean(
+        {
+          ba: ba,
+          targets: this.#createCollectParams(offer, takerWants),
+          taker: this.#takerToImpersonate,
+        },
+        txOverrides
+      )
       .then((result) => {
         logger.info("Successfully cleaned offer", {
           base: this.#market.base.name,
@@ -426,7 +436,7 @@ export class MarketCleaner {
     takerWants: Big
   ): Promise<OfferCleaningEstimates> {
     const gas = await this.#estimateGas(offer, ba, takerWants);
-    const totalCost = gas.mul(gasPrice);
+    const totalCost = gas.mul(gasPrice).mul(1 - this.#allowedLostPercentage);
     const netResult = bounty.sub(totalCost);
     return {
       bounty,
@@ -451,6 +461,7 @@ export class MarketCleaner {
     const raw = await this.#market.getRawCleanParams({
       ba: ba,
       targets: this.#createCollectParams(offer, takerWants),
+      taker: this.#takerToImpersonate,
     });
     const gasEstimate =
       await this.#market.mgv.contract.estimateGas.cleanByImpersonation(

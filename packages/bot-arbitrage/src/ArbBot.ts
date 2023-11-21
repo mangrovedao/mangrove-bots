@@ -10,6 +10,9 @@ import {
 } from "@mangrovedao/bot-utils";
 import { BigNumber, BigNumberish } from "ethers";
 import Big from "big.js";
+import { Pricer } from "./uniswap/pricing";
+import { Context } from "./types";
+import { PoolInfo } from "./uniswap/types";
 
 const whitelist = [
   "MgvArbitrage/notProfitable",
@@ -19,18 +22,18 @@ const whitelist = [
 
 export class ArbBot {
   mgv: Mangrove;
-  poolContract: ethers.Contract;
   priceUtils = new PriceUtils(logger);
   #latestMarketActivity: LatestMarketActivity;
   #txUtils: TxUtils;
 
   constructor(
     _mgv: Mangrove,
-    _poolContract: ethers.Contract,
-    latestMarketActivity: LatestMarketActivity
+    private poolInfo: PoolInfo,
+    private pricer: Pricer,
+    latestMarketActivity: LatestMarketActivity,
+    private context: Context
   ) {
     this.mgv = _mgv;
-    this.poolContract = _poolContract;
     this.#latestMarketActivity = latestMarketActivity;
     this.#txUtils = new TxUtils(_mgv.provider, logger);
   }
@@ -345,15 +348,27 @@ export class ArbBot {
       ? arbContract.estimateGas
       : arbContract;
 
-    const takerWants = UnitCalculations.toUnits(
+    let takerWants = UnitCalculations.toUnits(
       bestOffer.gives,
       wantsToken.decimals
     ).toString();
-    const takerGives = UnitCalculations.toUnits(
+
+    let takerGivesAsBig = bestOffer.wants;
+    let takerGives = UnitCalculations.toUnits(
       bestOffer.wants,
       givesToken.decimals
     ).toString();
+
     if (holdsToken) {
+      const _givesToken = this.context.holdingTokens[givesToken.name];
+      if (_givesToken) {
+        if (_givesToken.balance.lt(takerGivesAsBig)) {
+          takerGivesAsBig = _givesToken.balance;
+          takerGives = givesToken.toUnits(takerGivesAsBig).toString();
+          const newTakerWants = bestOffer.price.mul(takerGivesAsBig);
+          takerWants = wantsToken.toUnits(newTakerWants).toString();
+        }
+      }
       return await correctCall.doArbitrage(
         {
           offerId: bestId,
@@ -367,7 +382,27 @@ export class ArbBot {
         txOverrides
       );
     } else if (config.exchangeConfig) {
+      /* only uniswap exchange as fee */
       if ("fee" in config.exchangeConfig) {
+        // if exchange is uniswap
+        const poolInfo = {
+          token0: this.poolInfo.token0,
+          token1: this.poolInfo.token1,
+          fee: this.poolInfo.fee,
+        };
+        const maxTakerGives = await this.pricer.quoteExactInputSingle(
+          poolInfo,
+          this.context.tokenForExchange.balance.toFixed()
+        );
+        const maxTakerGivesAsBig = givesToken.fromUnits(maxTakerGives);
+
+        if (maxTakerGivesAsBig.lt(takerGivesAsBig)) {
+          //then we needs to partial fill
+          takerGives = givesToken.toUnits(maxTakerGivesAsBig).toString();
+          const newTakerWants = bestOffer.price.mul(maxTakerGivesAsBig);
+          takerWants = wantsToken.toUnits(newTakerWants).toString();
+        }
+
         return await correctCall.doArbitrageExchangeOnUniswap(
           {
             offerId: bestId,

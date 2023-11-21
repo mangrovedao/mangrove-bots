@@ -8,6 +8,7 @@ import {
   Setup,
 } from "@mangrovedao/bot-utils";
 import Mangrove, { Market, enableLogging } from "@mangrovedao/mangrove.js";
+
 import { Wallet } from "ethers";
 import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
 import { ArbBot } from "./ArbBot";
@@ -16,12 +17,10 @@ import { ConfigUtils } from "./util/configUtils";
 import { logger } from "./util/logger";
 import { getPoolInfo } from "./uniswap/pool";
 import { Token } from "@uniswap/sdk-core";
+import { generateUniQuoter } from "./uniswap/pricing";
+import { Context, TokenConfig } from "./types";
 
 enableLogging();
-
-type TokenConfig = {
-  name: string;
-};
 
 const balanceUtils = new BalanceUtils(config);
 const setup = new Setup(config);
@@ -79,6 +78,7 @@ export async function botFunction(
   provider: BaseProvider
 ) {
   const botConfig = configUtil.getAndValidateArbConfig();
+  const mgvArbitrageAddress = mgv.getAddress("MgvArbitrage");
 
   const latestMarketActivities: LatestMarketActivity[] = [];
   setup.latestActivity.markets = latestMarketActivities;
@@ -93,17 +93,48 @@ export async function botFunction(
       quote,
       fee: marketConfig[2],
     });
-    tokens.push({ name: base }, { name: quote });
+
+    const baseToken = mgv.tokenFromConfig(base);
+    const quoteToken = mgv.tokenFromConfig(base);
+    tokens.push(
+      { name: base, balance: await baseToken.balanceOf(mgvArbitrageAddress) },
+      { name: quote, balance: await quoteToken.balanceOf(mgvArbitrageAddress) }
+    );
   }
-  const holdingTokens: TokenConfig[] = configUtil
-    .getHoldingTokenConfig()
-    .map((token) => ({ name: token }));
+
+  const holdingTokens: TokenConfig[] = await Promise.all(
+    configUtil.getHoldingTokenConfig().map(async (token) => {
+      const erc20 = mgv.tokenFromConfig(token);
+
+      return {
+        name: token,
+        balance: await erc20.balanceOf(mgvArbitrageAddress),
+      };
+    })
+  );
+
   await balanceUtils.logTokenBalances(
     mgv,
-    Mangrove.getAddress("MgvArbitrage", mgv.network.name),
+    mgvArbitrageAddress,
     tokens.concat(holdingTokens),
     "init"
   );
+
+  const tokenForExchange = configUtil.getTokenForExchange();
+  const mgvTokenTokenForExchange = mgv.tokenFromConfig(tokenForExchange);
+
+  const balance = await mgvTokenTokenForExchange.balanceOf(mgvArbitrageAddress);
+
+  const context: Context = {
+    tokenForExchange: {
+      name: tokenForExchange,
+      balance,
+    },
+    holdingTokens: holdingTokens.reduce((acc, token) => {
+      acc[token.name] = token;
+      return acc;
+    }, {} as Record<string, TokenConfig>),
+  };
 
   // create and schedule task
   logger.info(`Running bot every ${botConfig.runEveryXMinutes} minutes.`, {
@@ -136,8 +167,13 @@ export async function botFunction(
     latestMarketActivities.push(latestMarketActivity);
 
     logger.info(`Starting bot for ${arbBotValues.base}/${arbBotValues.quote}`);
+
+    const pricer = generateUniQuoter(
+      mgv.getAddress("UniswapV3Quoter"),
+      mgv.provider
+    );
     arbBotMap.push({
-      arbBot: new ArbBot(mgv, poolInfo.poolContract, latestMarketActivity),
+      arbBot: new ArbBot(mgv, poolInfo, pricer, latestMarketActivity, context),
       market: market,
       fee: arbBotValues.fee,
     });
