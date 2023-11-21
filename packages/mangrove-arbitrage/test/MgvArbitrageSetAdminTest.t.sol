@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: BSD-2-Clause
 pragma solidity ^0.8.10;
 
-import {Deployer} from "mgv_script/lib/Deployer.sol";
-import {MgvArbitrageSetAdmin} from "script/MgvArbitrageSetAdmin.s.sol";
-import {MgvArbitrageDeployer} from "script/deployers/MgvArbitrageDeployer.s.sol";
-import {IERC20} from "mgv_src/IERC20.sol";
-import "mgv_test/lib/forks/Polygon.sol";
-import {MangroveJsDeploy} from "mgv_script/toy/MangroveJs.s.sol";
-import "mgv_test/lib/MangroveTest.sol";
+import {Deployer} from "@mgv/script/lib/Deployer.sol";
+import {MgvArbitrageSetAdmin} from "@mgv/arbitrage/script/MgvArbitrageSetAdmin.s.sol";
+import {MgvArbitrageDeployer} from "@mgv/arbitrage/script/deployers/MgvArbitrageDeployer.s.sol";
+import {IERC20} from "@mgv/lib/IERC20.sol";
+import "@mgv/test/lib/forks/Polygon.sol";
+import {MangroveJsDeploy} from "@mgv-strats/script/toy/MangroveJs.s.sol";
+import "@mgv/test/lib/MangroveTest.sol";
 
 contract MgvArbitrageSetAdminTest is Deployer, Test2 {
   MgvArbitrageSetAdmin mgvArbitrageSetAdmin;
@@ -24,7 +24,7 @@ contract MgvArbitrageSetAdminTest is Deployer, Test2 {
 
     address mgv = fork.get("Mangrove");
     mgvArbDeployer = new MgvArbitrageDeployer();
-    mgvArbDeployer.innerRun({admin: admin, mgv: mgv, arbitrager: freshAddress("arbitrager")});
+    mgvArbDeployer.innerRun({admin: admin, mgv: mgv});
     mgvArbitrageSetAdmin = new MgvArbitrageSetAdmin();
   }
 

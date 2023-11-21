@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.13;
 
-import {Deployer} from "mgv_script/lib/Deployer.sol";
-import {MgvArbitrage} from "src/MgvArbitrage.sol";
-import {IMangrove} from "mgv_src/IMangrove.sol";
-import {IERC20} from "mgv_src/IERC20.sol";
+import {Deployer} from "@mgv/script/lib/Deployer.sol";
+import {MgvArbitrage} from "@mgv/arbitrage/src/MgvArbitrage.sol";
+import {IMangrove} from "@mgv/src/IMangrove.sol";
+import {IERC20} from "@mgv/lib/IERC20.sol";
 
 contract MgvArbitrageActivateTokens is Deployer {
   MgvArbitrage public mgvArb;
@@ -32,15 +32,7 @@ contract MgvArbitrageActivateTokens is Deployer {
       tkn1.allowance(arbitrageContract, address(mgvArb.mgv())) == type(uint).max, "tkn1 allowance not set for mangrove"
     );
     require(
-      tkn1.allowance(arbitrageContract, address(mgvArb.router())) == type(uint).max,
-      "tkn1 allowance not set for uniswap router"
-    );
-    require(
       tkn2.allowance(arbitrageContract, address(mgvArb.mgv())) == type(uint).max, "tkn2 allowance not set for mangrove"
-    );
-    require(
-      tkn2.allowance(arbitrageContract, address(mgvArb.router())) == type(uint).max,
-      "tkn2 allowance not set for uniswap router"
     );
   }
 }

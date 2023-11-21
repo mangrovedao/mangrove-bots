@@ -1018,6 +1018,7 @@ __metadata:
     ethers: ^5.7.2
     fast-safe-stringify: ^2.1.1
     finalhandler: ^1.2.0
+    fs-extra: ^11.1.1
     lint-staged: ^13.0.3
     mocha: ^10.0.0
     mocha-multi-reporters: ^1.5.1
@@ -1032,6 +1033,7 @@ __metadata:
     transparent-proxy: ^1.12.1
     ts-node: ^10.9.1
     typescript: ^4.7.0
+    zod: ^3.22.4
   languageName: unknown
   linkType: soft
 
@@ -1282,7 +1284,7 @@ __metadata:
     "@espendk/json-file-reporter": ^1.4.2
     "@ethersproject/experimental": ^5.7.0
     "@ethersproject/hardware-wallets": ^5.7.0
-    "@mangrovedao/mangrove.js": 1.4.29
+    "@mangrovedao/mangrove.js": 2.0.0-1
     "@types/big.js": ^6.1.6
     "@types/chai": ^4.3.4
     "@types/chai-as-promised": ^7.1.5
@@ -1345,19 +1347,29 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mangrovedao/mangrove-core@npm:^1.5.11":
-  version: 1.5.11
-  resolution: "@mangrovedao/mangrove-core@npm:1.5.11"
-  checksum: c088d5092e319054e6a05fcbf6737c6443374c309bb28bdecdb28bed9f94c71e452d2298e38f0c4555a70519ca1c0e55330a015987466fe1d06c51567bc86157
+"@mangrovedao/mangrove-core@npm:^2.0.0-3, @mangrovedao/mangrove-core@npm:next":
+  version: 2.0.0-3
+  resolution: "@mangrovedao/mangrove-core@npm:2.0.0-3"
+  checksum: 7072e48bd78e9e784d4b07d50eb86ae459e63a884c3999ed6d5c0567c95ab6c00d60ba50800feb117c15641eb207026ca59076f15005c0e2ba44ef20b4bbdacb
   languageName: node
   linkType: hard
 
-"@mangrovedao/mangrove.js@npm:1.4.29":
-  version: 1.4.29
-  resolution: "@mangrovedao/mangrove.js@npm:1.4.29"
+"@mangrovedao/mangrove-strats@npm:next":
+  version: 0.0.2-3
+  resolution: "@mangrovedao/mangrove-strats@npm:0.0.2-3"
+  dependencies:
+    "@mangrovedao/mangrove-core": next
+  checksum: 32abe70d58d8fc649004ab56c5e717384f091865af2e148f3e1d702604839be45cbf2b203c6dffada006eb8c1df17abb52fbcaf894a9ff76fca2e7087b06b116
+  languageName: node
+  linkType: hard
+
+"@mangrovedao/mangrove.js@npm:2.0.0-1":
+  version: 2.0.0-1
+  resolution: "@mangrovedao/mangrove.js@npm:2.0.0-1"
   dependencies:
     "@ethersproject/experimental": ^5.7.0
-    "@mangrovedao/mangrove-core": ^1.5.11
+    "@mangrovedao/mangrove-core": ^2.0.0-3
+    "@mangrovedao/mangrove-strats": next
     "@mangrovedao/reliable-event-subscriber": 1.1.29
     "@types/object-inspect": ^1.8.1
     "@types/triple-beam": ^1.3.2
@@ -1377,7 +1389,7 @@ __metadata:
     yargs: ^17.3.0
   bin:
     mgv: ./dist/nodejs/cli/mgv.js
-  checksum: 2f68119c832111f42d607bb033e70764e7b6299b71b5ba4d21bc1fc86c7c639028621fd155e97b437c19b55149518ad60d82d4bb4e8a22278dcfd6b5d92116ac
+  checksum: af8c56ad5e3e284d686ead802278322dc2d66e6fdf63157897fa3550d1dc45ed6e7b945c350ca8c49743b608976882c5213a506a1a3bf8c9fe566a2c4030d892
   languageName: node
   linkType: hard
 
@@ -4092,6 +4104,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fs-extra@npm:^11.1.1":
+  version: 11.1.1
+  resolution: "fs-extra@npm:11.1.1"
+  dependencies:
+    graceful-fs: ^4.2.0
+    jsonfile: ^6.0.1
+    universalify: ^2.0.0
+  checksum: fb883c68245b2d777fbc1f2082c9efb084eaa2bbf9fddaa366130d196c03608eebef7fb490541276429ee1ca99f317e2d73e96f5ca0999eefedf5a624ae1edfd
+  languageName: node
+  linkType: hard
+
 "fs-extra@npm:^7.0.0":
   version: 7.0.1
   resolution: "fs-extra@npm:7.0.1"
@@ -4396,7 +4419,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graceful-fs@npm:^4.1.15, graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.2.6":
+"graceful-fs@npm:^4.1.15, graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.2.0, graceful-fs@npm:^4.2.6":
   version: 4.2.11
   resolution: "graceful-fs@npm:4.2.11"
   checksum: ac85f94da92d8eb6b7f5a8b20ce65e43d66761c55ce85ac96df6865308390da45a8d3f0296dd3a663de65d30ba497bd46c696cc1e248c72b13d6d567138a4fc7
@@ -5230,6 +5253,19 @@ __metadata:
     graceful-fs:
       optional: true
   checksum: 6447d6224f0d31623eef9b51185af03ac328a7553efcee30fa423d98a9e276ca08db87d71e17f2310b0263fd3ffa6c2a90a6308367f661dc21580f9469897c9e
+  languageName: node
+  linkType: hard
+
+"jsonfile@npm:^6.0.1":
+  version: 6.1.0
+  resolution: "jsonfile@npm:6.1.0"
+  dependencies:
+    graceful-fs: ^4.1.6
+    universalify: ^2.0.0
+  dependenciesMeta:
+    graceful-fs:
+      optional: true
+  checksum: 7af3b8e1ac8fe7f1eccc6263c6ca14e1966fcbc74b618d3c78a0a2075579487547b94f72b7a1114e844a1e15bb00d440e5d1720bfc4612d790a6f285d5ea8354
   languageName: node
   linkType: hard
 
@@ -7973,6 +8009,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"universalify@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "universalify@npm:2.0.0"
+  checksum: 2406a4edf4a8830aa6813278bab1f953a8e40f2f63a37873ffa9a3bc8f9745d06cc8e88f3572cb899b7e509013f7f6fcc3e37e8a6d914167a5381d8440518c44
+  languageName: node
+  linkType: hard
+
 "unpipe@npm:1.0.0, unpipe@npm:~1.0.0":
   version: 1.0.0
   resolution: "unpipe@npm:1.0.0"
@@ -8447,5 +8490,12 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: f77b3d8d00310def622123df93d4ee654fc6a0096182af8bd60679ddcdfb3474c56c6c7190817c84a2785648cdee9d721c0154eb45698c62176c322fb46fc700
+  languageName: node
+  linkType: hard
+
+"zod@npm:^3.22.4":
+  version: 3.22.4
+  resolution: "zod@npm:3.22.4"
+  checksum: 80bfd7f8039b24fddeb0718a2ec7c02aa9856e4838d6aa4864335a047b6b37a3273b191ef335bf0b2002e5c514ef261ffcda5a589fb084a48c336ffc4cdbab7f
   languageName: node
   linkType: hard
