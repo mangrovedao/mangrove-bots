@@ -30,6 +30,7 @@ contract MgvArbitrage is AccessControlled, IUniswapV3SwapCallback {
 
   bool isArbitraging;
 
+  /// Whitelist of pool address which are authorized to call `uniswapV3SwapCallback`
   mapping(address => bool) public pools;
 
   /// @param _mgv The Mangrove instance to be arbitraged
