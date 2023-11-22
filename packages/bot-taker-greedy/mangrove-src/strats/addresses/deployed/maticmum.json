@@ -1,0 +1,38 @@
+[
+  {
+    "address": "0xFBB5dca5019A77500F96C08fD01A51e8A83040b7",
+    "name": "KandelSeeder"
+  },
+  {
+    "address": "0x0443FAe884911b0221d75c86ED60b2E535a6a7D7",
+    "name": "MangroveOrder"
+  },
+  {
+    "address": "0x77Cbef9Bb7CfdFc8Da869dB6b4dDEB2c74b26170",
+    "name": "MangroveOrder-Router"
+  },
+  {
+    "address": "0xbb5E5CC0a5d2aA029dBA602338eFC36B8494D39C",
+    "name": "AaveKandelSeeder"
+  },
+  {
+    "address": "0x95c464fAA53FfC6c1ED5D0bBFe4afF48531F9EAf",
+    "name": "AavePooledRouter"
+  },
+  {
+    "address": "0x4EFA71AFC806112AE91b54F05bc33a1F7D397B08",
+    "name": "Mangrove"
+  },
+  {
+    "address": "0x7e3eaB8Eece01AC61804cD42241436A29936aBDD",
+    "name": "MgvReader"
+  },
+  {
+    "address": "0x2A36f6293bB1F35c84655DB5e6E34604EFCf739d",
+    "name": "MgvCleaner"
+  },
+  {
+    "address": "0xccbDDB1313d000b46B460f168c9898D0a284Bc5a",
+    "name": "MgvOracle"
+  }
+]

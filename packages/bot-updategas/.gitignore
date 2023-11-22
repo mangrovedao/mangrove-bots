@@ -7,6 +7,5 @@ static/environmentInformation.json
 .nyc_output/
 coverage/
 tsconfig.tsbuildinfo
-mangrove-src/
 out/
 broadcast/
