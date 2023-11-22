@@ -161,8 +161,9 @@ describe("MarketCleaner integration tests", () => {
       ba: "asks",
       maker,
       shouldFail: true,
-      wants: market.quote.toUnits(1600),
+      // wants: market.quote.toUnits(1600),
       gives: market.base.toUnits(1),
+      tick: market.getBook().asks.tickPriceHelper.tickFromPrice(1600),
     });
     await mgvTestUtil.waitForBlock(market.mgv, txReceipt.blockNumber!);
 
@@ -209,8 +210,9 @@ describe("MarketCleaner integration tests", () => {
       ba: "bids",
       maker,
       shouldFail: true,
-      wants: market.base.toUnits(1),
+      // wants: market.base.toUnits(1),
       gives: market.quote.toUnits(1600),
+      tick: market.getBook().bids.tickPriceHelper.tickFromPrice(1600),
     });
     await mgvTestUtil.waitForBlock(market.mgv, txReceipt.blockNumber!);
 
@@ -259,6 +261,7 @@ describe("MarketCleaner integration tests", () => {
     const marketAribtrager = await mgvArbitrager.market({
       base: "TokenA",
       quote: "TokenB",
+      tickSpacing: 1,
     });
     await mgvTestUtil.mint(marketAribtrager.base, cleaner, 1);
     await mgvTestUtil.mint(marketAribtrager.base, this.accounts.arbitrager, 1);
@@ -276,8 +279,9 @@ describe("MarketCleaner integration tests", () => {
       ba: "bids",
       maker,
       shouldFail: true,
-      wants: market.base.toUnits(1),
+      // wants: market.base.toUnits(1),
       gives: market.quote.toUnits(1600),
+      tick: market.getBook().bids.tickPriceHelper.tickFromPrice(1600),
     });
     await mgvTestUtil.waitForBlock(
       marketAribtrager.mgv,
@@ -326,6 +330,7 @@ describe("MarketCleaner integration tests", () => {
     const marketAribtrager = await mgvArbitrager.market({
       base: "TokenA",
       quote: "TokenB",
+      tickSpacing: 1,
     });
     await mgvTestUtil.mint(marketAribtrager.base, cleaner, 1);
     await mgvTestUtil.mint(marketAribtrager.base, this.accounts.arbitrager, 1);
@@ -343,8 +348,9 @@ describe("MarketCleaner integration tests", () => {
       ba: "bids",
       maker,
       shouldFail: true,
-      wants: market.base.toUnits(1),
+      // wants: market.base.toUnits(1),
       gives: market.quote.toUnits(1600),
+      tick: market.getBook().bids.tickPriceHelper.tickFromPrice(1600),
     });
     await mgvTestUtil.waitForBlock(
       marketAribtrager.mgv,
