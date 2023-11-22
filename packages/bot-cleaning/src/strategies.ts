@@ -29,7 +29,11 @@ export const cleanUsingMinimalAmountOfFunds = (
   const inboundTkn = ba == "bids" ? market.base : market.quote;
   const outboundTkn = ba == "bids" ? market.quote : market.base;
 
-  let price = offer.wants.div(offer.gives);
+  const wants = market
+    .getBook()
+    [ba].tickPriceHelper.inboundFromOutbound(offer.tick, offer.gives);
+
+  let price = wants.div(offer.gives);
 
   const minPossibleWantsVolume = inboundTkn.fromUnits(1);
   let minGivesVolume = outboundTkn.fromUnits(1);
