@@ -10,10 +10,11 @@ chai.use(chaiAsPromised);
 import { Mangrove, Market } from "@mangrovedao/mangrove.js";
 import { mgvTestUtil } from "@mangrovedao/mangrove.js";
 
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import { Provider } from "@ethersproject/abstract-provider";
 
 import { MarketCleaner } from "../../src/MarketCleaner";
+import { sleep } from "@mangrovedao/bot-utils";
 
 let maker: mgvTestUtil.Account; // Owner of SimpleTestMaker contract
 let cleaner: mgvTestUtil.Account; // Owner of cleaner EOA
@@ -103,14 +104,19 @@ describe("MarketCleaner integration tests", () => {
       // Act
       await marketCleaner.clean();
 
+      await sleep(1000);
+
       // Assert
       return Promise.all([
         expect(market.requestBook()).to.eventually.have.property(ba).which.is
           .empty,
-        expect(testProvider.getBalance(cleaner.address)).to.eventually.satisfy(
-          (balanceAfter: ethers.BigNumber) =>
-            balanceAfter.gt(balancesBefore.get(cleaner.name)?.ether || -1)
-        ),
+        expect(
+          mgvTestUtil.getBalances(accounts, testProvider)
+        ).to.eventually.satisfy((balanceAfter: Map<string, any>) => {
+          return balanceAfter
+            .get(cleaner.name)
+            .ether.gt(balancesBefore.get(cleaner.name)?.ether || -1);
+        }),
       ]);
     });
 
@@ -186,6 +192,7 @@ describe("MarketCleaner integration tests", () => {
     const beforeBalance = await mgv.provider.getBalance(cleanerAddr);
     // Act
     await marketCleaner.clean();
+    await sleep(1000);
     const afterBalance = await mgv.provider.getBalance(cleanerAddr);
 
     book = await market.requestBook();
@@ -237,6 +244,7 @@ describe("MarketCleaner integration tests", () => {
 
     // Act
     await marketCleaner.clean();
+    await sleep(1000);
 
     const afterBalance = await mgv.provider.getBalance(cleanerAddr);
 
@@ -307,6 +315,7 @@ describe("MarketCleaner integration tests", () => {
     const beforeBalance = await mgv.provider.getBalance(arbitragerAddress);
     // Act
     await marketCleaner.clean();
+    await sleep(1000);
     const afterBalance = await mgv.provider.getBalance(arbitragerAddress);
 
     book = await marketAribtrager.requestBook();
@@ -376,6 +385,7 @@ describe("MarketCleaner integration tests", () => {
     const beforeBalance = await mgv.provider.getBalance(arbitragerAddress);
     // Act
     await marketCleaner.clean();
+    await sleep(1000);
     const afterBalance = await mgv.provider.getBalance(arbitragerAddress);
 
     book = await marketAribtrager.requestBook();
