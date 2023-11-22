@@ -156,20 +156,14 @@ export class MarketCleaner {
         this.#whitelistedDustCleaningMaker &&
         this.#whitelistedDustCleaningMaker.has(offer.maker.toLowerCase())
       ) {
-        const cleaningParams = cleanUsingMinimalAmountOfFunds(
+        const takerWants = cleanUsingMinimalAmountOfFunds(
           semibook.market,
           ba,
           offer
         );
 
         cleaningPromises.push(
-          this.#cleanOffer(
-            offer,
-            ba,
-            gasPrice,
-            cleaningParams.takerWants,
-            contextInfo
-          ) // takerWants: outboundTkn, takerGives: inboundTkn
+          this.#cleanOffer(offer, ba, gasPrice, takerWants, contextInfo) // takerWants: outboundTkn, takerGives: inboundTkn
         );
       } else {
         if (shouldOnlyCleanWhitelisted) {
