@@ -78,7 +78,7 @@ describe("Unit test suite for strategies", () => {
 
     const wants = cleanUsingMinimalAmountOfFunds(market, "asks", ask);
     console.log(wants.toString());
-    expect(wants.toString()).to.equal("0.000001");
+    expect(wants.toString()).to.equal("6.25015715e-10");
   });
 
   it("WETH/USDC bid: test cleanUsingMinimalAmountOfFunds token with two different decimals", async () => {
@@ -94,7 +94,7 @@ describe("Unit test suite for strategies", () => {
 
     const wants = cleanUsingMinimalAmountOfFunds(market, "bids", bid);
     console.log(wants.toString());
-    expect(wants.toString()).to.equal("6.2495322e-10");
+    expect(wants.toString()).to.equal("0.000001");
   });
 
   it("USDC/USDT ask: test cleanUsingMinimalAmountOfFunds token with same decimals", async () => {

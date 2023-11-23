@@ -24,41 +24,18 @@ export const cleanUsingMinimalAmountOfFunds = (
   const inboundTkn = ba == "bids" ? market.base : market.quote;
   const outboundTkn = ba == "bids" ? market.quote : market.base;
 
-  // const mingivesBig = outboundTkn.fromUnits(1)
-  // console.log("mingivesBig", mingivesBig.toString())
+  const takerGives = TickLib.inboundFromOutbound(offer.tick, BigNumber.from(1));
+  if (takerGives.eq(0)) {
+    const takerWants = TickLib.outboundFromInbound(
+      offer.tick,
+      BigNumber.from(1)
+    );
 
-  // let minGivesVolume = BigNumber.from(outboundTkn.fromUnits(1).toString());
-
-  let minGives = BigNumber.from(1);
-  let minWants = TickLib.inboundFromOutbound(offer.tick, minGives);
-
-  if (minWants.eq(0)) {
-    minGives = TickLib.outboundFromInbound(offer.tick, BigNumber.from(1));
-    minWants = TickLib.inboundFromOutbound(offer.tick, minGives.add(1));
+    const wantsInBig = new Big(takerWants.toString()).div(
+      new Big(10).pow(outboundTkn.decimals)
+    );
+    return wantsInBig;
   }
 
-  console.log("minGives", minGives.toString());
-  console.log("minWants", minWants.toString());
-
-  return new Big(minWants.toString()).div(new Big(10).pow(inboundTkn.decimals));
-
-  // const wants = market
-  //   .getBook()
-  //   [ba].tickPriceHelper.inboundFromOutbound(offer.tick, offer.gives);
-
-  // let price = wants.div(offer.gives);
-
-  // const minPossibleWantsVolume = inboundTkn.fromUnits(1);
-  // let minGivesVolume = outboundTkn.fromUnits(1);
-  // let minWantsVolume = price.mul(minGivesVolume);
-
-  // if (minWantsVolume.lt(minPossibleWantsVolume)) {
-  //   minWantsVolume = minPossibleWantsVolume;
-  //   minGivesVolume = new Big(1).div(price).mul(minWantsVolume);
-  // }
-
-  // return {
-  //   takerWants: minGivesVolume,
-  //   takerGives: minWantsVolume.plus(inboundTkn.fromUnits(1).toString()),
-  // };
+  return new Big(1).div(new Big(10).pow(outboundTkn.decimals));
 };
