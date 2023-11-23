@@ -216,11 +216,11 @@ export class OfferTaker {
     const semibook = this.#market.getSemibook(ba);
 
     // If there is no immediately better offer, then we do not have to query the list
-    const offers = (await semibook.getPivotId(externalPrice))
-      ? await semibook.requestOfferListPrefix({
-          desiredPrice: externalPrice,
-        })
-      : [];
+    // TODO: check if there is a way to know all offers with a better price on the book without querying
+    const offers = await semibook.requestOfferListPrefix({
+      desiredPrice: externalPrice,
+    });
+
     const [quoteSideOfOffers, buyOrSell]: ["wants" | "gives", "buy" | "sell"] =
       ba === "asks" ? ["wants", "buy"] : ["gives", "sell"];
 
@@ -247,7 +247,15 @@ export class OfferTaker {
 
     const total = offersWithBetterThanExternalPrice
       .slice(0, this.#takerConfig.offerCountCap - 1)
-      .reduce((v, o) => v.add(o[quoteSideOfOffers]), Big(0));
+      .reduce(
+        (v, o) =>
+          v.add(
+            quoteSideOfOffers === "gives"
+              ? o.gives
+              : Market.getWantsForPrice(ba, o.gives, o.price)
+          ),
+        Big(0)
+      );
 
     logger.info(`Heartbeat - Posting ${buyOrSell} market order`, {
       contextInfo,
@@ -282,12 +290,18 @@ export class OfferTaker {
           total: total.toString(),
           price: externalPrice.toString(),
           numberOfAsksWithBetterPrice: offersWithBetterThanExternalPrice.length,
-          buyResult: {
-            gave: result.summary.gave.toString(),
-            got: result.summary.got.toString(),
-            partialFill: result.summary.partialFill,
-            penalty: result.summary.bounty.toString(),
-          },
+          buyResult:
+            "fillWants" in result.summary
+              ? {
+                  gave: result.summary.totalGave?.toString(),
+                  got: result.summary.totalGot?.toString(),
+                  partialFill: result.summary.partialFill,
+                  penalty: result.summary.bounty?.toString(),
+                }
+              : {
+                  bounty: result.summary.bounty?.toString(),
+                  isClean: true,
+                },
         },
       });
     } catch (e) {

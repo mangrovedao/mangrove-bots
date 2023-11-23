@@ -48,6 +48,7 @@ async function startTakersForMarkets(
     const market = await mgv.market({
       base: tokenPair.token1,
       quote: tokenPair.token2,
+      tickSpacing: marketConfig.tickSpacing,
     });
 
     const offerTaker = new OfferTaker(

@@ -147,6 +147,9 @@ export class PriceUtils {
         return Network.ETH_MAINNET;
       case 5:
         return Network.ETH_GOERLI;
+      // todo: remove this case when done
+      default:
+        return Network.MATIC_MUMBAI;
     }
 
     return undefined;

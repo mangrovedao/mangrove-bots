@@ -19,11 +19,12 @@
     "build": "yarn install && yarn workspaces foreach -vpiR --topological-dev --from $npm_package_name run build-this-package",
     "clean-this-package": "rimraf build tsconfig.tsbuildinfo",
     "clean": "yarn workspaces foreach -vpiR --topological-dev --from $npm_package_name run clean-this-package",
+    "copy": "node copyMangroveStrats.js",
     "test-with-dependencies": "yarn workspaces foreach -vpiR --topological-dev --from $npm_package_name run test",
     "test": "yarn run test:unit && yarn run test:integration",
     "test:unit": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --config test/mocha/config/unit-tests.json --exit",
     "test:integration": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/integration-tests.json --exit ",
-    "test:coverage": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/coverage-tests.json --exit ",
+    "test:coverage": "yarn copy && cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/coverage-tests.json --exit ",
     "start": "node build/index.js"
   },
   "lint-staged": {
@@ -41,6 +42,7 @@
     "ethers": "^5.7.2",
     "fast-safe-stringify": "^2.1.1",
     "finalhandler": "^1.2.0",
+    "fs-extra": "^11.1.1",
     "nyc": "^15.1.0",
     "serve-static": "^1.15.0",
     "toad-scheduler": "^2.2.0"
