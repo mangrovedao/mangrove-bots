@@ -150,53 +150,6 @@ jobs:
 
   # ==== End job: bot-updategas ====
           
-  # ==== Job: Build and test bot-maker-noise ====
-  bot-maker-noise:
-    runs-on: ubuntu-latest
-
-    env:
-      working-directory: packages/bot-maker-noise
-
-    defaults:
-      run:
-        working-directory: ${{env.working-directory}}
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-
-    - name: Yarn setup (caching yarn dependencies)
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18.x
-        cache: 'yarn'
-
-    - run: yarn install --immutable
-      working-directory: . # Yarn must run in root to ensure monorepo setup
-
-    - name: Foundry Setup
-      uses: mangrovedao/.github/.github/actions/foundry-setup@master
-      
-    - name: Build
-      id: build
-      run: yarn run build
-
-    # == run and report tests == 
-    - name: Test
-      run: yarn run test:coverage
-
-    - uses: actions/upload-artifact@v2
-      if: ${{ steps.build.conclusion == 'success' && (success() || failure())}}
-      with:
-        name: test-results-bot-maker-noise
-        path: packages/bot-maker-noise/coverage-tests-report.json
-
-  # ==== End job: bot-maker-noise ====        
-          
   # ==== Job: Build and test bot-taker-greedy ====
   bot-taker-greedy:
     runs-on: ubuntu-latest
@@ -243,49 +196,6 @@ jobs:
         path: packages/bot-taker-greedy/coverage-tests-report.json
 
   # ==== End job: bot-taker-greedy ====        
-
-  # ==== Job: Build and test bot-failing-offer ====
-  bot-failing-offer:
-    runs-on: ubuntu-latest
-
-    env:
-      working-directory: packages/bot-failing-offer
-
-    defaults:
-      run:
-        working-directory: ${{env.working-directory}}
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-
-    - name: Yarn setup (caching yarn dependencies)
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18.x
-        cache: 'yarn'
-
-    - run: yarn install --immutable
-      working-directory: . # Yarn must run in root to ensure monorepo setup
-
-    - name: Foundry Setup
-      uses: mangrovedao/.github/.github/actions/foundry-setup@master
-      
-    - name: Build
-      id: build
-      run: yarn run build
-
-    # == run and report tests == 
-    - name: Test
-      run: yarn run test:coverage
-
-    - uses: actions/upload-artifact@v2
-      if: ${{ steps.build.conclusion == 'success' && (success() || failure())}}
-      with:
-        name: test-results-bot-failing-offer
-        path: packages/bot-failing-offer/coverage-tests-report.json
-
-  # ==== End job: bot-failing-offer ====        
 
   # ==== Job: Build and test Mangrove arbitrage contract ====
   mangrove-arbitrage-contract:
@@ -409,8 +319,6 @@ jobs:
     needs:
     - bot-utils
     - bot-cleaning
-    - bot-maker-noise
-    - bot-failing-offer
     - bot-taker-greedy
     - bot-updategas
     - bot-arbitrage

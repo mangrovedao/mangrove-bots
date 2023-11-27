@@ -11,11 +11,6 @@
           "internalType": "address",
           "name": "admin",
           "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "_arbitrager",
-          "type": "address"
         }
       ],
       "stateMutability": "nonpayable",
@@ -61,56 +56,33 @@
       "type": "function"
     },
     {
-      "inputs": [],
-      "name": "arbitrager",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
           "components": [
             {
-              "internalType": "uint256",
-              "name": "offerId",
-              "type": "uint256"
+              "internalType": "contract IERC20",
+              "name": "takerGivesToken",
+              "type": "address"
             },
             {
-              "internalType": "address",
+              "internalType": "contract IERC20",
               "name": "takerWantsToken",
               "type": "address"
             },
             {
               "internalType": "uint256",
-              "name": "takerWants",
+              "name": "tickSpacing",
               "type": "uint256"
             },
             {
-              "internalType": "address",
-              "name": "takerGivesToken",
+              "internalType": "contract IUniswapV3Pool",
+              "name": "pool",
               "type": "address"
             },
             {
-              "internalType": "uint256",
-              "name": "takerGives",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint24",
-              "name": "fee",
-              "type": "uint24"
-            },
-            {
-              "internalType": "uint256",
-              "name": "minGain",
-              "type": "uint256"
+              "internalType": "uint160",
+              "name": "minimumGain",
+              "type": "uint160"
             }
           ],
           "internalType": "struct ArbParams",
@@ -118,14 +90,8 @@
           "type": "tuple"
         }
       ],
-      "name": "doArbitrage",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "amountOut",
-          "type": "uint256"
-        }
-      ],
+      "name": "doArbitrageFirstMangroveThenUniswap",
+      "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
@@ -134,125 +100,38 @@
         {
           "components": [
             {
-              "internalType": "uint256",
-              "name": "offerId",
-              "type": "uint256"
+              "internalType": "contract IERC20",
+              "name": "takerGivesToken",
+              "type": "address"
             },
             {
-              "internalType": "address",
+              "internalType": "contract IERC20",
               "name": "takerWantsToken",
               "type": "address"
             },
             {
               "internalType": "uint256",
-              "name": "takerWants",
+              "name": "tickSpacing",
               "type": "uint256"
             },
             {
-              "internalType": "address",
-              "name": "takerGivesToken",
+              "internalType": "contract IUniswapV3Pool",
+              "name": "pool",
               "type": "address"
             },
             {
-              "internalType": "uint256",
-              "name": "takerGives",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint24",
-              "name": "fee",
-              "type": "uint24"
-            },
-            {
-              "internalType": "uint256",
-              "name": "minGain",
-              "type": "uint256"
+              "internalType": "uint160",
+              "name": "minimumGain",
+              "type": "uint160"
             }
           ],
           "internalType": "struct ArbParams",
           "name": "params",
           "type": "tuple"
-        },
-        {
-          "internalType": "address",
-          "name": "token",
-          "type": "address"
         }
       ],
-      "name": "doArbitrageExchangeOnMgv",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "amountOut",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "components": [
-            {
-              "internalType": "uint256",
-              "name": "offerId",
-              "type": "uint256"
-            },
-            {
-              "internalType": "address",
-              "name": "takerWantsToken",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "takerWants",
-              "type": "uint256"
-            },
-            {
-              "internalType": "address",
-              "name": "takerGivesToken",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "takerGives",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint24",
-              "name": "fee",
-              "type": "uint24"
-            },
-            {
-              "internalType": "uint256",
-              "name": "minGain",
-              "type": "uint256"
-            }
-          ],
-          "internalType": "struct ArbParams",
-          "name": "params",
-          "type": "tuple"
-        },
-        {
-          "internalType": "address",
-          "name": "token",
-          "type": "address"
-        },
-        {
-          "internalType": "uint24",
-          "name": "fee",
-          "type": "uint24"
-        }
-      ],
-      "name": "doArbitrageExchangeOnUniswap",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "amountOut",
-          "type": "uint256"
-        }
-      ],
+      "name": "doArbitrageFirstUniwapThenMangrove",
+      "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
@@ -272,30 +151,17 @@
     {
       "inputs": [
         {
-          "internalType": "contract IERC20[]",
-          "name": "tokens",
-          "type": "address[]"
-        }
-      ],
-      "name": "needsActivateTokens",
-      "outputs": [
-        {
-          "internalType": "contract IERC20[]",
-          "name": "",
-          "type": "address[]"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "router",
-      "outputs": [
-        {
-          "internalType": "contract ISwapRouter",
+          "internalType": "address",
           "name": "",
           "type": "address"
+        }
+      ],
+      "name": "pools",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
         }
       ],
       "stateMutability": "view",
@@ -317,12 +183,12 @@
     {
       "inputs": [
         {
-          "internalType": "address",
-          "name": "newArbitrager",
+          "internalType": "contract IMangrove",
+          "name": "newMgv",
           "type": "address"
         }
       ],
-      "name": "setArbitrager",
+      "name": "setMgv",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -330,12 +196,40 @@
     {
       "inputs": [
         {
-          "internalType": "contract IMangrove",
-          "name": "newMgv",
+          "internalType": "address",
+          "name": "pool",
           "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "authorized",
+          "type": "bool"
         }
       ],
-      "name": "setMgv",
+      "name": "setPool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "int256",
+          "name": "amount0Delta",
+          "type": "int256"
+        },
+        {
+          "internalType": "int256",
+          "name": "amount1Delta",
+          "type": "int256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "uniswapV3SwapCallback",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

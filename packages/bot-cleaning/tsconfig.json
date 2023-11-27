@@ -9,6 +9,7 @@
     "noErrorTruncation": true,
     "sourceMap": true,
     "declaration": true,
+    "skipLibCheck": true,
     "outDir": "build",
     "baseUrl": ".",
     "paths": {

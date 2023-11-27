@@ -37,11 +37,11 @@ class GasHelper {
     const gaspriceFromOracle = this.priceUtils
       .getGasPrice(API_KEY, params.mangrove.network.id)
       .then((gaspriceEstimateInWei) => {
-        const gasPriceEstimateInGwei = ethers.utils.formatUnits(
+        const gasPriceEstimateInMwei = ethers.utils.formatUnits(
           gaspriceEstimateInWei,
-          "gwei"
+          "mwei"
         );
-        return Number(gasPriceEstimateInGwei);
+        return Number(gasPriceEstimateInMwei);
       })
       .catch((error) => {
         logger.error("Getting gas price estimate from oracle failed", {

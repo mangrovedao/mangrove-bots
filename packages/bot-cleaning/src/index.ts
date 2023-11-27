@@ -89,10 +89,11 @@ async function botFunction(
   const marketConfigs = botConfig.markets;
   const marketCleanerMap = new Map<MarketPair, MarketCleaner>();
   for (const marketConfig of marketConfigs) {
-    const [base, quote, takerToImpersonate] = marketConfig;
+    const [base, quote, tickSpacing, takerToImpersonate] = marketConfig;
     const market = await mgv.market({
       base: base,
       quote: quote,
+      tickSpacing: tickSpacing,
       bookOptions: { maxOffers: 200 },
     });
 

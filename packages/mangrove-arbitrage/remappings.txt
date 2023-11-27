@@ -1,8 +1,20 @@
-mgv_src/=../../node_modules/@mangrovedao/mangrove-core/src/
-mgv_lib/=../../node_modules/@mangrovedao/mangrove-core/lib/
-mgv_test/=../../node_modules/@mangrovedao/mangrove-core/test/
-mgv_script/=../../node_modules/@mangrovedao/mangrove-core/script/
+ds-test/=lib/mangrove-core/lib/forge-std/lib/ds-test/src/
+forge-std/=lib/mangrove-core/lib/forge-std/src/
 
-ds-test/=../../node_modules/@mangrovedao/mangrove-core/lib/forge-std/lib/ds-test/src/
-forge-std/=../../node_modules/@mangrovedao/mangrove-core/lib/forge-std/src/
+@mgv/src/=lib/mangrove-core/src/
+@mgv/lib/=lib/mangrove-core/lib/
+@mgv/test/=lib/mangrove-core/test/
+@mgv/script/=lib/mangrove-core/script/
+@mgv/forge-std/=lib/mangrove-core/lib/forge-std/src/
 
+@mgv-strats/src/=lib/mangrove-strats/src/
+@mgv-strats/lib/=lib/mangrove-strats/lib/
+@mgv-strats/test/=lib/mangrove-strats/test/
+@mgv-strats/script/=lib/mangrove-strats/script/
+
+@mgv/arbitrage/src=src
+@mgv/arbitrage/lib=lib
+@mgv/arbitrage/test=test
+@mgv/arbitrage/script=script
+
+@uniswap/v3/lib=lib/v3-core

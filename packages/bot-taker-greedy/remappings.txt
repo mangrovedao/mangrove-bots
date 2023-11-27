@@ -1,0 +1,11 @@
+@mgv/src/=mangrove-src/core/src/
+@mgv/lib/=mangrove-src/core/lib/
+@mgv/test/=mangrove-src/core/test/
+@mgv/script/=mangrove-src/core/script/
+@mgv/forge-std/=mangrove-src/core/lib/forge-std/src/
+ds-test/=mangrove-src/core/lib/forge-std/lib/ds-test/src
+
+@mgv-strats/src/=mangrove-src/strats/src/
+@mgv-strats/lib/=mangrove-src/strats/lib/
+@mgv-strats/test/=mangrove-src/strats/test/
+@mgv-strats/script/=mangrove-src/strats/script/

@@ -20,10 +20,11 @@
     "clean-this-package": "rimraf build tsconfig.tsbuildinfo",
     "clean": "yarn workspaces foreach -vpiR --topological-dev --from $npm_package_name run clean-this-package",
     "test-with-dependencies": "yarn workspaces foreach -vpiR --topological-dev --from $npm_package_name run test",
+    "copy": "node copyMangroveStrats.js",
     "test": "yarn run test:unit && yarn run test:integration",
     "test:unit": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --config test/mocha/config/unit-tests.json --exit",
     "test:integration": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/integration-tests.json --exit ",
-    "test:coverage": "cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/coverage-tests.json --exit ",
+    "test:coverage": "yarn copy && cross-env NODE_ENV=test nyc --reporter=lcov mocha --max-old-space-size=8192 --config test/mocha/config/coverage-tests.json --exit ",
     "start": "node build/index.js"
   },
   "lint-staged": {

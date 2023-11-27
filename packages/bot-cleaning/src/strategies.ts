@@ -1,10 +1,7 @@
 import { Market } from "@mangrovedao/mangrove.js";
 import Big from "big.js";
-
-type SnipeParams = {
-  takerWants: Big;
-  takerGives: Big;
-};
+import { TickLib } from "@mangrovedao/mangrove.js/dist/nodejs/util/coreCalculations/TickLib";
+import { BigNumber } from "ethers";
 
 /**
  * This function calculates the minimum assets that a taker is willing to exchange, considering whether it's a bid or ask offer.
@@ -13,35 +10,32 @@ type SnipeParams = {
  * this value by the price (wants/gives). It checks whether the computed amount is greater than the minimum possible volume of `inboundTkn`,
  * which is `1 / (10**(inboundTkn.decimals))`. If it's not, the logic is reversed: it first tries to
  * set `takerGives` to the minimum volume of `inboundTkn`, and then it calculates `takerWants` by multiplying this value by the inverse of the price.
+ * returns takerWants
  ***/
 export const cleanUsingMinimalAmountOfFunds = (
   market: Market,
   ba: Market.BA,
   offer: Market.Offer
-): SnipeParams => {
+): Big => {
   if (!offer.price) {
-    return {
-      takerWants: new Big(0),
-      takerGives: new Big(0),
-    };
+    return new Big(0);
   }
 
   const inboundTkn = ba == "bids" ? market.base : market.quote;
   const outboundTkn = ba == "bids" ? market.quote : market.base;
 
-  let price = offer.wants.div(offer.gives);
+  const takerGives = TickLib.inboundFromOutbound(offer.tick, BigNumber.from(1));
+  if (takerGives.eq(0)) {
+    const takerWants = TickLib.outboundFromInbound(
+      offer.tick,
+      BigNumber.from(1)
+    );
 
-  const minPossibleWantsVolume = inboundTkn.fromUnits(1);
-  let minGivesVolume = outboundTkn.fromUnits(1);
-  let minWantsVolume = price.mul(minGivesVolume);
-
-  if (minWantsVolume.lt(minPossibleWantsVolume)) {
-    minWantsVolume = minPossibleWantsVolume;
-    minGivesVolume = new Big(1).div(price).mul(minWantsVolume);
+    const wantsInBig = new Big(takerWants.toString()).div(
+      new Big(10).pow(outboundTkn.decimals)
+    );
+    return wantsInBig;
   }
 
-  return {
-    takerWants: minGivesVolume,
-    takerGives: minWantsVolume.plus(inboundTkn.fromUnits(1).toString()),
-  };
+  return new Big(1).div(new Big(10).pow(outboundTkn.decimals));
 };

@@ -156,35 +156,21 @@ export class MarketCleaner {
         this.#whitelistedDustCleaningMaker &&
         this.#whitelistedDustCleaningMaker.has(offer.maker.toLowerCase())
       ) {
-        const cleaningParams = cleanUsingMinimalAmountOfFunds(
+        const takerWants = cleanUsingMinimalAmountOfFunds(
           semibook.market,
           ba,
           offer
         );
 
         cleaningPromises.push(
-          this.#cleanOffer(
-            offer,
-            ba,
-            gasPrice,
-            cleaningParams.takerWants,
-            cleaningParams.takerGives,
-            contextInfo
-          ) // takerWants: outboundTkn, takerGives: inboundTkn
+          this.#cleanOffer(offer, ba, gasPrice, takerWants, contextInfo) // takerWants: outboundTkn, takerGives: inboundTkn
         );
       } else {
         if (shouldOnlyCleanWhitelisted) {
           continue;
         }
         cleaningPromises.push(
-          this.#cleanOffer(
-            offer,
-            ba,
-            gasPrice,
-            new Big(0),
-            new Big(0),
-            contextInfo
-          )
+          this.#cleanOffer(offer, ba, gasPrice, new Big(0), contextInfo)
         );
       }
     }
@@ -196,14 +182,12 @@ export class MarketCleaner {
     ba: Market.BA,
     gasPrice: BigNumber,
     takerWants: Big,
-    takerGives: Big,
     contextInfo?: string
   ): Promise<void> {
     const { willOfferFail, bounty } = await this.#willOfferFail(
       offer,
       ba,
       takerWants,
-      takerGives,
       contextInfo
     );
 
@@ -216,8 +200,7 @@ export class MarketCleaner {
       ba,
       bounty,
       gasPrice,
-      takerWants,
-      takerGives
+      takerWants
     );
 
     if (estimates.netResult.gt(0)) {
@@ -230,7 +213,7 @@ export class MarketCleaner {
         data: { estimates },
       });
       // TODO Do we have the liquidity to do the snipe?
-      await this.#collectOffer(offer, ba, takerWants, takerGives, contextInfo);
+      await this.#collectOffer(offer, ba, takerWants, contextInfo);
     } else {
       logger.debug("Offer is not profitable to clean", {
         base: this.#market.base.name,
@@ -248,42 +231,34 @@ export class MarketCleaner {
     offer: Market.Offer,
     ba: Market.BA,
     takerWants: Big,
-    takerGives: Big,
     contextInfo?: string
-  ): Promise<{ willOfferFail: boolean; bounty?: BigNumber }> {
-    const raw = await this.#market.getRawSnipeParams({
+  ): Promise<{ willOfferFail: boolean; bounty: BigNumber }> {
+    const raw = await this.#market.getRawCleanParams({
       ba: ba,
-      targets: this.#createCollectParams(offer, takerWants, takerGives),
-      requireOffersToFail: true,
-      fillWants: false,
+      targets: this.#createCollectParams(offer, takerWants),
+      taker: this.#takerToImpersonate,
     });
 
-    const call = this.#takerToImpersonate
-      ? this.#market.mgv.cleanerContract.callStatic.collectByImpersonation(
-          raw.outboundTkn,
-          raw.inboundTkn,
-          raw.targets,
-          raw.fillWants,
-          this.#takerToImpersonate
-        )
-      : this.#market.mgv.cleanerContract.callStatic.collect(
-          raw.outboundTkn,
-          raw.inboundTkn,
-          raw.targets,
-          raw.fillWants
-        );
-
-    return call
-      .then((bounty) => {
+    return this.#market.mgv.contract.callStatic
+      .cleanByImpersonation(
+        {
+          outbound_tkn: raw.outboundTkn,
+          inbound_tkn: raw.inboundTkn,
+          tickSpacing: this.#market.tickSpacing,
+        },
+        raw.targets,
+        raw.taker
+      )
+      .then(async ({ successes, bounty }) => {
         logger.debug("Static collect of offer succeeded", {
           base: this.#market.base.name,
           quote: this.#market.quote.name,
           ba: ba,
           offer: offer,
           contextInfo,
-          data: { bounty },
+          data: { successes, bounty },
         });
-        return { willOfferFail: true, bounty: bounty };
+        return { willOfferFail: successes.gt(0), bounty };
       })
       .catch((e) => {
         logger.debug("Static collect of offer failed", {
@@ -294,7 +269,7 @@ export class MarketCleaner {
           contextInfo,
           data: e,
         });
-        return { willOfferFail: false };
+        return { willOfferFail: false, bounty: BigNumber.from(0) };
       });
   }
 
@@ -302,7 +277,6 @@ export class MarketCleaner {
     offer: Market.Offer,
     ba: Market.BA,
     takerWants: Big,
-    takerGives: Big,
     contextInfo?: string
   ): Promise<void> {
     logger.debug("Cleaning offer", {
@@ -329,31 +303,38 @@ export class MarketCleaner {
       });
     }
 
-    const raw = await this.#market.getRawSnipeParams({
+    const raw = await this.#market.getRawCleanParams({
       ba: ba,
-      targets: this.#createCollectParams(offer, takerWants, takerGives),
-      requireOffersToFail: true,
-      fillWants: false,
+      targets: this.#createCollectParams(offer, takerWants),
+      taker: this.#takerToImpersonate,
     });
 
-    const call = this.#takerToImpersonate
-      ? this.#market.mgv.cleanerContract.collectByImpersonation(
-          raw.outboundTkn,
-          raw.inboundTkn,
-          raw.targets,
-          raw.fillWants,
-          this.#takerToImpersonate,
-          txOverrides
-        )
-      : this.#market.mgv.cleanerContract.collect(
-          raw.outboundTkn,
-          raw.inboundTkn,
-          raw.targets,
-          raw.fillWants,
-          txOverrides
-        );
+    const gasEstimate =
+      await this.#market.mgv.contract.estimateGas.cleanByImpersonation(
+        {
+          outbound_tkn: raw.outboundTkn,
+          inbound_tkn: raw.inboundTkn,
+          tickSpacing: this.#market.tickSpacing,
+        },
+        raw.targets,
+        raw.taker
+      );
 
-    return call
+    const gasEstimateWithBuffer = gasEstimate.mul(10);
+    txOverrides = {
+      ...txOverrides,
+      gasLimit: gasEstimateWithBuffer,
+    };
+
+    return this.#market
+      .clean(
+        {
+          ba: ba,
+          targets: this.#createCollectParams(offer, takerWants),
+          taker: this.#takerToImpersonate,
+        },
+        txOverrides
+      )
       .then((result) => {
         logger.info("Successfully cleaned offer", {
           base: this.#market.base.name,
@@ -392,15 +373,14 @@ export class MarketCleaner {
 
   #createCollectParams(
     offer: Market.Offer,
-    takerWants: Big,
-    takerGives: Big
-  ): Market.SnipeParams["targets"] {
+    takerWants: Big
+  ): Market.CleanParams["targets"] {
     return [
       {
         offerId: offer.id,
-        takerWants: takerWants.toFixed(),
-        takerGives: takerGives.toFixed(),
-        gasLimit: maxGasReq,
+        takerWants: takerWants,
+        tick: offer.tick.toString(),
+        gasreq: maxGasReq,
       },
     ];
     // FIXME 2021-12-01: The below result may have been affected by wrong order of inbound/outbound tokens
@@ -447,11 +427,9 @@ export class MarketCleaner {
     ba: Market.BA,
     bounty: BigNumber,
     gasPrice: BigNumber,
-    takerWants: Big,
-    takerGives: Big
+    takerWants: Big
   ): Promise<OfferCleaningEstimates> {
-    const gas = await this.#estimateGas(offer, ba, takerWants, takerGives);
-
+    const gas = await this.#estimateGas(offer, ba, takerWants);
     const totalCost = gas.mul(gasPrice).mul(1 - this.#allowedLostPercentage);
     const netResult = bounty.sub(totalCost);
     return {
@@ -472,32 +450,23 @@ export class MarketCleaner {
   async #estimateGas(
     offer: Market.Offer,
     ba: Market.BA,
-    takerWants: Big,
-    takerGives: Big
+    takerWants: Big
   ): Promise<BigNumber> {
-    const raw = await this.#market.getRawSnipeParams({
+    const raw = await this.#market.getRawCleanParams({
       ba: ba,
-      targets: this.#createCollectParams(offer, takerWants, takerGives),
-      requireOffersToFail: true,
+      targets: this.#createCollectParams(offer, takerWants),
+      taker: this.#takerToImpersonate,
     });
-
-    const call = this.#takerToImpersonate
-      ? this.#market.mgv.cleanerContract.estimateGas.collectByImpersonation(
-          raw.outboundTkn,
-          raw.inboundTkn,
-          raw.targets,
-          raw.fillWants,
-          this.#takerToImpersonate
-        )
-      : this.#market.mgv.cleanerContract.estimateGas.collect(
-          raw.outboundTkn,
-          raw.inboundTkn,
-          raw.targets,
-          raw.fillWants
-        );
-
-    const gasEstimate = await call;
-
+    const gasEstimate =
+      await this.#market.mgv.contract.estimateGas.cleanByImpersonation(
+        {
+          outbound_tkn: raw.outboundTkn,
+          inbound_tkn: raw.inboundTkn,
+          tickSpacing: this.#market.tickSpacing,
+        },
+        raw.targets,
+        raw.taker
+      );
     return gasEstimate;
   }
 }

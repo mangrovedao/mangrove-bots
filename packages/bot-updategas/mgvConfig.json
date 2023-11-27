@@ -1,0 +1,8 @@
+{
+  "addresses_paths": [
+    "mangrove-src/core/",
+    "mangrove-src/strats/",
+    "mangrove-src/strats/addresses/"
+  ],
+  "deployment_addresses_path": "addresses/"
+}
