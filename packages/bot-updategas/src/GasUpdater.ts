@@ -114,14 +114,14 @@ export class GasUpdater {
       }
     );
 
-    const globalConfig = await this.#mangrove.config();
+    const globalConfig = await this.#mangrove.readerContract.globalUnpacked();
 
     logger.debug("Mangrove global config retrieved", {
       data: globalConfig,
       contextInfo,
     });
 
-    const currentMangroveGasPrice = globalConfig.gasprice;
+    const currentMangroveGasPrice = globalConfig.gasprice.toNumber();
 
     let oracleGasPriceEstimate =
       await this.gasHelper.getGasPriceEstimateFromOracle({
