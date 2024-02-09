@@ -1,7 +1,7 @@
 /**
  * Integration tests of GasUpdater.ts.
  */
-import { afterEach, before, beforeEach, describe, it } from "mocha";
+import { afterEach, beforeEach, describe, it } from "mocha";
 import * as chai from "chai";
 const { expect } = chai;
 import chaiAsPromised from "chai-as-promised";
@@ -13,7 +13,7 @@ import {
   OracleSourceConfiguration,
 } from "../../src/GasUpdater";
 import { config } from "../../src/util/config";
-import { Signer, ethers } from "ethers";
+import { ethers } from "ethers";
 
 describe("GasUpdater integration tests", () => {
   let gasUpdaterSigner: ethers.Wallet;
