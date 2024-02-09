@@ -1,6 +1,6 @@
 import { Market } from "@mangrovedao/mangrove.js";
 import Big from "big.js";
-import { TickLib } from "@mangrovedao/mangrove.js/dist/nodejs/util/coreCalculations/TickLib";
+import * as TickLib from "@mangrovedao/mangrove.js/dist/nodejs/util/coreCalculations/TickLib";
 import { BigNumber } from "ethers";
 
 /**
@@ -21,21 +21,15 @@ export const cleanUsingMinimalAmountOfFunds = (
     return new Big(0);
   }
 
-  const inboundTkn = ba == "bids" ? market.base : market.quote;
-  const outboundTkn = ba == "bids" ? market.quote : market.base;
+  const { outbound_tkn } = market.getOutboundInbound(ba);
+  const tick = BigNumber.from(offer.tick);
 
-  const takerGives = TickLib.inboundFromOutbound(offer.tick, BigNumber.from(1));
+  const takerGives = TickLib.inboundFromOutbound(tick, BigNumber.from(1));
   if (takerGives.eq(0)) {
-    const takerWants = TickLib.outboundFromInbound(
-      offer.tick,
-      BigNumber.from(1)
-    );
+    const takerWants = TickLib.outboundFromInbound(tick, BigNumber.from(1));
 
-    const wantsInBig = new Big(takerWants.toString()).div(
-      new Big(10).pow(outboundTkn.decimals)
-    );
-    return wantsInBig;
+    return outbound_tkn.fromUnits(takerWants);
   }
 
-  return new Big(1).div(new Big(10).pow(outboundTkn.decimals));
+  return outbound_tkn.fromUnits(1);
 };

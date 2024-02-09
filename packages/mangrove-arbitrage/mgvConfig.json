@@ -1,4 +1,4 @@
 {
-  "addresses_paths": ["addresses/", "lib/mangrove-core/addresses/"],
+  "addresses_paths": ["addresses/", "addresses-imported/"],
   "deployment_addresses_path": "addresses/"
 }

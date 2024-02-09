@@ -1,10 +1,10 @@
 import { ArbParams, Market, MarketWithToken, Method } from "./types";
 import { ArbParamsStruct, MgvArbitrage } from "./types/typechain/MgvArbitrage";
-import { Mangrove, typechain, MgvToken } from "@mangrovedao/mangrove.js";
+import { Mangrove, typechain, Token } from "@mangrovedao/mangrove.js";
 
 export const activateTokens = async (
   mgv: Mangrove,
-  tokens: MgvToken[],
+  tokens: Token[],
   arbitragerContract: MgvArbitrage
 ) => {
   const values = await Promise.all(

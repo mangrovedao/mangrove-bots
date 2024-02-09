@@ -47,14 +47,16 @@ export class PriceUtils {
 
   public async getExternalPrice(market: Market, ba: Market.BA) {
     const externalPrice = this.getExternalPriceFromInAndOut(
-      market.base.name,
-      market.quote.name
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      market.base.symbol!,
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      market.quote.symbol!
     );
     try {
       this.logger?.debug("Getting external price reference", {
         contextInfo: "maker",
-        base: market.base.name,
-        quote: market.quote.name,
+        base: market.base.id,
+        quote: market.quote.id,
         ba: ba,
         data: {
           apiUrl: externalPrice.apiUrl,
@@ -67,8 +69,8 @@ export class PriceUtils {
           "Using external price reference as order book is empty",
           {
             contextInfo: "maker",
-            base: market.base.name,
-            quote: market.quote.name,
+            base: market.base.id,
+            quote: market.quote.id,
             ba: ba,
             data: {
               referencePrice,
@@ -80,11 +82,11 @@ export class PriceUtils {
       }
 
       this.logger?.warn(
-        `Response did not contain a ${market.quote.name} field`,
+        `Response did not contain a ${market.quote.symbol} field`,
         {
           contextInfo: "maker",
-          base: market.base.name,
-          quote: market.quote.name,
+          base: market.base.id,
+          quote: market.quote.id,
           ba: ba,
           data: {
             apiUrl: externalPrice.apiUrl,
@@ -97,8 +99,8 @@ export class PriceUtils {
     } catch (e) {
       this.logger?.error(`Error encountered while fetching external price`, {
         contextInfo: "maker",
-        base: market.base.name,
-        quote: market.quote.name,
+        base: market.base.id,
+        quote: market.quote.id,
         ba: ba,
         data: {
           reason: e,
@@ -118,8 +120,8 @@ export class PriceUtils {
       bestOffer = offerList[0];
       this.logger?.debug("Best offer on book", {
         contextInfo: "maker",
-        base: market.base.name,
-        quote: market.quote.name,
+        base: market.base.id,
+        quote: market.quote.id,
         ba: ba,
         data: { bestOffer: bestOffer },
       });

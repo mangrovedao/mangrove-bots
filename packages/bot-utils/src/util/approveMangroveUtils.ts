@@ -39,7 +39,7 @@ export class ApproveMangroveUtils {
         .then((tx) => tx.wait())
         .then((txReceipt) => {
           this.logger.info(
-            `Mangrove successfully approved for token ${token.name}`,
+            `Mangrove successfully approved for token ${token.id}`,
             {
               contextInfo,
               token: tokenConfig.name,

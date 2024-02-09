@@ -18,7 +18,7 @@ import { MarketCleaner } from "./MarketCleaner";
 import config from "./util/config";
 import { logger } from "./util/logger";
 
-type MarketPair = { base: string; quote: string };
+type MarketPair = { base: string; quote: string; tickSpacing: number };
 
 enableLogging();
 
@@ -94,7 +94,7 @@ async function botFunction(
       base: base,
       quote: quote,
       tickSpacing: tickSpacing,
-      bookOptions: { maxOffers: 200 },
+      bookOptions: { targetNumberOfTicks: 20 },
     });
 
     // Create object for tracking latest activity
@@ -107,7 +107,11 @@ async function botFunction(
     latestMarketActivities.push(latestMarketActivity);
 
     marketCleanerMap.set(
-      { base: market.base.name, quote: market.quote.name },
+      {
+        base: market.base.id,
+        quote: market.quote.id,
+        tickSpacing: market.tickSpacing,
+      },
       new MarketCleaner(
         market,
         provider,

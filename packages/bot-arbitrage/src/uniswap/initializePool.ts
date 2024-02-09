@@ -1,25 +1,25 @@
 import bn from "bignumber.js";
 import { BigNumber, Contract, Signer } from "ethers";
 import { logger } from "../util/logger";
-import { MgvToken } from "@mangrovedao/mangrove.js";
+import { Token } from "@mangrovedao/mangrove.js";
 
 export async function initPool(params: {
   positionManager: Contract;
   factory: Contract;
   actor: Signer;
-  token1: MgvToken;
+  token1: Token;
   token1Value: string;
-  token2: MgvToken;
+  token2: Token;
   token2Value: string;
   poolFee: number;
 }) {
   const { sqrtPrice } = encodePriceSqrt(
     params.token1Value,
     params.token1.decimals,
-    params.token1.name,
+    params.token1.symbol,
     params.token2Value,
     params.token2.decimals,
-    params.token2.name
+    params.token2.symbol
   );
   await params.positionManager
     .connect(params.actor)

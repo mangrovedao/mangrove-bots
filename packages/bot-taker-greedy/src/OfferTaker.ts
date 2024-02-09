@@ -37,16 +37,16 @@ export class OfferTaker {
     this.#takerAddress = takerAddress;
     this.#takerConfig = takerConfig;
     this.#cryptoCompareUrl = `https://min-api.cryptocompare.com/data/price?fsym=${
-      marketConfig.baseTokenSymbolForPriceLookup ?? this.#market.base.name
+      marketConfig.baseTokenSymbolForPriceLookup ?? this.#market.base.symbol
     }&tsyms=${
-      marketConfig.quoteTokenSymbolForPriceLookup ?? this.#market.quote.name
+      marketConfig.quoteTokenSymbolForPriceLookup ?? this.#market.quote.symbol
     }`;
     this.#scheduler = scheduler;
 
     logger.info("Initalized offer taker", {
       contextInfo: "taker init",
-      base: this.#market.base.name,
-      quote: this.#market.quote.name,
+      base: this.#market.base.id,
+      quote: this.#market.quote.id,
       data: { takerConfig: takerConfig },
     });
   }
@@ -57,8 +57,8 @@ export class OfferTaker {
   public start(): void {
     logger.info("Starting offer taker", {
       contextInfo: "taker start",
-      base: this.#market.base.name,
-      quote: this.#market.quote.name,
+      base: this.#market.base.id,
+      quote: this.#market.quote.id,
     });
     if (this.#job) {
       this.#job.start();
@@ -66,15 +66,15 @@ export class OfferTaker {
     }
 
     const task = new AsyncTask(
-      `offer taker task ${this.#market.base.name}-${this.#market.quote.name}`,
+      `offer taker task ${this.#market.base.id}-${this.#market.quote.id}`,
       async () => {
         await this.#tradeIfPricesAreBetterThanExternalSignal();
       },
       (err: Error) => {
         logger.error("encountered error during task", {
           contextInfo: "taker task",
-          base: this.#market.base.name,
-          quote: this.#market.quote.name,
+          base: this.#market.base.id,
+          quote: this.#market.quote.id,
           data: {
             reason: err,
           },
@@ -116,8 +116,8 @@ export class OfferTaker {
         "Heartbeat - No external price found, so not buying anything at this time",
         {
           contextInfo,
-          base: this.#market.base.name,
-          quote: this.#market.quote.name,
+          base: this.#market.base.id,
+          quote: this.#market.quote.id,
         }
       );
       return;
@@ -128,8 +128,8 @@ export class OfferTaker {
 
     // logger.debug("Token balances", {
     //   contextInfo: "taker",
-    //   base: this.#market.base.name,
-    //   quote: this.#market.quote.name,
+    //   base: this.#market.base.id,
+    //   quote: this.#market.quote.id,
     //   data: {
     //     baseTokenBalance: this.#market.base.fromUnits(baseTokenBalance),
     //     quoteTokenBalance: this.#market.quote.fromUnits(quoteTokenBalance),
@@ -156,20 +156,22 @@ export class OfferTaker {
     try {
       logger.debug("Fetching external price", {
         contextInfo,
-        base: this.#market.base.name,
-        quote: this.#market.quote.name,
+        base: this.#market.base.id,
+        quote: this.#market.quote.id,
         data: {
           cryptoCompareUrl: this.#cryptoCompareUrl,
         },
       });
 
       const json = await fetchJson(this.#cryptoCompareUrl);
-      if (json[this.#market.quote.name] !== undefined) {
-        const externalPrice = new Big(json[this.#market.quote.name]);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      if (json[this.#market.quote.symbol!] !== undefined) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const externalPrice = new Big(json[this.#market.quote.symbol!]);
         logger.debug("Received external price", {
           contextInfo,
-          base: this.#market.base.name,
-          quote: this.#market.quote.name,
+          base: this.#market.base.id,
+          quote: this.#market.quote.id,
           data: {
             externalPrice: externalPrice,
             cryptoCompareUrl: this.#cryptoCompareUrl,
@@ -179,11 +181,11 @@ export class OfferTaker {
       }
 
       logger.warn(
-        `Response did not contain a ${this.#market.quote.name} field`,
+        `Response did not contain a ${this.#market.quote.symbol} field`,
         {
           contextInfo,
-          base: this.#market.base.name,
-          quote: this.#market.quote.name,
+          base: this.#market.base.id,
+          quote: this.#market.quote.id,
           data: {
             cryptoCompareUrl: this.#cryptoCompareUrl,
             responseJson: json,
@@ -195,8 +197,8 @@ export class OfferTaker {
     } catch (e) {
       logger.error(`Error encountered while fetching external price`, {
         contextInfo,
-        base: this.#market.base.name,
-        quote: this.#market.quote.name,
+        base: this.#market.base.id,
+        quote: this.#market.quote.id,
         data: {
           reason: e,
           cryptoCompareUrl: this.#cryptoCompareUrl,
@@ -232,8 +234,8 @@ export class OfferTaker {
         this.#market.mgv.reliableProvider.blockManager.getLastBlock();
       logger.info("Heartbeat - No offer better than external price", {
         contextInfo,
-        base: this.#market.base.name,
-        quote: this.#market.quote.name,
+        base: this.#market.base.id,
+        quote: this.#market.quote.id,
         ba,
         data: {
           bestFetchedPrice: offers[0]?.price,
@@ -259,8 +261,8 @@ export class OfferTaker {
 
     logger.info(`Heartbeat - Posting ${buyOrSell} market order`, {
       contextInfo,
-      base: this.#market.base.name,
-      quote: this.#market.quote.name,
+      base: this.#market.base.id,
+      quote: this.#market.quote.id,
       ba,
       data: {
         total: total.toString(),
@@ -270,7 +272,7 @@ export class OfferTaker {
       },
     });
     try {
-      const tradeParams = { total: total, price: externalPrice };
+      const tradeParams = { total: total, limitPrice: externalPrice };
       const gasLowerBound = await this.#market.trade.estimateGas(
         buyOrSell,
         tradeParams,
@@ -283,32 +285,26 @@ export class OfferTaker {
       const result = await buyOrSellPromise.result;
       logger.info(`Successfully completed ${buyOrSell} order`, {
         contextInfo,
-        base: this.#market.base.name,
-        quote: this.#market.quote.name,
+        base: this.#market.base.id,
+        quote: this.#market.quote.id,
         ba,
         data: {
           total: total.toString(),
           price: externalPrice.toString(),
           numberOfAsksWithBetterPrice: offersWithBetterThanExternalPrice.length,
-          buyResult:
-            "fillWants" in result.summary
-              ? {
-                  gave: result.summary.totalGave?.toString(),
-                  got: result.summary.totalGot?.toString(),
-                  partialFill: result.summary.partialFill,
-                  penalty: result.summary.bounty?.toString(),
-                }
-              : {
-                  bounty: result.summary.bounty?.toString(),
-                  isClean: true,
-                },
+          buyResult: {
+            gave: result.summary.totalGave?.toString(),
+            got: result.summary.totalGot?.toString(),
+            partialFill: result.summary.partialFill,
+            penalty: result.summary.bounty?.toString(),
+          },
         },
       });
     } catch (e) {
       logger.error(`Error occurred while ${buyOrSell}ing`, {
         contextInfo,
-        base: this.#market.base.name,
-        quote: this.#market.quote.name,
+        base: this.#market.base.id,
+        quote: this.#market.quote.id,
         ba,
         data: {
           reason: e,

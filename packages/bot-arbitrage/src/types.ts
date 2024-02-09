@@ -1,4 +1,4 @@
-import { MgvToken } from "@mangrovedao/mangrove.js";
+import { Token } from "@mangrovedao/mangrove.js";
 import { ArbParamsStruct } from "./types/typechain/MgvArbitrage";
 
 export type Market = {
@@ -9,8 +9,8 @@ export type Market = {
 };
 
 export type MarketWithToken = Omit<Market, "base" | "quote"> & {
-  base: MgvToken;
-  quote: MgvToken;
+  base: Token;
+  quote: Token;
   uniswapPoolAddress: string;
 };
 

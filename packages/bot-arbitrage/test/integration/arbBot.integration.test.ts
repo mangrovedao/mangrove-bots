@@ -123,7 +123,7 @@ describe("ArbBot integration tests", () => {
       `--label ${this.accounts.maker.address}:maker --label ${this.accounts.deployer.address}:deployer --label ${arb}:arbContract --label ${weth.address}:weth --label ${dai.address}:dai --label ${mgv.address}:mangrove --label ${usdc.address}:usdc`
     );
 
-    mgvTestUtil.setConfig(mgv, this.accounts, mgvDeployer);
+    mgvTestUtil.setConfig(mgv, this.accounts);
     mgvTestUtil.initPollOfTransactionTracking(mgvDeployer.provider);
   });
 

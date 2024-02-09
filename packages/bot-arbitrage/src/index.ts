@@ -2,7 +2,7 @@ import { logger } from "./util/logger";
 
 import { BaseProvider } from "@ethersproject/providers";
 import { Wallet } from "@ethersproject/wallet";
-import Mangrove, { enableLogging, MgvToken } from "@mangrovedao/mangrove.js";
+import Mangrove, { enableLogging, Token } from "@mangrovedao/mangrove.js";
 
 import { AsyncTask, SimpleIntervalJob, ToadScheduler } from "toad-scheduler";
 import { ExitCode, Setup } from "@mangrovedao/bot-utils";
@@ -40,7 +40,7 @@ async function botFunction(
     )
   );
 
-  const tokenSet: Record<string, MgvToken> = {};
+  const tokenSet: Record<string, Token> = {};
 
   marketsWithToken.forEach((market) => {
     tokenSet[market.base.address] = market.base;

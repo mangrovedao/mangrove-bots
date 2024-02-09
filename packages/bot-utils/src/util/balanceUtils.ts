@@ -1,6 +1,6 @@
 import * as log from "../logging/logger";
 
-import Mangrove, { MgvToken } from "@mangrovedao/mangrove.js";
+import Mangrove, { Token } from "@mangrovedao/mangrove.js";
 
 import { Provider } from "@ethersproject/providers";
 import { IConfig } from "config";
@@ -37,13 +37,13 @@ export class BalanceUtils {
   public async logTokenBalance(
     provider: Provider,
     address: string,
-    token: MgvToken,
+    token: Token,
     contextInfo: string
   ): Promise<void> {
     const balance = await token.contract.balanceOf(address);
     this.logger.info(`Balance: ${token.fromUnits(balance)}`, {
       contextInfo: contextInfo,
-      token: token.name,
+      token: token.id,
       data: {
         rawBalance: balance.toString(),
       },

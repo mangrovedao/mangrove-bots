@@ -30,7 +30,7 @@ export class MarketCleaner {
   #txUtils: TxUtils;
   #latestMarketActivity: LatestMarketActivity;
   #allowedLostPercentage: number;
-  #whitelistedDustCleaningMaker?: Set<String>;
+  #whitelistedDustCleaningMaker?: Set<string>;
   #takerToImpersonate?: string;
 
   /**
@@ -44,7 +44,7 @@ export class MarketCleaner {
     provider: Provider,
     latestMarketActivity: LatestMarketActivity,
     allowedLostPercentage: number,
-    whitelistedDustCleaningMaker?: Set<String>,
+    whitelistedDustCleaningMaker?: Set<string>,
     takerToImpersonate?: string
   ) {
     this.#market = market;
@@ -58,8 +58,8 @@ export class MarketCleaner {
     this.#txUtils = new TxUtils(provider, logger);
 
     logger.info("Initialized market cleaner", {
-      base: this.#market.base.name,
-      quote: this.#market.quote.name,
+      base: this.#market.base.id,
+      quote: this.#market.quote.id,
       takerToImpersonate: takerToImpersonate
         ? takerToImpersonate
         : "no impersonation, the bot account will be used for cleaning",
@@ -73,14 +73,14 @@ export class MarketCleaner {
    * @returns A promise that fulfills when all offers have been evaluated and all cleaning transactions have been mined.
    */
   public async clean(
-    shouldOnlyCleanWhitelisted: boolean = false,
+    shouldOnlyCleanWhitelisted = false,
     contextInfo?: string
   ): Promise<void> {
     // TODO non-thread safe reentrancy lock - is this is an issue in JS?
     if (this.#isCleaning) {
       logger.debug("Already cleaning so ignoring request to clean", {
-        base: this.#market.base.name,
-        quote: this.#market.quote.name,
+        base: this.#market.base.id,
+        quote: this.#market.quote.id,
         contextInfo,
       });
 
@@ -92,8 +92,8 @@ export class MarketCleaner {
       this.#isCleaning = true;
 
       logger.info("Heartbeat - Cleaning market", {
-        base: this.#market.base.name,
-        quote: this.#market.quote.name,
+        base: this.#market.base.id,
+        quote: this.#market.quote.id,
         contextInfo,
       });
       this.#latestMarketActivity.latestBlock =
@@ -102,8 +102,8 @@ export class MarketCleaner {
 
       if (!(await this.#market.isActive())) {
         logger.warn(`Market is closed so ignoring request to clean`, {
-          base: this.#market.base.name,
-          quote: this.#market.quote.name,
+          base: this.#market.base.id,
+          quote: this.#market.quote.id,
           contextInfo,
         });
         return;
@@ -114,8 +114,8 @@ export class MarketCleaner {
 
       const { asks, bids } = this.#market.getBook();
       logger.info("Order book retrieved", {
-        base: this.#market.base.name,
-        quote: this.#market.quote.name,
+        base: this.#market.base.id,
+        quote: this.#market.quote.id,
         contextInfo,
         data: {
           asksCount: asks.size(),
@@ -205,8 +205,8 @@ export class MarketCleaner {
 
     if (estimates.netResult.gt(0)) {
       logger.info("Identified offer that is profitable to clean", {
-        base: this.#market.base.name,
-        quote: this.#market.quote.name,
+        base: this.#market.base.id,
+        quote: this.#market.quote.id,
         takerToImpersonate: this.#takerToImpersonate,
         ba: ba,
         offer: offer,
@@ -216,8 +216,8 @@ export class MarketCleaner {
       await this.#collectOffer(offer, ba, takerWants, contextInfo);
     } else {
       logger.debug("Offer is not profitable to clean", {
-        base: this.#market.base.name,
-        quote: this.#market.quote.name,
+        base: this.#market.base.id,
+        quote: this.#market.quote.id,
         takerToImpersonate: this.#takerToImpersonate,
         ba: ba,
         offer: offer,
@@ -240,19 +240,11 @@ export class MarketCleaner {
     });
 
     return this.#market.mgv.contract.callStatic
-      .cleanByImpersonation(
-        {
-          outbound_tkn: raw.outboundTkn,
-          inbound_tkn: raw.inboundTkn,
-          tickSpacing: this.#market.tickSpacing,
-        },
-        raw.targets,
-        raw.taker
-      )
+      .cleanByImpersonation(raw.olKey, raw.targets, raw.taker)
       .then(async ({ successes, bounty }) => {
         logger.debug("Static collect of offer succeeded", {
-          base: this.#market.base.name,
-          quote: this.#market.quote.name,
+          base: this.#market.base.id,
+          quote: this.#market.quote.id,
           ba: ba,
           offer: offer,
           contextInfo,
@@ -262,8 +254,8 @@ export class MarketCleaner {
       })
       .catch((e) => {
         logger.debug("Static collect of offer failed", {
-          base: this.#market.base.name,
-          quote: this.#market.quote.name,
+          base: this.#market.base.id,
+          quote: this.#market.quote.id,
           ba: ba,
           offer: offer,
           contextInfo,
@@ -280,8 +272,8 @@ export class MarketCleaner {
     contextInfo?: string
   ): Promise<void> {
     logger.debug("Cleaning offer", {
-      base: this.#market.base.name,
-      quote: this.#market.quote.name,
+      base: this.#market.base.id,
+      quote: this.#market.quote.id,
       ba: ba,
       offer: offer,
       contextInfo,
@@ -311,11 +303,7 @@ export class MarketCleaner {
 
     const gasEstimate =
       await this.#market.mgv.contract.estimateGas.cleanByImpersonation(
-        {
-          outbound_tkn: raw.outboundTkn,
-          inbound_tkn: raw.inboundTkn,
-          tickSpacing: this.#market.tickSpacing,
-        },
+        raw.olKey,
         raw.targets,
         raw.taker
       );
@@ -337,15 +325,15 @@ export class MarketCleaner {
       )
       .then((result) => {
         logger.info("Successfully cleaned offer", {
-          base: this.#market.base.name,
-          quote: this.#market.quote.name,
+          base: this.#market.base.id,
+          quote: this.#market.quote.id,
           ba: ba,
           offerId: offer.id,
           contextInfo,
         });
         logger.debug("Details for cleaned offer", {
-          base: this.#market.base.name,
-          quote: this.#market.quote.name,
+          base: this.#market.base.id,
+          quote: this.#market.quote.id,
           ba: ba,
           offer: offer,
           contextInfo,
@@ -354,15 +342,15 @@ export class MarketCleaner {
       })
       .catch((e) => {
         logger.warn("Cleaning of offer failed", {
-          base: this.#market.base.name,
-          quote: this.#market.quote.name,
+          base: this.#market.base.id,
+          quote: this.#market.quote.id,
           ba: ba,
           offerId: offer.id,
           contextInfo,
         });
         logger.debug("Details for failed cleaning", {
-          base: this.#market.base.name,
-          quote: this.#market.quote.name,
+          base: this.#market.base.id,
+          quote: this.#market.quote.id,
           ba: ba,
           offer: offer,
           contextInfo,
@@ -379,7 +367,7 @@ export class MarketCleaner {
       {
         offerId: offer.id,
         takerWants: takerWants,
-        tick: offer.tick.toString(),
+        tick: offer.tick,
         gasreq: maxGasReq,
       },
     ];
@@ -459,11 +447,7 @@ export class MarketCleaner {
     });
     const gasEstimate =
       await this.#market.mgv.contract.estimateGas.cleanByImpersonation(
-        {
-          outbound_tkn: raw.outboundTkn,
-          inbound_tkn: raw.inboundTkn,
-          tickSpacing: this.#market.tickSpacing,
-        },
+        raw.olKey,
         raw.targets,
         raw.taker
       );
