@@ -1,4 +1,4 @@
-import { Market } from "@mangrovedao/mangrove.js";
+import { Market, TokenCalculations } from "@mangrovedao/mangrove.js";
 import Big from "big.js";
 import * as TickLib from "@mangrovedao/mangrove.js/dist/nodejs/util/coreCalculations/TickLib";
 import { BigNumber } from "ethers";
@@ -13,15 +13,13 @@ import { BigNumber } from "ethers";
  * returns takerWants
  ***/
 export const cleanUsingMinimalAmountOfFunds = (
-  market: Market,
-  ba: Market.BA,
+  outbound_tkn: TokenCalculations,
   offer: Market.Offer
 ): Big => {
   if (!offer.price) {
     return new Big(0);
   }
 
-  const { outbound_tkn } = market.getOutboundInbound(ba);
   const tick = BigNumber.from(offer.tick);
 
   const takerGives = TickLib.inboundFromOutbound(tick, BigNumber.from(1));

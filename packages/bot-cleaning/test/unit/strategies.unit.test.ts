@@ -1,16 +1,17 @@
-import { Market } from "@mangrovedao/mangrove.js";
-import { Bigish } from "@mangrovedao/mangrove.js/dist/nodejs/types";
+import { Market, Bigish, TokenCalculations } from "@mangrovedao/mangrove.js";
 import UnitCalculations from "@mangrovedao/mangrove.js/dist/nodejs/util/unitCalculations";
-import Big from "big.js";
+import Big, { BigSource } from "big.js";
 import { expect } from "chai";
-import { BigNumber, ethers } from "ethers";
+import { ethers } from "ethers";
 
 import { describe, it } from "mocha";
 import { cleanUsingMinimalAmountOfFunds } from "../../src/strategies";
-import { TickLib } from "@mangrovedao/mangrove.js/dist/nodejs/util/coreCalculations/TickLib";
+import * as TickLib from "@mangrovedao/mangrove.js/dist/nodejs/util/coreCalculations/TickLib";
 
-class MockMgvToken {
-  constructor(public name: string, public decimals: number) {}
+class MockMgvToken extends TokenCalculations {
+  constructor(public symbol: string, public decimals: number) {
+    super(decimals, decimals);
+  }
 
   fromUnits(amount: string | number | ethers.BigNumber): Big {
     return UnitCalculations.fromUnits(amount, this.decimals);
@@ -22,7 +23,11 @@ class MockMgvToken {
 }
 
 class MockMarket {
-  constructor(public base: MockMgvToken, public quote: MockMgvToken) {}
+  constructor(
+    public base: MockMgvToken,
+    public quote: MockMgvToken,
+    public tickSpacing: number
+  ) {}
 }
 
 type Volume = {
@@ -30,9 +35,11 @@ type Volume = {
   wants: Big;
 };
 
+type MarketLike = MockMarket | Market;
+
 const generateMockOfferWithGivesAndWants = (
   volume: Volume,
-  market: Market,
+  market: MarketLike,
   ba: Market.BA
 ): Market.Offer => {
   const { gives, wants } = volume;
@@ -47,16 +54,17 @@ const generateMockOfferWithGivesAndWants = (
 
   return {
     id: 1,
-    prev: undefined,
+    prevAtTick: undefined,
     gasprice: 1,
     maker: "",
     gasreq: 1,
+    wants: wants,
     gives: gives,
-    tick: BigNumber.from(tick.toString()),
+    tick: tick.toNumber(),
     volume: new Big(1),
     price: new Big(0),
-    next: undefined,
-    offer_gasbase: 1,
+    nextAtTick: undefined,
+    gasbase: 1,
   };
 };
 
@@ -66,7 +74,7 @@ describe("Unit test suite for strategies", () => {
   const USDT = new MockMgvToken("USDT", 6);
 
   it("WETH/USDC ask: test cleanUsingMinimalAmountOfFunds token with two different decimals", async () => {
-    const market = new MockMarket(WETH, USDC) as Market;
+    const market = new MockMarket(WETH, USDC, 1);
     const ask: Market.Offer = generateMockOfferWithGivesAndWants(
       {
         gives: new Big(1),
@@ -76,13 +84,13 @@ describe("Unit test suite for strategies", () => {
       "asks"
     );
 
-    const wants = cleanUsingMinimalAmountOfFunds(market, "asks", ask);
+    const wants = cleanUsingMinimalAmountOfFunds(market.base, ask);
     console.log(wants.toString());
     expect(wants.toString()).to.equal("6.25015715e-10");
   });
 
   it("WETH/USDC bid: test cleanUsingMinimalAmountOfFunds token with two different decimals", async () => {
-    const market = new MockMarket(WETH, USDC) as Market;
+    const market = new MockMarket(WETH, USDC, 1);
     const bid: Market.Offer = generateMockOfferWithGivesAndWants(
       {
         gives: new Big(1600),
@@ -92,13 +100,13 @@ describe("Unit test suite for strategies", () => {
       "bids"
     );
 
-    const wants = cleanUsingMinimalAmountOfFunds(market, "bids", bid);
+    const wants = cleanUsingMinimalAmountOfFunds(market.quote, bid);
     console.log(wants.toString());
     expect(wants.toString()).to.equal("0.000001");
   });
 
   it("USDC/USDT ask: test cleanUsingMinimalAmountOfFunds token with same decimals", async () => {
-    const market = new MockMarket(USDC, USDT) as Market;
+    const market = new MockMarket(USDC, USDT, 1);
     const ask: Market.Offer = generateMockOfferWithGivesAndWants(
       {
         gives: new Big(1.001),
@@ -108,13 +116,13 @@ describe("Unit test suite for strategies", () => {
       "asks"
     );
 
-    const wants = cleanUsingMinimalAmountOfFunds(market, "asks", ask);
+    const wants = cleanUsingMinimalAmountOfFunds(market.base, ask);
 
     expect(USDC.toUnits(wants).toString()).to.equal("1");
   });
 
   it("USDC/USDT bid: test cleanUsingMinimalAmountOfFunds token with same decimals", async () => {
-    const market = new MockMarket(USDC, USDT) as Market;
+    const market = new MockMarket(USDC, USDT, 1);
     const bid: Market.Offer = generateMockOfferWithGivesAndWants(
       {
         gives: new Big(0.999),
@@ -124,7 +132,7 @@ describe("Unit test suite for strategies", () => {
       "bids"
     );
 
-    const wants = cleanUsingMinimalAmountOfFunds(market, "bids", bid);
+    const wants = cleanUsingMinimalAmountOfFunds(market.quote, bid);
 
     expect(USDT.toUnits(wants).toString()).to.equal("1");
   });

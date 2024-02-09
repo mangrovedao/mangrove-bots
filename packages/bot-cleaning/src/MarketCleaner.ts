@@ -157,8 +157,7 @@ export class MarketCleaner {
         this.#whitelistedDustCleaningMaker.has(offer.maker.toLowerCase())
       ) {
         const takerWants = cleanUsingMinimalAmountOfFunds(
-          semibook.market,
-          ba,
+          semibook.market.getOutboundInbound(ba).outbound_tkn,
           offer
         );
 

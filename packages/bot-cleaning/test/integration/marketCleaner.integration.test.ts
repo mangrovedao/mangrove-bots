@@ -10,7 +10,7 @@ chai.use(chaiAsPromised);
 import { Mangrove, Market } from "@mangrovedao/mangrove.js";
 import { mgvTestUtil } from "@mangrovedao/mangrove.js";
 
-import { BigNumber, ethers } from "ethers";
+import { ethers } from "ethers";
 import { Provider } from "@ethersproject/abstract-provider";
 
 import { MarketCleaner } from "../../src/MarketCleaner";
@@ -49,7 +49,7 @@ describe("MarketCleaner integration tests", () => {
       provider: mgvConfig.provider,
     });
 
-    mgvTestUtil.setConfig(mgvConfig, this.accounts, mgvAdmin);
+    mgvTestUtil.setConfig(mgvConfig, this.accounts);
 
     maker = await mgvTestUtil.getAccount(mgvTestUtil.AccountName.Maker);
     cleaner = await mgvTestUtil.getAccount(mgvTestUtil.AccountName.Cleaner);
@@ -95,8 +95,8 @@ describe("MarketCleaner integration tests", () => {
         market,
         cleanerProvider,
         {
-          base: market.base.name,
-          quote: market.quote.name,
+          base: market.base.id,
+          quote: market.quote.id,
         },
         0
       );
@@ -129,8 +129,8 @@ describe("MarketCleaner integration tests", () => {
         market,
         cleanerProvider,
         {
-          base: market.base.name,
-          quote: market.quote.name,
+          base: market.base.id,
+          quote: market.quote.id,
         },
         0
       );
@@ -169,7 +169,9 @@ describe("MarketCleaner integration tests", () => {
       shouldFail: true,
       // wants: market.quote.toUnits(1600),
       gives: market.base.toUnits(1),
-      tick: market.getBook().asks.tickPriceHelper.tickFromPrice(1600),
+      tick: market
+        .getBook()
+        .asks.tickPriceHelper.tickFromPrice(1600, "nearest"),
     });
     await mgvTestUtil.waitForBlock(market.mgv, txReceipt.blockNumber!);
 
@@ -178,8 +180,8 @@ describe("MarketCleaner integration tests", () => {
       market,
       cleanerProvider,
       {
-        base: market.base.name,
-        quote: market.quote.name,
+        base: market.base.id,
+        quote: market.quote.id,
       },
       0,
       whitelistedSets
@@ -219,7 +221,9 @@ describe("MarketCleaner integration tests", () => {
       shouldFail: true,
       // wants: market.base.toUnits(1),
       gives: market.quote.toUnits(1600),
-      tick: market.getBook().bids.tickPriceHelper.tickFromPrice(1600),
+      tick: market
+        .getBook()
+        .bids.tickPriceHelper.tickFromPrice(1600, "nearest"),
     });
     await mgvTestUtil.waitForBlock(market.mgv, txReceipt.blockNumber!);
 
@@ -228,8 +232,8 @@ describe("MarketCleaner integration tests", () => {
       market,
       cleanerProvider,
       {
-        base: market.base.name,
-        quote: market.quote.name,
+        base: market.base.id,
+        quote: market.quote.id,
       },
       0,
       whitelistedSets
@@ -289,7 +293,9 @@ describe("MarketCleaner integration tests", () => {
       shouldFail: true,
       // wants: market.base.toUnits(1),
       gives: market.quote.toUnits(1600),
-      tick: market.getBook().bids.tickPriceHelper.tickFromPrice(1600),
+      tick: market
+        .getBook()
+        .bids.tickPriceHelper.tickFromPrice(1600, "nearest"),
     });
     await mgvTestUtil.waitForBlock(
       marketAribtrager.mgv,
@@ -301,8 +307,8 @@ describe("MarketCleaner integration tests", () => {
       marketAribtrager,
       cleanerProvider,
       {
-        base: market.base.name,
-        quote: market.quote.name,
+        base: market.base.id,
+        quote: market.quote.id,
       },
       0,
       whitelistedSets,
@@ -359,7 +365,9 @@ describe("MarketCleaner integration tests", () => {
       shouldFail: true,
       // wants: market.base.toUnits(1),
       gives: market.quote.toUnits(1600),
-      tick: market.getBook().bids.tickPriceHelper.tickFromPrice(1600),
+      tick: market
+        .getBook()
+        .bids.tickPriceHelper.tickFromPrice(1600, "nearest"),
     });
     await mgvTestUtil.waitForBlock(
       marketAribtrager.mgv,
@@ -371,8 +379,8 @@ describe("MarketCleaner integration tests", () => {
       marketAribtrager,
       cleanerProvider,
       {
-        base: market.base.name,
-        quote: market.quote.name,
+        base: market.base.id,
+        quote: market.quote.id,
       },
       1,
       whitelistedSets,
