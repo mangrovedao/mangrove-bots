@@ -13,15 +13,17 @@ const srcDirs = [
     src: "../mangrove-arbitrage/",
     dest: "./mangrove-src/arbitrage",
   },
+  {
+    src: "../../node_modules/@mangrovedao/mangrove.js/src/util/test/",
+    dest: "./mangrove-src/mangrove.js",
+  },
 ];
 
 // To copy a folder or file, select overwrite accordingly
 try {
   for (dir of srcDirs) {
     fse.removeSync(dir.dest);
-    fse.copySync(dir.src, dir.dest, {
-      overwrite: true,
-    });
+    fse.copySync(dir.src, dir.dest, { overwrite: true });
   }
   console.log("success!");
 } catch (err) {
