@@ -55,7 +55,7 @@ jobs:
     - name: Test
       run: yarn run test:coverage
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       if: ${{ steps.build.conclusion == 'success' && (success() || failure())}}
       with:
         name: test-results-bot-utils
@@ -98,7 +98,7 @@ jobs:
     - name: Test
       run: yarn run test:coverage
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       if: ${{ steps.build.conclusion == 'success' && (success() || failure())}}
       with:
         name: test-results-bot-cleaning
@@ -142,7 +142,7 @@ jobs:
     - name: Test
       run: yarn run test:coverage
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       if: ${{ steps.build.conclusion == 'success' && (success() || failure())}}
       with:
         name: test-results-bot-updategas
@@ -185,7 +185,7 @@ jobs:
     - name: Test
       run: yarn run test:coverage
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       if: ${{ steps.build.conclusion == 'success' && (success() || failure())}}
       with:
         name: test-results-bot-taker-greedy
@@ -298,7 +298,7 @@ jobs:
     - name: Test
       run: yarn run test:coverage
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       if: ${{ steps.build.conclusion == 'success' && (success() || failure())}}
       with:
         name: test-results-bot-arbitrage
