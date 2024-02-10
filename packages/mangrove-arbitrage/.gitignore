@@ -17,4 +17,5 @@ docs/
 build
 node_modules
 addresses/.DS_Store
+addresses-imported
 broadcast

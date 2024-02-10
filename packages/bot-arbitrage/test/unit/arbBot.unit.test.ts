@@ -6,7 +6,7 @@ import bn from "bignumber.js";
 
 import { encodePriceSqrt } from "../../src/uniswap/initializePool";
 import { BigNumber } from "ethers";
-import { MgvToken } from "@mangrovedao/mangrove.js";
+import { Token } from "@mangrovedao/mangrove.js";
 import assert from "assert";
 
 describe("ArbBot integration tests", () => {

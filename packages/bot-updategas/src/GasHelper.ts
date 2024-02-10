@@ -134,20 +134,18 @@ class GasHelper {
     return newGasPrice;
   }
 
-  private getGasDiff(newGasPrice: number, oldGasPrice: number) {
-    return Math.abs(newGasPrice - oldGasPrice);
-  }
-
   getAllowedPercentageGasPrice(
     maxUpdatePercentage: number,
     oldGasPrice: number,
     newGasPrice: number
   ) {
-    const gasDiff = this.getGasDiff(newGasPrice, oldGasPrice);
-    const gasDiffPercentage = oldGasPrice * (maxUpdatePercentage / 100);
+    const gasDiff = newGasPrice - oldGasPrice;
+    const gasDiffPercentage = Math.abs((100 * gasDiff) / oldGasPrice);
     const allowPercentagePrice =
-      gasDiff > gasDiffPercentage
-        ? gasDiffPercentage + oldGasPrice
+      gasDiffPercentage > Math.abs(maxUpdatePercentage)
+        ? oldGasPrice +
+          (Math.sign(gasDiff) * Math.abs(maxUpdatePercentage) * oldGasPrice) /
+            100
         : newGasPrice;
     return allowPercentagePrice;
   }
@@ -157,10 +155,12 @@ class GasHelper {
     oldGasPrice: number,
     newGasPrice: number
   ) {
-    const gasDiff = this.getGasDiff(newGasPrice, oldGasPrice);
-    const absConstant = Math.abs(maxUpdateConstant);
+    const gasDiff = newGasPrice - oldGasPrice;
+    const absMaxUpdateConstant = Math.abs(maxUpdateConstant);
     const allowConstPrice =
-      gasDiff > absConstant ? absConstant + oldGasPrice : newGasPrice;
+      Math.abs(gasDiff) > absMaxUpdateConstant
+        ? oldGasPrice + Math.sign(gasDiff) * absMaxUpdateConstant
+        : newGasPrice;
     return allowConstPrice;
   }
 

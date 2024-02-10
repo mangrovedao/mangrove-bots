@@ -18,3 +18,5 @@ forge-std/=lib/mangrove-core/lib/forge-std/src/
 @mgv/arbitrage/script=script
 
 @uniswap/v3/lib=lib/v3-core
+
+@mangrovejs/src/util=../../node_modules/@mangrovedao/mangrove.js/src/util

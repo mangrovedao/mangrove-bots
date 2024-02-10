@@ -121,7 +121,7 @@ export class Setup {
     contextInfo: string,
     scheduler?: ToadScheduler
   ): Promise<void> {
-    const globalConfig = await mgv.config();
+    const globalConfig = await mgv.readerContract.globalUnpacked();
     // FIXME maybe this should be a property/method on Mangrove.
     if (globalConfig.dead) {
       this.logger.warn("Mangrove is dead, stopping the bot", { contextInfo });
@@ -147,7 +147,7 @@ export class Setup {
       provider: BaseProvider
     ) => Promise<void>,
     scheduler?: ToadScheduler,
-    shouldNotListenToNewEvents: boolean = false
+    shouldNotListenToNewEvents = false
   ) {
     this.logger.info(`Starting ${name}...`, { contextInfo: "init" });
 

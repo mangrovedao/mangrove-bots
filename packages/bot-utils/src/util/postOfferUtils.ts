@@ -18,12 +18,12 @@ export class PostOfferUtils {
     this.logger = log.logger(config);
   }
   public async postFailing(offerData: offerData) {
-    let mgv = offerData.market.mgv;
-    let directLP = await mgv.liquidityProvider(offerData.market);
+    const mgv = offerData.market.mgv;
+    const directLP = await mgv.liquidityProvider(offerData.market);
     // LP needs to approve Mangrove for base transfer (skipping this part will ensure offers posted by this LP will fail)
-    let prov = await directLP.computeAskProvision();
+    const prov = await directLP.computeAskProvision();
     // Posting a new Ask or Bid (that will fail)
-    let post = this.postBidOrAsk(
+    const post = this.postBidOrAsk(
       directLP,
       offerData.ba,
       offerData.price,
@@ -117,8 +117,8 @@ export class PostOfferUtils {
   ) {
     this.logger[logLevel](logText, {
       contextInfo: "maker",
-      base: market.base.name,
-      quote: market.quote.name,
+      base: market.base.id,
+      quote: market.quote.id,
       ba: offerData.ba,
       data: {
         quantity: offerData.quantity,
